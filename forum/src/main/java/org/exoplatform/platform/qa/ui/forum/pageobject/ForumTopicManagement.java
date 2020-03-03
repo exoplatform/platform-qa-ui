@@ -92,45 +92,45 @@ public class ForumTopicManagement {
     switch (item) {
     case ADD_POLL:
       info("Click on Add poll button");
-      $(ELEMENT_ADD_POLL).click();
+      $(ELEMENT_ADD_POLL).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       break;
     case EDIT:
       info("Click on Edit topic button");
-      $(ELEMENT_EDIT_TOPIC).click();
+      $(ELEMENT_EDIT_TOPIC).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       break;
     case DELETE:
       info("Click on Delete topic button");
-      $(ELEMENT_DELETE_TOPIC).click();
+      $(ELEMENT_DELETE_TOPIC).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       info("Verify that confirm popup is shown");
       $(byText("Are you sure you want to delete this topic ?")).waitUntil(appears, Configuration.timeout);
       info("Click on OK on Confirm popup");
-      $(ELEMENT_OK_DELETE).click();
+      $(ELEMENT_OK_DELETE).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       $(ELEMENT_OK_DELETE).waitUntil(Condition.disappears, Configuration.timeout);
       break;
     case WATCHES:
       break;
     case LOCK:
       info("Click on lock topic button");
-      $(ELEMENT_LOCK_TOPIC).click();
+      $(ELEMENT_LOCK_TOPIC).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       break;
     case UNLOCK:
       info("Click on unlock topic button");
-      $(ELEMENT_UNLOCK_TOPIC).click();
+      $(ELEMENT_UNLOCK_TOPIC).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       break;
     case MOVE:
       info("Wait Move topic link is shown");
       $(ELEMENT_MOVE_TOPIC).waitUntil(Condition.appears, Configuration.timeout);
       info("Click on move topic link");
-      $(ELEMENT_MOVE_TOPIC).click();
+      $(ELEMENT_MOVE_TOPIC).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       $(byId("UIForumPopupWindow")).waitUntil(visible,Configuration.timeout);
       break;
     case CLOSE:
       info("Click on Close");
-      $(ELEMENT_CLOSE_TOPIC).click();
+      $(ELEMENT_CLOSE_TOPIC).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       break;
     case OPEN:
       info("Click on Close");
-      $(ELEMENT_OPEN_TOPIC).click();
+      $(ELEMENT_OPEN_TOPIC).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       break;
     case STICK:
       break;
@@ -149,7 +149,7 @@ public class ForumTopicManagement {
     info("Wait More link is shown");
     $(ELEMENT_MORE_ACTIONS_POLL).should(Condition.exist);
     info("Click on More link");
-    $(ELEMENT_MORE_ACTIONS_POLL).click();
+    $(ELEMENT_MORE_ACTIONS_POLL).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -387,9 +387,7 @@ public class ForumTopicManagement {
    */
   public void deleteTopic() {
     info("Delete the topic");
-    sleep(Configuration.timeout);
     selectItemMoreActionMenuTopic(specifMoreActionMenuTopic.DELETE);
-    sleep(Configuration.timeout);
   }
 
   /**
@@ -478,26 +476,24 @@ public class ForumTopicManagement {
     info("Input the title:" + title);
     $(ELEMENT_START_TOPIC_POPUP_TITLE_FILED).val(title);
     info("Input the message:" + message);
-    $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).click();
-    sleep(Configuration.timeout);
+    $(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
     switchTo().frame(0);
-    $(byXpath("/html/body")).sendKeys(message);
+    $(byXpath("/html/body")).waitUntil(visible,Configuration.openBrowserTimeoutMs).sendKeys(message);
     switchTo().defaultContent();
     info("click on Attached file button");
-    sleep(Configuration.timeout);
     if(fileName[0]!=""){
     for (int i=0;i<=fileName.length-1;i++){
       $(ELEMENT_START_TOPIC_ATTACH_FILE).shouldBe(visible);
       Actions action = new Actions(this.testBase.getExoWebDriver().getWebDriver());
-      $(ELEMENT_START_TOPIC_ATTACH_FILE).waitUntil(visible, Configuration.timeout);
+      $(ELEMENT_START_TOPIC_ATTACH_FILE).waitUntil(visible, Configuration.openBrowserTimeoutMs);
       action.moveToElement($(ELEMENT_START_TOPIC_ATTACH_FILE)).click().perform();
       $(By.className("file")).uploadFromClasspath(fileName[i]);
-      $(ELEMENT_SAVE_BTN).click();
+      $(ELEMENT_SAVE_BTN).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
     }}
-    $(ELEMENT_SUBMIT_BUTTON).waitUntil(visible,Configuration.timeout).click();
-    $(ELEMENT_SUBMIT_BUTTON).waitUntil(Condition.disappear, Configuration.timeout);
+    $(ELEMENT_SUBMIT_BUTTON).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_SUBMIT_BUTTON).waitUntil(Condition.disappear, Configuration.openBrowserTimeoutMs);
     info("Verify that the topic is created");
-    $(By.linkText(title)).waitUntil(visible,Configuration.timeout).should(exist);
+    $(By.linkText(title)).waitUntil(visible,Configuration.openBrowserTimeoutMs).should(exist);
     info("Start topic successfully");
   }
 

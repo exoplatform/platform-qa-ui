@@ -2,11 +2,8 @@ package org.exoplatform.platform.qa.ui.platform.plf;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_ACTIVITY;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_POPUP_OK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_LINK_SETUP;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -111,8 +108,7 @@ public class PlfCheckLanguagesTestIT extends Base {
     String columnName ="Etat de publication";
     navigationToolbar.goToChangeLanguage();
     changeLanguages.changeLanguage("French","Apply");    // change language
-    $(ELEMENT_LINK_SETUP).waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(Configuration.timeout);
+    $(ELEMENT_LINK_SETUP).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     do {
       $(byXpath("//li[@class='dropdown-submenu']/a[text()='Contenu']")).hover();
     } while (!$(byXpath("(//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Administration de Contenu')]/preceding::a[1])[1]")).exists());

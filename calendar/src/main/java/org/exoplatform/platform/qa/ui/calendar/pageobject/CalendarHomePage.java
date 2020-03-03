@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.*;
@@ -61,12 +62,11 @@ public class CalendarHomePage {
         ELEMENT_CALENDAR_LIST_BUTTON.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         break;
       case MONTH:
-        sleep(Configuration.timeout);
-        $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
         $(byXpath(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Month"))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
         break;
       case WORKWEEK:
-        $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Work Week"))).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(byXpath(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Work Week"))).waitUntil(Condition.visible,Configuration.timeout + Configuration.openBrowserTimeoutMs).click();
         $(byXpath(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Work Week"))).waitUntil(Condition.visible,Configuration.timeout);
         break;
       default:
@@ -170,7 +170,7 @@ public class CalendarHomePage {
               && $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date))).is(Condition.visible)
               ) {
         info("Click more button");
-        $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date))).click();
+        $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE_ICON.replace("$date", date))).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
         $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW_MORE.replace("$name", name).replace("$date",
                 date))).scrollTo().contextClick();}
       if ($(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date", date))).is(Condition.not(Condition.visible))) {
@@ -185,11 +185,9 @@ public class CalendarHomePage {
       }
       else
       {
-        sleep(2000);
         testBase.getExoWebDriver().getWebDriver().navigate().refresh();
         $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", name).replace("$date",
-                date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).contextClick();
-        sleep(1000);
+                date))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).contextClick();
         if($(ELEMENT_CONTEXT_MENU_DELETE).isDisplayed()) {
           info("Delete Icon exists");
         }
@@ -389,7 +387,6 @@ public class CalendarHomePage {
 
         break;
       case MONTH:
-        sleep(2000);
         $(byXpath(ELEMENT_EVENT_TASK_MONTH_VIEW.replace("$name", name))).shouldNotBe(Condition.visible);
         break;
       case WORKWEEK:
@@ -473,8 +470,7 @@ public class CalendarHomePage {
           $(byXpath(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", name))).waitUntil(Condition.visible,Configuration.collectionsTimeout);
           $(byXpath(ELEMENT_ANY_PAGE.replace("$page", "1"))).waitUntil(Condition.visible,Configuration.timeout).click();
         } else {
-          sleep(Configuration.collectionsTimeout);
-          $(byText(name)).waitUntil(Condition.appears, Configuration.collectionsTimeout);
+          $(byText(name)).waitUntil(Condition.appears, Configuration.collectionsTimeout + Configuration.collectionsTimeout);
         }
         break;
       case MONTH:
@@ -748,7 +744,6 @@ public class CalendarHomePage {
         break;
       case MONTH:
         goToRightMenuTaskEventFromMonthView(name, date);
-        sleep(2000);
         break;
       case WORKWEEK:
         goToRightMenuTaskEventFromWorkWeekView(name, optionDay, date);

@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.calendar.pageobject;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.*;
@@ -59,8 +60,8 @@ public class CalendarManagement {
   public void goToMenuFromMainCalendar(menuOfMainCalendar action) {
     info("Select action from menu");
 
-    $(ELEMENT_CALENDAR_MENU_ACTIONS_ICON).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(ELEMENT_CALENDAR_MENU).waitUntil(Condition.visible, Configuration.collectionsTimeout);
+    $(ELEMENT_CALENDAR_MENU_ACTIONS_ICON).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_CALENDAR_MENU).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     switch (action) {
       case ADDCAL:
         info("Go to add calendar");
@@ -85,7 +86,6 @@ public class CalendarManagement {
         evt.waitForAndGetElement(ELEMENT_CALENDAR_MENU_ACTIONS_CALENDAR_SETTING, testBase.getDefaultTimeout(), 1);
         evt.click(ELEMENT_CALENDAR_MENU_ACTIONS_CALENDAR_SETTING, 0, true);
         evt.waitForAndGetElement(ELEMENT_CALENDAR_SETTING_FORM, testBase.getDefaultTimeout(), 1);
-        sleep(Configuration.collectionsTimeout);
         break;
       case IMPORT:
         info("Import calendar");
@@ -537,8 +537,7 @@ public class CalendarManagement {
    * save setting form
    */
   public void saveSetting() {
-    sleep(2000);
-    evt.click(ELEMENT_SETTING_FORM_SAVE_BUTTON);
+    $(ELEMENT_SETTING_FORM_SAVE_BUTTON).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
     evt.waitForElementNotPresent(ELEMENT_CALENDAR_SETTING_FORM);
   }
 

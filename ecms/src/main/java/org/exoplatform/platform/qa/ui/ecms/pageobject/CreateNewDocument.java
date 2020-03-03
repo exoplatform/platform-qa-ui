@@ -1,5 +1,6 @@
 package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
@@ -51,55 +52,53 @@ public class CreateNewDocument {
       if ($(ELEMENT_ADDDOCUMENT_WEBCONTENT).is(Condition.exist)) {
         $(ELEMENT_ADDDOCUMENT_WEBCONTENT).click();
       } else {
-        sleep(Configuration.timeout);
         executeJavaScript("window.scrollBy(0,200);", "");
-        sleep(Configuration.timeout);
-        $(byXpath("//div[@class='PageAvailable']//li/a[text()='2']")).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(byXpath("//div[@class='PageAvailable']//li/a[text()='2']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         executeJavaScript("window.scrollBy(0,-400);", "");
-        $(ELEMENT_ADDDOCUMENT_WEBCONTENT).click();
+        $(ELEMENT_ADDDOCUMENT_WEBCONTENT).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       }
       break;
     case ACCESSIBLEMEDIA:
       info("Select Accessiblemedia type");
-      $(ELEMENT_ADDDOCUMENT_ACCESSIBLE_MEDIA).click();
+      $(ELEMENT_ADDDOCUMENT_ACCESSIBLE_MEDIA).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       break;
     case ANNOUNCEMENT:
       info("Select Announcement type");
-      $(ELEMENT_ADDDOCUMENT_ANNOUNCEMENT).click();
+      $(ELEMENT_ADDDOCUMENT_ANNOUNCEMENT).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       break;
     case CSSFILE:
       info("Select Css file type");
-      $(ELEMENT_ADDDOCUMENT_CSS_FILE).click();
+      $(ELEMENT_ADDDOCUMENT_CSS_FILE).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       break;
     case CONTACTUS:
       info("Select Contact us type");
-      $(ELEMENT_ADDDOCUMENT_CONTACT_US).click();
+      $(ELEMENT_ADDDOCUMENT_CONTACT_US).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       break;
     case HTMLFILE:
       info("Select HTML file type");
-      $(ELEMENT_ADDDOCUMENT_HTML_FILE).click();
+      $(ELEMENT_ADDDOCUMENT_HTML_FILE).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       break;
     case ILLUSTRATEDWEBCONTENT:
       info("Select Illustrated webcontent type");
-      $(ELEMENT_ADDDOCUMENT_ILLUSTRATED_WEB_CONTENT).click();
+      $(ELEMENT_ADDDOCUMENT_ILLUSTRATED_WEB_CONTENT).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       break;
     case WEBLINK:
       info("Select Weblink type");
       if ((evt.waitForAndGetElement(ELEMENT_ADDDOCUMENT_WEBLINK, 3000, 0) == null)
           && (evt.waitForAndGetElement(ELEMENT_ADDDOCUMENT_NEXT_PAGE, 3000, 0) != null)) {
-        $(ELEMENT_ADDDOCUMENT_NEXT_PAGE).click();
-        $(ELEMENT_ADDDOCUMENT_WEBLINK).waitUntil(Condition.appears, Configuration.timeout);
-        $(ELEMENT_ADDDOCUMENT_WEBLINK).click();
+        $(ELEMENT_ADDDOCUMENT_NEXT_PAGE).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
+        $(ELEMENT_ADDDOCUMENT_WEBLINK).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+        $(ELEMENT_ADDDOCUMENT_WEBLINK).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       } else
-        $(ELEMENT_ADDDOCUMENT_WEBLINK).click();
+        $(ELEMENT_ADDDOCUMENT_WEBLINK).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       break;
     case PRODUCT:
       info("Select Product type");
-      $(ELEMENT_ADDDOCUMENT_PRODUCT).click();
+      $(ELEMENT_ADDDOCUMENT_PRODUCT).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       break;
     case JAVASCRIPTFILE:
       info("Select Javascript file type");
-      $(ELEMENT_ADDDOCUMENT_JAVASCRIPT_FILE).click();
+      $(ELEMENT_ADDDOCUMENT_JAVASCRIPT_FILE).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       break;
     }
   }
@@ -166,12 +165,11 @@ public class CreateNewDocument {
    * @param content String
    */
   public void addNewWebContent(String title, String content) {
-    $(ELEMENT_FILEFORM_BLANK_NAME).click();
-    $(ELEMENT_FILEFORM_BLANK_NAME).setValue(title);
-    $(ELEMENT_FILEFORM_BLANK_CONTENT).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_FILEFORM_BLANK_NAME).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_FILEFORM_BLANK_NAME).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(title);
+    $(ELEMENT_FILEFORM_BLANK_CONTENT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     switchTo().frame($(ELEMENT_FILEFORM_BLANK_CONTENT));
-    sleep(Configuration.timeout);
-    $(byXpath("/html/body")).sendKeys(content);
+    $(byXpath("/html/body")).waitUntil(visible,Configuration.openBrowserTimeoutMs).sendKeys(content);
     switchTo().defaultContent();
 
   }
@@ -183,8 +181,7 @@ public class CreateNewDocument {
   public void saveAndClose() {
     info("save and close");
     executeJavaScript("window.scrollBy(0,-250)");
-    $(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    sleep(Configuration.timeout);
+    $(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
 
   }
 
@@ -194,9 +191,9 @@ public class CreateNewDocument {
    * @param url String
    */
   public void addLinkInWebContent(String url) {
-    $(ELEMENT_WEBCONTENTFORM_BUTTON_LINK).click();
-    $(ELEMENT_WEBCONTENTFORM_LINK_ADRESS).setValue(url);
-    $(ELEMENT_WEBCONTENTFORM_LINK_OK).click();
+    $(ELEMENT_WEBCONTENTFORM_BUTTON_LINK).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_WEBCONTENTFORM_LINK_ADRESS).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(url);
+    $(ELEMENT_WEBCONTENTFORM_LINK_OK).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**

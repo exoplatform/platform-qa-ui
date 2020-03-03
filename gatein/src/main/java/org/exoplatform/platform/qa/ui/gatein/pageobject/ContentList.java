@@ -34,11 +34,10 @@ public class ContentList {
       String[] arrayPath = path.split("/");
       if($(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}",content))).is(Condition.not(Condition.visible))){
       for (String arrayElement : arrayPath) {
-        $(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_NODE_FOLDER.replace("${node}", arrayElement))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+        $(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_NODE_FOLDER.replace("${node}", arrayElement))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       }}
     if (content != "" || content != null) {
-      sleep(Configuration.timeout);
-      $(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}", content))).waitUntil(Condition.visible,Configuration.timeout);
+      $(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}", content))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
       $(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}",content))).click();
     }
   }

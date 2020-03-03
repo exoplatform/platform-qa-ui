@@ -983,8 +983,7 @@ public class EventManagement {
     info("Select User Participant");
       String[] temp = users.split("/");
       for (int i = 0; i < temp.length; i++) {
-          ELEMENT_EVENT_ADD_PARTICIPANT.waitUntil(Condition.visible, Configuration.timeout).setValue(temp[i]).waitUntil(Condition.visible, Configuration.timeout).click();
-          sleep(3000);
+          ELEMENT_EVENT_ADD_PARTICIPANT.waitUntil(Condition.visible, Configuration.timeout + Configuration.openBrowserTimeoutMs).setValue(temp[i]).waitUntil(Condition.visible, Configuration.timeout).click();
           ELEMENT_EVENT_ADD_PARTICIPANT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).sendKeys(Keys.ENTER);
       }
   }

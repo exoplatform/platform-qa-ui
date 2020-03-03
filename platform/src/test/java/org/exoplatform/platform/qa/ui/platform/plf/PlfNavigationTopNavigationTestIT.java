@@ -277,9 +277,8 @@ public class PlfNavigationTopNavigationTestIT extends Base {
     info("Test 7: Open user guide");
     homePagePlatform.goToHomePage();
     homePagePlatform.refreshUntil($(ELEMENT_HELP_TOOLBAR),Condition.visible,Configuration.timeout);
-    $(ELEMENT_HELP_TOOLBAR).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_HELP_TOOLBAR).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
     switchTo().window(1);
-    sleep(2000);
     String url = WebDriverRunner.url();
     assertEquals(url,
                  "https://docs.exoplatform.org/en/5.3/");

@@ -2,7 +2,6 @@ package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import org.openqa.selenium.WebElement;
@@ -168,16 +167,12 @@ public class PageCreationWizard {
   public void addContentDetail(String path, String content) {
     addApplication($(byTitle("Content")), $(byId("Content/SingleContentViewer")));
 
-    $(ELEMENT_PAGEEDITOR_VIEWPAGE).waitUntil(Condition.appears, Configuration.timeout).click();
-    $(ELEMENT_CONTENT_DETAIL_EDIT_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(2000);
+    $(ELEMENT_PAGEEDITOR_VIEWPAGE).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_CONTENT_DETAIL_EDIT_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     contDetail.selectFolderContent(path, content);
-    sleep(2000);
-    $(ELEMENT_CONTENT_DETAIL_SAVE_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(2000);
-    $(ELEMENT_CONTENT_DETAIL_CLOSE_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(2000);
-    $(ELEMENT_PAGE_FINISH_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_CONTENT_DETAIL_SAVE_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_CONTENT_DETAIL_CLOSE_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_PAGE_FINISH_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**

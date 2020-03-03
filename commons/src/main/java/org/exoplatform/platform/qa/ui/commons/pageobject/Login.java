@@ -20,6 +20,7 @@
  */
 package org.exoplatform.platform.qa.ui.commons.pageobject;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_PASSWORD;
@@ -63,19 +64,17 @@ public class Login {
    * @param password the password associated with the user
    */
   public Login signIn(final String user, final String password) {
-    $(ELEMENT_INPUT_USERNAME).setValue(user);
-    $(ELEMENT_INPUT_PASSWORD).setValue(password);
-    $(byClassName("button")).click();
+    $(ELEMENT_INPUT_USERNAME).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(user);
+    $(ELEMENT_INPUT_PASSWORD).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(password);
+    $(byClassName("button")).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
 
     return this;
   }
 
 
   public Login signOut() {
-    sleep(Configuration.timeout);
-    $(byId("UIUserPlatformToolBarPortlet")).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.collectionsTimeout);
-    $(byClassName("uiIconPLFLogout")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byId("UIUserPlatformToolBarPortlet")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byClassName("uiIconPLFLogout")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
     return this;
   }

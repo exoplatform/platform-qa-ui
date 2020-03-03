@@ -10,7 +10,6 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ManageFileTestBase;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.forum.ForumLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_SAVE_BTN;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -68,28 +67,27 @@ public class ForumCategoryManagement {
      * @param item enum
      */
     public void selectItemManageCategoryMenu(specifManageCategoryMenu item) {
-        sleep(Configuration.timeout);
         info("Waiting manage menu is shown");
-        $(ELEMENT_MENU_MANAGE_CATEGORY).waitUntil(appears, Configuration.timeout);
+        $(ELEMENT_MENU_MANAGE_CATEGORY).waitUntil(appears, Configuration.openBrowserTimeoutMs);
         info("Click on Manage menu");
-        $(ELEMENT_MENU_MANAGE_CATEGORY).waitUntil(visible,Configuration.timeout).click();
+        $(ELEMENT_MENU_MANAGE_CATEGORY).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
         switch (item) {
             case EDIT_CATEGORY:
                 info("click on Edit link");
-                $(ELEMENT_EDIT_CATEGORY).click();
+                $(ELEMENT_EDIT_CATEGORY).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
                 break;
             case EXPORT_FORUM:
                 info("Click on Export link");
-                $(ELEMENT_EXPORT_FORUM).click();
+                $(ELEMENT_EXPORT_FORUM).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
                 break;
             case IMPORT_FORUM:
                 info("Click on Import link");
-                $(ELEMENT_IMPORT_FORUM).click();
+                $(ELEMENT_IMPORT_FORUM).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
                 break;
             case DELETE:
                 info("Click on Delete link");
-                $(ELEMENT_DELETE_CATEGORY).click();
-                $(ELEMENT_OK_DELETE).click();
+                $(ELEMENT_DELETE_CATEGORY).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
+                $(ELEMENT_OK_DELETE).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
                 break;
             case WATCHES:
                 break;
@@ -133,15 +131,13 @@ public class ForumCategoryManagement {
      */
     public void deleteCategory(String nameCat) {
         // TODO Auto-generated method stub
-        sleep(Configuration.timeout);
         info("Wait the category is shown");
         if ($(ELEMENT_MENU_MANAGE_CATEGORY).is(not(exist))) {
-            ELEMENT_CAT_CONTAINER.find(byText(nameCat)).waitUntil(appears, Configuration.timeout).click();
+            ELEMENT_CAT_CONTAINER.find(byText(nameCat)).waitUntil(appears, Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
         }
         info("Select Delete link");
         selectItemManageCategoryMenu(specifManageCategoryMenu.DELETE);
         info("Verify that the category is deleted");
-        sleep(Configuration.timeout);
         $(withText(nameCat)).shouldNot(exist);
         info("The category is deleted successfully");
 
@@ -156,17 +152,13 @@ public class ForumCategoryManagement {
     public void exportForum(String forumName, String fileName) {
         selectItemManageCategoryMenu(specifManageCategoryMenu.EXPORT_FORUM);
         info("Uncheck All check boxes");
-        ELEMENT_CHECKBOX_ALL_FORUM_CATEGORIE.click();
-        sleep(2000);
+        ELEMENT_CHECKBOX_ALL_FORUM_CATEGORIE.waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
         info("Select check box of the forum");
-        ELEMENT_CHECKBOX_SELECT_ONE_FORUM_CATEGORIE.click();
-        sleep(2000);
+        ELEMENT_CHECKBOX_SELECT_ONE_FORUM_CATEGORIE.waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
         info("input name");
-        $(ELEMENT_FILENAME_INPUT).setValue(fileName);
-        sleep(2000);
+        $(ELEMENT_FILENAME_INPUT).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(fileName);
         info("Save all changes");
-        $(byXpath(ELEMENT_SAVE_BTN)).click();
-        sleep(Configuration.timeout);
+        $(byXpath(ELEMENT_SAVE_BTN)).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
     }
 
     /**

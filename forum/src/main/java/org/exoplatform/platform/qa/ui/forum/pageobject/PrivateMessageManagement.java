@@ -47,18 +47,14 @@ public class PrivateMessageManagement {
    * Go send message tab
    */
   public void goSendMessages() {
-    sleep(2000);
-    $(ELEMENT_TABS_SENT_MESSAGES).click();
-    sleep(Configuration.timeout);
+    $(ELEMENT_TABS_SENT_MESSAGES).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
    * Go compose tab
    */
   public void goComposeMessage() {
-    sleep(2000);
-    $(ELEMENT_TABS_COMPOSE_MESSAGE).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.timeout);
+    $(ELEMENT_TABS_COMPOSE_MESSAGE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -70,17 +66,11 @@ public class PrivateMessageManagement {
    */
   public void writeMessage(String contact, String title, String content) {
     refresh();
-    sleep(2000);
-    $(ELEMENT_SEND_TO_MESSAGE).setValue(contact);
-    sleep(2000);
-    $(ELEMENT_TITLE_MESSAGE).setValue(title);
-    sleep(2000);
+    $(ELEMENT_SEND_TO_MESSAGE).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(contact);
+    $(ELEMENT_TITLE_MESSAGE).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(title);
     plf.inputFrame(ELEMENT_MESSAGE_CONTENT, content);
-    sleep(2000);
-    $(ELEMENT_SEND_BUTTON).click();
-    sleep(3000);
-    ELEMENT_FORUM_OK_SEND_MSG.waitUntil(visible,Configuration.timeout).click();
-    sleep(3000);
+    $(ELEMENT_SEND_BUTTON).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_FORUM_OK_SEND_MSG.waitUntil(visible,Configuration.timeout + Configuration.openBrowserTimeoutMs).click();
 
   }
 
@@ -92,11 +82,8 @@ public class PrivateMessageManagement {
    * @param content String
    */
   public void checkInboxMessage(String contact, String title, String content) {
-    sleep(2000);
-    $(byText(title)).click();
-    sleep(Configuration.timeout);
-    $(byText(content)).scrollTo().waitUntil(Condition.appears, Configuration.timeout);
-    sleep(2000);
+    $(byText(title)).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
+    $(byText(content)).scrollTo().waitUntil(Condition.appears, Configuration.timeout + Configuration.openBrowserTimeoutMs);
   }
 
   /**
@@ -108,13 +95,13 @@ public class PrivateMessageManagement {
    * @param content String
    */
   public void replyMessage(String contact, String title, String newTitle, String content) {
-    $(byText(title)).waitUntil(Condition.visible,Configuration.timeout).click();
-    $(ELEMENT_REPLY).waitUntil(Condition.visible,2000).click();
+    $(byText(title)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_REPLY).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     refresh();
-    $(ELEMENT_TITLE_MESSAGE).setValue(newTitle);
+    $(ELEMENT_TITLE_MESSAGE).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(newTitle);
     plf.inputFrame(ELEMENT_MESSAGE_CONTENT, content);
-    $(ELEMENT_SEND_BUTTON).click();
-    ELEMENT_FORUM_OK_SEND_MSG.click();
+    $(ELEMENT_SEND_BUTTON).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_FORUM_OK_SEND_MSG.waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -127,20 +114,14 @@ public class PrivateMessageManagement {
    * @param newContent String
    */
   public void forwardMessage(String contact, String title, String newContact, String newTitle, String newContent) {
-    $(byText(title)).parent().parent().parent().find(ELEMENT_BUTTON_FORWARD_MESSAGE).click();
-    sleep(Configuration.timeout);
-    $(ELEMENT_SEND_TO_MESSAGE).setValue(newContact);
-    sleep(2000);
+    $(byText(title)).parent().parent().parent().find(ELEMENT_BUTTON_FORWARD_MESSAGE).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_SEND_TO_MESSAGE).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(newContact);
     if (newTitle != "")
-      $(ELEMENT_TITLE_MESSAGE).setValue(newTitle);
-     sleep(2000);
+      $(ELEMENT_TITLE_MESSAGE).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(newTitle);
     if (newContent != "")
       plf.inputFrame(ELEMENT_MESSAGE_CONTENT, newContent);
-    sleep(2000);
-    $(ELEMENT_SEND_BUTTON).click();
-    sleep(2000);
-    ELEMENT_FORUM_OK_SEND_MSG.click();
-    sleep(2000);
+    $(ELEMENT_SEND_BUTTON).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_FORUM_OK_SEND_MSG.waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -150,11 +131,8 @@ public class PrivateMessageManagement {
    * @param contact String
    */
   public void deleteMessage(String title, String contact) {
-    $(byText(title)).parent().parent().parent().find(ELEMENT_BUTTON_DELETE_MESSAGE).click();
-    sleep(2000);
-    $(ELEMENT_CONFIRM).click();
-    sleep(Configuration.timeout);
-    $(byText(title)).waitUntil(Condition.disappears, Configuration.timeout);
-    sleep(2000);
+    $(byText(title)).parent().parent().parent().find(ELEMENT_BUTTON_DELETE_MESSAGE).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_CONFIRM).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
+    $(byText(title)).waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
   }
 }

@@ -6,7 +6,6 @@ import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
 import static java.time.zone.ZoneRulesProvider.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -137,52 +136,51 @@ public void goToDefaultSkin() {
                            String editMembership,
                            String... template) {
     if (portalName != null) {
-      $(ELEMENT_INPUT_NAME).setValue(portalName);
+      $(ELEMENT_INPUT_NAME).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(portalName);
     }
     if (label != null) {
-      $(ELEMENT_PORTAL_LABEL).setValue(label);
+      $(ELEMENT_PORTAL_LABEL).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(label);
     }
     if (description != null) {
-      $(ELEMENT_PORTAL_DESCRIPTION).setValue(description);
+      $(ELEMENT_PORTAL_DESCRIPTION).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(description);
     }
     if (portalLocale != null) {
-      $(byXpath(ELEMENT_SELECT_LOCALE)).selectOption(portalLocale);
+      $(byXpath(ELEMENT_SELECT_LOCALE)).waitUntil(visible,Configuration.openBrowserTimeoutMs).selectOption(portalLocale);
 
     }
     if (portalSkin != null) {
-      $(ELEMENT_SELECT_SKIN).selectOption(portalSkin);
+      $(ELEMENT_SELECT_SKIN).waitUntil(visible,Configuration.openBrowserTimeoutMs).selectOption(portalSkin);
     }
     if (portalSession != null) {
-      $(byXpath(ELEMENT_PROPERTIES_TAB)).click();
-      $(byXpath(ELEMENT_SELECT_SESSION_ALIVE)).selectOption(portalSession);
+      $(byXpath(ELEMENT_PROPERTIES_TAB)).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
+      $(byXpath(ELEMENT_SELECT_SESSION_ALIVE)).waitUntil(visible,Configuration.openBrowserTimeoutMs).selectOption(portalSession);
     }
-    $(byXpath(ELEMENT_PERMISSION_SETTING_TAB)).click();
+    $(byXpath(ELEMENT_PERMISSION_SETTING_TAB)).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
     if (publicMode) {
       if($(ELEMENT_CHECKBOX_PUBLIC_MODE).is(Condition.not(Condition.checked)))
-      $(ELEMENT_CHECKBOX_PUBLIC_MODE).parent().click();
-      $(ELEMENT_ADD_PERMISSION_BUTTON).waitUntil(Condition.not(visible),Configuration.timeout);
+      $(ELEMENT_CHECKBOX_PUBLIC_MODE).parent().waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
+      $(ELEMENT_ADD_PERMISSION_BUTTON).waitUntil(Condition.not(visible),Configuration.openBrowserTimeoutMs);
     } else {
       for (String key : permissions.keySet()) {
         setViewPermissions(key, permissions.get(key));
       }
     }
     if (editGroupId != null && editMembership != null) {
-      $(byXpath(ELEMENT_EDIT_PERMISSION_SETTING)).click();
+      $(byXpath(ELEMENT_EDIT_PERMISSION_SETTING)).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       setEditPermissions(editGroupId, editMembership);
     }
     if (template.length > 0) {
-      $(byXpath(ELEMENT_PORTAL_TEMPLATE_TAB)).click();
+      $(byXpath(ELEMENT_PORTAL_TEMPLATE_TAB)).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
       WebElement temp = evt.getElementFromTextByJquery(template[0]);
       temp.click();
     }
-    $(byXpath(ELEMENT_SAVE_BUTTON)).waitUntil(visible,Configuration.timeout).click();
-    sleep(18000);
-    $(ELEMENT_POPUP_ADD_PORTAL).waitUntil(Condition.not(visible),Configuration.timeout);
+    $(byXpath(ELEMENT_SAVE_BUTTON)).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_POPUP_ADD_PORTAL).waitUntil(Condition.not(visible),Configuration.openBrowserTimeoutMs);
 
 
     if (evt.waitForAndGetElement(ELEMENT_POPUP_ADD_PORTAL, 10000, 0) == null)
 
-    $(ELEMENT_EDIT_PERMISSION_SETTING).waitUntil(Condition.not(visible),Configuration.timeout);
+    $(ELEMENT_EDIT_PERMISSION_SETTING).waitUntil(Condition.not(visible),Configuration.openBrowserTimeoutMs);
   }
 
   /**
