@@ -17,16 +17,17 @@ casper.then( function(){
    }
   });
 
-casper.then( function(){  
+casper.then( function(){
     casper.echo('Clicking user button');
     casper.click('div#UIUserPlatformToolBarPortlet a');
     casper.waitForSelector('i.uiIconPLFProfile');
 
   });
 
-casper.then( function(){  
+casper.then( function(){
     casper.echo('Clicking usersettings button');
-    casper.click('i.uiIconSetting');
+    casper.waitForSelector('ul.dropdown-menu li a i.uiIconSetting');
+    casper.click('ul.dropdown-menu li a i.uiIconSetting');
     casper.waitForSelector('div.MaskContainer');
     casper.wait(4000);
     this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');

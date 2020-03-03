@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="BackstopJS" tests="147" failures="0" errors="0" skipped="0">
+    <testcase classname="body" name=" ›› Login Page"/>
+    <testcase classname="document" name=" ›› Login Page"/>
+    <testcase classname="div.uiLogin" name=" ›› Login Page"/>
+    <testcase classname="body" name=" ›› Home Page"/>
+    <testcase classname="document" name=" ›› Home Page"/>
+    <testcase classname=".LeftNavigationTDContainer.TDContainer" name=" ›› Home Page"/>
+    <testcase classname=".RightBodyTDContainer.TDContainer" name=" ›› Home Page"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Home Page"/>
+    <testcase classname="td.OfficeMiddleTDContainer.TDContainer" name=" ›› Home Page"/>
+    <testcase classname="td.OfficeRightTDContainer.TDContainer" name=" ›› Home Page"/>
+    <testcase classname="body" name=" ›› Apps Btn"/>
+    <testcase classname="document" name=" ›› Apps Btn"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Apps Btn"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Apps Btn"/>
+    <testcase classname="body" name=" ›› Apps Page"/>
+    <testcase classname="document" name=" ›› Apps Page"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Apps Page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Apps Page"/>
+    <testcase classname="body" name=" ›› Calendar Page"/>
+    <testcase classname="document" name=" ›› Calendar Page"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Calendar Page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Calendar Page"/>
+    <testcase classname="body" name=" ›› Add User Btn"/>
+    <testcase classname="document" name=" ›› Add User Btn"/>
+    <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix" name=" ›› Add User Btn"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Add User Btn"/>
+    <testcase classname="body" name=" ›› Community_page_adduser"/>
+    <testcase classname="document" name=" ›› Community_page_adduser"/>
+    <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix" name=" ›› Community_page_adduser"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Community_page_adduser"/>
+    <testcase classname="body" name=" ›› UserMgmntBtn"/>
+    <testcase classname="document" name=" ›› UserMgmntBtn"/>
+    <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix" name=" ›› UserMgmntBtn"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› UserMgmntBtn"/>
+    <testcase classname="body" name=" ›› CommPage"/>
+    <testcase classname="document" name=" ›› CommPage"/>
+    <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix" name=" ›› CommPage"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› CommPage"/>
+    <testcase classname="body" name=" ›› ContentBtn"/>
+    <testcase classname="document" name=" ›› ContentBtn"/>
+    <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix" name=" ›› ContentBtn"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› ContentBtn"/>
+    <testcase classname="body" name=" ›› Content_admin"/>
+    <testcase classname="document" name=" ›› Content_admin"/>
+    <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix" name=" ›› Content_admin"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Content_admin"/>
+    <testcase classname="body" name=" ›› ContentMgmnt"/>
+    <testcase classname="document" name=" ›› ContentMgmnt"/>
+    <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix" name=" ›› ContentMgmnt"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› ContentMgmnt"/>
+    <testcase classname="body" name=" ›› Content_search_page"/>
+    <testcase classname="document" name=" ›› Content_search_page"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Content_search_page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Content_search_page"/>
+    <testcase classname="body" name=" ›› Documents_page"/>
+    <testcase classname="document" name=" ›› Documents_page"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Documents_page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Documents_page"/>
+    <testcase classname="body" name=" ›› Documents_page"/>
+    <testcase classname="document" name=" ›› Documents_page"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Documents_page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Documents_page"/>
+    <testcase classname="body" name=" ›› Forums_page"/>
+    <testcase classname="document" name=" ›› Forums_page"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Forums_page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Forums_page"/>
+    <testcase classname="body" name=" ›› Network_page"/>
+    <testcase classname="document" name=" ›› Network_page"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Network_page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Network_page"/>
+    <testcase classname="body" name=" ›› PortalBtn"/>
+    <testcase classname="document" name=" ›› PortalBtn"/>
+    <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix" name=" ›› PortalBtn"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› PortalBtn"/>
+    <testcase classname="body" name=" ›› Portal_page"/>
+    <testcase classname="document" name=" ›› Portal_page"/>
+    <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix" name=" ›› Portal_page"/>
+    <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix.__n1" name=" ›› Portal_page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Portal_page"/>
+    <testcase classname="body" name=" ›› Portal_gpsites_page"/>
+    <testcase classname="document" name=" ›› Portal_gpsites_page"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Portal_gpsites_page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Portal_gpsites_page"/>
+    <testcase classname="body" name=" ›› Portal_notifs_page"/>
+    <testcase classname="document" name=" ›› Portal_notifs_page"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Portal_notifs_page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Portal_notifs_page"/>
+    <testcase classname="body" name=" ›› Portal_sites_page"/>
+    <testcase classname="document" name=" ›› Portal_sites_page"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Portal_sites_page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Portal_sites_page"/>
+    <testcase classname="body" name=" ›› Portalpages_page"/>
+    <testcase classname="document" name=" ›› Portalpages_page"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Portalpages_page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Portalpages_page"/>
+    <testcase classname="body" name=" ›› Searchindexing_page"/>
+    <testcase classname="document" name=" ›› Searchindexing_page"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Searchindexing_page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Searchindexing_page"/>
+    <testcase classname="body" name=" ›› Spaces_page"/>
+    <testcase classname="document" name=" ›› Spaces_page"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Spaces_page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Spaces_page"/>
+    <testcase classname="body" name=" ›› System_mngmnt_space"/>
+    <testcase classname="document" name=" ›› System_mngmnt_space"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› System_mngmnt_space"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› System_mngmnt_space"/>
+    <testcase classname="body" name=" ›› System_mngmnt_space_templates_button"/>
+    <testcase classname="document" name=" ›› System_mngmnt_space_templates_button"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› System_mngmnt_space_templates_button"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› System_mngmnt_space_templates_button"/>
+    <testcase classname="body" name=" ›› Tasks_page"/>
+    <testcase classname="document" name=" ›› Tasks_page"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Tasks_page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Tasks_page"/>
+    <testcase classname="body" name=" ›› User_page_acts"/>
+    <testcase classname="document" name=" ›› User_page_acts"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› User_page_acts"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› User_page_acts"/>
+    <testcase classname="body" name=" ›› User_page_flags"/>
+    <testcase classname="document" name=" ›› User_page_flags"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› User_page_flags"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› User_page_flags"/>
+    <testcase classname="div.MaskContainer" name=" ›› User_page_flags"/>
+    <testcase classname="body" name=" ›› Close_flags"/>
+    <testcase classname="body" name=" ›› User_page_network"/>
+    <testcase classname="document" name=" ›› User_page_network"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› User_page_network"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› User_page_network"/>
+    <testcase classname="body" name=" ›› User_page_notifs"/>
+    <testcase classname="document" name=" ›› User_page_notifs"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› User_page_notifs"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› User_page_notifs"/>
+    <testcase classname="body" name=" ›› User_settings"/>
+    <testcase classname="body" name=" ›› Close_settings"/>
+    <testcase classname="body" name=" ›› WebconfBtn"/>
+    <testcase classname="document" name=" ›› WebconfBtn"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› WebconfBtn"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› WebconfBtn"/>
+    <testcase classname="body" name=" ›› Webconf_page"/>
+    <testcase classname="document" name=" ›› Webconf_page"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Webconf_page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Webconf_page"/>
+    <testcase classname="body" name=" ›› User_page_wiki"/>
+    <testcase classname="document" name=" ›› User_page_wiki"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› User_page_wiki"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› User_page_wiki"/>
+  </testsuite>
+</testsuites>

@@ -27,7 +27,10 @@ casper.then( function(){
   });
 
 casper.then( function(){  
-    casper.echo('Clicking adduser button');
+    casper.echo('Clicking web conferencing button');
+     casper.waitForSelector('#UISetupPlatformToolBarPortlet li:nth-of-type(9) a');
+     casper.mouse.move('#UISetupPlatformToolBarPortlet li:nth-of-type(9) a');
+     casper.wait(4000);
   });
 
 }

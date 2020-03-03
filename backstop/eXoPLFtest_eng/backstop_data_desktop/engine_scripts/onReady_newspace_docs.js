@@ -50,6 +50,7 @@ casper.then( function(){
 
 casper.then( function(){
     casper.echo('Clicking button');
+    casper.waitForSelector('div.uiAction button.btn');
     casper.click('div.uiAction button.btn');
     casper.waitForSelector('div.uiSpaceMenu');
     this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');

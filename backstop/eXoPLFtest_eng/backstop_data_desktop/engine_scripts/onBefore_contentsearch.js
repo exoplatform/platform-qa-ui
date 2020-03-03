@@ -17,16 +17,18 @@ casper.then( function(){
    }
   });
 
-casper.then( function(){  
+casper.then( function(){
     casper.echo('Clicking administration button');
     casper.click('div#UISetupPlatformToolBarPortlet a');
     casper.waitForSelector('i.uiIconPLFProfile');
+    casper.wait(8000);
+    this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
+
   });
 
-casper.thenOpen(scenario.url + "/g/:platform:administrators/search", function() {
-    casper.echo('Clicking contentSearch button');
+casper.thenOpen(scenario.url + "/portal/g/:platform:administrators/search", function() {
+    casper.echo('Clicking add user button');
     casper.wait(4000);
     this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
   });
-
 }

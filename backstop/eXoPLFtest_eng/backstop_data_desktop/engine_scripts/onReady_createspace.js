@@ -29,10 +29,10 @@ casper.then( function(){
     casper.click('button.btn.btn-primary.pull-left');
     casper.echo('button clicked');
     casper.echo('waiting for popup');
-    casper.waitForSelector('div.uiPopupMySpaces');
+    casper.waitForSelector('#UIPopupAddSpace');
     casper.echo('popup showed');
-    if (this.exists('div.uiPopupMySpaces')) {
-        this.echo('the uiPopupMySpaces exists');
+    if (this.exists('#UIPopupAddSpace')) {
+        this.echo('the uiPopupAddSpace exists');
     }
 
   });
@@ -47,7 +47,7 @@ casper.then( function(){
       });
   });
 
-casper.then( function(){  
+casper.then( function(){
     casper.echo('Clicking button');
     casper.click('div.uiAction button.btn');
     casper.waitForSelector('div.uiSpaceMenu');

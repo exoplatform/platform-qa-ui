@@ -28,17 +28,17 @@ casper.then( function(){
     casper.echo('Clicking userflags button');
     casper.click('i.uiIconFlags');
     casper.waitForSelector('div.MaskContainer');
-    casper.echo('popup showed');
     casper.wait(4000);
+    this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
 
   });
 
-casper.then( function(){  
+casper.then( function(){
     casper.echo('Closing userflags popup');
-    casper.click('div.uiAction.uiActionBorder a.btn');
+    casper.click('div.uiAction.uiActionBorder a.btn:nth-of-type(2)');
     casper.echo('Clicking button');
     casper.wait(4000);
-    this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');    
+    this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
 
   });
 

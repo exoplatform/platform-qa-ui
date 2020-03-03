@@ -27,7 +27,7 @@ casper.then( function(){
 
 casper.then( function(){  
     casper.echo('Clicking usersettings button');
-    casper.click('i.uiIconSetting');
+    casper.click('#UIUserPlatformToolBarPortlet i.uiIconSetting');
     casper.waitForSelector('div.MaskContainer');
     casper.wait(4000);
     

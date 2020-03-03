@@ -12,9 +12,26 @@ casper.then( function(){
       }, true);
     casper.echo('Clicking button');
     casper.click('button.button');
-    casper.wait(4000);
+    casper.wait(8000);
     });
    }
+  });
+
+casper.then( function(){
+    casper.echo('Clicking administration button');
+    casper.click('div#UISetupPlatformToolBarPortlet a');
+    casper.waitForSelector('i.uiIconPLFProfile');
+    casper.wait(4000);
+    this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
+
+  });
+
+casper.then( function(){
+    casper.echo('Clicking web conferencing button');
+     casper.waitForSelector('#UISetupPlatformToolBarPortlet li:nth-of-type(9) a');
+     casper.click('#UISetupPlatformToolBarPortlet li:nth-of-type(9) a');
+     casper.wait(4000);
+     casper.waitForSelector('#webconferencingAdmin');
   });
 
 }

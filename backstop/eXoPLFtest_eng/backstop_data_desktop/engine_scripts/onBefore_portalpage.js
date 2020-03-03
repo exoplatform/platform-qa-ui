@@ -1,3 +1,4 @@
+
 module.exports = function(casper, scenario, vp) {
   // Example: Adding script delays to allow for things like CSS transitions to complete.
   casper.thenOpen(scenario.url);
@@ -21,12 +22,13 @@ casper.then( function(){
     casper.echo('Clicking portal button');
     casper.click('div#UISetupPlatformToolBarPortlet a');
     casper.waitForSelector('i.uiIconPLFProfile');
-    casper.wait(4000);
+    casper.wait(8000);
     this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
 
   });
 
-casper.thenOpen(scenario.url + "/g/:platform:administrators/branding", function() {
+casper.thenOpen(scenario.url + "/portal/g/:platform:administrators/branding", function() {
+    casper.waitForSelector('#companyNameInput');
     casper.echo('Clicking portalePage button');
     casper.wait(4000);
     this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');

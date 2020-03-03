@@ -26,8 +26,9 @@ casper.then( function(){
 
   });
 
-casper.then( function(){  
-    casper.echo('Clicking adduser button');
+casper.wait(3000, function() {
+    casper.echo('Clicking add user button');
+    casper.mouse.move('li.dropdown-submenu:nth-of-type(1)');
   });
 
 }

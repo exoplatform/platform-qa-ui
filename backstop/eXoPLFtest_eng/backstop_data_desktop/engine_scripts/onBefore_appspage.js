@@ -12,9 +12,23 @@ casper.then( function(){
       }, true);
     casper.echo('Clicking button');
     casper.click('button.button');
-    casper.wait(4000);
-    });
-   }
-  });
+    casper.wait(8000);
+        });
+       }
+      });
 
-}
+    casper.then( function(){
+        casper.echo('Clicking administration button');
+        casper.click('div#UISetupPlatformToolBarPortlet a');
+        casper.waitForSelector('i.uiIconPLFProfile');
+        casper.wait(4000);
+        this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
+
+      });
+
+     casper.thenOpen(scenario.url + "/portal/g/:platform:administrators/administration/registry", function() {
+         casper.echo('Clicking apps button');
+         casper.echo('open space Administration');
+         casper.wait(4000);
+       });
+    }
