@@ -1,0 +1,19 @@
+{
+  "name": "exoplftest_eng",
+  "version": "1.0.0",
+  "main": "backstopTestDesktop.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:visual": "rm -rf backstop_data_desktop/bitmaps_test && backstop test",
+    "test:visual:approve": "backstop approve"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "caper": "0.0.2",
+    "casper": "^0.1.1",
+    "chromy": "^0.5.11"
+  },
+  "devDependencies": {},
+  "description": ""
+}
