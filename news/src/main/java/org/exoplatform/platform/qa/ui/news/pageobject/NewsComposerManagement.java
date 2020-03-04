@@ -229,11 +229,12 @@ public void ConfirmPinUnPinArticle ()
 
     CONFIRM_PIN_ARTICLE.click();
 }
-public void  pinNewsFromCreationForm() {
-      NewsCreationFrom_PINUNPIN_BUTTON.click();
+
+  public void pinNewsFromCreationForm() {
+    NewsCreationFrom_PINUNPIN_BUTTON.click();
   }
 
-public void unpinNewsFromCreationForm(){
-      NewsCreationFrom_PINUNPIN_BUTTON.click();
+  public void unpinNewsFromCreationForm() {
+    NewsCreationFrom_PINUNPIN_BUTTON.click();
   }
 }
