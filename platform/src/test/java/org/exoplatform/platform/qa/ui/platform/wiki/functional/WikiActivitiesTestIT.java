@@ -573,7 +573,7 @@ public class WikiActivitiesTestIT extends Base {
         info("Check the Activity");
         homePagePlatform.goToHomePage();
         activityStream.checkActivity(title);
-        manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+        manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
         homePagePlatform.goToAllSpace();
         spaceManagement.goToSpace(space);
         spaceManagement.verifyMessageAccessToSpace(space);

@@ -84,7 +84,7 @@ public class ForumForumMoreActionTestIT extends Base {
     forumForumManagement.lockAndUnlock(true);
 
     info("sign out and log in with user2");
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
     info("go to Forum home page");
     homePagePlatform.goToForum();
     info("Go to the forum");
@@ -101,7 +101,7 @@ public class ForumForumMoreActionTestIT extends Base {
     forumForumManagement.lockAndUnlock(false);
 
     info("sign out and log in with user2");
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
 
     info("go to Forum home page");
     homePagePlatform.goToForum();
@@ -147,7 +147,7 @@ public class ForumForumMoreActionTestIT extends Base {
     forumForumManagement.closeAndOpen(true);
 
     info("sign out and log in with user2");
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
 
     info("go to Forum home page");
     homePagePlatform.goToForum();
@@ -166,7 +166,7 @@ public class ForumForumMoreActionTestIT extends Base {
     forumForumManagement.closeAndOpen(false);
 
     info("sign out and log in with user2");
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, "gtngtngtn");
 
     info("go to Forum home page");
     homePagePlatform.goToForum();

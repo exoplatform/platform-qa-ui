@@ -82,7 +82,7 @@ public class ChatManageMessageTestIT extends Base {
     $(ELEMENT_SPACE_BTN_INVITE).click();
     homePagePlatform.goToConnections();
     connectionsManagement.connectToAUser(PLFData.DATA_USER2);
-    manageLogInOut.signIn(PLFData.DATA_USER2, "gtn");
+    manageLogInOut.signIn(PLFData.DATA_USER2, "gtngtngtn");
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(PLFData.DATA_USER1);
     homePagePlatform.goToAllSpace();
@@ -138,7 +138,7 @@ public class ChatManageMessageTestIT extends Base {
     $(ELEMENT_SPACE_BTN_INVITE).click();
     homePagePlatform.goToConnections();
     connectionsManagement.connectToAUser(PLFData.DATA_USER2);
-    manageLogInOut.signIn(PLFData.DATA_USER2, "gtn");
+    manageLogInOut.signIn(PLFData.DATA_USER2, "gtngtngtn");
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(PLFData.DATA_USER1);
     homePagePlatform.goToAllSpace();
@@ -185,7 +185,7 @@ public class ChatManageMessageTestIT extends Base {
   public void test03_checkUserStatusWhenSendMessageInRoom() {
     String room = "room" + getRandomNumber();
     String message = "room" + getRandomNumber();
-    manageLogInOut.signIn(PLFData.DATA_USER2, PLFData.password);
+    manageLogInOut.signIn(PLFData.DATA_USER2, "gtngtngtn");
     homePagePlatform.goToChat();
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     chatManagement.changeStatus("Available");
@@ -193,7 +193,7 @@ public class ChatManageMessageTestIT extends Base {
     switchTo().window(1);
     roomManagement.addRoom(room, PLFData.DATA_USER2);
     switchTo().window(0);
-    manageLogInOut.signIn(PLFData.DATA_USER2, PLFData.password);
+    manageLogInOut.signIn(PLFData.DATA_USER2, "gtngtngtn");
     chatManagement.changeStatus("Away");
     homePagePlatform.goToChat();
     switchTo().window(1);
@@ -217,7 +217,7 @@ public class ChatManageMessageTestIT extends Base {
     String message = "room" + getRandomNumber();
     String message1 = "room" + getRandomNumber();
     String message2 = "room" + getRandomNumber();
-    manageLogInOut.signIn(PLFData.DATA_USER2, PLFData.password);
+    manageLogInOut.signIn(PLFData.DATA_USER2, "gtngtngtn");
     homePagePlatform.goToChat();
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     homePagePlatform.goToChat();

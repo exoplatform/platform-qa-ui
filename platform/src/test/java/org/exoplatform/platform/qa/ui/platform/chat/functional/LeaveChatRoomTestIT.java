@@ -337,7 +337,7 @@ public class LeaveChatRoomTestIT extends Base {
        $(ELEMENT_SPACE_BTN_INVITE).click();
        homePagePlatform.goToConnections();
        connectionsManagement.connectToAUser(PLFData.DATA_USER2);
-       manageLogInOut.signIn(PLFData.DATA_USER2, "gtn");
+       manageLogInOut.signIn(PLFData.DATA_USER2, "gtngtngtn");
        homePagePlatform.goToConnections();
        connectionsManagement.acceptAConnection(PLFData.username);
        homePagePlatform.goToAllSpace();

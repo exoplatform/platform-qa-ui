@@ -190,6 +190,7 @@ public class SpaceActivitiesTestIT extends Base {
     String space10 = "space" + getRandomNumber();
     String space11 = "space" + getRandomNumber();
     String space12 = "space" + getRandomNumber();
+    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space1, "", 60000);
     homePagePlatform.goToMySpaces();
