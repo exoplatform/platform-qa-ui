@@ -2,7 +2,6 @@ package org.exoplatform.platform.qa.ui.selenium.platform.ecms;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static com.codeborne.selenide.Condition.*;
@@ -60,17 +59,16 @@ public class ECMS_Permission {
     if (user == "user") {
       info("User is a user");
       info("Click on Select User button");
-      $(ELEMENT_PERMISSION_SELECTUSER).waitUntil(Condition.visible, Configuration.timeout).click();
+      $(ELEMENT_PERMISSION_SELECTUSER).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
       info("Click on Add User button");
-      sleep(2000);
-      $(ELEMENT_SEARCH_USER_INPUT).setValue(name);
+      $(ELEMENT_SEARCH_USER_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(name);
       $(byXpath("//span[@class='searchByUser']//a[@data-original-title='Quick Search']")).waitUntil(visible,timeout).click();
       $(By.xpath((ELEMENT_PERMISSION_USER_ADDUSER).replace("${name}", name))).waitUntil(visible, timeout).click();
     }
     if (user == "membership") {
       info("User is a membership");
       info("Type a mebership for textbox user");
-      $(ELEMENT_PERMISSION_TEXTBOXUSER).setValue( "" + opt[0] + ":/" + opt[1] + "");
+      $(ELEMENT_PERMISSION_TEXTBOXUSER).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue( "" + opt[0] + ":/" + opt[1] + "");
     }
     if (user == "all") {
       info("User is all");

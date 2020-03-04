@@ -154,9 +154,8 @@ public class SpaceManagement {
       }
     }
     info("Save all changes");
-    $(ELEMENET_SPACE_CREATE_BUTTON).click();
-    sleep(2000);
-    $(ELEMENET_SPACE_CREATE_BUTTON).waitUntil(Condition.disappear, Configuration.timeout);
+    $(ELEMENET_SPACE_CREATE_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENET_SPACE_CREATE_BUTTON).waitUntil(Condition.disappear, Configuration.openBrowserTimeoutMs);
     evt.waitForAndGetElement(By.linkText(name), iTimeout);
   }
 
@@ -226,9 +225,8 @@ public class SpaceManagement {
       $(byId("UIPopupAvatarUploader")).find(byClassName("file")).uploadFromClasspath(filepath);
 
       info("filepath:" + filepath);
-      sleep(2000);
-      $(ELEMENT_SPACE_UPLOAD_CONFIRM_BTN).click();
-      $(ELEMENT_SPACE_UPLOAD_SAVE_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(ELEMENT_SPACE_UPLOAD_CONFIRM_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+      $(ELEMENT_SPACE_UPLOAD_SAVE_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
   }
 
@@ -237,9 +235,7 @@ public class SpaceManagement {
    */
   public void saveChangesSpace() {
     info("evt.click on Save button");
-    sleep(2000);
-    (ELEMENT_SPACE_SAVE_BTN).click();
-    sleep(2000);
+    (ELEMENT_SPACE_SAVE_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Save all changes");
   }
 
@@ -474,13 +470,11 @@ public class SpaceManagement {
    */
   public void searchSpace(String name, String... number) {
     info("Waiting my space is shown");
-    sleep(Configuration.timeout);
-    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs + Configuration.timeout);
     info("Input the space into search text box");
-    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.timeout).setValue(name);
-    sleep(Configuration.timeout);
+    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
     info("evt.click on Search button");
-    $(ELEMENT_MY_SPACE_SEARCH_BTN).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_MY_SPACE_SEARCH_BTN).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -562,13 +556,12 @@ public class SpaceManagement {
   public void sendARequestToASpace(String space, boolean... isVerify) {
     info("Send a request to a space");
     searchSpace(space);
-    sleep(2000);
     if ($(byXpath("//button[@type='button' and text()='Request to Join']")).exists()) {
       $(byText(space)).parent()
               .parent()
               .parent()
               .find(ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN)
-              .waitUntil(Condition.visible, Configuration.timeout)
+              .waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs)
               .click();
     }
     if ($(byXpath("//button[@type='button' and text()='Join']")).exists()) {
@@ -656,9 +649,8 @@ public class SpaceManagement {
   public void goToActivityStreamTab() {
     info("Open Activity STream Tab");
     homePagePlatform.refreshUntil($(ELEMENT_ACTIVITY_STREAM_TAB), Condition.visible, 1000);
-    sleep(Configuration.timeout);
-    $(ELEMENT_ACTIVITY_STREAM_TAB).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_ACTIVITY_STREAM_TAB).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     info("Activity STream portlet is shown");
   }
 

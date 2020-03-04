@@ -336,8 +336,7 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToHomePage();
         executeJavaScript("window.scrollBy(0,150)", "");
         homePagePlatform.refreshUntil($(byText(quote)),Condition.visible,1000);
-        sleep(Configuration.timeout);
-        String comment_parent_id = $(byText(quote)).parent().parent().parent().parent().getAttribute("data-comment-id");
+        String comment_parent_id = $(byText(quote)).parent().parent().parent().parent().waitUntil(Condition.visible,Configuration.collectionsTimeout).getAttribute("data-comment-id");
         assertEquals($(byText(quote)).parent()
                 .parent()
                 .parent()

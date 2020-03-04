@@ -86,11 +86,8 @@ public class ManageLogInOut {
       }
     } else {
       info("login normally if not use SSO with user " + username + " and pass " + password);
-      sleep(Configuration.timeout);
-      $(ELEMENT_INPUT_USERNAME).setValue(username);
-      sleep(2000);
-      $(ELEMENT_INPUT_PASSWORD).setValue(password);
-      sleep(2000);
+      $(ELEMENT_INPUT_USERNAME).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(username);
+      $(ELEMENT_INPUT_PASSWORD).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(password);
       evt.clickByJavascript(ManageLogInOutLocator.ELEMENT_SIGN_IN_BUTTON, 2);
       if (verify)
         evt.waitForElementNotPresent(ManageLogInOutLocator.ELEMENT_SIGN_IN_BUTTON);
@@ -104,13 +101,10 @@ public class ManageLogInOut {
    * @param password
    */
   public void signInOpenam(String username, String password) {
-    sleep(2000);
     testBase.getExoWebDriver().getWebDriver();
-    $(ELEMENT_INPUT_USERNAME_OPENAM).setValue(username);
-    $(ELEMENT_INPUT_PASSWORD_OPENAM).setValue(password);
-    sleep(2000);
-    $(ELEMENT_SIGN_IN_BUTTON_OPENAM).click();
-    sleep(2000);
+    $(ELEMENT_INPUT_USERNAME_OPENAM).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(username);
+    $(ELEMENT_INPUT_PASSWORD_OPENAM).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(password);
+    $(ELEMENT_SIGN_IN_BUTTON_OPENAM).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 
@@ -139,8 +133,7 @@ public class ManageLogInOut {
         evt.mouseOverAndClick(ELEMENT_ACCOUNT_NAME_LINK);
         break;
       }
-      sleep(2000);
-      $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.appears, Configuration.timeout).click();
+      $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
 
       if (evt.waitForAndGetElement(ELEMENT_SIGN_OUT_LINK, 5000, 0) != null) {
         sleep(2000);
@@ -150,8 +143,7 @@ public class ManageLogInOut {
       info("Retry...[" + repeat + "]");
       testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     }
-    sleep(Configuration.timeout);
-    $(ELEMENT_SIGN_OUT_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_SIGN_OUT_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
     if (evt.waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK, 2000, 0) != null) {
       info("Clear cache and reconnect to the package");

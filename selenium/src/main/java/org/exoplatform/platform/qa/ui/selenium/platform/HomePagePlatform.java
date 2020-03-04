@@ -36,16 +36,13 @@ public class HomePagePlatform {
     $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_WIKI_LINK_PLF).click();
     refreshUntil($(ELEMENT_WIKI_LINK_PLF), Condition.visible, 500);
-    sleep(Configuration.timeout);
   }
 
   public void goToChat() {
     info("--Go to chat--");
     refreshUntil($(byClassName("status-dropdown")), Condition.visible, 1000);
-    sleep(Configuration.timeout);
-    $(byClassName("status-dropdown")).waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(Configuration.timeout);
-    $(byClassName("notif-chat-open-link")).waitUntil(Condition.appears, Configuration.timeout).click();
+    $(byClassName("status-dropdown")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byClassName("notif-chat-open-link")).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -96,7 +93,7 @@ public class HomePagePlatform {
    */
   public void goToMySpaces() {
     info("-- Go to my spaces --");
-    ELEMENT_MY_SPACE_LINK_PLF.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    ELEMENT_MY_SPACE_LINK_PLF.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     refreshUntil(ELEMENT_ADDNEWSPACE_BUTTON, Condition.visible, Configuration.timeout);
   }
 
@@ -162,11 +159,8 @@ public class HomePagePlatform {
    */
   public void searchUsersPeople(String user) {
     info("Enter User Name");
-    sleep(2000);
-    $(byXpath("//div[@class='selectize-input items not-full']/input[@placeholder='Name']")).setValue(user);
-    sleep(2000);
-    $(byXpath("//button[@id='SearchButton']")).waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(2000);
+    $(byXpath("//div[@class='selectize-input items not-full']/input[@placeholder='Name']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(user);
+    $(byXpath("//button[@id='SearchButton']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**

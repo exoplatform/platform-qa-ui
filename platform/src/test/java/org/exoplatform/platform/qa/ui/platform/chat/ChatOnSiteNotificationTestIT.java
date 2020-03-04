@@ -236,15 +236,13 @@ public class ChatOnSiteNotificationTestIT extends Base {
         manageLogInOut.signInCas(username,password);
         homePagePlatform.goToChat();
         switchTo().window(1);
-        sleep(Configuration.timeout);
-        ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.visible,Configuration.timeout).click();
+        ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         chatManagement.sendMessageInRoomOrSpace(room, message);
         switchToParentWindow();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
         refresh();
-        sleep(Configuration.collectionsTimeout);
-        $(byXpath("//*[@id='chatApplicationNotification']/div[1]/a/div/span")).shouldBe(Condition.visible);
+        $(byXpath("//*[@id='chatApplicationNotification']/div[1]/a/div/span")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).shouldBe(Condition.visible);
         switchTo().window(1);
         refresh();
         roomManagement.deleteRomm(room);
@@ -265,13 +263,11 @@ public class ChatOnSiteNotificationTestIT extends Base {
         homePagePlatform.goToChat();
         switchTo().window(1);
         refresh();
-        ELEMENT_CHAT_SETTING_NOTIFICATION.waitUntil(Condition.visible,Configuration.timeout).click();
-        sleep(Configuration.timeout);
-        ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION.parent().waitUntil(Condition.visible,Configuration.timeout);
-        sleep(Configuration.timeout);
+        ELEMENT_CHAT_SETTING_NOTIFICATION.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION.parent().waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
         assertEquals("ON",ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION.parent().getText());
-        ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION.parent().click();
-        ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
+        ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION.parent().waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 
     @Test
@@ -286,11 +282,10 @@ public class ChatOnSiteNotificationTestIT extends Base {
         homePagePlatform.goToChat();
         switchTo().window(1);
         refresh();
-        ELEMENT_CHAT_SETTING_NOTIFICATION.waitUntil(Condition.visible,Configuration.timeout).click();
-        sleep(Configuration.timeout);
+        ELEMENT_CHAT_SETTING_NOTIFICATION.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         assertEquals("OFF",ELEMENT_CHAT_DESKTOP_NOTIFICATION_STATUS.getText());
-        ELEMENT_CHAT_DESKTOP_NOTIFICATION_BUTTON_.parent().click();
-        ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
+        ELEMENT_CHAT_DESKTOP_NOTIFICATION_BUTTON_.parent().waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 
     @Test
@@ -305,11 +300,10 @@ public class ChatOnSiteNotificationTestIT extends Base {
         homePagePlatform.goToChat();
         switchTo().window(1);
         refresh();
-        ELEMENT_CHAT_SETTING_NOTIFICATION.waitUntil(Condition.visible,Configuration.timeout).click();
-        sleep(Configuration.timeout);
+        ELEMENT_CHAT_SETTING_NOTIFICATION.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         Assert.assertNotEquals($(byXpath("(//input[@id='notifyDesktop']/following::label[@class='switchBtnLabelOn'])[1]")).getCssValue("width"),"11px");
-        ELEMENT_CHAT_BIP_NOTIFICATION_BUTTON.parent().click();
-        ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
+        ELEMENT_CHAT_BIP_NOTIFICATION_BUTTON.parent().waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 
     @Test
@@ -324,11 +318,10 @@ public class ChatOnSiteNotificationTestIT extends Base {
         homePagePlatform.goToChat();
         switchTo().window(1);
         refresh();
-        ELEMENT_CHAT_SETTING_NOTIFICATION.waitUntil(Condition.visible,Configuration.timeout).click();
-        sleep(Configuration.timeout);
+        ELEMENT_CHAT_SETTING_NOTIFICATION.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         assertEquals("OFF",ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON.parent().getText());
-        ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON.parent().click();
-        ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.click();
+        ELEMENT_CHAT_ON_SITE_NOTIFICATION_BUTTON.parent().waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        ELEMENT_CHAT_CONFIRM_BUTTON_NOTIFICATION.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 
     @Test
@@ -369,11 +362,9 @@ public class ChatOnSiteNotificationTestIT extends Base {
         switchToParentWindow();
         manageLogInOut.signOut();
         manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
-        ELEMENT_CHAT_ICON_STATUS.waitUntil(Condition.visible,Configuration.timeout).click();
-        sleep(Configuration.timeout);
+        ELEMENT_CHAT_ICON_STATUS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         assertEquals(ELEMENT_CHAT_NOTIFICATION_DETAIL.getCssValue("overflow-y"),"auto");
-        sleep(Configuration.timeout);
-        ELEMENT_CHAT_ICON_STATUS.waitUntil(Condition.visible,Configuration.timeout).click();
+        ELEMENT_CHAT_ICON_STATUS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         homePagePlatform.goToChat();
         switchTo().window(1);
         roomManagement.deleteRomm(room);
