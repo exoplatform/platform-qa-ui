@@ -65,15 +65,13 @@ public class NewsLocator {
 
   public static final SelenideElement ELEMENT_USERNAME_PUBLISHER_INPUT = $(".control-group").find(".controls").find("#username");
 
- //public static final SelenideElement NEWS_COMPOSER_PIN_CHECKBOX = $("#newsActivityComposer").find("#pinArticle");
-
  public static final SelenideElement CONFIRM_PIN_ARTICLE =$(byXpath ("//div[@class='uiAction uiActionBorder']//a[@class='btn'][1]"));
 
  public static final SelenideElement ALERT_SUCCESS = $("#messagePin ").find(".alert.alert-success ");
 
  public static final SelenideElement BLOC_LATEST_NEWS = $(".latestNewsContent ");
 
- public static final SelenideElement News_PINNED_ARTICLE = $(".contentTitle ");
+ public static final SelenideElement NEWS_PINNED_ARTICLE = $(".contentTitle ");
 
  public static final SelenideElement NewsCreationFrom_PINUNPIN_BUTTON = $("#newsPinButton ");
 

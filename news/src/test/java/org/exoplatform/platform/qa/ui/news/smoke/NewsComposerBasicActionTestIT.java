@@ -658,7 +658,7 @@ public class NewsComposerBasicActionTestIT extends Base {
 
     newsComposerManagement.verifyPostButton(true);
 
-    newsComposerManagement.PIN_NEWS_FROM_CREATIONFORM();
+    newsComposerManagement.pinNewsFromCreationForm();
     newsComposerManagement.postNews();
     newsComposerManagement.ConfirmPinUnPinArticle();
     newsComposerManagement.verifyNewsDetailsTitle(newsTitle);
@@ -667,7 +667,7 @@ public class NewsComposerBasicActionTestIT extends Base {
     info("check pinned article in Bloc News ");
     homePagePlatform.goToHomePage();
     BLOC_LATEST_NEWS.shouldBe(Condition.visible);
-    News_PINNED_ARTICLE.shouldBe(Condition.visible);
+    NEWS_PINNED_ARTICLE.shouldBe(Condition.visible);
 
     // cleanup
     switchTo().window(1).close();
@@ -734,7 +734,7 @@ public class NewsComposerBasicActionTestIT extends Base {
 
     newsComposerManagement.verifyNewsDetailsBody(newsContent);
 
-    newsComposerManagement.PIN_UNPIN_NEWS_DETAILS ();
+    newsComposerManagement.pin_unpin_news_details ();
 
     newsComposerManagement.ConfirmPinUnPinArticle();
 
@@ -743,7 +743,7 @@ public class NewsComposerBasicActionTestIT extends Base {
     info("check pinned article in News CLV ");
     homePagePlatform.goToHomePage();
     BLOC_LATEST_NEWS.shouldBe(Condition.visible);
-    News_PINNED_ARTICLE.shouldBe(Condition.visible);
+    NEWS_PINNED_ARTICLE.shouldBe(Condition.visible);
 
     // cleanup
     switchTo().window(1).close();
@@ -877,7 +877,7 @@ public class NewsComposerBasicActionTestIT extends Base {
 
     newsComposerManagement.verifyPostButton(true);
 
-    newsComposerManagement.PIN_NEWS_FROM_CREATIONFORM();
+    newsComposerManagement.pinNewsFromCreationForm();
     newsComposerManagement.postNews();
     newsComposerManagement.ConfirmPinUnPinArticle();
     newsComposerManagement.verifyNewsDetailsTitle(newsTitle);
@@ -885,7 +885,7 @@ public class NewsComposerBasicActionTestIT extends Base {
 
     info("user 'publisher' Unpin article ");
     newsComposerManagement.openNewsEditor();
-    newsComposerManagement.UNPIN_NEWS_FROM_CREATIONFORM();
+    newsComposerManagement.unpinNewsFromCreationForm();
     newsComposerManagement.verifyUpdateButton(true);
     newsComposerManagement.updateNews();
     newsComposerManagement.ConfirmPinUnPinArticle();

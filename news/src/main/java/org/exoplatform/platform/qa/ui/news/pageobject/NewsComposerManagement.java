@@ -178,10 +178,8 @@ public class NewsComposerManagement {
   public void verifyDraftSaved() {
     NEWS_DRAFT_STATUS.waitUntil(visible, timeout).shouldNotBe(empty);
   }
-public void verifySpaceNameIsVisible (){ELEMENT_SPACE_NAME.shouldBe(visible);}
-/**  public boolean verifyPinButtonExists() {
-    return NEWS_COMPOSER_PIN_CHECKBOX.exists();
-  }*/
+
+  public void verifySpaceNameIsVisible (){ELEMENT_SPACE_NAME.shouldBe(visible);}
 
   public boolean verifyNewsUpdaterExists() {
     return NEWS_DETAILS_UPDATER.exists();
@@ -221,18 +219,21 @@ public void verifySpaceNameIsVisible (){ELEMENT_SPACE_NAME.shouldBe(visible);}
     ELEMENT_MEMBERSHIP_SELECT.selectOptionByValue(publisher);
     NewsLocator.ELEMENT_SAVE_BUTTON.click();
   }
-public void PIN_UNPIN_NEWS_DETAILS ()
+public void pin_unpin_news_details ()
 {
     NEWS_DETAILS_BUTTON_PIN_UNPIN.click();
 
 }
 public void ConfirmPinUnPinArticle ()
 {
+
     CONFIRM_PIN_ARTICLE.click();
 }
-public void PIN_NEWS_FROM_CREATIONFORM()
-{  NewsCreationFrom_PINUNPIN_BUTTON.click();}
+public void  pinNewsFromCreationForm() {
+      NewsCreationFrom_PINUNPIN_BUTTON.click();
+  }
 
-public void UNPIN_NEWS_FROM_CREATIONFORM()
-  {  NewsCreationFrom_PINUNPIN_BUTTON.click();}
+public void unpinNewsFromCreationForm(){
+      NewsCreationFrom_PINUNPIN_BUTTON.click();
+  }
 }
