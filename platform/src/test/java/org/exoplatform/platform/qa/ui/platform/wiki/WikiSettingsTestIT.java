@@ -139,7 +139,6 @@ public class WikiSettingsTestIT extends Base {
     String message="The page title already exists. Please select another one.";
     homePagePlatform.goToWiki();
     wikiHomePage.goToWikiSettingPage();
-    sleep(Configuration.timeout);
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     ELEMENT_WIKI_BUTTON_ADD_MORE_TEMPLATE.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
     wikiSettingManagement.addTemplate(title, description, content);

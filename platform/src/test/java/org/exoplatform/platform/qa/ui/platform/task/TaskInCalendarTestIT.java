@@ -64,7 +64,6 @@ public class TaskInCalendarTestIT extends Base {
         info("Create a space");
         homePagePlatform.goToAllSpace();
         spaceManagement.addNewSpaceSimple(space, space, 6000);
-        Thread.sleep(1000);
         spaceManagement.goToTaskTab();
         ELEMENT_LEFT_PANEL_IN_TASK_PAGE.find(byText(space)).click();
         tasksManagement.addTask(taskName);

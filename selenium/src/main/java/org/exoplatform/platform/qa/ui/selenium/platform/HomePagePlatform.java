@@ -106,7 +106,7 @@ public class HomePagePlatform {
   public void goToAllSpace() {
     info("Click on Join a space link");
     executeJavaScript("arguments[0].scrollBy(0,5000);", $(byId("LeftNavigation")));
-    $(ELEMENT_ALL_SPACE_JOIN_LINK).waitUntil(Condition.appears, Configuration.timeout).click();
+    $(ELEMENT_ALL_SPACE_JOIN_LINK).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
 
   }
 
@@ -129,8 +129,7 @@ public class HomePagePlatform {
    */
   public void goToForum() {
     info("-- Go to forum page --");
-    sleep(Configuration.timeout);
-    $(ELEMENT_FORUM_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_FORUM_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
     refresh();
   }
 

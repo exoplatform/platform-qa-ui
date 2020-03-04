@@ -92,9 +92,8 @@ public class ForumPublishActivityTestIT extends Base {
    */
   public void deleteDataTest() {
     info("Delete data test");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     executeJavaScript("window.scrollBy(0,-550)");
-    sleep(Configuration.timeout);
     homePagePlatform.goToForum();
     forumHomePage.goToHomeCategory();
     info("Delete catefory");
@@ -325,8 +324,7 @@ public class ForumPublishActivityTestIT extends Base {
     forumTopicManagement.deleteTopic();
     deleteDataTest();
     homePagePlatform.goToHomePage();
-    homePagePlatform.refreshUntil($(byText(topic1)),Condition.not(Condition.exist),2000);
-    sleep(Configuration.timeout);
+    homePagePlatform.refreshUntil($(byText(topic1)),Condition.not(Condition.exist),Configuration.timeout);
     info("Verify that the topic's activity is deleted after the topic is deleted");
     $(byText(topic1)).shouldNot(Condition.exist);
     info("the topic's activity is deleted sucessfully");
@@ -360,9 +358,8 @@ public class ForumPublishActivityTestIT extends Base {
     forumTopicManagement.addPoll(question, option1, option2);
     info("clear cache and recconnect");
     homePagePlatform.goToHomePage();
-    homePagePlatform.refreshUntil($(byText(comment)),Condition.exist,1000);
+    homePagePlatform.refreshUntil($(byText(comment)),Condition.exist,Configuration.timeout);
     info("Verify that topic's activity is added to the stream");
-    sleep(Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
     info("The topic's activity is added to the stream successfully");
     deleteDataTest();

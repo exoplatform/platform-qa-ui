@@ -204,13 +204,11 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(comment)).click();
 
     info("Read connection request notification");
-    Thread.sleep(2000);
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username3 + " " + username3)).click();
     ELEMENT_CONTENT_NAME_PROFILE.find(byText(username3 + " " + username3)).waitUntil(appears, Configuration.timeout);
 
     info("Check notification icon");
-    Thread.sleep(2000);
     navigationToolbar.goToIntranetNotification();
     info("A link [Mark as read] is displayed at the top of the notification popover");
     $(ELEMENT_NOTIFICATION_MARK_ALL_AS_READ_WITH_POSITION).should(Condition.exist);

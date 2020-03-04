@@ -100,8 +100,7 @@ public class GateinGlobalSettingsTestIT extends Base {
         userAddManagement.changePassWord(password, newpass, newpass);
         info("Login with new pass");
         manageLogInOut.signIn(username, newpass);
-        sleep(Configuration.timeout);
-        $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible, Configuration.timeout);
+        $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
         info("Clear Data");
         manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
         navigationToolbar.goToUsersAndGroupsManagement();
