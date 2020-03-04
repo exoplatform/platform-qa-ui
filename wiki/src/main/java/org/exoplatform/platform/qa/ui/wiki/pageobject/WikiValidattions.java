@@ -235,8 +235,7 @@ public class WikiValidattions {
         info("The compare version page is shown");
         evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_COMPARE_VERSION_TITLE);
         info("Verify that Version N-1 and current version is shown on the page");
-        sleep(Configuration.timeout);
-        $(byXpath(ELEMENT_COMPARE_VERSION_VERSION_NUMBER.replace("$num", oldVersion))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+        $(byXpath(ELEMENT_COMPARE_VERSION_VERSION_NUMBER.replace("$num", oldVersion))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout);
         evt.waitForAndGetElement(ELEMENT_COMPARE_VERSION_CURRENT_VERSION);
     }
 
@@ -352,7 +351,6 @@ public class WikiValidattions {
      */
     public void verifyRestrictedPageHasChildPage() {
         info("Verify that parent page is shown under the title: restricted on the left tree");
-        sleep(Configuration.collectionsTimeout);
         (ELEMENT_WIKI_LEFT_TREE_RESTRICTED_PAGE_TITLE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).hover();
         info("Verify the tooltip of the page as:[this page is restricted, you don't have permissions to view it]");
         $(ELEMENT_WIKI_TOOLTIP_RESTRICTED_PAGE_TITLE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).exists();

@@ -295,15 +295,10 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
 
     info("edit avatar");
     click(ELEMENT_EDIT_MY_PROFILE_LINK);
-    sleep(2000);
-    ELEMENT_BUTTON_CHANGE_AVATAR.click();
-    sleep(2000);
+    ELEMENT_BUTTON_CHANGE_AVATAR.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_INPUT_UPLOAD_AVATAR.uploadFromClasspath("testavatar.png");
-    sleep(Configuration.timeout);
-    ELEMENT_BUTTON_CONFIRM_UPLOAD.click();
-    sleep(2000);
-    ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.click();
-    sleep(2000);
+    ELEMENT_BUTTON_CONFIRM_UPLOAD.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     userProfilePage.saveCancelUpdateInfo(false);
     $(byXpath(ELEMENT_RECENT_ACTIVITY_CONTENT.replace("${index}", "1").replace("${content}", actAvatar))).should(Condition.exist);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");

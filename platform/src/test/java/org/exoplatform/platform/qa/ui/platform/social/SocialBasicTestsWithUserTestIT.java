@@ -198,21 +198,19 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     ELEMENT_TAB_ADD_LINK.click();
     ELEMENT_INPUT_LINK.setValue(link);
     ELEMENT_BUTTON_ATTACH_LINK.click();
-    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.be(Condition.enabled), Configuration.timeout);
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.be(Condition.enabled), Configuration.openBrowserTimeoutMs);
     $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
     $(byText(link)).should(Condition.exist);
-    $(byText(link)).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byText(link)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     switchTo().window(1);
-    sleep(2000);
     String title = "Google";
     assertEquals(title, Selenide.title());
     switchTo().window(0);
-    sleep(2000);
-    String id = $(byXpath("(//div[@id='boxContainer']/div)[1]")).waitUntil(Condition.visible,Configuration.timeout).getAttribute("id").split("ContextBox")[1];
-    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}",id))).waitUntil(Condition.visible,Configuration.timeout).click();
+    String id = $(byXpath("(//div[@id='boxContainer']/div)[1]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).getAttribute("id").split("ContextBox")[1];
+    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}",id))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}",id))).click();
-    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byXpath("//div[@id='ContextBox{id}']".replace("{id}",id))).waitUntil(Condition.disappear, Configuration.timeout);
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//div[@id='ContextBox{id}']".replace("{id}",id))).waitUntil(Condition.disappear, Configuration.openBrowserTimeoutMs);
   }
 
   @Test

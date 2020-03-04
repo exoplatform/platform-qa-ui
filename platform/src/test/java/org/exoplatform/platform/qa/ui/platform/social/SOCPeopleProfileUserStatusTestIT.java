@@ -101,8 +101,7 @@ public class SOCPeopleProfileUserStatusTestIT extends Base {
 
     info("change status to Away");
     mouseOverAndClick(ELEMENT_CHAT_ICON);
-    sleep(Configuration.timeout);
-    $(byClassName(ELEMENT_CHAT_STATUS.replace("${status}", iconAway))).waitUntil(visible, Configuration.openBrowserTimeoutMs).click();
+    $(byClassName(ELEMENT_CHAT_STATUS.replace("${status}", iconAway))).waitUntil(visible, Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout).click();
     info(ELEMENT_CHAT_UISTATUSPROFILEPORTLET.replace("${icon}", statusAway).replace("${status}", statusAway));
     homePagePlatform.refreshUntil($(ELEMENT_CHAT_ICON),visible,Configuration.timeout);
     $(ELEMENT_CHAT_ICON).find(byClassName(ELEMENT_CHAT_STATUS.replace("${status}", iconAway))).should(Condition.exist);

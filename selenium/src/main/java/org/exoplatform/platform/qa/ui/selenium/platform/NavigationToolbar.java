@@ -186,7 +186,7 @@ public class NavigationToolbar {
   public void goToSiteExplorer() {
     info("-- Go to site explorer home page --");
     if (testBase.getExoWebDriver().isIEDriver()) {
-      $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+      $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs + Configuration.timeout);
       $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     } else
       $(ELEMENT_LINK_SETUP).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();

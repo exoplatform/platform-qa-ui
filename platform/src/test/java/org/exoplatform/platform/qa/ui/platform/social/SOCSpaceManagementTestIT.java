@@ -267,12 +267,9 @@ public class SOCSpaceManagementTestIT extends Base {
     spaceSettingManagement.addApplication(category, app);
 
     info("Verify that Application is added to space");
-    $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.timeout).click();
-    sleep(2000);
+    $(ELEMENT_SPACE_MENU_MORE).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
     executeJavaScript("window.scrollBy(0,200)", "");
-    sleep(2000);
     $(byXpath("//div[@class=\"communityContainer\"]/span[text()='${app}']".replace("${app}",app))).exists();
-    sleep(2000);
     spaceSettingManagement.removeApplication(app);
     if($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible))
       $(ELEMENT_SPACE_MENU_MORE).click();
@@ -431,7 +428,6 @@ public class SOCSpaceManagementTestIT extends Base {
     open(urlSpace);
     homePagePlatform.refreshUntil($(ELEMENT_SPACE_ACCESS_SPACE_DENIED),Condition.visible,2000);
     $(ELEMENT_SPACE_ACCESS_SPACE_DENIED).is(Condition.visible);
-    sleep(2000);
     $(ELEMENT_SPACE_ACCESS_SPACE_DENIED_INFO).shouldHave(Condition.text(mess));
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();

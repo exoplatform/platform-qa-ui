@@ -849,7 +849,7 @@ public class ActivityStream {
         executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
         // click on the button comment
         $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.visible,Configuration.timeout).pressEnter()
-                .waitUntil(Condition.not(Condition.visible), Configuration.collectionsTimeout);
+                .waitUntil(Condition.not(Condition.visible), openBrowserTimeoutMs);
         $(byText(comment)).should(Condition.visible);
     }
 

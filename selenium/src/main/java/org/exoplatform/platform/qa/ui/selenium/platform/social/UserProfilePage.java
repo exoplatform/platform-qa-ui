@@ -226,7 +226,7 @@ public class UserProfilePage {
     evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     if (isSave == null || isSave) {
       info("Save updating information");
-      $(ELEMENT_CONTACT_SAVE_BUTTON).click();
+      $(ELEMENT_CONTACT_SAVE_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       $(ELEMENT_CONTACT_SAVE_BUTTON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     } else {
       info("Cancel updating information");

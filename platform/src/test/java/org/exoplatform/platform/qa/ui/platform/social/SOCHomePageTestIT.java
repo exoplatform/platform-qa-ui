@@ -713,9 +713,7 @@ public class SOCHomePageTestIT extends Base {
     createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
     createNewDocument.addNewWebContent(name, content);
     createNewDocument.saveAndClose();
-    sleep(Configuration.timeout);
     click(ELEMENT_SITEEXPLORER_LEFTBOX_ROOTNODE);
-    sleep(2000);
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToAddNewContent();
     info("Create new file document");

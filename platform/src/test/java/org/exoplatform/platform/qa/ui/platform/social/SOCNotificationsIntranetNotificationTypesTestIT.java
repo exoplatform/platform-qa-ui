@@ -1504,8 +1504,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
 
     info("check notification in notification list");
     manageLogInOut.signIn(username1, password);
-    sleep(Configuration.timeout);
-    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     ELEMENT_ALERT_NOTIFICATION.click();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().shouldHave(text(username2 + " " + username2
         + " has requested access to " + space + " space."));
@@ -2165,8 +2164,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
 
     info("Check comment notification in the notification list");
     manageLogInOut.signIn(username1, password);
-    sleep(2000);
-    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     $(byId("UINotificationPopoverToolbarPortlet")).find(byText(comment2))
             .parent()
             .parent()
@@ -2421,9 +2419,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.goToAllSpacesTab();
     spaceManagement.searchSpace(space);
-    sleep(2000);
-    ELEMENT_SPACES_LIST.find(byText(space)).click();
-    sleep(2000);
+    ELEMENT_SPACES_LIST.find(byText(space)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     activityStream.commentActivity(activity, comment4);
     info("Check comment notification in the notification list");
     manageLogInOut.signIn(username1, password);

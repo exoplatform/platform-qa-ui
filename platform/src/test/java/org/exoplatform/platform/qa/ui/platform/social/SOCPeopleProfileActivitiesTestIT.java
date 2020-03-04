@@ -2,7 +2,6 @@ package org.exoplatform.platform.qa.ui.platform.social;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
@@ -113,17 +112,11 @@ public class SOCPeopleProfileActivitiesTestIT extends Base {
     $(byText(actContactInfo)).should(Condition.visible);
 
     info("edit avatar");
-    sleep(2000);
     click(ELEMENT_EDIT_MY_PROFILE_LINK);
-    sleep(2000);
-    ELEMENT_BUTTON_CHANGE_AVATAR.waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.timeout);
+    ELEMENT_BUTTON_CHANGE_AVATAR.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_INPUT_UPLOAD_AVATAR.uploadFromClasspath("testavatar.png");
-    sleep(2000);
-    ELEMENT_BUTTON_CONFIRM_UPLOAD.click();
-    sleep(2000);
-    ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.click();
-    sleep(2000);
+    ELEMENT_BUTTON_CONFIRM_UPLOAD.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     userProfilePage.saveCancelUpdateInfo(false);
     $(byText(actContactInfo)).should(Condition.visible);
 
