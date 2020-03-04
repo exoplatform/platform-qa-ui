@@ -219,16 +219,16 @@ public class NewsComposerManagement {
     ELEMENT_MEMBERSHIP_SELECT.selectOptionByValue(publisher);
     NewsLocator.ELEMENT_SAVE_BUTTON.click();
   }
-public void pin_unpin_news_details ()
-{
+
+  public void pin_unpin_news_details() {
     NEWS_DETAILS_BUTTON_PIN_UNPIN.click();
 
-}
-public void ConfirmPinUnPinArticle ()
-{
+  }
+
+  public void ConfirmPinUnPinArticle() {
 
     CONFIRM_PIN_ARTICLE.click();
-}
+  }
 
   public void pinNewsFromCreationForm() {
     NewsCreationFrom_PINUNPIN_BUTTON.click();
