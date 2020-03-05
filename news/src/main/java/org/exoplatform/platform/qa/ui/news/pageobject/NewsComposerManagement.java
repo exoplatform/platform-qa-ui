@@ -231,10 +231,10 @@ public class NewsComposerManagement {
   }
 
   public void pinNewsFromCreationForm() {
-    NewsCreationFrom_PINUNPIN_BUTTON.click();
+    NEWS_CREATION_FORM_PINUNPIN_BUTTON.click();
   }
 
   public void unpinNewsFromCreationForm() {
-    NewsCreationFrom_PINUNPIN_BUTTON.click();
+    NEWS_CREATION_FORM_PINUNPIN_BUTTON.click();
   }
 }

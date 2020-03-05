@@ -556,6 +556,7 @@ public class NewsComposerBasicActionTestIT extends Base {
     homePagePlatform.goToAllSpace();
     spaceManagement.deleteSpace(spaceName, false);
   }
+
   @Test
   public void test10_CheckNewsDetailsPage_AfterPostAnArticle () {
 
@@ -831,6 +832,7 @@ public class NewsComposerBasicActionTestIT extends Base {
     homePagePlatform.goToAllSpace();
     spaceManagement.deleteSpace(spaceName, false);
   }
+
   @Test
   public void test14_UNPinArticle_From_CreationForm() {
 

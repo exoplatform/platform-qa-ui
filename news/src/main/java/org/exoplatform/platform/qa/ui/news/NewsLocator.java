@@ -37,7 +37,7 @@ public class NewsLocator {
 
   public static final SelenideElement NEWS_DETAILS_UPDATER = NEWS_DETAILS_CONTAINER.find(".newsUpdater").find(".newsUpdaterName");
 
-  public static final SelenideElement NEWS_DETAILS_BUTTON_PIN_UNPIN= NEWS_DETAILS_CONTAINER.find("#newsPinButton");
+  public static final SelenideElement NEWS_DETAILS_BUTTON_PIN_UNPIN = NEWS_DETAILS_CONTAINER.find("#newsPinButton");
 
   public static final SelenideElement NEWS_DETAILS_BUTTON_EDIT = NEWS_DETAILS_CONTAINER.find("#newsEditButton");
 
@@ -65,7 +65,7 @@ public class NewsLocator {
 
   public static final SelenideElement ELEMENT_USERNAME_PUBLISHER_INPUT = $(".control-group").find(".controls").find("#username");
 
- public static final SelenideElement CONFIRM_PIN_ARTICLE =$(byXpath ("//div[@class='uiAction uiActionBorder']//a[@class='btn'][1]"));
+ public static final SelenideElement CONFIRM_PIN_ARTICLE = $(byXpath ("//div[@class='uiAction uiActionBorder']//a[@class='btn'][1]"));
 
  public static final SelenideElement ALERT_SUCCESS = $("#messagePin ").find(".alert.alert-success ");
 
@@ -73,11 +73,9 @@ public class NewsLocator {
 
  public static final SelenideElement NEWS_PINNED_ARTICLE = $(".contentTitle ");
 
- public static final SelenideElement NewsCreationFrom_PINUNPIN_BUTTON = $("#newsPinButton ");
+ public static final SelenideElement NEWS_CREATION_FORM_PINUNPIN_BUTTON = $("#newsPinButton ");
 
- public static final SelenideElement ELEMENT_SPACE_NAME= $("#informationNews").find(".newsSpace");
-
-
+ public static final SelenideElement ELEMENT_SPACE_NAME = $("#informationNews").find(".newsSpace");
 
 }
 
