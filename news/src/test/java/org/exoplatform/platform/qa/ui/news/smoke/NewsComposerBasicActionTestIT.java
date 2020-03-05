@@ -1,5 +1,7 @@
 package org.exoplatform.platform.qa.ui.news.smoke;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.news.pageobject.NewsComposerManagement;
 import org.exoplatform.platform.qa.ui.selenium.logger.Logger;
@@ -13,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static org.exoplatform.platform.qa.ui.news.NewsLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static com.codeborne.selenide.Selenide.switchTo;
@@ -552,6 +555,351 @@ public class NewsComposerBasicActionTestIT extends Base {
     addUsers.deleteUser(username1);
     homePagePlatform.goToAllSpace();
     spaceManagement.deleteSpace(spaceName, false);
+  }
+
+  @Test
+  public void test10_CheckNewsDetailsPage_AfterPostAnArticle () {
+
+    String spaceName = "spaceName" + getRandomNumber();
+    String spaceDes = "description" + getRandomNumber();
+
+    String newsTitle = "newsTitle" + getRandomNumber();
+    String newsContent = "newsContent" + getRandomNumber();
+    // String author = "author" + getRandomNumber();
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String password = "123456";
+
+    String redactor="redactor";
+
+    info("Add user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+
+    info("Create a space and invite a user");
+    homePagePlatform.goToAllSpace();
+    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+    spaceHomePage.goToSpaceSettingTab();
+    spaceSettingManagement.inviteUser(username1, false, "");
+
+    info("give  the role redactor for user ");
+    newsComposerManagement.addUserRedactor(redactor, spaceName,username1);
+    info("user accept invitation to the space ");
+    manageLogInOut.signIn(username1, password);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.acceptAInvitation(spaceName);
+
+    info("Redactor posts an article and checks news details page ");
+
+    newsComposerManagement.createNews(newsTitle, newsContent);
+
+    newsComposerManagement.verifyNewsDetailsTitle(newsTitle);
+    newsComposerManagement.verifyNewsDetailsBody(newsContent);
+    newsComposerManagement.verifyNewsButtonEditExists();
+    newsComposerManagement.verifyNewsButtonShareExists();
+    newsComposerManagement.verifyNewsAuthor(username1);
+    newsComposerManagement.verifySpaceNameIsVisible();
+    newsComposerManagement.verifyNewsDetailsPublicationDateVisible();
+
+
+    // cleanup
+    switchTo().window(1).close();
+    switchTo().window(0);
+    manageLogInOut.signOut();
+    manageLogInOut.signIn("root","gtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    homePagePlatform.goToAllSpace();
+    spaceManagement.deleteSpace(spaceName, false);
+  }
+
+  @Test
+  public void test11_PinArticle_From_CreationForm() {
+
+    String spaceName = "spaceName" + getRandomNumber();
+    String spaceDes = "description" + getRandomNumber();
+
+    String newsTitle = "newsTitle" + getRandomNumber();
+    String newsContent = "newsContent" + getRandomNumber();
+
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String password = "123456";
+
+    String publisher="publisher";
+
+    info("Add user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+
+    info("Create a space and invite a user");
+    homePagePlatform.goToAllSpace();
+    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+    spaceHomePage.goToSpaceSettingTab();
+    spaceSettingManagement.inviteUser(username1, false, "");
+
+    info("give  the role publisher for user ");
+    newsComposerManagement.addUserPublisher(publisher, username1);
+
+    info("user accept invitation to the space ");
+    manageLogInOut.signIn(username1, password);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.acceptAInvitation(spaceName);
+
+    info("user publisher post and pin  an article ");
+    newsComposerManagement.openNewsComposer();
+
+    newsComposerManagement.verifyPostButton(false);
+
+    newsComposerManagement.fillTitleField(newsTitle);
+
+    newsComposerManagement.verifyPostButton(false);
+
+    newsComposerManagement.fillBodyField(newsContent);
+
+    newsComposerManagement.verifyPostButton(true);
+
+    newsComposerManagement.pinNewsFromCreationForm();
+    newsComposerManagement.postNews();
+    newsComposerManagement.ConfirmPinUnPinArticle();
+    newsComposerManagement.verifyNewsDetailsTitle(newsTitle);
+    newsComposerManagement.verifyNewsDetailsBody(newsContent);
+
+    info("check pinned article in Bloc News ");
+    homePagePlatform.goToHomePage();
+    BLOC_LATEST_NEWS.shouldBe(Condition.visible);
+    NEWS_PINNED_ARTICLE.shouldBe(Condition.visible);
+
+    // cleanup
+    switchTo().window(1).close();
+    switchTo().window(0);
+    manageLogInOut.signOut();
+    manageLogInOut.signIn("root","gtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    homePagePlatform.goToAllSpace();
+
+
+  }
+
+  @Test
+  public void test12_PinArticleFromNewsDetails() {
+
+    String spaceName = "spaceName" + getRandomNumber();
+    String spaceDes = "description" + getRandomNumber();
+
+    String newsTitle = "newsTitle" + getRandomNumber();
+    String newsContent = "newsContent" + getRandomNumber();
+
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String password = "123456";
+
+    String publisher = "publisher";
+
+    info("Add user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+
+    info("Create a space and invite a user");
+    homePagePlatform.goToAllSpace();
+    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+    spaceHomePage.goToSpaceSettingTab();
+    spaceSettingManagement.inviteUser(username1, false, "");
+
+    info("give  the role publisher for user ");
+    newsComposerManagement.addUserPublisher(publisher, username1);
+
+    info("user accept invitation to the space ");
+    manageLogInOut.signIn(username1, password);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.acceptAInvitation(spaceName);
+    info("user publisher post an article ");
+
+    homePagePlatform.goToSpecificSpace(spaceName);
+    newsComposerManagement.openNewsComposer();
+
+    newsComposerManagement.verifyPostButton(false);
+
+    newsComposerManagement.fillTitleField(newsTitle);
+
+    newsComposerManagement.verifyPostButton(false);
+
+    newsComposerManagement.fillBodyField(newsContent);
+
+    newsComposerManagement.verifyPostButton(true);
+
+    newsComposerManagement.postNews();
+
+    newsComposerManagement.verifyNewsDetailsTitle(newsTitle);
+
+    newsComposerManagement.verifyNewsDetailsBody(newsContent);
+
+    newsComposerManagement.pin_unpin_news_details ();
+
+    newsComposerManagement.ConfirmPinUnPinArticle();
+
+    ALERT_SUCCESS.waitUntil(Condition.visible, Configuration.timeout);
+
+    info("check pinned article in News CLV ");
+    homePagePlatform.goToHomePage();
+    BLOC_LATEST_NEWS.shouldBe(Condition.visible);
+    NEWS_PINNED_ARTICLE.shouldBe(Condition.visible);
+
+    // cleanup
+    switchTo().window(1).close();
+    switchTo().window(0);
+    manageLogInOut.signOut();
+    manageLogInOut.signIn("root", "gtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    homePagePlatform.goToAllSpace();
+    spaceManagement.deleteSpace(spaceName, false);
+
+  }
+
+  @Test
+  public void test13_UnpinArticleFromNewsDetails () {
+
+
+    String spaceName = "spaceName" + getRandomNumber();
+    String spaceDes = "description" + getRandomNumber();
+
+    String newsTitle = "newsTitle" + getRandomNumber();
+    String newsContent = "newsContent" + getRandomNumber();
+
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String password = "123456";
+
+    String publisher = "publisher";
+
+    info("Add user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+
+    info("Create a space and invite a user");
+    homePagePlatform.goToAllSpace();
+    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+    spaceHomePage.goToSpaceSettingTab();
+    spaceSettingManagement.inviteUser(username1, false, "");
+
+    info("give  the role publisher for user ");
+    newsComposerManagement.addUserPublisher(publisher, username1);
+
+    info("user accept invitation to the space ");
+    manageLogInOut.signIn(username1, password);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.acceptAInvitation(spaceName);
+    info("user publisher post an article ");
+
+    homePagePlatform.goToSpecificSpace(spaceName);
+    newsComposerManagement.openNewsComposer();
+
+    newsComposerManagement.verifyPostButton(false);
+
+    newsComposerManagement.fillTitleField(newsTitle);
+
+    newsComposerManagement.verifyPostButton(false);
+
+    newsComposerManagement.fillBodyField(newsContent);
+
+    newsComposerManagement.verifyPostButton(true);
+
+    newsComposerManagement.postNews();
+
+    newsComposerManagement.verifyNewsDetailsTitle(newsTitle);
+    newsComposerManagement.verifyNewsDetailsBody(newsContent);
+
+    info("user 'publisher' pin an article ");
+    NEWS_DETAILS_BUTTON_PIN_UNPIN.click();
+    newsComposerManagement.ConfirmPinUnPinArticle();
+    ALERT_SUCCESS.waitUntil(Condition.visible,Configuration.timeout);
+
+    info("user 'publisher' unpin Article ");
+    ALERT_SUCCESS.waitUntil(Condition.not(Condition.visible),Configuration.collectionsTimeout);
+    NEWS_DETAILS_BUTTON_PIN_UNPIN.waitUntil(Condition.visible,Configuration.timeout).click();
+    newsComposerManagement.ConfirmPinUnPinArticle();
+    ALERT_SUCCESS.waitUntil(Condition.visible,Configuration.timeout);
+
+    // cleanup
+    switchTo().window(1).close();
+    switchTo().window(0);
+    manageLogInOut.signOut();
+    manageLogInOut.signIn("root", "gtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    homePagePlatform.goToAllSpace();
+    spaceManagement.deleteSpace(spaceName, false);
+  }
+
+  @Test
+  public void test14_UNPinArticle_From_CreationForm() {
+
+    String spaceName = "spaceName" + getRandomNumber();
+    String spaceDes = "description" + getRandomNumber();
+
+    String newsTitle = "newsTitle" + getRandomNumber();
+    String newsContent = "newsContent" + getRandomNumber();
+
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@gmail.com";
+    String password = "123456";
+
+    String publisher="publisher";
+
+    info("Add user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+
+    info("Create a space and invite a user");
+    homePagePlatform.goToAllSpace();
+    spaceManagement.addNewSpaceSimple(spaceName, spaceDes);
+    spaceHomePage.goToSpaceSettingTab();
+    spaceSettingManagement.inviteUser(username1, false, "");
+
+    info("give  the role publisher for user ");
+    newsComposerManagement.addUserPublisher(publisher, username1);
+
+    info("user accept invitation to the space ");
+    manageLogInOut.signIn(username1, password);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.acceptAInvitation(spaceName);
+    info("user publisher post and pin  an article ");
+
+    newsComposerManagement.openNewsComposer();
+
+    newsComposerManagement.verifyPostButton(false);
+
+    newsComposerManagement.fillTitleField(newsTitle);
+
+    newsComposerManagement.verifyPostButton(false);
+
+    newsComposerManagement.fillBodyField(newsContent);
+
+    newsComposerManagement.verifyPostButton(true);
+
+    newsComposerManagement.pinNewsFromCreationForm();
+    newsComposerManagement.postNews();
+    newsComposerManagement.ConfirmPinUnPinArticle();
+    newsComposerManagement.verifyNewsDetailsTitle(newsTitle);
+    newsComposerManagement.verifyNewsDetailsBody(newsContent);
+
+    info("user 'publisher' Unpin article ");
+    newsComposerManagement.openNewsEditor();
+    newsComposerManagement.unpinNewsFromCreationForm();
+    newsComposerManagement.verifyUpdateButton(true);
+    newsComposerManagement.updateNews();
+    newsComposerManagement.ConfirmPinUnPinArticle();
+
+    // cleanup
+    switchTo().window(1).close();
+    switchTo().window(0);
+    manageLogInOut.signOut();
+    manageLogInOut.signIn("root","gtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    homePagePlatform.goToAllSpace();
   }
 
 }

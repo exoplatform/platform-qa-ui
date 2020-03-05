@@ -50,7 +50,7 @@ public class NewsComposerManagement {
    */
   public void openNewsEditor() {
     NEWS_EDITOR_LINK.shouldBe(visible).click();
-    switchTo().window(2);
+    switchTo().window(1);
   }
 
   /**
@@ -169,9 +169,7 @@ public class NewsComposerManagement {
     NEWS_DETAILS_ILLUSTRATION.shouldBe(visible);
   }
 
-  public void verifyNewsDetailsPublicationDateVisible() {
-    NEWS_DETAILS_PUBLICATION_DATE.shouldBe(visible);
-  }
+  public void verifyNewsDetailsPublicationDateVisible() { NEWS_DETAILS_PUBLICATION_DATE.shouldBe(visible); }
 
   public void verifyNewsComposerLinkVisible(boolean linkVisible) {
     NEWS_COMPOSER_LINK.shouldBe(linkVisible ? visible : not(visible));
@@ -181,16 +179,14 @@ public class NewsComposerManagement {
     NEWS_DRAFT_STATUS.waitUntil(visible, timeout).shouldNotBe(empty);
   }
 
-  public boolean verifyPinButtonExists() {
-    return NEWS_COMPOSER_PIN_CHECKBOX.exists();
-  }
+  public void verifySpaceNameIsVisible (){ELEMENT_SPACE_NAME.shouldBe(visible);}
 
   public boolean verifyNewsUpdaterExists() {
     return NEWS_DETAILS_UPDATER.exists();
   }
 
   public boolean verifyNewsButtonPinExists() {
-    return NEWS_DETAILS_BUTTON_PIN.exists();
+    return NEWS_DETAILS_BUTTON_PIN_UNPIN.exists();
   }
 
   public boolean verifyNewsButtonEditExists() {
@@ -224,4 +220,21 @@ public class NewsComposerManagement {
     NewsLocator.ELEMENT_SAVE_BUTTON.click();
   }
 
+  public void pin_unpin_news_details() {
+    NEWS_DETAILS_BUTTON_PIN_UNPIN.click();
+
+  }
+
+  public void ConfirmPinUnPinArticle() {
+
+    CONFIRM_PIN_ARTICLE.click();
+  }
+
+  public void pinNewsFromCreationForm() {
+    NEWS_CREATION_FORM_PINUNPIN_BUTTON.click();
+  }
+
+  public void unpinNewsFromCreationForm() {
+    NEWS_CREATION_FORM_PINUNPIN_BUTTON.click();
+  }
 }

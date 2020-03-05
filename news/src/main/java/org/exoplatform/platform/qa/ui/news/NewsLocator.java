@@ -37,13 +37,13 @@ public class NewsLocator {
 
   public static final SelenideElement NEWS_DETAILS_UPDATER = NEWS_DETAILS_CONTAINER.find(".newsUpdater").find(".newsUpdaterName");
 
-  public static final SelenideElement NEWS_DETAILS_BUTTON_PIN = NEWS_DETAILS_CONTAINER.find("#newsPinButton");
+  public static final SelenideElement NEWS_DETAILS_BUTTON_PIN_UNPIN = NEWS_DETAILS_CONTAINER.find("#newsPinButton");
 
   public static final SelenideElement NEWS_DETAILS_BUTTON_EDIT = NEWS_DETAILS_CONTAINER.find("#newsEditButton");
 
   public static final SelenideElement NEWS_DETAILS_BUTTON_SHARE = NEWS_DETAILS_CONTAINER.find("#newsShareButton");
 
-  public static final SelenideElement NEWS_DETAILS_PUBLICATION_DATE = NEWS_DETAILS_CONTAINER.find(".newsInformationLabel").find(".newsInformationValue.newsPostedDate");
+  public static final SelenideElement NEWS_DETAILS_PUBLICATION_DATE = NEWS_DETAILS_CONTAINER.find(".newsInformationValue.newsPostedDate");
 
   public static final SelenideElement NEWS_DETAILS_ILLUSTRATION = NEWS_DETAILS_CONTAINER.find(".illustrationPicture");
 
@@ -65,7 +65,17 @@ public class NewsLocator {
 
   public static final SelenideElement ELEMENT_USERNAME_PUBLISHER_INPUT = $(".control-group").find(".controls").find("#username");
 
-  public static final SelenideElement NEWS_COMPOSER_PIN_CHECKBOX = $("#newsActivityComposer").find("#pinArticle");
+ public static final SelenideElement CONFIRM_PIN_ARTICLE = $(byXpath ("//div[@class='uiAction uiActionBorder']//a[@class='btn'][1]"));
+
+ public static final SelenideElement ALERT_SUCCESS = $("#messagePin ").find(".alert.alert-success ");
+
+ public static final SelenideElement BLOC_LATEST_NEWS = $(".latestNewsContent ");
+
+ public static final SelenideElement NEWS_PINNED_ARTICLE = $(".contentTitle ");
+
+ public static final SelenideElement NEWS_CREATION_FORM_PINUNPIN_BUTTON = $("#newsPinButton ");
+
+ public static final SelenideElement ELEMENT_SPACE_NAME = $("#informationNews").find(".newsSpace");
 
 }
 
