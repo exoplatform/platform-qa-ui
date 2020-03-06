@@ -49,6 +49,7 @@
     <module>task</module>
     <module>answer</module>
     <module>onlyOffice</module>
+    <module>restAssured</module>
     <module>news</module>
   </modules>
   <scm>

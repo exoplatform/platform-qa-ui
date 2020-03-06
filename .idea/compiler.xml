@@ -17,6 +17,7 @@
         <module name="platform-qa-ui-news" />
         <module name="platform-qa-ui-onlyOffice" />
         <module name="platform-qa-ui-platform" />
+        <module name="platform-qa-ui-restAssured" />
         <module name="platform-qa-ui-selenium" />
         <module name="platform-qa-ui-social" />
         <module name="platform-qa-ui-task" />
@@ -36,6 +37,7 @@
       <module name="platform-qa-ui-news" target="1.8" />
       <module name="platform-qa-ui-onlyOffice" target="1.8" />
       <module name="platform-qa-ui-platform" target="1.8" />
+      <module name="platform-qa-ui-restAssured" target="1.8" />
       <module name="platform-qa-ui-selenium" target="1.8" />
       <module name="platform-qa-ui-social" target="1.8" />
       <module name="platform-qa-ui-task" target="1.8" />
