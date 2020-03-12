@@ -17,4 +17,15 @@ casper.then( function(){
    }
   });
 
+  casper.then( function(){
+      casper.echo('Clicking on Chat Icon');
+      casper.waitForSelector('.status-dropdown');
+      casper.click('.status-dropdown');
+
+      if (this.exists('.notif-chat-open-link')) {
+          this.echo('Open Chat Button is displayed');
+      }
+
+    });
+
 }

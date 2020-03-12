@@ -913,7 +913,55 @@
       "selectorExpansion": true,
       "misMatchThreshold" : 0,
       "requireSameDimensions": true
-    }
+    },
+     {
+          "label": "Open Chat Button",
+          "url": "http://fqa02.exoplatform.org" ,
+          "referenceUrl": "http://fqa01.exoplatform.org" ,
+          "readyEvent": "",
+          "readySelector": "",
+          "delay": 2000,
+          "onBeforeScript": "",
+          "onReadyScript": "onBefore_chatpage.js",
+          "hideSelectors": [".calendarPortlet"],
+          "removeSelectors": [],
+          "hoverSelector": "",
+          "clickSelector": "",
+          "postInteractionWait": 0,
+          "selectors": [
+            "viewport",
+            "document",
+            "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+            "div#RightBody.UIContainer"
+          ],
+          "selectorExpansion": true,
+          "misMatchThreshold" : 0,
+          "requireSameDimensions": true
+        },
+           {
+              "label": "User_page_profile",
+              "url": "http://fqa02.exoplatform.org" ,
+              "referenceUrl": "http://fqa01.exoplatform.org" ,
+              "readyEvent": "",
+              "readySelector": "",
+              "delay": 2000,
+              "onBeforeScript": "",
+              "onReadyScript": "onBefore_usrpageprofile.js",
+              "hideSelectors": [".calendarPortlet"],
+              "removeSelectors": [],
+              "hoverSelector": "",
+              "clickSelector": "",
+              "postInteractionWait": 0,
+              "selectors": [
+                "viewport",
+                "document",
+                "div#NavigationPortlet.UIContainer div.TRContainer.clearfix",
+                "div#RightBody.UIContainer"
+              ],
+              "selectorExpansion": true,
+              "misMatchThreshold" : 0,
+              "requireSameDimensions": true
+            }
   ],
   "paths": {
     "bitmaps_reference": "backstop_data_desktop/bitmaps_reference",
