@@ -36,7 +36,6 @@ public class HomePagePlatform {
     $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_WIKI_LINK_PLF).click();
     refreshUntil($(ELEMENT_WIKI_LINK_PLF), Condition.visible, 500);
-    sleep(Configuration.timeout);
   }
 
   public void goToChat() {
@@ -71,10 +70,8 @@ public class HomePagePlatform {
    */
   public void goToHomePage() {
     info("Click on Home link of intranet page");
-    sleep(Configuration.timeout);
     executeJavaScript("window.scrollBy(0,-5500)", "");
-    sleep(Configuration.collectionsTimeout);
-    $(ELEMENT_HOME_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_HOME_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout).click();
   }
 
   /**

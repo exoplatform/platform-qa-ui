@@ -53,7 +53,7 @@ public class WikiManagement {
    */
   public void selectTemplateWikiPage(SelenideElement eTemplate) {
     info("--Select  template--");
-    $(ELEMENT_TEMPLATE_SELECT_FORM).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    $(ELEMENT_TEMPLATE_SELECT_FORM).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs + Configuration.timeout);
     eTemplate.selectRadio(eTemplate.getValue());
   }
 
@@ -68,11 +68,10 @@ public class WikiManagement {
       do {
         //refresh();
         testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-        sleep(2000);
       }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
     }
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.exist)) {
-      $(ELEMENT_SOURCE_EDITOR_BUTTON).click();
+      $(ELEMENT_SOURCE_EDITOR_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
     }
   }
@@ -95,10 +94,9 @@ public class WikiManagement {
    */
   public void saveAddPage() {
     info("Save all changes");
-    sleep(Configuration.timeout);
     executeJavaScript("window.scrollBy(0,-5500)", "");
-    ELEMENT_SAVE_BUTTON_ADD_PAGE.waitUntil(Condition.visible,Configuration.timeout).click();
-   $(ELEMENT_SAVE_BUTTON_ADD_PAGE).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    ELEMENT_SAVE_BUTTON_ADD_PAGE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+   $(ELEMENT_SAVE_BUTTON_ADD_PAGE).waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
     info("Wiki page simple is created successfully");
 
   }
@@ -317,12 +315,10 @@ public class WikiManagement {
    */
   public void previewATemplate(String template) {
     info("Preview the template");
-    $(ELEMENT_TEMPLATE_PREVIEW_BTN).click();
+    $(byXpath(ELEMENT_TEMPLATE_PREVIEW_BTN.replace("${template}",template))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Verify that the layout is shown");
-    $(ELEMENT_PREVIEW_TEMPLATE_CONTENT).waitUntil(Condition.appears, Configuration.timeout);
-    $(ELEMENT_TEMPLATE_PREVIEW_PAGE_CLOSE_BTN).click();
-    evt.click(ELEMENT_TEMPLATE_CANCEL_BTN);
-
+    $(ELEMENT_PREVIEW_TEMPLATE_CONTENT).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    $(ELEMENT_TEMPLATE_PREVIEW_PAGE_CLOSE_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -468,20 +464,17 @@ public class WikiManagement {
    */
   public void addSimpleWikiPageByTemplate(SelenideElement template, String newTitle) {
     info("Select a template");
-    sleep(Configuration.timeout);
     selectTemplateWikiPage(template);
-    sleep(2000);
-    $(ELEMENT_TEMPLATE_SELECT_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_TEMPLATE_SELECT_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     if(!$(ELEMENT_TITLE_WIKI_INPUT).exists())
     {
       do {
         //refresh();
         testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-        sleep(2000);
       }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
     }
     if (!newTitle.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).setValue(newTitle);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(newTitle);
     info("Save all changes");
     saveAddPage();
   }
@@ -496,17 +489,9 @@ public class WikiManagement {
     info("Select a template");
     selectTemplateWikiPage(template);
     $(ELEMENT_TEMPLATE_SELECT_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    sleep(Configuration.timeout);
     if (!newTitle.isEmpty())
       testBase.getExoWebDriver().getWebDriver().navigate().refresh();
       $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,15000).setValue(newTitle);
-    info("Waiting 30s before saved all changes");
-    try {
-      Thread.sleep(31000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
     info("Save all changes");
     saveAddPage();
   }

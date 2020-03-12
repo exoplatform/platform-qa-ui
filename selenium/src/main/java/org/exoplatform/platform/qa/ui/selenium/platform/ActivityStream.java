@@ -55,8 +55,7 @@ public class ActivityStream {
      */
     public void checkActivity(String name) {
         info("Verify that the activity of the name:" + name + " is shown");
-        sleep(Configuration.timeout);
-        $(byText(name)).waitUntil(Condition.visible, Configuration.timeout);
+        $(byText(name)).waitUntil(Condition.visible, openBrowserTimeoutMs);
         info("The activity of the name:" + name + " is shown successfully");
     }
 
@@ -79,9 +78,7 @@ public class ActivityStream {
      */
     public void checkCommentOfActivity(String activity, String comment) {
         info("Verify that the comment is added");
-        sleep(Configuration.collectionsTimeout);
-        $(byXpath("//div[@class='titleWiki']/a[text()='${activity}']".replace("${activity}",activity))).should(Condition.exist);
-        sleep(2000);
+        $(byXpath("//div[@class='titleWiki']/a[text()='${activity}']".replace("${activity}",activity))).waitUntil(Condition.exist, openBrowserTimeoutMs);
         ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(comment)).should(Condition.exist);
         info("The comment is added successfully");
     }

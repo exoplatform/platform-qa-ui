@@ -74,7 +74,6 @@ public class RichTextEditor {
       do {
         //refresh();
         testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-        sleep(2000);
       }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
     }
    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
@@ -91,9 +90,7 @@ public class RichTextEditor {
       sleep(2000);
       $(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout).click();
       switchTo().frame(frame);
-      sleep(2000);
-      $(byId("body")).sendKeys(content);
-      sleep(2000);
+      $(byId("body")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(content);
       switchTo().defaultContent();
     }
     }
@@ -354,7 +351,6 @@ public class RichTextEditor {
       do {
         //refresh();
         testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-        sleep(2000);
       }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
     }
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.not(Condition.exist))
@@ -770,7 +766,6 @@ public class RichTextEditor {
       do {
         //refresh();
         testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-        sleep(2000);
       }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
     }
     if (!title.isEmpty())
@@ -869,12 +864,14 @@ public class RichTextEditor {
   public void editSimplePageWithAutoSave(String newTitle, String newContent) {
     info("Input a new title for the page");
     if (!newTitle.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).val(newTitle);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.timeout).clear();
+    $(ELEMENT_TITLE_WIKI_INPUT).val(newTitle);
     info("Input a new content for the page");
     if (!newContent.isEmpty()) {
       SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);
       $(byClassName("gwt-RichTextArea")).click();
       switchTo().frame(frame);
+      $(byId("body")).waitUntil(Condition.visible,Configuration.timeout).clear();
       $(byId("body")).sendKeys(newContent);
       switchTo().defaultContent();
     }
@@ -891,10 +888,15 @@ public class RichTextEditor {
    */
   public void addSimplePageHasAutoSaveWithoutSave(String title, String content) {
     info("Input a title for the page");
-    sleep(Configuration.timeout);
-    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    if(!$(ELEMENT_TITLE_WIKI_INPUT).exists())
+    {
+      do {
+        //refresh();
+        testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+      }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
+    }
     if (!title.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,15000).val(title);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(title);
     info("Input a content for the page");
     if (!content.isEmpty()) {
       SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);
@@ -907,8 +909,8 @@ public class RichTextEditor {
     $(ELEMENT_DRAFT_NOTIFY).waitUntil(Condition.appears, 31000, 1);
     info("Save all changes");
     info("Cancel adding page");
-    $(ELEMENT_CANCEL_BUTTON_ADD_PAGE).click();
-    $(ELEMENT_CONFIRMATION_POPUP_YES_BTN).click();
+    $(ELEMENT_CANCEL_BUTTON_ADD_PAGE).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_CONFIRMATION_POPUP_YES_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**

@@ -47,14 +47,12 @@ public class SourceTextEditor {
       do {
         //refresh();
         testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-        sleep(2000);
       }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
     }
-    $(ELEMENT_TITLE_WIKI_INPUT).setValue(title);
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(title);
 
     info("Input a content for the page");
-    sleep(Configuration.timeout);
-    $(ELEMENT_CONTENT_WIKI_INPUT).setValue(content);
+    $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(content);
   }
 
   /**
