@@ -19,7 +19,7 @@ casper.then( function(){
   });
 
 casper.then( function(){ 
-    casper.echo('create space for settings');
+    casper.echo('create spacefor calendar');
     casper.click('div.joinSpace a');
     casper.wait(3000);
 
@@ -41,23 +41,22 @@ casper.then( function(){
 casper.then( function(){
   casper.waitForSelector('div.UIPopupWindow.uiPopup.UIDragObject.NormalStyle form.UIForm', function(){
       this.fillSelectors('div.UIPopupWindow.uiPopup.UIDragObject.NormalStyle form.UIForm', {
-        'input[id="displayName"]':'test'
-      }, true);
-    casper.wait(1000);
-    
+        'input[id="displayName"]':'test23'
+      });
+    casper.click('div.uiAction button.btn');
+    casper.wait(8000);
+
       });
   });
 
-casper.then( function(){
-    casper.echo('Clicking button');
-    casper.click('div.uiAction button.btn');
-    casper.waitForSelector('div.uiSpaceMenu');
-
+casper.thenOpen(scenario.url + "/portal/g/:spaces:test23/test23", function() {
+    casper.echo('Space Page is displayed');
+    casper.wait(4000);
+    this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
   });
 
-casper.then( function(){  
-    casper.echo('Clicking forum button');
-    casper.click('i.uiIconAppsettings.uiIconAppSpaceSettingPortlet.uiIconDefaultApp');
+casper.thenOpen(scenario.url + "/portal/g/:spaces:test23/test23/settings", function() {
+    casper.echo('Clicking Space Settings button');
     casper.waitForSelector('div.uiSpaceSettingPortlet');
     casper.wait(4000);
     casper.echo('newSpace settings');

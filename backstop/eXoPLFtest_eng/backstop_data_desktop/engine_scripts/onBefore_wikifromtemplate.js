@@ -12,20 +12,21 @@ casper.then( function(){
       }, true);
     casper.echo('Clicking button');
     casper.click('button.button');
-    casper.wait(4000);
+    casper.wait(8000);
     });
    }
   });
 
-  casper.then( function(){
-      casper.echo('Clicking on Chat Icon');
-      casper.waitForSelector('.status-dropdown');
-      casper.click('.status-dropdown');
+casper.thenOpen(scenario.url + "/portal/intranet/wiki", function() {
+    casper.echo('Wiki Page is displayed');
+    casper.wait(8000);
+    casper.echo('Click on add page');
+    casper.click('.uiWikiPageControlArea li:nth-of-type(2) div');
+    casper.echo('Add wiki blank page');
+    casper.click('.uiWikiPageControlArea li:nth-of-type(2) li:nth-of-type(2)');
+    this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
+  });
 
-      if (this.exists('.notif-chat-open-link')) {
-          this.echo('Open Chat Button is displayed');
-      }
 
-    });
 
 }

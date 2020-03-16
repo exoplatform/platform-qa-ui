@@ -19,7 +19,7 @@ casper.then( function(){
   });
 
 casper.then( function(){ 
-    casper.echo('create space for wiki');
+    casper.echo('create spacefor calendar');
     casper.click('div.joinSpace a');
     casper.wait(3000);
 
@@ -41,23 +41,22 @@ casper.then( function(){
 casper.then( function(){
   casper.waitForSelector('div.UIPopupWindow.uiPopup.UIDragObject.NormalStyle form.UIForm', function(){
       this.fillSelectors('div.UIPopupWindow.uiPopup.UIDragObject.NormalStyle form.UIForm', {
-        'input[id="displayName"]':'test'
-      }, true);
-    casper.wait(2000);
-    
+        'input[id="displayName"]':'test25'
+      });
+    casper.click('div.uiAction button.btn');
+    casper.wait(8000);
+
       });
   });
 
-casper.then( function(){
-    casper.echo('Clicking button');
-    casper.click('div.uiAction button.btn');
-    casper.waitForSelector('div.uiSpaceMenu');
-
+casper.thenOpen(scenario.url + "/portal/g/:spaces:test25/test25", function() {
+    casper.echo('Space Page is displayed');
+    casper.wait(4000);
+    this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
   });
 
-casper.then( function(){  
+casper.thenOpen(scenario.url + "/portal/g/:spaces:test25/test25/wiki", function() {
     casper.echo('Clicking wiki button');
-    casper.click('i.uiIconAppwiki.uiIconAppWikiPortlet.uiIconDefaultApp');
     casper.waitForSelector('div#UIViewContentDisplay.uiWikiContentDisplay');
     casper.wait(4000);
     casper.echo('newSpace wiki');

@@ -41,26 +41,24 @@ casper.then( function(){
 casper.then( function(){
   casper.waitForSelector('div.UIPopupWindow.uiPopup.UIDragObject.NormalStyle form.UIForm', function(){
       this.fillSelectors('div.UIPopupWindow.uiPopup.UIDragObject.NormalStyle form.UIForm', {
-        'input[id="displayName"]':'test'
-      }, true);
-    casper.wait(1000);
+        'input[id="displayName"]':'test20'
+      });
+    casper.click('div.uiAction button.btn');
+    casper.wait(8000);
     
       });
   });
 
-casper.then( function(){
-    casper.echo('Clicking button');
-    casper.click('div.uiAction button.btn');
-    casper.waitForSelector('div.uiSpaceMenu');
-    casper.wait(1000);
-
+casper.thenOpen(scenario.url + "/portal/g/:spaces:test20/test20", function() {
+    casper.echo('Space Page is displayed');
+    casper.wait(4000);
+    this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
   });
 
-casper.then( function(){  
+casper.thenOpen(scenario.url + "/portal/g/:spaces:test20/test20/calendar", function() {
     casper.echo('Clicking calendar button');
-    casper.click('span#calendar');
     casper.waitForSelector('div.calendarWorkingWorkspace');
-    casper.wait(4000);
+    casper.wait(8000);
     casper.echo('newSpace calendar');
     this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
 

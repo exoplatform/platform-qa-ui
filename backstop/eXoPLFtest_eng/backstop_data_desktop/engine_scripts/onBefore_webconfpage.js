@@ -28,8 +28,9 @@ casper.then( function(){
 
 casper.then( function(){
     casper.echo('Clicking web conferencing button');
-     casper.waitForSelector('#UISetupPlatformToolBarPortlet li:nth-of-type(9) a');
-     casper.click('#UISetupPlatformToolBarPortlet li:nth-of-type(9) a');
+     casper.wait(4000);
+     casper.waitForSelector('#UISetupPlatformToolBarPortlet li:nth-of-type(8) a');
+     casper.click('#UISetupPlatformToolBarPortlet li:nth-of-type(8) a');
      casper.wait(4000);
      casper.waitForSelector('#webconferencingAdmin');
   });

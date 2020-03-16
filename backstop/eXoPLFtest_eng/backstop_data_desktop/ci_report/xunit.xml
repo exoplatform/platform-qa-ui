@@ -1,152 +1,477 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="BackstopJS" tests="147" failures="0" errors="0" skipped="0">
+  <testsuite name="BackstopJS" tests="175" failures="99" errors="99" skipped="0">
     <testcase classname="body" name=" ›› Login Page"/>
     <testcase classname="document" name=" ›› Login Page"/>
     <testcase classname="div.uiLogin" name=" ›› Login Page"/>
-    <testcase classname="body" name=" ›› Home Page"/>
-    <testcase classname="document" name=" ›› Home Page"/>
-    <testcase classname=".LeftNavigationTDContainer.TDContainer" name=" ›› Home Page"/>
-    <testcase classname=".RightBodyTDContainer.TDContainer" name=" ›› Home Page"/>
+    <testcase classname="body" name=" ›› Home Page">
+      <failure message="Design deviation ›› Home Page (body) component"/>
+      <error message="Design deviation ›› Home Page (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Home Page">
+      <failure message="Design deviation ›› Home Page (document) component"/>
+      <error message="Design deviation ›› Home Page (document) component"/>
+    </testcase>
+    <testcase classname=".LeftNavigationTDContainer.TDContainer" name=" ›› Home Page">
+      <failure message="Design deviation ›› Home Page (.LeftNavigationTDContainer.TDContainer) component"/>
+      <error message="Design deviation ›› Home Page (.LeftNavigationTDContainer.TDContainer) component"/>
+    </testcase>
+    <testcase classname=".RightBodyTDContainer.TDContainer" name=" ›› Home Page">
+      <failure message="Design deviation ›› Home Page (.RightBodyTDContainer.TDContainer) component"/>
+      <error message="Design deviation ›› Home Page (.RightBodyTDContainer.TDContainer) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Home Page"/>
-    <testcase classname="td.OfficeMiddleTDContainer.TDContainer" name=" ›› Home Page"/>
-    <testcase classname="td.OfficeRightTDContainer.TDContainer" name=" ›› Home Page"/>
-    <testcase classname="body" name=" ›› Apps Btn"/>
-    <testcase classname="document" name=" ›› Apps Btn"/>
+    <testcase classname="td.OfficeMiddleTDContainer.TDContainer" name=" ›› Home Page">
+      <failure message="Design deviation ›› Home Page (td.OfficeMiddleTDContainer.TDContainer) component"/>
+      <error message="Design deviation ›› Home Page (td.OfficeMiddleTDContainer.TDContainer) component"/>
+    </testcase>
+    <testcase classname="td.OfficeRightTDContainer.TDContainer" name=" ›› Home Page">
+      <failure message="Design deviation ›› Home Page (td.OfficeRightTDContainer.TDContainer) component"/>
+      <error message="Design deviation ›› Home Page (td.OfficeRightTDContainer.TDContainer) component"/>
+    </testcase>
+    <testcase classname="body" name=" ›› Apps Btn">
+      <failure message="Design deviation ›› Apps Btn (body) component"/>
+      <error message="Design deviation ›› Apps Btn (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Apps Btn">
+      <failure message="Design deviation ›› Apps Btn (document) component"/>
+      <error message="Design deviation ›› Apps Btn (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Apps Btn"/>
-    <testcase classname="div#RightBody.UIContainer" name=" ›› Apps Btn"/>
-    <testcase classname="body" name=" ›› Apps Page"/>
-    <testcase classname="document" name=" ›› Apps Page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Apps Btn">
+      <failure message="Design deviation ›› Apps Btn (div#RightBody.UIContainer) component"/>
+      <error message="Design deviation ›› Apps Btn (div#RightBody.UIContainer) component"/>
+    </testcase>
+    <testcase classname="body" name=" ›› Apps Page">
+      <failure message="Design deviation ›› Apps Page (body) component"/>
+      <error message="Design deviation ›› Apps Page (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Apps Page">
+      <failure message="Design deviation ›› Apps Page (document) component"/>
+      <error message="Design deviation ›› Apps Page (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Apps Page"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› Apps Page"/>
-    <testcase classname="body" name=" ›› Calendar Page"/>
-    <testcase classname="document" name=" ›› Calendar Page"/>
+    <testcase classname="body" name=" ›› Calendar Page">
+      <failure message="Design deviation ›› Calendar Page (body) component"/>
+      <error message="Design deviation ›› Calendar Page (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Calendar Page">
+      <failure message="Design deviation ›› Calendar Page (document) component"/>
+      <error message="Design deviation ›› Calendar Page (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Calendar Page"/>
-    <testcase classname="div#RightBody.UIContainer" name=" ›› Calendar Page"/>
-    <testcase classname="body" name=" ›› Add User Btn"/>
-    <testcase classname="document" name=" ›› Add User Btn"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Calendar Page">
+      <failure message="Design deviation ›› Calendar Page (div#RightBody.UIContainer) component"/>
+      <error message="Design deviation ›› Calendar Page (div#RightBody.UIContainer) component"/>
+    </testcase>
+    <testcase classname="body" name=" ›› Add User Btn">
+      <failure message="Design deviation ›› Add User Btn (body) component"/>
+      <error message="Design deviation ›› Add User Btn (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Add User Btn">
+      <failure message="Design deviation ›› Add User Btn (document) component"/>
+      <error message="Design deviation ›› Add User Btn (document) component"/>
+    </testcase>
     <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix" name=" ›› Add User Btn"/>
-    <testcase classname="div#RightBody.UIContainer" name=" ›› Add User Btn"/>
-    <testcase classname="body" name=" ›› Community_page_adduser"/>
-    <testcase classname="document" name=" ›› Community_page_adduser"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Add User Btn">
+      <failure message="Design deviation ›› Add User Btn (div#RightBody.UIContainer) component"/>
+      <error message="Design deviation ›› Add User Btn (div#RightBody.UIContainer) component"/>
+    </testcase>
+    <testcase classname="body" name=" ›› Community_page_adduser">
+      <failure message="Design deviation ›› Community_page_adduser (body) component"/>
+      <error message="Design deviation ›› Community_page_adduser (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Community_page_adduser">
+      <failure message="Design deviation ›› Community_page_adduser (document) component"/>
+      <error message="Design deviation ›› Community_page_adduser (document) component"/>
+    </testcase>
     <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix" name=" ›› Community_page_adduser"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› Community_page_adduser"/>
-    <testcase classname="body" name=" ›› UserMgmntBtn"/>
-    <testcase classname="document" name=" ›› UserMgmntBtn"/>
+    <testcase classname="body" name=" ›› UserMgmntBtn">
+      <failure message="Design deviation ›› UserMgmntBtn (body) component"/>
+      <error message="Design deviation ›› UserMgmntBtn (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› UserMgmntBtn">
+      <failure message="Design deviation ›› UserMgmntBtn (document) component"/>
+      <error message="Design deviation ›› UserMgmntBtn (document) component"/>
+    </testcase>
     <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix" name=" ›› UserMgmntBtn"/>
-    <testcase classname="div#RightBody.UIContainer" name=" ›› UserMgmntBtn"/>
-    <testcase classname="body" name=" ›› CommPage"/>
-    <testcase classname="document" name=" ›› CommPage"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› UserMgmntBtn">
+      <failure message="Design deviation ›› UserMgmntBtn (div#RightBody.UIContainer) component"/>
+      <error message="Design deviation ›› UserMgmntBtn (div#RightBody.UIContainer) component"/>
+    </testcase>
+    <testcase classname="body" name=" ›› CommPage">
+      <failure message="Design deviation ›› CommPage (body) component"/>
+      <error message="Design deviation ›› CommPage (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› CommPage">
+      <failure message="Design deviation ›› CommPage (document) component"/>
+      <error message="Design deviation ›› CommPage (document) component"/>
+    </testcase>
     <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix" name=" ›› CommPage"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› CommPage"/>
-    <testcase classname="body" name=" ›› ContentBtn"/>
-    <testcase classname="document" name=" ›› ContentBtn"/>
+    <testcase classname="body" name=" ›› ContentBtn">
+      <failure message="Design deviation ›› ContentBtn (body) component"/>
+      <error message="Design deviation ›› ContentBtn (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› ContentBtn">
+      <failure message="Design deviation ›› ContentBtn (document) component"/>
+      <error message="Design deviation ›› ContentBtn (document) component"/>
+    </testcase>
     <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix" name=" ›› ContentBtn"/>
-    <testcase classname="div#RightBody.UIContainer" name=" ›› ContentBtn"/>
-    <testcase classname="body" name=" ›› Content_admin"/>
-    <testcase classname="document" name=" ›› Content_admin"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› ContentBtn">
+      <failure message="Design deviation ›› ContentBtn (div#RightBody.UIContainer) component"/>
+      <error message="Design deviation ›› ContentBtn (div#RightBody.UIContainer) component"/>
+    </testcase>
+    <testcase classname="body" name=" ›› Content_admin">
+      <failure message="Design deviation ›› Content_admin (body) component"/>
+      <error message="Design deviation ›› Content_admin (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Content_admin">
+      <failure message="Design deviation ›› Content_admin (document) component"/>
+      <error message="Design deviation ›› Content_admin (document) component"/>
+    </testcase>
     <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix" name=" ›› Content_admin"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› Content_admin"/>
-    <testcase classname="body" name=" ›› ContentMgmnt"/>
-    <testcase classname="document" name=" ›› ContentMgmnt"/>
+    <testcase classname="body" name=" ›› ContentMgmnt">
+      <failure message="Design deviation ›› ContentMgmnt (body) component"/>
+      <error message="Design deviation ›› ContentMgmnt (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› ContentMgmnt">
+      <failure message="Design deviation ›› ContentMgmnt (document) component"/>
+      <error message="Design deviation ›› ContentMgmnt (document) component"/>
+    </testcase>
     <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix" name=" ›› ContentMgmnt"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› ContentMgmnt"/>
-    <testcase classname="body" name=" ›› Content_search_page"/>
-    <testcase classname="document" name=" ›› Content_search_page"/>
+    <testcase classname="body" name=" ›› Content_search_page">
+      <failure message="Design deviation ›› Content_search_page (body) component"/>
+      <error message="Design deviation ›› Content_search_page (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Content_search_page">
+      <failure message="Design deviation ›› Content_search_page (document) component"/>
+      <error message="Design deviation ›› Content_search_page (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Content_search_page"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› Content_search_page"/>
-    <testcase classname="body" name=" ›› Documents_page"/>
-    <testcase classname="document" name=" ›› Documents_page"/>
+    <testcase classname="body" name=" ›› Documents_page">
+      <failure message="Design deviation ›› Documents_page (body) component"/>
+      <error message="Design deviation ›› Documents_page (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Documents_page">
+      <failure message="Design deviation ›› Documents_page (document) component"/>
+      <error message="Design deviation ›› Documents_page (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Documents_page"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› Documents_page"/>
-    <testcase classname="body" name=" ›› Documents_page"/>
-    <testcase classname="document" name=" ›› Documents_page"/>
+    <testcase classname="body" name=" ›› Documents_page">
+      <failure message="Design deviation ›› Documents_page (body) component"/>
+      <error message="Design deviation ›› Documents_page (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Documents_page">
+      <failure message="Design deviation ›› Documents_page (document) component"/>
+      <error message="Design deviation ›› Documents_page (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Documents_page"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› Documents_page"/>
-    <testcase classname="body" name=" ›› Forums_page"/>
-    <testcase classname="document" name=" ›› Forums_page"/>
+    <testcase classname="body" name=" ›› Forums_page">
+      <failure message="Design deviation ›› Forums_page (body) component"/>
+      <error message="Design deviation ›› Forums_page (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Forums_page">
+      <failure message="Design deviation ›› Forums_page (document) component"/>
+      <error message="Design deviation ›› Forums_page (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Forums_page"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› Forums_page"/>
-    <testcase classname="body" name=" ›› Network_page"/>
-    <testcase classname="document" name=" ›› Network_page"/>
+    <testcase classname="body" name=" ›› Network_page">
+      <failure message="Design deviation ›› Network_page (body) component"/>
+      <error message="Design deviation ›› Network_page (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Network_page">
+      <failure message="Design deviation ›› Network_page (document) component"/>
+      <error message="Design deviation ›› Network_page (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Network_page"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› Network_page"/>
-    <testcase classname="body" name=" ›› PortalBtn"/>
-    <testcase classname="document" name=" ›› PortalBtn"/>
+    <testcase classname="body" name=" ›› PortalBtn">
+      <failure message="Design deviation ›› PortalBtn (body) component"/>
+      <error message="Design deviation ›› PortalBtn (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› PortalBtn">
+      <failure message="Design deviation ›› PortalBtn (document) component"/>
+      <error message="Design deviation ›› PortalBtn (document) component"/>
+    </testcase>
     <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix" name=" ›› PortalBtn"/>
-    <testcase classname="div#RightBody.UIContainer" name=" ›› PortalBtn"/>
-    <testcase classname="body" name=" ›› Portal_page"/>
-    <testcase classname="document" name=" ›› Portal_page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› PortalBtn">
+      <failure message="Design deviation ›› PortalBtn (div#RightBody.UIContainer) component"/>
+      <error message="Design deviation ›› PortalBtn (div#RightBody.UIContainer) component"/>
+    </testcase>
+    <testcase classname="body" name=" ›› Portal_page">
+      <failure message="Design deviation ›› Portal_page (body) component"/>
+      <error message="Design deviation ›› Portal_page (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Portal_page">
+      <failure message="Design deviation ›› Portal_page (document) component"/>
+      <error message="Design deviation ›› Portal_page (document) component"/>
+    </testcase>
     <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix" name=" ›› Portal_page"/>
     <testcase classname="div.UITableColumnContainer div.TRContainer.clearfix.__n1" name=" ›› Portal_page"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› Portal_page"/>
-    <testcase classname="body" name=" ›› Portal_gpsites_page"/>
-    <testcase classname="document" name=" ›› Portal_gpsites_page"/>
+    <testcase classname="body" name=" ›› Portal_gpsites_page">
+      <failure message="Design deviation ›› Portal_gpsites_page (body) component"/>
+      <error message="Design deviation ›› Portal_gpsites_page (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Portal_gpsites_page">
+      <failure message="Design deviation ›› Portal_gpsites_page (document) component"/>
+      <error message="Design deviation ›› Portal_gpsites_page (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Portal_gpsites_page"/>
-    <testcase classname="div#RightBody.UIContainer" name=" ›› Portal_gpsites_page"/>
-    <testcase classname="body" name=" ›› Portal_notifs_page"/>
-    <testcase classname="document" name=" ›› Portal_notifs_page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Portal_gpsites_page">
+      <failure message="Design deviation ›› Portal_gpsites_page (div#RightBody.UIContainer) component"/>
+      <error message="Design deviation ›› Portal_gpsites_page (div#RightBody.UIContainer) component"/>
+    </testcase>
+    <testcase classname="body" name=" ›› Portal_notifs_page">
+      <failure message="Design deviation ›› Portal_notifs_page (body) component"/>
+      <error message="Design deviation ›› Portal_notifs_page (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Portal_notifs_page">
+      <failure message="Design deviation ›› Portal_notifs_page (document) component"/>
+      <error message="Design deviation ›› Portal_notifs_page (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Portal_notifs_page"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› Portal_notifs_page"/>
-    <testcase classname="body" name=" ›› Portal_sites_page"/>
-    <testcase classname="document" name=" ›› Portal_sites_page"/>
+    <testcase classname="body" name=" ›› Portal_sites_page">
+      <failure message="Design deviation ›› Portal_sites_page (body) component"/>
+      <error message="Design deviation ›› Portal_sites_page (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Portal_sites_page">
+      <failure message="Design deviation ›› Portal_sites_page (document) component"/>
+      <error message="Design deviation ›› Portal_sites_page (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Portal_sites_page"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› Portal_sites_page"/>
-    <testcase classname="body" name=" ›› Portalpages_page"/>
-    <testcase classname="document" name=" ›› Portalpages_page"/>
+    <testcase classname="body" name=" ›› Portalpages_page">
+      <failure message="Design deviation ›› Portalpages_page (body) component"/>
+      <error message="Design deviation ›› Portalpages_page (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Portalpages_page">
+      <failure message="Design deviation ›› Portalpages_page (document) component"/>
+      <error message="Design deviation ›› Portalpages_page (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Portalpages_page"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› Portalpages_page"/>
-    <testcase classname="body" name=" ›› Searchindexing_page"/>
-    <testcase classname="document" name=" ›› Searchindexing_page"/>
+    <testcase classname="body" name=" ›› Searchindexing_page">
+      <failure message="Design deviation ›› Searchindexing_page (body) component"/>
+      <error message="Design deviation ›› Searchindexing_page (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Searchindexing_page">
+      <failure message="Design deviation ›› Searchindexing_page (document) component"/>
+      <error message="Design deviation ›› Searchindexing_page (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Searchindexing_page"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› Searchindexing_page"/>
-    <testcase classname="body" name=" ›› Spaces_page"/>
-    <testcase classname="document" name=" ›› Spaces_page"/>
+    <testcase classname="body" name=" ›› Spaces_page">
+      <failure message="Design deviation ›› Spaces_page (body) component"/>
+      <error message="Design deviation ›› Spaces_page (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Spaces_page">
+      <failure message="Design deviation ›› Spaces_page (document) component"/>
+      <error message="Design deviation ›› Spaces_page (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Spaces_page"/>
-    <testcase classname="div#RightBody.UIContainer" name=" ›› Spaces_page"/>
-    <testcase classname="body" name=" ›› System_mngmnt_space"/>
-    <testcase classname="document" name=" ›› System_mngmnt_space"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Spaces_page">
+      <failure message="Design deviation ›› Spaces_page (div#RightBody.UIContainer) component"/>
+      <error message="Design deviation ›› Spaces_page (div#RightBody.UIContainer) component"/>
+    </testcase>
+    <testcase classname="body" name=" ›› System_mngmnt_space">
+      <failure message="Design deviation ›› System_mngmnt_space (body) component"/>
+      <error message="Design deviation ›› System_mngmnt_space (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› System_mngmnt_space">
+      <failure message="Design deviation ›› System_mngmnt_space (document) component"/>
+      <error message="Design deviation ›› System_mngmnt_space (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› System_mngmnt_space"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› System_mngmnt_space"/>
-    <testcase classname="body" name=" ›› System_mngmnt_space_templates_button"/>
-    <testcase classname="document" name=" ›› System_mngmnt_space_templates_button"/>
+    <testcase classname="body" name=" ›› System_mngmnt_space_templates_button">
+      <failure message="Design deviation ›› System_mngmnt_space_templates_button (body) component"/>
+      <error message="Design deviation ›› System_mngmnt_space_templates_button (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› System_mngmnt_space_templates_button">
+      <failure message="Design deviation ›› System_mngmnt_space_templates_button (document) component"/>
+      <error message="Design deviation ›› System_mngmnt_space_templates_button (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› System_mngmnt_space_templates_button"/>
-    <testcase classname="div#RightBody.UIContainer" name=" ›› System_mngmnt_space_templates_button"/>
-    <testcase classname="body" name=" ›› Tasks_page"/>
-    <testcase classname="document" name=" ›› Tasks_page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› System_mngmnt_space_templates_button">
+      <failure message="Design deviation ›› System_mngmnt_space_templates_button (div#RightBody.UIContainer) component"/>
+      <error message="Design deviation ›› System_mngmnt_space_templates_button (div#RightBody.UIContainer) component"/>
+    </testcase>
+    <testcase classname="body" name=" ›› Tasks_page">
+      <failure message="Design deviation ›› Tasks_page (body) component"/>
+      <error message="Design deviation ›› Tasks_page (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Tasks_page">
+      <failure message="Design deviation ›› Tasks_page (document) component"/>
+      <error message="Design deviation ›› Tasks_page (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Tasks_page"/>
-    <testcase classname="div#RightBody.UIContainer" name=" ›› Tasks_page"/>
-    <testcase classname="body" name=" ›› User_page_acts"/>
-    <testcase classname="document" name=" ›› User_page_acts"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Tasks_page">
+      <failure message="Design deviation ›› Tasks_page (div#RightBody.UIContainer) component"/>
+      <error message="Design deviation ›› Tasks_page (div#RightBody.UIContainer) component"/>
+    </testcase>
+    <testcase classname="body" name=" ›› User_page_acts">
+      <failure message="Design deviation ›› User_page_acts (body) component"/>
+      <error message="Design deviation ›› User_page_acts (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› User_page_acts">
+      <failure message="Design deviation ›› User_page_acts (document) component"/>
+      <error message="Design deviation ›› User_page_acts (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› User_page_acts"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› User_page_acts"/>
-    <testcase classname="body" name=" ›› User_page_flags"/>
-    <testcase classname="document" name=" ›› User_page_flags"/>
+    <testcase classname="body" name=" ›› User_page_flags">
+      <failure message="Design deviation ›› User_page_flags (body) component"/>
+      <error message="Design deviation ›› User_page_flags (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› User_page_flags">
+      <failure message="Design deviation ›› User_page_flags (document) component"/>
+      <error message="Design deviation ›› User_page_flags (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› User_page_flags"/>
-    <testcase classname="div#RightBody.UIContainer" name=" ›› User_page_flags"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› User_page_flags">
+      <failure message="Design deviation ›› User_page_flags (div#RightBody.UIContainer) component"/>
+      <error message="Design deviation ›› User_page_flags (div#RightBody.UIContainer) component"/>
+    </testcase>
     <testcase classname="div.MaskContainer" name=" ›› User_page_flags"/>
-    <testcase classname="body" name=" ›› Close_flags"/>
-    <testcase classname="body" name=" ›› User_page_network"/>
-    <testcase classname="document" name=" ›› User_page_network"/>
+    <testcase classname="body" name=" ›› Close_flags">
+      <failure message="Design deviation ›› Close_flags (body) component"/>
+      <error message="Design deviation ›› Close_flags (body) component"/>
+    </testcase>
+    <testcase classname="body" name=" ›› User_page_network">
+      <failure message="Design deviation ›› User_page_network (body) component"/>
+      <error message="Design deviation ›› User_page_network (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› User_page_network">
+      <failure message="Design deviation ›› User_page_network (document) component"/>
+      <error message="Design deviation ›› User_page_network (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› User_page_network"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› User_page_network"/>
-    <testcase classname="body" name=" ›› User_page_notifs"/>
-    <testcase classname="document" name=" ›› User_page_notifs"/>
+    <testcase classname="body" name=" ›› User_page_notifs">
+      <failure message="Design deviation ›› User_page_notifs (body) component"/>
+      <error message="Design deviation ›› User_page_notifs (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› User_page_notifs">
+      <failure message="Design deviation ›› User_page_notifs (document) component"/>
+      <error message="Design deviation ›› User_page_notifs (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› User_page_notifs"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› User_page_notifs"/>
-    <testcase classname="body" name=" ›› User_settings"/>
-    <testcase classname="body" name=" ›› Close_settings"/>
-    <testcase classname="body" name=" ›› WebconfBtn"/>
-    <testcase classname="document" name=" ›› WebconfBtn"/>
+    <testcase classname="body" name=" ›› User_settings">
+      <failure message="Design deviation ›› User_settings (body) component"/>
+      <error message="Design deviation ›› User_settings (body) component"/>
+    </testcase>
+    <testcase classname="body" name=" ›› Close_settings">
+      <failure message="Design deviation ›› Close_settings (body) component"/>
+      <error message="Design deviation ›› Close_settings (body) component"/>
+    </testcase>
+    <testcase classname="body" name=" ›› WebconfBtn">
+      <failure message="Design deviation ›› WebconfBtn (body) component"/>
+      <error message="Design deviation ›› WebconfBtn (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› WebconfBtn">
+      <failure message="Design deviation ›› WebconfBtn (document) component"/>
+      <error message="Design deviation ›› WebconfBtn (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› WebconfBtn"/>
-    <testcase classname="div#RightBody.UIContainer" name=" ›› WebconfBtn"/>
-    <testcase classname="body" name=" ›› Webconf_page"/>
-    <testcase classname="document" name=" ›› Webconf_page"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› WebconfBtn">
+      <failure message="Design deviation ›› WebconfBtn (div#RightBody.UIContainer) component"/>
+      <error message="Design deviation ›› WebconfBtn (div#RightBody.UIContainer) component"/>
+    </testcase>
+    <testcase classname="body" name=" ›› Webconf_page">
+      <failure message="Design deviation ›› Webconf_page (body) component"/>
+      <error message="Design deviation ›› Webconf_page (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Webconf_page">
+      <failure message="Design deviation ›› Webconf_page (document) component"/>
+      <error message="Design deviation ›› Webconf_page (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Webconf_page"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› Webconf_page"/>
-    <testcase classname="body" name=" ›› User_page_wiki"/>
-    <testcase classname="document" name=" ›› User_page_wiki"/>
+    <testcase classname="body" name=" ›› User_page_wiki">
+      <failure message="Design deviation ›› User_page_wiki (body) component"/>
+      <error message="Design deviation ›› User_page_wiki (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› User_page_wiki">
+      <failure message="Design deviation ›› User_page_wiki (document) component"/>
+      <error message="Design deviation ›› User_page_wiki (document) component"/>
+    </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› User_page_wiki"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› User_page_wiki"/>
+    <testcase classname="document" name=" ›› Create Space Pop Up">
+      <failure message="Design deviation ›› Create Space Pop Up (document) component"/>
+      <error message="Design deviation ›› Create Space Pop Up (document) component"/>
+    </testcase>
+    <testcase classname="body" name=" ›› Space Page Calendar Tab">
+      <failure message="Design deviation ›› Space Page Calendar Tab (body) component"/>
+      <error message="Design deviation ›› Space Page Calendar Tab (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Space Page Calendar Tab">
+      <failure message="Design deviation ›› Space Page Calendar Tab (document) component"/>
+      <error message="Design deviation ›› Space Page Calendar Tab (document) component"/>
+    </testcase>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Space Page Calendar Tab"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Space Page Calendar Tab"/>
+    <testcase classname="body" name=" ›› Space Page Documents Tab">
+      <failure message="Design deviation ›› Space Page Documents Tab (body) component"/>
+      <error message="Design deviation ›› Space Page Documents Tab (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Space Page Documents Tab">
+      <failure message="Design deviation ›› Space Page Documents Tab (document) component"/>
+      <error message="Design deviation ›› Space Page Documents Tab (document) component"/>
+    </testcase>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Space Page Documents Tab"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Space Page Documents Tab"/>
+    <testcase classname="body" name=" ›› Space Page Forum Tab">
+      <failure message="Design deviation ›› Space Page Forum Tab (body) component"/>
+      <error message="Design deviation ›› Space Page Forum Tab (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Space Page Forum Tab">
+      <failure message="Design deviation ›› Space Page Forum Tab (document) component"/>
+      <error message="Design deviation ›› Space Page Forum Tab (document) component"/>
+    </testcase>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Space Page Forum Tab"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Space Page Forum Tab"/>
+    <testcase classname="body" name=" ›› Space Page Tasks Tab">
+      <failure message="Design deviation ›› Space Page Tasks Tab (body) component"/>
+      <error message="Design deviation ›› Space Page Tasks Tab (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Space Page Tasks Tab">
+      <failure message="Design deviation ›› Space Page Tasks Tab (document) component"/>
+      <error message="Design deviation ›› Space Page Tasks Tab (document) component"/>
+    </testcase>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Space Page Tasks Tab"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Space Page Tasks Tab"/>
+    <testcase classname="body" name=" ›› Space Page Wiki Tab"/>
+    <testcase classname="document" name=" ›› Space Page Wiki Tab"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Space Page Wiki Tab"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Space Page Wiki Tab"/>
+    <testcase classname="document" name=" ›› Add wiki page btn"/>
+    <testcase classname="#UIWikiPortlet" name=" ›› Wiki blank page"/>
+    <testcase classname="#UIWikiPortlet" name=" ›› Wiki From Template"/>
+    <testcase classname="body" name=" ›› Chat button">
+      <failure message="Design deviation ›› Chat button (body) component"/>
+      <error message="Design deviation ›› Chat button (body) component"/>
+    </testcase>
+    <testcase classname="document" name=" ›› Chat button">
+      <failure message="Design deviation ›› Chat button (document) component"/>
+      <error message="Design deviation ›› Chat button (document) component"/>
+    </testcase>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Chat button"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Chat button">
+      <failure message="Design deviation ›› Chat button (div#RightBody.UIContainer) component"/>
+      <error message="Design deviation ›› Chat button (div#RightBody.UIContainer) component"/>
+    </testcase>
   </testsuite>
 </testsuites>

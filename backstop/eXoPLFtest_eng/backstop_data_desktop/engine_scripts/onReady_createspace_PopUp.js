@@ -1,4 +1,3 @@
-// onReady example
 module.exports = function(casper, scenario, vp) {
   // Example: Adding script delays to allow for things like CSS transitions to complete.
   casper.thenOpen(scenario.url);
@@ -19,8 +18,8 @@ casper.then( function(){
   });
 
 casper.then( function(){ 
-    casper.echo('create spacefor calendar');
-    casper.click('div.joinSpace a');
+    casper.echo('create space');
+    casper.click('#MySpacesItem');
     casper.wait(3000);
 
   });
@@ -30,10 +29,10 @@ casper.then( function(){
     casper.click('button.btn.btn-primary.pull-left');
     casper.echo('button clicked');
     casper.echo('waiting for popup');
-    casper.waitForSelector('div.uiPopupMySpaces');
+    casper.waitForSelector('#UIPopupAddSpace');
     casper.echo('popup showed');
-    if (this.exists('div.uiPopupMySpaces')) {
-        this.echo('the uiPopupMySpaces exists');
+    if (this.exists('#UIPopupAddSpace')) {
+        this.echo('the uiPopupAddSpace exists');
     }
 
   });
@@ -41,27 +40,10 @@ casper.then( function(){
 casper.then( function(){
   casper.waitForSelector('div.UIPopupWindow.uiPopup.UIDragObject.NormalStyle form.UIForm', function(){
       this.fillSelectors('div.UIPopupWindow.uiPopup.UIDragObject.NormalStyle form.UIForm', {
-        'input[id="displayName"]':'test21'
+        'input[id="displayName"]':'test18'
       });
-    casper.click('div.uiAction button.btn');
-    casper.wait(8000);
-
+    casper.wait(1000);
       });
-  });
-
-casper.thenOpen(scenario.url + "/portal/g/:spaces:test21/test21", function() {
-    casper.echo('Space Page is displayed');
-    casper.wait(4000);
-    this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
-  });
-
-casper.thenOpen(scenario.url + "/portal/g/:spaces:test21/test21/documents", function() {
-    casper.echo('Clicking documents button');
-    casper.waitForSelector('i.uiIconAppFileExplorerPortlet.uiIconDefaultApp');
-    casper.wait(4000);
-    casper.echo('newSpace documents');
-    this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
-
   });
 
 }

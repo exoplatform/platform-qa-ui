@@ -17,13 +17,16 @@ casper.then( function(){
    }
   });
 
-casper.then( function(){  
-    casper.echo('Clicking chat button');
-    casper.click('div#chat-status a.dropdown-toggle');
-    casper.waitForSelector('li a.notif-chat-open-link');
+casper.thenOpen(scenario.url + "/portal/intranet/wiki", function() {
+    casper.echo('Wiki Page is displayed');
     casper.wait(8000);
+    casper.echo('Click on add page');
+    casper.click('.uiWikiPageControlArea li:nth-of-type(2) div');
+    casper.echo('Add wiki blank page');
+    casper.click('.uiWikiPageControlArea li:nth-of-type(2) li:nth-of-type(1)');
     this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
-
   });
+
+
 
 }
