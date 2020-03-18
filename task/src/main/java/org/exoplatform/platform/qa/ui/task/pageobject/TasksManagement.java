@@ -93,15 +93,15 @@ public class TasksManagement {
   }
 
   public void replyToCommentTask(String taskContent, String reply, String user) {
-    $(byText(taskContent)).click();
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
-    ELEMENT_LABEL_REPLY_TASK.click();
+    $(byText(taskContent)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
+    $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_LABEL_REPLY_TASK.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     SelenideElement frame= ELEMENT_INPUT_COMMENT_TASK;
     switchTo().frame(frame);
-    COMMENT_INPUT_AREA.sendKeys(reply);
+    COMMENT_INPUT_AREA.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(reply);
     switchTo().defaultContent();
-    COMMENT_BUTTON.click();
-    $(byText(reply)).parent().parent().parent().parent().find(byText(user)).should(Condition.exist);
+    COMMENT_BUTTON.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byText(reply)).parent().parent().parent().parent().find(byText(user)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
   }
 
   public void replyToReply(String task,String reply,String replytoreply, String user) {

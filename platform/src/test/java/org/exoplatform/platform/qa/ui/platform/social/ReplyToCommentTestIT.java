@@ -569,7 +569,7 @@ public class ReplyToCommentTestIT extends Base {
         refresh();
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
         activityStream.addActivity(activity, "");
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
@@ -611,7 +611,7 @@ public class ReplyToCommentTestIT extends Base {
         refresh();
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
         activityStream.addActivity(activity, "");
         homePagePlatform.goToConnections();
         connectionsManagement.connectToAUser(DATA_USER2);
@@ -678,7 +678,7 @@ public class ReplyToCommentTestIT extends Base {
         refresh();
         ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+        ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
         activityStream.addActivity(activity, "");
         manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
         homePagePlatform.goToConnections();
@@ -839,7 +839,7 @@ public class ReplyToCommentTestIT extends Base {
         refresh();
         tasksManagement.replyToCommentTask(task, reply, DATA_NAME_USER1);
         refresh();
-        $(byText(task)).click();
+        $(byText(task)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         //Check that the replies number in show reply link
         String idDataComment = $(byText(comment)).parent().parent().parent().getAttribute("data-commentid");
         $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK_TASK.replace("{id}", idDataComment))).waitUntil(Condition.appears, Configuration.timeout).shouldHave(Condition.text("4"));

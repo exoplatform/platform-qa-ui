@@ -182,7 +182,7 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_COMPOSER_SHARE_BUTTON).should(Condition.be(Condition.enabled));
     $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
     $(byAttribute("data-original-title", "eXo-Platform.png")).parent()

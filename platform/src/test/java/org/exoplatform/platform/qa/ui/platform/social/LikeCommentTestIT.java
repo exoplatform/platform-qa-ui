@@ -827,7 +827,7 @@ public class LikeCommentTestIT extends Base {
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
     activityStream.addActivity(activity1, "");
     String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();

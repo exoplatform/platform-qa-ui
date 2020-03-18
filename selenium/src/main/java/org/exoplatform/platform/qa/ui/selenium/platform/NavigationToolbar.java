@@ -57,7 +57,7 @@ public class NavigationToolbar {
 
     $(ELEMENT_LINK_EDIT).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_MENU_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).hover();
-    $(ELEMENT_MENU_EDIT_LAYOUT).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_MENU_EDIT_LAYOUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**

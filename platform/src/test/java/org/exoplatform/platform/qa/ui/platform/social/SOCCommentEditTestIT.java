@@ -349,7 +349,7 @@ public class SOCCommentEditTestIT extends Base {
     String comment1 = "comment1" + getRandomNumber();
     activityStream.addActivity(activity1, "");
     activityStream.commentActivity(activity1, comment1);
-    $(byText(comment1)).waitUntil(Condition.visible, Configuration.timeout);
+    $(byText(comment1)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     activityStream.gotoCommentViewer(comment1);
     manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
     activityStream.deleteactivity(activity1);

@@ -184,7 +184,7 @@ public class SourceTextEditor {
     WebElement elem = $(ELEMENT_UPLOAD_NAME);
     evt.scrollToElement(elem, testBase.getExoWebDriver().getWebDriver());
     $(byClassName("uploadInput")).find(byName("file")).uploadFromClasspath(link);
-    $(By.linkText(link.substring(link.lastIndexOf(fs) + 1))).waitUntil(Condition.visible,Configuration.timeout);
+    $(By.linkText(link.substring(link.lastIndexOf(fs) + 1))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
   }
 
 }

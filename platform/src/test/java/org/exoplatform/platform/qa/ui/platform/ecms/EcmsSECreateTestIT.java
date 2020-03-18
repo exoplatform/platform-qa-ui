@@ -508,7 +508,7 @@ public class EcmsSECreateTestIT extends Base {
     siteExplorerHome.uploadFile("key_word.doc");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     $(byXpath(ELEMENT_GRID_LIST_CONTENT.replace("${file}", "key_word.doc"))).waitUntil(Condition.visible,
-                                                                                         Configuration.timeout);
+                                                                                         Configuration.openBrowserTimeoutMs);
     info("Delete the file");
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     siteExplorerHome.deleteData("key_word.doc");

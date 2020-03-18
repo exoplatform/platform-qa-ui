@@ -60,7 +60,7 @@ public class SOCActivityAddTestIT extends Base {
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_COMPOSER_SHARE_BUTTON).should(Condition.be(Condition.enabled));
     $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
     $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.disabled,Configuration.timeout);
@@ -72,7 +72,7 @@ public class SOCActivityAddTestIT extends Base {
                                                              .parent()
                                                              .parent()
                                                              .parent()
-                                                             .waitUntil(Condition.disappear, Configuration.timeout);
+                                                             .waitUntil(Condition.disappear, Configuration.openBrowserTimeoutMs);
   }
 
   @Test
@@ -84,16 +84,16 @@ public class SOCActivityAddTestIT extends Base {
     refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
+    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
     activityStream.addActivity(activity1, "");
     String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
     $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile"))
-                                                         .waitUntil(Condition.visible, Configuration.timeout)
+                                                         .waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs)
                                                          .click();
-    ELEMENT_ICON_LIKE_IN_PREVIEW_MODE.click();
+    ELEMENT_ICON_LIKE_IN_PREVIEW_MODE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_ICON_LIKE_IN_PREVIEW_MODE.waitUntil(Condition.have(Condition.attribute("data-original-title", "Unlike")),
                                                 Configuration.timeout);
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     activityStream.deleteactivity(activity1);
 
   }
