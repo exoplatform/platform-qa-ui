@@ -19,7 +19,7 @@ casper.then( function(){
   });
 
 casper.then( function(){ 
-    casper.echo('create spacefor calendar');
+    casper.echo('create space');
     casper.click('div.joinSpace a');
     casper.wait(3000);
 

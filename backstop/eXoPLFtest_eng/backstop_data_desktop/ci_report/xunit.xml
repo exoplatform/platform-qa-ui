@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="BackstopJS" tests="175" failures="99" errors="99" skipped="0">
+  <testsuite name="BackstopJS" tests="158" failures="88" errors="88" skipped="0">
     <testcase classname="body" name=" ›› Login Page"/>
     <testcase classname="document" name=" ›› Login Page"/>
     <testcase classname="div.uiLogin" name=" ›› Login Page"/>
@@ -293,7 +293,10 @@
       <error message="Design deviation ›› System_mngmnt_space (document) component"/>
     </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› System_mngmnt_space"/>
-    <testcase classname="div#RightBody.UIContainer" name=" ›› System_mngmnt_space"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› System_mngmnt_space">
+      <failure message="Design deviation ›› System_mngmnt_space (div#RightBody.UIContainer) component"/>
+      <error message="Design deviation ›› System_mngmnt_space (div#RightBody.UIContainer) component"/>
+    </testcase>
     <testcase classname="body" name=" ›› System_mngmnt_space_templates_button">
       <failure message="Design deviation ›› System_mngmnt_space_templates_button (body) component"/>
       <error message="Design deviation ›› System_mngmnt_space_templates_button (body) component"/>
@@ -409,69 +412,16 @@
     </testcase>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› User_page_wiki"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› User_page_wiki"/>
-    <testcase classname="document" name=" ›› Create Space Pop Up">
-      <failure message="Design deviation ›› Create Space Pop Up (document) component"/>
-      <error message="Design deviation ›› Create Space Pop Up (document) component"/>
-    </testcase>
-    <testcase classname="body" name=" ›› Space Page Calendar Tab">
-      <failure message="Design deviation ›› Space Page Calendar Tab (body) component"/>
-      <error message="Design deviation ›› Space Page Calendar Tab (body) component"/>
-    </testcase>
-    <testcase classname="document" name=" ›› Space Page Calendar Tab">
-      <failure message="Design deviation ›› Space Page Calendar Tab (document) component"/>
-      <error message="Design deviation ›› Space Page Calendar Tab (document) component"/>
-    </testcase>
-    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Space Page Calendar Tab"/>
-    <testcase classname="div#RightBody.UIContainer" name=" ›› Space Page Calendar Tab"/>
-    <testcase classname="body" name=" ›› Space Page Documents Tab">
-      <failure message="Design deviation ›› Space Page Documents Tab (body) component"/>
-      <error message="Design deviation ›› Space Page Documents Tab (body) component"/>
-    </testcase>
-    <testcase classname="document" name=" ›› Space Page Documents Tab">
-      <failure message="Design deviation ›› Space Page Documents Tab (document) component"/>
-      <error message="Design deviation ›› Space Page Documents Tab (document) component"/>
-    </testcase>
-    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Space Page Documents Tab"/>
-    <testcase classname="div#RightBody.UIContainer" name=" ›› Space Page Documents Tab"/>
-    <testcase classname="body" name=" ›› Space Page Forum Tab">
-      <failure message="Design deviation ›› Space Page Forum Tab (body) component"/>
-      <error message="Design deviation ›› Space Page Forum Tab (body) component"/>
-    </testcase>
-    <testcase classname="document" name=" ›› Space Page Forum Tab">
-      <failure message="Design deviation ›› Space Page Forum Tab (document) component"/>
-      <error message="Design deviation ›› Space Page Forum Tab (document) component"/>
-    </testcase>
-    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Space Page Forum Tab"/>
-    <testcase classname="div#RightBody.UIContainer" name=" ›› Space Page Forum Tab"/>
-    <testcase classname="body" name=" ›› Space Page Tasks Tab">
-      <failure message="Design deviation ›› Space Page Tasks Tab (body) component"/>
-      <error message="Design deviation ›› Space Page Tasks Tab (body) component"/>
-    </testcase>
-    <testcase classname="document" name=" ›› Space Page Tasks Tab">
-      <failure message="Design deviation ›› Space Page Tasks Tab (document) component"/>
-      <error message="Design deviation ›› Space Page Tasks Tab (document) component"/>
-    </testcase>
+    <testcase classname="#UIPopupAddSpace" name=" ›› Create Space Pop Up"/>
+    <testcase classname="body" name=" ›› Space Page Tasks Tab"/>
+    <testcase classname="document" name=" ›› Space Page Tasks Tab"/>
     <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Space Page Tasks Tab"/>
     <testcase classname="div#RightBody.UIContainer" name=" ›› Space Page Tasks Tab"/>
-    <testcase classname="body" name=" ›› Space Page Wiki Tab"/>
-    <testcase classname="document" name=" ›› Space Page Wiki Tab"/>
-    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Space Page Wiki Tab"/>
-    <testcase classname="div#RightBody.UIContainer" name=" ›› Space Page Wiki Tab"/>
+    <testcase classname="body" name=" ›› Space Page Calendar Tab"/>
+    <testcase classname="document" name=" ›› Space Page Calendar Tab"/>
+    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Space Page Calendar Tab"/>
+    <testcase classname="div#RightBody.UIContainer" name=" ›› Space Page Calendar Tab"/>
     <testcase classname="document" name=" ›› Add wiki page btn"/>
-    <testcase classname="#UIWikiPortlet" name=" ›› Wiki blank page"/>
-    <testcase classname="#UIWikiPortlet" name=" ›› Wiki From Template"/>
-    <testcase classname="body" name=" ›› Chat button">
-      <failure message="Design deviation ›› Chat button (body) component"/>
-      <error message="Design deviation ›› Chat button (body) component"/>
-    </testcase>
-    <testcase classname="document" name=" ›› Chat button">
-      <failure message="Design deviation ›› Chat button (document) component"/>
-      <error message="Design deviation ›› Chat button (document) component"/>
-    </testcase>
-    <testcase classname="div#NavigationPortlet.UIContainer div.TRContainer.clearfix" name=" ›› Chat button"/>
-    <testcase classname="div#RightBody.UIContainer" name=" ›› Chat button">
-      <failure message="Design deviation ›› Chat button (div#RightBody.UIContainer) component"/>
-      <error message="Design deviation ›› Chat button (div#RightBody.UIContainer) component"/>
-    </testcase>
+    <testcase classname="document" name=" ›› Chat button"/>
   </testsuite>
 </testsuites>
