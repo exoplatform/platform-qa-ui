@@ -82,7 +82,7 @@ public class SOCActivityAddTestIT extends Base {
     String activity1 = "activity1" + getRandomNumber();
     ELEMENT_TAB_LINK.waitUntil(Condition.visible,Configuration.timeout).click();
     refresh();
-    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
+    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.openBrowserTimeoutMs);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
     activityStream.addActivity(activity1, "");

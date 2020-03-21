@@ -356,6 +356,9 @@ public class ForumLocator {
   public static final By ELEMENT_ADD_POLL =
           By.xpath(".//*[@id='UITopicDetail']//a[contains(text(),'Add Poll')]");
 
+  public static final By ELEMENT_CANCEL_POLL =
+          By.xpath("//*[@class='UIForm']//*[@class='uiAction uiActionBorder']/button[3]");
+
   // Post on a topic
   public static final By ELEMENT_TOPIC_POST_A_REPLY_TITLE = By.id("PostTitle");
 

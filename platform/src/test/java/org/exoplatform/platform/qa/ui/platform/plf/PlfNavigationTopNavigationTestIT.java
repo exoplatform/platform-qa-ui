@@ -130,6 +130,7 @@ public class PlfNavigationTopNavigationTestIT extends Base {
      * displayed
      */
     navigationToolbar.goToAddPoll("", forum);
+    $(ELEMENT_CANCEL_POLL).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Delete data");
     homePagePlatform.goToForum();
     forumHomePage.goToHomeCategory();
