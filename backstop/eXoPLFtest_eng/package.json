@@ -12,7 +12,9 @@
   "dependencies": {
     "caper": "0.0.2",
     "casper": "^0.1.1",
-    "chromy": "^0.5.11"
+    "casperjs": "^1.1.4",
+    "chromy": "^0.5.11",
+    "phantomjs": "^2.1.7"
   },
   "devDependencies": {},
   "description": ""

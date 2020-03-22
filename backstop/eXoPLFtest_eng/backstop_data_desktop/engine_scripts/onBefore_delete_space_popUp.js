@@ -1,3 +1,4 @@
+// onReady example
 module.exports = function(casper, scenario, vp) {
   // Example: Adding script delays to allow for things like CSS transitions to complete.
   casper.thenOpen(scenario.url);
@@ -17,13 +18,19 @@ casper.then( function(){
    }
   });
 
-casper.then( function(){  
-    casper.echo('Clicking My Spaces button');
-    casper.click('i#MySpacesItem.uiIconSpaceNavigation');
-    casper.waitForSelector('i#MySpacesItem.uiIconSpaceNavigation');
-    casper.wait(4000);
-    this.capture('C:/Backstopjs/Backstopjs Projects/DemoExo/backstop_data/user-action-screenshots/' + vp.name+'.png');
+casper.then( function(){
+    casper.echo('create spacefor calendar');
+    casper.click('div.joinSpace a');
+    casper.wait(3000);
 
   });
 
-}
+casper.then( function(){
+    casper.echo('Clicking button delete');
+    casper.waitForSelector('button.confirmPopup');
+    casper.click('button.confirmPopup');
+    casper.echo('button clicked');
+    casper.wait(3000);
+  });
+
+  }
