@@ -6,6 +6,8 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -60,71 +62,6 @@ public class Wiki_BasicActionAddDraftOthersTemplateTestIT extends Base {
   }
 
   /**
-   * <li>Case ID:118451.</li>
-   * <li>Test Case Name: Add a page with link wiki page existed.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li> Step Number: 1 Step Name: Step 1: Step Description:
-   * - Connect with the user A - Go to [Intranet] --> [Wiki] - Click [Add Page]
-   * --> [Blank Page]/[From Template...] - Enter the required fields without
-   * saving for 30s Input Data: Expected Outcome: The draft is saved after 30s
-   * Step Number: 2 Step Name: Step 2: Step Description: - Connect with the user B
-   * - Go to [Intranet] --> [Wiki] - From the menu "Browse", choose "My drafts"
-   * Input Data: Expected Outcome: The draft created by the user A doesn't appear
-   * in the list of drafts of the user B
-   */
-  @Test
-  public void test01_ViewADraftForAnotherUser() {
-    info("Test 1: View a draft for another user");
-
-    info("Create a draft");
-    String title = "title" + getRandomNumber();
-    String content = "content" + getRandomNumber();
-    homePagePlatform.goToWiki();
-    wikiHomePage.goToAddBlankPage();
-    richTextEditor.addSimplePageHasAutoSaveWithoutSave(title, content);
-    info("Verify draft exists in draft list");
-    wikiHomePage.goToMyDraft();
-    wikiValidattions.verifyDraftExistsInDraftListOrNot(title, true);
-    info("Sign in with Mary");
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    info("Go to Myfraft and verify that draft created in step 1 does not exist in draft list");
-    homePagePlatform.goToWiki();
-    wikiHomePage.goToMyDraft();
-    wikiValidattions.verifyDraftExistsInDraftListOrNot(title, false);
-    info("Clear Data");
-    info("Sign in as John");
-
-  }
-
-  /**
-   * <li>Case ID:118333.</li>
-   * <li>Test Case Name: Preview a page.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li> Step Number: 1 Step Name: Step 1: Open form to
-   * create new page Step Description: - Choose path to add new page - Click [Add
-   * Page] --> [Blank Page]/[From Template...] Input Data: Expected Outcome: Form
-   * to create new page is shown and in the [Rich Text] editor Step Number: 2 Step
-   * Name: Step 2: Create new page Step Description: - Put the title for this page
-   * - Put the content of page Input Data: Expected Outcome: All fields are
-   * inputed with values Step Number: 3 Step Name: Step 3: Preview a page Step
-   * Description: - Click on Preview Input Data: Expected Outcome: Content of page
-   * is shown
-   */
-  @Test
-  @Tag("wabis")
-  public void test02_PreviewAPage() {
-    info("Test 2: Preview a page");
-    info("Go to Add a Wiki page");
-    String title = "title" + getRandomNumber();
-    String content = "content" + getRandomNumber();
-    homePagePlatform.goToWiki();
-    wikiHomePage.goToAddBlankPage();
-    richTextEditor.addSimplePage(title, content);
-    wikiManagement.PreviewASimplePage(title, content);
-    $(ELEMENT_CLOSE_PREVIEW_WINDOW).click();
-  }
-
-  /**
    * <li>Case ID:122803.</li>
    * <li>Test Case Name: Preview a page with image by another user.</li>
    * <li>Pre-Condition:</li>
@@ -146,30 +83,41 @@ public class Wiki_BasicActionAddDraftOthersTemplateTestIT extends Base {
    * Expected Outcome: User can see the image inserted in this wiki page.
    */
   @Test
-  public void test03_PreviewAPageWithImageByAnotherUser() {
+  public void test03_PreviewAPageWithImageAndViewADraftByAnotherUser() {
     info("Test 3: Preview a page with image by another user");
     info("Go to Add a Wiki page");
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();
+    String title1 = "title1" + getRandomNumber();
+    String content1 = "content1" + getRandomNumber();
     String linkImage = "http://www.keejob.com/media/recruiter/recruiter_10926/logo-10926-20160713-102629.png";
     String altText = "altText" + getRandomNumber();
     String width = "200";
     String height = "200";
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();
+    richTextEditor.addSimplePageHasAutoSaveWithoutSave(title1, content1);
+    info("Verify draft exists in draft list");
+    wikiHomePage.goToMyDraft();
+    wikiValidattions.verifyDraftExistsInDraftListOrNot(title1, true);
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToAddBlankPage();
     richTextEditor.addSimplePage(title, content);
+    wikiManagement.PreviewASimplePage(title, content);
+    $(ELEMENT_CLOSE_PREVIEW_WINDOW).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     richTextEditor.insertExternalImageLink(linkImage, width, height, altText);
     richTextEditor.selectAlign(RichTextEditor.alignType.Left);
     richTextEditor.goToInsertImage();
     wikiManagement.saveAddPage();
     info("Page is add/edited successfully");
     wikiValidattions.verifyTitleWikiPage(title);
-
     info("Add attach file is added successfully in content of page");
     wikiHomePage.goToAPage(title);
     wikiValidattions.verifyAltTextImageInContentPage(altText);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
     homePagePlatform.goToWiki();
+    wikiHomePage.goToMyDraft();
+    wikiValidattions.verifyDraftExistsInDraftListOrNot(title1, false);
     wikiHomePage.goToAPage(title);
     wikiValidattions.verifyAltTextImageInContentPage(altText);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
