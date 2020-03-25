@@ -823,7 +823,7 @@ public class ActivityStream {
      */
     public void checkNotComment(String title) {
         info("Verify that the activity hasn't any comment");
-        $(By.xpath(ELEMENT_ACTIVITY_NOT_ANY_COMMENT.replace("$title", title))).waitUntil(Condition.visible, Configuration.timeout);
+        $(By.xpath(ELEMENT_ACTIVITY_NOT_ANY_COMMENT.replace("$title", title))).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
     }
 
     public void addcomment_to_activity(String id, String comment) {

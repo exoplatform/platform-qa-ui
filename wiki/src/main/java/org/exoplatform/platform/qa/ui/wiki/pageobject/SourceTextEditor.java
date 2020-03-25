@@ -123,9 +123,12 @@ public class SourceTextEditor {
    */
   public void editSimplePage(String newTitle, String newContent) {
     info("Input a title for the page");
+
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.collectionsTimeout).clear();
     $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(newTitle);
 
     info("Input a content for the page");
+    $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible,Configuration.collectionsTimeout).clear();
     $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible,Configuration.collectionsTimeout).sendKeys(newContent);
 
   }
@@ -140,12 +143,14 @@ public class SourceTextEditor {
     info("Input a title for the page");
     String[] text;
     if (!newTitle.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).setValue(newTitle);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible, Configuration.timeout).clear();
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible, Configuration.timeout).setValue(newTitle);
     info("Input a content for the page");
     if (!newContent.isEmpty()) {
       text = newContent.split("</br>");
       for (int i = 0; i < text.length; i++) {
-      $(ELEMENT_CONTENT_WIKI_INPUT).setValue(newContent);
+        $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible, Configuration.timeout).clear();
+        $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible, Configuration.timeout).setValue(newContent);
        $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible, Configuration.timeout).sendKeys(Keys.ENTER);
       }
     }

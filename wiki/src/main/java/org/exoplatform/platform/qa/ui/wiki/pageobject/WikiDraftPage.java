@@ -44,7 +44,7 @@ public class WikiDraftPage {
   public void resumeADraft(String title) {
 
    info("Click on the title of the draf in the list");
-    $(byId("UIWikiDraftGrid")).find(byText(title + "(New Page)")).click();
+    $(byId("UIWikiDraftGrid")).find(byText(title + "(New Page)")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
 
   }

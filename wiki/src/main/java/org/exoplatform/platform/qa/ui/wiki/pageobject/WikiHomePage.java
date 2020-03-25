@@ -43,7 +43,7 @@ public class WikiHomePage {
      */
     public void goToAddBlankPage() {
         info("--Go to add blank wiki page--");
-        homePagePlatform.refreshUntil($(ELEMENT_ADD_PAGE_LINK),Condition.visible,Configuration.timeout);
+        homePagePlatform.refreshUntil($(ELEMENT_ADD_PAGE_LINK),Condition.visible,Configuration.collectionsTimeout);
         $(ELEMENT_ADD_PAGE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         $(ELEMENT_BLANK_PAGE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         info("Blank wiki page is shown");
@@ -71,8 +71,7 @@ public class WikiHomePage {
      */
     public void goToHomeWikiPage() {
         info("-- Go to wiki home page --");
-        sleep(2000);
-        $(ELEMENT_WIKI_HOME_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(ELEMENT_WIKI_HOME_PAGE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 
     /**
@@ -257,6 +256,24 @@ public class WikiHomePage {
         $(ELEMENT_MAKE_RESTRICT_BUTTON).click();
         dialog.closeMessageDialog();
     }
+
+  /**
+   * Make the page public from infor bar or More menu
+   *
+   * @param opParams Boolean
+   */
+  public void publicPage(Boolean... opParams) {
+    info("Make Restricted page");
+    Boolean useRestrictLink = (opParams.length > 0 ? opParams[0] : false);
+    if (useRestrictLink) {
+      $(ELEMENT_RESTRICTED_WIKI_ICON).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+      $(ELEMENT_RESTRICTED_WIKI_ICON).click();
+    } else {
+      goToPermalink();
+    }
+    $(ELEMENT_MAKE_PUBLIC_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
+    dialog.closeMessageDialog();
+  }
 
     /**
      * Close permalink popup

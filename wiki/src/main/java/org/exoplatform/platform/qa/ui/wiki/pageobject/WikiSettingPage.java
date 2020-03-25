@@ -43,7 +43,7 @@ public class WikiSettingPage {
 
     info("Verify that the search results is shown that matchs with keyword");
 
-    $(byId("UIWikiTemplateGrid")).find(byText(template)).waitUntil(Condition.visible,Configuration.timeout);
+    $(byId("UIWikiTemplateGrid")).find(byText(template)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
 
   }
 
@@ -97,6 +97,23 @@ public class WikiSettingPage {
     $(byXpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template))).click();
     alert.cancelAlert();
     $(byXpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template))).waitUntil(Condition.visible,Configuration.timeout);
+  }
+
+  /**
+   * Search a template
+   *
+   * @param template String
+   */
+  public void searchTemplateByTitle(String template) {
+
+    info("Input a template's name and press entrer");
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    $(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(template);
+     $(ELEMENT_TEMPLATE_SEARCH_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    info("Verify that the search results is shown that matchs with keyword");
+
+    $(byId("UIWikiTemplateGrid")).find(byText(template)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+
   }
 
   /**

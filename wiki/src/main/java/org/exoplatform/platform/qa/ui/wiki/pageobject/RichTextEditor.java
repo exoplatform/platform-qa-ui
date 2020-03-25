@@ -123,9 +123,11 @@ public class RichTextEditor {
    */
   public void goToAttachedFileLink() {
     info("Click on Link menu");
-    $(ELEMENT_LINK).hover().click();
+    $(ELEMENT_LINK).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_LINK).hover().waitUntil(Condition.visible,Configuration.timeout).click();
     info("Click on Attached file Link menu");
-    $(ELEMENT_ATTACHED_FILE_LINK_MENU).hover().click();
+    $(ELEMENT_ATTACHED_FILE_LINK_MENU).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_ATTACHED_FILE_LINK_MENU).hover().waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**
@@ -365,8 +367,8 @@ public class RichTextEditor {
     if (!newContent.isEmpty()) {
       SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);
       switchTo().frame(frame);
-      $(byId("body")).waitUntil(Condition.visible,Configuration.timeout).clear();
-      $(byId("body")).waitUntil(Condition.visible,Configuration.timeout).sendKeys(newContent);
+      $(byId("body")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).clear();
+      $(byId("body")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(newContent);
       switchTo().defaultContent();
     }
   }
@@ -708,7 +710,7 @@ public class RichTextEditor {
    */
   public void goToCurrentPageTab() {
     info("Click on Current Page Tab");
-    evt.click(ELEMENT_CURRENT_PAGE_TAB);
+    $(ELEMENT_CURRENT_PAGE_TAB).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -718,7 +720,7 @@ public class RichTextEditor {
    */
   public void uploadImageFile(String link) {
     info("Double Click on Upload New file button");
-    $(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_IMAGE_BTN).doubleClick();
+    $(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_IMAGE_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).doubleClick();
     $(byClassName("gwt-FileUpload")).uploadFromClasspath(link);
   }
 
@@ -749,7 +751,7 @@ public class RichTextEditor {
    */
   public void goToInsertImage() {
     info("Click on Insert Image");
-   $(ELEMENT_IMAGE_MENU_INSERT_IMAGE_BTN).click();
+   $(ELEMENT_IMAGE_MENU_INSERT_IMAGE_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     $(ELEMENT_IMAGE_MENU_INSERT_IMAGE_BTN).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
 
@@ -868,7 +870,7 @@ public class RichTextEditor {
     $(ELEMENT_TITLE_WIKI_INPUT).val(newTitle);
     info("Input a new content for the page");
     if (!newContent.isEmpty()) {
-      SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);
+      SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
       $(byClassName("gwt-RichTextArea")).click();
       switchTo().frame(frame);
       $(byId("body")).waitUntil(Condition.visible,Configuration.timeout).clear();

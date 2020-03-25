@@ -7,6 +7,7 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_WIKI_CONTENT;
@@ -176,7 +177,7 @@ public class WikiValidattions {
      */
     public void verifyNotTitleWikiPage(String title) {
         info("Verify that the wiki page isnot created and shown in the list");
-        ELEMENT_WIKI_PAGE_LINK.find(byText(title)).shouldNot(Condition.exist);
+        ELEMENT_WIKI_PAGE_LINK.find(byText(title)).shouldNot(exist);
         info("The wiki page isnot created successfully");
     }
 
@@ -425,7 +426,7 @@ public class WikiValidattions {
      */
     public void verifyTitleWikiPage(String title) {
         info("Verify that the wiki page is created and shown in the list");
-        $(byXpath("//div[@id='iconTreeExplorer']//*[contains(text(),'${title}')]".replace("${title}", " " + title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.openBrowserTimeoutMs).click();
+        $(byXpath("//div[@id='iconTreeExplorer']//*[contains(text(),'${title}')]".replace("${title}", " " + title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.openBrowserTimeoutMs +Configuration.timeout).click();
         $(byXpath("//div[@id='UITreeExplorer']/following::div[@id='titleInfo' and text()='${title}']".replace("${title}",title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
         info("The wiki page is created successfully");
     }
@@ -450,7 +451,7 @@ public class WikiValidattions {
      */
     public void verifyWikiPageNotDisplayedInWikiHome(String title) {
         info("Verify the page is not displayed in Wiki Home");
-        ELEMENT_WIKI_PAGE_LINK.find(byText(title)).shouldNot(Condition.exist);
+        ELEMENT_WIKI_PAGE_LINK.find(byText(title)).waitUntil(Condition.not(exist),Configuration.openBrowserTimeoutMs);
         info("The wiki page is not displayed in Wiki Home");
     }
 

@@ -77,6 +77,16 @@ public class WikiManagement {
   }
 
   /**
+   * Select template to create page
+   * @param eTemplate SelenideElement
+   */
+  public void selectTemplateWikiPageBySearch(String eTemplate) {
+    info("--Select  template--");
+    $(ELEMENT_TEMPLATE_SELECT_FORM).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs + Configuration.timeout);
+    $(ELEMENT_TEMPLATE_SELECT_RADIO_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+  }
+
+  /**
    * Change to Rich Text Mode
    */
   public void goToRichTextEditor() {
@@ -95,7 +105,7 @@ public class WikiManagement {
   public void saveAddPage() {
     info("Save all changes");
     executeJavaScript("window.scrollBy(0,-5500)", "");
-    ELEMENT_SAVE_BUTTON_ADD_PAGE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_SAVE_BUTTON_ADD_PAGE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout).click();
    $(ELEMENT_SAVE_BUTTON_ADD_PAGE).waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
     info("Wiki page simple is created successfully");
 
@@ -506,5 +516,28 @@ public class WikiManagement {
     info("Preview a simple page");
     goToPreviewPage();
     $(byXpath(ELEMENT_PREVIEW_PAGE_CONTENT.replace("${content}", content))).waitUntil(Condition.visible, Configuration.timeout);
+  }
+
+  /**
+   * Add a simple wiki page by template format
+   *
+   * @param template SelenideElement
+   * @param newTitle String
+   */
+  public void addSimpleWikiPageByTemplateBySearch(String template, String newTitle) {
+    info("Select a template");
+    selectTemplateWikiPageBySearch(template);
+    $(ELEMENT_TEMPLATE_SELECT_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    if(!$(ELEMENT_TITLE_WIKI_INPUT).exists())
+    {
+      do {
+        //refresh();
+        testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+      }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
+    }
+    if (!newTitle.isEmpty())
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(newTitle);
+    info("Save all changes");
+    saveAddPage();
   }
 }
