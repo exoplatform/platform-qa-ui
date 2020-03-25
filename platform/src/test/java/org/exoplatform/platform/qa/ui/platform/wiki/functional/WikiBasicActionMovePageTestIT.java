@@ -657,6 +657,16 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         richTextEditor.addSimplePage(wiki0, wiki0);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(wiki0);
+        info("Verify that the page is published");
+        wikiValidattions.verifyPublishedPage();
+        info("Make restricted the page");
+        wikiHomePage.restrictedPage();
+        info("Verify that the page is restricted");
+        wikiValidattions.verifyRestrictedPage();
+        info("Make the page public");
+        wikiHomePage.publicPage();
+        info("Verify that the page is public");
+        wikiValidattions.verifyPublishedPage();
         info("Un check edit permission of any group");
         wikiManagement.unCheckViewAUserOfPage(ELEMENT_PERMISSION_EDIT_ANY);
         info("Log in as Mary");
@@ -839,6 +849,8 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         richTextEditor.addSimplePage(wiki1, wiki1);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(wiki1);
+        info("Verify that the page is restricted");
+        wikiValidattions.verifyRestrictedPage();
 
         info("Create Space 2 with no wiki page");
         homePagePlatform.goToMySpaces();
