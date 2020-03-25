@@ -29,7 +29,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 
 @Tag("functional")
 @Tag("wiki")
-public class WikiBasicActionMoveMovePageTestIT extends Base {
+public class WikiBasicActionMovePageTestIT extends Base {
 
     HomePagePlatform homePagePlatform;
     WikiHomePage wikiHomePage;
