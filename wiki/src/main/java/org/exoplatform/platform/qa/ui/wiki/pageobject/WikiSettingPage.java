@@ -43,7 +43,7 @@ public class WikiSettingPage {
 
     info("Verify that the search results is shown that matchs with keyword");
 
-    $(byId("UIWikiTemplateGrid")).find(byText(template)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+    $(byId("UIWikiTemplateGrid")).find(byText(template)).waitUntil(Condition.visible,Configuration.timeout);
 
   }
 

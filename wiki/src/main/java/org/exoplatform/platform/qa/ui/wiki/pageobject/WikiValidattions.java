@@ -177,7 +177,7 @@ public class WikiValidattions {
      */
     public void verifyNotTitleWikiPage(String title) {
         info("Verify that the wiki page isnot created and shown in the list");
-        ELEMENT_WIKI_PAGE_LINK.find(byText(title)).shouldNot(exist);
+        ELEMENT_WIKI_PAGE_LINK.find(byText(title)).waitUntil(Condition.not(exist),Configuration.openBrowserTimeoutMs);
         info("The wiki page isnot created successfully");
     }
 
@@ -236,8 +236,7 @@ public class WikiValidattions {
         info("The compare version page is shown");
         evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_COMPARE_VERSION_TITLE);
         info("Verify that Version N-1 and current version is shown on the page");
-        sleep(Configuration.timeout);
-        $(byXpath(ELEMENT_COMPARE_VERSION_VERSION_NUMBER.replace("$num", oldVersion))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+        $(byXpath(ELEMENT_COMPARE_VERSION_VERSION_NUMBER.replace("$num", oldVersion))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout);
         evt.waitForAndGetElement(ELEMENT_COMPARE_VERSION_CURRENT_VERSION);
     }
 
@@ -353,7 +352,6 @@ public class WikiValidattions {
      */
     public void verifyRestrictedPageHasChildPage() {
         info("Verify that parent page is shown under the title: restricted on the left tree");
-        sleep(Configuration.collectionsTimeout);
         (ELEMENT_WIKI_LEFT_TREE_RESTRICTED_PAGE_TITLE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).hover();
         info("Verify the tooltip of the page as:[this page is restricted, you don't have permissions to view it]");
         $(ELEMENT_WIKI_TOOLTIP_RESTRICTED_PAGE_TITLE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).exists();
@@ -426,7 +424,7 @@ public class WikiValidattions {
      */
     public void verifyTitleWikiPage(String title) {
         info("Verify that the wiki page is created and shown in the list");
-        $(byXpath("//div[@id='iconTreeExplorer']//*[contains(text(),'${title}')]".replace("${title}", " " + title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.openBrowserTimeoutMs +Configuration.timeout).click();
+        $(byXpath("//div[@id='iconTreeExplorer']//*[contains(text(),'${title}')]".replace("${title}", " " + title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.openBrowserTimeoutMs).click();
         $(byXpath("//div[@id='UITreeExplorer']/following::div[@id='titleInfo' and text()='${title}']".replace("${title}",title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
         info("The wiki page is created successfully");
     }

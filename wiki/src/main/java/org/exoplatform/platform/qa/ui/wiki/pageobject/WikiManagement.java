@@ -95,8 +95,7 @@ public class WikiManagement {
       $(ELEMENT_SOURCE_EDITOR_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
         $(ELEMENT_RICHTEXT_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
     }
-    sleep(Configuration.timeout);
-    $(ELEMENT_CONTENT_WIKI_FRAME).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_CONTENT_WIKI_FRAME).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
   }
 
   /**

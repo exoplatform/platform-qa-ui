@@ -79,16 +79,15 @@ public class RichTextEditor {
    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).is(Condition.not(Condition.exist))
         && (ELEMENT_BUTTON_WIKI_RITCH_TEXT.is(Condition.exist))) {
-      ELEMENT_BUTTON_WIKI_RITCH_TEXT.click();
+      ELEMENT_BUTTON_WIKI_RITCH_TEXT.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
     if (!title.isEmpty()) {
-      $(ELEMENT_TITLE_WIKI_INPUT).setValue(title);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(title);
     }
     info("Input a content for the page");
     if (!content.isEmpty()) {
-      SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout);
-      sleep(2000);
-      $(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.timeout).click();
+      SelenideElement frame=$(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+      $(byClassName("gwt-RichTextArea")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       switchTo().frame(frame);
       $(byId("body")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(content);
       switchTo().defaultContent();
@@ -167,9 +166,7 @@ public class RichTextEditor {
   public void inputEmailAddress(String address) {
     if (!address.isEmpty()) {
       info("Input web address");
-      sleep(2000);
-      $(ELEMENT_EMAIL_LINK_EMAIL_ADDRESS).setValue(address);
-      sleep(2000);
+      $(ELEMENT_EMAIL_LINK_EMAIL_ADDRESS).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(address);
     }
   }
 
@@ -378,13 +375,10 @@ public class RichTextEditor {
    */
   public void goToEmailLink() {
     info("Click on Link menu");
-    sleep(Configuration.collectionsTimeout);
-    $(ELEMENT_LINK).doubleClick();
+    $(ELEMENT_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).doubleClick();
     info("Click on Attached file Link menu");
-    sleep(Configuration.collectionsTimeout);
     $(ELEMENT_EMAIL_LINK_MENU).shouldBe(Condition.visible);
-    $(ELEMENT_EMAIL_LINK_MENU).doubleClick();
-    sleep(2000);
+    $(ELEMENT_EMAIL_LINK_MENU).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).doubleClick();
   }
 
   /**
@@ -414,10 +408,9 @@ public class RichTextEditor {
    */
   public void goToExternalImageLink() {
     info("Click on Link menu");
-    sleep(2000);
-    $(ELEMENT_IMAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_IMAGE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Click on Attached file Link menu");
-    $(ELEMENT_EXTERNAL_IMAGE_LINK_MENU).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_EXTERNAL_IMAGE_LINK_MENU).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -457,8 +450,7 @@ public class RichTextEditor {
   public void inputExternalImageLink(String link) {
     if (!link.isEmpty()) {
       info("Input external Image link");
-      sleep(Configuration.timeout);
-      $(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(link);
+      $(ELEMENT_EXTERNAL_IMAGE_INPUT_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).setValue(link);
     }
   }
 
@@ -616,9 +608,8 @@ public class RichTextEditor {
    * Click on Create link button on Wiki page popup
    */
   public void goToCreateLink() {
-    $(ELEMENT_CREATE_LINK_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.timeout);
-    $(ELEMENT_CREATE_LINK_BUTTON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
+    $(ELEMENT_CREATE_LINK_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_CREATE_LINK_BUTTON).waitUntil(Condition.not(Condition.visible),Configuration.openBrowserTimeoutMs);
   }
 
   /**
@@ -677,9 +668,7 @@ public class RichTextEditor {
    */
   public void goToAllPagesTab() {
     info("Click on All Pages tab");
-    sleep(Configuration.timeout);
-    $(ELEMENT_ALL_PAGE_TAB).click();
-    sleep(Configuration.timeout);
+    $(ELEMENT_ALL_PAGE_TAB).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -741,8 +730,7 @@ public class RichTextEditor {
     $(byClassName("gwt-TabPanel")).find(byText("intranet")).waitUntil(Condition.visible,Configuration.timeout);
     if($(ELEMENT_EXPLORER_WIKIHOME).is(Condition.not(Condition.visible))){
       info("click on Wiki Home note");
-      $(byId("isc_1open_icon_0")).waitUntil(Condition.visible,Configuration.timeout).click();
-      sleep(2000);
+      $(byId("isc_1open_icon_0")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
   }
 
@@ -786,19 +774,15 @@ public class RichTextEditor {
   public void selectPageInAllPagesTab(String page) {
     info("Select the page");
     goToAllPagesTab();
-    $(byClassName("gwt-TabPanel")).find(byText("intranet")).waitUntil(Condition.visible,Configuration.timeout);
-    sleep(Configuration.timeout);
+    $(byClassName("gwt-TabPanel")).find(byText("intranet")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     if (!$(byClassName("gwt-TabPanel")).find(byText(page)).exists()){
-      $(ELEMENT_EXPLORER_WIKIHOME).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(ELEMENT_EXPLORER_WIKIHOME).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
-    ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE.waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(2000);
+    ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_WIKI_UNPUT_LINK_EXISTED_PAGE.setValue("intranet." + page);
-    sleep(2000);
-    ELEMENT_POPUP_SELECT_WIKI_PAGE.find(byText(page)).waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_POPUP_SELECT_WIKI_PAGE.find(byText(page)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Click on Select button");
-    sleep(2000);
-    $(ELEMENT_SELECT_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_SELECT_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 
@@ -922,13 +906,9 @@ public class RichTextEditor {
    */
   public void changeLink(String label) {
     info("Focus on the frame");
-    sleep(Configuration.timeout);
     plf.switchFrame(ELEMENT_CONTENT_WIKI_FRAME);
-    sleep(2000);
     selectLabelLink(label);
-    sleep(2000);
     evt.switchToParentWindow();
-    sleep(2000);
   }
 
   /**

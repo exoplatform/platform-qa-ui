@@ -92,17 +92,16 @@ public class SourceTextEditor {
       do {
         //refresh();
         testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-        sleep(2000);
       }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
     }
     String[] text;
     if (!title.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).setValue(title);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(title);
     info("Input a content for the page");
     if (!content.isEmpty()) {
       text = content.split("</br>");
       for (int i = 0; i < text.length; i++) {
-        $(ELEMENT_CONTENT_WIKI_INPUT).setValue(content);
+        $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(content);
         $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible, Configuration.timeout).sendKeys(Keys.ENTER);
       }
     }
@@ -110,8 +109,8 @@ public class SourceTextEditor {
     $(ELEMENT_WIKI_PAGE_TOOL_BAR_AUTO_SAVE_TEXT).waitUntil(Condition.visible,31000);
 
     info("Cancel adding page");
-    $(ELEMENT_CANCEL_BUTTON_ADD_PAGE).click();
-    $(ELEMENT_CONFIRMATION_POPUP_YES_BTN).click();
+    $(ELEMENT_CANCEL_BUTTON_ADD_PAGE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_CONFIRMATION_POPUP_YES_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 
