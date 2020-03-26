@@ -176,7 +176,6 @@ public class WikiBasicActionMovePageTestIT extends Base {
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToRichTextEditor();
         richTextEditor.addSimplePage(wiki1, wiki1);
-
         info("insert image 1 to page 1");
         richTextEditor.insertExternalImageLink(linkImage1, width, height, altText1);
         richTextEditor.selectAlign(RichTextEditor.alignType.Left);
@@ -708,10 +707,10 @@ public class WikiBasicActionMovePageTestIT extends Base {
         homePagePlatform.goToWiki();
         info("Move wiki page 1 to page 2");
         wikiHomePage.goToAPage(wiki1);
-        ELEMENT_MORE_LINK.click();
-        $(ELEMENT_MOVE_PAGE).click();
-        $(byXpath(ELEMENT_WIKI_PAGE_MOVE_POPUP_NODE.replace("${name}", wiki2))).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
-        $(ELEMENT_CANCEL_BUTTON).click();
+        ELEMENT_MORE_LINK.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(ELEMENT_MOVE_PAGE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(byXpath(ELEMENT_WIKI_PAGE_MOVE_POPUP_NODE.replace("${name}", wiki2))).waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
+        $(ELEMENT_CANCEL_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         info("Move a page when user have edit permission on page");
         manageLogInOut.signIn(DATA_USER1, "gtngtn");
         String wiki3 = "wiki3" + getRandomNumber();

@@ -425,6 +425,7 @@ public class RichTextEditor {
     info("Go to External Image Link");
     goToExternalImageLink();
     info("Input a link");
+    sleep(1000);
     inputExternalImageLink(link);
     info("Click on Image Settings button");
     goToImageSettings();
@@ -775,6 +776,7 @@ public class RichTextEditor {
     info("Select the page");
     goToAllPagesTab();
     $(byClassName("gwt-TabPanel")).find(byText("intranet")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+    sleep(1000);
     if (!$(byClassName("gwt-TabPanel")).find(byText(page)).exists()){
       $(ELEMENT_EXPLORER_WIKIHOME).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
@@ -909,6 +911,7 @@ public class RichTextEditor {
     plf.switchFrame(ELEMENT_CONTENT_WIKI_FRAME);
     selectLabelLink(label);
     evt.switchToParentWindow();
+    sleep(2000);
   }
 
   /**
