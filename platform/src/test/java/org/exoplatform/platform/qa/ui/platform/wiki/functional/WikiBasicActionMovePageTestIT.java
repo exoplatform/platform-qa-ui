@@ -745,7 +745,7 @@ public class WikiBasicActionMovePageTestIT extends Base {
         wikiManagement.movePage(wiki3, wiki4);
         info("Check to make sure wiki page 1 does not exist in wiki home");
         wikiHomePage.goToHomeWikiPage();
-        wikiValidattions.verifyWikiPageNotDisplayedInWikiHome(wiki1);
+        wikiValidattions.verifyWikiPageNotDisplayedInWikiHome(wiki3);
         info("Check to make sure wiki page 1 exists under wiki page 2");
         wikiHomePage.goToAPage(wiki4);
         wikiValidattions.verifyTitleWikiPage(wiki4);
