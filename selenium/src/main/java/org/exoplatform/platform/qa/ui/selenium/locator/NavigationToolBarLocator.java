@@ -20,6 +20,7 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.locator;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -34,6 +35,15 @@ public final class NavigationToolBarLocator {
 
   public static final By              ELEMENT_TOOLBAR_THEMELIGHT                          =
                                                                  By.xpath("(//div[@class=\"UIContainer UIToolbarContainer UIToolbarContainerLight  \"])[1]");
+
+  public static final SelenideElement ELEMENT_TOP_TOOLBAR_PORTLET                         = $("#UIToolbarContainer");
+
+
+  public static final SelenideElement ELEMENT_TOP_TOOLBAR_MENU_USER                       = ELEMENT_TOP_TOOLBAR_PORTLET.find("#UIUserPlatformToolBarPortlet");
+
+
+  public static final SelenideElement ELEMENT_TOP_TOOLBAR_MENU_USER_LOGOUT                = ELEMENT_TOP_TOOLBAR_MENU_USER.findAll("li").filterBy(text("logout")).first();
+
 
   public static final By              ELEMENT_TOOLBAR_THEMEDARK                          =
                                                                  By.xpath("(//div[@class=\"UIContainer UIToolbarContainer UIToolbarContainerDark  \"])[1]");
