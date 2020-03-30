@@ -14,7 +14,7 @@ public class getData {
 
     int code = resp.getStatusCode();
     System.out.println("Status code is" + code);
-    Assert.assertEquals(code, 300);
+    Assert.assertEquals(code, 200);
   }
 
   @Test
@@ -41,8 +41,6 @@ public class getData {
     Response response = request.put("http://localhost:3000/posts/26");
     int code = response.getStatusCode();
     Assert.assertEquals(code, 200);
-
-
 
   }
 
