@@ -10,6 +10,7 @@ import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.Keys;
 
 ;
 
@@ -137,7 +138,7 @@ public class ConnectionsManagement {
       searchPeople(fullName[0], null, null, null);
     else
       searchPeople(username, null, null, null);
-      $(byXpath(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",username))).click();
+      $(byXpath(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",username))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       homePagePlatform.refreshUntil($(byXpath(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",username))),Condition.not(Condition.visible),1000);
       info("Accepted to the user");
   }
@@ -171,25 +172,34 @@ public class ConnectionsManagement {
   public void searchPeople(String peopleName, String position, String skills, String directory) {
     info("-- Searching people ... --");
     if (peopleName != "" && peopleName != null) {
-      $(ELEMENT_NAME_OF_PEOPLE).setValue("");
-      $(ELEMENT_NAME_OF_PEOPLE).waitUntil(Condition.appears,Configuration.timeout).setValue(peopleName);
+
+      if ($(ELEMENT_SEARCHED_NAME_OF_PEOPLE).exists())
+      {
+        int searchedNamelength = $(ELEMENT_SEARCHED_NAME_OF_PEOPLE).getText().length();
+        for (int i=0; i<searchedNamelength; i++)
+        {
+          $(ELEMENT_NAME_OF_PEOPLE).waitUntil(Condition.visible,Configuration.timeout).sendKeys(Keys.BACK_SPACE);
+        }
+      }
+      $(ELEMENT_NAME_OF_PEOPLE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue("");
+      $(ELEMENT_NAME_OF_PEOPLE).waitUntil(Condition.visible,Configuration.timeout).setValue(peopleName);
     } else {
       $(ELEMENT_NAME_OF_PEOPLE).setValue("");
     }
     if (position != "" && position != null) {
-      $(ELEMENT_POSITIONS_OF_PEOPLE).setValue(position);
+      $(ELEMENT_POSITIONS_OF_PEOPLE).waitUntil(Condition.visible,Configuration.timeout).setValue(position);
     } else {
       $(ELEMENT_POSITIONS_OF_PEOPLE).setValue("");
     }
     if (skills != "" && skills != null) {
-      $(ELEMENT_SKILL_OF_PEOPLE).setValue(skills);
+      $(ELEMENT_SKILL_OF_PEOPLE).waitUntil(Condition.visible,Configuration.timeout).setValue(skills);
     } else {
       $(ELEMENT_SKILL_OF_PEOPLE).setValue("");
     }
-    $(ELEMENT_SEARCH_BUTTON).click();
+    $(ELEMENT_SEARCH_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
     homePagePlatform.refreshUntil($(byClassName("spaceBox")),Condition.visible,1000);
     if (directory != "" && directory != null)
-      $(byLinkText(directory)).click();
+      $(byLinkText(directory)).waitUntil(Condition.appears,Configuration.timeout).click();
   }
 
   /**
