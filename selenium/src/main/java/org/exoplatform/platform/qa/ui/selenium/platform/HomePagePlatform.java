@@ -139,7 +139,7 @@ public class HomePagePlatform {
   public void goToConnections() {
     info("--Go to Connections page---");
     info("Click on Connection link");
-    $(ELEMENT_CONNECTIONS_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).parent().click();
+    $(ELEMENT_CONNECTIONS_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).parent().click();
     info("Verify that the connections portlet is shown");
     refreshUntil($(ELEMENT_CONNECTION_EVERYONE_TITLE), Condition.visible, 500);
     info("The connections portlet is shown successfully");
