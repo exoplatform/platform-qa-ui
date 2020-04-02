@@ -39,15 +39,13 @@ public class IntranetNotification {
    */
   public void goToAllNotification() {
     info("Go to all notification");
-    sleep(2000);
     if ($(ELEMENT_VIEW_ALL).is(Condition.visible)) {
       info("Click on View All button");
-      $(ELEMENT_VIEW_ALL).click();
+      $(ELEMENT_VIEW_ALL).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     } else {
       info("Open All page by link");
       open(Configuration.baseUrl+ "portal/intranet/allNotifications/");
     }
-    sleep(Configuration.timeout);
     $(ELEMENT_ALL_NOTIFICATIONS).exists();
   }
 
