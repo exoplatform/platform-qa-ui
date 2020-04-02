@@ -255,13 +255,13 @@ public class ForumTopicManagement {
    * @param newContent String
    */
   public void quotePost(String title, String newContent) {
-    $(byText(title)).parent().parent().parent().parent().find(byText("Quote")).click();
+    $(byText(title)).parent().parent().parent().parent().find(byText("Quote")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     if (newContent != "")
       switchTo().frame(0);
     $(byXpath("/html/body")).sendKeys(newContent);
     switchTo().defaultContent();
     executeJavaScript("window.scrollBy(0,150)");
-    $(ELEMENT_POST_FORM_SUBMIT).click();
+    $(ELEMENT_POST_FORM_SUBMIT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
