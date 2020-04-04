@@ -565,17 +565,17 @@ public class ActivityStream {
     public void gotoActivityViewer(String text) {
         String idActivityTime = $(byText(text)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
         $(byId(ELEMENT_ACTIVITY_TIME.replace("{id}", idActivityTime))).click();
-        $(byId("ProfileActivity")).waitUntil(Condition.visible, Configuration.timeout);
+        $(byId("ProfileActivity")).waitUntil(Condition.visible, openBrowserTimeoutMs);
     }
 
     public void gotoCommentViewer(String text) {
-        String idCommentTime = $(byText(text)).parent()
+        String idCommentTime = $(byText(text)).waitUntil(Condition.visible, openBrowserTimeoutMs).parent()
                 .parent()
                 .parent()
                 .parent()
                 .getAttribute("id")
                 .split("commentContainercomment")[1];
-        $(byId(ELEMENT_COMMENT_TIME.replace("{id}", idCommentTime))).click();
+        $(byId(ELEMENT_COMMENT_TIME.replace("{id}", idCommentTime))).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
         $(byId("ProfileActivity")).waitUntil(Condition.visible, Configuration.timeout);
     }
 
@@ -706,14 +706,14 @@ public class ActivityStream {
         switchTo().frame(frame);
         $(byXpath("/html/body")).setValue("@" + username);
         switchTo().defaultContent();
-        $(byAttribute("data-value", username)).waitUntil(Condition.visible, Configuration.timeout);
+        $(byAttribute("data-value", username)).waitUntil(Condition.visible, openBrowserTimeoutMs);
         switchTo().frame(frame);
         $(byXpath("/html/body")).pressEnter();
         $(byXpath("/html/body")).sendKeys(textContent);
         switchTo().defaultContent();
         // click on the button comment
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-        $(byText(textContent)).should(Condition.exist);
+        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, openBrowserTimeoutMs);
+        $(byText(textContent)).waitUntil(Condition.exist, openBrowserTimeoutMs);
         info("The comment is added successfully");
     }
 
@@ -1127,7 +1127,7 @@ public class ActivityStream {
     public void deleteFormatedActivity(String text) {
         // get the id of activity created
         info("-- Editing an activity--");
-        String idActivity = $(byText(text)).parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+        String idActivity = $(byText(text)).waitUntil(Condition.visible, openBrowserTimeoutMs).parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
         $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", idActivity))).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
         $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", idActivity))).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
         ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, openBrowserTimeoutMs).click();
@@ -1174,7 +1174,7 @@ public class ActivityStream {
     }
 
     public void replyToComment(String comment, String reply, String user) {
-        String id = $(byText(comment)).parent()
+        String id = $(byText(comment)).waitUntil(visible, openBrowserTimeoutMs).parent()
                 .parent()
                 .parent()
                 .parent()
@@ -1182,7 +1182,7 @@ public class ActivityStream {
                 .parent()
                 .getAttribute("id")
                 .split("CommentBlockBound")[1];
-        String idBlocComment = $(byText(comment)).parent()
+        String idBlocComment = $(byText(comment)).waitUntil(visible, openBrowserTimeoutMs).parent()
                 .parent()
                 .parent()
                 .find(byText(comment))
@@ -1230,11 +1230,11 @@ public class ActivityStream {
         // Click on reply link
         $(byId(ELEMENT_lABEL_REPLY_COMMENT.replace("{id}", idBlocComment))).click();
         // Insert the reply
-        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, openBrowserTimeoutMs).click();
         executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + reply + "\")", "");
         info("Verify that the reply is added");
         // Click on the Insert image icon
-        $(byText(comment)).parent().parent().parent().parent().parent().find(byClassName("cke_button__simpleimage ")).click();
+        $(byText(comment)).parent().parent().parent().parent().parent().find(byClassName("cke_button__simpleimage ")).waitUntil(Condition.appears, openBrowserTimeoutMs).click();
         // insert URL
         // $(byClassName("cke_dialog_ui_input_text")).findElementByClassName("cke_dialog_ui_input_text").sendKeys("http://qa-ui03.acceptance7.exoplatform.org/rest/private/jcr/repository/collaboration/Users/j___/jo___/joh___/john/Public/Activity
         // Stream Documents/eXo-Platform.png");
@@ -1242,9 +1242,9 @@ public class ActivityStream {
         $$(byClassName("cke_dialog_ui_input_text")).get(1).pressEnter();
         // Validate
         // click on the button comment
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-        $(byText(reply)).should(Condition.exist);
-        $(byText(reply)).parent().parent().find(byText(user)).should(Condition.exist);
+        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, openBrowserTimeoutMs);
+        $(byText(reply)).waitUntil(Condition.exist, openBrowserTimeoutMs);
+        $(byText(reply)).parent().parent().find(byText(user)).waitUntil(Condition.exist, openBrowserTimeoutMs);
     }
 
     public void deleteReplyInAS(String reply) {

@@ -80,7 +80,6 @@ public class LikeCommentTestIT extends Base {
     String comment4 = " like your comment.";
 
     ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);

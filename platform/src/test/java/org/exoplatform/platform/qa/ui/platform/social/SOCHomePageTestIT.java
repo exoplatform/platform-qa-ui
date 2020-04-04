@@ -138,51 +138,292 @@ public class SOCHomePageTestIT extends Base {
     // verify that the activity doesn't exist
     $(byText(name)).shouldNot(Condition.exist);
   }
+  @Tag("SOC-5646")
+  @Test
+  public void test23_SpecialisationOfDollarInActivityMessage(){
+
+    homePagePlatform.goToHomePage();
+    info("add an activity with $ and check that is added succesfully");
+    activityStream.addActivity("$ {val}", "");
+    activityStream.checkActivity("$ {val}");
+    info("delete activity");
+    activityStream.deleteactivity("$ {val}");
+  }
+  @Test
+  @Tag("PLF-8135")
+  public void test23_CheckPaddingOfSpacesAtLeftAndRightOfActivities(){
+    homePagePlatform.goToHomePage();
+    assertEquals("40px", ELEMENT_ACTIVITY_CONTAINER.getCssValue("padding-top"));
+    assertEquals("20px", ELEMENT_ACTIVITY_CONTAINER.getCssValue("padding-right"));
+    assertEquals("40px", ELEMENT_ACTIVITY_CONTAINER.getCssValue("padding-bottom"));
+    assertEquals("20px", ELEMENT_ACTIVITY_CONTAINER.getCssValue("padding-left"));
+  }
+
 
   /**
-   * <li>Case ID:121924.</li>
-   * <li>Test Case Name: Add a document.</li>
+   * <li>Case ID:121928.</li>
+   * <li>Test Case Name: Check [All activities] filter.</li>
    * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li> Step Number: 1 Step Name: - Go to Select File Dialog
-   * Step Description: - Log in - Goto Homepage - In Activity Composer click File
-   * (icon) Input Data: Expected Outcome: - Select File Dialog shows up Step
-   * number: 2 Step Name: - Select document Step Description: - Browse the Select
-   * File Dialog to choose a document - Click Select Input Data: Expected Outcome:
-   * - A breadcrumb is displaying the current position of the user in the browsed
-   * drive. - the name of the file should be displayed under the activity input
-   * field. Step number: 3 Step Name: - Share the document Step Description: -
-   * Click Share button Input Data: Expected Outcome: - Activity is added into
+   * <li>Post-Condition:</li> Step Number: 1 Step Name: - Goto social homepage
+   * Step Description: - Log in - Goto homepage Input Data: Expected Outcome: -
+   * Home page is displayed Step number: 2 Step Name: - Check [All activity]
+   * filter Step Description: - In the drop -down select box, select [All
+   * Activities] Input Data: Expected Outcome: - All activities are displayed in
    * activity stream
    */
   @Test
-  public void test06_AddADocument() {
-    info("Test 6: Add a document");
+  public void test10_CheckAllActivitiesFilter() {
+    info("Test 10 Check [All activities] filter");
 
-    String name = "name" + getRandomNumber();
-    String content = "content" + getRandomNumber();
-    info("add file");
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.goToAddNewContent();
-    info("Create new file document");
-    createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
-    createNewDocument.addNewFile(name, content);
-    createNewDocument.saveAndClose();
+    String text = "text" + getRandomNumber();
     homePagePlatform.goToHomePage();
-    info("share file from activity stream");
-    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
-    refresh();
-    ELEMENT_LINK_TEXT_SELECT_FROM_EXISTING_UPLOAD.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_TEXT_DOCUMENT_IN_DOC_ACTIVITY_POPUP.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_SITE_MANAGEMENT_IN_DOC_ACTIVITY_POPUP.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_POPUP_DOC_ACTIVITY.find(byText(name)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_BUTTON_ATTASH_FILE_IN_DOC_ACTIVITY_POPUP.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    $(byAttribute("data-original-title", name)).should(Condition.exist);
-    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    info("delete data");
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.deleteData(name);
+    activityStream.addActivity(text, "");
+    assertEquals("ALL ACTIVITIES", $(byId("DisplayModesDropDown")).getText());
+    executeJavaScript("window.scrollBy(0,-1500)", "");
+    activityStream.deleteactivity(text);
 
   }
+
+  /**
+   * <li>Case ID:121932.</li>
+   * <li>Test Case Name: Check activities order.</li>
+   * <li>Pre-Condition:</li>
+   * <li>Post-Condition:</li> Step Number: 1 Step Name: - Check order of
+   * activities Step Description: - Log in and go to homepage - Check order of
+   * activity Input Data: Expected Outcome: - Homepage is displayed - the order of
+   * activities is based on activity's last action date. The last action date is
+   * the latest of: 1. The publication date 2. The date of the last comment posted
+   */
+
+  @Test
+  public void test14_CheckActivitiesOrder() {
+    info("Test 14 Check activities order");
+    String text = "text" + getRandomNumber();
+    String text1 = "text1" + getRandomNumber();
+    String comment = "comment" + getRandomNumber();
+    activityStream.addActivity(text, "");
+    refresh();
+    activityStream.addActivity(text1, "");
+    ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_BOX_ACTIVITY).get(0).find(byText(text1)).should(Condition.exist);
+    ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_BOX_ACTIVITY).get(1).find(byText(text)).should(Condition.exist);
+    activityStream.commentActivity(text, comment);
+    refresh();
+    ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_BOX_ACTIVITY).get(0).find(byText(text)).should(Condition.exist);
+    executeJavaScript("window.scrollBy(0,-1500)", "");
+    activityStream.deleteactivity(text);
+    executeJavaScript("window.scrollBy(0,-1500)", "");
+    activityStream.deleteactivity(text1);
+  }
+
+  /**
+   * <li>Case ID:121934.</li>
+   * <li>Test Case Name: Check Layout of Activities.</li>
+   * <li>Pre-Condition:</li>
+   * <li>Post-Condition:</li> Step Number: 1 Step Name: Check layout of activity
+   * Step Description: - log in and goto intranet hompage - Select an activity to
+   * check its layout Input Data: Expected Outcome: An activity is made out of
+   * different parts:(see attached) 1.the author 2.the author's avatar 3.the space
+   * (optional) 4.the type (optional) 5.the activity message 6.the featured
+   * content (optional) 7.the Action bar (Comment and Like links + custom actions)
+   * 8.the like section (optional) 9.the comment section (optional)
+   */
+  @Test
+  public void test16_CheckLayoutOfActivities() {
+    info("Test 16 Check Layout of Activities");
+
+    String name = "" + getRandomNumber();
+
+    homePagePlatform.goToHomePage();
+    activityStream.addActivity(name, "");
+    $(byText(name)).parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .find(byText(DATA_NAME_USER1))
+            .should(Condition.exist);
+    $(byText(name)).parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .find(ELEMENT_PUBLICATION_FIRSTPOST_AUTHORAVATAR)
+            .should(Condition.exist);
+    $(byText(name)).parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .find(ELEMENT_PUBLICATION_FIRSTPOST_ACTIVITYTEXT)
+            .should(Condition.exist);
+    $(byText(name)).parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .find(ELEMENT_ICONCOMMENT)
+            .should(Condition.exist);
+    $(byText(name)).parent().parent().parent().parent().parent().parent().parent().find(ELEMENT_ICONLIKE).should(Condition.exist);
+    executeJavaScript("window.scrollBy(0,-1500)", "");
+    activityStream.deleteactivity(name);
+  }
+
+  /**
+   * <li>Case ID:121935.</li>
+   * <li>Test Case Name: View Comments.</li>
+   * <li>Pre-Condition:</li>
+   * <li>Post-Condition:</li> Step Number: 1 Step Name: - Check view of comment
+   * Step Description: - goto home page - select an activity with more than 2
+   * comments on it (fx: 10 comments) - click on the message "View all 10
+   * comments" Input Data: Expected Outcome: - onlythe latest (most recently
+   * posted) two comments are displayed below the activity. - "View all 10
+   * comments" message is shown - all comments is displayed, in the time order
+   * (oldest at the top)
+   */
+  @Test
+  public void test17_ViewComments() {
+    info("Test 17 View Comments");
+
+    String name = "name" + getRandomNumber();
+
+    activityStream.addActivity(name, "");
+
+    for (int i = 0; i <= 9; i++) {
+      String comment = "comment" + getRandomNumber();
+      activityStream.commentActivity(name, comment);
+      refresh();
+      executeJavaScript("window.scrollBy(0,-1500)", "");
+    }
+    String text = "text" + getRandomNumber();
+    String text1 = "text1" + getRandomNumber();
+    activityStream.commentActivity(name, text);
+    refresh();
+    executeJavaScript("window.scrollBy(0,-1500)", "");
+    activityStream.commentActivity(name, text1);
+    refresh();
+    executeJavaScript("window.scrollBy(0,-1500)", "");
+    info("Verify that only second last and last comment are shown");
+    $(byText(name)).parent().parent().parent().parent().parent().parent().parent().find(byText(text)).should(Condition.exist);
+    $(byText(name)).parent().parent().parent().parent().parent().parent().parent().find(byText(text1)).should(Condition.exist);
+    info("Verify that view all comment links is shown and clickable on it");
+    String id = $(byText(name)).parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .getAttribute("id")
+            .split("UIActivityLoader")[1];
+    $(byXpath(ELEMENT_LINK_TEXT_VIEW_ALL_COMMENTS.replace("{id}", id))).click();
+    $(byXpath(ELEMENT_LINK_TEXT_VIEW_ALL_COMMENTS.replace("{id}", id))).waitUntil(Condition.hasText("Hide all 12 comments."),
+            Configuration.timeout);
+    info("Verify that all comments is shown");
+    assertEquals(13, $(byId(ELEMENT_LIST_ALL_COMMENNTS.replace("{id}", id))).findAll(byClassName("commentItem")).size());
+    executeJavaScript("window.scrollBy(0,-1500)", "");
+    activityStream.deleteactivity(name);
+    refresh();
+
+  }
+
+  /**
+   * <li>Case ID:121936.</li>
+   * <li>Test Case Name: Mention a user in comment.</li>
+   * <li>Pre-Condition:</li>
+   * <li>Post-Condition:</li>
+   */
+  @Test
+  public void test18_MentionAUserInComment() {
+    info("Test 18 Mention a user in comment");
+    String name = "name" + getRandomNumber();
+    String text = "text" + getRandomNumber();
+
+    homePagePlatform.goToHomePage();
+    activityStream.addActivity(name, null);
+    activityStream.addCommentWithMentionUser(name, DATA_USER2, text);
+    $(byText(text)).parent().shouldHave(Condition.text(PLFData.DATA_NAME_USER2+" "+text));
+    executeJavaScript("window.scrollBy(0,-1500)", "");
+    activityStream.deleteactivity(name);
+  }
+
+  /**
+   * <li>Case ID:121937.</li>
+   * <li>Test Case Name: Relation Activity.</li>
+   * <li>Pre-Condition:</li>
+   * <li>Post-Condition:</li> Step Number: 1 Step Name: - Invite another user Step
+   * Description: - Login with User A and go to Intranet - Go to Connections -
+   * Find user B and send a request Input Data: Expected Outcome: - Request is
+   * sent to the user B Step number: 2 Step Name: - Accept request Step
+   * Description: - Login as user B and goto my Connection - Accept the request
+   * from user A Input Data: Expected Outcome: - A Relation activity is displayed
+   * to the activity stream
+   */
+
+  @Test
+  public void test19_RelationActivity() {
+    info("Test 19 Relation Activity");
+    String username = "username" + getRandomString();
+    String email = username + "@test.com";
+    String password = "123456";
+    info("Add new user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username, password, email, username, username);
+    String comment = "I'm now connected with 1 user(s)";
+    manageLogInOut.signIn(username,password);
+    homePagePlatform.goToConnections();
+    connectionsManagement.connectToAUser(DATA_USER2);
+
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    homePagePlatform.goToConnections();
+    connectionsManagement.acceptAConnection(username);
+    homePagePlatform.goToHomePage();
+    $(byText(username+" "+username)).parent().parent().parent().parent().find(byText(comment)).should(Condition.exist);
+    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username);
+  }
+  /**
+   * <li>Case ID:121930.</li>
+   * <li>Test Case Name: Check [Connections] filter.</li>
+   * <li>Pre-Condition:</li>
+   * <li>Post-Condition:</li> Step Number: 1 Step Name: - Goto intranet homepage
+   * Step Description: - Log in - Goto intranet homepage Input Data: Expected
+   * Outcome: - Home page is displayed Step number: 2 Step Name: - Check
+   * [Connections] filter Step Description: - In the drop -down select box, select
+   * [Connnection] Input Data: Expected Outcome: shows only activities created by
+   * the user's connections and by the user himself, outside a space
+   */
+  @Test
+  public void test12_CheckConnectionsFilter() {
+    info("Test 12 Check [Connections] filter");
+    String text = "text" + getRandomNumber();
+    activityStream.addActivity(text, "");
+    homePagePlatform.goToConnections();
+    connectionsManagement.connectToAUser(DATA_USER2);
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    homePagePlatform.goToConnections();
+    connectionsManagement.acceptAConnection(DATA_USER1);
+    homePagePlatform.goToHomePage();
+    $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_PUBLICATION_DISPLAYMODE_CONNECTION_OPTION).waitUntil(Condition.visible,Configuration.timeout).click();
+    executeJavaScript("window.scrollBy(0,-1500)", "");
+    $(byText(text)).should(Condition.exist);
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    executeJavaScript("window.scrollBy(0,-1500)", "");
+    activityStream.deleteactivity(text);
+
+  }
+
+
 
   /**
    * <li>Case ID:121926.</li>
@@ -253,92 +494,6 @@ public class SOCHomePageTestIT extends Base {
     addUsers.deleteUser(username1);
   }
 
-  /**
-   * <li>Case ID:121928.</li>
-   * <li>Test Case Name: Check [All activities] filter.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li> Step Number: 1 Step Name: - Goto social homepage
-   * Step Description: - Log in - Goto homepage Input Data: Expected Outcome: -
-   * Home page is displayed Step number: 2 Step Name: - Check [All activity]
-   * filter Step Description: - In the drop -down select box, select [All
-   * Activities] Input Data: Expected Outcome: - All activities are displayed in
-   * activity stream
-   */
-  @Test
-  public void test10_CheckAllActivitiesFilter() {
-    info("Test 10 Check [All activities] filter");
-
-    String text = "text" + getRandomNumber();
-    homePagePlatform.goToHomePage();
-    activityStream.addActivity(text, "");
-    assertEquals("ALL ACTIVITIES", $(byId("DisplayModesDropDown")).getText());
-    executeJavaScript("window.scrollBy(0,-1500)", "");
-    activityStream.deleteactivity(text);
-
-  }
-
-  /**
-   * <li>Case ID:121929.</li>
-   * <li>Test Case Name: Check [My Spaces] filter.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li> Step Number: 1 Step Name: - Goto social homepage
-   * Step Description: - Log in - Goto homepage Input Data: Expected Outcome: -
-   * Home page is displayed Step number: 2 Step Name: - Check [My Spaces] filter
-   * Step Description: - In the drop -down select box, select [My Space] Input
-   * Data: Expected Outcome: - It shows only activities created in space where the
-   * user is a member
-   */
-  @Test
-  public void test11_CheckMySpacesFilter() {
-    info("Test 11 Check [My Spaces] filter");
-
-    String space = "space" + getRandomNumber();
-
-    info("Create a space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space, 60000);
-    homePagePlatform.goToHomePage();
-    homePagePlatform.refreshUntil($(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES),Condition.visible,1000);
-    $(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES).click();
-    $(ELEMENT_PUBLICATION_DISPLAYMODE_MYSPACE_OPTION).click();
-    $(byText(space)).should(Condition.exist);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space, false);
-
-  }
-
-  /**
-   * <li>Case ID:121930.</li>
-   * <li>Test Case Name: Check [Connections] filter.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li> Step Number: 1 Step Name: - Goto intranet homepage
-   * Step Description: - Log in - Goto intranet homepage Input Data: Expected
-   * Outcome: - Home page is displayed Step number: 2 Step Name: - Check
-   * [Connections] filter Step Description: - In the drop -down select box, select
-   * [Connnection] Input Data: Expected Outcome: shows only activities created by
-   * the user's connections and by the user himself, outside a space
-   */
-  @Test
-  public void test12_CheckConnectionsFilter() {
-    info("Test 12 Check [Connections] filter");
-    String text = "text" + getRandomNumber();
-    activityStream.addActivity(text, "");
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER2);
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
-    $(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES).waitUntil(Condition.visible,Configuration.timeout).click();
-    $(ELEMENT_PUBLICATION_DISPLAYMODE_CONNECTION_OPTION).waitUntil(Condition.visible,Configuration.timeout).click();
-    executeJavaScript("window.scrollBy(0,-1500)", "");
-    $(byText(text)).should(Condition.exist);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    executeJavaScript("window.scrollBy(0,-1500)", "");
-    activityStream.deleteactivity(text);
-
-  }
 
   /**
    * <li>Case ID:121931.</li>
@@ -385,212 +540,79 @@ public class SOCHomePageTestIT extends Base {
     activityStream.deleteactivity(text);
 
   }
-
   /**
-   * <li>Case ID:121932.</li>
-   * <li>Test Case Name: Check activities order.</li>
+   * <li>Case ID:121929.</li>
+   * <li>Test Case Name: Check [My Spaces] filter.</li>
    * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li> Step Number: 1 Step Name: - Check order of
-   * activities Step Description: - Log in and go to homepage - Check order of
-   * activity Input Data: Expected Outcome: - Homepage is displayed - the order of
-   * activities is based on activity's last action date. The last action date is
-   * the latest of: 1. The publication date 2. The date of the last comment posted
-   */
-
-  @Test
-  public void test14_CheckActivitiesOrder() {
-    info("Test 14 Check activities order");
-    String text = "text" + getRandomNumber();
-    String text1 = "text1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-    activityStream.addActivity(text, "");
-    refresh();
-    activityStream.addActivity(text1, "");
-    ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_BOX_ACTIVITY).get(0).find(byText(text1)).should(Condition.exist);
-    ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_BOX_ACTIVITY).get(1).find(byText(text)).should(Condition.exist);
-    activityStream.commentActivity(text, comment);
-    refresh();
-    ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_BOX_ACTIVITY).get(0).find(byText(text)).should(Condition.exist);
-    executeJavaScript("window.scrollBy(0,-1500)", "");
-    activityStream.deleteactivity(text);
-    executeJavaScript("window.scrollBy(0,-1500)", "");
-    activityStream.deleteactivity(text1);
-  }
-
-  /**
-   * <li>Case ID:121934.</li>
-   * <li>Test Case Name: Check Layout of Activities.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li> Step Number: 1 Step Name: Check layout of activity
-   * Step Description: - log in and goto intranet hompage - Select an activity to
-   * check its layout Input Data: Expected Outcome: An activity is made out of
-   * different parts:(see attached) 1.the author 2.the author's avatar 3.the space
-   * (optional) 4.the type (optional) 5.the activity message 6.the featured
-   * content (optional) 7.the Action bar (Comment and Like links + custom actions)
-   * 8.the like section (optional) 9.the comment section (optional)
+   * <li>Post-Condition:</li> Step Number: 1 Step Name: - Goto social homepage
+   * Step Description: - Log in - Goto homepage Input Data: Expected Outcome: -
+   * Home page is displayed Step number: 2 Step Name: - Check [My Spaces] filter
+   * Step Description: - In the drop -down select box, select [My Space] Input
+   * Data: Expected Outcome: - It shows only activities created in space where the
+   * user is a member
    */
   @Test
-  public void test16_CheckLayoutOfActivities() {
-    info("Test 16 Check Layout of Activities");
+  public void test11_CheckMySpacesFilter() {
+    info("Test 11 Check [My Spaces] filter");
 
-    String name = "" + getRandomNumber();
+    String space = "space" + getRandomNumber();
 
+    info("Create a space");
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(space, space, 60000);
     homePagePlatform.goToHomePage();
-    activityStream.addActivity(name, "");
-    $(byText(name)).parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .find(byText(DATA_NAME_USER1))
-                   .should(Condition.exist);
-    $(byText(name)).parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .find(ELEMENT_PUBLICATION_FIRSTPOST_AUTHORAVATAR)
-                   .should(Condition.exist);
-    $(byText(name)).parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .find(ELEMENT_PUBLICATION_FIRSTPOST_ACTIVITYTEXT)
-                   .should(Condition.exist);
-    $(byText(name)).parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .parent()
-                   .find(ELEMENT_ICONCOMMENT)
-                   .should(Condition.exist);
-    $(byText(name)).parent().parent().parent().parent().parent().parent().parent().find(ELEMENT_ICONLIKE).should(Condition.exist);
-    executeJavaScript("window.scrollBy(0,-1500)", "");
-    activityStream.deleteactivity(name);
+    homePagePlatform.refreshUntil($(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES),Condition.visible,1000);
+    $(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES).click();
+    $(ELEMENT_PUBLICATION_DISPLAYMODE_MYSPACE_OPTION).click();
+    $(byText(space)).should(Condition.exist);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.deleteSpace(space, false);
+
   }
 
   /**
-   * <li>Case ID:121935.</li>
-   * <li>Test Case Name: View Comments.</li>
+   * <li>Case ID:121924.</li>
+   * <li>Test Case Name: Add a document.</li>
    * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li> Step Number: 1 Step Name: - Check view of comment
-   * Step Description: - goto home page - select an activity with more than 2
-   * comments on it (fx: 10 comments) - click on the message "View all 10
-   * comments" Input Data: Expected Outcome: - onlythe latest (most recently
-   * posted) two comments are displayed below the activity. - "View all 10
-   * comments" message is shown - all comments is displayed, in the time order
-   * (oldest at the top)
+   * <li>Post-Condition:</li> Step Number: 1 Step Name: - Go to Select File Dialog
+   * Step Description: - Log in - Goto Homepage - In Activity Composer click File
+   * (icon) Input Data: Expected Outcome: - Select File Dialog shows up Step
+   * number: 2 Step Name: - Select document Step Description: - Browse the Select
+   * File Dialog to choose a document - Click Select Input Data: Expected Outcome:
+   * - A breadcrumb is displaying the current position of the user in the browsed
+   * drive. - the name of the file should be displayed under the activity input
+   * field. Step number: 3 Step Name: - Share the document Step Description: -
+   * Click Share button Input Data: Expected Outcome: - Activity is added into
+   * activity stream
    */
   @Test
-  public void test17_ViewComments() {
-    info("Test 17 View Comments");
+  public void test06_AddADocument() {
+    info("Test 6: Add a document");
 
     String name = "name" + getRandomNumber();
-
-    activityStream.addActivity(name, "");
-
-    for (int i = 0; i <= 9; i++) {
-      String comment = "comment" + getRandomNumber();
-      activityStream.commentActivity(name, comment);
-      refresh();
-      executeJavaScript("window.scrollBy(0,-1500)", "");
-    }
-    String text = "text" + getRandomNumber();
-    String text1 = "text1" + getRandomNumber();
-    activityStream.commentActivity(name, text);
-    refresh();
-    executeJavaScript("window.scrollBy(0,-1500)", "");
-    activityStream.commentActivity(name, text1);
-    refresh();
-    executeJavaScript("window.scrollBy(0,-1500)", "");
-    info("Verify that only second last and last comment are shown");
-    $(byText(name)).parent().parent().parent().parent().parent().parent().parent().find(byText(text)).should(Condition.exist);
-    $(byText(name)).parent().parent().parent().parent().parent().parent().parent().find(byText(text1)).should(Condition.exist);
-    info("Verify that view all comment links is shown and clickable on it");
-    String id = $(byText(name)).parent()
-                               .parent()
-                               .parent()
-                               .parent()
-                               .parent()
-                               .parent()
-                               .parent()
-                               .getAttribute("id")
-                               .split("UIActivityLoader")[1];
-    $(byXpath(ELEMENT_LINK_TEXT_VIEW_ALL_COMMENTS.replace("{id}", id))).click();
-    $(byXpath(ELEMENT_LINK_TEXT_VIEW_ALL_COMMENTS.replace("{id}", id))).waitUntil(Condition.hasText("Hide all 12 comments."),
-                                                                                  Configuration.timeout);
-    info("Verify that all comments is shown");
-    assertEquals(13, $(byId(ELEMENT_LIST_ALL_COMMENNTS.replace("{id}", id))).findAll(byClassName("commentItem")).size());
-    executeJavaScript("window.scrollBy(0,-1500)", "");
-    activityStream.deleteactivity(name);
-    refresh();
-
-  }
-
-  /**
-   * <li>Case ID:121936.</li>
-   * <li>Test Case Name: Mention a user in comment.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
-   */
-  @Test
-  public void test18_MentionAUserInComment() {
-    info("Test 18 Mention a user in comment");
-    String name = "name" + getRandomNumber();
-    String text = "text" + getRandomNumber();
-
+    String content = "content" + getRandomNumber();
+    info("add file");
+    navigationToolbar.goToSiteExplorer();
+    siteExplorerHome.goToAddNewContent();
+    info("Create new file document");
+    createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
+    createNewDocument.addNewFile(name, content);
+    createNewDocument.saveAndClose();
     homePagePlatform.goToHomePage();
-    activityStream.addActivity(name, null);
-    activityStream.addCommentWithMentionUser(name, DATA_USER2, text);
-    $(byText(text)).parent().shouldHave(Condition.text(PLFData.DATA_NAME_USER2+" "+text));
-    executeJavaScript("window.scrollBy(0,-1500)", "");
-    activityStream.deleteactivity(name);
-  }
+    info("share file from activity stream");
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
+    refresh();
+    ELEMENT_LINK_TEXT_SELECT_FROM_EXISTING_UPLOAD.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TEXT_DOCUMENT_IN_DOC_ACTIVITY_POPUP.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_SITE_MANAGEMENT_IN_DOC_ACTIVITY_POPUP.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_POPUP_DOC_ACTIVITY.find(byText(name)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_BUTTON_ATTASH_FILE_IN_DOC_ACTIVITY_POPUP.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byAttribute("data-original-title", name)).should(Condition.exist);
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    info("delete data");
+    navigationToolbar.goToSiteExplorer();
+    siteExplorerHome.deleteData(name);
 
-  /**
-   * <li>Case ID:121937.</li>
-   * <li>Test Case Name: Relation Activity.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li> Step Number: 1 Step Name: - Invite another user Step
-   * Description: - Login with User A and go to Intranet - Go to Connections -
-   * Find user B and send a request Input Data: Expected Outcome: - Request is
-   * sent to the user B Step number: 2 Step Name: - Accept request Step
-   * Description: - Login as user B and goto my Connection - Accept the request
-   * from user A Input Data: Expected Outcome: - A Relation activity is displayed
-   * to the activity stream
-   */
-
-  @Test
-  public void test19_RelationActivity() {
-    info("Test 19 Relation Activity");
-    String username = "username" + getRandomString();
-    String email = username + "@test.com";
-    String password = "123456";
-    info("Add new user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username, password, email, username, username);
-    String comment = "I'm now connected with 1 user(s)";
-    manageLogInOut.signIn(username,password);
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER2);
-
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(username);
-    homePagePlatform.goToHomePage();
-    $(byText(username+" "+username)).parent().parent().parent().parent().find(byText(comment)).should(Condition.exist);
-    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username);
   }
 
   /**
@@ -873,24 +895,4 @@ public class SOCHomePageTestIT extends Base {
 
   }
 
-  @Tag("SOC-5646")
-  @Test
-  public void test23_SpecialisationOfDollarInActivityMessage(){
-
-    homePagePlatform.goToHomePage();
-    info("add an activity with $ and check that is added succesfully");
-    activityStream.addActivity("$ {val}", "");
-    activityStream.checkActivity("$ {val}");
-    info("delete activity");
-    activityStream.deleteactivity("$ {val}");
-  }
-  @Test
-  @Tag("PLF-8135")
-  public void test23_CheckPaddingOfSpacesAtLeftAndRightOfActivities(){
-    homePagePlatform.goToHomePage();
-    assertEquals("40px", ELEMENT_ACTIVITY_CONTAINER.getCssValue("padding-top"));
-    assertEquals("20px", ELEMENT_ACTIVITY_CONTAINER.getCssValue("padding-right"));
-    assertEquals("40px", ELEMENT_ACTIVITY_CONTAINER.getCssValue("padding-bottom"));
-    assertEquals("20px", ELEMENT_ACTIVITY_CONTAINER.getCssValue("padding-left"));
-  }
 }

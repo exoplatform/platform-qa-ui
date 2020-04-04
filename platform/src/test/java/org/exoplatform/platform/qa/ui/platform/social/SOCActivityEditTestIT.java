@@ -202,6 +202,7 @@ public class SOCActivityEditTestIT extends Base {
   }
 
   @Test
+  @Tag("sab")
   public void test02_CheckEditActivity() {
 
     String activity = "activity" + getRandomNumber();

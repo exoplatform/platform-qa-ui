@@ -61,13 +61,12 @@ public class SOCActivityAddTestIT extends Base {
 
     info("Upload File Without Text");
     ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
-    refresh();
-    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_COMPOSER_SHARE_BUTTON).should(Condition.be(Condition.enabled));
     $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
-    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.disabled,Configuration.timeout);
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.disabled,Configuration.openBrowserTimeoutMs);
     String id=$(byAttribute("data-original-title", "eXo-Platform.png")).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
     $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}",id))).waitUntil(Condition.visible,Configuration.timeout).click();
     $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}",id))).click();
