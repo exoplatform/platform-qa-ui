@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7bae155a-78b0-49ab-9f7e-bff850c8ce2c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecms/src/main/java/org/exoplatform/platform/qa/ui/ecms/pageobject/SiteExplorerHome.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecms/src/main/java/org/exoplatform/platform/qa/ui/ecms/pageobject/SiteExplorerHome.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCHomePageTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCHomePageTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SocialBasicTestsWithUserTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SocialBasicTestsWithUserTestIT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/forum/target/" />
     <ignored path="$PROJECT_DIR$/task/target/" />
@@ -83,31 +81,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCHomePageTestIT.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="373" column="36" lean-forward="true" selection-start-line="373" selection-start-column="36" selection-end-line="373" selection-end-column="36" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SocialBasicTestsWithUserTestIT.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="40" column="39" lean-forward="true" selection-start-line="40" selection-start-column="39" selection-end-line="40" selection-end-column="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ManageLogInOut.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-111">
-              <caret line="63" column="14" selection-start-line="63" selection-start-column="14" selection-end-line="63" selection-end-column="14" />
+            <state relative-caret-position="478">
+              <caret line="204" column="31" lean-forward="true" selection-start-line="204" selection-start-column="31" selection-end-line="204" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -205,7 +182,6 @@
         <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/TestBase.java" />
         <option value="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiPageInformation.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCPeopleProfileDynContainersTestIT.java" />
-        <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SocialBasicTestsWithUserTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/plf/PlfUnifiedSearchTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsSECreateTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsWCMTestIT.java" />
@@ -230,11 +206,12 @@
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/ReplyToCommentTestIT.java" />
         <option value="$PROJECT_DIR$/forum/src/main/java/org/exoplatform/platform/qa/ui/forum/pageobject/ForumTopicManagement.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCActivityEditTestIT.java" />
-        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCCommentEditTestIT.java" />
         <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java" />
         <option value="$PROJECT_DIR$/ecms/src/main/java/org/exoplatform/platform/qa/ui/ecms/pageobject/SiteExplorerHome.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCHomePageTestIT.java" />
+        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java" />
+        <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SocialBasicTestsWithUserTestIT.java" />
       </list>
     </option>
   </component>
@@ -333,7 +310,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1586054958586" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1586059404896" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -359,7 +336,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.SOCHomePageTestIT.test03_CheckMyActivitiesFilter">
+  <component name="RunManager" selected="JUnit.SocialBasicTestsWithUserTestIT.test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment">
     <configuration name="CalendarBasicTestsInSpaceTestIT.test01_AddEventInSpace" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
@@ -432,7 +409,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SOCHomePageTestIT.test03_CheckMyActivitiesFilter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SocialBasicTestsWithUserTestIT.test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
         <pattern>
@@ -441,8 +418,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCHomePageTestIT" />
-      <option name="METHOD_NAME" value="test03_CheckMyActivitiesFilter" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SocialBasicTestsWithUserTestIT" />
+      <option name="METHOD_NAME" value="test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org" />
       <option name="PARAMETERS" value="" />
@@ -450,7 +427,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SOCHomePageTestIT.test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SocialBasicTestsWithUserTestIT.test02_CreateNewSpaceSearchDeletedSpace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
         <pattern>
@@ -459,8 +436,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCHomePageTestIT" />
-      <option name="METHOD_NAME" value="test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SocialBasicTestsWithUserTestIT" />
+      <option name="METHOD_NAME" value="test02_CreateNewSpaceSearchDeletedSpace" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org" />
       <option name="PARAMETERS" value="" />
@@ -468,7 +445,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SOCHomePageTestIT.test04_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SocialBasicTestsWithUserTestIT.test02_LikeYourActivityOnSpaceAndSearchDeletedSpace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
         <pattern>
@@ -477,8 +454,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCHomePageTestIT" />
-      <option name="METHOD_NAME" value="test04_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SocialBasicTestsWithUserTestIT" />
+      <option name="METHOD_NAME" value="test02_LikeYourActivityOnSpaceAndSearchDeletedSpace" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org" />
       <option name="PARAMETERS" value="" />
@@ -486,7 +463,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SOCHomePageTestIT.test13_CheckMyActivitiesFilter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SocialBasicTestsWithUserTestIT.test09_CreateNewSpaceSearchDeletedSpace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
         <pattern>
@@ -495,8 +472,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCHomePageTestIT" />
-      <option name="METHOD_NAME" value="test13_CheckMyActivitiesFilter" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SocialBasicTestsWithUserTestIT" />
+      <option name="METHOD_NAME" value="test09_CreateNewSpaceSearchDeletedSpace" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org" />
       <option name="PARAMETERS" value="" />
@@ -504,7 +481,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SOCHomePageTestIT.test21_UserJoinASpaceAndCheckOrderOfActivities" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SocialBasicTestsWithUserTestIT.test12_likeYourActivityOnSpace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
         <pattern>
@@ -513,8 +490,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCHomePageTestIT" />
-      <option name="METHOD_NAME" value="test21_UserJoinASpaceAndCheckOrderOfActivities" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SocialBasicTestsWithUserTestIT" />
+      <option name="METHOD_NAME" value="test12_likeYourActivityOnSpace" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org" />
       <option name="PARAMETERS" value="" />
@@ -556,19 +533,19 @@
       <item itemvalue="JUnit.PlfUnifiedSearchTestIT.test13_checkUnifiedSearchNotWorkingWithFilesContainingDashInTheirTitles" />
       <item itemvalue="JUnit.PortletInSpaceHomePageTestIT.test04_CheckTheSpaceWhoIsOnlinePortlet" />
       <item itemvalue="JUnit.org.exoplatform.platform.qa.ui.chat.smoke in platform-qa-ui-chat" />
-      <item itemvalue="JUnit.SOCHomePageTestIT.test21_UserJoinASpaceAndCheckOrderOfActivities" />
-      <item itemvalue="JUnit.SOCHomePageTestIT.test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager" />
-      <item itemvalue="JUnit.SOCHomePageTestIT.test13_CheckMyActivitiesFilter" />
-      <item itemvalue="JUnit.SOCHomePageTestIT.test04_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager" />
-      <item itemvalue="JUnit.SOCHomePageTestIT.test03_CheckMyActivitiesFilter" />
+      <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment" />
+      <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test09_CreateNewSpaceSearchDeletedSpace" />
+      <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test02_CreateNewSpaceSearchDeletedSpace" />
+      <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test12_likeYourActivityOnSpace" />
+      <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test02_LikeYourActivityOnSpaceAndSearchDeletedSpace" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.SOCHomePageTestIT.test03_CheckMyActivitiesFilter" />
-        <item itemvalue="JUnit.SOCHomePageTestIT.test04_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager" />
-        <item itemvalue="JUnit.SOCHomePageTestIT.test13_CheckMyActivitiesFilter" />
-        <item itemvalue="JUnit.SOCHomePageTestIT.test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager" />
-        <item itemvalue="JUnit.SOCHomePageTestIT.test21_UserJoinASpaceAndCheckOrderOfActivities" />
+        <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment" />
+        <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test02_LikeYourActivityOnSpaceAndSearchDeletedSpace" />
+        <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test12_likeYourActivityOnSpace" />
+        <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test02_CreateNewSpaceSearchDeletedSpace" />
+        <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test09_CreateNewSpaceSearchDeletedSpace" />
       </list>
     </recent_temporary>
   </component>
@@ -586,35 +563,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="SOCHomePageTestIT_test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager - 2020.04.05 at 04h 02m 48s.xml">
-      <configuration name="SOCHomePageTestIT.test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager" configurationId="JUnit" />
+    <history-entry file="SocialBasicTestsWithUserTestIT_test01_LikeActivity - 2020.04.05 at 05h 20m 46s.xml">
+      <configuration name="SocialBasicTestsWithUserTestIT.test01_LikeActivity" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCHomePageTestIT_test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager - 2020.04.05 at 04h 09m 07s.xml">
-      <configuration name="SOCHomePageTestIT.test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager" configurationId="JUnit" />
+    <history-entry file="SocialBasicTestsWithUserTestIT_test01_LikeActivity - 2020.04.05 at 05h 21m 41s.xml">
+      <configuration name="SocialBasicTestsWithUserTestIT.test01_LikeActivity" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCHomePageTestIT_test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager - 2020.04.05 at 04h 10m 51s.xml">
-      <configuration name="SOCHomePageTestIT.test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager" configurationId="JUnit" />
+    <history-entry file="SocialBasicTestsWithUserTestIT_test01_LikeActivity - 2020.04.05 at 05h 26m 04s.xml">
+      <configuration name="SocialBasicTestsWithUserTestIT.test01_LikeActivity" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCHomePageTestIT_test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager - 2020.04.05 at 04h 11m 45s.xml">
-      <configuration name="SOCHomePageTestIT.test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager" configurationId="JUnit" />
+    <history-entry file="SocialBasicTestsWithUserTestIT_test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment - 2020.04.05 at 05h 31m 21s.xml">
+      <configuration name="SocialBasicTestsWithUserTestIT.test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCHomePageTestIT_test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager - 2020.04.05 at 04h 13m 15s.xml">
-      <configuration name="SOCHomePageTestIT.test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager" configurationId="JUnit" />
+    <history-entry file="SocialBasicTestsWithUserTestIT_test09_CreateNewSpaceSearchDeletedSpace - 2020.04.05 at 05h 50m 50s.xml">
+      <configuration name="SocialBasicTestsWithUserTestIT.test09_CreateNewSpaceSearchDeletedSpace" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCHomePageTestIT_test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager - 2020.04.05 at 04h 19m 37s.xml">
-      <configuration name="SOCHomePageTestIT.test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager" configurationId="JUnit" />
+    <history-entry file="SocialBasicTestsWithUserTestIT_test09_CreateNewSpaceSearchDeletedSpace - 2020.04.05 at 05h 51m 12s.xml">
+      <configuration name="SocialBasicTestsWithUserTestIT.test09_CreateNewSpaceSearchDeletedSpace" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCHomePageTestIT_test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager - 2020.04.05 at 04h 23m 01s.xml">
-      <configuration name="SOCHomePageTestIT.test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager" configurationId="JUnit" />
+    <history-entry file="SocialBasicTestsWithUserTestIT_test02_CreateNewSpaceSearchDeletedSpace - 2020.04.05 at 05h 52m 57s.xml">
+      <configuration name="SocialBasicTestsWithUserTestIT.test02_CreateNewSpaceSearchDeletedSpace" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCHomePageTestIT_test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager - 2020.04.05 at 04h 28m 05s.xml">
-      <configuration name="SOCHomePageTestIT.test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager" configurationId="JUnit" />
+    <history-entry file="SocialBasicTestsWithUserTestIT_test12_likeYourActivityOnSpace - 2020.04.05 at 05h 55m 25s.xml">
+      <configuration name="SocialBasicTestsWithUserTestIT.test12_likeYourActivityOnSpace" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCHomePageTestIT_test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager - 2020.04.05 at 04h 39m 56s.xml">
-      <configuration name="SOCHomePageTestIT.test03_UserJoinASpaceAndCheckOrderOfActivitiesAndPromoteAMemberAsManager" configurationId="JUnit" />
+    <history-entry file="SocialBasicTestsWithUserTestIT_test02_LikeYourActivityOnSpaceAndSearchDeletedSpace - 2020.04.05 at 06h 00m 02s.xml">
+      <configuration name="SocialBasicTestsWithUserTestIT.test02_LikeYourActivityOnSpaceAndSearchDeletedSpace" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCHomePageTestIT_test13_CheckMyActivitiesFilter - 2020.04.05 at 04h 41m 17s.xml">
-      <configuration name="SOCHomePageTestIT.test13_CheckMyActivitiesFilter" configurationId="JUnit" />
+    <history-entry file="SocialBasicTestsWithUserTestIT_test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment - 2020.04.05 at 06h 01m 13s.xml">
+      <configuration name="SocialBasicTestsWithUserTestIT.test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -628,9 +605,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1533" height="875" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" weight="0.25622058" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.77629066" visible="true" weight="0.23335575" />
       <window_info id="Structure" order="1" sideWeight="0.22285715" side_tool="true" weight="0.24815063" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -641,10 +617,10 @@
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49966374" weight="0.38873994" />
       <window_info anchor="bottom" id="Cvs" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.737727" weight="0.37265417" />
+      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.737727" weight="0.4772118" />
       <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.8473436" weight="0.49865952" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.58042896" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" weight="0.19839142" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" visible="true" weight="0.48659518" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.26227304" side_tool="true" weight="0.39008042" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.5683646" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49831876" weight="0.48927614" />
@@ -656,11 +632,11 @@
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info anchor="right" id="Ant Build" order="7" sideWeight="0.49867374" weight="0.09683927" />
-      <window_info anchor="right" id="Maven" order="8" sideWeight="0.7607527" weight="0.12172159" />
+      <window_info anchor="right" id="Maven" order="7" sideWeight="0.7607527" weight="0.12172159" />
+      <window_info anchor="right" id="Ant Build" order="8" sideWeight="0.49867374" weight="0.09683927" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" visible="true" weight="0.25622058" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.77629066" visible="true" weight="0.23335575" />
       <window_info id="Structure" order="1" sideWeight="0.22285715" side_tool="true" weight="0.24815063" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -671,10 +647,10 @@
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49966374" weight="0.38873994" />
       <window_info anchor="bottom" id="Cvs" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="3" weight="0.4" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" sideWeight="0.737727" visible="true" weight="0.37265417" />
+      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.737727" visible="true" weight="0.42895442" />
       <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.8473436" weight="0.49865952" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.58042896" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" weight="0.19839142" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" weight="0.35254693" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.26227304" side_tool="true" weight="0.39008042" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.5683646" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49831876" weight="0.48927614" />
@@ -686,8 +662,8 @@
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info anchor="right" id="Ant Build" order="7" sideWeight="0.49867374" weight="0.09683927" />
-      <window_info anchor="right" id="Maven" order="8" sideWeight="0.7607527" weight="0.12172159" />
+      <window_info anchor="right" id="Maven" order="7" sideWeight="0.7607527" weight="0.12172159" />
+      <window_info anchor="right" id="Ant Build" order="8" sideWeight="0.49867374" weight="0.09683927" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -1153,6 +1129,11 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
+        <expression-string>activityStream.commentActivity(activity2, comment2);</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>homePagePlatform.goToConnections();</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
@@ -1192,22 +1173,9 @@
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_BOX_ACTIVITY).get(0).find(byText(activity1)).should(Condition.exist);</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SpaceActivitiesTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/getRequest/getData.java" />
     <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/ManageLogInOutLocator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -1458,41 +1426,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="1102" column="16" selection-start-line="1102" selection-start-column="16" selection-end-line="1102" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsEditActivityTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3839">
-          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsAdministrationTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2279">
-          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationIconListTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4904">
-          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationTypesTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-52273">
-          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/ecms/ECMSLocator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
@@ -1548,17 +1481,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SocialBasicTestsWithUserTestIT.java">
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCHomePageTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="40" column="39" lean-forward="true" selection-start-line="40" selection-start-column="39" selection-end-line="40" selection-end-column="39" />
+        <state relative-caret-position="15">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCHomePageTestIT.java">
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/social/SpaceManagement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="373" column="36" lean-forward="true" selection-start-line="373" selection-start-column="36" selection-end-line="373" selection-end-column="36" />
+        <state relative-caret-position="106">
+          <caret line="81" selection-start-line="81" selection-end-line="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="853" column="110" selection-start-line="853" selection-start-column="110" selection-end-line="853" selection-end-column="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsAdministrationTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2635">
+          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsEditActivityTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4195">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationTypesTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-52629">
+          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsUserSettingsTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2740">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationIconListTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5260">
+          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SocialBasicTestsWithUserTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="204" column="31" lean-forward="true" selection-start-line="204" selection-start-column="31" selection-end-line="204" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

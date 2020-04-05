@@ -851,7 +851,7 @@ public class ActivityStream {
                 .getAttribute("id")
                 .split("UIActivityLoader")[1];
         // click on comment link
-        $(byText(activity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
+        $(byText(activity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).waitUntil(visible, Configuration.openBrowserTimeoutMs).click();
         // insert comment
         $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
         executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
