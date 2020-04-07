@@ -12,6 +12,8 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_CALENDAR_WORKING_PANEL;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.GO_TO_SPACES_TRIBE_BTN;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ADDNEWSPACE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
@@ -100,6 +102,15 @@ public class HomePagePlatform {
     info("-- Go to my spaces --");
     ELEMENT_MY_SPACE_LINK_PLF.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
     refreshUntil(ELEMENT_ADDNEWSPACE_BUTTON, Condition.visible, Configuration.timeout);
+  }
+
+  /**
+   * Go to my spaces Tribe
+   */
+  public void goToMySpacesTribe() {
+    info("-- Go to my spaces --");
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    GO_TO_SPACES_TRIBE_BTN.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
   }
 
   /**
