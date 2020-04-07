@@ -12,6 +12,7 @@
         <module name="platform-qa-ui-commons" />
         <module name="platform-qa-ui-core" />
         <module name="platform-qa-ui-ecms" />
+        <module name="platform-qa-ui-exoTribe" />
         <module name="platform-qa-ui-forum" />
         <module name="platform-qa-ui-gatein" />
         <module name="platform-qa-ui-news" />
@@ -31,6 +32,7 @@
       <module name="platform-qa-ui-commons" target="1.8" />
       <module name="platform-qa-ui-core" target="1.8" />
       <module name="platform-qa-ui-ecms" target="1.8" />
+      <module name="platform-qa-ui-exoTribe" target="1.8" />
       <module name="platform-qa-ui-forum" target="1.8" />
       <module name="platform-qa-ui-gatein" target="1.8" />
       <module name="platform-qa-ui-news" target="1.8" />

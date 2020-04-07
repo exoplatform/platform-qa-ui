@@ -25,6 +25,13 @@ package org.exoplatform.platform.qa.ui.core;
  */
 public class PLFData {
 
+
+  public static String tribe_mail             = "kriahi@exoplatform.com";
+
+  public static String atlassian_username             = "kriahi";
+
+  public static String atlassian_password             = "pHkhCkBB4c";
+
   public static String username             = "root";
 
   public static String password             = "gtn";

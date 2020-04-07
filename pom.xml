@@ -50,6 +50,8 @@
     <module>answer</module>
     <module>onlyOffice</module>
     <module>news</module>
+    <module>exoTribe</module>
+
   </modules>
   <scm>
     <connection>scm:git:git://github.com/exoplatform/platform-qa-ui.git</connection>

@@ -25,7 +25,9 @@ import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ManageLogInOutLocator.ELEMENT_SIGN_OUT_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -36,6 +38,10 @@ import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.locator.ManageLogInOutLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.temporal.Temporal;
 
 public class ManageLogInOut {
 
@@ -114,6 +120,50 @@ public class ManageLogInOut {
 
   }
 
+
+  /**
+   * Log in to Tribe
+   *
+   * @param username
+   * @param password
+   */
+
+  public void signInTribe(String username, String password) {
+    info("login normally with user " + username + " and pass " + password);
+
+    if (ELEMENT_TRIBE_TOOLBAR.exists()){
+      signOutTribe();
+    }
+    ELEMENT_TRIBE_COMMUNITY_NAVIGATION_SIGN_IN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    USERNAME_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(username);
+    PASSWORD_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(password);
+    ELEMENT_TRIBE_SIGN_IN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
+  }
+
+  /**
+   * Log in to Tribe with Google
+   *
+   * @param mail
+   */
+
+  public void signInTribeWithGoogle(String mail, String username, String password) {
+    info("login with Google with mail " + mail);
+    if (ELEMENT_TRIBE_TOOLBAR.exists()){
+      signOutTribe();
+    }
+    ELEMENT_TRIBE_COMMUNITY_NAVIGATION_SIGN_IN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_SIGN_IN_WITH_GOOGLE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    MAIL_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(mail);
+    NEXT_MAIL_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    USERNAME_ATLASSIAN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(username);
+    PASSWORD_ATLASSIAN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(password);
+    ELEMENT_ATLASSIAN_SIGN_IN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_ATLASSIAN_CONTINUE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_TRIBE_TOOLBAR).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+
+  }
+
   /**
    * Log in via CAS
    *
@@ -125,6 +175,18 @@ public class ManageLogInOut {
     $(ELEMENT_INPUT_USERNAME).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(username);
     $(ELEMENT_INPUT_PASSWORD).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(password);
     ELEMENT_SIGN_IN_BUTTON_CAS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
+  }
+
+  /**
+   * Sign out from intranet
+   */
+  public void signOutTribe() {
+    Temporal start = LocalDateTime.now();
+    info("Sign out");
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_SIGN_OUT.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    info("Sign out in " + Duration.between(start, LocalDateTime.now()).toString());
 
   }
 

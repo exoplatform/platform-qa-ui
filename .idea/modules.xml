@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/commons/platform-qa-ui-commons.iml" filepath="$PROJECT_DIR$/commons/platform-qa-ui-commons.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/platform-qa-ui-core.iml" filepath="$PROJECT_DIR$/core/platform-qa-ui-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/ecms/platform-qa-ui-ecms.iml" filepath="$PROJECT_DIR$/ecms/platform-qa-ui-ecms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exoTribe/platform-qa-ui-exoTribe.iml" filepath="$PROJECT_DIR$/exoTribe/platform-qa-ui-exoTribe.iml" />
       <module fileurl="file://$PROJECT_DIR$/forum/platform-qa-ui-forum.iml" filepath="$PROJECT_DIR$/forum/platform-qa-ui-forum.iml" />
       <module fileurl="file://$PROJECT_DIR$/gatein/platform-qa-ui-gatein.iml" filepath="$PROJECT_DIR$/gatein/platform-qa-ui-gatein.iml" />
       <module fileurl="file://$PROJECT_DIR$/news/platform-qa-ui-news.iml" filepath="$PROJECT_DIR$/news/platform-qa-ui-news.iml" />
