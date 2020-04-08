@@ -1,25 +1,23 @@
-package org.exoplatform.platform.qa.ui.wiki.pageobject;
-
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byName;
-import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import java.io.File;
+package org.exoplatform.platform.qa.ui.exoTribe.pageobject;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import java.io.File;
 
-public class SourceTextEditor {
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_CONTENT_WIKI_INPUT_TRIBE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
+public class TribeSourceTextEditor {
   private final TestBase       testBase;
 
   private ElementEventTestBase evt;
@@ -29,7 +27,7 @@ public class SourceTextEditor {
    *
    * @param testBase TestBase
    */
-  public SourceTextEditor(TestBase testBase) {
+  public TribeSourceTextEditor(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
   }
@@ -47,14 +45,15 @@ public class SourceTextEditor {
       do {
         //refresh();
         testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-        sleep(2000);
       }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
     }
-    $(ELEMENT_TITLE_WIKI_INPUT).setValue(title);
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(title);
 
     info("Input a content for the page");
-    sleep(Configuration.timeout);
-    $(ELEMENT_CONTENT_WIKI_INPUT).setValue(content);
+    sleep(1000);
+    switchTo().frame($(byXpath("//*[@class='gwt-RichTextArea']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs));
+    $(ELEMENT_CONTENT_WIKI_INPUT_TRIBE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(content);
+    switchTo().defaultContent();
   }
 
   /**
@@ -125,10 +124,15 @@ public class SourceTextEditor {
    */
   public void editSimplePage(String newTitle, String newContent) {
     info("Input a title for the page");
-    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(newTitle);
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).clear();
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(newTitle);
 
     info("Input a content for the page");
-    $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible,Configuration.collectionsTimeout).sendKeys(newContent);
+    sleep(1000);
+    switchTo().frame($(byXpath("//*[@class='gwt-RichTextArea']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs));
+    $(ELEMENT_CONTENT_WIKI_INPUT_TRIBE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).clear();
+    $(ELEMENT_CONTENT_WIKI_INPUT_TRIBE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(newContent);
+    switchTo().defaultContent();
 
   }
 

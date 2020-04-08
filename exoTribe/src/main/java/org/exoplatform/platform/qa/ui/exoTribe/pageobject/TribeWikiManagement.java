@@ -1,26 +1,24 @@
-package org.exoplatform.platform.qa.ui.wiki.pageobject;
+package org.exoplatform.platform.qa.ui.exoTribe.pageobject;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelenideElement;
+import org.exoplatform.platform.qa.ui.selenium.Button;
+import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.interactions.Actions;
-
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.SelenideElement;
-
-import org.exoplatform.platform.qa.ui.selenium.Button;
-import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.platform.PlatformBase;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-
-public class WikiManagement {
+public class TribeWikiManagement {
 
   private final TestBase       testBase;
 
@@ -38,7 +36,7 @@ public class WikiManagement {
    * constructor
    * @param testBase TestBase
    */
-  public WikiManagement(TestBase testBase) {
+  public TribeWikiManagement(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
     this.alert = new ManageAlert(testBase);

@@ -2,9 +2,7 @@ package org.exoplatform.platform.qa.ui.exoTribe;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
-import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.exoTribe.pageobject.TribeActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
@@ -18,15 +16,9 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_TRIBE_SIGN_OUT;
-import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 /**
  * Created by exo on 11/09/17.

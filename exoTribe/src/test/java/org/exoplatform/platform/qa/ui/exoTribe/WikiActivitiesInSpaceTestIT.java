@@ -1,46 +1,50 @@
-package org.exoplatform.platform.qa.ui.platform.wiki;
+package org.exoplatform.platform.qa.ui.exoTribe;
 
-import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.core.PLFData.password;
-import static org.exoplatform.platform.qa.ui.core.PLFData.username;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_SOURCE_EDITOR_BUTTON;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-
-import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.commons.BaseTribe;
+import org.exoplatform.platform.qa.ui.exoTribe.pageobject.*;
+import org.exoplatform.platform.qa.ui.exoTribe.pageobject.TribeWikiHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
-import org.exoplatform.platform.qa.ui.wiki.pageobject.SourceTextEditor;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import static org.exoplatform.platform.qa.ui.core.PLFData.*;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("sniff")
 @Tag("wiki")
-public class WikiActivitiesInSpaceTestIT extends Base {
+public class WikiActivitiesInSpaceTestIT extends BaseTribe {
 
   HomePagePlatform homePagePlatform;
 
   SpaceManagement  spaceManagement;
 
-  WikiHomePage     wikiHomePage;
+  TribeWikiHomePage tribeWikiHomePage;
 
   WikiManagement   wikiManagement;
 
-  SourceTextEditor sourceTextEditor;
+  TribeWikiManagement tribeWikiManagement;
+
+  TribeSourceTextEditor tribeSourceTextEditor;
 
   WikiValidattions wikiValidattions;
+
+  WikiHomePage     wikiHomePage;
 
   SpaceHomePage    spaceHomePage;
 
   ActivityStream   activityStream;
+
+  TribeActivityStream tribeActivityStream;
+
+  TribeSpaceManagement tribeSpaceManagement;
 
   ManageLogInOut   manageLogInOut;
 
@@ -51,142 +55,60 @@ public class WikiActivitiesInSpaceTestIT extends Base {
     homePagePlatform = new HomePagePlatform(this);
 
     spaceHomePage = new SpaceHomePage(this);
+    tribeWikiHomePage = new TribeWikiHomePage(this);
     wikiHomePage = new WikiHomePage(this);
     wikiManagement = new WikiManagement(this);
-    sourceTextEditor = new SourceTextEditor(this);
+    tribeWikiManagement = new TribeWikiManagement(this);
+    tribeSourceTextEditor = new TribeSourceTextEditor(this);
     wikiValidattions = new WikiValidattions(this);
     spaceManagement = new SpaceManagement(this);
     activityStream = new ActivityStream(this);
+    tribeActivityStream = new TribeActivityStream(this);
+    tribeSpaceManagement = new TribeSpaceManagement(this);
     manageLogInOut = new ManageLogInOut(this);
-    manageLogInOut.signInCas(username, password);
+    manageLogInOut.signInTribeWithGoogle(tribe_mail, atlassian_username, atlassian_password);
 
   }
 
-  /**
-   * <li>Case ID:139201.</li>
-   * <li>Test Case Name: Add a wiki's activity after create a wiki page in
-   * space.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
-   */
-  /*
-   * Step Number: 1 Step Name: Step 1: Add new space Step Description: - Connect
-   * to Intranet - Click [Join a space] - Click [Add New Space] Input Data:
-   * Expected Outcome: The new space is created successfully. Step number: 2 Step
-   * Name: Step 2: Add a wiki page for space Step Description: - Click the created
-   * space in the [My Spaces] panel - Click [Wiki] link on the space's top
-   * navigation bar - Click [Add Page] - -> [Blank Page]/[From Template...] -
-   * Enter title and content - Click [Save] Input Data: Expected Outcome: - By
-   * default, the [Create Wiki page] is displayed in the [Rich Text] mode - Wiki
-   * page is created for space. Step number: 3 Step Name: Step 3: Check wiki's
-   * activity after created page Step Description: - Back to the Homepage Input
-   * Data: Expected Outcome: - An activity of wikiis added to the activity stream
-   * - The content of the activity is displayed
-   */
-
   @Test
-  public void test11_AddAWikisActivityAfterCreateAWikiPageInSpace() {
-    info("Test 11 Add a wiki's activity after create a wiki page in space");
-    info("Create a space");
-    String space = "space" + getRandomNumber();
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space, 6000);
-
-    info("Create a wiki page");
-    String title = "title" + getRandomNumber();
-    String content = "content" + getRandomNumber();
-    spaceHomePage.goToWikiTab();
-    wikiHomePage.goToAddBlankPage();
-    wikiManagement.goToSourceEditor();
-    sourceTextEditor.addSimplePage(title, content);
-    wikiManagement.saveAddPage();
-    wikiValidattions.verifyTitleWikiPage(title);
-
-    info("Check the Activity");
-    homePagePlatform.goToHomePage();
-    activityStream.checkActivity(title);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
-
-  }
-
-  /**
-   * <li>Case ID:139203.</li>
-   * <li>Test Case Name: Remove wiki's page of space.</li>
-   * <li>Pre-Condition: Have a space</li>
-   * <li>Post-Condition:</li>
-   */
-  /*
-   * Step Number: 1 Step Name: Step 1: Add wiki for space Step Description: -
-   * Connect to [Intranet] - Add a Wiki activity for space Input Data: Expected
-   * Outcome: - The Wiki activity for spaceis displayed in the activity stream
-   * Step number: 2 Step Name: Step 2: Check show delete icon Step Description: -
-   * Back to activity stream - Move the mouse over the Wiki activity for space
-   * Input Data: Expected Outcome: A (X) icon is displayed in the top right panel
-   * of the activity
-   */
-  @Test
-  public void test13_RemoveWikisPageOfSpace() {
+  public void test11_AddEditRemoveAWikiActivityAfterCreateAWikiPageInSpace() {
     info("Test 13 Remove wiki's page of space");
     info("Create a space");
     String space = "space" + getRandomNumber();
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space, 6000);
-
-    info("Create a wiki page");
-    String title = "title" + getRandomNumber();
-    String content = "content" + getRandomNumber();
-    spaceHomePage.goToWikiTab();
-    wikiHomePage.goToAddBlankPage();
-    wikiManagement.goToSourceEditor();
-    sourceTextEditor.addSimplePage(title, content);
-    wikiManagement.saveAddPage();
-    wikiValidattions.verifyTitleWikiPage(title);
-
-    homePagePlatform.goToSpecificSpace(space);
-    spaceHomePage.goToWikiTab();
-    wikiHomePage.deleteWiki(title);
-    wikiValidattions.verifyWikiPageNotDisplayedInWikiHome(title);
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
-
-  }
-
-  @Test
-  public void test01_editPageWikionSpace() {
-
-    info("Edit page wiki on space");
-    info("Create a space");
-    String space = "space" + getRandomNumber();
-    homePagePlatform.goToAllSpace();
-    spaceManagement.addNewSpaceSimple(space, space, 6000);
-
-    info("Create a wiki page");
-    String title = "title" + getRandomNumber();
-    String content = "content" + getRandomNumber();
-    spaceHomePage.goToWikiTab();
-    wikiHomePage.goToAddBlankPage();
-    wikiManagement.goToSourceEditor();
-    sourceTextEditor.addSimplePage(title, content);
-    wikiManagement.saveAddPage();
-    wikiValidattions.verifyTitleWikiPage(title);
-    homePagePlatform.goToHomePage();
-    activityStream.checkActivity(title);
-    info("Edit wiki page");
-    wikiHomePage.goToAPage(title);
-    wikiHomePage.goToEditPage();
-    if ($(ELEMENT_SOURCE_EDITOR_BUTTON).isDisplayed()) {
-      wikiManagement.goToSourceEditor();
-    }
     String newTitle = "newTitle" + getRandomNumber();
     String newContent = "newContent" + getRandomNumber();
-    sourceTextEditor.editSimplePage(newTitle, newContent);
+    homePagePlatform.goToMySpacesTribe();
+    tribeSpaceManagement.addNewSpaceSimple(space, space, 6000);
+    info("Create a wiki page");
+    String title = "title" + getRandomNumber();
+    String content = "content" + getRandomNumber();
+    spaceHomePage.goToWikiTab();
+    tribeWikiHomePage.goToAddBlankPage();
+    wikiManagement.goToSourceEditor();
+    tribeSourceTextEditor.addSimplePage(title, content);
     wikiManagement.saveAddPage();
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    wikiValidattions.verifyTitleWikiPage(title);
+    info("Check the Activity");
+    homePagePlatform.goToStreamPageTribe();
+    activityStream.checkActivity(title);
+    info("Edit wiki page");
+    tribeWikiHomePage.goToAPage(title);
+    wikiHomePage.goToEditPage();
+    tribeSourceTextEditor.editSimplePage(newTitle, newContent);
+    wikiManagement.saveAddPage();
+    getExoWebDriver().getWebDriver().navigate().refresh();
     wikiValidattions.verifyTitleWikiPage(newTitle);
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
+    homePagePlatform.goToMySpacesTribe();
+    spaceManagement.searchSpace(space);
+    spaceManagement.accessToSearchedSpace();
+    spaceHomePage.goToWikiTab();
+    tribeWikiHomePage.deleteWiki(newTitle);
+    wikiValidattions.verifyWikiPageNotDisplayedInWikiHome(newTitle);
+    homePagePlatform.goToStreamPageTribe();
+    homePagePlatform.goToMySpacesTribe();
+    tribeSpaceManagement.deleteSpace(space, false);
 
   }
+
 }

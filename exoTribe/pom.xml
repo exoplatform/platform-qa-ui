@@ -40,6 +40,11 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>platform-qa-ui-wiki</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.exoplatform.platform.qa.ui</groupId>
             <artifactId>platform-qa-ui-ecms</artifactId>
             <version>1.0.x-SNAPSHOT</version>

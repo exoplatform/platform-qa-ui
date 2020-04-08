@@ -12,8 +12,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_CALENDAR_WORKING_PANEL;
-import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU;
-import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.GO_TO_SPACES_TRIBE_BTN;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ADDNEWSPACE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
@@ -80,6 +79,16 @@ public class HomePagePlatform {
   }
 
   /**
+   * Go to Home page Tribe
+   */
+  public void goToStreamPageTribe() {
+    info("Click on Home page");
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_STREAM_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+  }
+
+
+  /**
    * Go to Home Calendar Page
    */
   public void goToCalendarPage() {
@@ -110,7 +119,7 @@ public class HomePagePlatform {
   public void goToMySpacesTribe() {
     info("-- Go to my spaces --");
     ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    GO_TO_SPACES_TRIBE_BTN.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    GO_TO_SPACES_TRIBE_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
