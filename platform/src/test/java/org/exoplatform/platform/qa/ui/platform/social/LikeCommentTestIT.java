@@ -11,6 +11,8 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
+
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -68,17 +70,38 @@ public class LikeCommentTestIT extends Base {
      manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
   }
 
-
   @Test
-  public void test02_CheckNumberWhenUserLikeComment() {
+  public void test01_checkNumberWhenUserLikeThenUnlikeComment() {
     String activity1 = "activity1" + getRandomNumber();
+    String activity2 = "activity2" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
+    String comment1 = " likes your comment.";
+    String comment2 = "comment2" + getRandomNumber();
+    String comment4 = " like your comment.";
+
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
+    activityStream.addActivity(activity2, "");
+    info("Like Comment After Preview Document");
+    String id = $(byText(activity2)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment2 + "\")", "");
+    ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.openBrowserTimeoutMs).click();
+    $(byText(comment2)).should(Condition.exist);
+    $(byText(comment2)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byText(comment2)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).parent().parent().shouldHave(Condition.text("(1)"));
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     homePagePlatform.goToConnections();
     connectionsManagement.connectToAUser(DATA_USER2);
     connectionsManagement.connectToAUser(DATA_USER3);
     connectionsManagement.connectToAUser(DATA_USER4);
     homePagePlatform.goToHomePage();
     activityStream.addActivity(activity1, "");
+    // get the id of activity created
     activityStream.commentActivity(activity1, comment);
     String idBlocComment = $(byText(activity1)).parent()
                                                .parent()
@@ -96,318 +119,289 @@ public class LikeCommentTestIT extends Base {
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).hover();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment2)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    info("Check Notification When One User Likes Comment");
+    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    ELEMENT_ICON_NOTIFICATION.click();
+    Assert.assertEquals(ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs)
+            .find(byText(comment))
+            .parent()
+            .parent()
+            .getText(),DATA_NAME_USER2 +" likes your comment.\n" + comment + "\nJust Now");
+    info("Check Notification When One User Likes Comment In Document Previw");
+    ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
+            .find(byText(comment2))
+            .parent()
+            .parent()
+            .shouldHave(Condition.text(DATA_NAME_USER2 + comment1));
+    ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
+            .find(byText(DATA_NAME_USER2))
+            .parent()
+            .parent()
+            .find(byText(comment2))
+            .should(Condition.exist);
+    info("Check Full Name Of User Is Displayed");
+    homePagePlatform.refreshUntil($(ELEMENT_ACCOUNT_NAME_LINK),Condition.visible,1000);
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().find(byText("(1)")).hover();
+    ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.find(byText("Mary Williams")).should(Condition.exist);
 
     manageLogInOut.signIn(PLFData.DATA_USER3, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
-
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).hover();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment2)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+    info("Check Notification When Two Users Like Comment");
+    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_ICON_NOTIFICATION.click();
+    ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
+            .find(byText(comment))
+            .parent()
+            .parent()
+            .shouldHave(Condition.text(DATA_NAME_USER3 + " and " + DATA_NAME_USER2 + comment4));
+    info("Check Notification When Two Users Like Comment In Document Previw");
+    ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
+            .find(byText(comment2))
+            .parent()
+            .parent()
+            .shouldHave(Condition.text(DATA_NAME_USER3 + " and " + DATA_NAME_USER2 + comment4));
     manageLogInOut.signIn(PLFData.DATA_USER4, PLFData.DATA_PASS);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
     activityStream.likeUnlikeComment(activity1, comment);
-
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).hover();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment2)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+    info("Check Notification When Many Users Like Comment");
+    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    ELEMENT_ICON_NOTIFICATION.click();
+    Assert.assertEquals(ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs)
+            .find(byText(comment))
+            .parent()
+            .parent()
+            .getText(),DATA_NAME_USER4 + ", " + DATA_NAME_USER3 + " and 1 others like your comment.\n" + comment + "\nJust Now");
+    info("Check Notification When Many Users Like Comment In Document Previw");
+    ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
+            .find(byText(comment2))
+            .parent()
+            .parent()
+            .shouldHave(Condition.text(DATA_NAME_USER4 + ", " + DATA_NAME_USER3 + " and 1 others like your comment.\n" + comment2 + "\nJust Now"));
+    Assert.assertEquals(ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs)
+            .find(byText(comment2))
+            .parent()
+            .parent()
+            .getText(),DATA_NAME_USER4 + ", " + DATA_NAME_USER3 + " and 1 others like your comment.\n" + comment2 + "\nJust Now");
+    info("Check List Of Users Who Like Comment Ordered By The Most Recent Like");
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().shouldHave(Condition.text("(3)"));
-    activityStream.deleteactivity(activity1);
-
-
-  }
-
-  @Test
-  public void test03_CheckNumberWhenUserUnLikeComment() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER2);
-    connectionsManagement.connectToAUser(DATA_USER3);
-    connectionsManagement.connectToAUser(DATA_USER4);
-    homePagePlatform.goToHomePage();
-    activityStream.addActivity(activity1, ""); // get the id of activity created
-    activityStream.commentActivity(activity1, comment);
-    String idBlocComment = $(byText(activity1)).parent()
-                                               .parent()
-                                               .parent()
-                                               .find(byText(comment))
-                                               .parent()
-                                               .parent()
-                                               .parent()
-                                               .parent()
-                                               .getAttribute("id")
-                                               .split("commentContainercomment")[1];
-
-    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    activityStream.likeUnlikeComment(activity1, comment);
-
-    manageLogInOut.signIn(PLFData.DATA_USER3, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    activityStream.likeUnlikeComment(activity1, comment);
-
-    manageLogInOut.signIn(PLFData.DATA_USER4, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    activityStream.likeUnlikeComment(activity1, comment);
-
-    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
-    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().shouldHave(Condition.text("(3)"));
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().find(byText("(3)")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Jack Miller")).should(Condition.exist);
+    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("James David")).should(Condition.exist);
+    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Mary Williams")).should(Condition.exist);
+    info("Check Connexion Status Button Of Users Like Comment");
+    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Jack Miller"))
+            .parent()
+            .parent()
+            .find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT)
+            .shouldHave(Condition.text("Remove Connection"));
+    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("James David"))
+            .parent()
+            .parent()
+            .find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT)
+            .shouldHave(Condition.text("Remove Connection"));
+    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Mary Williams"))
+            .parent()
+            .parent()
+            .find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT)
+            .shouldHave(Condition.text("Remove Connection"));
+    ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     // connect with user 4 and unlike comment
     manageLogInOut.signIn(PLFData.DATA_USER4, PLFData.DATA_PASS);
     activityStream.likeUnlikeComment(activity1, comment);
     manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
+    info("Check Number Of Users Comment Likes After Preview Document");
     $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().shouldHave(Condition.text("(2)"));
-    activityStream.deleteactivity(activity1);
-
-
-  }
-
-  @Test
-  public void test04_CheckListOfUsersWhoLikeComment() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER2);
-    connectionsManagement.connectToAUser(DATA_USER3);
-    connectionsManagement.connectToAUser(DATA_USER4);
-    homePagePlatform.goToHomePage();
-    activityStream.addActivity(activity1, ""); // get the id of activity created
-    activityStream.commentActivity(activity1, comment);
-    String idBlocComment = $(byText(activity1)).parent()
-                                               .parent()
-                                               .parent()
-                                               .find(byText(comment))
-                                               .parent()
-                                               .parent()
-                                               .parent()
-                                               .parent()
-                                               .getAttribute("id")
-                                               .split("commentContainercomment")[1];
-
-    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    activityStream.likeUnlikeComment(activity1, comment);
-
-    manageLogInOut.signIn(PLFData.DATA_USER3, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    activityStream.likeUnlikeComment(activity1, comment);
-
-    manageLogInOut.signIn(PLFData.DATA_USER4, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    activityStream.likeUnlikeComment(activity1, comment);
-
-    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
-    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().find(byText("(3)")).click();
-    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Jack Miller")).should(Condition.exist);
-    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("James David")).should(Condition.exist);
-    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Mary Williams")).should(Condition.exist);
-    ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.click();
-    executeJavaScript("window.scrollBy(0,-950)", "");
-    activityStream.deleteactivity(activity1);
-
-  }
-
-  @Test
-  public void test05_DisplayListOfUsersOrderedByTheMostRecentLike() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER2);
-    connectionsManagement.connectToAUser(DATA_USER3);
-    connectionsManagement.connectToAUser(DATA_USER4);
-    homePagePlatform.goToHomePage();
-    activityStream.addActivity(activity1, ""); // get the id of activity created
-    activityStream.commentActivity(activity1, comment);
-    String idBlocComment = $(byText(activity1)).parent()
-                                               .parent()
-                                               .parent()
-                                               .find(byText(comment))
-                                               .parent()
-                                               .parent()
-                                               .parent()
-                                               .parent()
-                                               .getAttribute("id")
-                                               .split("commentContainercomment")[1];
-
-    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    activityStream.likeUnlikeComment(activity1, comment);
-
-    manageLogInOut.signIn(PLFData.DATA_USER3, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    activityStream.likeUnlikeComment(activity1, comment);
-
-    manageLogInOut.signIn(PLFData.DATA_USER4, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    activityStream.likeUnlikeComment(activity1, comment);
-
-    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
-    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().find(byText("(3)")).click();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    info("Display List Of Users Ordered By The Most Recent Like After Preview Document");
+    $(byId(ELEMENT_INCON_LIKE_COMMENT_PREVIEW.replace("{id}", String.valueOf(Integer.parseInt(id) +1) ))).shouldHave(Condition.text("(4)"));
+    $(byId(ELEMENT_INCON_LIKE_COMMENT_PREVIEW.replace("{id}", String.valueOf(Integer.parseInt(id) +1) ))).shouldHave(Condition.text("(4)")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_FIRST_USER_IN_POPUP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Jack Miller"));
     ELEMENT_SECOND_USER_IN_POPUP_WHO_LIKE_COMMENT.shouldHave(Condition.text("James David"));
     ELEMENT_THIRD_USER_IN_POPUP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Mary Williams"));
-    ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.click();
-    executeJavaScript("window.scrollBy(0,-950)", "");
-    activityStream.deleteactivity(activity1);
+    ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
-
-  }
-
-  @Test
-  public void test06_CheckConnexionStatusButtonOfUsersLikeComment() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER2);
-    connectionsManagement.connectToAUser(DATA_USER3);
-    connectionsManagement.connectToAUser(DATA_USER4);
-    homePagePlatform.goToHomePage();
-    activityStream.addActivity(activity1, ""); // get the id of activity created
-    activityStream.commentActivity(activity1, comment);
-    String idBlocComment = $(byText(activity1)).parent()
-                                               .parent()
-                                               .parent()
-                                               .find(byText(comment))
-                                               .parent()
-                                               .parent()
-                                               .parent()
-                                               .parent()
-                                               .getAttribute("id")
-                                               .split("commentContainercomment")[1];
-
-    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    activityStream.likeUnlikeComment(activity1, comment);
-
-    manageLogInOut.signIn(PLFData.DATA_USER3, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    activityStream.likeUnlikeComment(activity1, comment);
-
-    manageLogInOut.signIn(PLFData.DATA_USER4, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    activityStream.likeUnlikeComment(activity1, comment);
-
-    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
-    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().find(byText("(3)")).click();
-    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Jack Miller"))
-                                   .parent()
-                                   .parent()
-                                   .find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT)
-                                   .shouldHave(Condition.text("Remove Connection"));
+    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).hover();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment2)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    info("Check Number Of Users Comment Unlikes After Preview Document");
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().shouldHave(Condition.text("(2)"));
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    info("Check Connection Status After Preview Document");
+    $(byId(ELEMENT_INCON_LIKE_COMMENT_PREVIEW.replace("{id}", String.valueOf(Integer.parseInt(id) +1) ))).shouldHave(Condition.text("(3)"));
+    $(byId(ELEMENT_INCON_LIKE_COMMENT_PREVIEW.replace("{id}", String.valueOf(Integer.parseInt(id) +1) ))).shouldHave(Condition.text("(3)")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("James David"))
-                                   .parent()
-                                   .parent()
-                                   .find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT)
-                                   .shouldHave(Condition.text("Remove Connection"));
+            .parent()
+            .parent()
+            .find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT)
+            .shouldHave(Condition.text("Remove Connection"));
     ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Mary Williams"))
-                                   .parent()
-                                   .parent()
-                                   .find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT)
-                                   .shouldHave(Condition.text("Remove Connection"));
-    ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.click();
-    executeJavaScript("window.scrollBy(0,-950)", "");
+            .parent()
+            .parent()
+            .find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT)
+            .shouldHave(Condition.text("Remove Connection"));
+    ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    homePagePlatform.goToHomePage();
     activityStream.deleteactivity(activity1);
-
+    activityStream.deleteactivity(activity2);
 
   }
 
   @Test
   @Tag("sabis")
-  public void test07_CheckConnexionStatusButtonOfUsersLikeCommentInSpace() {
-
-    String space = "space" + getRandomNumber();
+  public void test02_checkConnectionStatusAfterPreviewDocumentAndStatusButtonOfUsersCommentLikesInSpace() {
     String activity1 = "activity1" + getRandomNumber();
+    String activity2 = "activity2" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
-    info("Create a space and invite users");
+    String comment2 = "comment2" + getRandomNumber();
+    String space = "space" + getRandomNumber();
+
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
+    $(byXpath("//*[@class='uidocactivitycomposer']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    refresh();
+    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
+    activityStream.addActivity(activity2, "");
+    String id = $(byText(activity2)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
+    executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment2 + "\")", "");
+    ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.openBrowserTimeoutMs).click();
+    $(byText(comment2)).should(Condition.exist);
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    executeJavaScript("window.scrollBy(0,-2000)", "");
     spaceSettingManagement.goToMemberTab();
     ELEMENT_INPUT_INVITE_USER.sendKeys(DATA_USER2);
-    $(ELEMENT_SPACE_BTN_INVITE).click();
+    $(ELEMENT_SPACE_BTN_INVITE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     refresh();
     ELEMENT_INPUT_INVITE_USER.sendKeys(DATA_USER3);
-    $(ELEMENT_SPACE_BTN_INVITE).click();
+    $(ELEMENT_SPACE_BTN_INVITE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     refresh();
     ELEMENT_INPUT_INVITE_USER.sendKeys(DATA_USER4);
-    $(ELEMENT_SPACE_BTN_INVITE).click();
+    $(ELEMENT_SPACE_BTN_INVITE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    homePagePlatform.goToSpecificSpace(space);
     spaceManagement.goToActivityStreamTab();
     activityStream.addActivity(activity1, "");
     activityStream.commentActivity(activity1, comment);
     executeJavaScript("window.scrollBy(0,-550)", "");
     String idBlocComment = $(byText(activity1)).parent()
-                                               .parent()
-                                               .parent()
-                                               .find(byText(comment))
-                                               .parent()
-                                               .parent()
-                                               .parent()
-                                               .parent()
-                                               .getAttribute("id")
-                                               .split("commentContainercomment")[1];
+            .parent()
+            .parent()
+            .find(byText(comment))
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .getAttribute("id")
+            .split("commentContainercomment")[1];
 
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.goToInvitationsReceivedTab();
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
+    homePagePlatform.goToAllSpace();
     spaceManagement.acceptAInvitation(space);
     activityStream.likeUnlikeComment(activity1, comment);
-    manageLogInOut.signIn(DATA_USER3, DATA_PASS);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.goToInvitationsReceivedTab();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).hover();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment2)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
+    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
+    homePagePlatform.goToAllSpace();
+    spaceManagement.acceptAInvitation(space);
+    executeJavaScript("window.scrollBy(0,300)", "");
+    activityStream.likeUnlikeComment(activity1, comment);
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).hover();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment2)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
+    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
+    homePagePlatform.goToAllSpace();
     spaceManagement.acceptAInvitation(space);
     activityStream.likeUnlikeComment(activity1, comment);
-    manageLogInOut.signIn(DATA_USER4, DATA_PASS);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.goToInvitationsReceivedTab();
-    spaceManagement.acceptAInvitation(space);
-    activityStream.likeUnlikeComment(activity1, comment);
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).hover();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment2)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    homePagePlatform.goToMySpaces();
-    ELEMENT_SPACES_LIST.find(byText(space)).click();
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
-    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().find(byText("(3)")).click();
+    info("Check Connection Status After Preview Document");
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).hover();
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment2))
+            .parent()
+            .parent()
+            .find(ELEMENT_ICON_LIKE_COMMENT)
+            .parent()
+            .parent()
+            .find(byText("(3)"))
+            .click();
     ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Jack Miller"))
-                                   .parent()
-                                   .parent()
-                                   .find(byClassName("uiActionLike"))
-                                   .shouldHave(Condition.text("Connect"));
+            .parent()
+            .parent()
+            .find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT)
+            .shouldHave(Condition.text("Connect"));
     ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("James David"))
-                                   .parent()
-                                   .parent()
-                                   .find(byClassName("uiActionLike"))
-                                   .shouldHave(Condition.text("Connect"));
+            .parent()
+            .parent()
+            .find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT)
+            .shouldHave(Condition.text("Connect"));
     ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Mary Williams"))
-                                   .parent()
-                                   .parent()
-                                   .find(byClassName("uiActionLike"))
-                                   .shouldHave(Condition.text("Connect"));
-    ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.click();
+            .parent()
+            .parent()
+            .find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT)
+            .shouldHave(Condition.text("Connect"));
+    ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    executeJavaScript("window.scrollBy(0,-2000)", "");
+    info("Check Connexion Status Button Of Users Comment Likes In Space");
+    homePagePlatform.goToSpecificSpace(space);
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().shouldHave(Condition.text("(3)"));
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().find(byText("(3)")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Jack Miller"))
+            .parent()
+            .parent()
+            .find(byClassName("uiActionLike"))
+            .shouldHave(Condition.text("Connect"));
+    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("James David"))
+            .parent()
+            .parent()
+            .find(byClassName("uiActionLike"))
+            .shouldHave(Condition.text("Connect"));
+    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Mary Williams"))
+            .parent()
+            .parent()
+            .find(byClassName("uiActionLike"))
+            .shouldHave(Condition.text("Connect"));
+    ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
 
@@ -415,7 +409,7 @@ public class LikeCommentTestIT extends Base {
 
   @Test
   @Tag("sabis")
-  public void test08_checkListOfUsersInToolTipWhen11UsersLikeComment() {
+  public void test03_checkListOfUsersInToolTipWhen11UsersLikeComment() {
     String space = "space" + getRandomNumber();
     String activity1 = "activity1" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
@@ -610,832 +604,4 @@ public class LikeCommentTestIT extends Base {
     addUsers.deleteUser(username11);
   }
 
-  @Test
-  public void test09_checkFullNameOfUserIsDisplayed() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER2);
-    homePagePlatform.goToHomePage();
-    activityStream.addActivity(activity1, ""); // get the id of activity created
-    activityStream.commentActivity(activity1, comment);
-    String idBlocComment = $(byText(activity1)).parent()
-                                               .parent()
-                                               .parent()
-                                               .find(byText(comment))
-                                               .parent()
-                                               .parent()
-                                               .parent()
-                                               .parent()
-                                               .getAttribute("id")
-                                               .split("commentContainercomment")[1];
-    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    activityStream.likeUnlikeComment(activity1, comment);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    homePagePlatform.refreshUntil($(ELEMENT_ACCOUNT_NAME_LINK),Condition.visible,1000);
-    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().find(byText("(1)")).hover();
-    ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.find(byText("Mary Williams")).should(Condition.exist);
-    activityStream.deleteactivity(activity1);
-  }
-
-  @Test
-  public void test10_likeComentAfterPreviewDocument() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
-    refresh();
-    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.timeout);
-    ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-    activityStream.addActivity(activity1, "");
-    String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
-    executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
-    ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
-    $(byText(comment)).should(Condition.exist);
-    $(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    $(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).parent().parent().shouldHave(Condition.text("(1)"));
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-    activityStream.deleteactivity(activity1);
-  }
-
-  @Test
-  public void test11_CheckNumberOfUserslikeComentAfterPreviewDocument() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-
-    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
-    refresh();
-    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
-    ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-    activityStream.addActivity(activity1, "");
-    String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
-    executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
-    ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
-    $(byText(comment)).should(Condition.exist);
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER2);
-    connectionsManagement.connectToAUser(DATA_USER3);
-    connectionsManagement.connectToAUser(DATA_USER4);
-
-    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment))
-                                                     .parent()
-                                                     .parent()
-                                                     .find(ELEMENT_ICON_LIKE_COMMENT)
-                                                     .click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment))
-                                                .parent()
-                                                .parent()
-                                                .find(ELEMENT_ICON_LIKE_COMMENT)
-                                                .parent()
-                                                .parent()
-                                                .shouldHave(Condition.text("(3)"));
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-    activityStream.deleteactivity(activity1);
-
-  }
-
-  @Test
-  public void test12_CheckNumberOfUsersUnlikeComentAfterPreviewDocument() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-
-    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
-    refresh();
-    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
-    ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-    activityStream.addActivity(activity1, "");
-    String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
-    executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
-    ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
-    $(byText(comment)).should(Condition.exist);
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER2);
-    connectionsManagement.connectToAUser(DATA_USER3);
-    connectionsManagement.connectToAUser(DATA_USER4);
-
-    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment))
-                                                .parent()
-                                                .parent()
-                                                .find(ELEMENT_ICON_LIKE_COMMENT)
-                                                .parent()
-                                                .parent()
-                                                .shouldHave(Condition.text("(3)"));
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment))
-                                                .parent()
-                                                .parent()
-                                                .find(ELEMENT_ICON_LIKE_COMMENT)
-                                                .parent()
-                                                .parent()
-                                                .shouldHave(Condition.text("(2)"));
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-    activityStream.deleteactivity(activity1);
-    refresh();
-  }
-
-  @Test
-  public void test13_CheckListOfUserslikeComentAfterPreviewDocument() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-
-    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
-    refresh();
-    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
-    ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-    activityStream.addActivity(activity1, "");
-    String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
-    executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
-    ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
-    $(byText(comment)).should(Condition.exist);
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER2);
-    connectionsManagement.connectToAUser(DATA_USER3);
-    connectionsManagement.connectToAUser(DATA_USER4);
-
-    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment))
-                                                .parent()
-                                                .parent()
-                                                .find(ELEMENT_ICON_LIKE_COMMENT)
-                                                .parent()
-                                                .parent()
-                                                .find(byText("(3)"))
-                                                .click();
-    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Jack Miller")).should(Condition.exist);
-    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("James David")).should(Condition.exist);
-    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Mary Williams")).should(Condition.exist);
-    ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-    activityStream.deleteactivity(activity1);
-
-  }
-
-  @Test
-  public void test14_DisplayListOfUsersOrderedByTheMostRecentLikeAfterPreviewDocument() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-
-    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
-    refresh();
-    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
-    ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-    activityStream.addActivity(activity1, "");
-    String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
-    executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
-    ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
-    $(byText(comment)).should(Condition.exist);
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER2);
-    connectionsManagement.connectToAUser(DATA_USER3);
-    connectionsManagement.connectToAUser(DATA_USER4);
-
-    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment))
-                                                .parent()
-                                                .parent()
-                                                .find(ELEMENT_ICON_LIKE_COMMENT)
-                                                .parent()
-                                                .parent()
-                                                .find(byText("(3)"))
-                                                .click();
-    ELEMENT_FIRST_USER_IN_POPUP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Jack Miller"));
-    ELEMENT_SECOND_USER_IN_POPUP_WHO_LIKE_COMMENT.shouldHave(Condition.text("James David"));
-    ELEMENT_THIRD_USER_IN_POPUP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Mary Williams"));
-    ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-    activityStream.deleteactivity(activity1);
-  }
-
-  @Test
-  public void test15_CheckConnectionStatusAfterPreviewDocument() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-
-    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
-    refresh();
-    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
-    ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-    activityStream.addActivity(activity1, "");
-    String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
-    executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
-    ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
-    $(byText(comment)).should(Condition.exist);
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER2);
-    connectionsManagement.connectToAUser(DATA_USER3);
-    connectionsManagement.connectToAUser(DATA_USER4);
-
-    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment))
-                                                .parent()
-                                                .parent()
-                                                .find(ELEMENT_ICON_LIKE_COMMENT)
-                                                .parent()
-                                                .parent()
-                                                .find(byText("(3)"))
-                                                .click();
-    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Jack Miller"))
-                                   .parent()
-                                   .parent()
-                                   .find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT)
-                                   .shouldHave(Condition.text("Remove Connection"));
-    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("James David"))
-                                   .parent()
-                                   .parent()
-                                   .find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT)
-                                   .shouldHave(Condition.text("Remove Connection"));
-    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Mary Williams"))
-                                   .parent()
-                                   .parent()
-                                   .find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT)
-                                   .shouldHave(Condition.text("Remove Connection"));
-    ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-    activityStream.deleteactivity(activity1);
-  }
-
-  @Test
-  @Tag("sabis")
-  public void test16_CheckConnectionStatusAfterPreviewDocumentInspace() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-    String space = "space" + getRandomNumber();
-
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
-    $(byXpath("//*[@class='uidocactivitycomposer']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.openBrowserTimeoutMs);
-    //ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-    activityStream.addActivity(activity1, "");
-    String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
-    executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
-    ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
-    $(byText(comment)).should(Condition.exist);
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-    executeJavaScript("window.scrollBy(0,-2000)", "");
-    spaceSettingManagement.goToMemberTab();
-    ELEMENT_INPUT_INVITE_USER.sendKeys(DATA_USER2);
-    $(ELEMENT_SPACE_BTN_INVITE).click();
-    refresh();
-    ELEMENT_INPUT_INVITE_USER.sendKeys(DATA_USER3);
-    $(ELEMENT_SPACE_BTN_INVITE).click();
-    refresh();
-    ELEMENT_INPUT_INVITE_USER.sendKeys(DATA_USER4);
-    $(ELEMENT_SPACE_BTN_INVITE).click();
-
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER2);
-    connectionsManagement.connectToAUser(DATA_USER3);
-
-    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment))
-                                                .parent()
-                                                .parent()
-                                                .find(ELEMENT_ICON_LIKE_COMMENT)
-                                                .parent()
-                                                .parent()
-                                                .find(byText("(3)"))
-                                                .click();
-    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Jack Miller"))
-                                   .parent()
-                                   .parent()
-                                   .find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT)
-                                   .shouldHave(Condition.text("Connect"));
-    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("James David"))
-                                   .parent()
-                                   .parent()
-                                   .find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT)
-                                   .shouldHave(Condition.text("Remove Connection"));
-    ELEMENT_POPUP_WHO_LIKED_COMMENT.find(byText("Mary Williams"))
-                                   .parent()
-                                   .parent()
-                                   .find(ELEMENT_BUTTON_IN_POPUP_WHO_LIKE_COMMENT)
-                                   .shouldHave(Condition.text("Remove Connection"));
-    ELEMENT_ICON_CLONE_POPUP_WHO_LIKED_COMMENT.click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-    executeJavaScript("window.scrollBy(0,-2000)", "");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space, false);
-
-  }
-
-  @Test
-  public void test17_checkNotificationWhenOneUserLikeComment() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-    String comment1 = " likes your comment.";
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER2);
-    homePagePlatform.goToHomePage();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment);
-    String idBlocComment = $(byText(activity1)).parent()
-                                               .parent()
-                                               .parent()
-                                               .find(byText(comment))
-                                               .parent()
-                                               .parent()
-                                               .parent()
-                                               .parent()
-                                               .getAttribute("id")
-                                               .split("commentContainercomment")[1];
-    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    activityStream.likeUnlikeComment(activity1, comment);
-    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
-    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears, Configuration.timeout);
-    ELEMENT_ICON_NOTIFICATION.click();
-    ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
-                              .find(byText(comment))
-                              .parent()
-                              .parent()
-                              .shouldHave(Condition.text(DATA_NAME_USER2 + comment1));
-    ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
-                              .find(byText(DATA_NAME_USER2))
-                              .parent()
-                              .parent()
-                              .find(byText(comment))
-                              .should(Condition.exist);
-    refresh();
-    activityStream.deleteactivity(activity1);
-
-  }
-
-  @Test
-  public void test18_checkNotificationWhenTWOUserLikeComment() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-    String comment1 = " like your comment.";
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER2);
-    connectionsManagement.connectToAUser(DATA_USER3);
-    homePagePlatform.goToHomePage();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment);
-    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    activityStream.likeUnlikeComment(activity1, comment);
-    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    activityStream.likeUnlikeComment(activity1, comment);
-    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
-    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears, Configuration.timeout);
-    ELEMENT_ICON_NOTIFICATION.click();
-    ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
-                              .find(byText(comment))
-                              .parent()
-                              .parent()
-                              .shouldHave(Condition.text("James David" + " and " + DATA_NAME_USER2 + comment1));
-    ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
-                              .find(byText(DATA_NAME_USER2))
-                              .parent()
-                              .parent()
-                              .find(byText(comment))
-                              .should(Condition.exist);
-    activityStream.deleteactivity(activity1);
-  }
-
-  @Test
-  public void test19_checkNotificationWhenManyUserLikeComment() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-    String comment1 = " and 1 others like your comment.";
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER2);
-    connectionsManagement.connectToAUser(DATA_USER3);
-    connectionsManagement.connectToAUser(DATA_USER4);
-    homePagePlatform.goToHomePage();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment);
-    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    activityStream.likeUnlikeComment(activity1, comment);
-    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    activityStream.likeUnlikeComment(activity1, comment);
-    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    activityStream.likeUnlikeComment(activity1, comment);
-    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
-    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears, Configuration.timeout);
-    ELEMENT_ICON_NOTIFICATION.click();
-    ELEMENT_NOTIFICATION_POPUP.find(byText(comment))
-                              .parent()
-                              .parent()
-                              .shouldHave(Condition.text(DATA_NAME_USER4 + ", James David" + comment1));
-    ELEMENT_ICON_NOTIFICATION.click();
-    activityStream.deleteactivity(activity1);
-  }
-
-  @Test
-  public void test20_checkNotificationWhenOneUserLikeCommentInDocumentPreviw() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-    String comment1 = " likes your comment.";
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER2);
-    homePagePlatform.goToHomePage();
-    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
-    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
-    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
-    ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-    activityStream.addActivity(activity1, "");
-    String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
-    executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
-
-    ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
-    $(byText(comment)).should(Condition.exist);
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
-    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears, Configuration.timeout);
-    ELEMENT_ICON_NOTIFICATION.click();
-    ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
-                              .find(byText(comment))
-                              .parent()
-                              .parent()
-                              .shouldHave(Condition.text(DATA_NAME_USER2 + comment1));
-    ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
-                              .find(byText(DATA_NAME_USER2))
-                              .parent()
-                              .parent()
-                              .find(byText(comment))
-                              .should(Condition.exist);
-    activityStream.deleteactivity(activity1);
-  }
-
-  @Test
-  public void test21_checkNotificationWhenTWOUserLikeCommentInDocumentPreviw() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-    String comment1 = " like your comment.";
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER2);
-    connectionsManagement.connectToAUser(DATA_USER3);
-    homePagePlatform.goToHomePage();
-    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
-    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
-    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
-    ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-    activityStream.addActivity(activity1, "");
-    String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
-    executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
-    ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
-    $(byText(comment)).should(Condition.exist);
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible, Configuration.timeout).click();
-
-    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible, Configuration.timeout).click();
-
-    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible, Configuration.timeout).click();
-
-    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
-    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears, Configuration.timeout);
-    ELEMENT_ICON_NOTIFICATION.click();
-    ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
-                              .find(byText(comment))
-                              .parent()
-                              .parent()
-                              .shouldHave(Condition.text("James David" + " and " + DATA_NAME_USER2 + comment1));
-    ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
-                              .find(byText(DATA_NAME_USER2))
-                              .parent()
-                              .parent()
-                              .find(byText(comment))
-                              .should(Condition.exist);
-    refresh();
-    activityStream.deleteactivity(activity1);
-
-  }
-
-  @Test
-  public void test22_checkNotificationWhenManyUserLikeCommentInDocumentPreviw() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-    String comment1 = " and 1 others like your comment.";
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(DATA_USER2);
-    connectionsManagement.connectToAUser(DATA_USER3);
-    connectionsManagement.connectToAUser(DATA_USER4);
-    homePagePlatform.goToHomePage();
-    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
-    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
-    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
-    ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
-    ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
-    activityStream.addActivity(activity1, "");
-    String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_INPUT_COMMENT_IN_DOCUMENT_PREVIEW.click();
-    executeJavaScript("CKEDITOR.instances.commentInput. insertText(\"" + comment + "\")", "");
-    ELEMENT_BUTTON_COMMENT_IN_DOCUMENT_PREVIEW.waitUntil(Condition.enabled, Configuration.timeout).click();
-    $(byText(comment)).should(Condition.exist);
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER3, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(DATA_USER4, PLFData.DATA_PASS);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-    homePagePlatform.goToHomePage();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).hover();
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile")).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_RIGHT_NAVIGATION_IN_DOCUMENT_PREVIEW.find(byText(comment)).parent().parent().find(ELEMENT_ICON_LIKE_COMMENT).click();
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
-
-    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
-    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.appears, Configuration.timeout);
-    ELEMENT_ICON_NOTIFICATION.click();
-    ELEMENT_NOTIFICATION_POPUP.waitUntil(Condition.appears, Configuration.timeout)
-                              .find(byText(comment))
-                              .parent()
-                              .parent()
-                              .shouldHave(Condition.text(DATA_NAME_USER4 + ", James David" + comment1));
-    ELEMENT_ICON_NOTIFICATION.click();
-    activityStream.deleteactivity(activity1);
-
-  }
 }

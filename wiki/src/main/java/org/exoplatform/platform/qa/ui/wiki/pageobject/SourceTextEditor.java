@@ -47,14 +47,12 @@ public class SourceTextEditor {
       do {
         //refresh();
         testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-        sleep(2000);
       }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
     }
-    $(ELEMENT_TITLE_WIKI_INPUT).setValue(title);
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(title);
 
     info("Input a content for the page");
-    sleep(Configuration.timeout);
-    $(ELEMENT_CONTENT_WIKI_INPUT).setValue(content);
+    $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(content);
   }
 
   /**
@@ -94,17 +92,16 @@ public class SourceTextEditor {
       do {
         //refresh();
         testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-        sleep(2000);
       }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
     }
     String[] text;
     if (!title.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).setValue(title);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(title);
     info("Input a content for the page");
     if (!content.isEmpty()) {
       text = content.split("</br>");
       for (int i = 0; i < text.length; i++) {
-        $(ELEMENT_CONTENT_WIKI_INPUT).setValue(content);
+        $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(content);
         $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible, Configuration.timeout).sendKeys(Keys.ENTER);
       }
     }
@@ -112,8 +109,8 @@ public class SourceTextEditor {
     $(ELEMENT_WIKI_PAGE_TOOL_BAR_AUTO_SAVE_TEXT).waitUntil(Condition.visible,31000);
 
     info("Cancel adding page");
-    $(ELEMENT_CANCEL_BUTTON_ADD_PAGE).click();
-    $(ELEMENT_CONFIRMATION_POPUP_YES_BTN).click();
+    $(ELEMENT_CANCEL_BUTTON_ADD_PAGE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_CONFIRMATION_POPUP_YES_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 
@@ -125,9 +122,12 @@ public class SourceTextEditor {
    */
   public void editSimplePage(String newTitle, String newContent) {
     info("Input a title for the page");
+
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.collectionsTimeout).clear();
     $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.collectionsTimeout).setValue(newTitle);
 
     info("Input a content for the page");
+    $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible,Configuration.collectionsTimeout).clear();
     $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible,Configuration.collectionsTimeout).sendKeys(newContent);
 
   }
@@ -142,12 +142,14 @@ public class SourceTextEditor {
     info("Input a title for the page");
     String[] text;
     if (!newTitle.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).setValue(newTitle);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible, Configuration.timeout).clear();
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible, Configuration.timeout).setValue(newTitle);
     info("Input a content for the page");
     if (!newContent.isEmpty()) {
       text = newContent.split("</br>");
       for (int i = 0; i < text.length; i++) {
-      $(ELEMENT_CONTENT_WIKI_INPUT).setValue(newContent);
+        $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible, Configuration.timeout).clear();
+        $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible, Configuration.timeout).setValue(newContent);
        $(ELEMENT_CONTENT_WIKI_INPUT).waitUntil(Condition.visible, Configuration.timeout).sendKeys(Keys.ENTER);
       }
     }
@@ -184,7 +186,7 @@ public class SourceTextEditor {
     WebElement elem = $(ELEMENT_UPLOAD_NAME);
     evt.scrollToElement(elem, testBase.getExoWebDriver().getWebDriver());
     $(byClassName("uploadInput")).find(byName("file")).uploadFromClasspath(link);
-    $(By.linkText(link.substring(link.lastIndexOf(fs) + 1))).waitUntil(Condition.visible,Configuration.timeout);
+    $(By.linkText(link.substring(link.lastIndexOf(fs) + 1))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
   }
 
 }

@@ -184,16 +184,15 @@ public class NavigationToolbar {
   public void goToSiteExplorer() {
     info("-- Go to site explorer home page --");
     if (testBase.getExoWebDriver().isIEDriver()) {
-      $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs + Configuration.timeout);
       $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     } else
-      $(ELEMENT_LINK_SETUP).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(ELEMENT_LINK_SETUP).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Element " + ELEMENT_MENU_CONTENT_LINK + "... is displayed");
-    sleep(Configuration.timeout);
     do {
       $(ELEMENT_MENU_CONTENT_LINK).hover();
     } while (!$(ELEMENT_MENU_SITE_EXPLORER).exists());
-    $(ELEMENT_MENU_SITE_EXPLORER).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_MENU_SITE_EXPLORER).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
     info("Site Explorer is shown successfully");
   }
 
@@ -463,12 +462,11 @@ public class NavigationToolbar {
   }
 
   public void goToManageCommunity() {
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.timeout);
-    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, 10000);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**

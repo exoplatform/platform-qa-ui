@@ -74,106 +74,6 @@ public class WikiBasicActionAddSourceEditorTestIT extends Base {
     }
 
     /**
-     * <li> Case ID:139406.</li>
-     * <li> Test Case Name: Add new page has the same title with existing page.</li>
-     * <li> Pre-Condition: </li>
-     * <li> Post-Condition: </li>
-     * Step Number: 1
-     * Step Name: Step 1: Open form to create new page
-     * Step Description:
-     * - Choose path to add new page
-     * - Click [Add Page]
-     * -
-     * -> [Blank Page]/[From Template...]
-     * - Select [Source Editor] to switch to [Source Editor] mode
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - By default, the [Create Wiki page] is displayed in the [Rich Text] mode
-     * - The page is switched to the [Source Editor] mode
-     * Step number: 2
-     * Step Name: Step 2: Create new page
-     * Step Description:
-     * - Put the title for this page has the same with existing pages
-     * - Put the content of page
-     * - Click [Save]
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * Show message alert that the page title is existing
-     */
-    @Test
-    public void test01_AddNewPageHasTheSameTitleWithExistingPage() {
-        info("Test 1: Add new page has the same title with existing page");
-        info("Create a wiki page");
-        String title = "title" + getRandomNumber();
-        String content = "content" + getRandomNumber();
-        homePagePlatform.goToWiki();
-        wikiHomePage.goToAddBlankPage();
-        wikiManagement.goToSourceEditor();
-        sourceTextEditor.addSimplePage(title, content);
-        wikiManagement.saveAddPage();
-        wikiValidattions.verifyTitleWikiPage(title);
-        info("Create a wiki page 2 with the same title");
-        String mess = "The page title already exists. Please select another one.";
-        homePagePlatform.goToWiki();
-        wikiHomePage.goToAddBlankPage();
-        sourceTextEditor.addSimplePage(title, content);
-        wikiManagement.savePage();
-        wikiValidattions.verifyWarningMessage(mess);
-        $(ELEMENT_OK_BUTTON_LINK).click();
-        homePagePlatform.goToWiki();
-        wikiHomePage.deleteWiki(title);
-
-    }
-
-    /**
-     * <li> Case ID:139407.</li>
-     * <li> Test Case Name: Add new page when content is blank.</li>
-     * <li> Pre-Condition: </li>
-     * <li> Post-Condition: </li>
-     * Step Number: 1
-     * Step Name: Step 1: Open form to create new page
-     * Step Description:
-     * - Choose path to add new page
-     * - Click [Add Page]
-     * -
-     * -> [Blank Page]/[From Template...]
-     * - Select [Source Editor] to switch to [Source Editor] mode
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - By default, the [Create Wiki page] is displayed in the [Rich Text] mode
-     * Step number: 2
-     * Step Name: Step 2: Create new page
-     * Step Description:
-     * - Put the title for this page
-     * - Leave the content blank
-     * - Click [Save]
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * New page is created successfully with blank content. It is displayed in the destination path
-     */
-    @Test
-    public void test02_AddNewPageWhenContentIsBlank() {
-        info("Test 2: Add new page when content is blank");
-
-        info("Create a wiki page");
-        String title = "title" + getRandomNumber();
-        homePagePlatform.goToWiki();
-        wikiHomePage.goToAddBlankPage();
-        wikiManagement.goToSourceEditor();
-        sourceTextEditor.addSimplePage(title, "");
-        wikiManagement.saveAddPage();
-        wikiValidattions.verifyTitleWikiPage(title);
-        info("Verify that the content of the page is empty");
-        wikiValidattions.verifyEmptyContentPage();
-        homePagePlatform.goToWiki();
-        wikiHomePage.deleteWiki(title);
-    }
-
-    /**
      * <li> Case ID:139408.</li>
      * <li> Test Case Name: Add new page when title is blank.</li>
      * <li> Pre-Condition: </li>
@@ -212,10 +112,20 @@ public class WikiBasicActionAddSourceEditorTestIT extends Base {
      * New page is created with name is "Untitled page."
      */
     @Test
-    public void test03_AddNewPageWhenTitleIsBlank() {
-        info("Test 3: Add new page when title is blank");
+    public void test03_AddNewPageWhenContentIsBlankThenWhenTitleIsBlankThenHasTheSameTitleWithExistingPageThenUsingBlankTemplateThenCancelCreateANewPageThenWhenUserDoesNotHaveAddPagePermissionOnSpace() {
+        info("Add new page when content is blank");
         info("Create a wiki page");
         String title = "Untitled";
+        String title1 = "title1" + getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.addSimplePage(title1, "");
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title1);
+        info("Verify that the content of the page is empty");
+        wikiValidattions.verifyEmptyContentPage();
+        info("Add new page when title is blank");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
@@ -233,53 +143,53 @@ public class WikiBasicActionAddSourceEditorTestIT extends Base {
         wikiHomePage.confirmWaringMessage(true);
         info("New page is created with name is 'Untitled page.''");
         wikiValidattions.verifyTitleWikiPage(title);
-        wikiHomePage.deleteWiki(title);
-
-    }
-
-    /**
-     * <li> Case ID:139409.</li>
-     * <li> Test Case Name: Add new page when user does not have add page permission on space.</li>
-     * <li> Pre-Condition: </li>
-     * <li> Post-Condition: </li>
-     * Step Number: 1
-     * Step Name: Step 1: Open form to add permission for space
-     * Step Description:
-     * - Go to Browse
-     * -
-     * -> Space Permissions
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * Space Permissions form appears
-     * Step number: 2
-     * Step Name: Step 2: Add permission for space
-     * Step Description:
-     * - Set permission for space that some user/group does not have permission to add page on this space
-     * - Click on Add icon
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * Space is added permission
-     * Step number: 3
-     * Step Name: Step 3: Add new page
-     * Step Description:
-     * Login by user/group does not have permission to add page onspace
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * Can not see Add Page function
-     */
-    @Test
-    public void test04_AddNewPageWhenUserDoesNotHaveAddPagePermissionOnSpace() {
-        info("Test 4: Add new page when user does not have add page permission on space");
+        info("Add new page has the same title with existing page");
+        String title2 = "title2" + getRandomNumber();
+        String content2 = "content2" + getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.addSimplePage(title2, content2);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(title2);
+        info("Create a wiki page 2 with the same title");
+        String mess = "The page title already exists. Please select another one.";
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        sourceTextEditor.addSimplePage(title2, content2);
+        wikiManagement.savePage();
+        wikiValidattions.verifyWarningMessage(mess);
+        $(ELEMENT_OK_BUTTON_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        info("Create new page using Blank Template");
+        info("Create a wiki page");
+        String title3 = "title3" + getRandomNumber();
+        String content3 = "content3" + getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.addSimplePage(title3, content3);
+        wikiManagement.saveAddPage();
+        info("New page is created successfully. It is displayed in the destination path");
+        wikiValidattions.verifyTitleWikiPage(title3);
+        info("Cancel create a new page");
+        info("Create a wiki page");
+        String title4 = "title4" + getRandomNumber();
+        String content4 = "content4" + getRandomNumber();
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.addSimplePage(title4, content4);
+        wikiManagement.cancelAddPage();
+        wikiHomePage.confirmWaringMessage(true);
+        info("No page is created");
+        wikiValidattions.verifyNotTitleWikiPage(title4);
+        info("Add new page when user does not have add page permission on space");
         info("Create a new user");
         String username1 = "username" + getRandomString();
         String password = "123456";
         String email1 = username1 + "@test.com";
         navigationToolbar.goToAddUser();
         addUsers.addUser(username1, password, email1, username1, username1);
-        ;
         info("Login by user/group does not have permission to add page onspace");
         manageLogInOut.signIn(username1, password);
         info("Can not see Add Page function");
@@ -288,103 +198,10 @@ public class WikiBasicActionAddSourceEditorTestIT extends Base {
         manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
         navigationToolbar.goToManageCommunity();
         addUsers.deleteUser(username1);
-    }
-
-    /**
-     * <li> Case ID:139410.</li>
-     * <li> Test Case Name: Cancel create a new page.</li>
-     * <li> Pre-Condition: </li>
-     * <li> Post-Condition: </li>
-     * Step Number: 1
-     * Step Name: Step 1: Open form to create new page
-     * Step Description:
-     * - Choose path to add new page
-     * - Click [Add Page]
-     * -
-     * -> [Blank Page]/[From Template...]
-     * - Select [Source Editor] to switch to [Source Editor] mode
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - By default, the [Create Wiki page] is displayed in the [Rich Text] mode
-     * Step number: 2
-     * Step Name: Step 2: Create new page
-     * Step Description:
-     * - Put the title for this page
-     * - Put the content of page
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * All fields are inputed with values
-     * Step number: 3
-     * Step Name: Step 3: Cancel create a page
-     * Step Description:
-     * Click on Cancel
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * No page is created
-     */
-    @Test
-    public void test05_CancelCreateANewPage() {
-        info("Test 5: Cancel create a new page");
-        info("Create a wiki page");
-        String title = "title" + getRandomNumber();
-        String content = "content" + getRandomNumber();
         homePagePlatform.goToWiki();
-        wikiHomePage.goToAddBlankPage();
-        wikiManagement.goToSourceEditor();
-        sourceTextEditor.addSimplePage(title, content);
-        wikiManagement.cancelAddPage();
-        wikiHomePage.confirmWaringMessage(true);
-        info("No page is created");
-        wikiValidattions.verifyNotTitleWikiPage(title);
-
-    }
-
-    /**
-     * <li> Case ID:139414.</li>
-     * <li> Test Case Name: Create new page using Blank Template.</li>
-     * <li> Pre-Condition: </li>
-     * <li> Post-Condition: </li>
-     * Step Number: 1
-     * Step Name: Step 1: Open form to create new page
-     * Step Description:
-     * - Choose path to add new page
-     * - Click [Add Page]
-     * -
-     * -> [Blank Page]
-     * - Select [Source Editor] to switch to [Source Editor] mode
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - By default, the [Create Wiki page] is displayed in the [Rich Text] mode
-     * <p>
-     * Step number: 2
-     * Step Name: Step 2: Create new page
-     * Step Description:
-     * - Put the title for this page
-     * - Put the content of page
-     * - Click [Save]
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * New page is created successfully. It is displayed in the destination path
-     */
-    @Test
-    public void test06_CreateNewPageUsingBlankTemplate() {
-        info("Test 6: Create new page using Blank Template");
-        info("Create a wiki page");
-        String title = "title" + getRandomNumber();
-        String content = "content" + getRandomNumber();
-        homePagePlatform.goToWiki();
-        wikiHomePage.goToAddBlankPage();
-        wikiManagement.goToSourceEditor();
-        sourceTextEditor.addSimplePage(title, content);
-        wikiManagement.saveAddPage();
-        info("New page is created successfully. It is displayed in the destination path");
-        wikiValidattions.verifyTitleWikiPage(title);
-        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(title3);
+        wikiHomePage.deleteWiki(title2);
+        wikiHomePage.deleteWiki(title1);
         wikiHomePage.deleteWiki(title);
 
     }
@@ -418,12 +235,42 @@ public class WikiBasicActionAddSourceEditorTestIT extends Base {
      * The result is the table with 2 columms and 2 rows
      */
     @Test
-    public void test07_CreateNewPageWithTableEffect() {
-        info("Test 7: Create new page with Table effect");
+    public void test07_CreateNewPageWithTableThenBoldThenBulletedListThenHeadingThenItalicThenLinkThenNumberedListThenStrikeThenUnderlineEffect() {
+        info("Create new page with Table effect");
         info("Create a wiki page");
         String title = "title" + getRandomNumber();
+        String title1 = "title1" + getRandomNumber();
         String content = "|= |= \n" +
                 "| | ";
+        String value = "value" + getRandomNumber();
+        String content1 = "**" + value + "**";
+        String title2 = "title2" + getRandomNumber();
+        String value1 = "value" + getRandomNumber();
+        String value2 = "value" + getRandomNumber();
+        String value3 = "value" + getRandomNumber();
+        String value4 = "value" + getRandomNumber();
+        String content2 = "* " + value1 + " \n" + "** " + value2 + "\n" + "*** " + value3 + "\n" + "* " + value4;
+        String title3 = "title3" + getRandomNumber();
+        String value5 = "value" + getRandomNumber();
+        String contentHeading1 = "=" + value5 + "=";
+        String contentHeading3 = "===" + value5 + "===";
+        String contentHeading5 = "=====" + value5 + "=====";
+        String content3 = contentHeading1 + "\n" + contentHeading3 + "\n" + contentHeading5;
+        String title4 = "title4" + getRandomNumber();
+        String value6 = "value" + getRandomNumber();
+        String content4 = "//" + value6 + "//";
+        String title5 = "title5" + getRandomNumber();
+        String value7 = "value" + getRandomNumber();
+        String content5 = "[[" + value7 + "]]";
+        String title6 = "title6" + getRandomNumber();
+        String value8 = "value" + getRandomNumber();
+        String content6 = "1. " + value8 + " \n" + "111. " + value8 + "\n" + "2111. " + value8 + "\n" + "31. " + value8;
+        String title7 = "title7" + getRandomNumber();
+        String value9 = "value" + getRandomNumber();
+        String content7 = "--" + value9 + "--";
+        String title8 = "title8" + getRandomNumber();
+        String value10 = "value" + getRandomNumber();
+        String content8 = "__" + value10 + "__";
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
@@ -433,462 +280,110 @@ public class WikiBasicActionAddSourceEditorTestIT extends Base {
         wikiValidattions.verifyTitleWikiPage(title);
         info("The result is the table with 2 columms and 2 rows");
         wikiValidattions.verifyTableInContentPage(2, 2);
-        homePagePlatform.goToWiki();
-        wikiHomePage.deleteWiki(title);
-
-    }
-
-    /**
-     * <li> Case ID:139417.</li>
-     * <li> Test Case Name: Create new page with Bold effect.</li>
-     * <li> Pre-Condition: </li>
-     * <li> Post-Condition: </li>
-     * Step Number: 1
-     * Step Name: Step 1: Open form to create new page
-     * Step Description:
-     * - Choose path to add new page
-     * - Click [Add Page]
-     * -
-     * -> [Blank Page]/[From Template...]
-     * - Select [Source Editor] to switch to [Source Editor] mode
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - By default, the [Create Wiki page] is displayed in the [Rich Text] mode
-     * Step number: 2
-     * Step Name: Step 2: Create new page with Bold tag
-     * Step Description:
-     * - Input text inside ** ** character in contentFor example: **bold**
-     * - Click [Save]
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * The page is shown with Bold effect
-     */
-    @Test
-    public void test08_CreateNewPageWithBoldEffect() {
-        info("Test 8: Create new page with Bold effect");
-        info("Create a wiki page");
-        String title = "title" + getRandomNumber();
-        String value = "value" + getRandomNumber();
-        String content = "**" + value + "**";
+        info("Create new page with Bold effect");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
-        sourceTextEditor.addSimplePage(title, content);
+        sourceTextEditor.addSimplePage(title1, content1);
         wikiManagement.saveAddPage();
         info("The page is created successfully");
-        wikiValidattions.verifyTitleWikiPage(title);
+        wikiValidattions.verifyTitleWikiPage(title1);
         info("The page is shown with Bold effect");
         wikiValidattions.verifyEffectsPageContent(WikiValidattions.effectTypes.Bold, value);
-        homePagePlatform.goToWiki();
-        wikiHomePage.deleteWiki(title);
-
-    }
-
-    /**
-     * <li> Case ID:139418.</li>
-     * <li> Test Case Name: Create new page with Bulleted list effect.</li>
-     * <li> Pre-Condition: </li>
-     * <li> Post-Condition: </li>
-     * Step Number: 1
-     * Step Name: Step 1: Open form to create new page
-     * Step Description:
-     * - Choose path to add new page
-     * - Click [Add Page]
-     * -
-     * -> [Blank Page]/[From Template...]
-     * - Select [Source Editor] to switch to [Source Editor] mode
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - By default, the [Create Wiki page] is displayed in the [Rich Text] mode
-     * Step number: 2
-     * Step Name: Step 2: Create new page with Bold tag
-     * Step Description:
-     * - Input text inside start with * character in contentFor example: * item 1** item 2*** item 3* item 4
-     * - Click [Save]
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * The result is item 1 item 2 Item 3 item 4
-     */
-    @Test
-    public void test09_CreateNewPageWithBulletedListEffect() {
-        info("Test 9: Create new page with Bulleted list effect");
-
-        info("Create a wiki page");
-        String title = "title" + getRandomNumber();
-        String value1 = "value" + getRandomNumber();
-        String value2 = "value" + getRandomNumber();
-        String value3 = "value" + getRandomNumber();
-        String value4 = "value" + getRandomNumber();
-        String content = "* " + value1 + " \n" + "** " + value2 + "\n" + "*** " + value3 + "\n" + "* " + value4;
+        info("Create new page with BulletedList effect");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
-        sourceTextEditor.addSimplePage(title, content);
+        sourceTextEditor.addSimplePage(title2, content2);
         wikiManagement.saveAddPage();
         info("The page is created successfully");
-        wikiValidattions.verifyTitleWikiPage(title);
+        wikiValidattions.verifyTitleWikiPage(title2);
         info("The page is shown with Bullest list effect");
         wikiValidattions.verifyEffectsPageContent(WikiValidattions.effectTypes.Bullest_List, value1);
         wikiValidattions.verifyEffectsPageContent(WikiValidattions.effectTypes.Bullest_List, value2);
         wikiValidattions.verifyEffectsPageContent(WikiValidattions.effectTypes.Bullest_List, value3);
         wikiValidattions.verifyEffectsPageContent(WikiValidattions.effectTypes.Bullest_List, value4);
-        wikiHomePage.deleteWiki(title);
-    }
-
-    /**
-     * <li> Case ID:139419.</li>
-     * <li> Test Case Name: Create new page with Heading effect.</li>
-     * <li> Pre-Condition: </li>
-     * <li> Post-Condition: </li>
-     * Step Number: 1
-     * Step Name: Step 1: Open form to create new page
-     * Step Description:
-     * - Choose path to add new page
-     * - Click [Add Page]
-     * -
-     * -> [Blank Page]/[From Template...]
-     * - Select [Source Editor] to switch to [Source Editor] mode
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - By default, the [Create Wiki page] is displayed in the [Rich Text] mode*
-     * Step number: 2
-     * Step Name: Step 2: Create new page with Heading 1 tag
-     * Step Description:
-     * - Input text inside == character in contentFor example: =Heading1=
-     * - Click [Save]
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * The page is shown with Bold effect like Heading1 (large heading)
-     * Step number: 3
-     * Step Name: Step 3: Create new page with Heading3 tag
-     * Step Description:
-     * - Input text inside == character in contentFor example: ===Heading3===
-     * - Click [Save]
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * The page is shown with Bold effect like Heading3 (normal heading)
-     * <p>
-     * Step number: 4
-     * Step Name: Step 4: Create new page with Heading5 tag
-     * Step Description
-     * - Input text inside == character in contentFor example: =====Heading5=====
-     * - Click [Save]
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * The page is shown with Bold effect like Heading5 (small heading)
-     */
-    @Test
-    public void test10_CreateNewPageWithHeadingEffect() {
-        info("Test 10 Create new page with Heading effect");
-        info("Create a wiki page");
-        String title = "title" + getRandomNumber();
-        String value = "value" + getRandomNumber();
-        ;
-        String contentHeading1 = "=" + value + "=";
-        String contentHeading3 = "===" + value + "===";
-        String contentHeading5 = "=====" + value + "=====";
-        String content = contentHeading1 + "\n" + contentHeading3 + "\n" + contentHeading5;
+        info("Create new page with Heading effect");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
-        sourceTextEditor.addSimplePage(title, content);
+        sourceTextEditor.addSimplePage(title3, content3);
         wikiManagement.saveAddPage();
         info("The page is created successfully");
-        wikiValidattions.verifyTitleWikiPage(title);
+        wikiValidattions.verifyTitleWikiPage(title3);
         info("The page is shown with Heading 1 effect");
-        $(byId("H" + value)).shouldHave(Condition.text(value));
-        assertEquals($(byId("H" + value)).getCssValue("font-size"), "36px");
+        $(byId("H" + value5)).shouldHave(Condition.text(value5));
+        assertEquals($(byId("H" + value5)).getCssValue("font-size"), "36px");
         info("The page is shown with Heading 3 effect");
-        $(byId("H" + value + "-1")).shouldHave(Condition.text(value));
-        assertEquals($(byId("H" + value + "-1")).getCssValue("font-size"), "24px");
+        $(byId("H" + value5 + "-1")).shouldHave(Condition.text(value5));
+        assertEquals($(byId("H" + value5 + "-1")).getCssValue("font-size"), "24px");
         info("The page is shown with Heading 5 effect");
-        $(byId("H" + value + "-2")).shouldHave(Condition.text(value));
-        assertEquals($(byId("H" + value + "-2")).getCssValue("font-size"), "14px");
-        wikiHomePage.deleteWiki(title);
-
-    }
-
-    /**
-     * <li> Case ID:139420.</li>
-     * <li> Test Case Name: Create new page with italic effect.</li>
-     * <li> Pre-Condition: </li>
-     * <li> Post-Condition: </li>
-     * Step Number: 1
-     * Step Name: Step 1: Open form to create new page
-     * Step Description:
-     * - Choose path to add new page
-     * - Click [Add Page]
-     * -
-     * -> [Blank Page]/[From Template...]
-     * - Select [Source Editor] to switch to [Source Editor] mode
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - By default, the [Create Wiki page] is displayed in the [Rich Text] mode
-     * <p>
-     * Step number: 2
-     * Step Name: Step 2: Create new page with italic tag
-     * Step Description:
-     * - Input text inside // // character in contentFor example: //italic //
-     * - Click [Save]
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * The page is shown with 'italic' effect
-     */
-    @Test
-    public void test11_CreateNewPageWithItalicEffect() {
-        info("Test 11 Create new page with italic effect");
-        info("Create a wiki page");
-        String title = "title" + getRandomNumber();
-        String value = "value" + getRandomNumber();
-        String content = "//" + value + "//";
+        $(byId("H" + value5 + "-2")).shouldHave(Condition.text(value5));
+        assertEquals($(byId("H" + value5 + "-2")).getCssValue("font-size"), "14px");
+        info("Create new page with  Italic effect");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
-        sourceTextEditor.addSimplePage(title, content);
+        sourceTextEditor.addSimplePage(title4, content4);
         wikiManagement.saveAddPage();
         info("The page is created successfully");
-        wikiValidattions.verifyTitleWikiPage(title);
+        wikiValidattions.verifyTitleWikiPage(title4);
         info("The page is shown with Italic effect");
-        wikiValidattions.verifyEffectsPageContent(WikiValidattions.effectTypes.Italic, value);
-        homePagePlatform.goToWiki();
-        wikiHomePage.deleteWiki(title);
-    }
-
-    /**
-     * <li> Case ID:139421.</li>
-     * <li> Test Case Name: Create new page with Link effect.</li>
-     * <li> Pre-Condition: </li>
-     * <li> Post-Condition: </li>
-     * Step Number: 1
-     * Step Name: Step 1: Open form to create new page
-     * Step Description:
-     * - Choose path to add new page
-     * - Click [Add Page]
-     * -
-     * -> [Blank Page]/[From Template...]
-     * - Select [Source Editor] to switch to [Source Editor] mode
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - By default, the [Create Wiki page] is displayed in the [Rich Text] mode
-     * Step number: 2
-     * Step Name: Step 2: Create new page with Link tag
-     * Step Description:
-     * - Input text inside [[ ]] character For example: [[Wiki Home]]
-     * - Click [Save]
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * The page is shown with 'link' effect like Wiki Home
-     */
-    @Test
-    public void test12_CreateNewPageWithLinkEffect() {
-        info("Test 12 Create new page with Link effect");
-        info("Create a wiki page");
-        String title = "title" + getRandomNumber();
-        String value = "value" + getRandomNumber();
-        String content = "[[" + value + "]]";
+        wikiValidattions.verifyEffectsPageContent(WikiValidattions.effectTypes.Italic, value6);
+        info("Create new page with Link effect");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
-        sourceTextEditor.addSimplePage(title, content);
+        sourceTextEditor.addSimplePage(title5, content5);
         wikiManagement.saveAddPage();
         info("The page is created successfully");
-        wikiValidattions.verifyTitleWikiPage(title);
+        wikiValidattions.verifyTitleWikiPage(title5);
         info("The page is shown with link effect");
-        wikiValidattions.verifyEffectsPageContent(WikiValidattions.effectTypes.Link, value);
-        homePagePlatform.goToWiki();
-        wikiHomePage.deleteWiki(title);
-
-    }
-
-    /**
-     * <li> Case ID:139422.</li>
-     * <li> Test Case Name: Create new page with Numbered list effect.</li>
-     * <li> Pre-Condition: </li>
-     * <li> Post-Condition: </li>
-     * Step Number: 1
-     * Step Name: Step 1: Open form to create new page
-     * Step Description:
-     * - Choose path to add new page
-     * - Click [Add Page]
-     * -
-     * -> [Blank Page]/[From Template...]
-     * - Select [Source Editor] to switch to [Source Editor] mode
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - By default, the [Create Wiki page] is displayed in the [Rich Text] mode
-     * <p>
-     * Step number: 2
-     * Step Name: Step 2: Create new page with Numbered list tag
-     * Step Description:
-     * - Input text start with numberFor example: 1. item 111. item 2111. item 31. item 4
-     * - Click [Save]
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * The result is 1. item 1 1. item 2 1. item 3 2. item 4
-     */
-    @Test
-    public void test13_CreateNewPageWithNumberedListEffect() {
-        info("Test 13 Create new page with Numbered list effect");
-        info("Create a wiki page");
-        String title = "title" + getRandomNumber();
-        String value = "value" + getRandomNumber();
-        String content = "1. " + value + " \n" + "111. " + value + "\n" + "2111. " + value + "\n" + "31. " + value;
+        wikiValidattions.verifyEffectsPageContent(WikiValidattions.effectTypes.Link, value7);
+        info("Create new page with Numbered List effect");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
-        sourceTextEditor.addSimplePage(title, content);
+        sourceTextEditor.addSimplePage(title6, content6);
         wikiManagement.saveAddPage();
         info("The page is created successfully");
-        wikiValidattions.verifyTitleWikiPage(title);
+        wikiValidattions.verifyTitleWikiPage(title6);
         info("The page is shown with Number list effect");
-        wikiValidattions.verifyEffectsPageContent(WikiValidattions.effectTypes.Number_List, value);
-        homePagePlatform.goToWiki();
-        wikiHomePage.deleteWiki(title);
-
-    }
-
-    /**
-     * <li> Case ID:139423.</li>
-     * <li> Test Case Name: Create new page with strike effect.</li>
-     * <li> Pre-Condition: </li>
-     * <li> Post-Condition: </li>
-     * Step Number: 1
-     * Step Name: Step 1: Open form to create new page
-     * Step Description:
-     * - Choose path to add new page
-     * - Click [Add Page]
-     * -
-     * -> [Blank Page]/[From Template...]
-     * - Select [Source Editor] to switch to [Source Editor] mode
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - By default, the [Create Wiki page] is displayed in the [Rich Text] mode
-     * Step number: 2
-     * Step Name: Step 2: Create new page with strike tag
-     * Step Description:
-     * - Input text inside
-     * -
-     * -
-     * -
-     * - character in contentFor example:
-     * -
-     * -strike
-     * -
-     * -
-     * - Click [Save]
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * The page is shown with 'strike' effect like strikes
-     */
-
-    @Test
-    public void test14_CreateNewPageWithStrikeEffect() {
-        info("Test 14 Create new page with strike effect");
-        info("Create a wiki page");
-        String title = "title" + getRandomNumber();
-        String value = "value" + getRandomNumber();
-        String content = "--" + value + "--";
+        wikiValidattions.verifyEffectsPageContent(WikiValidattions.effectTypes.Number_List, value8);
+        info("Create new page with Strike effect");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
-        sourceTextEditor.addSimplePage(title, content);
+        sourceTextEditor.addSimplePage(title7, content7);
         wikiManagement.saveAddPage();
         info("The page is created successfully");
-        wikiValidattions.verifyTitleWikiPage(title);
+        wikiValidattions.verifyTitleWikiPage(title7);
         info("The page is shown with Strike effect");
-        wikiValidattions.verifyEffectsPageContent(WikiValidattions.effectTypes.Strike, value);
-        homePagePlatform.goToWiki();
-        wikiHomePage.deleteWiki(title);
-
-    }
-
-    /**
-     * <li> Case ID:139424.</li>
-     * <li> Test Case Name: Create new page with underline effect.</li>
-     * <li> Pre-Condition: </li>
-     * <li> Post-Condition: </li>
-     * Step Number: 1
-     * Step Name: Step 1: Open form to create new page
-     * Step Description:
-     * - Choose path to add new page
-     * - Click [Add Page]
-     * -
-     * -> [Blank Page]/[From Template...]
-     * - Select [Source Editor] to switch to [Source Editor] mode
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - By default, the [Create Wiki page] is displayed in the [Rich Text] mode
-     * <p>
-     * Step number: 2
-     * Step Name: Step 2: Create new page with underline tag
-     * Step Description:
-     * - Input text inside__ __character in contentFor example: __underline__
-     * - Click [Save]
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * The page is shown with 'underline' effect like underline
-     */
-    @Test
-    public void test15_CreateNewPageWithUnderlineEffect() {
-        info("Test 15 Create new page with underline effect");
-        info("Create a wiki page");
-        String title = "title" + getRandomNumber();
-        String value = "value" + getRandomNumber();
-        String content = "__" + value + "__";
+        wikiValidattions.verifyEffectsPageContent(WikiValidattions.effectTypes.Strike, value9);
+        info("Create new page with UnderLine effect");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToSourceEditor();
-        sourceTextEditor.addSimplePage(title, content);
+        sourceTextEditor.addSimplePage(title8, content8);
         wikiManagement.saveAddPage();
         info("The page is created successfully");
-        wikiValidattions.verifyTitleWikiPage(title);
+        wikiValidattions.verifyTitleWikiPage(title8);
         info("The page is shown with Underline effect");
-        wikiValidattions.verifyEffectsPageContent(WikiValidattions.effectTypes.Underline, value);
+        wikiValidattions.verifyEffectsPageContent(WikiValidattions.effectTypes.Underline, value10);
+
         homePagePlatform.goToWiki();
         wikiHomePage.deleteWiki(title);
+        wikiHomePage.deleteWiki(title1);
+        wikiHomePage.deleteWiki(title2);
+        wikiHomePage.deleteWiki(title3);
+        wikiHomePage.deleteWiki(title4);
+        wikiHomePage.deleteWiki(title5);
+        wikiHomePage.deleteWiki(title6);
+        wikiHomePage.deleteWiki(title7);
+        wikiHomePage.deleteWiki(title8);
 
     }
 
-    /**
-     * <li> Case ID:139511.</li>
-     * <li> Test Case Name: Create a page wiki in a Space.</li>
-     * <li> Pre-Condition: </li>
-     * <li> Post-Condition: </li>
-     * Step Number: 1
-     * Step Name: Step 1: Add new page for space
-     * Step Description:
-     * - Go to a space in [MY SPACES] list
-     * - Click [Wiki] on the space navigation bar
-     * - Click [Add Page]
-     * -
-     * -> [Blank Page]/[From Template...]
-     * - Select [Source Editor] to switch to [Source Editor] mode
-     * - Fill valid values for fields
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - By default, the [Create Wiki page] is displayed in the [Rich Text] mode
-     * - A wiki page is created successfully
-     * - At the top of the page,"Restricted" is displayed
-     */
     @Test
     public void test16_CreateAPageWikiInASpace() {
         info("Test 16 Create a page wiki in a Space");
@@ -907,6 +402,15 @@ public class WikiBasicActionAddSourceEditorTestIT extends Base {
         wikiManagement.saveAddPage();
         info("Verify the version on infor bar");
         $(byXpath(ELEMENT_INFOR_BAR_VERSION.replace("$version", "V1"))).waitUntil(Condition.visible, Configuration.timeout);
+        info("Create a draft wiki page");
+        String title1 = "title1" + getRandomNumber();
+        String content1 = "content1" + getRandomNumber();
+        spaceManagement.goToWikiTab();
+        wikiHomePage.goToAddBlankPage();
+        wikiManagement.goToSourceEditor();
+        sourceTextEditor.addSimplePageHasAutoSaveWithoutSave(title1, content1);
+        wikiHomePage.goToMyDraft();
+        wikiValidattions.verifyTitleDrafPage(title1);
         homePagePlatform.goToMySpaces();
         spaceManagement.deleteSpace(space, false);
     }

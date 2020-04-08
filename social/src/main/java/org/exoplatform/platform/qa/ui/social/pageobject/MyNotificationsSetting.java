@@ -9,7 +9,6 @@ import static com.codeborne.selenide.Condition.not;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_ADD_TOOTLBAR;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -111,13 +110,11 @@ public class MyNotificationsSetting {
       case AS_Comment_intranet:
         $(ELEMENT_EDIT_COMMENT_ICON).waitUntil(visible, Configuration.timeout).click();
         if ($(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX).is(Condition.selected)) {
-          sleep(2000);
-          $(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX).parent().click();
-          sleep(2000);
+          $(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX).parent().waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         }
         info("Click on Save button");
-        $(ELEMENT_EDIT_COMMENT_SAVE_BTN).click();
-        $(ELEMENT_EDIT_COMMENT_SAVE_BTN).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        $(ELEMENT_EDIT_COMMENT_SAVE_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(ELEMENT_EDIT_COMMENT_SAVE_BTN).waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
         info("Verify that Intranet notification is hidded");
         evt.waitForElementNotPresent(ELEMENT_COMMENT_INTRANET_ICON, 3000, 1);
         break;
@@ -236,14 +233,13 @@ public class MyNotificationsSetting {
         evt.waitForElementNotPresent(ELEMENT_JOIN_REQ_SPACE_MAIL_ICON, 3000, 1);
         break;
       case Space_Join_Req_intranet:
-        $(ELEMENT_EDIT_REQJOIN_SPACE_ICON).click();
+        $(ELEMENT_EDIT_REQJOIN_SPACE_ICON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         if ($(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX).is(Condition.selected)) {
-          sleep(2000);
-          $(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX).parent().waitUntil(visible, Configuration.timeout).click();
+          $(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX).parent().waitUntil(visible, Configuration.openBrowserTimeoutMs).click();
         }
         info("Click on Save button");
         evt.click(ELEMENT_EDIT_REQJOIN_SPACE_SAVE_BTN);
-        $(ELEMENT_EDIT_REQJOIN_SPACE_SAVE_BTN).waitUntil(not(visible), Configuration.timeout);
+        $(ELEMENT_EDIT_REQJOIN_SPACE_SAVE_BTN).waitUntil(not(visible), Configuration.openBrowserTimeoutMs);
         info("Verify that email notification is hidded");
         evt.waitForElementNotPresent(ELEMENT_JOIN_REQ_SPACE_INTRANET_ICON, 3000, 1);
         break;

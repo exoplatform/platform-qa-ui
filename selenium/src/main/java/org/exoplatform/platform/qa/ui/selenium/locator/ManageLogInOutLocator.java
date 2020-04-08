@@ -26,6 +26,7 @@ public final class ManageLogInOutLocator {
 
   public static final By     ELEMENT_SIGN_IN_BUTTON                           = By.xpath("//*[@class='loginButton']/*");
 
-  public static final By     ELEMENT_SIGN_OUT_LINK                            = By.xpath("//i[@class='uiIconPLFLogout']");
+  public static final By ELEMENT_DISABLE_USER_ERROR_MES           =
+                                                        By.xpath("//*[@class='signinFail'][contains(.,'This user account has been disabled. If you think this is an error, please contact the administrator.')]");
 
 }

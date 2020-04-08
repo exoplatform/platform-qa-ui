@@ -131,10 +131,9 @@ public class SiteExplorerHome {
   public void goToAddNewContent() {
 
     info("Click on New Document on Action Bar");
-    $(ELEMENT_ACTIONBAR_ADDDOCUMENT).waitUntil(Condition.appears, Configuration.collectionsTimeout).click();
+    $(ELEMENT_ACTIONBAR_ADDDOCUMENT).waitUntil(Condition.appears, openBrowserTimeoutMs).click();
     info("Verify that New content page is shown");
-    sleep(Configuration.timeout);
-    $(ELEMENT_ADDDOCUMENT_CHOICETYPE).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_ADDDOCUMENT_CHOICETYPE).waitUntil(Condition.appears, openBrowserTimeoutMs);
     info("New content page is shown successfully");
   }
 
@@ -160,8 +159,7 @@ public class SiteExplorerHome {
     info("Click on File Explorer icon");
     // scroll de 50 pixel
     executeJavaScript("window.scrollBy(0,50);", "");
-    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    sleep(Configuration.collectionsTimeout);
+    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + timeout).click();
     info("Right click on nodename");
     executeJavaScript("window.scrollBy(0,-250)", "");
     $(byXpath("//div[@id='UITreeExplorer']//i[@title='${title}']".replace("${title}",title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
@@ -169,11 +167,9 @@ public class SiteExplorerHome {
     ELEMENT_CONTENT_LIST.find(byLinkText(title)).waitUntil(Condition.visible,Configuration.timeout).contextClick();
     executeJavaScript("window.scrollBy(0,100);", "");
     info("Click on Delete link");
-    sleep(Configuration.timeout);
-    $(ELEMENT_SITEEXPLORER_ACTION_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.timeout);
+    $(ELEMENT_SITEEXPLORER_ACTION_DELETE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
     info("Click on Delete button on Confirm popup");
-    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.visible,Configuration.collectionsTimeout + openBrowserTimeoutMs).click();
     $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     refresh();
     if(destination.equals(true))

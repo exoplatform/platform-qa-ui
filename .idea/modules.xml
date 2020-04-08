@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/platform-qa-ui.iml" filepath="$PROJECT_DIR$/.idea/platform-qa-ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform-qa-ui.iml" filepath="$PROJECT_DIR$/platform-qa-ui.iml" />
       <module fileurl="file://$PROJECT_DIR$/answer/platform-qa-ui-answer.iml" filepath="$PROJECT_DIR$/answer/platform-qa-ui-answer.iml" />
       <module fileurl="file://$PROJECT_DIR$/calendar/platform-qa-ui-calendar.iml" filepath="$PROJECT_DIR$/calendar/platform-qa-ui-calendar.iml" />
       <module fileurl="file://$PROJECT_DIR$/chat/platform-qa-ui-chat.iml" filepath="$PROJECT_DIR$/chat/platform-qa-ui-chat.iml" />

@@ -289,7 +289,7 @@ public class ForumHomePage {
    */
   public void goToTopic(String name) {
     info("Click on the topic with the name:" + name);
-    $(byText(name)).click();
+    $(byText(name)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**

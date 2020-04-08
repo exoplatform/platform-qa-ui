@@ -255,13 +255,13 @@ public class ForumTopicManagement {
    * @param newContent String
    */
   public void quotePost(String title, String newContent) {
-    $(byText(title)).parent().parent().parent().parent().find(byText("Quote")).click();
+    $(byText(title)).parent().parent().parent().parent().find(byText("Quote")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     if (newContent != "")
       switchTo().frame(0);
     $(byXpath("/html/body")).sendKeys(newContent);
     switchTo().defaultContent();
     executeJavaScript("window.scrollBy(0,150)");
-    $(ELEMENT_POST_FORM_SUBMIT).click();
+    $(ELEMENT_POST_FORM_SUBMIT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -474,7 +474,7 @@ public class ForumTopicManagement {
    */
   public void startTopic(String title, String message, String pathFile, String... fileName) {
     info("Verify that the pop up is shown");
-    $(ELEMENT_START_TOPIC_POPUP_TITLE_FILED).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_START_TOPIC_POPUP_TITLE_FILED).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     info("Input the title:" + title);
     $(ELEMENT_START_TOPIC_POPUP_TITLE_FILED).val(title);
     info("Input the message:" + message);
@@ -492,12 +492,12 @@ public class ForumTopicManagement {
       $(ELEMENT_START_TOPIC_ATTACH_FILE).waitUntil(visible, Configuration.timeout);
       action.moveToElement($(ELEMENT_START_TOPIC_ATTACH_FILE)).click().perform();
       $(By.className("file")).uploadFromClasspath(fileName[i]);
-      $(ELEMENT_SAVE_BTN).click();
+      $(ELEMENT_SAVE_BTN).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
     }}
-    $(ELEMENT_SUBMIT_BUTTON).waitUntil(visible,Configuration.timeout).click();
-    $(ELEMENT_SUBMIT_BUTTON).waitUntil(Condition.disappear, Configuration.timeout);
+    $(ELEMENT_SUBMIT_BUTTON).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_SUBMIT_BUTTON).waitUntil(Condition.disappear, Configuration.openBrowserTimeoutMs);
     info("Verify that the topic is created");
-    $(By.linkText(title)).waitUntil(visible,Configuration.timeout).should(exist);
+    $(By.linkText(title)).waitUntil(exist,Configuration.openBrowserTimeoutMs);
     info("Start topic successfully");
   }
 

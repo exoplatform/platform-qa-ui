@@ -43,12 +43,9 @@ public class WikiHomePage {
      */
     public void goToAddBlankPage() {
         info("--Go to add blank wiki page--");
-        homePagePlatform.refreshUntil($(ELEMENT_ADD_PAGE_LINK),Condition.visible,Configuration.timeout);
-        sleep(2000);
-        $(ELEMENT_ADD_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
-        sleep(Configuration.timeout);
-        $(ELEMENT_BLANK_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
-        sleep(2000);
+        homePagePlatform.refreshUntil($(ELEMENT_ADD_PAGE_LINK),Condition.visible,Configuration.collectionsTimeout);
+        $(ELEMENT_ADD_PAGE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(ELEMENT_BLANK_PAGE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         info("Blank wiki page is shown");
     }
 
@@ -66,8 +63,7 @@ public class WikiHomePage {
      */
     public void goToEditPage() {
         info("--Go to edit page--");
-        sleep(Configuration.timeout);
-        $(ELEMENT_EDIT_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(ELEMENT_EDIT_PAGE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout).click();
     }
 
     /**
@@ -75,8 +71,7 @@ public class WikiHomePage {
      */
     public void goToHomeWikiPage() {
         info("-- Go to wiki home page --");
-        sleep(2000);
-        $(ELEMENT_WIKI_HOME_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(ELEMENT_WIKI_HOME_PAGE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 
     /**
@@ -87,7 +82,7 @@ public class WikiHomePage {
     public void goToAPage(String title) {
         info("-- Go to wiki page --");
         $(byText(title)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-        $(ELEMENT_WIKI_HOME_PAGE_TEXT).shouldNot(Condition.exist);
+        $(ELEMENT_WIKI_HOME_PAGE_TEXT).waitUntil(Condition.not(Condition.exist),Configuration.openBrowserTimeoutMs);
     }
 
     /**
@@ -96,17 +91,14 @@ public class WikiHomePage {
      * @param title String
      */
     public void deleteWiki(String title) {
-        homePagePlatform.refreshUntil($(byText(title)),Condition.visible,1000);
+        homePagePlatform.refreshUntil($(byText(title)),Condition.visible,500);
         info("Select the wiki page to delete");
         selectAPage(title);
-        sleep(2000);
         info("Click on More link");
-        $(ELEMENT_MORE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
-        sleep(2000);
-        $(ELEMENT_DELETE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
-        sleep(2000);
-        $(ELEMENT_CONFIRM_WIKI_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
-        $(byText(title)).shouldNot(Condition.exist);
+        $(ELEMENT_MORE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(ELEMENT_DELETE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(ELEMENT_CONFIRM_WIKI_DELETE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(byText(title)).waitUntil(Condition.not(Condition.exist),Configuration.openBrowserTimeoutMs);
 
     }
 
@@ -140,7 +132,7 @@ public class WikiHomePage {
         info("Go to a wiki page...");
         info("Select the wiki page");
         testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-        $(byXpath("//*[@id='iconTreeExplorer']//*[contains(text(),'${page}')]".replace("${page}",page))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(byXpath("//*[@id='iconTreeExplorer']//*[contains(text(),'${page}')]".replace("${page}",page))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout).click();
         info("The page is shown");
     }
 
@@ -173,7 +165,7 @@ public class WikiHomePage {
         info("Click on Browser drop down");
         $(ELEMENT_SEARCH_BROWSERS_DROPDOWN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         info("Select wiki settings label");
-        $(ELEMENT_SEARCH_BROWSERS_WIKI_SETTINGS).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(ELEMENT_SEARCH_BROWSERS_WIKI_SETTINGS).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
             testBase.getExoWebDriver().getWebDriver().navigate().refresh();
         } while (!$(ELEMENT_WIKI_SETTING_ADD_MORE_TEMPALTE).exists());
     }
@@ -264,6 +256,24 @@ public class WikiHomePage {
         $(ELEMENT_MAKE_RESTRICT_BUTTON).click();
         dialog.closeMessageDialog();
     }
+
+  /**
+   * Make the page public from infor bar or More menu
+   *
+   * @param opParams Boolean
+   */
+  public void publicPage(Boolean... opParams) {
+    info("Make Restricted page");
+    Boolean useRestrictLink = (opParams.length > 0 ? opParams[0] : false);
+    if (useRestrictLink) {
+      $(ELEMENT_RESTRICTED_WIKI_ICON).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+      $(ELEMENT_RESTRICTED_WIKI_ICON).click();
+    } else {
+      goToPermalink();
+    }
+    $(ELEMENT_MAKE_PUBLIC_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
+    dialog.closeMessageDialog();
+  }
 
     /**
      * Close permalink popup

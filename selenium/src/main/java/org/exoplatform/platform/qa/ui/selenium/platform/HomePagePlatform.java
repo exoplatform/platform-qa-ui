@@ -37,7 +37,6 @@ public class HomePagePlatform {
     $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_WIKI_LINK_PLF).click();
     refreshUntil($(ELEMENT_WIKI_LINK_PLF), Condition.visible, 500);
-    sleep(Configuration.timeout);
   }
 
   public void goToChat() {
@@ -72,10 +71,8 @@ public class HomePagePlatform {
    */
   public void goToHomePage() {
     info("Click on Home link of intranet page");
-    sleep(Configuration.timeout);
     executeJavaScript("window.scrollBy(0,-5500)", "");
-    sleep(Configuration.collectionsTimeout);
-    $(ELEMENT_HOME_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_HOME_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout).click();
   }
 
   /**
@@ -162,7 +159,7 @@ public class HomePagePlatform {
   public void goToConnections() {
     info("--Go to Connections page---");
     info("Click on Connection link");
-    $(ELEMENT_CONNECTIONS_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).parent().click();
+    $(ELEMENT_CONNECTIONS_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).parent().click();
     info("Verify that the connections portlet is shown");
     refreshUntil($(ELEMENT_CONNECTION_EVERYONE_TITLE), Condition.visible, 500);
     info("The connections portlet is shown successfully");

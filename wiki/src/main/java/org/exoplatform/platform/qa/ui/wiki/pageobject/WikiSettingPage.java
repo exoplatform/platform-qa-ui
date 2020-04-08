@@ -100,6 +100,23 @@ public class WikiSettingPage {
   }
 
   /**
+   * Search a template
+   *
+   * @param template String
+   */
+  public void searchTemplateByTitle(String template) {
+
+    info("Input a template's name and press entrer");
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    $(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(template);
+     $(ELEMENT_TEMPLATE_SEARCH_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    info("Verify that the search results is shown that matchs with keyword");
+
+    $(byId("UIWikiTemplateGrid")).find(byText(template)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+
+  }
+
+  /**
    * Save all changes for the template
    */
   public void saveTemplate() {

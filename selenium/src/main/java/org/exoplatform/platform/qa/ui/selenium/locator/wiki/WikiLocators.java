@@ -314,11 +314,14 @@ public class WikiLocators {
             By.xpath(".//*[@id='UIPortalApplication']//button[text()='Yes']");
 
     // Add page from template
-    public static final By ELEMENT_TEMPLATE_PREVIEW_BTN =
-            By.xpath("//*[@id=\"UIWikiTemplateGrid\"]/tbody/tr[2]/td[4]/a[2]/i");
+    public static final String ELEMENT_TEMPLATE_PREVIEW_BTN =
+            "(//*[text()='${template}']/following::*[@class='actionIcon'])[1]";
 
     public static final By ELEMENT_TEMPLATE_SELECT_FORM =
             By.id("UIWikiSelectTemplateForm");
+
+  public static final By ELEMENT_TEMPLATE_SELECT_RADIO_BTN =
+          By.xpath("//*[@class='uiRadio']");
 
     public static final By ELEMENT_TEMPLATE_SELECT_BTN =
             By.xpath(".//*[@id='UIWikiSelectTemplateForm']//*[text()='Select']");
@@ -460,7 +463,10 @@ public class WikiLocators {
     public static final By ELEMENT_TEMPLATE_SEARCH_TEXTBOX =
             By.xpath(".//*[@id='TemplateSeachBox']");
 
-    public static final String ELEMENT_WIKI_SETTINGS_RESULTS =
+    public static final By ELEMENT_TEMPLATE_SEARCH_BTN =
+          By.xpath(".//*[@class='uiSearchInput pull-left']/a");
+
+  public static final String ELEMENT_WIKI_SETTINGS_RESULTS =
             ".//*[@id='UIWikiTemplateGrid']//*[text()='${template}']";
 
     public static final String ELEMENT_EDIT_TEMPLATE =

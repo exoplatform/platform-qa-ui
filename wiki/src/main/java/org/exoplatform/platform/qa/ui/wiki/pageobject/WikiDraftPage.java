@@ -5,6 +5,9 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
@@ -29,7 +32,7 @@ public class WikiDraftPage {
    *
    */
   public void deleteDraft() {
-    $(byXpath("(//i[@class=\"uiIconDeleteDraft uiIconLightGray\"])[1]"));
+    $(byXpath("(//i[@class=\"uiIconDeleteDraft uiIconLightGray\"])[1]")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     alert.acceptAlert();
   }
 
@@ -41,7 +44,7 @@ public class WikiDraftPage {
   public void resumeADraft(String title) {
 
    info("Click on the title of the draf in the list");
-    $(byId("UIWikiDraftGrid")).find(byText(title + "(New Page)")).click();
+    $(byId("UIWikiDraftGrid")).find(byText(title + "(New Page)")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
 
   }

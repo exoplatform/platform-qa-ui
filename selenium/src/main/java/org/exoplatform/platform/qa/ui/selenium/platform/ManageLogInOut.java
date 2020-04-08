@@ -21,15 +21,10 @@
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ManageLogInOutLocator.ELEMENT_SIGN_OUT_LINK;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -68,7 +63,6 @@ public class ManageLogInOut {
    * @param opParams
    */
   public void signIn(String username, String password, Boolean... opParams) {
-    sleep(2000);
     Boolean verify = (Boolean) (opParams.length > 0 ? opParams[0] : false);
     if ($(ELEMENT_ACCOUNT_NAME_LINK).exists()){
       signOut();
@@ -92,11 +86,8 @@ public class ManageLogInOut {
       }
     } else {
       info("login normally if not use SSO with user " + username + " and pass " + password);
-      sleep(Configuration.timeout);
-      $(ELEMENT_INPUT_USERNAME).setValue(username);
-      sleep(2000);
-      $(ELEMENT_INPUT_PASSWORD).setValue(password);
-      sleep(2000);
+      $(ELEMENT_INPUT_USERNAME).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(username);
+      $(ELEMENT_INPUT_PASSWORD).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(password);
       evt.clickByJavascript(ManageLogInOutLocator.ELEMENT_SIGN_IN_BUTTON, 2);
       if (verify)
         evt.waitForElementNotPresent(ManageLogInOutLocator.ELEMENT_SIGN_IN_BUTTON);
@@ -110,14 +101,10 @@ public class ManageLogInOut {
    * @param password
    */
   public void signInOpenam(String username, String password) {
-    sleep(2000);
     testBase.getExoWebDriver().getWebDriver();
-    $(ELEMENT_INPUT_USERNAME_OPENAM).setValue(username);
-    $(ELEMENT_INPUT_PASSWORD_OPENAM).setValue(password);
-    sleep(2000);
-    $(ELEMENT_SIGN_IN_BUTTON_OPENAM).click();
-    sleep(2000);
-
+    $(ELEMENT_INPUT_USERNAME_OPENAM).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(username);
+    $(ELEMENT_INPUT_PASSWORD_OPENAM).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(password);
+    $(ELEMENT_SIGN_IN_BUTTON_OPENAM).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
 
@@ -194,45 +181,14 @@ public class ManageLogInOut {
    * Sign out from intranet
    */
   public void signOut() {
-    homePagePlatform.refreshUntil($(ELEMENT_ACCOUNT_NAME_LINK),Condition.visible,Configuration.timeout);
+    Temporal start = LocalDateTime.now();
     info("Sign out");
-    for (int repeat = 0;; repeat++) {
-      if (repeat > 1) {
-        evt.mouseOverAndClick(ELEMENT_ACCOUNT_NAME_LINK);
-        break;
-      }
-      sleep(2000);
-      $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.appears, Configuration.timeout).click();
+    ELEMENT_TOP_TOOLBAR_PORTLET.waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
+    ELEMENT_TOP_TOOLBAR_MENU_USER.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TOP_TOOLBAR_MENU_USER_LOGOUT.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
-      if (evt.waitForAndGetElement(ELEMENT_SIGN_OUT_LINK, 5000, 0) != null) {
-        sleep(2000);
-        info("Element " + ELEMENT_SIGN_OUT_LINK + "... is displayed");
-        break;
-      }
-      info("Retry...[" + repeat + "]");
-      testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    }
-    sleep(Configuration.timeout);
-    $(ELEMENT_SIGN_OUT_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+    info("Sign out in " + Duration.between(start, LocalDateTime.now()).toString());
 
-    if (evt.waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK, 2000, 0) != null) {
-      info("Clear cache and reconnect to the package");
-      testBase.getExoWebDriver().getWebDriver().manage().deleteAllCookies();
-      testBase.getExoWebDriver().getWebDriver();
-    }
-
-    if (ExpectedConditions.alertIsPresent() != null) {
-      alt = new ManageAlert(testBase);
-      alt.acceptAlert();
-    }
-    WebElement logOutSucess = evt.waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK, 3000, 0);
-    if (logOutSucess != null) {
-      info("Because issue: in jboss, logout then come back homepage, we have to close IE and init the new one");
-      testBase.getExoWebDriver().getWebDriver().manage().deleteAllCookies();
-      testBase.getExoWebDriver().getWebDriver();
-    } else {
-      info("Logout sucessfully");
-    }
   }
 
   /**

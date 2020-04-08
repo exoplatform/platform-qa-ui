@@ -29,7 +29,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 
 @Tag("functional")
 @Tag("wiki")
-public class WikiBasicActionMoveMovePageTestIT extends Base {
+public class WikiBasicActionMovePageTestIT extends Base {
 
     HomePagePlatform homePagePlatform;
     WikiHomePage wikiHomePage;
@@ -63,177 +63,6 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
             $(ELEMENT_SKIP_BUTTON).click();
         }
         manageLogInOut.signInCas(DATA_USER1, "gtngtn");
-    }
-
-    /**
-     * <li> Case ID:139576.</li>
-     * <li> Test Case Name: Page's attachments should be move with the page.</li>
-     * <li> Pre-Condition: User is member of "Space Move" and "Space Destination 2"
-     * Wiki of "Space Move" has:
-     * - Page A
-     * - Page B
-     * - Page with attachments (with two images in its content)
-     * Wiki of "Space Destination 2" is empty.</li>
-     * <li> Post-Condition: </li>
-     * Step Number: 1
-     * Step Name: Step 1: Select a wiki page of a space
-     * Step Description:
-     * - Go to a space, then select [Wiki]
-     * - Select a "Page with attachments"
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - "Page with attachments" is displayed
-     * <p>
-     * Step Number: 2
-     * Step Name: Step 2: Move page
-     * Step Description:
-     * - Click [More]
-     * - Select [Move Page] from the drop-down menu
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - The popup to move the page is displayed*
-     * Step Number: 2
-     * Step Name: Step 2: Move page
-     * Step Description:
-     * - Click [More]
-     * - Select [Move Page] from the drop-down menu
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - The popup to move the page is displayed*
-     * Step Number: 3
-     * Step Name: Step 3: Select destination
-     * Step Description:
-     * - Open Space switcher
-     * - Select "Space Destination 2"
-     * - In destination container select "Wiki Home"
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - The destination container is displaying "Space Destination 2" tree
-     * - New Location Path is displaying :
-     * Space Destination 2> Wiki Home
-     * Step Number: 4
-     * Step Name: Step 4. Do "Move"Step 4: Select destination
-     * Step Description:
-     * - Click the [Move] button
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - "Page with attachments" is moved in the space "Space Destination 2" and directly displayed
-     * Step Number: 5
-     * Step Name: Step 5. Check
-     * Step Description:
-     * - Check content of the wiki page
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * Page content is correctly displayed with the attachments
-     */
-    @Test
-    public void test01_PageAttachmentShouldBeMoveWithThePage() {
-
-
-        String space1 = "space1" + getRandomNumber();
-        String space2 = "space2" + getRandomNumber();
-
-        String title = "title" + getRandomNumber();
-        String content = "content" + getRandomNumber();
-
-
-        info("Test 1: Page's attachments should be move with the page");
-
-        String link1 = "wiki_attachment.txt";
-
-        String link2 = "testavatar.png";
-        System.out.println(link2);
-
-
-        String linkImage1 = "testavatar.png";
-        String altText1 = "altText1" + getRandomNumber();
-
-        String linkImage2 = "eXo-Platform.png";
-        String altText2 = "altText2" + getRandomNumber();
-
-        String width = "200";
-        String height = "200";
-
-        info("Create data test");
-        info("Create Space 1 with a wiki page 1");
-        homePagePlatform.goToMySpaces();
-        spaceManagement.addNewSpaceSimple(space1, space1);
-        info("Create wiki page with 2 images attachment and 2 images inserted to Space 1");
-        spaceManagement.goToWikiTab();
-        wikiHomePage.goToAddBlankPage();
-        richTextEditor.addSimplePage(title, content);
-        info("insert image 1 to page");
-        richTextEditor.insertExternalImageLink(linkImage1, width, height, altText1);
-        richTextEditor.selectAlign(RichTextEditor.alignType.Left);
-        richTextEditor.goToInsertImage();
-        wikiManagement.saveAddPage();
-        info("insert image 2 to page");
-        wikiHomePage.goToEditPage();
-        richTextEditor.insertExternalImageLink(linkImage2, width, height, altText2);
-        richTextEditor.selectAlign(RichTextEditor.alignType.Left);
-        richTextEditor.goToInsertImage();
-        wikiManagement.saveAddPage();
-        info("Attach 2 images to page");
-        wikiHomePage.goToEditPage();
-        info("Upload link to wiki page");
-        wikiManagement.goToSourceEditor();
-        sourceTextEditor.attachFileInWiki(link1, 2);
-        sourceTextEditor.attachFileInWiki(link2, 2);
-        wikiManagement.saveAddPage();
-
-
-        info("Create Space 2 with no wiki page");
-        homePagePlatform.goToMySpaces();
-        spaceManagement.addNewSpaceSimple(space2, space2);
-        info("Verify 2 images are displayed in content od wiki page");
-        homePagePlatform.goToMySpaces();
-        spaceManagement.searchSpace(space1, "");
-        spaceManagement.goToSpace(space1);
-        spaceHomePage.goToWikiTab();
-        wikiValidattions.verifyTitleWikiPage(title);
-        wikiHomePage.goToAPage(title);
-        wikiValidattions.verifyAltTextImageInContentPage(altText1);
-        wikiValidattions.verifyAltTextImageInContentPage(altText2);
-        info("2 inserted images are inserted successfully in content of page");
-        info("Verify 2 images are displayed in attach list of wiki page");
-        wikiHomePage.goToAttachFiles("2");
-        wikiValidattions.VerifyAttachFilesAreDisplayedInAttachListOrNot(link1, true);
-        wikiValidattions.VerifyAttachFilesAreDisplayedInAttachListOrNot(link2, true);
-        info("2 attached images are attached successfully in attache list of page");
-        info("Move wiki page to space 2");
-        wikiManagement.movePageDiffDestination(title, "Wiki Home", space2);
-        info("Check to make sure wiki page does not exist in Space 1");
-        homePagePlatform.goToMySpaces();
-        spaceManagement.searchSpace(space1, "");
-        spaceManagement.goToSpace(space1);
-        spaceHomePage.goToWikiTab();
-        wikiValidattions.verifyWikiPageNotDisplayedInWikiHome(title);
-        info("Wiki page does not exist in Space 1");
-
-        info("Check to make sure wiki page exists in Space 2");
-        homePagePlatform.goToMySpaces();
-        spaceManagement.searchSpace(space2, "");
-        spaceManagement.goToSpace(space2);
-        spaceHomePage.goToWikiTab();
-
-        wikiValidattions.verifyTitleWikiPage(title);
-        wikiHomePage.goToAPage(title);
-        wikiValidattions.verifyAltTextImageInContentPage(altText1);
-        wikiValidattions.verifyAltTextImageInContentPage(altText2);
-        wikiHomePage.goToAttachFiles("2");
-        wikiValidattions.VerifyAttachFilesAreDisplayedInAttachListOrNot(link1, true);
-        wikiValidattions.VerifyAttachFilesAreDisplayedInAttachListOrNot(link2, true);
-        homePagePlatform.goToMySpaces();
-        spaceManagement.searchSpace(space1, "");
-        spaceManagement.deleteSpace(space1, false);
-        spaceManagement.searchSpace(space2, "");
-        spaceManagement.deleteSpace(space2, false);
     }
 
     /**
@@ -347,7 +176,6 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         wikiHomePage.goToAddBlankPage();
         wikiManagement.goToRichTextEditor();
         richTextEditor.addSimplePage(wiki1, wiki1);
-
         info("insert image 1 to page 1");
         richTextEditor.insertExternalImageLink(linkImage1, width, height, altText1);
         richTextEditor.selectAlign(RichTextEditor.alignType.Left);
@@ -772,113 +600,6 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
     }
 
     /**
-     * <li> Case ID:139580.</li>
-     * <li> Test Case Name: Space names displayed in location labels should be user friendly and not technical.</li>
-     * <li> Pre-Condition: User is member of "Space Move" and "Space Destination 2"
-     * Wiki of "Space Move" has:
-     * - Page B</li>
-     * <li> Post-Condition: </li>
-     * <p>
-     * Step Number: 1
-     * Step Name: Step 1
-     * Step Description:
-     * - Go to "Space Move" wiki
-     * - Select "Page to move"- Go to "Space Move" using left side bar navigation
-     * - Open wiki application
-     * - Open "Page B"
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - "Page B" is displayed
-     * - Space navigation of "Space Move" is displayed
-     * <p>
-     * Step Number: 2
-     * Step Name: Step 2
-     * Step Description:
-     * - Open "More" Menu
-     * - Select "Move"
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - The popup to move the page is displayed
-     * - Current location label is displaying : Space Move > Page B
-     * <p>
-     * Step Number: 3
-     * Step Name: Step 3
-     * Step Description:
-     * - Open Space switcher
-     * - Select "Space Destination 2"
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - The destination container is displaying "Space Destination 2" tree
-     * <p>
-     * Step Number: 4
-     * Step Name: Step 4
-     * Step Description:
-     * - In destination container select "Wiki Home"
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - New Location Path is displaying : Space Destination 2 > Wiki Home
-     */
-    @Test
-    public void test04_SpaceNamesDisplayedInLocationLabelsShouldBeUserFriendlyAndNotTechnical() {
-        info("Test 4: Space names displayed in location labels should be user friendly and not technical");
-
-        String space1 = "space1" + getRandomNumber();
-        String wiki1 = "wiki1" + getRandomNumber();
-
-        String space2 = "space2" + getRandomNumber();
-
-        info("Create data test");
-        info("Create Space 1 with 1 wiki page");
-        homePagePlatform.goToMySpaces();
-        spaceManagement.addNewSpaceSimple(space1, space1);
-
-        info("Create wiki page 1");
-        spaceHomePage.goToWikiTab();
-        wikiHomePage.goToAddBlankPage();
-        richTextEditor.addSimplePage(wiki1, wiki1);
-        wikiManagement.saveAddPage();
-        wikiValidattions.verifyTitleWikiPage(wiki1);
-
-        info("Create Space 2 with no wiki page");
-        homePagePlatform.goToMySpaces();
-        spaceManagement.addNewSpaceSimple(space2, space2);
-        info("Move wiki page from space 1 to space 2");
-        homePagePlatform.goToMySpaces();
-        spaceManagement.searchSpace(space1, "");
-        spaceHomePage.goToSpace(space1);
-        spaceHomePage.goToWikiTab();
-
-        info("Move wiki page 1 to space 2");
-        wikiHomePage.goToAPage(wiki1);
-        wikiManagement.movePageDiffDestination(wiki1, "Wiki Home", space2, true);
-
-        info("Check to make sure wiki page 1 does not exist in Space 1");
-        homePagePlatform.goToMySpaces();
-        spaceManagement.searchSpace(space1, "");
-        spaceManagement.goToSpace(space1);
-        spaceHomePage.goToWikiTab();
-        wikiValidattions.verifyWikiPageNotDisplayedInWikiHome(wiki1);
-        info("Wiki page 1 does not exist in Space 1");
-
-        info("Check to make sure wiki page 1 exist in Space 2");
-        homePagePlatform.goToMySpaces();
-        spaceManagement.searchSpace(space2, "");
-        spaceManagement.goToSpace(space2);
-        spaceHomePage.goToWikiTab();
-        wikiValidattions.verifyTitleWikiPage(wiki1);
-        info("Wiki page 1 exist in Space 2");
-        homePagePlatform.goToMySpaces();
-        spaceManagement.searchSpace(space1, "");
-        spaceManagement.deleteSpace(space1, false);
-        spaceManagement.searchSpace(space2, "");
-        spaceManagement.deleteSpace(space2, false);
-    }
-
-    /**
      * <li> Case ID:139429.</li>
      * <li> Test Case Name: Move a page when user does not have edit permission on destination page.</li>
      * <li> Pre-Condition: </li>
@@ -924,12 +645,37 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
 
     @Test
     @Tag("wabis")
-    public void test05_MoveAPageWhenUserDoesNotHaveEditPermissionOnDestinationPage() {
-        info("Test 5: Move a page when user does not have edit permission on destination page");
-
+    public void test05_MoveAPageWhenUserDoesNotHaveEditPermissionOnDestinationPageThenWhenUserHasEditPermissionOnPage() {
+        info("Move a page when user doesn't have edit permission on page");
         String wiki1 = "wiki1" + getRandomNumber();
         String wiki2 = "wiki2" + getRandomNumber();
-
+        String wiki0 = "wiki0" + getRandomNumber();
+        info("Create wiki page 1 with full permission");
+        homePagePlatform.goToWiki();
+        wikiHomePage.goToAddBlankPage();
+        richTextEditor.addSimplePage(wiki0, wiki0);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(wiki0);
+        info("Verify that the page is published");
+        wikiValidattions.verifyPublishedPage();
+        info("Make restricted the page");
+        wikiHomePage.restrictedPage();
+        info("Verify that the page is restricted");
+        wikiValidattions.verifyRestrictedPage();
+        info("Make the page public");
+        wikiHomePage.publicPage();
+        info("Verify that the page is public");
+        wikiValidattions.verifyPublishedPage();
+        info("Un check edit permission of any group");
+        wikiManagement.unCheckViewAUserOfPage(ELEMENT_PERMISSION_EDIT_ANY);
+        info("Log in as Mary");
+        manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+        homePagePlatform.goToWiki();
+        info("Move wiki page 1 to page 2");
+        wikiHomePage.goToAPage(wiki0);
+        wikiManagement.movePageWhenUserDoesNotHavePerMissionInDestination(wiki0, "", false);
+        manageLogInOut.signIn(DATA_USER1, "gtngtn");
+        info("Move a page when user does not have edit permission on destination page");
         info("Create data test");
         info("Create wiki page 1 with full permission");
         homePagePlatform.goToWiki();
@@ -937,7 +683,6 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         richTextEditor.addSimplePage(wiki1, wiki1);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(wiki1);
-
         info("add Edit Permission for Mary in wiki page 1");
         wikiHomePage.goToPermissions();
         wikiPermission.addPermisisonByType(DATA_USER2);
@@ -962,156 +707,31 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         homePagePlatform.goToWiki();
         info("Move wiki page 1 to page 2");
         wikiHomePage.goToAPage(wiki1);
-        ELEMENT_MORE_LINK.click();
-        $(ELEMENT_MOVE_PAGE).click();
-        $(byXpath(ELEMENT_WIKI_PAGE_MOVE_POPUP_NODE.replace("${name}", wiki2))).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
-        $(ELEMENT_CANCEL_BUTTON).click();
-        homePagePlatform.goToWiki();
-        wikiHomePage.deleteWiki(wiki1);
-        wikiHomePage.deleteWiki(wiki2);
-
-    }
-
-    /**
-     * <li> Case ID:139430.</li>
-     * <li> Test Case Name: Move a page when user doesn't have edit permission on page.</li>
-     * <li> Pre-Condition: </li>
-     * <li> Post-Condition: </li>
-     * <p>
-     * Step Number: 1
-     * Step Name: Step 1: Create a page
-     * Step Description:
-     * - Click [Add Page] --> [Blank Page]/[From Template...]
-     * - Put title, content
-     * - Click [Save]
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - By default, the [Create Wiki page] is displayed in the [Rich Text] mode
-     * - New page is created successfully
-     * Step Number: 2
-     * Step Name: Step 2: Set permission for page
-     * Step Description:
-     * - Select page above
-     * - Click [More] -->  [Page Permissions] to set permission for this page
-     * that some users/groups can not edit this page
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - Permissions are added to the page
-     * Step Number: 3
-     * Step Name: Step 3: Open form to move page
-     * Step Description:
-     * - Login by any user who does not have permission to edit page
-     * - Select the page at step 1
-     * - Click on [More]
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - Move Page action is not displayed
-     */
-    @Test
-    @Tag("wabis")
-    public void test06_MoveAPageWhenUserDoesNotHaveEditPermissionOnPage() {
-        info("Test 6: Move a page when user doesn't have edit permission on page");
-
-        String wiki1 = "wiki1" + getRandomNumber();
-        info("Create wiki page 1 with full permission");
-        homePagePlatform.goToWiki();
-        wikiHomePage.goToAddBlankPage();
-        richTextEditor.addSimplePage(wiki1, wiki1);
-        wikiManagement.saveAddPage();
-        wikiValidattions.verifyTitleWikiPage(wiki1);
-        info("Un check edit permission of any group");
-        wikiManagement.unCheckViewAUserOfPage(ELEMENT_PERMISSION_EDIT_ANY);
-        info("Log in as Mary");
-        manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-        homePagePlatform.goToWiki();
-
-        info("Move wiki page 1 to page 2");
-        wikiHomePage.goToAPage(wiki1);
-        wikiManagement.movePageWhenUserDoesNotHavePerMissionInDestination(wiki1, "", false);
+        ELEMENT_MORE_LINK.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(ELEMENT_MOVE_PAGE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(byXpath(ELEMENT_WIKI_PAGE_MOVE_POPUP_NODE.replace("${name}", wiki2))).waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
+        $(ELEMENT_CANCEL_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        info("Move a page when user have edit permission on page");
         manageLogInOut.signIn(DATA_USER1, "gtngtn");
-        homePagePlatform.goToWiki();
-        wikiHomePage.deleteWiki(wiki1);
-
-
-    }
-
-    /**
-     * <li> Case ID:139431.</li>
-     * <li> Test Case Name: Move a page when user have edit permission on page.</li>
-     * <li> Pre-Condition: </li>
-     * <li> Post-Condition: </li>
-     * Step Number: 1
-     * Step Name: Step 1: Create a page
-     * Step Description:
-     * - Click [Add Page] --> [Blank Page]/[From Template...]
-     * - Put title, content
-     * - Click [Save]
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - By default, the [Create Wiki page] is displayed in the [Rich Text] mode
-     * - New page is created successfully
-     * Step Number: 2
-     * Step Name: Step 2: Set permission for page
-     * Step Description:
-     * - Select page above
-     * - Click [More] -->  [Page Permissions] to set permission for this page
-     * that any user/group can edit this page
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * Page is added permission
-     * Step Number: 3
-     * Step Name: Step 3: Open form to move page
-     * Step Description:
-     * - Login by any user
-     * - Select page at step 1
-     * - Click on [More] --> [Move Page]
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * - Form to move page appears
-     * <p>
-     * Step Number: 4
-     * Step Name: Step 4: Move page
-     * Step Description:
-     * - Select the destination page
-     * - Click on Move
-     * Input Data:
-     * <p>
-     * Expected Outcome:
-     * New page is moved to the destination page
-     */
-    @Test
-    @Tag("wabis")
-    public void test07_MoveAPageWhenUserHasEditPermissionOnPage() {
-        info("Test 7: Move a page when user have edit permission on page");
-
-        String wiki1 = "wiki1" + getRandomNumber();
-        String wiki2 = "wiki2" + getRandomNumber();
+        String wiki3 = "wiki3" + getRandomNumber();
+        String wiki4 = "wiki4" + getRandomNumber();
         info("Create wiki page 1 with full permission");
         homePagePlatform.goToWiki();
         wikiHomePage.goToAddBlankPage();
-        richTextEditor.addSimplePage(wiki1, wiki1);
+        richTextEditor.addSimplePage(wiki3, wiki3);
         wikiManagement.saveAddPage();
-        wikiValidattions.verifyTitleWikiPage(wiki1);
-
+        wikiValidattions.verifyTitleWikiPage(wiki3);
         info("add Edit Permission for Mary in wiki page 1");
         wikiHomePage.goToPermissions();
         wikiPermission.addPermisisonByType(DATA_USER2);
         wikiPermission.selectPermission(DATA_USER2, WikiPermission.permissionType.Edit_Pages);
         wikiPermission.savePermisison();
-
         info("Create wiki page 2 with full permission");
         wikiHomePage.goToHomeWikiPage();
         wikiHomePage.goToAddBlankPage();
-        richTextEditor.addSimplePage(wiki2, wiki2);
+        richTextEditor.addSimplePage(wiki4, wiki4);
         wikiManagement.saveAddPage();
-        wikiValidattions.verifyTitleWikiPage(wiki2);
-
+        wikiValidattions.verifyTitleWikiPage(wiki4);
         info("add Edit Permission for Mary in wiki page 2");
         wikiHomePage.goToPermissions();
         wikiPermission.addPermisisonByType(DATA_USER2);
@@ -1120,18 +740,21 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         info("Log in as Mary");
         manageLogInOut.signIn(DATA_USER2, DATA_PASS);
         homePagePlatform.goToWiki();
-
         info("Move wiki page 1 to page 2");
-        wikiHomePage.goToAPage(wiki1);
-        wikiManagement.movePage(wiki1, wiki2);
-
+        wikiHomePage.goToAPage(wiki3);
+        wikiManagement.movePage(wiki3, wiki4);
         info("Check to make sure wiki page 1 does not exist in wiki home");
         wikiHomePage.goToHomeWikiPage();
-        wikiValidattions.verifyWikiPageNotDisplayedInWikiHome(wiki1);
+        wikiValidattions.verifyWikiPageNotDisplayedInWikiHome(wiki3);
         info("Check to make sure wiki page 1 exists under wiki page 2");
-        wikiHomePage.goToAPage(wiki2);
-        wikiValidattions.verifyTitleWikiPage(wiki2);
+        wikiHomePage.goToAPage(wiki4);
+        wikiValidattions.verifyTitleWikiPage(wiki4);
         homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(wiki4);
+        manageLogInOut.signIn(DATA_USER1, "gtngtn");
+        homePagePlatform.goToWiki();
+        wikiHomePage.deleteWiki(wiki0);
+        wikiHomePage.deleteWiki(wiki1);
         wikiHomePage.deleteWiki(wiki2);
 
     }
@@ -1207,8 +830,62 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
      */
     @Test
     @Tag("wabis")
-    public void test08_CheckControlComplexSubpagesTreeWithNameDuplicatedInTheTargetSpace() {
-        info("Test 15 Check Redirection after a move to another space");
+    public void test08_SpaceNamesDisplayedInLocationLabelsShouldBeUserFriendlyAndNotTechnicalThenCheckControlComplexSubpagesTreeWithNameDuplicatedInTheTargetSpace() {
+
+        info("Space names displayed in location labels should be user friendly and not technical");
+
+        String space3 = "space3" + getRandomNumber();
+        String wiki1 = "wiki1" + getRandomNumber();
+        String space4 = "space4" + getRandomNumber();
+        info("Create data test");
+        info("Create Space 1 with 1 wiki page");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(space3, space3);
+
+        info("Create wiki page 1");
+        spaceHomePage.goToWikiTab();
+        wikiHomePage.goToAddBlankPage();
+        richTextEditor.addSimplePage(wiki1, wiki1);
+        wikiManagement.saveAddPage();
+        wikiValidattions.verifyTitleWikiPage(wiki1);
+        info("Verify that the page is restricted");
+        wikiValidattions.verifyRestrictedPage();
+
+        info("Create Space 2 with no wiki page");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.addNewSpaceSimple(space4, space4);
+        info("Move wiki page from space 1 to space 2");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.searchSpace(space3, "");
+        spaceHomePage.goToSpace(space3);
+        spaceHomePage.goToWikiTab();
+
+        info("Move wiki page 1 to space 2");
+        wikiHomePage.goToAPage(wiki1);
+        wikiManagement.movePageDiffDestination(wiki1, "Wiki Home", space4, true);
+
+        info("Check to make sure wiki page 1 does not exist in Space 1");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.searchSpace(space3, "");
+        spaceManagement.goToSpace(space3);
+        spaceHomePage.goToWikiTab();
+        wikiValidattions.verifyWikiPageNotDisplayedInWikiHome(wiki1);
+        info("Wiki page 1 does not exist in Space 1");
+
+        info("Check to make sure wiki page 1 exist in Space 2");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.searchSpace(space4, "");
+        spaceManagement.goToSpace(space4);
+        spaceHomePage.goToWikiTab();
+        wikiValidattions.verifyTitleWikiPage(wiki1);
+        info("Wiki page 1 exist in Space 2");
+        homePagePlatform.goToMySpaces();
+        spaceManagement.searchSpace(space3, "");
+        spaceManagement.deleteSpace(space3, false);
+        spaceManagement.searchSpace(space4, "");
+        spaceManagement.deleteSpace(space4, false);
+
+        info("Check Redirection after a move to another space");
         info("Create a space 1: moving space");
         String space1 = "space1" + getRandomNumber();
         homePagePlatform.goToMySpaces();
@@ -1247,6 +924,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         info("Insert image 1");
         richTextEditor.goToAttachedImageLink();
         richTextEditor.insertImage(image1, true);
+        sleep(1000);
         wikiManagement.saveAddPage();
         info("Page is add/edited successfully");
         wikiValidattions.verifyTitleWikiPage(page1);
@@ -1256,6 +934,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         wikiHomePage.goToEditPage();
         richTextEditor.goToAttachedImageLink();
         richTextEditor.insertImage(image2, true);
+        sleep(1000);
         wikiManagement.saveAddPage();
         info("Page is add/edited successfully");
         wikiValidattions.verifyTitleWikiPage(page1);
@@ -1286,6 +965,7 @@ public class WikiBasicActionMoveMovePageTestIT extends Base {
         info("Insert image 1");
         richTextEditor.goToAttachedImageLink();
         richTextEditor.insertImage(image1, true);
+        sleep(1000);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(subPage2);
 

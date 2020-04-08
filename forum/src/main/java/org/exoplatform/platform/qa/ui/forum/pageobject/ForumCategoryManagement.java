@@ -133,16 +133,14 @@ public class ForumCategoryManagement {
      */
     public void deleteCategory(String nameCat) {
         // TODO Auto-generated method stub
-        sleep(Configuration.timeout);
         info("Wait the category is shown");
         if ($(ELEMENT_MENU_MANAGE_CATEGORY).is(not(exist))) {
-            ELEMENT_CAT_CONTAINER.find(byText(nameCat)).waitUntil(appears, Configuration.timeout).click();
+            ELEMENT_CAT_CONTAINER.find(byText(nameCat)).waitUntil(appears, Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
         }
         info("Select Delete link");
         selectItemManageCategoryMenu(specifManageCategoryMenu.DELETE);
         info("Verify that the category is deleted");
-        sleep(Configuration.timeout);
-        $(withText(nameCat)).shouldNot(exist);
+        $(withText(nameCat)).waitUntil(Condition.not(exist),Configuration.openBrowserTimeoutMs);
         info("The category is deleted successfully");
 
     }

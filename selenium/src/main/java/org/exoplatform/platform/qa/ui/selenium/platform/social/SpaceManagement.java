@@ -56,9 +56,8 @@ public class SpaceManagement {
       ELEMENT_SPACES_LIST.find(byText(spaceName)).parent().parent().parent().find(byText("Delete")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       if (isVerify)
         alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
-      $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
-      sleep(Configuration.collectionsTimeout);
-      ELEMENT_SPACES_LIST.find(byText(spaceName)).waitUntil(Condition.disappear, Configuration.collectionsTimeout);
+      $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+      ELEMENT_SPACES_LIST.find(byText(spaceName)).waitUntil(Condition.disappear, Configuration.collectionsTimeout + Configuration.collectionsTimeout);
     }
   }
 
@@ -82,11 +81,10 @@ public class SpaceManagement {
   public void addNewSpaceSimple(String name, String desc, int... params) {
     ELEMENT_ADDNEWSPACE_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
-    ELEMENT_SPACE_DESCRIPTION_INPUT.waitUntil(Condition.visible, Configuration.timeout).setValue(desc);
+    ELEMENT_SPACE_DESCRIPTION_INPUT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(desc);
     info("Save all changes");
-    ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(Configuration.timeout);
-    ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
+    ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout);
   }
 
   /**
@@ -476,13 +474,11 @@ public class SpaceManagement {
    */
   public void searchSpace(String name, String... number) {
     info("Waiting my space is shown");
-    sleep(Configuration.timeout);
-    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs + Configuration.timeout);
     info("Input the space into search text box");
-    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.timeout).setValue(name);
-    sleep(Configuration.timeout);
+    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
     info("evt.click on Search button");
-    $(ELEMENT_MY_SPACE_SEARCH_BTN).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_MY_SPACE_SEARCH_BTN).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
