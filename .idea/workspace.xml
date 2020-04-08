@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7bae155a-78b0-49ab-9f7e-bff850c8ce2c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SocialBasicTestsWithUserTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SocialBasicTestsWithUserTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/forum/target/" />
     <ignored path="$PROJECT_DIR$/task/target/" />
@@ -83,8 +82,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SocialBasicTestsWithUserTestIT.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="204" column="31" lean-forward="true" selection-start-line="204" selection-start-column="31" selection-end-line="204" selection-end-column="31" />
+            <state relative-caret-position="323">
+              <caret line="204" column="25" lean-forward="true" selection-start-line="204" selection-start-column="25" selection-end-line="204" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -249,7 +248,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -306,11 +304,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1586059404896" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1586371900750" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -336,7 +335,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.SocialBasicTestsWithUserTestIT.test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment">
+  <component name="RunManager" selected="JUnit.SocialBasicTestsWithUserTestIT">
     <configuration name="CalendarBasicTestsInSpaceTestIT.test01_AddEventInSpace" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
@@ -350,6 +349,24 @@
       <option name="METHOD_NAME" value="test01_AddEventInSpace" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://plfent-5.3.1-rc01-autoqa01.acceptance10.exoplatform.org" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ForumCategoryTestIT.test02_AddACategory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-forum" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.forum.smoke.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.forum.smoke" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.forum.smoke.ForumCategoryTestIT" />
+      <option name="METHOD_NAME" value="test02_AddACategory" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=https://community-preprod.exoplatform.com" />
       <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -409,7 +426,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SocialBasicTestsWithUserTestIT.test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SOCCommentEditTestIT.test03_ckeckEditCommentInSpaceByUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
         <pattern>
@@ -418,8 +435,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SocialBasicTestsWithUserTestIT" />
-      <option name="METHOD_NAME" value="test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCCommentEditTestIT" />
+      <option name="METHOD_NAME" value="test03_ckeckEditCommentInSpaceByUser" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org" />
       <option name="PARAMETERS" value="" />
@@ -427,25 +444,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SocialBasicTestsWithUserTestIT.test02_CreateNewSpaceSearchDeletedSpace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-platform" />
+    <configuration name="SOCPeopleActivityAddTestIT.test03_add_link_without_text" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-exoTribe" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.social.*" />
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.exoTribe.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SocialBasicTestsWithUserTestIT" />
-      <option name="METHOD_NAME" value="test02_CreateNewSpaceSearchDeletedSpace" />
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.exoTribe" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.exoTribe.SOCPeopleActivityAddTestIT" />
+      <option name="METHOD_NAME" value="test03_add_link_without_text" />
       <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=https://community-preprod.exoplatform.com" />
       <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SocialBasicTestsWithUserTestIT.test02_LikeYourActivityOnSpaceAndSearchDeletedSpace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SocialBasicTestsWithUserTestIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
         <pattern>
@@ -455,44 +472,8 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
       <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SocialBasicTestsWithUserTestIT" />
-      <option name="METHOD_NAME" value="test02_LikeYourActivityOnSpaceAndSearchDeletedSpace" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SocialBasicTestsWithUserTestIT.test09_CreateNewSpaceSearchDeletedSpace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-platform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.social.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SocialBasicTestsWithUserTestIT" />
-      <option name="METHOD_NAME" value="test09_CreateNewSpaceSearchDeletedSpace" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SocialBasicTestsWithUserTestIT.test12_likeYourActivityOnSpace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-platform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.social.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SocialBasicTestsWithUserTestIT" />
-      <option name="METHOD_NAME" value="test12_likeYourActivityOnSpace" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org" />
       <option name="PARAMETERS" value="" />
       <method v="2">
@@ -527,25 +508,43 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="org.exoplatform.platform.qa.ui.exoTribe in platform-qa-ui-exoTribe" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-exoTribe" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.exoTribe.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.exoTribe" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=https://community-preprod.exoplatform.com" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="JUnit.CalendarBasicTestsInSpaceTestIT.test01_AddEventInSpace" />
       <item itemvalue="JUnit.PlfNavigationTopNavigationTestIT.test05_CreateANewTaskViaTheTopNavigation" />
       <item itemvalue="JUnit.PlfUnifiedSearchTestIT.test13_checkUnifiedSearchNotWorkingWithFilesContainingDashInTheirTitles" />
       <item itemvalue="JUnit.PortletInSpaceHomePageTestIT.test04_CheckTheSpaceWhoIsOnlinePortlet" />
       <item itemvalue="JUnit.org.exoplatform.platform.qa.ui.chat.smoke in platform-qa-ui-chat" />
-      <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment" />
-      <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test09_CreateNewSpaceSearchDeletedSpace" />
-      <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test02_CreateNewSpaceSearchDeletedSpace" />
-      <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test12_likeYourActivityOnSpace" />
-      <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test02_LikeYourActivityOnSpaceAndSearchDeletedSpace" />
+      <item itemvalue="JUnit.org.exoplatform.platform.qa.ui.exoTribe in platform-qa-ui-exoTribe" />
+      <item itemvalue="JUnit.SOCPeopleActivityAddTestIT.test03_add_link_without_text" />
+      <item itemvalue="JUnit.ForumCategoryTestIT.test02_AddACategory" />
+      <item itemvalue="JUnit.SOCCommentEditTestIT.test03_ckeckEditCommentInSpaceByUser" />
+      <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment" />
-        <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test02_LikeYourActivityOnSpaceAndSearchDeletedSpace" />
-        <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test12_likeYourActivityOnSpace" />
-        <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test02_CreateNewSpaceSearchDeletedSpace" />
-        <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test09_CreateNewSpaceSearchDeletedSpace" />
+        <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT" />
+        <item itemvalue="JUnit.SOCCommentEditTestIT.test03_ckeckEditCommentInSpaceByUser" />
+        <item itemvalue="JUnit.ForumCategoryTestIT.test02_AddACategory" />
+        <item itemvalue="JUnit.SOCPeopleActivityAddTestIT.test03_add_link_without_text" />
+        <item itemvalue="JUnit.org.exoplatform.platform.qa.ui.exoTribe in platform-qa-ui-exoTribe" />
       </list>
     </recent_temporary>
   </component>
@@ -606,7 +605,7 @@
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1533" height="875" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.77629066" visible="true" weight="0.23335575" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" visible="true" weight="0.2784129" />
       <window_info id="Structure" order="1" sideWeight="0.22285715" side_tool="true" weight="0.24815063" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -620,7 +619,7 @@
       <window_info anchor="bottom" id="Run" order="4" sideWeight="0.737727" weight="0.4772118" />
       <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.8473436" weight="0.49865952" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.58042896" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" visible="true" weight="0.48659518" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" visible="true" weight="0.29758713" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.26227304" side_tool="true" weight="0.39008042" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.5683646" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49831876" weight="0.48927614" />
@@ -632,7 +631,7 @@
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info anchor="right" id="Maven" order="7" sideWeight="0.7607527" weight="0.12172159" />
+      <window_info anchor="right" id="Maven" order="7" sideWeight="0.7607527" weight="0.1466039" />
       <window_info anchor="right" id="Ant Build" order="8" sideWeight="0.49867374" weight="0.09683927" />
     </layout>
     <layout-to-restore>
@@ -1043,6 +1042,12 @@
           <properties />
           <option name="timeStamp" value="3988" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCPeopleActivityAddTestIT.java</url>
+          <line>70</line>
+          <properties />
+          <option name="timeStamp" value="4078" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -1176,13 +1181,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/ManageLogInOutLocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db.json" />
     <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/PlatformBase.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1294,8 +1292,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/forum/src/test/java/org/exoplatform/platform/qa/ui/forum/smoke/ForumTopicTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="107" column="7" selection-start-line="107" selection-start-column="7" selection-end-line="107" selection-end-column="7" />
+        <state relative-caret-position="298">
+          <caret line="124" column="42" selection-start-line="124" selection-start-column="42" selection-end-line="124" selection-end-column="42" />
         </state>
       </provider>
     </entry>
@@ -1540,10 +1538,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/forum/src/test/java/org/exoplatform/platform/qa/ui/forum/smoke/ForumCategoryTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="40" column="29" selection-start-line="40" selection-start-column="29" selection-end-line="40" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SocialBasicTestsWithUserTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="204" column="31" lean-forward="true" selection-start-line="204" selection-start-column="31" selection-end-line="204" selection-end-column="31" />
+        <state relative-caret-position="323">
+          <caret line="204" column="25" lean-forward="true" selection-start-line="204" selection-start-column="25" selection-end-line="204" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
