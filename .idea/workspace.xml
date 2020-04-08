@@ -5,64 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7bae155a-78b0-49ab-9f7e-bff850c8ce2c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecms/src/main/java/org/exoplatform/platform/qa/ui/ecms/pageobject/SiteExplorerHome.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecms/src/main/java/org/exoplatform/platform/qa/ui/ecms/pageobject/SiteExplorerHome.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/src/main/java/org/exoplatform/platform/qa/ui/forum/pageobject/ForumCategoryManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/forum/src/main/java/org/exoplatform/platform/qa/ui/forum/pageobject/ForumCategoryManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/src/main/java/org/exoplatform/platform/qa/ui/forum/pageobject/ForumHomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/forum/src/main/java/org/exoplatform/platform/qa/ui/forum/pageobject/ForumHomePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/src/main/java/org/exoplatform/platform/qa/ui/forum/pageobject/ForumTopicManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/forum/src/main/java/org/exoplatform/platform/qa/ui/forum/pageobject/ForumTopicManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/LikeCommentTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/LikeCommentTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/ReplyToCommentTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/ReplyToCommentTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCActivityAddTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCActivityAddTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCActivityEditTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCActivityEditTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCCommentEditTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCCommentEditTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCHomePageTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCHomePageTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiActivitiesInSpaceTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiActivitiesInSpaceTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiAttachmentTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiAttachmentTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiBasicActionManagePageAddDeleteTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiBasicActionManagePageAddDeleteTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiBasicActionManagePageEditTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiBasicActionManagePageEditTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiBasicActionManagePageRenameTestIT.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiBasicActionOtherActionsTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiBasicActionOtherActionsTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiBasicTestWithUserTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiBasicTestWithUserTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiMacroInsertTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiMacroInsertTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiPublishActivityTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiPublishActivityTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiSearchTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiSearchTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiSettingsTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiSettingsTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiActivitiesTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiActivitiesTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionAddAutoSaveTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionAddAutoSaveTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionAddSourceEditorTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionAddSourceEditorTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionDeleteTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionDeleteTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionEditTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionEditTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionMoveMovePageTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionMovePageTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionPermalinkTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionPermalinkTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiPageInformationVersionTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiPageInformationVersionTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiSpaceSwitcherTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiSpaceSwitcherTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiTemplateTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiTemplateTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/Wiki_BasicActionAddDraftOthersTemplateTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/Wiki_BasicActionAddDraftOthersTemplateTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/ActivityStreamLocator.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/ActivityStreamLocator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/ConnectionsLocator.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/ConnectionsLocator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/ManageLogInOutLocator.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/ManageLogInOutLocator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/NavigationToolBarLocator.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/NavigationToolBarLocator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/wiki/WikiLocators.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/wiki/WikiLocators.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ConnectionsManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ConnectionsManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/HomePagePlatform.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/HomePagePlatform.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ManageLogInOut.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ManageLogInOut.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/social/SpaceManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/social/SpaceManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/social/src/main/java/org/exoplatform/platform/qa/ui/social/pageobject/IntranetNotification.java" beforeDir="false" afterPath="$PROJECT_DIR$/social/src/main/java/org/exoplatform/platform/qa/ui/social/pageobject/IntranetNotification.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/social/src/main/java/org/exoplatform/platform/qa/ui/social/pageobject/MyNotificationsSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/social/src/main/java/org/exoplatform/platform/qa/ui/social/pageobject/MyNotificationsSetting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/src/main/java/org/exoplatform/platform/qa/ui/task/pageobject/TasksManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/task/src/main/java/org/exoplatform/platform/qa/ui/task/pageobject/TasksManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/RichTextEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/RichTextEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/SourceTextEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/SourceTextEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiDraftPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiDraftPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiHomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiHomePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiPermission.java" beforeDir="false" afterPath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiPermission.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiSettingManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiSettingManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiSettingPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiSettingPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiValidattions.java" beforeDir="false" afterPath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiValidattions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCPeopleActivityAddTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCPeopleActivityAddTestIT.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/forum/target/" />
     <ignored path="$PROJECT_DIR$/task/target/" />
@@ -136,41 +80,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ManageLogInOut.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCPeopleActivityAddTestIT.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="183" lean-forward="true" selection-start-line="183" selection-end-line="183" />
+            <state relative-caret-position="130">
+              <caret line="64" column="114" selection-start-line="64" selection-start-column="114" selection-end-line="64" selection-end-column="114" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task/src/test/java/org/exoplatform/platform/qa/ui/task/smoke/TaskManagementTestIT.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/HomePagePlatform.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="26" column="29" lean-forward="true" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionMovePageTestIT.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -186,8 +103,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>test22_ChecktworepliesnotcollapsedInTasks</find>
-      <find>Notification</find>
       <find>checkNumber</find>
       <find>sabis</find>
       <find>checkAllRe</find>
@@ -216,6 +131,8 @@
       <find>ManageLogInOut</find>
       <find>HomePagePlatform</find>
       <find>WikiBasicActionMovePageTestIT</find>
+      <find>WikiBasicActionManagePageRenameTest</find>
+      <find>WikiBasicActionManagePageRenameTestIT</find>
     </findStrings>
     <replaceStrings>
       <replace>And</replace>
@@ -244,7 +161,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/DownloadFileControl.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/org/exoplatform/platform/qa/ui/core/config/driver/Driver.java" />
         <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/ecms/ECMSLocator.java" />
         <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/testbase/ElementEventTestBase.java" />
@@ -295,6 +211,7 @@
         <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SocialBasicTestsWithUserTestIT.java" />
         <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ManageLogInOut.java" />
+        <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCPeopleActivityAddTestIT.java" />
       </list>
     </option>
   </component>
@@ -398,6 +315,51 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="exoTribe" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+              <item name="wiki" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -407,7 +369,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1586311614846" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1586312717546" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -433,7 +395,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.SocialBasicTestsWithUserTestIT.test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment">
+  <component name="RunManager" selected="JUnit.SOCPeopleActivityAddTestIT.test03_add_link_without_text">
     <configuration name="CalendarBasicTestsInSpaceTestIT.test01_AddEventInSpace" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
@@ -506,6 +468,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SOCPeopleActivityAddTestIT.test03_add_link_without_text" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-exoTribe" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.exoTribe.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.exoTribe" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.exoTribe.SOCPeopleActivityAddTestIT" />
+      <option name="METHOD_NAME" value="test03_add_link_without_text" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=https://community-preprod.exoplatform.com" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SocialBasicTestsWithUserTestIT.test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
@@ -524,24 +504,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SocialBasicTestsWithUserTestIT.test02_CreateNewSpaceSearchDeletedSpace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-platform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.social.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SocialBasicTestsWithUserTestIT" />
-      <option name="METHOD_NAME" value="test02_CreateNewSpaceSearchDeletedSpace" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="SocialBasicTestsWithUserTestIT.test02_LikeYourActivityOnSpaceAndSearchDeletedSpace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
@@ -553,24 +515,6 @@
       <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
       <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SocialBasicTestsWithUserTestIT" />
       <option name="METHOD_NAME" value="test02_LikeYourActivityOnSpaceAndSearchDeletedSpace" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SocialBasicTestsWithUserTestIT.test09_CreateNewSpaceSearchDeletedSpace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-platform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.social.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SocialBasicTestsWithUserTestIT" />
-      <option name="METHOD_NAME" value="test09_CreateNewSpaceSearchDeletedSpace" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org" />
       <option name="PARAMETERS" value="" />
@@ -600,7 +544,7 @@
       <option name="MAIN_CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=https://community-preprod.exoplatform.com" />
       <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -624,6 +568,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="org.exoplatform.platform.qa.ui.exoTribe in platform-qa-ui-exoTribe" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-exoTribe" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.exoTribe.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.exoTribe" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=https://community-preprod.exoplatform.com" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="JUnit.CalendarBasicTestsInSpaceTestIT.test01_AddEventInSpace" />
       <item itemvalue="JUnit.PlfNavigationTopNavigationTestIT.test05_CreateANewTaskViaTheTopNavigation" />
@@ -631,18 +593,18 @@
       <item itemvalue="JUnit.PortletInSpaceHomePageTestIT.test04_CheckTheSpaceWhoIsOnlinePortlet" />
       <item itemvalue="JUnit.org.exoplatform.platform.qa.ui.chat.smoke in platform-qa-ui-chat" />
       <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment" />
-      <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test09_CreateNewSpaceSearchDeletedSpace" />
-      <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test02_CreateNewSpaceSearchDeletedSpace" />
       <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test12_likeYourActivityOnSpace" />
       <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test02_LikeYourActivityOnSpaceAndSearchDeletedSpace" />
+      <item itemvalue="JUnit.org.exoplatform.platform.qa.ui.exoTribe in platform-qa-ui-exoTribe" />
+      <item itemvalue="JUnit.SOCPeopleActivityAddTestIT.test03_add_link_without_text" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.SOCPeopleActivityAddTestIT.test03_add_link_without_text" />
+        <item itemvalue="JUnit.org.exoplatform.platform.qa.ui.exoTribe in platform-qa-ui-exoTribe" />
         <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment" />
         <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test02_LikeYourActivityOnSpaceAndSearchDeletedSpace" />
         <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test12_likeYourActivityOnSpace" />
-        <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test02_CreateNewSpaceSearchDeletedSpace" />
-        <item itemvalue="JUnit.SocialBasicTestsWithUserTestIT.test09_CreateNewSpaceSearchDeletedSpace" />
       </list>
     </recent_temporary>
   </component>
@@ -660,18 +622,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="SocialBasicTestsWithUserTestIT_test01_LikeActivity - 2020.04.05 at 05h 20m 46s.xml">
-      <configuration name="SocialBasicTestsWithUserTestIT.test01_LikeActivity" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SocialBasicTestsWithUserTestIT_test01_LikeActivity - 2020.04.05 at 05h 21m 41s.xml">
-      <configuration name="SocialBasicTestsWithUserTestIT.test01_LikeActivity" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SocialBasicTestsWithUserTestIT_test01_LikeActivity - 2020.04.05 at 05h 26m 04s.xml">
-      <configuration name="SocialBasicTestsWithUserTestIT.test01_LikeActivity" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SocialBasicTestsWithUserTestIT_test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment - 2020.04.05 at 05h 31m 21s.xml">
-      <configuration name="SocialBasicTestsWithUserTestIT.test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="SocialBasicTestsWithUserTestIT_test09_CreateNewSpaceSearchDeletedSpace - 2020.04.05 at 05h 50m 50s.xml">
       <configuration name="SocialBasicTestsWithUserTestIT.test09_CreateNewSpaceSearchDeletedSpace" configurationId="JUnit" />
     </history-entry>
@@ -690,6 +640,18 @@
     <history-entry file="SocialBasicTestsWithUserTestIT_test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment - 2020.04.05 at 06h 01m 13s.xml">
       <configuration name="SocialBasicTestsWithUserTestIT.test01_AddLinkWithoutTextLikeActivityLikeUnlikeComment" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="org_exoplatform_platform_qa_ui_exoTribe_in_platform-qa-ui-exoTribe - 2020.04.08 at 04h 10m 13s.xml">
+      <configuration name="org.exoplatform.platform.qa.ui.exoTribe in platform-qa-ui-exoTribe" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="org_exoplatform_platform_qa_ui_exoTribe_in_platform-qa-ui-exoTribe - 2020.04.08 at 04h 18m 54s.xml">
+      <configuration name="org.exoplatform.platform.qa.ui.exoTribe in platform-qa-ui-exoTribe" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SOCPeopleActivityAddTestIT_test03_add_link_without_text - 2020.04.08 at 04h 20m 41s.xml">
+      <configuration name="SOCPeopleActivityAddTestIT.test03_add_link_without_text" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SOCPeopleActivityAddTestIT_test03_add_link_without_text - 2020.04.08 at 04h 21m 28s.xml">
+      <configuration name="SOCPeopleActivityAddTestIT.test03_add_link_without_text" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -702,8 +664,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1533" height="875" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" weight="0.22932078" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" visible="true" weight="0.22932078" />
       <window_info id="Structure" order="1" sideWeight="0.22285715" side_tool="true" weight="0.24815063" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -714,10 +677,10 @@
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49966374" weight="0.38873994" />
       <window_info anchor="bottom" id="Cvs" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.737727" weight="0.4772118" />
-      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.8473436" weight="0.49865952" />
+      <window_info active="true" anchor="bottom" id="Run" order="4" sideWeight="0.737727" visible="true" weight="0.40348527" />
+      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.8473436" weight="0.43297586" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.58042896" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" visible="true" weight="0.46380696" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" weight="0.3994638" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.26227304" side_tool="true" weight="0.39008042" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.5683646" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49831876" weight="0.48927614" />
@@ -733,7 +696,7 @@
       <window_info anchor="right" id="Ant Build" order="8" sideWeight="0.49867374" weight="0.09683927" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" weight="0.22932078" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.77629066" visible="true" weight="0.22932078" />
       <window_info id="Structure" order="1" sideWeight="0.22285715" side_tool="true" weight="0.24815063" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -744,10 +707,10 @@
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49966374" weight="0.38873994" />
       <window_info anchor="bottom" id="Cvs" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.737727" weight="0.4772118" />
+      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.737727" visible="true" weight="0.5107239" />
       <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.8473436" weight="0.49865952" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.58042896" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" visible="true" weight="0.46380696" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" weight="0.3994638" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.26227304" side_tool="true" weight="0.39008042" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.5683646" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49831876" weight="0.48927614" />
@@ -1140,6 +1103,12 @@
           <properties />
           <option name="timeStamp" value="3988" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCPeopleActivityAddTestIT.java</url>
+          <line>69</line>
+          <properties />
+          <option name="timeStamp" value="4078" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -1273,41 +1242,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar!/com/google/gson/internal/ConstructorConstructor.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="91" selection-start-line="91" selection-end-line="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/forum/src/main/java/org/exoplatform/platform/qa/ui/forum/pageobject/ForumCategoryManagement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="142" column="94" selection-start-line="142" selection-start-column="94" selection-end-line="142" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/forum/src/main/java/org/exoplatform/platform/qa/ui/forum/pageobject/ForumHomePage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="45" column="14" selection-start-line="45" selection-start-column="14" selection-end-line="45" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/jdk1.8.0_211/jre/lib/rt.jar!/sun/reflect/NativeMethodAccessorImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="33" column="31" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/jdk1.8.0_211/src.zip!/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="300" column="30" selection-start-line="300" selection-start-column="30" selection-end-line="300" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/functional/SOCPeopleActivityCommentTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
@@ -1594,16 +1528,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ManageLogInOut.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="183" lean-forward="true" selection-start-line="183" selection-end-line="183" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/exoTribe/pageobject/TribeSourceTextEditor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="118">
@@ -1645,14 +1569,62 @@
     <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/HomePagePlatform.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
-          <caret line="26" column="29" lean-forward="true" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
+          <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiBasicActionMovePageTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+        <state relative-caret-position="151">
+          <caret line="968" column="37" selection-start-line="968" selection-start-column="37" selection-end-line="968" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ManageLogInOut.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="128" column="3" selection-start-line="128" selection-start-column="3" selection-end-line="128" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiActivitiesInSpaceTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-137">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiAttachmentTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-730">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiBasicActionManagePageAddDeleteTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2263">
+          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiBasicActionManagePageEditTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2101">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCPeopleActivityAddTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="64" column="114" selection-start-line="64" selection-start-column="114" selection-end-line="64" selection-end-column="114" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

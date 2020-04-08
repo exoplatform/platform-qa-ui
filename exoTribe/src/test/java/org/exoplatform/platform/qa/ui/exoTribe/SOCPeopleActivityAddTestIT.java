@@ -62,14 +62,15 @@ public class SOCPeopleActivityAddTestIT extends BaseTribe {
     ELEMENT_TAB_ADD_LINK.click();
     ELEMENT_INPUT_LINK.setValue(link);
     ELEMENT_BUTTON_ATTACH_LINK.click();
-    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.be(Condition.enabled), Configuration.timeout);
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.be(Condition.enabled), Configuration.openBrowserTimeoutMs);
     $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
-    $(byText(link)).should(Condition.exist);
+    $(byText(link)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
     $(byText(link)).click();
+    sleep(1000);
     switchTo().window(1);
     assertEquals(title, Selenide.title());
     switchTo().window(0);
-    String id=$(byText(link)).parent()
+    String id=$(byText(link)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).parent()
             .parent()
             .parent()
             .parent()
