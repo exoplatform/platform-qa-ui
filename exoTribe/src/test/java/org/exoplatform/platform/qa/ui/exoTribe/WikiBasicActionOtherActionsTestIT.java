@@ -28,6 +28,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+@Tag("tribe")
 @Tag("wiki")
 @Tag("sniff")
 public class WikiBasicActionOtherActionsTestIT extends BaseTribe {

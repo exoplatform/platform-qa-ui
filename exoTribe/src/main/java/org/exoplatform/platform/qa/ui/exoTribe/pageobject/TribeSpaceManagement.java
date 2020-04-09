@@ -81,7 +81,7 @@ public class TribeSpaceManagement {
   public void addNewSpaceSimple(String name, String desc, int... params) {
     ELEMENT_ADDNEWSPACE_TRIBE_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
-    ELEMENT_SPACE_DESCRIPTION_INPUT.waitUntil(Condition.visible, Configuration.timeout).setValue(desc);
+    ELEMENT_SPACE_DESCRIPTION_INPUT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(desc);
     info("Save all changes");
     ELEMENET_SPACE_CREATE_TRIBE_BUTTON.waitUntil(Condition.visible, 60000).click();
     ELEMENET_SPACE_CREATE_TRIBE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs + Configuration.openBrowserTimeoutMs);

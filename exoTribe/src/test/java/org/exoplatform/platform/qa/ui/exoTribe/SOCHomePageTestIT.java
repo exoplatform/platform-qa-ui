@@ -23,6 +23,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 /**
  * Created by exo on 11/09/17.
  */
+@Tag("tribe")
 @Tag("social")
 @Tag("sniff")
 public class SOCHomePageTestIT extends BaseTribe {

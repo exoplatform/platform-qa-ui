@@ -18,6 +18,7 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+@Tag("tribe")
 @Tag("sniff")
 @Tag("wiki")
 public class WikiActivitiesInSpaceTestIT extends BaseTribe {
