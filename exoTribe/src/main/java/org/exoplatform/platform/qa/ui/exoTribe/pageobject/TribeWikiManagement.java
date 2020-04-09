@@ -15,6 +15,8 @@ import org.openqa.selenium.interactions.Actions;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_TEMPLATE_TRIBE_SELECT_BTN;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_WIKI_TRIBE_MOVE_POPUP_SAVE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -93,10 +95,9 @@ public class TribeWikiManagement {
    */
   public void saveAddPage() {
     info("Save all changes");
-    sleep(Configuration.timeout);
     executeJavaScript("window.scrollBy(0,-5500)", "");
-    ELEMENT_SAVE_BUTTON_ADD_PAGE.waitUntil(Condition.visible,Configuration.timeout).click();
-   $(ELEMENT_SAVE_BUTTON_ADD_PAGE).waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+    ELEMENT_SAVE_BUTTON_ADD_PAGE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout).click();
+    $(ELEMENT_SAVE_BUTTON_ADD_PAGE).waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
     info("Wiki page simple is created successfully");
 
   }
@@ -264,7 +265,7 @@ public class TribeWikiManagement {
     $(ELEMENT_MOVE_PAGE).hover().click();
     ELEMENT_SELECT_DESTINATION.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_POPUP_SELECT_DESTINATION.find(byText(destination)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    $(ELEMENT_WIKI_PAGE_MOVE_POPUP_SAVE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_WIKI_TRIBE_MOVE_POPUP_SAVE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -466,20 +467,18 @@ public class TribeWikiManagement {
    */
   public void addSimpleWikiPageByTemplate(SelenideElement template, String newTitle) {
     info("Select a template");
-    sleep(Configuration.timeout);
     selectTemplateWikiPage(template);
-    sleep(2000);
-    $(ELEMENT_TEMPLATE_SELECT_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_TEMPLATE_TRIBE_SELECT_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     if(!$(ELEMENT_TITLE_WIKI_INPUT).exists())
     {
       do {
         //refresh();
         testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-        sleep(2000);
+        sleep(1000);
       }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
     }
     if (!newTitle.isEmpty())
-      $(ELEMENT_TITLE_WIKI_INPUT).setValue(newTitle);
+      $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(newTitle);
     info("Save all changes");
     saveAddPage();
   }
@@ -493,9 +492,9 @@ public class TribeWikiManagement {
   public void addSimplePageByTemplateWithAutoSave(SelenideElement template, String newTitle) {
     info("Select a template");
     selectTemplateWikiPage(template);
-    $(ELEMENT_TEMPLATE_SELECT_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_TEMPLATE_TRIBE_SELECT_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    sleep(Configuration.timeout);
+    sleep(1000);
     if (!newTitle.isEmpty())
       testBase.getExoWebDriver().getWebDriver().navigate().refresh();
       $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,15000).setValue(newTitle);

@@ -72,6 +72,17 @@ public class TribeActivityStream {
     }
 
     /**
+     * Check if there is an activity in the stream
+     *
+     * @param name String
+     */
+    public void checkActivity(String name) {
+        info("Verify that the activity of the name:" + name + " is shown");
+        $(byText(name)).waitUntil(Condition.visible, openBrowserTimeoutMs);
+        info("The activity of the name:" + name + " is shown successfully");
+    }
+
+    /**
      * Share activity
      */
     public void shareActivity() {

@@ -86,7 +86,7 @@ public class WikiActivitiesInSpaceTestIT extends BaseTribe {
     tribeWikiHomePage.goToAddBlankPage();
     wikiManagement.goToSourceEditor();
     tribeSourceTextEditor.addSimplePage(title, content);
-    wikiManagement.saveAddPage();
+    tribeWikiManagement.saveAddPage();
     getExoWebDriver().getWebDriver().navigate().refresh();
     wikiValidattions.verifyTitleWikiPage(title);
     info("Check the Activity");
@@ -96,12 +96,12 @@ public class WikiActivitiesInSpaceTestIT extends BaseTribe {
     tribeWikiHomePage.goToAPage(title);
     wikiHomePage.goToEditPage();
     tribeSourceTextEditor.editSimplePage(newTitle, newContent);
-    wikiManagement.saveAddPage();
+    tribeWikiManagement.saveAddPage();
     getExoWebDriver().getWebDriver().navigate().refresh();
     wikiValidattions.verifyTitleWikiPage(newTitle);
     homePagePlatform.goToMySpacesTribe();
-    spaceManagement.searchSpace(space);
-    spaceManagement.accessToSearchedSpace();
+    tribeSpaceManagement.searchSpace(space);
+    tribeSpaceManagement.accessToSearchedSpace();
     spaceHomePage.goToWikiTab();
     tribeWikiHomePage.deleteWiki(newTitle);
     wikiValidattions.verifyWikiPageNotDisplayedInWikiHome(newTitle);

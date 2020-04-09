@@ -55,7 +55,7 @@ public class TribeWikiHomePage {
      */
     public void goToAddTemplateWikiPage() {
         info("--Go to add template wiki page--");
-        $(ELEMENT_ADD_PAGE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(ELEMENT_ADD_PAGE_TRIBE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         $(ELEMENT_FROM_TEMPLATE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
     }
 
@@ -73,8 +73,7 @@ public class TribeWikiHomePage {
      */
     public void goToHomeWikiPage() {
         info("-- Go to wiki home page --");
-        sleep(2000);
-        $(ELEMENT_WIKI_HOME_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(ELEMENT_WIKI_HOME_PAGE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 
     /**

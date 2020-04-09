@@ -100,6 +100,9 @@ public class exoTribeLocator {
 
     public static final By ELEMENT_CONTENT_WIKI_INPUT_TRIBE = By.xpath("//*[@id='body']");
 
+    public static final By ELEMENT_TEMPLATE_TRIBE_SELECT_BTN = By.xpath("//*[@id='UIWikiSelectTemplateForm']//*[text()='Sélectionner']");
+
+  public static final By ELEMENT_WIKI_TRIBE_MOVE_POPUP_SAVE = By.xpath(".//*[@id='UIWikiMovePageForm']//button[contains(text(),'Déplacer')]");
 
 }
 
