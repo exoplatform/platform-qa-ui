@@ -77,29 +77,6 @@ public class SOCNotificationsAdministrationTestIT extends Base {
     manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
   }
 
-
-  /**
-   * <li>Case ID:121951.</li>
-   * <li>Test Case Name: Notification Administration.</li> Step Number: 1 Step
-   * Name: Step 1: Access notification Administration Step Description: - Login as
-   * admin - From top navigation, click Administration/Portal/Email Notification
-   * Input Data: Expected Outcome: - Email Notifications Administration page
-   * appears as attachment with 1. Notification types with 3 columns: +
-   * [Notifications] list all activities which support notification email +
-   * [Title] Title of activities which is shown in [Notification setting] table +
-   * [Enable] let users enable/disable notification option
-   */
-  @Test
-  public void test01_NotificationAdministration() {
-    info("Test 1: Notification Administration");
-
-    navigationToolbar.goToAdminNotifications();
-    waitForAndGetElement(ELEMENT_TITLE_ADMIN_NOTIFICATIONS_PAGE, 2000, 1);
-    waitForAndGetElement(ELEMENT_NOTIFICATION_GRID_TITLE, 2000, 1);
-    waitForAndGetElement(ELEMENT_TITLE_NOTIFICATION_GRID, 2000, 1);
-    waitForAndGetElement(ELEMENT_ENABLE_NOTIFICATION_GRID, 2000, 1);
-  }
-
   /**
    * <li>Case ID:122975.</li>
    * <li>Test Case Name: Enable an Intranet Notification type.</li>
@@ -120,20 +97,28 @@ public class SOCNotificationsAdministrationTestIT extends Base {
    * is displayed in the list
    */
   @Test
-  public void test05_EnableAnIntranetNotificationType() {
-    info("Test 4: Enable an Intranet Notification type");
+  public void test05_EnableThenDisableAnIntranetNotificationType() {
+
     String spaceName = "spaceName" + getRandomNumber();
-
-    navigationToolbar.goToAdminNotifications();
-    waitForAndGetElement(ELEMENT_TITLE_ADMIN_NOTIFICATIONS_PAGE, 2000, 1);
-
-    notificationsAdminSeting.enableNotification(NotificationsAdminSeting.notificationType.Space_Invitation_intranet);
-    navigationToolbar.goToMyNotifications();
-    waitForAndGetElement(ELEMENT_SPACE_INVITATION_INTRANET_NOTIFICATION_ICON, 2000, 1);
-
+    String text = "text" + getRandomNumber();
+    String comment = "comment" + getRandomNumber();
     String username = "username" + getRandomString();
     String email = username + "@gmail.com";
     String password = "123456";
+
+    info("Notification Administration");
+    navigationToolbar.goToAdminNotifications();
+    $(ELEMENT_TITLE_ADMIN_NOTIFICATIONS_PAGE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+    $(ELEMENT_NOTIFICATION_GRID_TITLE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);;
+    $(ELEMENT_TITLE_NOTIFICATION_GRID).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);;
+    $(ELEMENT_ENABLE_NOTIFICATION_GRID).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);;
+    navigationToolbar.goToAdminNotifications();
+    $(ELEMENT_TITLE_ADMIN_NOTIFICATIONS_PAGE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);;
+
+    info("Enable an Intranet Notification type");
+    notificationsAdminSeting.enableNotification(NotificationsAdminSeting.notificationType.Space_Invitation_intranet);
+    navigationToolbar.goToMyNotifications();
+    $(ELEMENT_SPACE_INVITATION_INTRANET_NOTIFICATION_ICON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);;
     info("Add new user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username, password, email, username, username);
@@ -147,83 +132,33 @@ public class SOCNotificationsAdministrationTestIT extends Base {
     navigationToolbar.goToNotificationList();
     info("Verify that the notification is listed in the list");
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(spaceName))
-                                    .parent()
-                                    .shouldHave(Condition.text("You're invited to join {space} space.".replace("{space}",
-                                                                                                               spaceName)));
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username);
-  }
-
-  /**
-   * <li>Case ID:122976.</li>
-   * <li>Test Case Name: Disable an Intranet Notification type.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition: - User A and User B are connected - User A has enabled
-   * Intranet Notification for the Comment</li>
-   * <li>Done with OSs and browsers :</li> Step Number: 1 Step Name: Step 1:
-   * Access notification Administration Step Description: - Login as admin - From
-   * top navigation, click Administration/Portal/Notifications Input Data:
-   * Expected Outcome: - Notifications Administration page is displayed
-   */
-  /*
-   * Step number: 2 Step Name: Step 2: Disable one option Step Description: -
-   * Select the notification[Comment] and click the Edit icon - Untick the
-   * checkbox "Intranet Notifications - Save - In the user navigation, go to
-   * [Notifications] Input Data: Expected Outcome: The option is not shown in
-   * Notification Setting anymore. ("Someone comments on one of my activity" is
-   * not listed) Step number: 3 Step Name: Step 3: Test the disable option Step
-   * Description: - With User A post an activity - With User B, comment on the
-   * activity of User A - With User A, check notifications list from the top
-   * navigation Input Data: Expected Outcome: - No intranet notifications is
-   * displayed
-   */
-  @Test
-  public void test03_DisableAnIntranetNotificationType() {
-    info("Test 03: Disable an Intranet Notification type");
-
+            .parent()
+            .shouldHave(Condition.text("You're invited to join {space} space.".replace("{space}",
+                    spaceName)));
+    homePagePlatform.goToConnections();
+    connectionsManagement.connectToAUser(username);
     navigationToolbar.goToAdminNotifications();
-    waitForAndGetElement(ELEMENT_TITLE_ADMIN_NOTIFICATIONS_PAGE, 2000, 1);
-
+    $(ELEMENT_TITLE_ADMIN_NOTIFICATIONS_PAGE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);;
     notificationsAdminSeting.disableNotification(NotificationsAdminSeting.notificationType.AS_Comment_intranet);
     navigationToolbar.goToMyNotifications();
     waitForElementNotPresent(ELEMENT_ACTIVITY_COMMENT_ICON_INTRANET_NOTIFICATION, 2000, 1);
-
-    String text = "text" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-
-    String username = "username" + getRandomString();
-    String email = username + "@gmail.com";
-    String password = "123456";
-
-    info("Add new user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username, password, email, username, username);
-
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(username);
-
-    manageLogInOut.signIn(username, password);
-
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(DATA_USER1);
-
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-
+    info("Disable an Intranet Notification type");
     homePagePlatform.goToHomePage();
     activityStream.addActivity(text, "");
-
     manageLogInOut.signIn(username, password);
+    homePagePlatform.goToConnections();
+    connectionsManagement.acceptAConnection(DATA_USER1);
+    homePagePlatform.goToHomePage();
     activityStream.commentActivity(text, comment);
-
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToNotificationList();
-    info("Verify that the notification isnot listed in the list");
+    info("Verify that the notification is not listed in the list");
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(text)).shouldNot(Condition.exist);
     info("Reset changed data");
     navigationToolbar.goToAdminNotifications();
     notificationsAdminSeting.enableNotification(NotificationsAdminSeting.notificationType.AS_Comment_intranet);
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username);
-
   }
+
 }

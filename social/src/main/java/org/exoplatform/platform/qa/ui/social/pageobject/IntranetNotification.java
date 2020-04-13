@@ -46,7 +46,7 @@ public class IntranetNotification {
       info("Open All page by link");
       open(Configuration.baseUrl+ "portal/intranet/allNotifications/");
     }
-    $(ELEMENT_ALL_NOTIFICATIONS).exists();
+    $(ELEMENT_ALL_NOTIFICATIONS).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
   }
 
   /**

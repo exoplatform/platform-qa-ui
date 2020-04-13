@@ -182,24 +182,24 @@ public class ConnectionsManagement {
         }
       }
       $(ELEMENT_NAME_OF_PEOPLE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue("");
-      $(ELEMENT_NAME_OF_PEOPLE).waitUntil(Condition.visible,Configuration.timeout).setValue(peopleName);
+      $(ELEMENT_NAME_OF_PEOPLE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(peopleName);
     } else {
       $(ELEMENT_NAME_OF_PEOPLE).setValue("");
     }
     if (position != "" && position != null) {
-      $(ELEMENT_POSITIONS_OF_PEOPLE).waitUntil(Condition.visible,Configuration.timeout).setValue(position);
+      $(ELEMENT_POSITIONS_OF_PEOPLE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(position);
     } else {
       $(ELEMENT_POSITIONS_OF_PEOPLE).setValue("");
     }
     if (skills != "" && skills != null) {
-      $(ELEMENT_SKILL_OF_PEOPLE).waitUntil(Condition.visible,Configuration.timeout).setValue(skills);
+      $(ELEMENT_SKILL_OF_PEOPLE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(skills);
     } else {
       $(ELEMENT_SKILL_OF_PEOPLE).setValue("");
     }
-    $(ELEMENT_SEARCH_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_SEARCH_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     homePagePlatform.refreshUntil($(byClassName("spaceBox")),Condition.visible,1000);
     if (directory != "" && directory != null)
-      $(byLinkText(directory)).waitUntil(Condition.appears,Configuration.timeout).click();
+      $(byLinkText(directory)).waitUntil(Condition.appears,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**

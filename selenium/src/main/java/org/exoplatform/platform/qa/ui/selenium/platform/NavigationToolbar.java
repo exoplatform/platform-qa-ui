@@ -441,7 +441,7 @@ public class NavigationToolbar {
    */
   public void goToAdminNotifications() {
     info("Go to email notifications");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     $(ELEMENT_ADMINISTRATION_PORTAL).hover();
     $(ELEMENT_ADMINISTRATION_PORTAL_EMAIL_NOTIFICATIONS).waitUntil(Condition.appears, Configuration.timeout);
