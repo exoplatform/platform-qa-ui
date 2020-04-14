@@ -7,7 +7,7 @@
     <list default="true" id="7bae155a-78b0-49ab-9f7e-bff850c8ce2c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationTypesTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationTypesTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/social/src/main/java/org/exoplatform/platform/qa/ui/social/pageobject/MyNotificationsSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/social/src/main/java/org/exoplatform/platform/qa/ui/social/pageobject/MyNotificationsSetting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/forum/target/" />
     <ignored path="$PROJECT_DIR$/task/target/" />
@@ -85,8 +85,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationTypesTestIT.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="740" selection-start-line="740" selection-end-line="740" />
+            <state relative-caret-position="153">
+              <caret line="1770" column="7" lean-forward="true" selection-start-line="1770" selection-start-column="7" selection-end-line="1770" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -95,10 +95,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/social/SpaceManagement.java">
+        <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationIconListTestIT.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="89">
-              <caret line="86" selection-start-line="86" selection-end-line="86" />
+            <state relative-caret-position="75">
+              <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="698" column="143" selection-start-line="698" selection-start-column="143" selection-end-line="698" selection-end-column="143" />
             </state>
           </provider>
         </entry>
@@ -106,17 +115,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/social/src/main/java/org/exoplatform/platform/qa/ui/social/pageobject/MyNotificationsSetting.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="212" selection-start-line="212" selection-end-line="212" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ConnectionsManagement.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="140" selection-start-line="140" selection-end-line="140" />
+            <state relative-caret-position="161">
+              <caret line="547" selection-start-line="547" selection-end-line="547" />
             </state>
           </provider>
         </entry>
@@ -132,7 +132,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>15</find>
       <find>ELEMENT_PUBLICATION_DISPLAYMODE_CONNECTION_OPTION</find>
       <find>deleteData</find>
       <find>goToAddNewContent</find>
@@ -162,6 +161,7 @@
       <find>test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled</find>
       <find>CreateA</find>
       <find>searched</find>
+      <find>commentNoHtml</find>
     </findStrings>
     <replaceStrings>
       <replace>And</replace>
@@ -222,7 +222,6 @@
         <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java" />
         <option value="$PROJECT_DIR$/ecms/src/main/java/org/exoplatform/platform/qa/ui/ecms/pageobject/SiteExplorerHome.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCHomePageTestIT.java" />
-        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SocialBasicTestsWithUserTestIT.java" />
         <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ManageLogInOut.java" />
         <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/WikiAttachmentTestIT.java" />
@@ -240,6 +239,7 @@
         <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCManageSpacesTestIT.java" />
         <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCHomePageTestIT.java" />
         <option value="$PROJECT_DIR$/social/src/main/java/org/exoplatform/platform/qa/ui/social/pageobject/MyNotificationsSetting.java" />
+        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationTypesTestIT.java" />
       </list>
     </option>
@@ -277,7 +277,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -335,11 +334,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1586824978601" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1586896967849" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -369,7 +369,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotificationThenOnMySpaceWhenNotificationIsDisabled">
+  <component name="RunManager" selected="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test13_OtherUserPuplishActivityInSpaceThenWhenNotificationIsDisabled">
     <configuration name="CalendarBasicTestsInSpaceTestIT.test01_AddEventInSpace" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
@@ -442,7 +442,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test03_MentionIntranetNotification_InactivityMessage_Then_InCommentThenCheckNotificationsAfterAttachLink" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test07_2_LikeIntranetNotificationMergedInSpaceThenWhenNotificationIsDisabled" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
         <pattern>
@@ -452,7 +452,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
       <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCNotificationsIntranetNotificationTypesTestIT" />
-      <option name="METHOD_NAME" value="test03_MentionIntranetNotification_InactivityMessage_Then_InCommentThenCheckNotificationsAfterAttachLink" />
+      <option name="METHOD_NAME" value="test07_2_LikeIntranetNotificationMergedInSpaceThenWhenNotificationIsDisabled" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org/" />
       <option name="PARAMETERS" value="" />
@@ -460,7 +460,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotification" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test09_MentionIntranetNotification_InactivityMessageThenInCommentInSpaceWhenNotificationIsDisabled" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
         <pattern>
@@ -470,7 +470,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
       <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCNotificationsIntranetNotificationTypesTestIT" />
-      <option name="METHOD_NAME" value="test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotification" />
+      <option name="METHOD_NAME" value="test09_MentionIntranetNotification_InactivityMessageThenInCommentInSpaceWhenNotificationIsDisabled" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org/" />
       <option name="PARAMETERS" value="" />
@@ -478,7 +478,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotificationThenOnMySpaceWhenNotificationIsDisabled" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test10_MentionIntranetNotification_InComment_Then_InactivityMessageInSpace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
         <pattern>
@@ -488,7 +488,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
       <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCNotificationsIntranetNotificationTypesTestIT" />
-      <option name="METHOD_NAME" value="test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotificationThenOnMySpaceWhenNotificationIsDisabled" />
+      <option name="METHOD_NAME" value="test10_MentionIntranetNotification_InComment_Then_InactivityMessageInSpace" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org/" />
       <option name="PARAMETERS" value="" />
@@ -496,7 +496,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test13_OtherUserPuplishActivityInSpaceThenWhenNotificationIsDisabled" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
         <pattern>
@@ -506,7 +506,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
       <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCNotificationsIntranetNotificationTypesTestIT" />
-      <option name="METHOD_NAME" value="test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled" />
+      <option name="METHOD_NAME" value="test13_OtherUserPuplishActivityInSpaceThenWhenNotificationIsDisabled" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org/" />
       <option name="PARAMETERS" value="" />
@@ -514,7 +514,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test20_CreateASpace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test18_OtherUserPuplishActivityInSpaceThenWhenNotificationIsDisabled" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
         <pattern>
@@ -524,7 +524,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
       <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCNotificationsIntranetNotificationTypesTestIT" />
-      <option name="METHOD_NAME" value="test20_CreateASpace" />
+      <option name="METHOD_NAME" value="test18_OtherUserPuplishActivityInSpaceThenWhenNotificationIsDisabled" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org/" />
       <option name="PARAMETERS" value="" />
@@ -566,19 +566,19 @@
       <item itemvalue="JUnit.PlfUnifiedSearchTestIT.test13_checkUnifiedSearchNotWorkingWithFilesContainingDashInTheirTitles" />
       <item itemvalue="JUnit.PortletInSpaceHomePageTestIT.test04_CheckTheSpaceWhoIsOnlinePortlet" />
       <item itemvalue="JUnit.org.exoplatform.platform.qa.ui.chat.smoke in platform-qa-ui-chat" />
-      <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test03_MentionIntranetNotification_InactivityMessage_Then_InCommentThenCheckNotificationsAfterAttachLink" />
-      <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled" />
-      <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotification" />
-      <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test20_CreateASpace" />
-      <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotificationThenOnMySpaceWhenNotificationIsDisabled" />
+      <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test07_2_LikeIntranetNotificationMergedInSpaceThenWhenNotificationIsDisabled" />
+      <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test10_MentionIntranetNotification_InComment_Then_InactivityMessageInSpace" />
+      <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test09_MentionIntranetNotification_InactivityMessageThenInCommentInSpaceWhenNotificationIsDisabled" />
+      <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test18_OtherUserPuplishActivityInSpaceThenWhenNotificationIsDisabled" />
+      <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test13_OtherUserPuplishActivityInSpaceThenWhenNotificationIsDisabled" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotificationThenOnMySpaceWhenNotificationIsDisabled" />
-        <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled" />
-        <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotification" />
-        <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test20_CreateASpace" />
-        <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test03_MentionIntranetNotification_InactivityMessage_Then_InCommentThenCheckNotificationsAfterAttachLink" />
+        <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test13_OtherUserPuplishActivityInSpaceThenWhenNotificationIsDisabled" />
+        <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test18_OtherUserPuplishActivityInSpaceThenWhenNotificationIsDisabled" />
+        <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test10_MentionIntranetNotification_InComment_Then_InactivityMessageInSpace" />
+        <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test09_MentionIntranetNotification_InactivityMessageThenInCommentInSpaceWhenNotificationIsDisabled" />
+        <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test07_2_LikeIntranetNotificationMergedInSpaceThenWhenNotificationIsDisabled" />
       </list>
     </recent_temporary>
   </component>
@@ -596,35 +596,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test20_CreateASpace - 2020.04.14 at 02h 10m 03s.xml">
-      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test20_CreateASpace" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test07_2_LikeIntranetNotificationMergedInSpaceThenWhenNotificationIsDisabled - 2020.04.14 at 21h 48m 56s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test07_2_LikeIntranetNotificationMergedInSpaceThenWhenNotificationIsDisabled" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled - 2020.04.14 at 02h 11m 27s.xml">
-      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test07_2_LikeIntranetNotificationMergedInSpaceThenWhenNotificationIsDisabled - 2020.04.14 at 22h 12m 04s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test07_2_LikeIntranetNotificationMergedInSpaceThenWhenNotificationIsDisabled" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled - 2020.04.14 at 02h 13m 04s.xml">
-      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test07_2_LikeIntranetNotificationMergedInSpaceThenWhenNotificationIsDisabled - 2020.04.14 at 22h 15m 29s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test07_2_LikeIntranetNotificationMergedInSpaceThenWhenNotificationIsDisabled" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled - 2020.04.14 at 02h 14m 17s.xml">
-      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test10_MentionIntranetNotification_InComment_Then_InactivityMessageInSpace - 2020.04.14 at 22h 23m 37s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test10_MentionIntranetNotification_InComment_Then_InactivityMessageInSpace" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled - 2020.04.14 at 02h 15m 37s.xml">
-      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test10_MentionIntranetNotification_InComment_Then_InactivityMessageInSpace - 2020.04.14 at 22h 25m 51s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test10_MentionIntranetNotification_InComment_Then_InactivityMessageInSpace" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotification - 2020.04.14 at 02h 17m 14s.xml">
-      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotification" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test09_MentionIntranetNotification_InactivityMessageThenInCommentInSpaceWhenNotificationIsDisabled - 2020.04.14 at 22h 29m 01s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test09_MentionIntranetNotification_InactivityMessageThenInCommentInSpaceWhenNotificationIsDisabled" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotification - 2020.04.14 at 02h 24m 21s.xml">
-      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotification" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test09_MentionIntranetNotification_InactivityMessageThenInCommentInSpaceWhenNotificationIsDisabled - 2020.04.14 at 22h 30m 24s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test09_MentionIntranetNotification_InactivityMessageThenInCommentInSpaceWhenNotificationIsDisabled" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled - 2020.04.14 at 02h 25m 25s.xml">
-      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test10_MentionIntranetNotification_InComment_Then_InactivityMessageInSpace - 2020.04.14 at 22h 33m 28s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test10_MentionIntranetNotification_InComment_Then_InactivityMessageInSpace" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotificationThenOnMySpaceWhenNotificationIsDisabled - 2020.04.14 at 02h 30m 20s.xml">
-      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotificationThenOnMySpaceWhenNotificationIsDisabled" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test18_OtherUserPuplishActivityInSpaceThenWhenNotificationIsDisabled - 2020.04.14 at 22h 41m 15s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test18_OtherUserPuplishActivityInSpaceThenWhenNotificationIsDisabled" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotificationThenOnMySpaceWhenNotificationIsDisabled - 2020.04.14 at 02h 38m 56s.xml">
-      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotificationThenOnMySpaceWhenNotificationIsDisabled" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test18_OtherUserPuplishActivityInSpaceThenWhenNotificationIsDisabled - 2020.04.14 at 22h 41m 56s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test18_OtherUserPuplishActivityInSpaceThenWhenNotificationIsDisabled" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -638,9 +638,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1533" height="875" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" weight="0.28850034" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" visible="true" weight="0.17417619" />
       <window_info id="Structure" order="1" sideWeight="0.22285715" side_tool="true" weight="0.24815063" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -651,10 +650,10 @@
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49966374" weight="0.38873994" />
       <window_info anchor="bottom" id="Cvs" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="3" weight="0.4" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" sideWeight="0.737727" visible="true" weight="0.28150135" />
-      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.8473436" weight="0.22788204" />
+      <window_info active="true" anchor="bottom" id="Run" order="4" sideWeight="0.737727" visible="true" weight="0.4463807" />
+      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.8473436" weight="0.4075067" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.58042896" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" weight="0.3458445" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" weight="0.20911528" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.26227304" side_tool="true" weight="0.39008042" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.5683646" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49831876" weight="0.48927614" />
@@ -670,7 +669,7 @@
       <window_info anchor="right" id="Ant Build" order="8" sideWeight="0.49867374" weight="0.09683927" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" weight="0.28850034" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" weight="0.18829858" />
       <window_info id="Structure" order="1" sideWeight="0.22285715" side_tool="true" weight="0.24815063" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -681,10 +680,10 @@
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49966374" weight="0.38873994" />
       <window_info anchor="bottom" id="Cvs" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="3" weight="0.4" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" sideWeight="0.737727" visible="true" weight="0.1621984" />
-      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.8473436" weight="0.22788204" />
+      <window_info active="true" anchor="bottom" id="Run" order="4" sideWeight="0.737727" visible="true" weight="0.4463807" />
+      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.8473436" weight="0.4075067" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.58042896" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" weight="0.3458445" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" weight="0.20911528" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.26227304" side_tool="true" weight="0.39008042" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.5683646" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49831876" weight="0.48927614" />
@@ -1091,13 +1090,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationTypesTestIT.java</url>
-          <line>832</line>
+          <line>831</line>
           <properties />
           <option name="timeStamp" value="4106" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationTypesTestIT.java</url>
-          <line>618</line>
+          <line>617</line>
           <properties />
           <option name="timeStamp" value="4107" />
         </line-breakpoint>
@@ -1119,6 +1118,13 @@
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>$(byXpath(ELEMENT_COMMENT_BUTTON.replace(&quot;{id}&quot;, id))).waitUntil(Condition.visible,Configuration.timeout).pressEnter()
+                .waitUntil(Condition.not(Condition.visible), Configuration.collectionsTimeout);
+        $(byText(comment)).should(Condition.visible);</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>tribeSpaceManagement.goToWikiTab();
     $(byClassName(&quot;uiTreeExplorer&quot;)).find(byText(title2)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
@@ -1177,14 +1183,6 @@
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>$(byXpath(ELEMENT_ACTIVITY_WEBCONTENT_CHECK_VERSION.replace(&quot;${title}&quot;, title)
-                .replace(&quot;{$version}&quot;, version))).waitUntil(Condition.visible,
-                Configuration.timeout).exists();
-        sleep(Configuration.timeout);</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
     </expressions>
     <expressions id="setValue">
       <expression>
@@ -1194,6 +1192,31 @@
       </expression>
     </expressions>
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>$(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).waitUntil(Condition.not(Condition.exist),Configuration.openBrowserTimeoutMs);</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>executeJavaScript(&quot;CKEDITOR.instances.CommentTextarea&quot; + id + &quot;.insertText(\&quot;&quot; + comment + &quot;\&quot;)&quot;, &quot;&quot;);</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>$(byId(ELEMENT_COMMENT_INPUT.replace(&quot;{id}&quot;, id))).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>$(byText(activity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace(&quot;{id}&quot;, id))).waitUntil(visible, Configuration.openBrowserTimeoutMs).click();</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>Assert.assertTrue($(byXpath(&quot;//div[@class=\&quot;commentNoHtml\&quot;]&quot;)).getText().contains(comment2));</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>tribeSpaceManagement.deleteSpace(space, false);</expression-string>
         <language-id>JAVA</language-id>
@@ -1211,31 +1234,6 @@
       </expression>
       <expression>
         <expression-string>tribeWikiManagement.selectSpaceDestination(&quot;Mes Notes&quot;);</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>tribeWikiManagement.selectSpaceDestination(&quot;Intranet&quot;);</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>tribeSpaceManagement.addNewSpaceSimple(space, space, 6000);</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>$(byClassName(&quot;uiTreeExplorer&quot;)).find(byText(title1)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>activityStream.commentActivity(activity2, comment2);</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>homePagePlatform.goToConnections();</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -1311,13 +1309,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationIconListTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5260">
-          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SocialBasicTestsWithUserTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -1386,13 +1377,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/exoTribe/pageobject/TribeSourceTextEditor.java" />
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="51" column="6" lean-forward="true" selection-start-line="50" selection-start-column="4" selection-end-line="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/exoTribe/pageobject/TribeActivityStream.java" />
     <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiBasicActionManagePageAddDeleteTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1428,13 +1412,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="151" column="38" selection-start-line="151" selection-start-column="38" selection-end-line="151" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.0.0/junit-platform-commons-1.0.0.jar!/org/junit/platform/commons/util/ReflectionUtils.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="175" selection-start-line="175" selection-end-line="175" />
         </state>
       </provider>
     </entry>
@@ -1494,31 +1471,52 @@
     <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCManageSpacesTestIT.java" />
     <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCPeopleActivityAddTestIT.java" />
     <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/WikiActivitiesInSpaceTestIT.java" />
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/social/SpaceManagement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="945">
+          <caret line="86" selection-start-line="86" selection-end-line="86" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ConnectionsManagement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
+        <state relative-caret-position="1950">
           <caret line="140" selection-start-line="140" selection-end-line="140" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.0.0/junit-platform-commons-1.0.0.jar!/org/junit/platform/commons/util/ReflectionUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="175" selection-start-line="175" selection-end-line="175" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/social/src/main/java/org/exoplatform/platform/qa/ui/social/pageobject/MyNotificationsSetting.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="212" selection-start-line="212" selection-end-line="212" />
+        <state relative-caret-position="161">
+          <caret line="547" selection-start-line="547" selection-end-line="547" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/social/SpaceManagement.java">
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="86" selection-start-line="86" selection-end-line="86" />
+        <state relative-caret-position="266">
+          <caret line="698" column="143" selection-start-line="698" selection-start-column="143" selection-end-line="698" selection-end-column="143" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationIconListTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationTypesTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="740" selection-start-line="740" selection-end-line="740" />
+        <state relative-caret-position="153">
+          <caret line="1770" column="7" lean-forward="true" selection-start-line="1770" selection-start-column="7" selection-end-line="1770" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

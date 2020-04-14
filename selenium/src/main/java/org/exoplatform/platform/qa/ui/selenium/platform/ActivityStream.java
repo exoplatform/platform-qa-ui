@@ -696,9 +696,9 @@ public class ActivityStream {
                 .getAttribute("id")
                 .split("UIActivityLoader")[1];
         // click on comment link
-        $(byText(activity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
+        $(byText(activity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).waitUntil(Condition.appears, openBrowserTimeoutMs).click();
         // insert comment
-        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, openBrowserTimeoutMs).click();
         SelenideElement frame = $(byText(activity)).parent()
                 .parent()
                 .parent()

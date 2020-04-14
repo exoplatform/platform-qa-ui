@@ -20,7 +20,6 @@ import org.junit.jupiter.api.Test;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
@@ -919,9 +918,11 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
    * notifications message is updated to : $AVATAR You joined $SPACE space. $DATE
    */
   @Test
-  public void test13_SpaceInvitationIntranetNotification_Accept() {
+  public void test06_SpaceInvitationIntranetNotification_AcceptThenRefuseThenWhenNotificationIsDisabled() {
     // Setup data test
     String space = "space" + getRandomNumber();
+    String space2 = "space2" + getRandomNumber();
+    String space3 = "space2" + getRandomNumber();
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
     String username2 = "usernameb" + getRandomString();
@@ -940,6 +941,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space, space);
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.inviteUser(username2, false, "");
+    info("Space Invitation Intranet Notification Accept");
     info("Check in notification list");
     manageLogInOut.signIn(username2, password);
     ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
@@ -951,66 +953,43 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
             .waitUntil(have(Condition.text("You joined " + space + " space.")), Configuration.timeout);
     intranetNotification.goToAllNotification();
     $(byId("UIIntranetNotificationsPortlet")).find(byText(space)).parent().find(byText("You joined " + space + " space."));
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-  }
-  /**
-   * <li>Case ID:122985.</li>
-   * <li>Test Case Name: Space Invitation Intranet notification (Refuse).</li>
-   * Precondition: - User A is manager of the space 1 - User A invite User B to
-   * join the space 1 - Space Invitation notification is activated in the settings
-   * of User B Step Number: 1 Step Name: Step 1: Check notification list Step
-   * Description: - Login with User B - Click Notifications icon - Check the
-   * notifications list Input Data: Expected Outcome: - A Space Invitation
-   * notifications is displayed in the list Step Number: 2 Step Name: Step 2:
-   * Check notification message Step Description: - Check the notification message
-   * Input Data: Expected Outcome: The notification message is : <br />
-   * - $AVATAR<br />
-   * - You're invited to join $SPACE space<br />
-   * - [Accept] | [Refuse]<br />
-   * - $DATE<br />
-   * <br />
-   * Where : <br />
-   * - $AVATAR is the thumbnail of the space<br />
-   * - $SPACE is space 1<br />
-   * - $DATE is the date of the notification
-   */
-  @Test
-  public void test14_SpaceInvitationIntranetNotification_Refuse() {
-    // Setup data test
-    String space = "space" + getRandomNumber();
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String password = "123456";
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
+    info("Space Invitation Intranet Notification Refuse");
     manageLogInOut.signIn(username1, password);
-    info("Enable the notifications");
-    navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.Space_Invitation_Intranet);
-    info("Add new space and ivite an user");
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
+    spaceManagement.addNewSpaceSimple(space2, space2);
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.inviteUser(username2, false, "");
-    info("Check in notification list");
     manageLogInOut.signIn(username2, password);
     ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_ALERT_NOTIFICATION.click();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().shouldHave(text("You're invited to join " + space + " space."));
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().parent().find(ELEMENT_BUTTON_CANCEL_INVITATION).click();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).shouldNot(exist);
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space2)).parent().shouldHave(text("You're invited to join " + space2 + " space."));
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space2)).parent().parent().find(ELEMENT_BUTTON_CANCEL_INVITATION).click();
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space2)).shouldNot(exist);
+
+    info("Space Invitation Intranet Notification When Notification Is Disabled");
+    manageLogInOut.signIn(username2, password);
+    info("disable the notifications");
+    navigationToolbar.goToMyNotifications();
+    myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.Space_Invitation_Intranet);
+    info("Add new space and ivite an user");
+    manageLogInOut.signIn(username1, password);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(space3, space3);
+    spaceHomePage.goToSpaceSettingTab();
+    spaceSettingManagement.inviteUser(username2, false, "");
+    info("Not Check in notification list");
+    manageLogInOut.signIn(username2, password);
+    ELEMENT_ALERT_NOTIFICATION.shouldNot(visible);
+    navigationToolbar.goToIntranetNotification();
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space3)).parent().shouldNot(exist);
+
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
   }
+
+
   /**
    * <li>Case ID:122986.</li>
    * <li>Test Case Name: Space Join Request Intranet notification (Accept).</li>
@@ -1038,8 +1017,9 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
    */
   @Test
   @Tag("sabis")
-  public void test15_SpaceJoinRequestIntranetNotification_Accept() {
+  public void test07_SpaceJoinRequestIntranetNotification_AcceptThenRefuseThenWhenNotificationIsDisabled() {
     String space = "space" + getRandomNumber();
+    String space2 = "space2" + getRandomNumber();
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
     String username2 = "usernameb" + getRandomString();
@@ -1050,6 +1030,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     addUsers.addUser(username1, password, email1, username1, username1);
     addUsers.addUser(username2, password, email2, username2, username2);
     manageLogInOut.signIn(username1, password);
+    info("Space Join Request Intranet Notification Accept");
     info("Enable the notifications");
     navigationToolbar.goToMyNotifications();
     myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.Space_Join_Req_intranet);
@@ -1074,122 +1055,32 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     $(byId("UIIntranetNotificationsPortlet")).find(byText(space))
             .parent()
             .shouldHave(text(username2 + " " + username2 + " joined " + space + " space."));
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space, false);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-  }
-  /**
-   * <li>Case ID:122987.</li>
-   * <li>Test Case Name: Space Join Request Intranet notification (Refuse).</li>
-   * Precondition: - User A requested to join Space 1 - User B is manager of Space
-   * 1 - Space Join Request notification is activated in User's B settings Step
-   * Number: 1 Step Name: Step 1: check notification list Step Description: -
-   * Login with User B - Click the notification icon - Check the notification list
-   * Expected Outcome: - The Space Join Request notification is displayed in the
-   * list Step Number: 2 Step Name: Step 2: Check content of notification Step
-   * Description: - Check the notification message Expected Outcome: - The
-   * notification message is :<br />
-   * - $AVATAR<br />
-   * - $USER has requested access to $SPACE space.<br />
-   * - [Accept] | [Refuse]<br />
-   * - $DATE<br />
-   * <br />
-   * Where : <br />
-   * - $AVATAR is the thumbnail of User A<br />
-   * - $USER is User A<br />
-   * - $DATE is the date of the notification
-   */
-  @Test
-  @Tag("sabis")
-  public void test16_SpaceJoinRequestIntranetNotification_Refuse() {
-    String space = "space" + getRandomNumber();
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String password = "123456";
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
+
+    info("Space Join Request Intranet Notification Refuse");
     manageLogInOut.signIn(username1, password);
-    info("Enable the notifications");
-    navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.Space_Join_Req_intranet);
     info("Add a new space");
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpace(space, space, "validation", "No", "");
+    spaceManagement.addNewSpace(space2, space2, "validation", "No", "");
     info("user requests to join space");
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToAllSpace();
-    spaceManagement.sendARequestToASpace(space);
+    spaceManagement.sendARequestToASpace(space2);
     info("check notification in notification list");
     manageLogInOut.signIn(username1, password);
-    sleep(Configuration.timeout);
     ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_ALERT_NOTIFICATION.click();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().shouldHave(text(username2 + " " + username2
-            + " has requested access to " + space + " space."));
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().parent().find(ELEMENT_BUTTON_CANCEL_INVITATION).click();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).shouldNot(exist);
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space2)).parent().shouldHave(text(username2 + " " + username2
+            + " has requested access to " + space2 + " space."));
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space2)).parent().parent().find(ELEMENT_BUTTON_CANCEL_INVITATION).click();
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space2)).shouldNot(exist);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-  }
-  @Test
-  public void test13_2_SpaceInvitationIntranetNotificationWhenNotificationIsDisabled() {
-    // Setup data test
-    String space = "space" + getRandomNumber();
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String password = "123456";
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-    manageLogInOut.signIn(username2, password);
-    info("disable the notifications");
-    navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.Space_Invitation_Intranet);
-    info("Add new space and ivite an user");
-    manageLogInOut.signIn(username1, password);
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
-    spaceHomePage.goToSpaceSettingTab();
-    spaceSettingManagement.inviteUser(username2, false, "");
-    info("Not Check in notification list");
-    manageLogInOut.signIn(username2, password);
-    ELEMENT_ALERT_NOTIFICATION.shouldNot(visible);
-    navigationToolbar.goToIntranetNotification();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().shouldNot(exist);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-  }
-  @Test
-  @Tag("sabis")
-  public void test15_2_SpaceJoinRequestIntranetNotificationWhenNotificationIsDisabled() {
-    String space = "space" + getRandomNumber();
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String password = "123456";
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-    manageLogInOut.signIn(username1, password);
+    spaceManagement.deleteSpace(space2, false);
+
+    info("Space Join Request Intranet Notification When Notification Is Disabled");
     info("Disable the notifications");
+    homePagePlatform.goToHomePage();
     navigationToolbar.goToMyNotifications();
     myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.Space_Join_Req_intranet);
     info("Add a new space");
@@ -1204,13 +1095,15 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     ELEMENT_ALERT_NOTIFICATION.shouldNot(visible);
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).shouldNot(exist);
+
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
   }
+
   @Test
-  public void test01_3_CommentIntranetNotificationInSpace() {
+  public void test08_CommentIntranetNotificationInSpaceThenWhenNotificationIsDisabled() {
     // Setup data test
     String space = "space" + getRandomNumber();
     String username1 = "usernamea" + getRandomString();
@@ -1256,26 +1149,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     $(byId("UIIntranetNotificationsPortlet")).find(byText(comment1)).should(Condition.exist);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-  }
-  @Test
-  public void test01_4_CommentIntranetNotificationInSpaceWhenNotoficationIsDisabled() {
-    // Setup data test
-    String space = "space" + getRandomNumber();
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String activity = "activity" + getRandomNumber();
-    String comment1 = "comment1" + getRandomNumber();
-    String password = "123456";
-    info("Add new user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
+    info("Comment Intranet Notification In Space When Notification Is Disabled");
     manageLogInOut.signIn(username1, password);
     navigationToolbar.goToMyNotifications();
     myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.AS_Comment_intranet);
@@ -1302,6 +1176,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
   }
+
   /*
    * Precondition: - User A, User B and User B are connected - User A has posted
    * an activity - User B has commented on User A activity - The notification
@@ -1323,78 +1198,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
    * activity message/title - $DATE is the date of the last notification of User C
    */
   @Test
-  public void test02_2CommentNotificationWhenANewNotificationIsPushedInSpace() {
-    // Setup data test
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String username3 = "usernamec" + getRandomString();
-    String email3 = username3 + "@test.com";
-    String password = "123456";
-    String activity = "activity" + getRandomNumber();
-    String comment1 = "comment1" + getRandomNumber();
-    String comment2 = "comment2" + getRandomNumber();
-    String space = "space" + getRandomNumber();
-    info("Add 2 users");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-    addUsers.addUser(username3, password, email3, username3, username3);
-    manageLogInOut.signIn(username1, password);
-    info("Enable like and new user notifications");
-    navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Comment_intranet);
-    executeJavaScript("window.scrollBy(0,-5500)", "");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
-    info("Add a activity");
-    activityStream.addActivity(activity, "");
-    activityStream.checkActivity(activity);
-    spaceHomePage.goToSpaceSettingTab();
-    spaceSettingManagement.inviteUser(username2, false, "");
-    spaceSettingManagement.inviteUser(username3, false, "");
-    info("user1 comments in John's activity");
-    manageLogInOut.signIn(username2, password);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
-    activityStream.commentActivity(activity, comment1);
-    info("Check comment notification in the notification list");
-    manageLogInOut.signIn(username1, password);
-    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_ALERT_NOTIFICATION.click();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(comment1)).should(Condition.exist);
-    info("user2 comments in John's activity");
-    manageLogInOut.signIn(username3, password);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
-    activityStream.commentActivity(activity, comment2);
-    info("Check comment notification in the notification list");
-    manageLogInOut.signIn(username1, password);
-    sleep(2000);
-    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byId("UINotificationPopoverToolbarPortlet")).find(byText(comment2))
-            .parent()
-            .parent()
-            .parent()
-            .shouldHave(Condition.text(username3 + " " + username3 + " and " + username2 + " "
-                    + username2 + " have commented a post."));
-    info("Check comment notification in the View All");
-    intranetNotification.goToAllNotification();
-    Assert.assertEquals($(byXpath("//div[@class=\"status\"]")).getText(),username3 + " " + username3 + " and " + username2 + " "
-            + username2 + " have commented a post.");
-    Assert.assertEquals($(byXpath("//div[@class=\"content\"]/p")).getText(),activity);
-    Assert.assertTrue($(byXpath("//div[@class=\"commentNoHtml\"]")).getText().contains(comment2));
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space, false);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-    addUsers.deleteUser(username3);
-  }
-  @Test
-  public void test03_2CommentsIntranetNotificationMergedInSpace() {
+  public void test09_CommentNotificationWhenANewNotificationIsPushedInSpaceThenWhenNotificationIsDisabled() {
     // Setup data test
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
@@ -1404,14 +1208,14 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     String email3 = username3 + "@test.com";
     String username4 = "usernamed" + getRandomString();
     String email4 = username4 + "@test.com";
+    String password = "123456";
     String activity = "activity" + getRandomNumber();
     String comment1 = "comment1" + getRandomNumber();
     String comment2 = "comment2" + getRandomNumber();
     String comment3 = "comment3" + getRandomNumber();
     String comment4 = "comment4" + getRandomNumber();
-    String password = "123456";
     String space = "space" + getRandomNumber();
-    info("Add 4 users");
+    info("Add 2 users");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
     addUsers.addUser(username2, password, email2, username2, username2);
@@ -1436,11 +1240,32 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     homePagePlatform.goToAllSpace();
     spaceManagement.acceptAInvitation(space);
     activityStream.commentActivity(activity, comment1);
+    info("Check comment notification in the notification list");
+    manageLogInOut.signIn(username1, password);
+    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_ALERT_NOTIFICATION.click();
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(comment1)).should(Condition.exist);
     info("user2 comments in John's activity");
     manageLogInOut.signIn(username3, password);
     homePagePlatform.goToAllSpace();
     spaceManagement.acceptAInvitation(space);
     activityStream.commentActivity(activity, comment2);
+    info("Check comment notification in the notification list");
+    manageLogInOut.signIn(username1, password);
+    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byId("UINotificationPopoverToolbarPortlet")).find(byText(comment2))
+            .parent()
+            .parent()
+            .parent()
+            .shouldHave(Condition.text(username3 + " " + username3 + " and " + username2 + " "
+                    + username2 + " have commented a post."));
+    info("Check comment notification in the View All");
+    intranetNotification.goToAllNotification();
+    Assert.assertEquals($(byXpath("//div[@class=\"status\"]")).getText(),username3 + " " + username3 + " and " + username2 + " "
+            + username2 + " have commented a post.");
+    Assert.assertEquals($(byXpath("//div[@class=\"content\"]/p")).getText(),activity);
+    Assert.assertTrue($(byXpath("//div[@class=\"commentNoHtml\"]")).waitUntil(visible,Configuration.openBrowserTimeoutMs).getText().contains(comment2));
+    info("Comments Intranet Notification Merged In Space");
     info("user3 comments in John's activity");
     manageLogInOut.signIn(username4, password);
     homePagePlatform.goToAllSpace();
@@ -1471,31 +1296,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     $(byText(comment4)).should(Condition.exist);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-    addUsers.deleteUser(username3);
-    addUsers.deleteUser(username4);
-  }
-  @Test
-  public void test02_3CommentNotificationWhenANewNotificationIsPushedInSpaceWhenNotificationIsDisabled() {
-    // Setup data test
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String username3 = "usernamec" + getRandomString();
-    String email3 = username3 + "@test.com";
-    String password = "123456";
-    String activity = "activity" + getRandomNumber();
-    String comment1 = "comment1" + getRandomNumber();
-    String comment2 = "comment2" + getRandomNumber();
-    String space = "space" + getRandomNumber();
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-    addUsers.addUser(username3, password, email3, username3, username3);
+    info("Comment Notification When A New Notification Is Pushed In Space When Notification Is Disabled");
     manageLogInOut.signIn(username1, password);
     info("Disable comment notifications");
     navigationToolbar.goToMyNotifications();
@@ -1509,6 +1310,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.inviteUser(username2, false, "");
     spaceSettingManagement.inviteUser(username3, false, "");
+    spaceSettingManagement.inviteUser(username4, false, "");
     info("user1 comments in John's activity");
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToAllSpace();
@@ -1529,83 +1331,26 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     ELEMENT_ALERT_NOTIFICATION.shouldNot(visible);
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(comment2)).shouldNot(Condition.exist);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space, false);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-    addUsers.deleteUser(username3);
-  }
-  @Test
-  @Tag("sabis")
-  public void test03_3CommentsIntranetNotificationMergedInSpaceWhenNotificationIsDisabled() {
-    // Setup data test
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String username3 = "usernamec" + getRandomString();
-    String email3 = username3 + "@test.com";
-    String username4 = "usernamed" + getRandomString();
-    String email4 = username4 + "@test.com";
-    String activity = "activity" + getRandomNumber();
-    String comment1 = "comment1" + getRandomNumber();
-    String comment2 = "comment2" + getRandomNumber();
-    String comment3 = "comment3" + getRandomNumber();
-    String comment4 = "comment4" + getRandomNumber();
-    String password = "123456";
-    String space = "space" + getRandomNumber();
-    info("Add 4 users");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-    addUsers.addUser(username3, password, email3, username3, username3);
-    addUsers.addUser(username4, password, email4, username4, username4);
-    manageLogInOut.signIn(username1, password);
-    info("Enable like and new user notifications");
-    navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.AS_Comment_intranet);
-    executeJavaScript("window.scrollBy(0,-5500)", "");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
-    info("Add a activity");
-    activityStream.addActivity(activity, "");
-    activityStream.checkActivity(activity);
-    spaceHomePage.goToSpaceSettingTab();
-    spaceSettingManagement.inviteUser(username2, false, "");
-    spaceSettingManagement.inviteUser(username3, false, "");
-    spaceSettingManagement.inviteUser(username4, false, "");
-    info("user1 comments in John's activity");
-    manageLogInOut.signIn(username2, password);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
-    activityStream.commentActivity(activity, comment1);
-    info("user2 comments in John's activity");
-    manageLogInOut.signIn(username3, password);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
-    activityStream.commentActivity(activity, comment2);
+    info("Comments Intranet Notification Merged In Space When Notification Is Disabled");
     info("user3 comments in John's activity");
     manageLogInOut.signIn(username4, password);
     homePagePlatform.goToAllSpace();
     spaceManagement.acceptAInvitation(space);
+    sleep(1000);
     activityStream.commentActivity(activity, comment3);
     info("user2 comments in John's activity");
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToMySpaces();
     spaceManagement.goToAllSpacesTab();
     spaceManagement.searchSpace(space);
-    sleep(2000);
-    ELEMENT_SPACES_LIST.find(byText(space)).click();
-    sleep(2000);
+    spaceManagement.accessToSearchedSpace();
     activityStream.commentActivity(activity, comment4);
     info("Check comment notification in the notification list");
     manageLogInOut.signIn(username1, password);
     ELEMENT_ALERT_NOTIFICATION.shouldNot(visible);
     navigationToolbar.goToIntranetNotification();
     info("Not Check comment notification in activity Viewer");
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).shouldNot(exist);
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).waitUntil(Condition.not(Condition.exist),Configuration.openBrowserTimeoutMs);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
@@ -1615,8 +1360,9 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     addUsers.deleteUser(username3);
     addUsers.deleteUser(username4);
   }
+
   @Test
-  public void test06_2LikeIntranetNotificationInSpace() {
+  public void test10_LikeIntranetNotificationInSpaceThenWhenNotificationIsDisabled() {
     // Setup data test
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
@@ -1662,24 +1408,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     $(byText(activity)).parent().parent().parent().find(byText(username2 + " " + username2)).should(Condition.exist);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-  }
-  @Test
-  public void test06_3LikeIntranetNotificationInSpaceWhenNotificationIsDisabled() {
-    // Setup data test
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String password = "123456";
-    String activity = "activity" + getRandomNumber();
-    String space = "space" + getRandomNumber();
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
+    info("Like Intranet Notification In Space When Notification Is Disabled");
     manageLogInOut.signIn(username1, password);
     info("Enable like and new user notifications");
     navigationToolbar.goToMyNotifications();
@@ -1708,6 +1437,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
   }
+
   /**
    * <li>Case ID:123001.</li>
    * <li>Test Case Name: Like Intranet Notification merged.</li> Precondition: -
@@ -1735,7 +1465,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
    * the activity.
    */
   @Test
-  public void test07_2_LikeIntranetNotificationMergedInSpace() {
+  public void test11_LikeIntranetNotificationMergedInSpaceThenWhenNotificationIsDisabled() {
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
     String username2 = "usernameb" + getRandomString();
@@ -1746,9 +1476,20 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     String email4 = username4 + "@test.com";
     String username5 = "usernamee" + getRandomString();
     String email5 = username5 + "@test.com";
+    String username11 = "usernamea" + getRandomString();
+    String email11 = username11 + "@test.com";
+    String username22 = "usernameb" + getRandomString();
+    String email22 = username22 + "@test.com";
+    String username33 = "usernamec" + getRandomString();
+    String email33 = username33 + "@test.com";
+    String username44 = "usernamed" + getRandomString();
+    String email44 = username44 + "@test.com";
+    String username55 = "usernamee" + getRandomString();
+    String email55 = username55 + "@test.com";
     String password = "123456";
     String activity = "activity" + getRandomNumber();
     String space = "space" + getRandomNumber();
+    String space2 = "space" + getRandomNumber();
     info("Add 4 users");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
@@ -1756,6 +1497,11 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     addUsers.addUser(username3, password, email3, username3, username3);
     addUsers.addUser(username4, password, email4, username4, username4);
     addUsers.addUser(username5, password, email5, username5, username5);
+    addUsers.addUser(username11, password, email11, username11, username11);
+    addUsers.addUser(username22, password, email22, username22, username22);
+    addUsers.addUser(username33, password, email33, username33, username33);
+    addUsers.addUser(username44, password, email44, username44, username44);
+    addUsers.addUser(username55, password, email55, username55, username55);
     manageLogInOut.signIn(username1, password);
     info("Enable like and new user notifications");
     navigationToolbar.goToMyNotifications();
@@ -1771,170 +1517,6 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     spaceSettingManagement.inviteUser(username3, false, "");
     spaceSettingManagement.inviteUser(username4, false, "");
     spaceSettingManagement.inviteUser(username5, false, "");
-    info("user 1 likes John's activity");
-    manageLogInOut.signIn(username2, password);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
-    activityStream.likeActivity(activity);
-    info("user 2 likes John's activity");
-    manageLogInOut.signIn(username3, password);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
-    activityStream.likeActivity(activity);
-    info("user 3 likes John's activity");
-    manageLogInOut.signIn(username4, password);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
-    activityStream.likeActivity(activity);
-    info("user 4 likes John's activity");
-    manageLogInOut.signIn(username5, password);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
-    activityStream.likeActivity(activity);
-    info("Check Like notification in intranet notification");
-    manageLogInOut.signIn(username1, password);
-    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_ALERT_NOTIFICATION.click();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).parent().parent().shouldHave(text(username5 + " " + username5 + ", "
-            + username4 + " " + username4 + " and 2 more like your activity."));
-    info("Check comment notification in activity Viewer");
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).click();
-    $(byText(activity)).parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).parent().shouldHave(text("4"));
-    homePagePlatform.refreshUntil($(byText(activity)),visible,1000);
-    navigationToolbar.goToIntranetNotification();
-    intranetNotification.goToAllNotification();
-    $(byText(activity)).parent().parent().shouldHave(text(username5 + " " + username5 + ", " + username4 + " " + username4
-            + " and 2 more like your activity."));
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space, false);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-    addUsers.deleteUser(username3);
-    addUsers.deleteUser(username4);
-    addUsers.deleteUser(username5);
-  }
-  @Test
-  public void test07_3_LikeIntranetNotificationMergedInSpaceWhenNotificationIsDisabled() throws InterruptedException {
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String username3 = "usernamec" + getRandomString();
-    String email3 = username3 + "@test.com";
-    String username4 = "usernamed" + getRandomString();
-    String email4 = username4 + "@test.com";
-    String username5 = "usernamee" + getRandomString();
-    String email5 = username5 + "@test.com";
-    String password = "123456";
-    String activity = "activity" + getRandomNumber();
-    String space = "space" + getRandomNumber();
-    info("Add 4 users");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-    addUsers.addUser(username3, password, email3, username3, username3);
-    addUsers.addUser(username4, password, email4, username4, username4);
-    addUsers.addUser(username5, password, email5, username5, username5);
-    manageLogInOut.signIn(username1, password);
-    info("Enable like and new user notifications");
-    navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.AS_Like_intranet);
-    executeJavaScript("window.scrollBy(0,-5500)", "");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
-    info("Add a activity");
-    activityStream.addActivity(activity, "");
-    activityStream.checkActivity(activity);
-    spaceHomePage.goToSpaceSettingTab();
-    spaceSettingManagement.inviteUser(username2, false, "");
-    spaceSettingManagement.inviteUser(username3, false, "");
-    spaceSettingManagement.inviteUser(username4, false, "");
-    spaceSettingManagement.inviteUser(username5, false, "");
-    info("user 1 likes John's activity");
-    manageLogInOut.signIn(username2, password);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
-    activityStream.likeActivity(activity);
-    info("user 2 likes John's activity");
-    manageLogInOut.signIn(username3, password);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
-    activityStream.likeActivity(activity);
-    info("user 3 likes John's activity");
-    manageLogInOut.signIn(username4, password);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
-    activityStream.likeActivity(activity);
-    info("user 4 likes John's activity");
-    manageLogInOut.signIn(username5, password);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
-    activityStream.likeActivity(activity);
-    info("Check Like notification in intranet notification");
-    manageLogInOut.signIn(username1, password);
-    ELEMENT_ALERT_NOTIFICATION.shouldNot(visible);
-    navigationToolbar.goToIntranetNotification();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).shouldNot(exist);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-    addUsers.deleteUser(username3);
-    addUsers.deleteUser(username4);
-    addUsers.deleteUser(username5);
-  }
-  /*
-   * Precondition: - User A, User B, User C are connected - User A has posted an
-   * activity - User B has liked User A activity - The notification
-   * "Someone likes one of my activities" is activated in the user settings Step
-   * Number: 1 Step Name: Step 1: Check notifications list Step Description: -
-   * Login with User A - Click the notifications icon in the top navigation -
-   * Check the notification list (keep the notification unread) Input Data:
-   * Expected Outcome: - A Like notification is displayed in the list. Step
-   * Number: 2 Step Name: Step 2: Push a new like notification Step Description: -
-   * With User C, like the activity of User A - Check the notifications list Input
-   * Data: Expected Outcome: - The Like notification is listed/merged in the same
-   * previous notification (step 1) - The notification is displayed at the top of
-   * the list. Step Number: 3 Step Name: Step 3: check the message of the Like
-   * notification Step Description: - Check notification message in the
-   * notifications list and View All page Input Data: Expected Outcome: - The
-   * notification message is : LAST_AVATAR $USER_LIST like your activity $ACTIVITY
-   * $DATE Where : - $LAST_AVATAR is the thumbnail of User C - $USER_LIST is User
-   * B, User C - $ACTIVITY is the activity message/title - $DATE is the date of
-   * the last notification of User C
-   */
-  @Test
-  public void test08_2NotificationWhenANewLikeIsPushedInSpace() {
-    // Setup data test
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String username3 = "usernamec" + getRandomString();
-    String email3 = username3 + "@test.com";
-    String password = "123456";
-    String activity = "activity" + getRandomNumber();
-    String space = "space" + getRandomNumber();
-    info("Add 2 users");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-    addUsers.addUser(username3, password, email3, username3, username3);
-    manageLogInOut.signIn(username1, password);
-    info("Enable like and new user notifications");
-    navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Like_intranet);
-    executeJavaScript("window.scrollBy(0,-5500)", "");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
-    info("Add a activity");
-    activityStream.addActivity(activity, "");
-    activityStream.checkActivity(activity);
-    spaceHomePage.goToSpaceSettingTab();
-    spaceSettingManagement.inviteUser(username2, false, "");
-    spaceSettingManagement.inviteUser(username3, false, "");
     info("user 1 likes John's activity");
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToAllSpace();
@@ -1961,91 +1543,111 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
             + " and " + username2 + " " + username2 + " like your activity.")).waitUntil(visible,Configuration.timeout);
     $(byText(activity)).parent().parent().shouldHave(text(username3 + " " + username3 + " and " + username2 + " " + username2
             + " like your activity.")).waitUntil(visible,Configuration.timeout);
+    info("user 3 likes John's activity");
+    manageLogInOut.signIn(username4, password);
+    homePagePlatform.goToAllSpace();
+    spaceManagement.acceptAInvitation(space);
+    activityStream.likeActivity(activity);
+    info("user 4 likes John's activity");
+    manageLogInOut.signIn(username5, password);
+    homePagePlatform.goToAllSpace();
+    spaceManagement.acceptAInvitation(space);
+    activityStream.likeActivity(activity);
+    info("Check Like notification in intranet notification");
+    manageLogInOut.signIn(username1, password);
+    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_ALERT_NOTIFICATION.click();
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).parent().parent().shouldHave(text(username5 + " " + username5 + ", "
+            + username4 + " " + username4 + " and 2 more like your activity."));
+    info("Check comment notification in activity Viewer");
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).click();
+    $(byText(activity)).parent().parent().parent().find(ELEMENT_ICON_LIKE_ACTIVITY).parent().shouldHave(text("4"));
+    homePagePlatform.refreshUntil($(byText(activity)),visible,1000);
+    navigationToolbar.goToIntranetNotification();
+    intranetNotification.goToAllNotification();
+    $(byText(activity)).parent().parent().shouldHave(text(username5 + " " + username5 + ", " + username4 + " " + username4
+            + " and 2 more like your activity."));
+    info("Like Intranet Notification Merged In Space When Notification Is Disabled");
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-    addUsers.deleteUser(username3);
-  }
-  /*
-   * Precondition: - User A, User B, User C are connected - User A has posted an
-   * activity - User B has liked User A activity - The notification
-   * "Someone likes one of my activities" is activated in the user settings Step
-   * Number: 2 Step Name: Step 2: Push a new like notification Step Description: -
-   * With User C, like the activity of User A - Check the notifications list Input
-   * Data: Expected Outcome: - The Like notification is listed/merged in the same
-   * previous notification (step 1) - The notification is displayed at the top of
-   * the list.
-   */
-  @Test
-  public void test08_3NotificationWhenANewLikeIsPushedInSpaceWhenNotificationIsDisabled() {
-    // Setup data test
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String username3 = "usernamec" + getRandomString();
-    String email3 = username3 + "@test.com";
-    String password = "123456";
-    String activity = "activity" + getRandomNumber();
-    String space = "space" + getRandomNumber();
-    info("Add 2 users");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-    addUsers.addUser(username3, password, email3, username3, username3);
-    manageLogInOut.signIn(username1, password);
-    info("Disable like and new user notifications");
+    manageLogInOut.signIn(username11, password);
+    info("Enable like and new user notifications");
     navigationToolbar.goToMyNotifications();
+    myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Like_intranet);
     myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.AS_Like_intranet);
     executeJavaScript("window.scrollBy(0,-5500)", "");
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
+    spaceManagement.addNewSpaceSimple(space2, space2);
     info("Add a activity");
     activityStream.addActivity(activity, "");
     activityStream.checkActivity(activity);
     spaceHomePage.goToSpaceSettingTab();
-    spaceSettingManagement.inviteUser(username2, false, "");
-    spaceSettingManagement.inviteUser(username3, false, "");
+    spaceSettingManagement.inviteUser(username22, false, "");
+    spaceSettingManagement.inviteUser(username33, false, "");
+    spaceSettingManagement.inviteUser(username44, false, "");
+    spaceSettingManagement.inviteUser(username55, false, "");
     info("user 1 likes John's activity");
-    manageLogInOut.signIn(username2, password);
+    manageLogInOut.signIn(username22, password);
     homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
+    spaceManagement.acceptAInvitation(space2);
     activityStream.likeActivity(activity);
     info("Not Check Like notification in intranet notification");
-    manageLogInOut.signIn(username1, password);
+    manageLogInOut.signIn(username11, password);
     ELEMENT_ALERT_NOTIFICATION.shouldNotBe(visible);
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).shouldNot(exist);
     info("user 2 likes John's activity");
-    manageLogInOut.signIn(username3, password);
+    manageLogInOut.signIn(username33, password);
     homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
+    spaceManagement.acceptAInvitation(space2);
     activityStream.likeActivity(activity);
     info("not Check Like notification in intranet notification");
-    manageLogInOut.signIn(username1, password);
+    manageLogInOut.signIn(username11, password);
     ELEMENT_ALERT_NOTIFICATION.shouldNotBe(visible);
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).shouldNot(exist);
+    info("user 3 likes John's activity");
+    manageLogInOut.signIn(username44, password);
+    homePagePlatform.goToAllSpace();
+    spaceManagement.acceptAInvitation(space2);
+    activityStream.likeActivity(activity);
+    info("user 4 likes John's activity");
+    manageLogInOut.signIn(username55, password);
+    homePagePlatform.goToAllSpace();
+    spaceManagement.acceptAInvitation(space2);
+    activityStream.likeActivity(activity);
+    info("Check Like notification in intranet notification");
+    manageLogInOut.signIn(username11, password);
+    ELEMENT_ALERT_NOTIFICATION.shouldNot(visible);
+    navigationToolbar.goToIntranetNotification();
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).shouldNot(exist);
     homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space, false);
+    spaceManagement.deleteSpace(space2, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
     addUsers.deleteUser(username3);
+    addUsers.deleteUser(username4);
+    addUsers.deleteUser(username5);
+    addUsers.deleteUser(username11);
+    addUsers.deleteUser(username22);
+    addUsers.deleteUser(username33);
+    addUsers.deleteUser(username44);
+    addUsers.deleteUser(username55);
   }
+
   @Test
-  public void test09_3MentionIntranetNotification_InactivityMessageInSpace() throws AWTException {
+  public void test12_MentionIntranetNotification_InComment_Then_InactivityMessageInSpace() {
     String activity = "activity" + getRandomNumber();
+    String comment = "comment" + getRandomNumber();
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
     String username2 = "usernameb" + getRandomString();
     String email2 = username2 + "@test.com";
     String password = "123456";
     String space = "space" + getRandomNumber();
+    String space2 = "space" + getRandomNumber();
     info("Add user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
@@ -2054,12 +1656,14 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     info("Enable the notifications");
     navigationToolbar.goToMyNotifications();
     myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Mention_intranet);
+    info("Connect with user");
     executeJavaScript("window.scrollBy(0,-5500)", "");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.inviteUser(username2, false, "");
-    info("User accepts Request notification and mention John in activity");
+    info("Mention Intranet Notification Inactivity Message In Space");
+    info("User accepts Request notification and mention John in comment");
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToAllSpace();
     spaceManagement.acceptAInvitation(space);
@@ -2096,82 +1700,11 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
             .parent()
             .find(byText(username2 + " " + username2))
             .should(exist);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space, false);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-  }
-  @Test
-  public void test09_4MentionIntranetNotification_InactivityMessageInSpaceWhenNotificationIsDisabled() throws AWTException {
-    String activity = "activity" + getRandomNumber();
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String password = "123456";
-    String space = "space" + getRandomNumber();
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-    manageLogInOut.signIn(username1, password);
-    info("Enable the notifications");
-    navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.AS_Mention_intranet);
-    myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.Space_Post_intranet);
-    executeJavaScript("window.scrollBy(0,-5500)", "");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
-    spaceHomePage.goToSpaceSettingTab();
-    spaceSettingManagement.inviteUser(username2, false, "");
-    info("User accepts Request notification and mention John in activity");
+    info("Mention Intranet Notification In Comment In Space");
     manageLogInOut.signIn(username2, password);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
-    activityStream.mentionUserActivity(username1, activity);
-    activityStream.checkActivity(activity);
-    info("not Check Mention Intranet Notification in notification list");
-    manageLogInOut.signIn(username1, password);
-    ELEMENT_ALERT_NOTIFICATION.shouldNotBe(visible);
-    navigationToolbar.goToIntranetNotification();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username2 + " " + username2)).shouldNot(exist);
     homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space, false);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-  }
-  @Test
-  public void test10_3MentionIntranetNotification_InCommentInSpace() {
-    String activity = "activity" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String password = "123456";
-    String space = "space" + getRandomNumber();
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-    manageLogInOut.signIn(username1, password);
-    info("Enable the notifications");
-    navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Mention_intranet);
-    info("Connect with user");
-    executeJavaScript("window.scrollBy(0,-5500)", "");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
-    spaceHomePage.goToSpaceSettingTab();
-    spaceSettingManagement.inviteUser(username2, false, "");
-    info("User accepts Request notification and mention John in comment");
-    manageLogInOut.signIn(username2, password);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
+    spaceManagement.searchSpace(space);
+    spaceManagement.accessToSearchedSpace();
     activityStream.addActivity(activity, "");
     activityStream.checkActivity(activity);
     activityStream.addCommentWithMentionUser(activity, username1, comment);
@@ -2190,42 +1723,34 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
     $(byId("UIIntranetNotificationsPortlet")).find(byText(activity)).should(exist);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space, false);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-  }
-  @Test
-  public void test10_4MentionIntranetNotification_InCommentInSpaceWhenNotificationIsDisabled() {
-    String activity = "activity" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String password = "123456";
-    String space = "space" + getRandomNumber();
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
     manageLogInOut.signIn(username1, password);
     info("Enable the notifications");
     navigationToolbar.goToMyNotifications();
     myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.AS_Mention_intranet);
     myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.Space_Post_intranet);
-    info("Connect with user");
     executeJavaScript("window.scrollBy(0,-5500)", "");
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
+    spaceManagement.addNewSpaceSimple(space2, space2);
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.inviteUser(username2, false, "");
-    info("User accepts Request notification and mention John in comment");
+    info("Mention Intranet Notification Inactivity Message In Space When Notification Is Disabled");
+    info("User accepts Request notification and mention John in activity");
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToAllSpace();
-    spaceManagement.acceptAInvitation(space);
+    spaceManagement.acceptAInvitation(space2);
+    activityStream.mentionUserActivity(username1, activity);
+    activityStream.checkActivity(activity);
+    info("not Check Mention Intranet Notification in notification list");
+    manageLogInOut.signIn(username1, password);
+    ELEMENT_ALERT_NOTIFICATION.shouldNotBe(visible);
+    navigationToolbar.goToIntranetNotification();
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username2 + " " + username2)).shouldNot(exist);
+    info("Mention Intranet Notification In Comment In Space When Notification Is Disabled");
+    info("User accepts Request notification and mention John in comment");
+    manageLogInOut.signIn(username2, password);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.searchSpace(space2);
+    spaceManagement.accessToSearchedSpace();
     activityStream.addActivity(activity, "");
     activityStream.checkActivity(activity);
     activityStream.addCommentWithMentionUser(activity, username1, comment);
@@ -2236,13 +1761,15 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username2 + " " + username2)).shouldNot(exist);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
+    spaceManagement.deleteSpace(space2, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
   }
+
   @Test
-  public void test18_OtherUserPuplishActivityInSpace() {
+  public void test13_OtherUserPuplishActivityInSpaceThenWhenNotificationIsDisabled() {
     String space = "space" + getRandomNumber();
     String activity = "activity" + getRandomNumber();
     String username1 = "usernamea" + getRandomString();
@@ -2251,12 +1778,21 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     String email2 = username2 + "@test.com";
     String username3 = "usernamec" + getRandomString();
     String email3 = username3 + "@test.com";
+    String username11 = "usernamea" + getRandomString();
+    String email11 = username11 + "@test.com";
+    String username22 = "usernameb" + getRandomString();
+    String email22 = username22 + "@test.com";
+    String username33 = "usernamec" + getRandomString();
+    String email33 = username33 + "@test.com";
     String password = "123456";
     info("Add user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
     addUsers.addUser(username2, password, email2, username2, username2);
     addUsers.addUser(username3, password, email3, username3, username3);
+    addUsers.addUser(username11, password, email11, username11, username11);
+    addUsers.addUser(username22, password, email22, username22, username22);
+    addUsers.addUser(username33, password, email33, username33, username33);
     manageLogInOut.signIn(username1, password);
     info("Add new space and ivite user");
     homePagePlatform.goToMySpaces();
@@ -2295,62 +1831,41 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     manageLogInOut.signIn(username1, password);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-    addUsers.deleteUser(username3);
-  }
-  @Test
-  public void test18_1_OtherUserPuplishActivityInSpaceWhenNotificationIsDisabled() {
-    String space = "space" + getRandomNumber();
-    String activity = "activity" + getRandomNumber();
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String username3 = "usernamec" + getRandomString();
-    String email3 = username3 + "@test.com";
-    String password = "123456";
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-    addUsers.addUser(username3, password, email3, username3, username3);
-    manageLogInOut.signIn(username1, password);
+    info("Other User Puplish Activity In Space When Notification Is Disabled");
+    manageLogInOut.signIn(username11, password);
     info("Add new space and ivite user");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     spaceHomePage.goToSpaceSettingTab();
-    spaceSettingManagement.inviteUser(username2, false, "");
-    spaceSettingManagement.inviteUser(username3, false, "");
-    manageLogInOut.signIn(username2, password);
+    spaceSettingManagement.inviteUser(username22, false, "");
+    spaceSettingManagement.inviteUser(username33, false, "");
+    manageLogInOut.signIn(username22, password);
     info("Enable the notifications");
     navigationToolbar.goToMyNotifications();
     myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.Space_Post_intranet);
     homePagePlatform.goToAllSpace();
     spaceManagement.acceptAInvitation(space);
-    manageLogInOut.signIn(username3, password);
+    manageLogInOut.signIn(username33, password);
     info("Disable the notifications");
     navigationToolbar.goToMyNotifications();
     myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.Space_Post_intranet);
     homePagePlatform.goToAllSpace();
     spaceManagement.acceptAInvitation(space);
-    manageLogInOut.signIn(username1, password);
+    manageLogInOut.signIn(username11, password);
     info("Enable the notifications");
     homePagePlatform.goToMySpaces();
     spaceManagement.goToAllSpacesTab();
     ELEMENT_SPACES_LIST.find(byText(space)).click();
     activityStream.addActivity(activity, "");
-    manageLogInOut.signIn(username2, password);
+    manageLogInOut.signIn(username22, password);
     ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_ALERT_NOTIFICATION.click();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1 + " " + username1)).parent().shouldHave(text(username1 + " "
-            + username1 + " has posted an activity in the " + space + " space."));
-    manageLogInOut.signIn(username3, password);
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username11 + " " + username11)).parent().shouldHave(text(username11 + " "
+            + username11 + " has posted an activity in the " + space + " space."));
+    manageLogInOut.signIn(username33, password);
     navigationToolbar.goToIntranetNotification();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1 + " " + username1)).shouldNot(exist);
-    manageLogInOut.signIn(username1, password);
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username11 + " " + username11)).shouldNot(exist);
+    manageLogInOut.signIn(username11, password);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
@@ -2358,7 +1873,9 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
     addUsers.deleteUser(username3);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space, false);
+    addUsers.deleteUser(username11);
+    addUsers.deleteUser(username22);
+    addUsers.deleteUser(username33);
   }
+
 }
