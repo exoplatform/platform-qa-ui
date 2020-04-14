@@ -12,15 +12,13 @@ import org.junit.Test;
 
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 
-public class SocialActivitiesTestAPI extends  Base{
+public class SocialActivitiesTestAPI extends Base {
 
   SocialActivitiesManagement socialActivitiesManagement = new SocialActivitiesManagement(this);
 
   @Test
-  public void testResponseCode()
-
-  {
-    Response resp = RestAssured.given().auth().basic(PLFData.username, PLFData.password).when().get(getExoWebDriver().getBaseUrl() + "/rest/private/v1/social/activities/");
+  public void testResponseCode() {
+    Response resp = RestAssured.given().auth().basic(PLFData.username, PLFData.password).when().get(getExoWebDriver().getBaseUrl() + "rest/private/v1/social/activities/");
 
     int code = resp.getStatusCode();
     System.out.println("Status code is" + code);
@@ -28,13 +26,13 @@ public class SocialActivitiesTestAPI extends  Base{
   }
 
   @Test
-  public void test_getActivitiesAPI() {
+  public void test01_getActivitiesAPI() {
 
     RequestSpecification request = RestAssured.given().auth().basic(PLFData.username, PLFData.password);
-    request.header("Content-Type" , "application/json");
+    request.header("Content-Type", "application/json");
     JSONObject json = new JSONObject();
     request.body(json.toJSONString());
-    Response response = request.get(getExoWebDriver().getBaseUrl() + "/rest/private/v1/social/activities/");
+    Response response = request.get(getExoWebDriver().getBaseUrl() + "rest/private/v1/social/activities/");
 
     int code = response.getStatusCode();
     Assert.assertEquals(code, 200);
@@ -43,7 +41,7 @@ public class SocialActivitiesTestAPI extends  Base{
   }
 
   @Test
-  public void test_getFirstActivityDataAPI() {
+  public void test02_getLastActivityDataAPI() {
 
     socialActivitiesManagement.getLastActivityAPI();
 
@@ -51,16 +49,16 @@ public class SocialActivitiesTestAPI extends  Base{
 
 
   @Test
-  public void  test_putActivityAPI() {
+  public void test03_putActivityAPI() {
 
     String activity = "activity" + getRandomNumber();
 
-    socialActivitiesManagement.putActivityAPI(socialActivitiesManagement.getLastActivityAPI(),activity);
+    socialActivitiesManagement.putActivityAPI(socialActivitiesManagement.getLastActivityAPI(), activity);
 
   }
 
   @Test
-  public void  test_deleteActivityAPI() {
+  public void test04_deleteActivityAPI() {
 
     socialActivitiesManagement.deleteActivityAPI(socialActivitiesManagement.getLastActivityAPI());
 

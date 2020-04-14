@@ -9,7 +9,7 @@ import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
 
-public class SocialActivitiesManagement extends Base {
+public class SocialUsersManagement extends Base {
 
   private final TestBase testBase;
 
@@ -18,66 +18,66 @@ public class SocialActivitiesManagement extends Base {
    *
    * @param testBase
    */
-  public SocialActivitiesManagement(TestBase testBase) {
+  public SocialUsersManagement(TestBase testBase) {
     this.testBase = testBase;
 
   }
 
-
-  public String getLastActivityAPI() {
+  public String getLastUserAPIByUsername(String username) {
 
     RequestSpecification request = RestAssured.given().auth().basic(PLFData.username, PLFData.password);
     request.header("Content-Type", "application/json");
     JSONObject json = new JSONObject();
     request.body(json.toJSONString());
-    Response response = request.get(testBase.getExoWebDriver().getBaseUrl() + "rest/private/v1/social/activities/");
+    Response response = request.get(testBase.getExoWebDriver().getBaseUrl() + "rest/private/v1/social/users/");
 
     int code = response.getStatusCode();
     Assert.assertEquals(code, 200);
     String data = response.asString();
-    System.out.println("Activities Data are" + data);
+    System.out.println("Users Data are" + data);
 
-    String id = response.asString().split("DEFAULT_ACTIVITY")[0].split("id")[1].split(":")[1].split("title")[0].split(",")[0].split("\"")[1];
-    Response response2 = request.get(testBase.getExoWebDriver().getBaseUrl() + "rest/private/v1/social/activities/" + id);
+    String id = response.asString().split(username)[1].split("username")[0].split("/identities/")[1].split(",")[0].split("\"")[0];
+    Response response2 = request.get(testBase.getExoWebDriver().getBaseUrl() + "rest/private/v1/social/users/" + username);
     int code2 = response2.getStatusCode();
     Assert.assertEquals(code2, 200);
     String data2 = response2.asString();
-    System.out.println("Last Activity Data are" + data2);
+    System.out.println("Last User Data are" + data2);
 
-    return id;
+    return data;
   }
 
 
-  public void putActivityAPI(String id, String title) {
+  public void putUserAPI(String oldUserName, String newUsername, String newLastName) {
 
     RequestSpecification request = RestAssured.given().auth().basic(PLFData.username, PLFData.password);
     request.header("Content-Type", "application/json");
     JSONObject json = new JSONObject();
-    json.put("title", title);
-    json.put("type", "DEFAULT_ACTIVITY");
-    json.put("templateParams", "{}");
-
+    json.put("username", newUsername);
+    json.put("firstname", newUsername);
+    json.put("lastname", newLastName);
+    json.put("fullname", newLastName + " " + newLastName);
+    json.put("email", newLastName + "." + newLastName + "@exoplatform.com");
 
     request.body(json.toJSONString());
-    Response response = request.put(testBase.getExoWebDriver().getBaseUrl() + "rest/private/v1/social/activities/" + id);
+    Response response = request.put(testBase.getExoWebDriver().getBaseUrl() + "rest/private/v1/social/users/" + oldUserName);
     int code = response.getStatusCode();
     Assert.assertEquals(code, 200);
     String data = response.asString();
-    System.out.println("Updated Activity Data are" + data);
+    System.out.println("Updated User Data are" + data);
 
   }
 
-  public void deleteActivityAPI(String id) {
+  public void deleteUserAPI(String username) {
 
     RequestSpecification request = RestAssured.given().auth().basic(PLFData.username, PLFData.password);
     request.header("Content-Type", "application/json");
     JSONObject json = new JSONObject();
     request.body(json.toJSONString());
-    Response response = request.delete(testBase.getExoWebDriver().getBaseUrl() + "rest/private/v1/social/activities/" + id);
+    Response response = request.delete(testBase.getExoWebDriver().getBaseUrl() + "rest/private/v1/social/users/" + username);
     int code = response.getStatusCode();
     Assert.assertEquals(code, 200);
     String data = response.asString();
-    System.out.println("Activity Data are deleted" + data);
+    System.out.println("Users Data are deleted" + data);
   }
 
 

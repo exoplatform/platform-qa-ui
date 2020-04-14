@@ -12,15 +12,13 @@ import org.junit.Test;
 
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 
-public class SocialSpacesTestAPI extends  Base{
+public class SocialSpacesTestAPI extends Base {
 
   SocialSpacesManagement socialSpacesManagement = new SocialSpacesManagement(this);
 
   @Test
-  public void testResponseCode()
-
-  {
-    Response resp = RestAssured.given().auth().basic(PLFData.username, PLFData.password).when().get(getExoWebDriver().getBaseUrl() + "/rest/private/v1/social/spaces/");
+  public void testResponseCode() {
+    Response resp = RestAssured.given().auth().basic(PLFData.username, PLFData.password).when().get(getExoWebDriver().getBaseUrl() + "rest/private/v1/social/spaces/");
 
     int code = resp.getStatusCode();
     System.out.println("Status code is" + code);
@@ -28,11 +26,11 @@ public class SocialSpacesTestAPI extends  Base{
   }
 
   @Test
-  public void test_addSpaceAPI() {
+  public void test01_addSpaceAPI() {
     String space = "space" + getRandomNumber();
 
     RequestSpecification request = RestAssured.given().auth().basic(PLFData.username, PLFData.password);
-    request.header("Content-Type" , "application/json");
+    request.header("Content-Type", "application/json");
     JSONObject json = new JSONObject();
     json.put("displayName", space);
     json.put("description", space);
@@ -40,7 +38,7 @@ public class SocialSpacesTestAPI extends  Base{
     json.put("subscription", "open");
 
     request.body(json.toJSONString());
-    Response response = request.post(getExoWebDriver().getBaseUrl() + "/rest/private/v1/social/spaces/");
+    Response response = request.post(getExoWebDriver().getBaseUrl() + "rest/private/v1/social/spaces/");
     int code = response.getStatusCode();
     Assert.assertEquals(code, 200);
     String data = response.asString();
@@ -49,13 +47,13 @@ public class SocialSpacesTestAPI extends  Base{
   }
 
   @Test
-  public void test_getSpacesAPI() {
+  public void test02_getSpacesAPI() {
 
     RequestSpecification request = RestAssured.given().auth().basic(PLFData.username, PLFData.password);
-    request.header("Content-Type" , "application/json");
+    request.header("Content-Type", "application/json");
     JSONObject json = new JSONObject();
     request.body(json.toJSONString());
-    Response response = request.get(getExoWebDriver().getBaseUrl() + "/rest/private/v1/social/spaces/");
+    Response response = request.get(getExoWebDriver().getBaseUrl() + "rest/private/v1/social/spaces/");
 
     int code = response.getStatusCode();
     Assert.assertEquals(code, 200);
@@ -64,7 +62,7 @@ public class SocialSpacesTestAPI extends  Base{
   }
 
   @Test
-  public void test_getLastSpaceDataAPI() {
+  public void test03_getLastSpaceDataAPI() {
 
     socialSpacesManagement.getLastSpaceAPI();
 
@@ -72,16 +70,16 @@ public class SocialSpacesTestAPI extends  Base{
 
 
   @Test
-  public void  test_putSpaceAPI() {
+  public void test04_putSpaceAPI() {
 
     String space = "space" + getRandomNumber();
 
-    socialSpacesManagement.putSpaceAPI(socialSpacesManagement.getLastSpaceAPI(),space);
+    socialSpacesManagement.putSpaceAPI(socialSpacesManagement.getLastSpaceAPI(), space);
 
   }
 
   @Test
-  public void  test_deleteSpaceAPI() {
+  public void test05_deleteSpaceAPI() {
     socialSpacesManagement.deleteSpaceAPI(socialSpacesManagement.getLastSpaceAPI());
 
   }

@@ -15,7 +15,6 @@
       <module fileurl="file://$PROJECT_DIR$/onlyOffice/platform-qa-ui-onlyOffice.iml" filepath="$PROJECT_DIR$/onlyOffice/platform-qa-ui-onlyOffice.iml" />
       <module fileurl="file://$PROJECT_DIR$/platform/platform-qa-ui-platform.iml" filepath="$PROJECT_DIR$/platform/platform-qa-ui-platform.iml" />
       <module fileurl="file://$PROJECT_DIR$/restAssured/platform-qa-ui-restAssured.iml" filepath="$PROJECT_DIR$/restAssured/platform-qa-ui-restAssured.iml" />
-      <module fileurl="file://$PROJECT_DIR$/restAssured/platform-qa-ui-restAssured.iml" filepath="$PROJECT_DIR$/restAssured/platform-qa-ui-restAssured.iml" />
       <module fileurl="file://$PROJECT_DIR$/selenium/platform-qa-ui-selenium.iml" filepath="$PROJECT_DIR$/selenium/platform-qa-ui-selenium.iml" />
       <module fileurl="file://$PROJECT_DIR$/social/platform-qa-ui-social.iml" filepath="$PROJECT_DIR$/social/platform-qa-ui-social.iml" />
       <module fileurl="file://$PROJECT_DIR$/task/platform-qa-ui-task.iml" filepath="$PROJECT_DIR$/task/platform-qa-ui-task.iml" />
