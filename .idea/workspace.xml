@@ -4,7 +4,11 @@
     <option name="SPLITTER_PROPORTION" value="0.8413697" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7bae155a-78b0-49ab-9f7e-bff850c8ce2c" name="Default Changelist" comment="" />
+    <list default="true" id="7bae155a-78b0-49ab-9f7e-bff850c8ce2c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationTypesTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationTypesTestIT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social/src/main/java/org/exoplatform/platform/qa/ui/social/pageobject/MyNotificationsSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/social/src/main/java/org/exoplatform/platform/qa/ui/social/pageobject/MyNotificationsSetting.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/forum/target/" />
     <ignored path="$PROJECT_DIR$/task/target/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -78,11 +82,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCPeopleActivityAddTestIT.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationTypesTestIT.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+            <state relative-caret-position="265">
+              <caret line="740" selection-start-line="740" selection-end-line="740" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -90,47 +94,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/WikiActivitiesInSpaceTestIT.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/social/SpaceManagement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="29" column="32" lean-forward="true" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
+            <state relative-caret-position="89">
+              <caret line="86" selection-start-line="86" selection-end-line="86" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/WikiBasicActionOtherActionsTestIT.java">
+        <entry file="file://$PROJECT_DIR$/social/src/main/java/org/exoplatform/platform/qa/ui/social/pageobject/MyNotificationsSetting.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="113" column="2" lean-forward="true" selection-start-line="113" selection-start-column="2" selection-end-line="113" selection-end-column="2" />
+            <state relative-caret-position="132">
+              <caret line="212" selection-start-line="212" selection-end-line="212" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/exoTribe/pageobject/TribeSpaceManagement.java">
+        <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ConnectionsManagement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="77" column="29" lean-forward="true" selection-start-line="77" selection-start-column="29" selection-end-line="77" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCManageSpacesTestIT.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="25" column="14" lean-forward="true" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCHomePageTestIT.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="25" column="11" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="11" />
+            <state relative-caret-position="123">
+              <caret line="140" selection-start-line="140" selection-end-line="140" />
             </state>
           </provider>
         </entry>
@@ -146,11 +132,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>DefaultSkin</find>
-      <find>Mention a user in comment</find>
-      <find>ion a user in activity composer</find>
-      <find>has been updated</find>
-      <find>ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES</find>
       <find>15</find>
       <find>ELEMENT_PUBLICATION_DISPLAYMODE_CONNECTION_OPTION</find>
       <find>deleteData</find>
@@ -176,6 +157,11 @@
       <find>exoTrib</find>
       <find>ELEMENT_SPACES_LIST</find>
       <find>selectSpaceDestination</find>
+      <find>Disable like and new user notifications</find>
+      <find>NotificationIsPushed</find>
+      <find>test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled</find>
+      <find>CreateA</find>
+      <find>searched</find>
     </findStrings>
     <replaceStrings>
       <replace>And</replace>
@@ -197,15 +183,13 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="RewriteScenariosToRemoveRedundantSteps" />
+        <entry key="$PROJECT_DIR$" value="RestAssured" />
       </map>
     </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/social/SpaceSettingManagement.java" />
-        <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/task/TaskCalendarIntegrationTestIT.java" />
         <option value="$PROJECT_DIR$/task/src/main/java/org/exoplatform/platform/qa/ui/task/pageobject/TaskManagementHome.java" />
         <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/testbase/TermsAndConditionsTestBase.java" />
         <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/TestBase.java" />
@@ -255,6 +239,8 @@
         <option value="$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/exoTribe/pageobject/TribeSpaceManagement.java" />
         <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCManageSpacesTestIT.java" />
         <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCHomePageTestIT.java" />
+        <option value="$PROJECT_DIR$/social/src/main/java/org/exoplatform/platform/qa/ui/social/pageobject/MyNotificationsSetting.java" />
+        <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationTypesTestIT.java" />
       </list>
     </option>
   </component>
@@ -291,6 +277,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -302,18 +289,57 @@
             <path>
               <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
               <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="wiki" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+              <item name="social" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1586453448798" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1586824978601" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -343,7 +369,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.org.exoplatform.platform.qa.ui.exoTribe in platform-qa-ui-exoTribe">
+  <component name="RunManager" selected="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotificationThenOnMySpaceWhenNotificationIsDisabled">
     <configuration name="CalendarBasicTestsInSpaceTestIT.test01_AddEventInSpace" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
@@ -416,73 +442,91 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WikiBasicActionManagePageAddDeleteTestIT.test04CreateDeletePageFromStatusMeetingTemplateOnSpace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-exoTribe" />
+    <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test03_MentionIntranetNotification_InactivityMessage_Then_InCommentThenCheckNotificationsAfterAttachLink" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-platform" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.exoTribe.*" />
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.social.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.exoTribe" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.exoTribe.WikiBasicActionManagePageAddDeleteTestIT" />
-      <option name="METHOD_NAME" value="test04CreateDeletePageFromStatusMeetingTemplateOnSpace" />
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCNotificationsIntranetNotificationTypesTestIT" />
+      <option name="METHOD_NAME" value="test03_MentionIntranetNotification_InactivityMessage_Then_InCommentThenCheckNotificationsAfterAttachLink" />
       <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=https://community-preprod.exoplatform.com" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org/" />
       <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WikiBasicActionOtherActionsTestIT.test04_MovePage_MyWiki_Space_Then_Space_MyWiki" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-exoTribe" />
+    <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotification" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-platform" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.exoTribe.*" />
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.social.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.exoTribe" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.exoTribe.WikiBasicActionOtherActionsTestIT" />
-      <option name="METHOD_NAME" value="test04_MovePage_MyWiki_Space_Then_Space_MyWiki" />
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCNotificationsIntranetNotificationTypesTestIT" />
+      <option name="METHOD_NAME" value="test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotification" />
       <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=https://community-preprod.exoplatform.com" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org/" />
       <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WikiBasicActionOtherActionsTestIT.test06_MovePage_Intranet_Space_Then_Space_Intranet" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-exoTribe" />
+    <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotificationThenOnMySpaceWhenNotificationIsDisabled" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-platform" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.exoTribe.*" />
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.social.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.exoTribe" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.exoTribe.WikiBasicActionOtherActionsTestIT" />
-      <option name="METHOD_NAME" value="test06_MovePage_Intranet_Space_Then_Space_Intranet" />
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCNotificationsIntranetNotificationTypesTestIT" />
+      <option name="METHOD_NAME" value="test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotificationThenOnMySpaceWhenNotificationIsDisabled" />
       <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=https://community-preprod.exoplatform.com" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org/" />
       <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WikiBasicActionOtherActionsTestIT.test08_MovePage_Space2_Space1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-exoTribe" />
+    <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-platform" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.exoTribe.*" />
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.social.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.exoTribe" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.exoTribe.WikiBasicActionOtherActionsTestIT" />
-      <option name="METHOD_NAME" value="test08_MovePage_Space2_Space1" />
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCNotificationsIntranetNotificationTypesTestIT" />
+      <option name="METHOD_NAME" value="test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled" />
       <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=https://community-preprod.exoplatform.com" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org/" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test20_CreateASpace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-platform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.platform.social.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.platform.social" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.platform.social.SOCNotificationsIntranetNotificationTypesTestIT" />
+      <option name="METHOD_NAME" value="test20_CreateASpace" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org/" />
       <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -492,7 +536,7 @@
       <option name="MAIN_CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=https://community-preprod.exoplatform.com" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org/" />
       <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -516,43 +560,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="org.exoplatform.platform.qa.ui.exoTribe in platform-qa-ui-exoTribe" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-exoTribe" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.exoTribe.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.exoTribe" />
-      <option name="MAIN_CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=https://community-preprod.exoplatform.com" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="JUnit.CalendarBasicTestsInSpaceTestIT.test01_AddEventInSpace" />
       <item itemvalue="JUnit.PlfNavigationTopNavigationTestIT.test05_CreateANewTaskViaTheTopNavigation" />
       <item itemvalue="JUnit.PlfUnifiedSearchTestIT.test13_checkUnifiedSearchNotWorkingWithFilesContainingDashInTheirTitles" />
       <item itemvalue="JUnit.PortletInSpaceHomePageTestIT.test04_CheckTheSpaceWhoIsOnlinePortlet" />
       <item itemvalue="JUnit.org.exoplatform.platform.qa.ui.chat.smoke in platform-qa-ui-chat" />
-      <item itemvalue="JUnit.WikiBasicActionManagePageAddDeleteTestIT.test04CreateDeletePageFromStatusMeetingTemplateOnSpace" />
-      <item itemvalue="JUnit.WikiBasicActionOtherActionsTestIT.test04_MovePage_MyWiki_Space_Then_Space_MyWiki" />
-      <item itemvalue="JUnit.WikiBasicActionOtherActionsTestIT.test06_MovePage_Intranet_Space_Then_Space_Intranet" />
-      <item itemvalue="JUnit.WikiBasicActionOtherActionsTestIT.test08_MovePage_Space2_Space1" />
-      <item itemvalue="JUnit.org.exoplatform.platform.qa.ui.exoTribe in platform-qa-ui-exoTribe" />
+      <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test03_MentionIntranetNotification_InactivityMessage_Then_InCommentThenCheckNotificationsAfterAttachLink" />
+      <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled" />
+      <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotification" />
+      <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test20_CreateASpace" />
+      <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotificationThenOnMySpaceWhenNotificationIsDisabled" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.org.exoplatform.platform.qa.ui.exoTribe in platform-qa-ui-exoTribe" />
-        <item itemvalue="JUnit.WikiBasicActionOtherActionsTestIT.test06_MovePage_Intranet_Space_Then_Space_Intranet" />
-        <item itemvalue="JUnit.WikiBasicActionOtherActionsTestIT.test08_MovePage_Space2_Space1" />
-        <item itemvalue="JUnit.WikiBasicActionOtherActionsTestIT.test04_MovePage_MyWiki_Space_Then_Space_MyWiki" />
-        <item itemvalue="JUnit.WikiBasicActionManagePageAddDeleteTestIT.test04CreateDeletePageFromStatusMeetingTemplateOnSpace" />
+        <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotificationThenOnMySpaceWhenNotificationIsDisabled" />
+        <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled" />
+        <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotification" />
+        <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test20_CreateASpace" />
+        <item itemvalue="JUnit.SOCNotificationsIntranetNotificationTypesTestIT.test03_MentionIntranetNotification_InactivityMessage_Then_InCommentThenCheckNotificationsAfterAttachLink" />
       </list>
     </recent_temporary>
   </component>
@@ -570,35 +596,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="WikiBasicActionOtherActionsTestIT_test06_MovePage_Intranet_Space_Then_Space_Intranet - 2020.04.09 at 03h 40m 24s.xml">
-      <configuration name="WikiBasicActionOtherActionsTestIT.test06_MovePage_Intranet_Space_Then_Space_Intranet" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test20_CreateASpace - 2020.04.14 at 02h 10m 03s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test20_CreateASpace" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="WikiBasicActionOtherActionsTestIT_test06_MovePage_Intranet_Space_Then_Space_Intranet - 2020.04.09 at 03h 43m 38s.xml">
-      <configuration name="WikiBasicActionOtherActionsTestIT.test06_MovePage_Intranet_Space_Then_Space_Intranet" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled - 2020.04.14 at 02h 11m 27s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="WikiBasicActionOtherActionsTestIT_test06_MovePage_Intranet_Space_Then_Space_Intranet - 2020.04.09 at 03h 47m 28s.xml">
-      <configuration name="WikiBasicActionOtherActionsTestIT.test06_MovePage_Intranet_Space_Then_Space_Intranet" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled - 2020.04.14 at 02h 13m 04s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="WikiBasicActionOtherActionsTestIT_test06_MovePage_Intranet_Space_Then_Space_Intranet - 2020.04.09 at 04h 00m 47s.xml">
-      <configuration name="WikiBasicActionOtherActionsTestIT.test06_MovePage_Intranet_Space_Then_Space_Intranet" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled - 2020.04.14 at 02h 14m 17s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="WikiBasicActionOtherActionsTestIT_test06_MovePage_Intranet_Space_Then_Space_Intranet - 2020.04.09 at 04h 05m 58s.xml">
-      <configuration name="WikiBasicActionOtherActionsTestIT.test06_MovePage_Intranet_Space_Then_Space_Intranet" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled - 2020.04.14 at 02h 15m 37s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="WikiBasicActionOtherActionsTestIT_test06_MovePage_Intranet_Space_Then_Space_Intranet - 2020.04.09 at 04h 14m 02s.xml">
-      <configuration name="WikiBasicActionOtherActionsTestIT.test06_MovePage_Intranet_Space_Then_Space_Intranet" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotification - 2020.04.14 at 02h 17m 14s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotification" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="WikiBasicActionOtherActionsTestIT_test08_MovePage_Space2_Space1 - 2020.04.09 at 04h 18m 27s.xml">
-      <configuration name="WikiBasicActionOtherActionsTestIT.test08_MovePage_Space2_Space1" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotification - 2020.04.14 at 02h 24m 21s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotification" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="org_exoplatform_platform_qa_ui_exoTribe_in_platform-qa-ui-exoTribe - 2020.04.09 at 12h 25m 48s.xml">
-      <configuration name="org.exoplatform.platform.qa.ui.exoTribe in platform-qa-ui-exoTribe" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled - 2020.04.14 at 02h 25m 25s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test12_2_PostOnMySpaceIntranetNotificationWhenNotificationIsDisabled" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="WikiBasicActionOtherActionsTestIT_test06_MovePage_Intranet_Space_Then_Space_Intranet - 2020.04.09 at 12h 32m 31s.xml">
-      <configuration name="WikiBasicActionOtherActionsTestIT.test06_MovePage_Intranet_Space_Then_Space_Intranet" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotificationThenOnMySpaceWhenNotificationIsDisabled - 2020.04.14 at 02h 30m 20s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotificationThenOnMySpaceWhenNotificationIsDisabled" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="org_exoplatform_platform_qa_ui_exoTribe_in_platform-qa-ui-exoTribe - 2020.04.09 at 12h 58m 42s.xml">
-      <configuration name="org.exoplatform.platform.qa.ui.exoTribe in platform-qa-ui-exoTribe" configurationId="JUnit" />
+    <history-entry file="SOCNotificationsIntranetNotificationTypesTestIT_test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotificationThenOnMySpaceWhenNotificationIsDisabled - 2020.04.14 at 02h 38m 56s.xml">
+      <configuration name="SOCNotificationsIntranetNotificationTypesTestIT.test04_PostOnMySpaceIntranetNotificationThenOnMyStreamIntranetNotificationThenOnMySpaceWhenNotificationIsDisabled" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -612,8 +638,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1533" height="875" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" visible="true" weight="0.28850034" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" weight="0.28850034" />
       <window_info id="Structure" order="1" sideWeight="0.22285715" side_tool="true" weight="0.24815063" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -624,10 +651,10 @@
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49966374" weight="0.38873994" />
       <window_info anchor="bottom" id="Cvs" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.737727" weight="0.7171582" />
-      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.8473436" weight="0.4544236" />
+      <window_info active="true" anchor="bottom" id="Run" order="4" sideWeight="0.737727" visible="true" weight="0.28150135" />
+      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.8473436" weight="0.22788204" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.58042896" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" visible="true" weight="0.41689008" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" weight="0.3458445" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.26227304" side_tool="true" weight="0.39008042" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.5683646" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49831876" weight="0.48927614" />
@@ -643,7 +670,7 @@
       <window_info anchor="right" id="Ant Build" order="8" sideWeight="0.49867374" weight="0.09683927" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" visible="true" weight="0.2642905" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" weight="0.28850034" />
       <window_info id="Structure" order="1" sideWeight="0.22285715" side_tool="true" weight="0.24815063" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -654,10 +681,10 @@
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49966374" weight="0.38873994" />
       <window_info anchor="bottom" id="Cvs" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="3" weight="0.4" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" sideWeight="0.737727" visible="true" weight="0.6756032" />
-      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.8473436" weight="0.4544236" />
+      <window_info active="true" anchor="bottom" id="Run" order="4" sideWeight="0.737727" visible="true" weight="0.1621984" />
+      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.8473436" weight="0.22788204" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.58042896" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" weight="0.41689008" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" weight="0.3458445" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.26227304" side_tool="true" weight="0.39008042" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.5683646" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49831876" weight="0.48927614" />
@@ -1052,21 +1079,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCPeopleActivityAddTestIT.java</url>
-          <line>71</line>
+          <line>70</line>
           <properties />
           <option name="timeStamp" value="4078" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/WikiBasicActionManagePageAddDeleteTestIT.java</url>
-          <line>97</line>
+          <url>file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ConnectionsManagement.java</url>
+          <line>209</line>
           <properties />
-          <option name="timeStamp" value="4079" />
+          <option name="timeStamp" value="4103" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/WikiBasicActionOtherActionsTestIT.java</url>
-          <line>119</line>
+          <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationTypesTestIT.java</url>
+          <line>832</line>
           <properties />
-          <option name="timeStamp" value="4080" />
+          <option name="timeStamp" value="4106" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationTypesTestIT.java</url>
+          <line>618</line>
+          <properties />
+          <option name="timeStamp" value="4107" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1209,16 +1242,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/ReplyToCommentTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5158">
-          <caret line="222" column="52" selection-start-line="222" selection-start-column="52" selection-end-line="222" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/platform/pom.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1250,13 +1273,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ConnectionsManagement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="133" column="14" selection-start-line="133" selection-start-column="14" selection-end-line="133" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCCommentEditTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -1274,13 +1290,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/social/SpaceManagement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="81" selection-start-line="81" selection-end-line="81" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsAdministrationTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2635">
@@ -1292,13 +1301,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4195">
           <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationTypesTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-52629">
-          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1383,16 +1385,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/exoTribe/pageobject/TribeSourceTextEditor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="43">
-          <caret line="40" column="14" selection-start-line="40" selection-start-column="14" selection-end-line="40" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/exoTribe/pageobject/TribeSourceTextEditor.java" />
     <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
@@ -1400,16 +1393,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/exoTribe/pageobject/TribeActivityStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="83" selection-start-line="83" selection-end-line="83" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/exoTribe/pageobject/TribeActivityStream.java" />
     <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiBasicActionManagePageAddDeleteTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3066">
@@ -1439,13 +1423,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/exoTribe/pageobject/TribeWikiHomePage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="44" column="16" selection-start-line="44" selection-start-column="16" selection-end-line="44" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/exoTribe/pageobject/TribeWikiHomePage.java" />
     <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/NavigationToolBarLocator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -1499,20 +1477,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/exoTribe/exoTribeLocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="104" column="25" selection-start-line="104" selection-start-column="25" selection-end-line="104" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/exoTribe/pageobject/TribeWikiManagement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="259" column="14" selection-start-line="259" selection-start-column="14" selection-end-line="259" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/exoTribe/exoTribeLocator.java" />
+    <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/exoTribe/pageobject/TribeWikiManagement.java" />
     <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/social/SocialLocator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="104">
@@ -1520,62 +1486,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/exoTribe/pageobject/TribeRichTextEditor.java">
+    <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/exoTribe/pageobject/TribeRichTextEditor.java" />
+    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/WikiBasicActionManagePageAddDeleteTestIT.java" />
+    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/WikiBasicActionOtherActionsTestIT.java" />
+    <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/exoTribe/pageobject/TribeSpaceManagement.java" />
+    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCHomePageTestIT.java" />
+    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCManageSpacesTestIT.java" />
+    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCPeopleActivityAddTestIT.java" />
+    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/WikiActivitiesInSpaceTestIT.java" />
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ConnectionsManagement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="140" selection-start-line="140" selection-end-line="140" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/social/src/main/java/org/exoplatform/platform/qa/ui/social/pageobject/MyNotificationsSetting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="212" selection-start-line="212" selection-end-line="212" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/social/SpaceManagement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="89">
-          <caret line="89" column="16" selection-start-line="89" selection-start-column="16" selection-end-line="89" selection-end-column="16" />
+          <caret line="86" selection-start-line="86" selection-end-line="86" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/WikiBasicActionManagePageAddDeleteTestIT.java">
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/social/SOCNotificationsIntranetNotificationTypesTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/WikiBasicActionOtherActionsTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="113" column="2" lean-forward="true" selection-start-line="113" selection-start-column="2" selection-end-line="113" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/exoTribe/pageobject/TribeSpaceManagement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="77" column="29" lean-forward="true" selection-start-line="77" selection-start-column="29" selection-end-line="77" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCHomePageTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="25" column="11" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCManageSpacesTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="25" column="14" lean-forward="true" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCPeopleActivityAddTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        <state relative-caret-position="265">
+          <caret line="740" selection-start-line="740" selection-end-line="740" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/WikiActivitiesInSpaceTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="29" column="32" lean-forward="true" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
         </state>
       </provider>
     </entry>

@@ -133,9 +133,9 @@ public class MyNotificationsSetting {
         evt.waitForElementNotPresent(ELEMENT_LIKE_MAIL_ICON, 3000, 1);
         break;
       case AS_Like_intranet:
-        $(ELEMENT_EDIT_LIKE_ICON).click();
+        $(ELEMENT_EDIT_LIKE_ICON).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
         if ($(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).is(Condition.selected)) {
-          $(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).parent().click();
+          $(ELEMENT_EDIT_LIKE_WEB_CHECKBOX).parent().waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
         }
         info("Click on Save button");
         $(ELEMENT_EDIT_LIKE_SAVE_BTN).click();
@@ -210,7 +210,7 @@ public class MyNotificationsSetting {
       case Space_Post_intranet:
         $(ELEMENT_EDIT_POST_SPACE_ICON).click();
         if ($(ELEMENT_EDIT_POST_SPACE_WEB_CHECKBOX).is(Condition.selected)) {
-          $(ELEMENT_EDIT_POST_SPACE_WEB_CHECKBOX).parent().click();
+          $(ELEMENT_EDIT_POST_SPACE_WEB_CHECKBOX).parent().waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
         }
         info("Click on Save button");
         evt.click(ELEMENT_EDIT_POST_SPACE_SAVE_BTN);
