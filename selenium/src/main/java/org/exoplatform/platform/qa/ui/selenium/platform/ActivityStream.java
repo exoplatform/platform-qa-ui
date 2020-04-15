@@ -79,7 +79,7 @@ public class ActivityStream {
     public void checkCommentOfActivity(String activity, String comment) {
         info("Verify that the comment is added");
         $(byXpath("//div[@class='titleWiki']/a[text()='${activity}']".replace("${activity}",activity))).waitUntil(Condition.exist, openBrowserTimeoutMs);
-        ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(comment)).should(Condition.exist);
+        ELEMENT_ACTIVITY_STREAM_CONTAINER.waitUntil(Condition.exist, openBrowserTimeoutMs).find(byText(comment)).waitUntil(Condition.exist, openBrowserTimeoutMs);
         info("The comment is added successfully");
     }
 
@@ -1069,13 +1069,15 @@ public class ActivityStream {
         // get the id of wikiactivity
         String id = $(byText(wikiactivity)).parent().parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
         // click on comment link
-        $(byText(wikiactivity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
+        $(byText(wikiactivity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).waitUntil(Condition.appears, openBrowserTimeoutMs).click();
         // insert comment
-        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, openBrowserTimeoutMs).click();
+
+        sleep(1000);
         executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
         // click on the button comment
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-        $(byText(comment)).should(Condition.exist);
+        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, openBrowserTimeoutMs);
+        $(byText(comment)).waitUntil(Condition.exist, openBrowserTimeoutMs);
     }
 
     public void commentTopicActivity(String description, String comment) {

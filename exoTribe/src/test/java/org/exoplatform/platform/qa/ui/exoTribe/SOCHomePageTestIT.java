@@ -15,9 +15,11 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.core.PLFData.*;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
+import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_WHO_LIKED_POPUP;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 /**
@@ -27,23 +29,23 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 @Tag("social")
 @Tag("sniff")
 public class SOCHomePageTestIT extends BaseTribe {
-  NavigationToolbar      navigationToolbar;
+  NavigationToolbar navigationToolbar;
 
-  AddUsers               addUsers;
+  AddUsers addUsers;
 
-  ManageLogInOut         manageLogInOut;
+  ManageLogInOut manageLogInOut;
 
-  HomePagePlatform       homePagePlatform;
+  HomePagePlatform homePagePlatform;
 
-  ConnectionsManagement  connectionsManagement;
+  ConnectionsManagement connectionsManagement;
 
-  ActivityStream         activityStream;
+  ActivityStream activityStream;
 
-  TribeActivityStream         tribeActivityStream;
+  TribeActivityStream tribeActivityStream;
 
-  SpaceHomePage          spaceHomePage;
+  SpaceHomePage spaceHomePage;
 
-  SpaceManagement        spaceManagement;
+  SpaceManagement spaceManagement;
 
   SpaceSettingManagement spaceSettingManagement;
 
@@ -60,7 +62,7 @@ public class SOCHomePageTestIT extends BaseTribe {
     spaceHomePage = new SpaceHomePage(this);
     spaceManagement = new SpaceManagement(this);
     spaceSettingManagement = new SpaceSettingManagement(this);
-    manageLogInOut.signInTribeWithGoogle(tribe_mail, atlassian_username, atlassian_password);
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
 
   }
 
@@ -121,14 +123,14 @@ public class SOCHomePageTestIT extends BaseTribe {
     // click on the button comment
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).pressEnter().waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
 
-    $(byText(comment)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
+    $(byText(comment)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
     sleep(1000);
     executeJavaScript("window.scrollBy(0,-2000)");
 
     info("Delete comment");
-    activityStream.deletecomment(activity1,comment);
+    activityStream.deletecomment(activity1, comment);
     // verify that the comment is deleted
-    $(byText(comment)).waitUntil(Condition.not(Condition.exist),Configuration.openBrowserTimeoutMs);
+    $(byText(comment)).waitUntil(Condition.not(Condition.exist), Configuration.openBrowserTimeoutMs);
 
     // click on the activity to appear the delete button
     tribeActivityStream.deleteactivity(activity1);

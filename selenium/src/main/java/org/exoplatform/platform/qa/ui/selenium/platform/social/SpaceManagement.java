@@ -117,9 +117,9 @@ public class SpaceManagement {
     } else {
       $(By.xpath("//*[contains(@class, 'uiIconSocSimplePlus')]")).click();
     }
-    $(ELEMENT_ADDNEWSPACE_FORM).waitUntil(Condition.visible, Configuration.timeout);
-    $(ELEMENT_SPACE_NAME_INPUT).setValue(name);
-    $(ELEMENT_SPACE_DESCRIPTION_INPUT).setValue(desc);
+    $(ELEMENT_ADDNEWSPACE_FORM).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    $(ELEMENT_SPACE_NAME_INPUT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
+    $(ELEMENT_SPACE_DESCRIPTION_INPUT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(desc);
     if (hidden == "Yes") {
       if ($(byXpath("//label[@class='switchBtnLabelOn']")).getCssValue("width").equals("9px")) {
         $(byXpath("//*[@class='uiSwitchBtn']")).waitUntil(Condition.visible, Configuration.timeout).click();

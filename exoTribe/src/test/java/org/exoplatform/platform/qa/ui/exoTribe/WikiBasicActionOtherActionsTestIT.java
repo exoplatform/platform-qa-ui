@@ -2,7 +2,6 @@ package org.exoplatform.platform.qa.ui.exoTribe;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
 import org.exoplatform.platform.qa.ui.exoTribe.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
@@ -11,22 +10,21 @@ import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
-import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
+import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
+import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
+import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.core.PLFData.*;
-import static org.exoplatform.platform.qa.ui.selenium.Button.ELEMENT_CANCEL_BUTTON;
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
+import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_BUTTON_EVENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACES_LIST;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 @Tag("tribe")
 @Tag("wiki")
@@ -35,11 +33,11 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
 
   HomePagePlatform homePagePlatform;
 
-  SpaceManagement  spaceManagement;
+  SpaceManagement spaceManagement;
 
   TribeWikiHomePage tribeWikiHomePage;
 
-  WikiManagement   wikiManagement;
+  WikiManagement wikiManagement;
 
   TribeWikiManagement tribeWikiManagement;
 
@@ -51,9 +49,9 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
 
   NavigationToolbar navigationToolbar;
 
-  WikiHomePage     wikiHomePage;
+  WikiHomePage wikiHomePage;
 
-  SpaceHomePage    spaceHomePage;
+  SpaceHomePage spaceHomePage;
 
   ActivityStream activityStream;
 
@@ -61,7 +59,7 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
 
   TribeSpaceManagement tribeSpaceManagement;
 
-  ManageLogInOut   manageLogInOut;
+  ManageLogInOut manageLogInOut;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -83,13 +81,13 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     tribeActivityStream = new TribeActivityStream(this);
     tribeSpaceManagement = new TribeSpaceManagement(this);
     manageLogInOut = new ManageLogInOut(this);
-    manageLogInOut.signInTribeWithGoogle(tribe_mail, atlassian_username, atlassian_password);
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
 
   }
 
 
   @Test
-  public void test06_MovePage_Intranet_Space_Then_Space_Intranet() {
+  public void test01_MovePage_Intranet_Space_Then_Space_Intranet() {
 
     info("Create a space");
     String space = "space" + getRandomNumber();
@@ -105,7 +103,7 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     tribeWikiHomePage.goToAddBlankPage();
     tribeRichTextEditor.addSimplePage(title1, title1);
     tribeWikiManagement.saveAddPage();
-    $(byText(title1)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
+    $(byText(title1)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
 
     info("Move page to Space");
     tribeWikiManagement.selectSpaceDestination(space);
@@ -113,7 +111,7 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     tribeSpaceManagement.searchSpace(space);
     ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToWikiTab();
-    $(byClassName("uiTreeExplorer")).find(byText(title1)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
+    $(byClassName("uiTreeExplorer")).find(byText(title1)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
     homePagePlatform.goToStreamPageTribe();
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.deleteSpace(space, false);
@@ -124,11 +122,11 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     tribeWikiHomePage.goToAddBlankPage();
     tribeRichTextEditor.addSimplePage(title2, title2);
     tribeWikiManagement.saveAddPage();
-    $(byText(title2)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
+    $(byText(title2)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
 
     info("Move page to Intranet");
     tribeWikiManagement.selectSpaceDestination("Mes Notes");
-    $(byClassName("uiTreeExplorer")).find(byText(title2)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
+    $(byClassName("uiTreeExplorer")).find(byText(title2)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
     tribeWikiHomePage.deleteWiki(title2);
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.deleteSpace(space, false);
@@ -136,7 +134,7 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
 
   @Test
   @Tag("wabis")
-  public void test08_MovePage_Space2_Space1() {
+  public void test02_MovePage_Space2_Space1() {
 
     info("Create a space");
     String space1 = "space" + getRandomNumber();

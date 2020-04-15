@@ -15,8 +15,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_TEMPLATE_TRIBE_SELECT_BTN;
-import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_WIKI_TRIBE_MOVE_POPUP_SAVE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -287,14 +286,14 @@ public class TribeWikiManagement {
   public void checkAddRelationDropDownList(String spaces) {
 
     info("Click on Drop down");
-    $(ELEMENT_ADD_RELATED_PAGE_POPUP_DROPDOWN).waitUntil(Condition.appears, Configuration.timeout);
-    $(ELEMENT_ADD_RELATED_PAGE_POPUP_DROPDOWN).click();
+    $(ELEMENT_ADD_RELATED_TRIBE_SLECTION).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_ADD_RELATED_TRIBE_SLECTION).click();
 
     info("Verify that Intranet location is shown is the list");
-    $(byId("UISpaceSwitcher_/portal/intranet")).should(Condition.exist);
+    $(byId("UISpaceSwitcher_/portal/DW")).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
 
     info("Verify that My wiki location is shown is the list");
-    $(byId("UISpaceSwitcher_/user/root")).should(Condition.exist);
+    $(byId("UISpaceSwitcher_/user/")).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
 
     if (!spaces.isEmpty()) {
       String[] arraySpace = spaces.split("/");

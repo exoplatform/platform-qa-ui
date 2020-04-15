@@ -2,7 +2,6 @@ package org.exoplatform.platform.qa.ui.exoTribe;
 
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
 import org.exoplatform.platform.qa.ui.exoTribe.pageobject.*;
-import org.exoplatform.platform.qa.ui.exoTribe.pageobject.TribeWikiHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
@@ -14,22 +13,24 @@ import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import static org.exoplatform.platform.qa.ui.core.PLFData.*;
+
+import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
+import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("tribe")
-@Tag("sniff")
 @Tag("wiki")
+@Tag("sniff")
 public class WikiActivitiesInSpaceTestIT extends BaseTribe {
 
   HomePagePlatform homePagePlatform;
 
-  SpaceManagement  spaceManagement;
+  SpaceManagement spaceManagement;
 
   TribeWikiHomePage tribeWikiHomePage;
 
-  WikiManagement   wikiManagement;
+  WikiManagement wikiManagement;
 
   TribeWikiManagement tribeWikiManagement;
 
@@ -37,17 +38,17 @@ public class WikiActivitiesInSpaceTestIT extends BaseTribe {
 
   WikiValidattions wikiValidattions;
 
-  WikiHomePage     wikiHomePage;
+  WikiHomePage wikiHomePage;
 
-  SpaceHomePage    spaceHomePage;
+  SpaceHomePage spaceHomePage;
 
-  ActivityStream   activityStream;
+  ActivityStream activityStream;
 
   TribeActivityStream tribeActivityStream;
 
   TribeSpaceManagement tribeSpaceManagement;
 
-  ManageLogInOut   manageLogInOut;
+  ManageLogInOut manageLogInOut;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -67,12 +68,12 @@ public class WikiActivitiesInSpaceTestIT extends BaseTribe {
     tribeActivityStream = new TribeActivityStream(this);
     tribeSpaceManagement = new TribeSpaceManagement(this);
     manageLogInOut = new ManageLogInOut(this);
-    manageLogInOut.signInTribeWithGoogle(tribe_mail, atlassian_username, atlassian_password);
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
 
   }
 
   @Test
-  public void test11_AddEditRemoveAWikiActivityAfterCreateAWikiPageInSpace() {
+  public void test01_AddEditRemoveAWikiActivityAfterCreateAWikiPageInSpace() {
     info("Test 13 Remove wiki's page of space");
     info("Create a space");
     String space = "space" + getRandomNumber();

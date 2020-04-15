@@ -30,7 +30,9 @@ public class PLFData {
 
   public static String atlassian_username             = "kriahi";
 
-  public static String atlassian_password             = "pHkhCkBB4c";
+  public static String tribe_password             = "pHkhCkBB4c";
+
+  public static String tribe_username             = "khalil_riahi";
 
   public static String username             = "root";
 

@@ -12,9 +12,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.core.PLFData.*;
+import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
+import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -24,21 +26,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Tag("smoke")
 @Tag("social")
 public class SOCPeopleActivityAddTestIT extends BaseTribe {
-  NavigationToolbar     navigationToolbar;
+  NavigationToolbar navigationToolbar;
 
-  AddUsers              addUsers;
+  AddUsers addUsers;
 
-  ManageLogInOut        manageLogInOut;
+  ManageLogInOut manageLogInOut;
 
-  HomePagePlatform      homePagePlatform;
+  HomePagePlatform homePagePlatform;
 
   ConnectionsManagement connectionsManagement;
 
-  ActivityStream        activityStream;
+  ActivityStream activityStream;
 
-  TribeActivityStream         tribeActivityStream;
+  TribeActivityStream tribeActivityStream;
 
-  UserPageBase          userPageBase;
+  UserPageBase userPageBase;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -50,12 +52,12 @@ public class SOCPeopleActivityAddTestIT extends BaseTribe {
     connectionsManagement = new ConnectionsManagement(this);
     activityStream = new ActivityStream(this);
     tribeActivityStream = new TribeActivityStream(this);
-    manageLogInOut.signInTribeWithGoogle(tribe_mail, atlassian_username, atlassian_password);
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
 
   }
 
   @Test
-  public void test03_add_link_without_text() {
+  public void test01_add_link_without_text() {
 
     String link = "http://www.google.fr";
     String title = "Google";
@@ -65,13 +67,13 @@ public class SOCPeopleActivityAddTestIT extends BaseTribe {
     ELEMENT_BUTTON_ATTACH_LINK.click();
     $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.be(Condition.enabled), Configuration.openBrowserTimeoutMs);
     $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
-    $(byText(link)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
+    $(byText(link)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
     $(byText(link)).click();
     sleep(1000);
     switchTo().window(1);
     assertEquals(title, Selenide.title());
     switchTo().window(0);
-    String id=$(byText(link)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).parent()
+    String id = $(byText(link)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).parent()
             .parent()
             .parent()
             .parent()

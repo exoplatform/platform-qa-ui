@@ -925,7 +925,7 @@ public final class SocialLocator {
 
   // Add application popup
   public static final By              ELEMENT_ADD_APPLICATION_POPUP_TITLE                               =
-                                                                          By.xpath("//*[contains(text(),'Space Application Installer')]");
+                                                                          By.xpath("//*[@class='UIPopupWindow uiPopup UIDragObject NormalStyle']//*[@class='PopupTitle popupTitle']");
 
   public static final By              ELEMENT_ADD_APPLICATION_POPUP_CLOSE_BTN                           =
                                                                               By.xpath(".//*[@id='UIAddApplication']//*[@class='uiIconClose pull-right']");
@@ -1080,7 +1080,7 @@ public final class SocialLocator {
    * SPACE SETTING MANAGEMENT
    ********************************************************/
   public static final By              ELEMENT_SPACE_SPACE_SETTINGS_TITLE                                =
-                                                                         By.xpath(".//*[@id='UISpaceSettingPortlet']/h3[text()='Space Configuration']");
+                                                                         By.xpath(".//*[@id='UISpaceSettingPortlet']/h3");
 
   // Members tab
   public static final SelenideElement ELEMENT_SPACE_SETTINGS_MEMBERS_TAB                                =

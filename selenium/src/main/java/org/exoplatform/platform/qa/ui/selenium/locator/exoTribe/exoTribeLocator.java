@@ -102,8 +102,25 @@ public class exoTribeLocator {
 
     public static final By ELEMENT_TEMPLATE_TRIBE_SELECT_BTN = By.xpath("//*[@id='UIWikiSelectTemplateForm']//*[text()='Sélectionner']");
 
-  public static final By ELEMENT_WIKI_TRIBE_MOVE_POPUP_SAVE = By.xpath(".//*[@id='UIWikiMovePageForm']//button[contains(text(),'Déplacer')]");
+    public static final By ELEMENT_WIKI_TRIBE_MOVE_POPUP_SAVE = By.xpath(".//*[@id='UIWikiMovePageForm']//button[contains(text(),'Déplacer')]");
 
+    public static final By ELEMENT_WIKI_TRIBE_COMPARE_VERSION_TITLE = By.xpath(".//h4[text()='Comparer les Versions']");
+
+    public static final String ELEMENT_COMPARE_TRIBE_VERSION_NUMBER = ".//*[@id='UIWikiPageVersionsCompare']//*[contains(text(),'Version $num')]";
+
+    public static final By ELEMENT_COMPARE_TRIBE_CURRENT_VERSION = By.xpath(".//*[@id='UIWikiPageVersionsCompare']//*[contains(text(),'Version courante')]");
+
+    public static final By   ELEMENT_HOME_SPACE_TRIBE = By.xpath("//*[@class='uiIconAppSpaceHomePage uiIconDefaultApp']");
+
+    public static final By ELEMENT_TRIBE_INFO_ADD_MORE_RELATIONS = By.xpath(".//*[@id='UIWikiPageInfo']//button[text()='Associer une Page']");
+
+    public static final By ELEMENT_ADD_RELATED_TRIBE_POPUP_DROPDOWN = By.xpath(".//*[contains(text(),'Associer une Page')]");
+
+    public static final By ELEMENT_ADD_RELATED_TRIBE_SLECTION = By.xpath("//*[contains(text(),'Ajouter une Page Associée')]/../..//*[@data-toggle='dropdown']");
+
+    public static final String ELEMENT_ADD_RELATED_POPUP_TRIBE_LOCATION = ".//*[contains(text(),'Ajouter une Page Associée')]/../..//*[contains(text(),'${location}')]";
+
+    public static final String ELEMENT_ADD_RELATED_POPUP_TRIBE_CONTENT = ".//*[contains(text(),'Ajouter une Page Associée')]/../..//*[contains(text(),'${page}')]";
 }
 
 

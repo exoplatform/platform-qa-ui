@@ -76,6 +76,15 @@ public class HomePagePlatform {
   }
 
   /**
+   * Go to Home page
+   */
+  public void goToSpaceHomeTribe() {
+    info("Click on Home link of intranet page");
+    executeJavaScript("window.scrollBy(0,-5500)", "");
+    $(ELEMENT_HOME_SPACE_TRIBE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout).click();
+  }
+
+  /**
    * Go to Home page Tribe
    */
   public void goToStreamPageTribe() {

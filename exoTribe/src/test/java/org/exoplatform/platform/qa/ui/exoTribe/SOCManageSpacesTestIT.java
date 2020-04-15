@@ -13,8 +13,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selectors.*;
-import static org.exoplatform.platform.qa.ui.core.PLFData.*;
+import static com.codeborne.selenide.Selectors.byText;
+import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
+import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_SPACENAME_TRIBE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -26,21 +27,21 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 @Tag("social")
 @Tag("sniff")
 public class SOCManageSpacesTestIT extends BaseTribe {
-  NavigationToolbar      navigationToolbar;
+  NavigationToolbar navigationToolbar;
 
-  AddUsers               addUsers;
+  AddUsers addUsers;
 
-  ManageLogInOut         manageLogInOut;
+  ManageLogInOut manageLogInOut;
 
-  HomePagePlatform       homePagePlatform;
+  HomePagePlatform homePagePlatform;
 
-  ConnectionsManagement  connectionsManagement;
+  ConnectionsManagement connectionsManagement;
 
-  ActivityStream         activityStream;
+  ActivityStream activityStream;
 
-  TribeActivityStream         tribeActivityStream;
+  TribeActivityStream tribeActivityStream;
 
-  SpaceHomePage          spaceHomePage;
+  SpaceHomePage spaceHomePage;
 
   TribeSpaceManagement tribeSpaceManagement;
 
@@ -59,13 +60,13 @@ public class SOCManageSpacesTestIT extends BaseTribe {
     spaceHomePage = new SpaceHomePage(this);
     tribeSpaceManagement = new TribeSpaceManagement(this);
     spaceSettingManagement = new SpaceSettingManagement(this);
-    manageLogInOut.signInTribeWithGoogle(tribe_mail, atlassian_username, atlassian_password);
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
 
   }
 
   @Test
   @Tag("sabis")
-  public void test09_CheckTheExistanceOfTheSpacesInTheManageSpacesTab() {
+  public void test01_CheckTheExistanceOfTheSpacesInTheManageSpacesTab() {
 
     String spaceNamea = "spaceNamea" + getRandomNumber();
     String spaceDesa = "descriptiona" + getRandomNumber();

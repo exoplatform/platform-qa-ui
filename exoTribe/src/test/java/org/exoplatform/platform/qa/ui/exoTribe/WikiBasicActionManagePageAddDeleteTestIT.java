@@ -1,30 +1,28 @@
 package org.exoplatform.platform.qa.ui.exoTribe;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
-import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
 import org.exoplatform.platform.qa.ui.exoTribe.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
-import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
-import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
+import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
+import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
+import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static org.exoplatform.platform.qa.ui.core.PLFData.*;
+import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
+import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 @Tag("tribe")
 @Tag("wiki")
@@ -34,11 +32,11 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
 
   HomePagePlatform homePagePlatform;
 
-  SpaceManagement  spaceManagement;
+  SpaceManagement spaceManagement;
 
   TribeWikiHomePage tribeWikiHomePage;
 
-  WikiManagement   wikiManagement;
+  WikiManagement wikiManagement;
 
   TribeWikiManagement tribeWikiManagement;
 
@@ -46,9 +44,9 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
 
   WikiValidattions wikiValidattions;
 
-  WikiHomePage     wikiHomePage;
+  WikiHomePage wikiHomePage;
 
-  SpaceHomePage    spaceHomePage;
+  SpaceHomePage spaceHomePage;
 
   ActivityStream activityStream;
 
@@ -56,7 +54,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
 
   TribeSpaceManagement tribeSpaceManagement;
 
-  ManageLogInOut   manageLogInOut;
+  ManageLogInOut manageLogInOut;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -76,12 +74,12 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
     tribeActivityStream = new TribeActivityStream(this);
     tribeSpaceManagement = new TribeSpaceManagement(this);
     manageLogInOut = new ManageLogInOut(this);
-    manageLogInOut.signInTribeWithGoogle(tribe_mail, atlassian_username, atlassian_password);
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
 
   }
 
   @Test
-  public void test06_1_AutoSaveWhenAddingPageFromHowToGuideThreeColumnLayoutStatusMeetingLeavePlanningTwoColumnLayoutTemplatesOnSpace() {
+  public void test01_AutoSaveWhenAddingPageFromHowToGuideThreeColumnLayoutStatusMeetingLeavePlanningTwoColumnLayoutTemplatesOnSpace() {
     info("Test 06: Auto Save when adding page from template");
     String title = "title1" + getRandomNumber();
     String title2 = "title2" + getRandomNumber();
@@ -129,9 +127,8 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
    * action in menu - Click on OK button on Confirm message form Input Data:
    * Expected Outcome: Delete page successfully
    */
-
   @Test
-  public void test04CreateDeletePageFromStatusMeetingTemplateOnSpace() {
+  public void test02_CreateDeletePageFromStatusMeetingTemplateOnSpace() {
     info("Test 04: Create page from template");
     SelenideElement template = ELEMENT_SELECT_TEMPLATE_StatusMeeting;
     String title = "title1" + getRandomNumber();
