@@ -121,7 +121,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
             .parent()
             .shouldHave(text(username5 + " " + username5 + " has joined eXo."));
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username5 + " " + username5)).parent().click();
-    ELEMENT_CONTENT_NAME_PROFILE.find(byText(username5 + " " + username5)).click();
+    ELEMENT_CONTENT_NAME_PROFILE.find(byText(username5 + " " + username5)).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
     homePagePlatform.refreshUntil(ELEMENT_CONTENT_NAME_PROFILE,visible,1000);
     navigationToolbar.goToIntranetNotification();
     intranetNotification.goToAllNotification();
@@ -416,6 +416,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     manageLogInOut.signIn(username2, password);
     info("Enable like and new user notifications");
     navigationToolbar.goToMyNotifications();
+    sleep(1000);
     myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.AS_Comment_intranet);
     executeJavaScript("window.scrollBy(0,-5500)", "");
     homePagePlatform.goToConnections();
@@ -615,7 +616,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
     activityStream.mentionUserActivity(username1, "");
     manageLogInOut.signIn(username1, password);
-    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     ELEMENT_ALERT_NOTIFICATION.click();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username2 + " " + username2))
             .parent()
@@ -816,6 +817,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     connectionsManagement.connectToAUser(username2);
     info("Disable the notifications");
     navigationToolbar.goToMyNotifications();
+    sleep(1000);
     myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.AS_Post_intranet);
     myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.AS_Mention_intranet);
     myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.AS_Comment_intranet);
@@ -970,6 +972,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     manageLogInOut.signIn(username2, password);
     info("disable the notifications");
     navigationToolbar.goToMyNotifications();
+    getExoWebDriver().getWebDriver().navigate().refresh();
     myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.Space_Invitation_Intranet);
     info("Add new space and ivite an user");
     manageLogInOut.signIn(username1, password);
@@ -1045,7 +1048,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     manageLogInOut.signIn(username1, password);
     ELEMENT_ALERT_NOTIFICATION.waitUntil(Condition.visible, Configuration.timeout);
     ELEMENT_ALERT_NOTIFICATION.click();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().shouldHave(text(username2 + " " + username2
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().waitUntil(visible,Configuration.openBrowserTimeoutMs).shouldHave(text(username2 + " " + username2
             + " has requested access to " + space + " space."));
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space)).parent().parent().find(ELEMENT_BUTTON_ACCEPT_INVITATION).click();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(space))
@@ -1119,6 +1122,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     addUsers.addUser(username2, password, email2, username2, username2);
     manageLogInOut.signIn(username1, password);
     navigationToolbar.goToMyNotifications();
+    getExoWebDriver().getWebDriver().navigate().refresh();
     myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Comment_intranet);
     executeJavaScript("window.scrollBy(0,-5500)", "");
     homePagePlatform.goToMySpaces();
@@ -1152,6 +1156,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     info("Comment Intranet Notification In Space When Notification Is Disabled");
     manageLogInOut.signIn(username1, password);
     navigationToolbar.goToMyNotifications();
+    getExoWebDriver().getWebDriver().navigate().refresh();
     myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.AS_Comment_intranet);
     executeJavaScript("window.scrollBy(0,-5500)", "");
     homePagePlatform.goToMySpaces();
@@ -1224,6 +1229,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     manageLogInOut.signIn(username1, password);
     info("Enable like and new user notifications");
     navigationToolbar.goToMyNotifications();
+    getExoWebDriver().getWebDriver().navigate().refresh();
     myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Comment_intranet);
     executeJavaScript("window.scrollBy(0,-5500)", "");
     homePagePlatform.goToMySpaces();
@@ -1239,6 +1245,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToAllSpace();
     spaceManagement.acceptAInvitation(space);
+    sleep(1000);
     activityStream.commentActivity(activity, comment1);
     info("Check comment notification in the notification list");
     manageLogInOut.signIn(username1, password);
@@ -1325,6 +1332,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     manageLogInOut.signIn(username3, password);
     homePagePlatform.goToAllSpace();
     spaceManagement.acceptAInvitation(space);
+    sleep(1000);
     activityStream.commentActivity(activity, comment2);
     info("Check comment notification in the notification list");
     manageLogInOut.signIn(username1, password);
@@ -1412,6 +1420,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     manageLogInOut.signIn(username1, password);
     info("Enable like and new user notifications");
     navigationToolbar.goToMyNotifications();
+    sleep(1000);
     myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.AS_Like_intranet);
     executeJavaScript("window.scrollBy(0,-5500)", "");
     homePagePlatform.goToMySpaces();
@@ -1848,6 +1857,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     manageLogInOut.signIn(username33, password);
     info("Disable the notifications");
     navigationToolbar.goToMyNotifications();
+    myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.Space_Post_intranet);
     myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.Space_Post_intranet);
     homePagePlatform.goToAllSpace();
     spaceManagement.acceptAInvitation(space);

@@ -71,14 +71,14 @@ public class SpaceSettingManagement {
 
     goToMemberTab();
     info("--Search user ");
-    ELEMENT_INPUT_INVITE_USER.click();
-    ELEMENT_INPUT_INVITE_USER.sendKeys(userName);
+    ELEMENT_INPUT_INVITE_USER.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_INPUT_INVITE_USER.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(userName);
     info("click on Invite button");
-    $(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[1]/button")).click();
+    $(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[1]/button")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     if (verify) {
       info("Verify that user is shown in invitation table");
       if (fullName != "" && fullName != null)
-        $(byXpath(ELEMENT_SPACE_INVITED_USER_TABLE.replace("${user}", fullName))).waitUntil(Condition.visible, Configuration.timeout);
+        $(byXpath(ELEMENT_SPACE_INVITED_USER_TABLE.replace("${user}", fullName))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     }
   }
 

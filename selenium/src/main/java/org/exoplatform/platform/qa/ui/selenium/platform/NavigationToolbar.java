@@ -145,24 +145,24 @@ public class NavigationToolbar {
         break;
       case MY_ACTIVITY:
         info("Go to Activities of User");
-        $(ELEMENT_ACTIVITIES_LINK).waitUntil(Condition.appears, Configuration.timeout);
+        $(ELEMENT_ACTIVITIES_LINK).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
         $(ELEMENT_ACTIVITIES_LINK).click();
-        $(ELEMENT_ACTIVITIES_PORTLET).waitUntil(Condition.appears, Configuration.timeout);
+        $(ELEMENT_ACTIVITIES_PORTLET).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
         break;
       case MY_CONNECTIONS:
-        evt.click(ELEMENT_MY_CONNECTION_LINK);
+        $(ELEMENT_MY_CONNECTION_LINK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
         break;
       case MY_WIKI:
-        $(ELEMENT_MY_WIKI_LINK).click();
+        $(ELEMENT_MY_WIKI_LINK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
         break;
       case MY_DASHBOARD:
-        evt.click(ELEMENT_MY_DASHBOARD_LINK);
+        $(ELEMENT_MY_DASHBOARD_LINK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
         break;
       case MY_NOTIFICATION:
-        $(ELEMENT_MY_NOTIFICATIONS_LINK).click();
+        $(ELEMENT_MY_NOTIFICATIONS_LINK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
         break;
       case SETTINGS:
-        $(ELEMENT_MY_SETTINGS_LINK).click();
+        $(ELEMENT_MY_SETTINGS_LINK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
         break;
       case CHANGE_LANGUAGE:
         break;
@@ -484,6 +484,8 @@ public class NavigationToolbar {
    */
   public void goToMyNotifications() {
     selectALinkOfUserMenu(specifUserToolBar.MY_NOTIFICATION);
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+
   }
 
   /**
@@ -493,6 +495,7 @@ public class NavigationToolbar {
     info("Go to Intranet Notification");
     $(ELEMENT_INTRANET_NOTIFICATION_BELL).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     $(ELEMENT_NOTIFICATION_DROPDOWN).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     info("The elemnt is shown successfully");
   }
 

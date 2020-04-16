@@ -699,17 +699,18 @@ public class ActivityStream {
         $(byText(activity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).waitUntil(Condition.appears, openBrowserTimeoutMs).click();
         // insert comment
         $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, openBrowserTimeoutMs).click();
-        SelenideElement frame = $(byText(activity)).parent()
+        SelenideElement frame = $(byText(activity)).waitUntil(visible, openBrowserTimeoutMs).parent()
                 .parent()
                 .parent()
                 .find(byAttribute("class", "cke_wysiwyg_frame cke_reset"));
+        sleep(1000);
         switchTo().frame(frame);
-        $(byXpath("/html/body")).setValue("@" + username);
+        $(byXpath("/html/body")).waitUntil(visible, openBrowserTimeoutMs).setValue("@" + username);
         switchTo().defaultContent();
         $(byAttribute("data-value", username)).waitUntil(Condition.visible, openBrowserTimeoutMs);
         switchTo().frame(frame);
-        $(byXpath("/html/body")).pressEnter();
-        $(byXpath("/html/body")).sendKeys(textContent);
+        $(byXpath("/html/body")).waitUntil(visible, openBrowserTimeoutMs).pressEnter();
+        $(byXpath("/html/body")).waitUntil(visible, openBrowserTimeoutMs).sendKeys(textContent);
         switchTo().defaultContent();
         // click on the button comment
         $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, openBrowserTimeoutMs);

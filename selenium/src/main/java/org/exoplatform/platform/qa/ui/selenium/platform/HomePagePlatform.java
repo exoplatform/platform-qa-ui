@@ -96,7 +96,9 @@ public class HomePagePlatform {
   public void goToMySpaces() {
     info("-- Go to my spaces --");
     ELEMENT_MY_SPACE_LINK_PLF.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
-    refreshUntil(ELEMENT_ADDNEWSPACE_BUTTON, Condition.visible, Configuration.timeout);
+    refreshUntil(ELEMENT_ADDNEWSPACE_BUTTON, Condition.visible, Configuration.openBrowserTimeoutMs);
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+
   }
 
   /**
@@ -142,6 +144,7 @@ public class HomePagePlatform {
     $(ELEMENT_CONNECTIONS_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).parent().click();
     info("Verify that the connections portlet is shown");
     refreshUntil($(ELEMENT_CONNECTION_EVERYONE_TITLE), Condition.visible, 500);
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     info("The connections portlet is shown successfully");
   }
 
