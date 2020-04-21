@@ -1,25 +1,27 @@
-package org.exoplatform.platform.qa.ui.task.pageobject;
+package org.exoplatform.platform.qa.ui.exoTribe.pageobject;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_POPUB_TRIBE_EDIT_PROJECT;
+
 /**
  * This class will define actions about management tasks
  */
 
-public class ProjectsManagement {
+public class TribeProjectsManagement {
   private final TestBase       testBase;
 
   private ElementEventTestBase evt;
 
-  public ProjectsManagement(TestBase testBase) {
+  public TribeProjectsManagement(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
   }
@@ -72,7 +74,7 @@ public class ProjectsManagement {
     ELEMENT_LIST_PROJECT.find(byText(projectPath)).parent().parent().find(ELEMENT_EDIT_PROJECT_OPTION).click();
     if (title != null && title != "") {
       info("Input title");
-      ELEMENT_POPUB_EDIT_PROJECT.find(byText(title)).click();
+      $(ELEMENT_POPUB_TRIBE_EDIT_PROJECT).find(byText(title)).click();
 // Input a new title with clearing an old title
       ELEMENT_EDIT_PROJECT.setValue(newTitle).pressEnter();
     }

@@ -56,5 +56,21 @@
             <version>1.0.x-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>platform-qa-ui-calendar</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>platform-qa-ui-forum</artifactId>
+        <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>platform-qa-ui-task</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
     </dependencies>
 </project>

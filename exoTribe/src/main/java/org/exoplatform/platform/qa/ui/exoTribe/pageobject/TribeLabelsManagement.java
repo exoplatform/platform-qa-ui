@@ -1,4 +1,9 @@
-package org.exoplatform.platform.qa.ui.task.pageobject;
+package org.exoplatform.platform.qa.ui.exoTribe.pageobject;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
@@ -6,22 +11,16 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-
-import org.exoplatform.platform.qa.ui.selenium.TestBase;
-import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
-
 /**
  * This class will define actions about management tasks
  */
 
-public class LabelsManagement {
+public class TribeLabelsManagement {
   private final TestBase       testBase;
 
   private ElementEventTestBase evt;
 
-  public LabelsManagement(TestBase testBase) {
+  public TribeLabelsManagement(TestBase testBase) {
     this.testBase = testBase;
     this.evt = testBase.getElementEventTestBase();
   }
@@ -47,6 +46,7 @@ public class LabelsManagement {
     $(byText(label)).click();
     $(byText(label)).parent().parent().find(ELEMENT_ICON_OPEN_MENU_LABEL).click();
     $(byText(label)).parent().parent().find(ELEMENT_OPEN_MENU_DELETE_LABEL).click();
+    executeJavaScript("window.scrollBy(0,250)");
     ELEMENT_LABEL_BUTTON_CONFIRM_DELETE.click();
     $(byText(label)).waitUntil(Condition.disappears, Configuration.timeout);
 

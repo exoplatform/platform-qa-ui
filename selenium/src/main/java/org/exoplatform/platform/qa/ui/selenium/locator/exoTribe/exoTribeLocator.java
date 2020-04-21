@@ -73,6 +73,9 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_STREAM_PAGE = $(byXpath("//*[@class='uiIcon uiIconFile uiIconToolbarNavItem uiIconStream iconStream null']"));
 
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_PAGE = $(byXpath("//*[@class='uiIcon uiIconFile uiIconToolbarNavItem uiIconHome iconHome null']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_TASKS_PAGE = $(byXpath("(//*[@class='caption color-title'])[1]"));
 
     //SPACE
 
@@ -90,8 +93,28 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENET_SPACE_CREATE_TRIBE_BUTTON = $(byClassName("PopupContent")).find(byText("Créer"));
 
+    public static final SelenideElement ELEMENT_ADDNEWSPACE_SECOND_TRIBE_BUTTON  = $(byXpath("//*[@id='spacesListToolbar']//*[@class='d-none d-sm-inline']"));
+
+    public static final By ELEMENT_ADDNEWSPACE_SECOND_TRIBE_FORM  = By.xpath("//*[@class='v-navigation-drawer__content']//*[contains(text(),'Add Space')]");
+
+    public static final SelenideElement ELEMENT_SPACE_NAME_SECOND_TRIBE_INPUT      = $(byXpath("//*[@placeholder='Display name']"));
+
+    public static final SelenideElement ELEMENT_SPACE_DESCRIPTION_SECOND_TRIBE_INPUT     = $(byXpath("//*[@placeholder='Description']"));
+
+    public static final SelenideElement ELEMENT_SPACE_DETAILS_TRIBE = $(byXpath("//*[@class='v-stepper__label' and contains(text(),'Space details')]"));
+
+    public static final SelenideElement ELEMENT_INVITE_USERS_TRIBE = $(byXpath("//*[@class='v-stepper__label' and contains(text(),'Invite users')]"));
+
+    public static final SelenideElement ELEMENT_SPACE_ACCESS_TRIBE = $(byXpath("//*[@class='v-stepper__label' and contains(text(),'Space access')]"));
+
+    public static final SelenideElement ELEMENT_SPACE_INPUT_USER_TRIBE = $(byXpath("//input[@content-class='identitySuggesterContent']"));
+
+    public static final SelenideElement ELEMENT_CREATE_SPACE_TRIBE = $(byXpath("//*[@class='v-btn__content' and contains(text(),'Create')]"));
+
+    public static final SelenideElement ELEMENT_CANCEL_SPACE_TRIBE = $(byXpath("//*[@class='v-btn__content' and contains(text(),'Cancel')]"));
 
     //WIKI
+
     public static final By ELEMENT_ADD_PAGE_TRIBE = By.xpath("//div[@data-toggle and text()='Ajouter une Page']");
 
     public static final By ELEMENT_DELETE_LINK_TRIBE = By.xpath(".//*[text()='Supprimer']");
@@ -121,6 +144,10 @@ public class exoTribeLocator {
     public static final String ELEMENT_ADD_RELATED_POPUP_TRIBE_LOCATION = ".//*[contains(text(),'Ajouter une Page Associée')]/../..//*[contains(text(),'${location}')]";
 
     public static final String ELEMENT_ADD_RELATED_POPUP_TRIBE_CONTENT = ".//*[contains(text(),'Ajouter une Page Associée')]/../..//*[contains(text(),'${page}')]";
+
+    //TASK
+    public static final By ELEMENT_POPUB_TRIBE_EDIT_PROJECT    =By.xpath("//*[@id='taskManagement']//*[@class='PopupContent popupContent']");
+
 }
 
 

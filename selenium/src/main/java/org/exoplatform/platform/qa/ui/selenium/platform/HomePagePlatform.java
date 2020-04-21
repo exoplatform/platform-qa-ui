@@ -95,6 +95,28 @@ public class HomePagePlatform {
 
 
   /**
+   * Go to Home page Tribe
+   */
+  public void goToSnapshotPageTribe() {
+    info("Click on Home page");
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_SNAPSHOT_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+  }
+
+  /**
+   * Go to Home page Tribe
+   */
+  public void goToTasksPageTribe() {
+    info("Click on Home page");
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_SNAPSHOT_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_TASKS_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+
+  }
+
+
+  /**
    * Go to Home Calendar Page
    */
   public void goToCalendarPage() {

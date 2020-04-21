@@ -9,6 +9,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.E
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_PROJECT_ICON_ADD_PROJECT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -88,6 +90,70 @@ public class TribeSpaceManagement {
   }
 
   /**
+   * Add a new space
+   *
+   * @param name
+   * @param desc
+   * @param access
+   * @param groups
+   * @param params
+   */
+  public void addNewSpace(String name, String desc, String access, String hidden, String groups, int... params) {
+    if ($(ELEMENT_ADDNEWSPACE_SECOND_TRIBE_BUTTON).waitUntil(Condition.visible, Configuration.timeout) != null) {
+      $(ELEMENT_ADDNEWSPACE_SECOND_TRIBE_BUTTON).click();
+    }
+    $(ELEMENT_ADDNEWSPACE_SECOND_TRIBE_FORM).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    ELEMENT_SPACE_DETAILS_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+    $(ELEMENT_SPACE_NAME_SECOND_TRIBE_INPUT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
+    $(ELEMENT_SPACE_DESCRIPTION_SECOND_TRIBE_INPUT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(desc);
+    $(byXpath("(//*[@class='layout column']//*[@class='v-btn__content' and contains(text(),'Continue')])[1]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_SPACE_ACCESS_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+
+    if (hidden == "Yes") {
+      if ($(byXpath("//*[@class='v-input--selection-controls__input']/input[@type='checkbox' and @aria-checked='false']")).exists()) {
+        evt.check(byXpath("//*[@class='v-input--selection-controls__input']"));
+
+      }
+    }
+    if (hidden == "No") {
+      if ($(byXpath("//*[@class='v-input--selection-controls__input']/input[@type='checkbox' and @aria-checked='true']")).exists()) {
+        evt.check(byXpath("//*[@class='v-input--selection-controls__input']"));
+      }
+    }
+    if (!access.isEmpty()) {
+      info("Select a permission for space:" + access);
+
+      if(access=="Open"){
+        evt.check(byXpath("//*[@class='v-input--selection-controls__input']/input[@type='checkbox' and @aria-checked='false']"), 2);
+
+        evt.check(byXpath("//input[@value='open']"));
+      }
+
+      if(access=="Validation"){
+        evt.check(byXpath("//input[@value='validation']"));
+      }
+
+      if(access=="Closed"){
+        evt.check(byXpath("//input[@value='closed']"));
+        ;
+      }
+    }
+
+    $(byXpath("(//*[@class='layout column']//*[@class='v-btn__content' and contains(text(),'Continue')])[2]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_INVITE_USERS_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+    if (!groups.isEmpty()) {
+
+      ELEMENT_SPACE_INPUT_USER_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+      ELEMENT_SPACE_INPUT_USER_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(groups);
+      $(byXpath("//*[@class='v-list-item__title text-truncate identitySuggestionMenuItemText' and contains(text(),'${group}')]".replace("${group}", groups))).click();
+    }
+    info("Save all changes");
+    ELEMENT_CREATE_SPACE_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//*[@class='spaceMenuNavHeader']/h3[contains(text(),'${spaceName}')]".replace("${spaceName}",name))).waitUntil(Condition.visible,40000);
+  }
+
+
+  /**
    * Update Space Description
    */
   public void updateSpaceDescription(String desc) {
@@ -98,66 +164,6 @@ public class TribeSpaceManagement {
     ELEMENET_SPACE_SAVE_BUTTON.waitUntil(Condition.visible, 6000).click();
     $(byXpath("//div[@class='uiAction uiActionBorder']/a")).waitUntil(Condition.visible, Configuration.timeout).click();
     refresh();
-  }
-
-
-  /**
-   * Add a new space
-   *
-   * @param name
-   * @param desc
-   * @param access
-   * @param groups
-   * @param params
-   */
-  public void addNewSpace(String name, String desc, String access, String hidden, String groups, int... params) {
-    int iTimeout = params.length > 0 ? params[0] : testBase.getDefaultTimeout();
-    if ($(ELEMENT_ADDNEWSPACE_TRIBE_BTN).waitUntil(Condition.visible, Configuration.timeout) != null) {
-      $(ELEMENT_ADDNEWSPACE_TRIBE_BTN).click();
-    } else {
-      $(By.xpath("//*[contains(@class, 'uiIconSocSimplePlus')]")).click();
-    }
-    $(ELEMENT_ADDNEWSPACE_TRIBE_FORM).waitUntil(Condition.visible, Configuration.timeout);
-    $(ELEMENT_SPACE_NAME_INPUT).setValue(name);
-    $(ELEMENT_SPACE_DESCRIPTION_INPUT).setValue(desc);
-    if (hidden == "Yes") {
-      if ($(byXpath("//label[@class='switchBtnLabelOn']")).getCssValue("width").equals("9px")) {
-        $(byXpath("//*[@class='uiSwitchBtn']")).waitUntil(Condition.visible, Configuration.timeout).click();
-      }
-    }
-    if (hidden == "No") {
-      if ($(byXpath("//label[@class='switchBtnLabelOn']")).getCssValue("width").equals("52px")) {
-        $(byXpath("//*[@class='uiSwitchBtn']")).waitUntil(Condition.visible, Configuration.timeout).click();
-      }
-    }
-    if (!access.isEmpty()) {
-      info("Select a permission for space:" + access);
-      $(byId("UIRegistration")).selectRadio(access);
-    }
-
-    if (!groups.isEmpty()) {
-      goToInviteUserFromGroupTab();
-      info("Select a group in the list");
-      String[] arrayGroup = groups.split("/");
-      if (arrayGroup.length > 0) {
-        for (String group : arrayGroup) {
-          if (!group.isEmpty()) {
-            evt.click(ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_CHECKBOX);
-
-            info("Select a group:" + group);
-            evt.click(ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_SELECT_GROUP.replace("${name}", group));
-          }
-        }
-      } else {
-        info("Select a group:" + groups);
-        evt.click(ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_SELECT_GROUP.replace("${name}", groups));
-      }
-    }
-
-    info("Save all changes");
-    $(ELEMENET_SPACE_CREATE_TRIBE_BUTTON).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-    $(ELEMENET_SPACE_CREATE_TRIBE_BUTTON).waitUntil(Condition.disappear, Configuration.openBrowserTimeoutMs);
-    evt.waitForAndGetElement(By.linkText(name), iTimeout);
   }
 
   /**
