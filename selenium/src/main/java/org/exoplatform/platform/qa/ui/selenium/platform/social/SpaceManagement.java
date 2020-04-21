@@ -654,9 +654,8 @@ public class SpaceManagement {
   public void goToActivityStreamTab() {
     info("Open Activity STream Tab");
     homePagePlatform.refreshUntil($(ELEMENT_ACTIVITY_STREAM_TAB), Condition.visible, 1000);
-    sleep(Configuration.timeout);
-    $(ELEMENT_ACTIVITY_STREAM_TAB).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_ACTIVITY_STREAM_TAB).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     info("Activity STream portlet is shown");
   }
 
@@ -665,8 +664,8 @@ public class SpaceManagement {
    */
   public void goToForumTab() {
     info("Open forum Tab");
-    evt.click(ELEMENT_FORUM_TAB);
-    evt.waitForAndGetElement(ELEMENT_FORUM_START_BUTTON_UP, 2000, 0);
+    $(ELEMENT_FORUM_TAB).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_FORUM_START_BUTTON_UP).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     info("Forum portlet is shown");
   }
 

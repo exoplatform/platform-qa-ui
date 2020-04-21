@@ -222,8 +222,8 @@ public class ActivityStream {
      */
     public void addText(String text) {
         info("----Add text into activity text box-----");
-        SelenideElement frame = $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible, Configuration.collectionsTimeout);
-        $(ELEMENT_ACCOUNT_NAME_LINK).click();
+        SelenideElement frame = $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible, openBrowserTimeoutMs);
+        $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
         switchTo().frame(frame);
         ELEMENT_INPUT_ACTIVITY.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         ELEMENT_INPUT_ACTIVITY.sendKeys(text);
@@ -1011,7 +1011,7 @@ public class ActivityStream {
                         .parent()
                         .parent()
                         .find(ELEMENT_NUMBERED_LIST_ICON)
-                        .waitUntil(Condition.visible, Configuration.timeout)
+                        .waitUntil(Condition.visible, openBrowserTimeoutMs)
                         .click();
                 break;
             case Add_Formtting_Bulled_List:
@@ -1022,7 +1022,7 @@ public class ActivityStream {
                         .parent()
                         .parent()
                         .find(ELEMENT_BULLETEDLIST_ICON)
-                        .waitUntil(Condition.visible, Configuration.timeout)
+                        .waitUntil(Condition.visible, openBrowserTimeoutMs)
                         .click();
                 break;
             case Add_Formtting_Image:
@@ -1060,7 +1060,7 @@ public class ActivityStream {
         ELEMENT_INPUT_ACTIVITY.sendKeys(reply);
         switchTo().defaultContent();
         // click on the button comment
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
+        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, openBrowserTimeoutMs);
         $(byText(reply)).should(Condition.exist);
         $(byText(reply)).parent().parent().parent().find(byText(user)).should(Condition.exist);
         info("Verify that the reply is added");

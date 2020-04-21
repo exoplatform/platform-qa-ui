@@ -65,124 +65,34 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
   }
 
   @Test
-  public void test01_UserRequestToJoinASpace() {
+  public void test03_Accept_DeclineUserRequestToJoinASpace() {
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@gmail.com";
     String username2 = "usernameb" + getRandomString();
     String email2 = username2 + "@gmail.com";
+    String username3 = "usernameb" + getRandomString();
+    String email3 = username3 + "@gmail.com";
     String password = "123456";
+    manageLogInOut.signIn("root", "gtn");
     info("Add new user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
     addUsers.addUser(username2, password, email2, username2, username2);
+    addUsers.addUser(username3, password, email3, username3, username3);
+
     manageLogInOut.signIn(username1, password);
 
-    /*
-     * Step Number: 1 Step Name: Step 1: Create a new Space Step Description: - Sign
-     * in system - Select space page to view - Click on [Add new Space] - Enter all
-     * valid data - Click [Create] Input Data: Expected Outcome: - Create new Space
-     * successfully.
-     */
     String space = "space" + getRandomNumber();
-
-    info("Create a space by user 1");
-    homePagePlatform.goToAllSpace();
-    spaceManagement.addNewSpaceSimple(space, space);
-    info("connect with user 2");
-    manageLogInOut.signIn(username2, password);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.goToAllSpacesTab();
-    spaceManagement.searchSpace(space,"");
-    info("send request");
-    spaceManagement.sendARequestToASpace(space);
-    manageLogInOut.signIn(username1, password);
-    info("verify request");
-    homePagePlatform.goToMySpaces();
-    ELEMENT_SPACES_LIST.find(byText(space)).click();
-    spaceHomePage.goToSpaceSettingTab();
-    spaceSettingManagement.goToMemberTabInSpaceSettingTab();
-    $(byText(username2 + " " + username2)).should(Condition.exist);
-    manageLogInOut.signIn("root", "gtn");
-    navigationToolbar.goToUsersAndGroupsManagement();
-    userAndGroupManagement.deleteUser(username1);
-    userAndGroupManagement.deleteUser(username2);
-
-  }
-
-  @Test
-  public void test02_AcceptUserRequestToJoinASpace() {
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@gmail.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@gmail.com";
-    String password = "123456";
-    info("Add new user");
-    manageLogInOut.signIn("root", "gtn");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-    manageLogInOut.signIn(username1, password);
-
-    /*
-     * Step Number: 1 Step Name: Step 1: Create a new Space Step Description: - Sign
-     * in system - Select space page to view - Click on [Add new Space] - Enter all
-     * valid data - Click [Create] Input Data: Expected Outcome: - Create new Space
-     * successfully.
-     */
-    String space = "space" + getRandomNumber();
-
     info("Create a space by user 1");
     homePagePlatform.goToAllSpace();
     spaceManagement.addNewSpace(space, space, "validation", "No", "");
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToAllSpace();
     spaceManagement.goToAllSpacesTab();
+    spaceManagement.searchSpace(space,"");
     info("send request by user 2");
-    spaceManagement.searchSpace(space,"");
     spaceManagement.sendARequestToASpace(space);
-    manageLogInOut.signIn(username1, password);
-    homePagePlatform.goToMySpaces();
-    ELEMENT_SPACES_LIST.find(byText(space)).click();
-    spaceHomePage.goToSpaceSettingTab();
-    info("accept request by user 1");
-    spaceSettingManagement.goToMemberTabInSpaceSettingTab();
-    $(byText(username2 + " " + username2)).parent().find(ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB).click();
-    spaceSettingManagement.goToMemberTab();
-    $(byText(username2 + " " + username2)).scrollTo().should(Condition.exist);
-    info("delete data");
-    manageLogInOut.signIn("root", "gtn");
-    navigationToolbar.goToUsersAndGroupsManagement();
-    userAndGroupManagement.deleteUser(username1);
-    userAndGroupManagement.deleteUser(username2);
-
-  }
-
-  @Test
-  public void test03_DeclineUserRequestToJoinASpace() {
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@gmail.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@gmail.com";
-    String password = "123456";
-    manageLogInOut.signIn("root", "gtn");
-    info("Add new user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-    manageLogInOut.signIn(username1, password);
-
-    /*
-     * Step Number: 1 Step Name: Step 1: Create a new Space Step Description: - Sign
-     * in system - Select space page to view - Click on [Add new Space] - Enter all
-     * valid data - Click [Create] Input Data: Expected Outcome: - Create new Space
-     * successfully.
-     */
-    String space = "space" + getRandomNumber();
-
-    info("Create a space by user 1");
-    homePagePlatform.goToAllSpace();
-    spaceManagement.addNewSpace(space, space, "validation", "No", "");
-    manageLogInOut.signIn(username2, password);
+    manageLogInOut.signIn(username3, password);
     homePagePlatform.goToAllSpace();
     spaceManagement.goToAllSpacesTab();
     spaceManagement.searchSpace(space,"");
@@ -194,14 +104,24 @@ public class SOCSpaceMemberManagementRequestTestIT extends Base {
     spaceHomePage.goToSpaceSettingTab();
     info("DECLINE request by user 1");
     spaceSettingManagement.goToMemberTabInSpaceSettingTab();
+    $(byText(username2 + " " + username2)).should(Condition.exist);
     $(byText(username2 + " " + username2)).parent().find(ELEMENT_ICON_DECLINE_SPACE_REQUEST_IN_MEMBERS_TAB).click();
     spaceSettingManagement.goToMemberTab();
     $(byText(username2 + " " + username2)).shouldNot(Condition.exist);
+    spaceHomePage.goToSpaceSettingTab();
+    info("accept request by user 1");
+    spaceSettingManagement.goToMemberTabInSpaceSettingTab();
+    $(byText(username3 + " " + username3)).should(Condition.exist);
+    $(byText(username3 + " " + username3)).parent().find(ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB).click();
+    spaceSettingManagement.goToMemberTab();
+    $(byText(username3 + " " + username3)).scrollTo().should(Condition.exist);
+
     info("delete data");
     manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToUsersAndGroupsManagement();
     userAndGroupManagement.deleteUser(username1);
     userAndGroupManagement.deleteUser(username2);
+    userAndGroupManagement.deleteUser(username3);
 
   }
 

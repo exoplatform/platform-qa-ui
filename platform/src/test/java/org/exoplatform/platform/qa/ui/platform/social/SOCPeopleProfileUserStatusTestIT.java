@@ -86,17 +86,20 @@ public class SOCPeopleProfileUserStatusTestIT extends Base {
     String redColor = "rgba(199, 34, 34, 1)";
     String whiteColor = "rgba(153, 153, 153, 1)";
     String greenColor = "rgba(70, 165, 70, 1)";
-
+    String username2 = "usernameb" + getRandomString();
+    String email2 = username2 + "@test.com";
+    String password = "123456";
+    String statusOnline = "Offline";
     // Create data test
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
-    String password = "123456";
 
     info("Add user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
-    manageLogInOut.signIn(username1, password);
+    addUsers.addUser(username2, password, email2, username2, username2);
 
+    manageLogInOut.signIn(username1, password);
     navigationToolbar.goToMyProfile();
 
     info("change status to Away");
@@ -136,6 +139,14 @@ public class SOCPeopleProfileUserStatusTestIT extends Base {
     assertEquals($(ELEMENT_CHAT_ICON).find(byClassName("uiIconStatus"))
                                      .getCssValue("color"),
                  greenColor);
+
+    manageLogInOut.signIn(username2, password);
+    homePagePlatform.goToConnections();
+    connectionsManagement.searchPeople(username1, null, null, null);
+    homePagePlatform.refreshUntil($(byText(username1 + " " + username1)), visible, 2000);
+    $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username1))).click();
+    $(byClassName(ELEMENT_STATUS_CHAT_IN_PROFILE_PAGE.replace("{status}", statusOnline))).should(visible);
+
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);

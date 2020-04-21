@@ -12,6 +12,8 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -51,89 +53,6 @@ public class SOCPeopleProfileViewProfileTestIT extends Base {
     manageLogInOut.signInCas(DATA_USER1, "gtngtn");
   }
 
-  /**
-   * <li>Case ID:122923.</li>
-   * <li>Test Case Name: Check My Profile page with default value.</li>
-   * <li>Pre-Condition: User A has not updated his profile yet</li>
-   * <li>Post-Condition:</li>
-   * <li>Case ID:122925.</li>
-   * <li>Test Case Name: Check the Profile of another user.</li>
-   * <li>Pre-Condition: User A and user B are createdUser A has not updated
-   * contact information</li>
-   * <li>Post-Condition:</li> Step Number: 1 Step Name: Step 1: Sign in system
-   * Step Description: - Login with User A - Click user menu and [My Profile]
-   * Input Data: Expected Outcome: - My profile is displayed - The title of the
-   * page (displayed in the browser tab) is My Profile Step number: 2 Step Name:
-   * Step 2: Check layout Step Description: - Check the mid-column Input Data:
-   * Expected Outcome: - The 1st section is named About me and displays to the
-   * user :"Help people find out more about you by sharing information on your
-   * profile." followed by a button Edit my Profile which takes the user the edit
-   * page. - The 2nd sections is name "Recent Activities" display message: You do
-   * not have activities yet Step number: 3 Step Name: Step 3: Check layout Step
-   * Description: - Check left column Input Data: Expected Outcome: - The section
-   * is named "Contact Information" - Only the email field is filled Step number:
-   * 4 Step Name: Step 4 : Check layout Step Description: - Check right column
-   * Input Data: Expected Outcome: - The section is named Connections - The
-   * message "You do not have connection yet" is displayed - The link is updated
-   * to "Find connections" and redirect to my connections page on everyone tab.
-   */
-  @Test
-  public void test01_CheckMyProfilePageWithDefaultValue() {
-    info("Test 1: Check My Profile page with default value");
-    String msgAboutMe = "Help people find you and learn more about you by filling out your profile information.";
-    String msgRecent_me = "You do not have activities yet.";
-    String msgRecent_other = "This user does not have activities yet.";
-    String msg_me = "You do not have connections yet.";
-    String msg_other = "This user does not have connections yet.";
-
-    /* Create data test */
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String password = "123456";
-
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-    manageLogInOut.signIn(username1, password);
-
-    navigationToolbar.goToMyProfile();
-    assertEquals(title(), "Profile");
-
-    info("check mid-column");
-    $(byXpath(ELEMENT_UIEXPERIENCE_PROFILE_PORTLET.replace("${content}", msgAboutMe))).should(Condition.exist);
-    $(byXpath(ELEMENT_RECENT_ACTIVITY_NO_CONTENT.replace("${content}", msgRecent_me))).should(Condition.exist);
-
-    info("check left-column");
-    $(ELEMENT_UIBASICPROFILEPORTLET).should(Condition.exist);
-    $(byXpath(ELEMENT_EMAIL_INFO.replace("${email}", email1))).should(Condition.exist);
-
-    info("check right-column");
-    $(byXpath(ELEMENT_UIMINICONNECTIONS_PORTLET_TEXT.replace("${content}", msg_me))).should(Condition.exist);
-    info("click on Find connections");
-    $(ELEMENT_UIMINICONNECTIONS_PORTLET_FIND).click();
-    $(ELEMENT_ALL_CONNECTIONS_TAB).click();
-
-    connectionsManagement.searchPeople(username2, null, null, null);
-    $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username2))).click();
-
-    info("check mid-column");
-    $(byXpath(ELEMENT_RECENT_ACTIVITY_NO_CONTENT.replace("${content}", msgRecent_other))).should(Condition.exist);
-
-    info("check left-column");
-    $(ELEMENT_UIBASICPROFILEPORTLET).should(Condition.exist);
-    $(byXpath(ELEMENT_EMAIL_INFO.replace("${email}", email2))).should(Condition.exist);
-
-    info("check right-column");
-    $(byXpath(ELEMENT_UIMINICONNECTIONS_PORTLET_TEXT.replace("${content}", msg_other))).should(Condition.exist);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-  }
-
   @Test
   public void test03_CheckOtherProfilePageWithDefaultValue() {
     info("Test 1: Check My Profile page with default value");
@@ -148,61 +67,6 @@ public class SOCPeopleProfileViewProfileTestIT extends Base {
     String email1 = username1 + "@test.com";
     String username2 = "usernameb" + getRandomString();
     String email2 = username2 + "@test.com";
-    String password = "123456";
-
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-    manageLogInOut.signIn(username1, password);
-
-    navigationToolbar.goToMyProfile();
-    assertEquals(title(), "Profile");
-
-    info("check mid-column");
-    $(byXpath(ELEMENT_UIEXPERIENCE_PROFILE_PORTLET.replace("${content}", msgAboutMe))).should(Condition.exist);
-    $(byXpath(ELEMENT_RECENT_ACTIVITY_NO_CONTENT.replace("${content}", msgRecent_me))).should(Condition.exist);
-
-    info("check left-column");
-    $(ELEMENT_UIBASICPROFILEPORTLET).should(Condition.exist);
-    $(byXpath(ELEMENT_EMAIL_INFO.replace("${email}", email1))).should(Condition.exist);
-
-    info("check right-column");
-    $(byXpath(ELEMENT_UIMINICONNECTIONS_PORTLET_TEXT.replace("${content}", msg_me))).should(Condition.exist);
-    info("click on Find connections");
-    $(ELEMENT_UIMINICONNECTIONS_PORTLET_FIND).click();
-    $(ELEMENT_ALL_CONNECTIONS_TAB).click();
-
-    connectionsManagement.searchPeople(username2, null, null, null);
-    $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username2))).click();
-
-    info("check mid-column");
-    $(byXpath(ELEMENT_RECENT_ACTIVITY_NO_CONTENT.replace("${content}", msgRecent_other))).should(Condition.exist);
-
-    info("check left-column");
-    $(ELEMENT_UIBASICPROFILEPORTLET).should(Condition.exist);
-    $(byXpath(ELEMENT_EMAIL_INFO.replace("${email}", email2))).should(Condition.exist);
-
-    info("check right-column");
-    $(byXpath(ELEMENT_UIMINICONNECTIONS_PORTLET_TEXT.replace("${content}", msg_other))).should(Condition.exist);
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-  }
-
-  /**
-   * <li>Case ID:122924.</li>
-   * <li>Test Case Name: Check My Profile page after all information is
-   * filled.</li>
-   * <li>Pre-Condition: User A updates About me, Experience, contact
-   * information</li>
-   * <li>Post-Condition:</li>
-   */
-  @Test
-  @Tag("sabis")
-  public void test02_CheckMyProfilePageAfterAllInformationIsFilled() {
-    info("Test 2: Edit Contact Information");
     String jobTitle = "jobTitle" + getRandomNumber();
 
     String organization = "organization" + getRandomString();
@@ -222,21 +86,30 @@ public class SOCPeopleProfileViewProfileTestIT extends Base {
 
     String email = "email" + getRandomString() + "@test.com";
     String actContactInfo = "Contact information has been updated.";
-    /* Create data test */
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
     String password = "123456";
 
     info("Add user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
+    addUsers.addUser(username2, password, email2, username2, username2);
     manageLogInOut.signIn(username1, password);
 
     navigationToolbar.goToMyProfile();
+    assertEquals(title(), "Profile");
+
+    info("check mid-column");
+    $(byXpath(ELEMENT_UIEXPERIENCE_PROFILE_PORTLET.replace("${content}", msgAboutMe))).should(Condition.exist);
+    $(byXpath(ELEMENT_RECENT_ACTIVITY_NO_CONTENT.replace("${content}", msgRecent_me))).should(Condition.exist);
+
+    info("check left-column");
+    $(ELEMENT_UIBASICPROFILEPORTLET).should(Condition.exist);
+    $(byXpath(ELEMENT_EMAIL_INFO.replace("${email}", email1))).should(Condition.exist);
+
+    info("check right-column");
+    $(byXpath(ELEMENT_UIMINICONNECTIONS_PORTLET_TEXT.replace("${content}", msg_me))).should(Condition.exist);
 
     info("edit profile");
-    click(ELEMENT_EDIT_MY_PROFILE_LINK);
-
+    $(ELEMENT_EDIT_MY_PROFILE_LINK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     info("update information");
     info("edit contact info");
     info("edit info");
@@ -265,7 +138,7 @@ public class SOCPeopleProfileViewProfileTestIT extends Base {
     $(byXpath(ELEMENT_IM_INFO.replace("${type}", "Msn").replace("${im}", im5))).should(Condition.exist);
 
     $(byXpath(ELEMENT_RECENT_ACTIVITY_CONTENT.replace("${index}", "1").replace("${content}",
-                                                                               actContactInfo))).should(Condition.exist);
+            actContactInfo))).should(Condition.exist);
     $(ELEMENT_EDIT_MY_PROFILE_LINK).click();
     userProfilePage.updateExperience(organization, jobTitle, jobDetail, skill, dStart, dEnd, false);
     userProfilePage.saveCancelUpdateInfo(true);
@@ -273,9 +146,28 @@ public class SOCPeopleProfileViewProfileTestIT extends Base {
     $(byXpath(ELEMENT_POSITION_INFO.replace("${position}", jobTitle))).should(Condition.exist);
     $(byXpath(ELEMENT_JOB_DETAIL_INFO.replace("${description}", jobDetail))).should(Condition.exist);
     $(byText(skill)).should(Condition.exist);
+
+    navigationToolbar.goToMyProfile();
+    info("click on Find connections");
+    $(ELEMENT_UIMINICONNECTIONS_PORTLET_FIND).click();
+    $(ELEMENT_ALL_CONNECTIONS_TAB).click();
+
+    connectionsManagement.searchPeople(username2, null, null, null);
+    $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username2))).click();
+
+    info("check mid-column");
+    $(byXpath(ELEMENT_RECENT_ACTIVITY_NO_CONTENT.replace("${content}", msgRecent_other))).should(Condition.exist);
+
+    info("check left-column");
+    $(ELEMENT_UIBASICPROFILEPORTLET).should(Condition.exist);
+    $(byXpath(ELEMENT_EMAIL_INFO.replace("${email}", email2))).should(Condition.exist);
+
+    info("check right-column");
+    $(byXpath(ELEMENT_UIMINICONNECTIONS_PORTLET_TEXT.replace("${content}", msg_other))).should(Condition.exist);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
-
+    addUsers.deleteUser(username2);
   }
+
 }

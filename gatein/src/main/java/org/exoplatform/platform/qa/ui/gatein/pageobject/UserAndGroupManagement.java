@@ -22,6 +22,7 @@ package org.exoplatform.platform.qa.ui.gatein.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_INPUT_USERNAME;
@@ -316,7 +317,8 @@ public class UserAndGroupManagement {
       evt.type(ELEMENT_BIRTHDAY, birthday, true);
     }
     if (Gender != null && Gender != "") {
-      $(ELEMENT_GENDER).selectOptionByValue(Gender);
+      sleep(1000);
+      $(ELEMENT_GENDER).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).selectOptionByValue(Gender);
     }
     if (Employer != null && Employer != "") {
       evt.type(ELEMENT_EMPLOYER, Employer, true);

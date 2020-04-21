@@ -111,147 +111,73 @@ public class SOCReplyEditTestIT extends Base {
     String comment1 = "comment1" + getRandomNumber();
     String reply1 = "reply1" + getRandomNumber();
     String newreply = "newreply" + getRandomNumber();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.replyToComment(comment1, reply1, DATA_NAME_USER1);
-    activityStream.editComment(reply1, newreply);
-    $(byText(reply1 + newreply)).waitUntil(Condition.visible, Configuration.timeout);
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
-    activityStream.deleteactivity(activity1);
-
-  }
-
-  @Test
-  public void test02_CheckEditReplyButton() {
-
-    String activity1 = "activity1" + getRandomNumber();
-    String comment1 = "comment1" + getRandomNumber();
-    String reply1 = "reply1" + getRandomNumber();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.replyToComment(comment1, reply1, DATA_NAME_USER1);
-    activityStream.CheckEditComment(reply1, true);
-
-  }
-
-  @Test
-  public void test03_addcharacter_EditReply() {
-
-    String activity1 = "activity1" + getRandomNumber();
-    String comment1 = "comment1" + getRandomNumber();
-    String reply1 = "reply1" + getRandomNumber();
-    String newreply = "newreply" + getRandomNumber();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.replyToComment(comment1, reply1, DATA_NAME_USER1);
-    activityStream.editComment(reply1, newreply);
-    $(byText(reply1 + newreply)).waitUntil(Condition.visible, Configuration.timeout);
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
-    activityStream.deleteactivity(activity1);
-
-  }
-
-  @Test
-  public void test04_CancelEdiReply() {
-
-    String activity1 = "activity1" + getRandomNumber();
-    String comment1 = "comment1" + getRandomNumber();
-    String reply1 = "reply1" + getRandomNumber();
-    String newreply = "newreply" + getRandomNumber();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.replyToComment(comment1, reply1, DATA_NAME_USER1);
-    activityStream.cancelComment(reply1, newreply);
-    $(byText(reply1)).waitUntil(Condition.visible, Configuration.timeout);
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
-    activityStream.deleteactivity(activity1);
-
-  }
-
-  @Test
-  public void test05_EditReplyanotheruser() {
-
-    String activity1 = "activity1" + getRandomNumber();
-    String comment1 = "comment11@@@@$$$" + getRandomNumber();
     String usernametest = "usernametest" + getRandomString();
-    String reply1 = "reply1" + getRandomNumber();
     String email = usernametest + "@gmail.com";
     String password = "123456";
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.replyToComment(comment1, reply1, DATA_NAME_USER1);
+    String activity2 = "activity2" + getRandomNumber();
+    String comment2 = "comment2" + getRandomNumber();
+    String reply2 = "reply2" + getRandomNumber();
+    String reply3 = "reply3" + getRandomNumber();
+
     info("Add new user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(usernametest, password, email, usernametest, usernametest);
     homePagePlatform.goToConnections();
     connectionsManagement.connectToAUser(usernametest);
+    homePagePlatform.goToHomePage();
+    activityStream.addActivity(activity1, "");
+    activityStream.commentActivity(activity1, comment1);
+    activityStream.replyToComment(comment1, reply1, DATA_NAME_USER1);
+    activityStream.CheckEditComment(reply1, true);
+    activityStream.CheckEditCommentbyDefault(reply1, true);
+
+    activityStream.gotoCommentViewer(comment1);
+    activityStream.cancelComment(reply1, newreply);
+    $(byText(reply1)).waitUntil(Condition.visible, Configuration.timeout);
+    activityStream.editComment(reply1, newreply);
+    $(byText(reply1 + newreply)).waitUntil(Condition.visible, Configuration.timeout);
+
     manageLogInOut.signIn(usernametest, password);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(DATA_USER1);
     homePagePlatform.goToHomePage();
-    activityStream.CheckEditComment(reply1, false);
+    activityStream.CheckEditComment(reply1 + newreply, false);
+    activityStream.addActivity(activity2, "");
+    activityStream.commentActivity(activity2, comment2);
+    activityStream.replyToComment(comment2, reply2, usernametest + " " + usernametest);
+    activityStream.editComment(reply2, newreply);
+    $(byText(reply2 + newreply)).waitUntil(Condition.visible, Configuration.timeout);
+    activityStream.removeCharactersComment(reply2 + newreply, 3, false);
+    activityStream.replyToComment(comment2, reply3, usernametest + " " + usernametest);
+    activityStream.removeCharactersComment(reply3, reply3.length(), true);
+
+    executeJavaScript("window.scrollBy(0,-150)");
     manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
     activityStream.deleteactivity(activity1);
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(usernametest);
-
-  }
-
-  @Test
-  public void test06_EditReplyfromspace() {
-
-    String space = "space" + getRandomNumber();
-    info("Create a space");
-    String comment1 = "comment1" + getRandomNumber();
-    String activity1 = "activity1" + getRandomNumber();
-    String reply1 = "reply1" + getRandomNumber();
-    String newreply = "newreply" + getRandomNumber();
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
+    info("Check Edit Reply In Default Skin");
+    navigationToolbar.goToPotalSites();
+    portalManageSites.goToEditSiteConfig("intranet");
+    portalManageSites.goToDefaultSkin();
+    homePagePlatform.goToHomePage();
     activityStream.addActivity(activity1, "");
     activityStream.commentActivity(activity1, comment1);
     activityStream.replyToComment(comment1, reply1, DATA_NAME_USER1);
-    activityStream.editComment(reply1, newreply);
-    $(byText(activity1)).parent()
-                        .parent()
-                        .parent()
-                        .parent()
-                        .find(byText(reply1 + newreply))
-                        .waitUntil(Condition.visible, Configuration.timeout);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space, false);
+    activityStream.CheckEditComment(reply1, true);
+    homePagePlatform.goToHomePage();
+    activityStream.deleteactivity(activity1);
+    navigationToolbar.goToPotalSites();
+    portalManageSites.goToEditSiteConfig("intranet");
+    portalManageSites.goToEntrepriseSkin();
 
-  }
-
-  @Test
-  public void test07_EditReplybyowner() {
-
-    String comment1 = "comment1" + getRandomNumber();
-    String reply1 = "reply1" + getRandomNumber();
-    String newreply = "newreply" + getRandomNumber();
-    String usernametest = "usernametest" + getRandomString();
-    String email = usernametest + "@gmail.com";
-    String password = "123456";
-    String activity1 = "activity1" + getRandomNumber();
-    info("Add new user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(usernametest, password, email, usernametest, usernametest);
-    manageLogInOut.signIn(usernametest, password);
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.replyToComment(comment1, reply1, usernametest + " " + usernametest);
-    activityStream.editComment(reply1, newreply);
-    manageLogInOut.signIn(usernametest, password);
-    $(byText(reply1 + newreply)).waitUntil(Condition.visible, Configuration.timeout);
-    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(usernametest);
   }
 
   @Test
   public void test08_ckeckEditReplyInSpaceByManager() {
 
     String space = "space" + getRandomNumber();
+    String space0 = "space0" + getRandomNumber();
     info("Create a space");
     String activity1 = "activity1" + getRandomNumber();
     String reply1 = "reply1" + getRandomNumber();
@@ -261,15 +187,37 @@ public class SOCReplyEditTestIT extends Base {
     String email1 = usernametest1 + "@gmail.com";
     String password = "123456";
     String comment1 = "comment1" + getRandomNumber();
+    String newreply = "newreply" + getRandomNumber();
+    String activity0 = "activity0" + getRandomNumber();
+    String reply0 = "reply0" + getRandomNumber();
+    String comment0 = "comment0" + getRandomNumber();
+    String user = "user" + getRandomString();
+    String email0 = user + "@gmail.com";
+
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(space0, space0);
+    activityStream.addActivity(activity0, "");
+    activityStream.commentActivity(activity0, comment0);
+    activityStream.replyToComment(comment0, reply0, DATA_NAME_USER1);
+    activityStream.editComment(reply0, newreply);
+    $(byText(activity0)).parent()
+            .parent()
+            .parent()
+            .parent()
+            .find(byText(reply0 + newreply))
+            .waitUntil(Condition.visible, Configuration.timeout);
     info("Add new user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(usernametest, password, email, usernametest, usernametest);
     addUsers.addUser(usernametest1, password, email1, usernametest1, usernametest1);
+    addUsers.addUser(user, password, email0, user, user);
     manageLogInOut.signIn(usernametest1, password);
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     spaceSettingManagement.goToMemberTab();
     spaceSettingManagement.inviteUser(usernametest, true, "");
+    spaceSettingManagement.inviteUser(user, true, "");
+
     manageLogInOut.signIn(usernametest, password);
     homePagePlatform.goToMySpaces();
     spaceManagement.goToInvitationsReceivedTab();
@@ -277,6 +225,14 @@ public class SOCReplyEditTestIT extends Base {
     activityStream.addActivity(activity1, "");
     activityStream.commentActivity(activity1, comment1);
     activityStream.replyToComment(comment1, reply1, usernametest + " " + usernametest);
+    manageLogInOut.signIn(user, password);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.goToInvitationsReceivedTab();
+    spaceManagement.acceptAInvitation(space);
+    homePagePlatform.goToMySpaces();
+    ELEMENT_SPACES_LIST.find(byText(space)).click();
+    activityStream.CheckEditActivity(activity1, false);
+    activityStream.CheckEditComment(reply1, false);
     manageLogInOut.signIn(usernametest1, password);
     homePagePlatform.goToMySpaces();
     ELEMENT_SPACES_LIST.find(byText(space)).click();
@@ -287,370 +243,86 @@ public class SOCReplyEditTestIT extends Base {
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(usernametest);
     addUsers.deleteUser(usernametest1);
-  }
-
-  @Test
-  public void test09_ckeckEditReplyInSpaceByUser() {
-
-    String space = "space" + getRandomNumber();
-    info("Create a space");
-    String activity1 = "activity1" + getRandomNumber();
-    String usernametest = "usernametest" + getRandomString();
-    String email = usernametest + "@gmail.com";
-    String password = "123456";
-    String user = "user" + getRandomString();
-    String email1 = user + "@gmail.com";
-    String password1 = "123456";
-    String comment1 = "comment1" + getRandomNumber();
-    String reply1 = "reply1" + getRandomNumber();
-    info("Add new user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(usernametest, password, email, usernametest, usernametest);
-    addUsers.addUser(user, password1, email1, user, user);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
-    spaceSettingManagement.goToMemberTab();
-    spaceSettingManagement.inviteUser(usernametest, true, "");
-    spaceSettingManagement.inviteUser(user, true, "");
-    manageLogInOut.signIn(usernametest, password);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.goToInvitationsReceivedTab();
-    spaceManagement.acceptAInvitation(space);
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.replyToComment(comment1, reply1, usernametest + " " + usernametest);
-    manageLogInOut.signIn(user, password1);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.goToInvitationsReceivedTab();
-    spaceManagement.acceptAInvitation(space);
-    homePagePlatform.goToMySpaces();
-    ELEMENT_SPACES_LIST.find(byText(space)).click();
-    activityStream.CheckEditActivity(activity1, false);
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space, false);
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(usernametest);
     addUsers.deleteUser(user);
-
-  }
-
-  @Test
-  public void test10_ckeckEditReplyInSpaceByUser() {
-
-    String comment1 = "comment1" + getRandomNumber();
-    String space = "space" + getRandomNumber();
-    info("Create a space");
-    String activity1 = "activity1" + getRandomNumber();
-    String usernametest = "usernametest" + getRandomString();
-    String email = usernametest + "@gmail.com";
-    String password = "123456";
-    String user = "user" + getRandomString();
-    String email1 = user + "@gmail.com";
-    String password1 = "123456";
-    info("Add new user");
-    String reply1 = "reply1" + getRandomNumber();
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(usernametest, password, email, usernametest, usernametest);
-    addUsers.addUser(user, password1, email1, user, user);
     homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
-    spaceSettingManagement.goToMemberTab();
-    spaceSettingManagement.inviteUser(usernametest, true, "");
-    spaceSettingManagement.inviteUser(user, true, "");
-    manageLogInOut.signIn(usernametest, password);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.goToInvitationsReceivedTab();
-    spaceManagement.acceptAInvitation(space);
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.replyToComment(comment1, reply1, usernametest + " " + usernametest);
-    manageLogInOut.signIn(user, password1);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.goToInvitationsReceivedTab();
-    spaceManagement.acceptAInvitation(space);
-    homePagePlatform.goToMySpaces();
-    ELEMENT_SPACES_LIST.find(byText(space)).click();
-    activityStream.CheckEditComment(reply1, false);
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space, false);
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(usernametest);
-    addUsers.deleteUser(user);
-
+    spaceManagement.deleteSpace(space0, false);
   }
 
   @Test
-  public void test11_ckeckReplyViewer() {
-
-    String activity1 = "activity1" + getRandomNumber();
-    String comment1 = "comment1" + getRandomNumber();
-    String reply1 = "reply1" + getRandomNumber();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.replyToComment(comment1, reply1, DATA_NAME_USER1);
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
-    $(byText(reply1)).waitUntil(Condition.visible, Configuration.timeout);
-    activityStream.gotoCommentViewer(reply1);
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
-    activityStream.deleteactivity(activity1);
-  }
-
-  @Test
-  public void test12_checkEditReplyInDefaultSkin() {
-
-    String activity1 = "activity1" + getRandomNumber();
-    String comment1 = "comment1" + getRandomNumber();
-    String reply1 = "reply1" + getRandomNumber();
-    navigationToolbar.goToPotalSites();
-    portalManageSites.goToEditSiteConfig("intranet");
-    portalManageSites.goToDefaultSkin();
-    homePagePlatform.goToHomePage();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.replyToComment(comment1, reply1, DATA_NAME_USER1);
-    activityStream.CheckEditComment(reply1, true);
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
-    activityStream.deleteactivity(activity1);
-    navigationToolbar.goToPotalSites();
-    portalManageSites.goToEditSiteConfig("intranet");
-    portalManageSites.goToEntrepriseSkin();
-
-  }
-
-  @Test
-  public void test13_CheckReplyEditedWhenRemoveCharacters() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment1 = "comment1" + getRandomNumber();
-    String reply1 = "reply1" + getRandomNumber();
-    String usernametest = "usernametest" + getRandomString();
-    String email = usernametest + "@gmail.com";
-    String password = "123456";
-    info("Add new user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(usernametest, password, email, usernametest, usernametest);
-    manageLogInOut.signIn(usernametest, password);
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.replyToComment(comment1, reply1, usernametest + " " + usernametest);
-    activityStream.removeCharactersComment(reply1, 3, false);
-    executeJavaScript("window.scrollBy(0,-150)");
-    activityStream.deleteactivity(activity1);
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(usernametest);
-  }
-
-  @Test
-  public void test14_CheckReplyEditedWhenRemoveAllreply() {
-    String activity1 = "activity1" + getRandomNumber();
-    String comment1 = "comment1" + getRandomNumber();
-    String reply1 = "reply1" + getRandomNumber();
-    String usernametest = "usernametest" + getRandomString();
-    String email = usernametest + "@gmail.com";
-    String password = "123456";
-    info("Add new user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(usernametest, password, email, usernametest, usernametest);
-    manageLogInOut.signIn(usernametest, password);
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.replyToComment(comment1, reply1, usernametest + " " + usernametest);
-    activityStream.removeCharactersComment(reply1, reply1.length(), true);
-    manageLogInOut.signIn(usernametest, password);
-    activityStream.deleteactivity(activity1);
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(usernametest);
-  }
-
-  @Test
-
-  public void test15_CheckEditReplyWithFormattingTextBold() {
+  @Tag("SOC-6147")
+  public void test15_CheckEditReplyWithFormattingText() {
     // Check when this feature will be done
     String activity1 = "activity" + getRandomNumber();
     String comment1 = "comment" + getRandomNumber();
     String reply1 = "reply1" + getRandomNumber();
+    String reply2 = "reply2" + getRandomNumber();
+    String reply3 = "reply3" + getRandomNumber();
+    String reply4 = "reply4" + getRandomNumber();
+    String reply5 = "reply5" + getRandomNumber();
+    String reply6 = "reply6" + getRandomNumber();
+    String reply7 = "reply7" + getRandomNumber();
+    String reply8 = "reply8" + getRandomNumber();
+    String activity2 = "activity2" + getRandomNumber();
+    String activity3 = "activity3" + getRandomNumber();
+    String comment0 = "comment0" + getRandomNumber();
     String newreply = "newreply" + getRandomNumber();
     activityStream.addActivity(activity1, "");
     activityStream.commentActivity(activity1, comment1);
     activityStream.addFormattedTextInReply(comment1, reply1, DATA_NAME_USER1, Add_FormattingBOLD);
     activityStream.editFormattingComment(reply1, newreply);
     assertEquals(Integer.parseInt($(byText(newreply + reply1)).getCssValue("font-weight")), 700);
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
-    activityStream.deleteactivity(activity1);
-  }
-
-  @Test
-  public void test16_CheckReply_EnabledBydefault() {
-    // Check when this feature will be done
-    String activity1 = "activity1" + getRandomNumber();
-    String comment1 = "comment" + getRandomNumber();
-    String reply1 = "reply1" + getRandomNumber();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.replyToComment(comment1, reply1, DATA_NAME_USER1);
-    activityStream.CheckEditCommentbyDefault(reply1, true);
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
-    activityStream.deleteactivity(activity1);
-
-  }
-
-  @Test
-  @Tag("sabis")
-  public void test17_CheckEditReplyWithFormattingTextItalic() {
-    // Check when this feature will be done
-    String activity1 = "activity" + getRandomNumber();
-    String comment1 = "comment" + getRandomNumber();
-    String reply1 = "reply1" + getRandomNumber();
-    String newreply = "newreply" + getRandomNumber();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.addFormattedTextInReply(comment1, reply1, DATA_NAME_USER1, Add_FormattingITALIC);
-    activityStream.editFormattingComment(reply1, newreply);
-    assertEquals(($(byText(newreply + reply1)).getCssValue("font-style")), "italic");
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
-    activityStream.deleteactivity(activity1);
-  }
-
-  @Test
-
-  public void test18_CheckEditReplyWithFormattingTextNumbredList() {
-    // Check when this feature will be done
-    String activity1 = "activity" + getRandomNumber();
-    String comment1 = "comment" + getRandomNumber();
-    String reply1 = "reply1" + getRandomNumber();
-    String newreply = "newreply" + getRandomNumber();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.addFormattedTextInReply(comment1, reply1, DATA_NAME_USER1, Add_Formtting_numbred_List);
-    activityStream.editFormattingComment(reply1, newreply);
-    assertEquals($(byText(newreply + reply1)).closest("ol").toString(), "<ol>" + newreply + reply1 + "</ol>");
-
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
-    activityStream.deleteactivity(activity1);
-  }
-
-  @Test
-
-  public void test19_CheckEditReplyWithFormattingTextBulledList() {
-    // Check when this feature will be done
-    String activity1 = "activity" + getRandomNumber();
-    String comment1 = "comment" + getRandomNumber();
-    String reply1 = "reply1" + getRandomNumber();
-    String newreply = "newreply" + getRandomNumber();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.addFormattedTextInReply(comment1, reply1, DATA_NAME_USER1, Add_Formtting_Bulled_List);
-    activityStream.editFormattingComment(reply1, newreply);
-    assertEquals($(byText(newreply + reply1)).closest("ul").toString(), "<ul>" + newreply + reply1 + "</ul>");
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
-    activityStream.deleteactivity(activity1);
-  }
-
-  @Test
-
-  public void test20_CheckEditReplyWithFormattingTextBlockquote() {
-    // Check when this feature will be done
-    String activity1 = "activity" + getRandomNumber();
-    String comment1 = "comment" + getRandomNumber();
-    String reply1 = "reply1" + getRandomNumber();
-    String newreply = "newreply" + getRandomNumber();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.addFormattedTextInReply(comment1, reply1, DATA_NAME_USER1, Add_FormattingQuote);
-    activityStream.editFormattingComment(reply1, newreply);
-    assertEquals($(byText(newreply + reply1)).closest("blockquote").toString(),
-                 "<blockquote>" + newreply + reply1 + "</blockquote>");
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
-    activityStream.deleteactivity(activity1);
-
-  }
-
-  @Test
-
-  public void test21_CheckEditReplyWithFormattingTextRemoveFormat() {
-    // Check when this feature will be done
-    String activity1 = "activity" + getRandomNumber();
-    String comment1 = "comment" + getRandomNumber();
-    String reply1 = "reply1" + getRandomNumber();
-    String newreply = "newreply" + getRandomNumber();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.addFormattedTextInReply(comment1, reply1, DATA_NAME_USER1, Add_FormttingRemoveFormat);
-    activityStream.editComment(reply1, newreply);
-    assertEquals(($(byText(reply1 + newreply)).getCssValue("font-style")), "normal");
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
-    activityStream.deleteactivity(activity1);
-  }
-
-  @Test
-  public void test22_CheckEditReplyWithlinkFormtoolbar() {
-    // Check when this feature will be done
-    String activity1 = "activity1" + getRandomNumber();
-    String comment1 = "comment" + getRandomNumber();
-    String reply1 = "reply1" + getRandomNumber();
-    String newreply = "newreply" + getRandomNumber();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.addFormattedTextInReply(comment1, reply1, DATA_NAME_USER1, Add_Formtting_Link);
-    activityStream.editComment(reply1, newreply);
-    $(byText(reply1)).parent().shouldHave(Condition.text(reply1 + reply1 + newreply));
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
-    activityStream.deleteactivity(activity1);
-  }
-
-  @Test
-  public void test23_CheckEditReplyWithImageFormtoolbar() {
-    // Check when this feature will be done
-
-    String activity1 = "activity1" + getRandomNumber();
-    String comment1 = "comment1" + getRandomNumber();
-    String reply1 = "reply1" + getRandomNumber();
-    String newreply = "reply1" + getRandomNumber();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.addFormattedTextInReply(comment1, reply1, DATA_NAME_USER1, Add_Formtting_Image);
-    activityStream.editCommentImage(reply1, newreply);
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
-    activityStream.deleteactivity(activity1);
-  }
-
-  @Test
-  @BugInPLF("SOC-6147")
-  public void test24_CheckOrderOfREplyWhenEditReply() {
-
-    String activity1 = "activity1" + getRandomNumber();
-    String reply1 = "reply1" + getRandomNumber();
-    String reply2 = "reply2" + getRandomNumber();
-    String reply3 = "reply3" + getRandomNumber();
-    String newreply = "newreply" + getRandomNumber();
-    String comment1 = "comment1" + getRandomNumber();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    activityStream.replyToComment(comment1, reply1, DATA_NAME_USER1);
-    activityStream.replyToComment(comment1, reply2, DATA_NAME_USER1);
-    activityStream.replyToComment(comment1, reply3, DATA_NAME_USER1);
+    activityStream.addFormattedTextInReply(comment1, reply2, DATA_NAME_USER1, Add_FormattingITALIC);
+    activityStream.editFormattingComment(reply2, newreply);
+    assertEquals(($(byText(newreply + reply2)).getCssValue("font-style")), "italic");
+    activityStream.addFormattedTextInReply(comment1, reply3, DATA_NAME_USER1, Add_Formtting_numbred_List);
+    activityStream.editFormattingComment(reply3, newreply);
+    assertEquals($(byText(newreply + reply3)).closest("ol").toString(), "<ol>" + newreply + reply3 + "</ol>");
+    activityStream.addFormattedTextInReply(comment1, reply4, DATA_NAME_USER1, Add_Formtting_Bulled_List);
+    activityStream.editFormattingComment(reply4, newreply);
+    assertEquals($(byText(newreply + reply4)).closest("ul").toString(), "<ul>" + newreply + reply4 + "</ul>");
+    homePagePlatform.goToHomePage();
+    activityStream.addActivity(activity3, "");
+    activityStream.commentActivity(activity3, comment1);
+    activityStream.addFormattedTextInReply(comment1, reply5, DATA_NAME_USER1, Add_FormattingQuote);
+    activityStream.editFormattingComment(reply5, newreply);
+    assertEquals($(byText(newreply + reply5)).closest("blockquote").toString(),
+            "<blockquote>" + newreply + reply5 + "</blockquote>");
+    activityStream.addFormattedTextInReply(comment1, reply6, DATA_NAME_USER1, Add_FormttingRemoveFormat);
+    activityStream.editComment(reply6, newreply);
+    assertEquals(($(byText(reply6 + newreply)).getCssValue("font-style")), "normal");
+    activityStream.addFormattedTextInReply(comment1, reply7, DATA_NAME_USER1, Add_Formtting_Link);
+    activityStream.editComment(reply7, newreply);
+    $(byText(reply7)).parent().shouldHave(Condition.text(reply7 + reply7 + newreply));
+    activityStream.addFormattedTextInReply(comment1, reply8, DATA_NAME_USER1, Add_Formtting_Image);
+    activityStream.editCommentImage(reply8, newreply);
+    homePagePlatform.goToHomePage();
+    info("Check Order Of Reply When Edit Reply");
+    activityStream.addActivity(activity2, "");
+    activityStream.commentActivity(activity2, comment0);
+    activityStream.replyToComment(comment0, reply1, DATA_NAME_USER1);
+    activityStream.replyToComment(comment0, reply2, DATA_NAME_USER1);
+    activityStream.replyToComment(comment0, reply3, DATA_NAME_USER1);
     activityStream.editComment(reply1, newreply);
     activityStream.editComment(reply2, newreply);
     activityStream.editComment(reply3, newreply);
-    String idBlocComment = $(byText(activity1)).parent()
-                                               .parent()
-                                               .parent()
-                                               .find(byText(comment1))
-                                               .parent()
-                                               .parent()
-                                               .parent()
-                                               .parent()
-                                               .getAttribute("id")
-                                               .split("commentContainercomment")[1];
-    $(byId(ELEMENT_VIEW_ALL_REPLIES_LINK.replace("{id}", idBlocComment))).waitUntil(Condition.appear, Configuration.timeout)
-                                                                         .click();
-    $(byText(comment1)).parent().parent().findAll(byClassName("CommentBlock")).get(2).find(byText(reply3 + newreply));
-    $(byText(comment1)).parent().parent().findAll(byClassName("CommentBlock")).get(1).find(byText(reply2 + newreply));
-    $(byText(comment1)).parent().parent().findAll(byClassName("CommentBlock")).get(0).find(byText(reply1 + newreply));
-    manageLogInOut.signIn(PLFData.DATA_USER1, DATA_PASS2);
+    String idBlocComment = $(byText(activity2)).parent()
+            .parent()
+            .parent()
+            .find(byText(comment0))
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .getAttribute("id")
+            .split("commentContainercomment")[1];
+
+    $(byText(comment0)).parent().parent().findAll(byClassName("CommentBlock")).get(2).find(byText(reply3 + newreply));
+    $(byText(comment0)).parent().parent().findAll(byClassName("CommentBlock")).get(1).find(byText(reply2 + newreply));
+    $(byText(comment0)).parent().parent().findAll(byClassName("CommentBlock")).get(0).find(byText(reply1 + newreply));
+
+    homePagePlatform.goToHomePage();
+    activityStream.deleteactivity(activity2);
+    activityStream.deleteactivity(activity3);
     activityStream.deleteactivity(activity1);
 
   }

@@ -43,7 +43,7 @@ public class AddUsers {
     $(ELEMENT_FIRSTNAME).setValue(firstname);
     $(ELEMENT_LASTNAME).setValue(lastName);
     $(ELEMENT_SAVE).click();
-    ELEMENT_POPUP_MESSAGE_USER_ADDED.waitUntil(appears, Configuration.timeout);
+    ELEMENT_POPUP_MESSAGE_USER_ADDED.waitUntil(appears, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_CONFIRM_INFORMATION).click();
     info("Finish adding an user");
   }

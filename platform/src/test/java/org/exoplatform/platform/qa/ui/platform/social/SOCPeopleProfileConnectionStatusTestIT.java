@@ -12,7 +12,6 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -71,18 +70,25 @@ public class SOCPeopleProfileConnectionStatusTestIT extends Base {
    */
   @Test
   @Tag("PLF-7947")
-  public void test01_CheckConnectionStatusBetweenTwoUsers() throws Exception {
+  public void test01_CheckAccept_Deny_ConnectionStatusBetweenTwoUsers() throws Exception {
     info("Test 1: Check Connection Status between two users");
     /* Create data test */
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
     String username2 = "usernameb" + getRandomString();
     String email2 = username2 + "@test.com";
+    String username3 = "usernamea" + getRandomString();
+    String email3 = username3 + "@test.com";
+    String username4 = "usernameb" + getRandomString();
+    String email4 = username4 + "@test.com";
     String password = "123456";
     info("Add user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
     addUsers.addUser(username2, password, email2, username2, username2);
+    addUsers.addUser(username3, password, email3, username3, username3);
+    addUsers.addUser(username4, password, email4, username4, username4);
+
     manageLogInOut.signIn(username1, password);
     info("goto user2's profile");
     homePagePlatform.goToConnections();
@@ -99,131 +105,15 @@ public class SOCPeopleProfileConnectionStatusTestIT extends Base {
     connectionsManagement.searchPeople(username1, null, null, null);
     homePagePlatform.refreshUntil($(byText(username1 + " " + username1)), visible, 2000);
     $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username1))).click();
+    $(ELEMENT_ACCEPT_CONNECT_PROFIL_STATUS).waitUntil(visible, Configuration.timeout);
     ELEMENT_ICON_CHAT_PROFIL_STATUS.waitUntil(visible,Configuration.timeout);
-    ELEMENT_ICON_CALL_PROFIL_STATUS.waitUntil(visible,Configuration.timeout);
     $(ELEMENT_ACCEPT_CONNECT_PROFIL_STATUS).waitUntil(visible, Configuration.timeout);
     $(ELEMENT_DROPDOWN_DENY_PROFIL_STATUS).click();
     $(ELEMENT_DENY_PROFIL_STATUS).waitUntil(visible, Configuration.timeout);
     info("connect to user 1");
     $(ELEMENT_DROPDOWN_DENY_PROFIL_STATUS).click();
     $(ELEMENT_ACCEPT_ADD_USER_PROFIL_STATUS).click();
-    $(ELEMENT_ACCEPT_ADD_USER_PROFIL_STATUS).waitUntil(not(visible), Configuration.timeout);
-    info("Delete users");
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-  }
-    @Test
-     public void test02_CheckDenyConnectionStatusBetweenTwoUsers() throws Exception {
-      info("Test 1: Check Deny Connection Status between two users");
-      String username1 = "usernamea" + getRandomString();
-      String email1 = username1 + "@test.com";
-      String username2 = "usernameb" + getRandomString();
-      String email2 = username2 + "@test.com";
-      String password = "123456";
-      info("Add user");
-      navigationToolbar.goToAddUser();
-      addUsers.addUser(username1, password, email1, username1, username1);
-      addUsers.addUser(username2, password, email2, username2, username2);
-      manageLogInOut.signIn(username1, password);
-      info("goto user2's profile");
-      homePagePlatform.goToConnections();
-      $(ELEMENT_ALL_CONNECTIONS_TAB).click();
-      connectionsManagement.searchPeople(username2, null, null, null);
-      $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username2))).click();
-      $(ELEMENT_ADD_CONNECT_PROFIL_STATUS).click();
-      $(ELEMENT_CANCEL_CONNECT_PROFILE_STATUS).waitUntil(visible,Configuration.timeout).waitUntil(hasText("Cancel Request"),Configuration.timeout);
-      info("login as user 2");
-      manageLogInOut.signIn(username2, password);
-      info("goto user1's profile");
-      homePagePlatform.goToConnections();
-      $(ELEMENT_ALL_CONNECTIONS_TAB).click();
-      connectionsManagement.searchPeople(username1, null, null, null);
-      homePagePlatform.refreshUntil($(byText(username1 + " " + username1)), visible, 2000);
-      $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username1))).click();
-      info("Deny to connect user1");
-      $(ELEMENT_DROPDOWN_DENY_PROFIL_STATUS).click();
-      $(ELEMENT_CLICK_DENY_USER_PROFIL_STATUS).click();
-      $(ELEMENT_ADD_CONNECT_PROFIL_STATUS).waitUntil(visible,Configuration.timeout).waitUntil(hasText("Connect"),Configuration.timeout);
-      info("Delete users");
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-  }
-  @Test
-  public void test03_CheckVerifyCancelRequestStatusBetweenTwoUsers () throws Exception {
-    info("Test 1: Check Deny Connection Status between two users");
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String password = "123456";
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-    manageLogInOut.signIn(username1, password);
-    info("goto user2's profile");
-    homePagePlatform.goToConnections();
-    $(ELEMENT_ALL_CONNECTIONS_TAB).click();
-    connectionsManagement.searchPeople(username2, null, null, null);
-    $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username2))).click();
-    $(ELEMENT_ADD_CONNECT_PROFIL_STATUS).click();
-    $(ELEMENT_CANCEL_CONNECT_PROFILE_STATUS).waitUntil(visible,Configuration.timeout);
-    $(ELEMENT_CANCEL_REQUEST_PROFIL_STATUS).waitUntil(visible,Configuration.timeout);
-    info("login as user 2");
-    manageLogInOut.signIn(username2, password);
-    info("goto user1's profile");
-    homePagePlatform.goToConnections();
-    $(ELEMENT_ALL_CONNECTIONS_TAB).click();
-    connectionsManagement.searchPeople(username1, null, null, null);
-    homePagePlatform.refreshUntil($(byText(username1 + " " + username1)), visible, 2000);
-    $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username1))).click();
-    $(ELEMENT_ACCEPT_CONNECT_PROFIL_STATUS).waitUntil(visible, Configuration.timeout);
-    $(ELEMENT_DROPDOWN_DENY_PROFIL_STATUS).click();
-    $(ELEMENT_DENY_PROFIL_STATUS).waitUntil(visible, Configuration.timeout);
-    info("Delete users");
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-  }
-  @Test
-  public void test04_CheckAcceptConnectStatusBetweenTwoUsers() throws Exception {
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String password = "123456";
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-    manageLogInOut.signIn(username1, password);
-    info("goto user2's profile");
-    homePagePlatform.goToConnections();
-    $(ELEMENT_ALL_CONNECTIONS_TAB).click();
-    connectionsManagement.searchPeople(username2, null, null, null);
-    $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username2))).click();
-    $(ELEMENT_ADD_CONNECT_PROFIL_STATUS).click();
-    $(ELEMENT_CANCEL_CONNECT_PROFILE_STATUS).waitUntil(visible,Configuration.timeout);
-    info("login as user 2");
-    manageLogInOut.signIn(username2, password);
-    info("goto user1's profile");
-    homePagePlatform.goToConnections();
-    $(ELEMENT_ALL_CONNECTIONS_TAB).click();
-    connectionsManagement.searchPeople(username1, null, null, null);
-    homePagePlatform.refreshUntil($(byText(username1 + " " + username1)), visible, 2000);
-    $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username1))).click();
-    $(ELEMENT_ACCEPT_CONNECT_PROFIL_STATUS).waitUntil(visible, Configuration.timeout);
-    $(ELEMENT_DROPDOWN_DENY_PROFIL_STATUS).click();
-    $(ELEMENT_DENY_PROFIL_STATUS).waitUntil(visible, Configuration.timeout);
-    info("connect to user 1");
-    $(ELEMENT_DROPDOWN_DENY_PROFIL_STATUS).click();
-    $(ELEMENT_ACCEPT_ADD_USER_PROFIL_STATUS).click();
-    $(ELEMENT_ACCEPT_ADD_USER_PROFIL_STATUS).waitUntil(not(visible), Configuration.timeout);
+    $(ELEMENT_ACCEPT_ADD_USER_PROFIL_STATUS).waitUntil(not(visible), Configuration.openBrowserTimeoutMs);
     info("Verify not appears Connect button on user 2");
     manageLogInOut.signIn(username1, password);
     homePagePlatform.goToConnections();
@@ -232,57 +122,40 @@ public class SOCPeopleProfileConnectionStatusTestIT extends Base {
     homePagePlatform.refreshUntil($(byText(username1 + " " + username1)), visible, 2000);
     $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username2))).click();
     $(ELEMENT_ACCEPT_ADD_USER_PROFIL_STATUS).waitUntil(not(visible), Configuration.timeout);
-    info("Delete users");
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-  }
-  @Test
-  public void test05_CheckAppearsConnectWhenClickDeny () throws Exception {
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String password = "123456";
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-    manageLogInOut.signIn(username1, password);
+    info("Check Deny Connection Status Between Two Users");
+    manageLogInOut.signIn(username3, password);
     info("goto user2's profile");
     homePagePlatform.goToConnections();
     $(ELEMENT_ALL_CONNECTIONS_TAB).click();
-    connectionsManagement.searchPeople(username2, null, null, null);
-    $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username2))).click();
-    $(ELEMENT_ADD_CONNECT_PROFIL_STATUS).click();
-    $(ELEMENT_CANCEL_CONNECT_PROFILE_STATUS).waitUntil(visible,Configuration.timeout);
+    connectionsManagement.searchPeople(username4, null, null, null);
+    $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username4))).click();
+    $(ELEMENT_ADD_CONNECT_PROFIL_STATUS).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_CANCEL_CONNECT_PROFILE_STATUS).waitUntil(visible,Configuration.timeout).waitUntil(hasText("Cancel Request"),Configuration.timeout);
+    $(ELEMENT_CANCEL_REQUEST_PROFIL_STATUS).waitUntil(visible,Configuration.timeout);
     info("login as user 2");
-    manageLogInOut.signIn(username2, password);
+    manageLogInOut.signIn(username4, password);
     info("goto user1's profile");
     homePagePlatform.goToConnections();
     $(ELEMENT_ALL_CONNECTIONS_TAB).click();
-    connectionsManagement.searchPeople(username1, null, null, null);
-    homePagePlatform.refreshUntil($(byText(username1 + " " + username1)), visible, 2000);
-    $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username1))).click();
+    connectionsManagement.searchPeople(username3, null, null, null);
+    homePagePlatform.refreshUntil($(byText(username3 + " " + username3)), visible, 2000);
+    $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username3))).click();
+    $(ELEMENT_ACCEPT_CONNECT_PROFIL_STATUS).waitUntil(visible, Configuration.timeout);
     info("Deny to connect user1");
     $(ELEMENT_DROPDOWN_DENY_PROFIL_STATUS).click();
+    $(ELEMENT_DENY_PROFIL_STATUS).waitUntil(visible, Configuration.timeout);
     $(ELEMENT_CLICK_DENY_USER_PROFIL_STATUS).click();
-    $(ELEMENT_ADD_CONNECT_PROFIL_STATUS).waitUntil(visible,Configuration.timeout);
-    info("login as user 1");
-    manageLogInOut.signIn(username1, password);
-    info("goto user1's profile");
-    homePagePlatform.goToConnections();
-    $(ELEMENT_ALL_CONNECTIONS_TAB).click();
-    connectionsManagement.searchPeople(username2, null, null, null);
-    homePagePlatform.refreshUntil($(byText(username2 + " " + username2)), visible, 2000);
-    $(byXpath(ELEMENT_CONNECTION_USER_NAME.replace("${user}", username2))).click();
     $(ELEMENT_ADD_CONNECT_PROFIL_STATUS).waitUntil(visible,Configuration.timeout).waitUntil(hasText("Connect"),Configuration.timeout);
+
     info("Delete users");
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
+    addUsers.deleteUser(username3);
+    addUsers.deleteUser(username4);
+
   }
+
 }
 
