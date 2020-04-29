@@ -114,7 +114,7 @@ public class WikiActivitiesTestIT extends BaseTribe {
     info("Create a space");
     String space = "space" + getRandomNumber();
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpaceSimple(space, space, 6000);
+    tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
     info("Create a wiki page");
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();
@@ -132,7 +132,7 @@ public class WikiActivitiesTestIT extends BaseTribe {
     String editContent = "editContent" + getRandomNumber();
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.searchSpace(space);
-    ELEMENT_SPACES_LIST.find(byText(space)).click();
+    tribeSpaceManagement.accessToSearchedSpace();
     spaceHomePage.goToWikiTab();
     tribeWikiHomePage.goToAPage(title);
     tribeWikiHomePage.goToEditPage();
@@ -149,7 +149,7 @@ public class WikiActivitiesTestIT extends BaseTribe {
     getExoWebDriver().getWebDriver().navigate().refresh();
     tribeWikiHomePage.deleteWiki(editTitle);
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.deleteSpace(space, false);
+    tribeSpaceManagement.deleteTribeSpace(space);
   }
 
   @Test
@@ -159,13 +159,13 @@ public class WikiActivitiesTestIT extends BaseTribe {
     info("Create a space");
     String space = "space" + getRandomNumber();
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpaceSimple(space, space, 6000);
+    tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
     info("Create a wiki page");
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.searchSpace(space);
-    ELEMENT_SPACES_LIST.find(byText(space)).click();
+    tribeSpaceManagement.accessToSearchedSpace();
     tribeSpaceManagement.goToWikiTab();
     tribeWikiHomePage.goToAddBlankPage();
     tribeWikiManagement.goToSourceEditor();
@@ -176,14 +176,14 @@ public class WikiActivitiesTestIT extends BaseTribe {
     info("Remove Wiki application in the space");
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.searchSpace(space);
-    ELEMENT_SPACES_LIST.find(byText(space)).click();
+    tribeSpaceManagement.accessToSearchedSpace();
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.goToApplicationTab();
     spaceSettingManagement.removeApplication("Wiki");
     info("Check on AS");
     homePagePlatform.goToSpaceHomeTribe();
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.deleteSpace(space, false);
+    tribeSpaceManagement.deleteTribeSpace(space);
 
   }
 
@@ -198,7 +198,7 @@ public class WikiActivitiesTestIT extends BaseTribe {
 
     info("Create space");
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpaceSimple(space, space);
+    tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
     spaceHomePage.goToSpaceSettingTab();
     spaceSettingManagement.goToApplicationTab();
     info("Add application");
@@ -217,6 +217,6 @@ public class WikiActivitiesTestIT extends BaseTribe {
     tribeWikiManagement.saveAddPage();
     tribeWikiValidattions.verifyTitleAndContentWikiPageInHomeSpace(newTitle, newTitle);
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.deleteSpace(space, false);
+    tribeSpaceManagement.deleteTribeSpace(space);
   }
 }

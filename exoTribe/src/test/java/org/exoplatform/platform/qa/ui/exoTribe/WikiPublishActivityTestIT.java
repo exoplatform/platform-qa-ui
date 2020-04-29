@@ -123,7 +123,7 @@ public class WikiPublishActivityTestIT extends BaseTribe {
      */
     info("Create a new wiki page");
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpaceSimple(space, space);
+    tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
     info("Add new wiki page for space");
     spaceHomePage.goToWikiTab();
     tribeWikiHomePage.goToAddBlankPage();
@@ -154,7 +154,7 @@ public class WikiPublishActivityTestIT extends BaseTribe {
     getExoWebDriver().getWebDriver().navigate().refresh();
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.searchSpace(space);
-    ELEMENT_SPACES_LIST.find(byText(space)).click();
+    tribeSpaceManagement.accessToSearchedSpace();
     spaceHomePage.goToWikiTab();
     $(byText(title)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     info("Edit the title of the wiki page and check on published checkbox");
@@ -171,7 +171,7 @@ public class WikiPublishActivityTestIT extends BaseTribe {
     tribeWikiHomePage.deleteWiki(newTitle);
     homePagePlatform.goToSpaceHomeTribe();
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.deleteSpace(space, false);
+    tribeSpaceManagement.deleteTribeSpace(space);
   }
 
 }

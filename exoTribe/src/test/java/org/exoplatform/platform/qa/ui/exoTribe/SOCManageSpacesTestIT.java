@@ -76,19 +76,19 @@ public class SOCManageSpacesTestIT extends BaseTribe {
     String spaceDesc = "descriptionc" + getRandomNumber();
 
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
+    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
     ELEMENT_SPACENAME_TRIBE.parent().find(byText(spaceNamea)).waitUntil(Condition.visible, Configuration.timeout);
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpaceSimple(spaceNameb, spaceDesb);
+    tribeSpaceManagement.addNewSpace(spaceNameb, spaceDesb, "Open", "No", null);
     ELEMENT_SPACENAME_TRIBE.parent().find(byText(spaceNameb)).waitUntil(Condition.visible, Configuration.timeout);
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpaceSimple(spaceNamec, spaceDesc);
+    tribeSpaceManagement.addNewSpace(spaceNamec, spaceDesc,"Open", "No", null);
     ELEMENT_SPACENAME_TRIBE.parent().find(byText(spaceNamec)).waitUntil(Condition.visible, Configuration.timeout);
 
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.deleteSpace(spaceNamea, false);
-    tribeSpaceManagement.deleteSpace(spaceNameb, false);
-    tribeSpaceManagement.deleteSpace(spaceDesc, false);
+    tribeSpaceManagement.deleteTribeSpace(spaceNamea);
+    tribeSpaceManagement.deleteTribeSpace(spaceNameb);
+    tribeSpaceManagement.deleteTribeSpace(spaceDesc);
   }
 
 

@@ -19,6 +19,7 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_TRIBE_STREAM_OLD_COMPOSER_BTN;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -62,6 +63,7 @@ public class SOCPeopleActivityAddTestIT extends BaseTribe {
     String link = "http://www.google.fr";
     String title = "Google";
 
+    ELEMENT_TRIBE_STREAM_OLD_COMPOSER_BTN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TAB_ADD_LINK.click();
     ELEMENT_INPUT_LINK.setValue(link);
     ELEMENT_BUTTON_ATTACH_LINK.click();

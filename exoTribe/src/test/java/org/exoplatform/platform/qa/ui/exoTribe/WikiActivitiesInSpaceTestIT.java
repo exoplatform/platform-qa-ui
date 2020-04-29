@@ -14,6 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -79,8 +81,14 @@ public class WikiActivitiesInSpaceTestIT extends BaseTribe {
     String space = "space" + getRandomNumber();
     String newTitle = "newTitle" + getRandomNumber();
     String newContent = "newContent" + getRandomNumber();
+    String user1= "Beter Bimel";
+    String user2= "Bret Muller";
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(user1);
+    inviteUsers.add(user2);
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpaceSimple(space, space, 6000);
+    tribeSpaceManagement.addNewSpace(space, space, "Open", "No", inviteUsers);
     info("Create a wiki page");
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();
@@ -109,7 +117,7 @@ public class WikiActivitiesInSpaceTestIT extends BaseTribe {
     wikiValidattions.verifyWikiPageNotDisplayedInWikiHome(newTitle);
     homePagePlatform.goToStreamPageTribe();
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.deleteSpace(space, false);
+    tribeSpaceManagement.deleteTribeSpace(space);
 
   }
 

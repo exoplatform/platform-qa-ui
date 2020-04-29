@@ -109,7 +109,7 @@ public class WikiInformationTestIT extends BaseTribe {
 
     info("Create space 1 and wiki page 1");
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpaceSimple(space1, space1);
+    tribeSpaceManagement.addNewSpace(space1, space1, "Open", "No", null);
     info("Add new wiki page for space 1");
     spaceHomePage.goToWikiTab();
     tribeWikiHomePage.goToAddBlankPage();
@@ -121,7 +121,7 @@ public class WikiInformationTestIT extends BaseTribe {
 
     info("Create space 2 and wiki page 2");
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpaceSimple(space2, space2);
+    tribeSpaceManagement.addNewSpace(space2, space2, "Open", "No", null);
     info("Add new wiki page for space 1");
     spaceHomePage.goToWikiTab();
     tribeWikiHomePage.goToAddBlankPage();
@@ -133,7 +133,7 @@ public class WikiInformationTestIT extends BaseTribe {
     info("Open wiki page 1");
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.searchSpace(space1);
-    ELEMENT_SPACES_LIST.find(byText(space1)).click();
+    tribeSpaceManagement.accessToSearchedSpace();
     spaceHomePage.goToWikiTab();
     info("Open page 1 and Go to Page Info");
     tribeWikiHomePage.goToAPage(title1);
@@ -148,8 +148,8 @@ public class WikiInformationTestIT extends BaseTribe {
 
     homePagePlatform.goToSpaceHomeTribe();
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.deleteSpace(space1, false);
-    tribeSpaceManagement.deleteSpace(space2, false);
+    tribeSpaceManagement.deleteTribeSpace(space1);
+    tribeSpaceManagement.deleteTribeSpace(space2);
 
   }
 

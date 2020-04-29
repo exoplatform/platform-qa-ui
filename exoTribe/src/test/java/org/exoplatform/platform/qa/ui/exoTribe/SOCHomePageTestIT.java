@@ -20,6 +20,7 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_WHO_LIKED_POPUP;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_TRIBE_STREAM_OLD_COMPOSER_BTN;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 /**
@@ -71,6 +72,7 @@ public class SOCHomePageTestIT extends BaseTribe {
   public void test01_LikeActivity() {
     String activity1 = "activity1" + getRandomNumber();
     info("Test 1: Like Activity");
+    ELEMENT_TRIBE_STREAM_OLD_COMPOSER_BTN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addActivity(activity1, "");
     /*
      * Step Number: 1 Step Name: Step 1: Like/Unlike Activity Step Description: - Go
@@ -111,6 +113,7 @@ public class SOCHomePageTestIT extends BaseTribe {
 
     String activity1 = "activity1" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
+    ELEMENT_TRIBE_STREAM_OLD_COMPOSER_BTN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addActivity(activity1, "");
     // get the id of activity created
     String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];

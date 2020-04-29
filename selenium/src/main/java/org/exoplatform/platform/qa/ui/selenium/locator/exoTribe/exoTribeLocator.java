@@ -77,6 +77,9 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_TASKS_PAGE = $(byXpath("(//*[@class='caption color-title'])[1]"));
 
+    public static final SelenideElement ELEMENT_TRIBE_STREAM_OLD_COMPOSER_BTN = $(byXpath("//*[@class='oldComposerButton']"));
+
+
     //SPACE
 
     public static final SelenideElement GO_TO_SPACES_TRIBE_BTN = $(byXpath("//*[@class='uiIcon uiIconFile uiIconToolbarNavItem uiIconSpaces iconSpaces null']"));
@@ -88,6 +91,14 @@ public class exoTribeLocator {
     public static final String          ELEMENT_SPACE_TRIBE_CONFIRM_DELETE  = "Est-ce vous êtes certain de vouloir supprimer cet espace ? Ceci est définitif. Toutes les pages de ce groupe seront également supprimées.";
 
     public static final By              ELEMENT_TRIBE_DELETE_SPACE_OK_BUTTON = By.xpath("//*[text()='Valider']");
+
+    public static final By              ELEMENT_TRIBE_MANAGE_SPACE_BUTTON = By.xpath("(//*[@class='spaceCardFront']//*[@class='v-btn__content'])[3]");
+
+    public static final By              ELEMENT_TRIBE_REMOVE_SPACE_BUTTON = By.xpath("//*[@class='uiIcon uiIconTrash']");
+
+    public static final By              ELEMENT_TRIBE_REMOVE_SPACE_OK_BUTTON = By.xpath("(//*[@class='v-card__actions']/button)[1]");
+
+    public static final SelenideElement ELEMENT_NO_SPACES_LIST  = $(byXpath("//*[@class='ma-auto noSpacesYet']"));
 
     public static final By ELEMENT_ADDNEWSPACE_TRIBE_FORM  = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Créer un nouvel espace']");
 
@@ -112,6 +123,10 @@ public class exoTribeLocator {
     public static final SelenideElement ELEMENT_CREATE_SPACE_TRIBE = $(byXpath("//*[@class='v-btn__content' and contains(text(),'Create')]"));
 
     public static final SelenideElement ELEMENT_CANCEL_SPACE_TRIBE = $(byXpath("//*[@class='v-btn__content' and contains(text(),'Cancel')]"));
+
+    public static final SelenideElement ELEMENT_SPACES_TRIBE_SEARCH_TEXT = $(byXpath("//*[@class='v-text-field__slot']/input"));
+
+    public static final SelenideElement ELEMENT_SEARCHED_SPACE_TRIBE   = $(byXpath("//*[@class='spaceDisplayName text-truncate d-block']"));
 
     //WIKI
 

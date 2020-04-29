@@ -91,17 +91,18 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
 
     info("Create a space");
     String space = "space" + getRandomNumber();
+    String space1 = "space1" + getRandomNumber();
     String title1 = "title1" + getRandomNumber();
     String title2 = "title2" + getRandomNumber();
 
 
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpaceSimple(space, space, 6000);
+    tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
 
     info("Create a wiki page ");
     spaceHomePage.goToWikiTab();
     tribeWikiHomePage.goToAddBlankPage();
-    tribeRichTextEditor.addSimplePage(title1, title1);
+    tribeSourceTextEditor.addSimplePage(title1, title1);
     tribeWikiManagement.saveAddPage();
     $(byText(title1)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
 
@@ -109,13 +110,13 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     tribeWikiManagement.selectSpaceDestination(space);
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.searchSpace(space);
-    ELEMENT_SPACES_LIST.find(byText(space)).click();
+    tribeSpaceManagement.accessToSearchedSpace();
     spaceHomePage.goToWikiTab();
     $(byClassName("uiTreeExplorer")).find(byText(title1)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
     homePagePlatform.goToStreamPageTribe();
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.deleteSpace(space, false);
-    tribeSpaceManagement.addNewSpaceSimple(space, space, 6000);
+    tribeSpaceManagement.deleteTribeSpace(space);
+    tribeSpaceManagement.addNewSpace(space1, space1, "Open", "No", null);
 
     info("Create a wiki page in space");
     tribeSpaceManagement.goToWikiTab();
@@ -129,7 +130,7 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     $(byClassName("uiTreeExplorer")).find(byText(title2)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
     tribeWikiHomePage.deleteWiki(title2);
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.deleteSpace(space, false);
+    tribeSpaceManagement.deleteTribeSpace(space1);
   }
 
   @Test
@@ -141,9 +142,9 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     String space2 = "space" + getRandomNumber();
 
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpaceSimple(space1, space1, 6000);
+    tribeSpaceManagement.addNewSpace(space1, space1, "Open", "No", null);
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpaceSimple(space2, space2, 6000);
+    tribeSpaceManagement.addNewSpace(space2, space2, "Open", "No", null);
 
     info("Create a wiki page in space2");
     String title1 = "title1" + getRandomNumber();
@@ -158,13 +159,13 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     tribeWikiManagement.selectSpaceDestination(space1);
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.searchSpace(space1);
-    ELEMENT_SPACES_LIST.find(byText(space1)).click();
+    tribeSpaceManagement.accessToSearchedSpace();
     tribeSpaceManagement.goToWikiTab();
     $(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
     homePagePlatform.goToStreamPageTribe();
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.deleteSpace(space1, false);
-    tribeSpaceManagement.deleteSpace(space2, false);
+    tribeSpaceManagement.deleteTribeSpace(space1);
+    tribeSpaceManagement.deleteTribeSpace(space2);
 
   }
 

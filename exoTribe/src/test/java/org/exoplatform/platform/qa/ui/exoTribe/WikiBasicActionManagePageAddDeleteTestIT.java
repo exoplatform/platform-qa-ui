@@ -88,7 +88,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
     String title5 = "title4" + getRandomNumber();
     String space = "space" + getRandomNumber();
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpaceSimple(space, space, 6000);
+    tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
     spaceHomePage.goToWikiTab();
     tribeWikiHomePage.goToAddTemplateWikiPage();
     tribeWikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_HowToGuide, title);
@@ -107,7 +107,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
     info("Delete the space");
     homePagePlatform.goToStreamPageTribe();
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.deleteSpace(space, false);
+    tribeSpaceManagement.deleteTribeSpace(space);
   }
 
   /**
@@ -134,7 +134,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
     String title = "title1" + getRandomNumber();
     String space = "space" + getRandomNumber();
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpaceSimple(space, space, 6000);
+    tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
     spaceHomePage.goToWikiTab();
     tribeWikiHomePage.goToAddTemplateWikiPage();
     tribeWikiManagement.addSimpleWikiPageByTemplate(template, title);
@@ -142,7 +142,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
     tribeWikiHomePage.deleteWiki(title);
     info("Test 10: Delete data");
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.deleteSpace(space, false);
+    tribeSpaceManagement.deleteTribeSpace(space);
   }
 
 }

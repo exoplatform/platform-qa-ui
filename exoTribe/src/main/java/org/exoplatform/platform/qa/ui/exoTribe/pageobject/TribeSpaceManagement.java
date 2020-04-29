@@ -63,6 +63,17 @@ public class TribeSpaceManagement {
     }
   }
 
+
+  public void deleteTribeSpace(String spaceName) {
+      info("Do delete space");
+      searchSpace(spaceName);
+      $(ELEMENT_TRIBE_MANAGE_SPACE_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+      $(ELEMENT_TRIBE_REMOVE_SPACE_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+      $(ELEMENT_TRIBE_REMOVE_SPACE_OK_BUTTON).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+      ELEMENT_NO_SPACES_LIST.waitUntil(Condition.exist,500000);
+
+  }
+
   /**
    * Leave a space
    *
@@ -98,7 +109,7 @@ public class TribeSpaceManagement {
    * @param groups
    * @param params
    */
-  public void addNewSpace(String name, String desc, String access, String hidden, String groups, int... params) {
+  public void addNewSpace(String name, String desc, String access, String hidden, ArrayList<String> groups, int... params) {
     if ($(ELEMENT_ADDNEWSPACE_SECOND_TRIBE_BUTTON).waitUntil(Condition.visible, Configuration.timeout) != null) {
       $(ELEMENT_ADDNEWSPACE_SECOND_TRIBE_BUTTON).click();
     }
@@ -124,8 +135,6 @@ public class TribeSpaceManagement {
       info("Select a permission for space:" + access);
 
       if(access=="Open"){
-        evt.check(byXpath("//*[@class='v-input--selection-controls__input']/input[@type='checkbox' and @aria-checked='false']"), 2);
-
         evt.check(byXpath("//input[@value='open']"));
       }
 
@@ -141,15 +150,16 @@ public class TribeSpaceManagement {
 
     $(byXpath("(//*[@class='layout column']//*[@class='v-btn__content' and contains(text(),'Continue')])[2]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_INVITE_USERS_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
-    if (!groups.isEmpty()) {
-
-      ELEMENT_SPACE_INPUT_USER_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-      ELEMENT_SPACE_INPUT_USER_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(groups);
-      $(byXpath("//*[@class='v-list-item__title text-truncate identitySuggestionMenuItemText' and contains(text(),'${group}')]".replace("${group}", groups))).click();
+    if (groups!= null) {
+      for (int i = 0; i < groups.size(); i++) {
+        ELEMENT_SPACE_INPUT_USER_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+        ELEMENT_SPACE_INPUT_USER_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(groups.get(i));
+        $(byXpath("//*[@class='v-list-item__title text-truncate identitySuggestionMenuItemText' and contains(text(),'${group}')]".replace("${group}", groups.get(i)))).click();
+        }
     }
     info("Save all changes");
     ELEMENT_CREATE_SPACE_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    $(byXpath("//*[@class='spaceMenuNavHeader']/h3[contains(text(),'${spaceName}')]".replace("${spaceName}",name))).waitUntil(Condition.visible,40000);
+    $(byXpath("//*[@class='spaceMenuNavHeader']/h3[contains(text(),'${spaceName}')]".replace("${spaceName}",name))).waitUntil(Condition.visible,60000);
   }
 
 
@@ -480,18 +490,17 @@ public class TribeSpaceManagement {
    */
   public void searchSpace(String name, String... number) {
     info("Waiting my space is shown");
-    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout);
+    ELEMENT_SPACES_TRIBE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout);
     info("Input the space into search text box");
-    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
-    info("evt.click on Search button");
-    $(ELEMENT_MY_SPACE_SEARCH_BTN).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_SPACES_TRIBE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).clear();
+    ELEMENT_SPACES_TRIBE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
   }
 
   /**
    * Access to the searched space
    */
   public void accessToSearchedSpace() {
-    ELEMENT_SEARCHED_SPACE.waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_SEARCHED_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.timeout).click();
   }
 
   /**
