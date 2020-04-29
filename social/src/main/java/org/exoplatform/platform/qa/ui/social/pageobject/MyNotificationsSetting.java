@@ -504,7 +504,7 @@ public class MyNotificationsSetting {
         break;
       case Space_Join_Req_intranet:
         $(ELEMENT_EDIT_REQJOIN_SPACE_ICON).waitUntil(Condition.visible, Configuration.timeout).click();
-        $(ELEMENT_EDIT_REQJOIN_SPACE_ICON).waitUntil(not(Condition.visible), Configuration.timeout);
+        $(ELEMENT_EDIT_REQJOIN_SPACE_ICON).waitUntil(not(Condition.visible), Configuration.openBrowserTimeoutMs);
         if ($(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX).is(not(Condition.selected))) {
           $(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX).parent().click();
         }

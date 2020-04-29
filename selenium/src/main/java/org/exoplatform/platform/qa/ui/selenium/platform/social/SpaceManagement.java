@@ -10,7 +10,10 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -18,6 +21,8 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_MY_PROFILE_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOPBAR_AVATAR;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.ELEMENT_COMMENT_EDIT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_QUICK_INPUT_EVENT_FROM_DATE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_QUICK_INPUT_EVENT_TO_DATE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CHAT_ICON_STATUS;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ADDNEWSPACE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
@@ -177,13 +182,13 @@ public class SpaceManagement {
 
     if (oneUser != null) {
       $(ELEMENT_SPACE_MEMBERS).waitUntil(Condition.visible, Configuration.timeout).click();
-      final String assignOrRemoveManagerRole = "(//table[@class='uiGrid table  table-hover table-striped']//th[3]/following::tr[@id='existingUsersTable']/td[text()='${user}']/following::div[@class='uiSwitchBtn'])[1]";
+      final String assignOrRemoveManagerRole = "(//table[@class='uiGrid table  table-hover table-striped']//th[3]/following::tr[@id='existingUsersTable']/td[contains(text(),'${user}')]/following::div[@class='uiSwitchBtn'])[1]";
       $(byXpath(assignOrRemoveManagerRole.replace("${user}", oneUser))).waitUntil(Condition.visible, Configuration.timeout).click();
     }
     if (manyUsers != null) {
       $(ELEMENT_SPACE_MEMBERS).waitUntil(Condition.visible, Configuration.timeout).click();
 
-      final String assignOrRemoveManagerRole = "(//table[@class='uiGrid table  table-hover table-striped']//th[3]/following::tr[@id='existingUsersTable']/td[text()='${user}']/following::div[@class='uiSwitchBtn'])[1]";
+      final String assignOrRemoveManagerRole = "(//table[@class='uiGrid table  table-hover table-striped']//th[3]/following::tr[@id='existingUsersTable']/td[contains(text(),'${user}')]/following::div[@class='uiSwitchBtn'])[1]";
       $(byXpath(assignOrRemoveManagerRole.replace("${user}", manyUsers.get(0)))).waitUntil(Condition.visible, Configuration.timeout).click();
       $(byXpath(assignOrRemoveManagerRole.replace("${user}", manyUsers.get(2)))).waitUntil(Condition.visible, Configuration.timeout).click();
     }
@@ -282,10 +287,10 @@ public class SpaceManagement {
   /**
    * Check Space Description and Space Manager Name
    */
-  public void checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(String spaceDesa, String oneManagerName, ArrayList<String> managersNames, String space, String titleEvent, String dateEvent, String toolTips) {
+  public void checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(String spaceDesa, String oneManagerName, ArrayList<String> managersNames, String space, String titleEvent, String dateEvent, String toolTips) throws ParseException {
     if (spaceDesa != null) {
       info("Space Description is : " + spaceDesa);
-      ELEMENT_SPACE_DESCRIPTION.waitUntil(Condition.visible, Configuration.timeout);
+      ELEMENT_SPACE_DESCRIPTION.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
       assertEquals(spaceDesa, ELEMENT_SPACE_DESCRIPTION.getText());
     }
     if (oneManagerName != null) {
@@ -324,32 +329,29 @@ public class SpaceManagement {
       assertEquals(titleEvent, ELEMENT_TITLE_EVENT_NAME.getText());
     }
     if (dateEvent != null) {
-      final String[] ELEMENT_CURRENT_DATE = $(byXpath("//div[@class='currentDateContainer']/center/a")).getText().split(": ");
-      info("Created Event Month is : ");
-      assertEquals(dateEvent.substring(5, 7), ELEMENT_CURRENT_DATE[1].substring(0, 2));
-      info("Created Event day is : ");
-      if (dateEvent.length()==18) {
-        if($(byXpath("//center//*[contains(text(),'Yesterday')]")).isDisplayed()) {
-          assertEquals(dateEvent.substring(9, 10), ELEMENT_CURRENT_DATE[1].substring(3, 4));
-          info("Created Event Year is : ");
-          assertEquals(dateEvent.substring(0, 4), ELEMENT_CURRENT_DATE[1].substring(5, 9));
-        }
-          else{
-            assertEquals(dateEvent.substring(9, 10), ELEMENT_CURRENT_DATE[1].substring(3, 4));
-            info("Created Event Year is : ");
-            assertEquals(dateEvent.substring(0, 4), ELEMENT_CURRENT_DATE[1].substring(6, 10));
-        }
-      } else {
-        if($(byXpath("//center//*[contains(text(),'Yesterday')]")).isDisplayed()) {
-          assertEquals(dateEvent.substring(8, 10), ELEMENT_CURRENT_DATE[1].substring(3, 5));
-          info("Created Event Year is : ");
-          assertEquals(dateEvent.substring(0, 4), ELEMENT_CURRENT_DATE[1].substring(6, 10));
-        }
-        else{
-          assertEquals(dateEvent.substring(8, 10), ELEMENT_CURRENT_DATE[1].substring(3, 5));
-          info("Created Event Year is : ");
-          assertEquals(dateEvent.substring(0, 4), ELEMENT_CURRENT_DATE[1].substring(6, 10));
-        }
+
+      final String NEW_FORMAT = "MM/dd/yyyy";
+      final String OLD_FORMAT = "yyyy/MM/dd";
+
+      String dateEventReverse;
+
+      SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
+      Date d = sdf.parse(dateEvent);
+      sdf.applyPattern(NEW_FORMAT);
+      dateEventReverse = sdf.format(d);
+
+      final String ELEMENT_CURRENT_DATE = $(byXpath("//div[@class='currentDateContainer']/center/a")).getText().split(": ")[1];
+
+      info("Date" + dateEventReverse);
+
+      if (dateEventReverse.charAt(0) == '0' && dateEventReverse.charAt(3)!='0') {
+        assertEquals(dateEventReverse, "0" + (ELEMENT_CURRENT_DATE));
+      }
+      else if (dateEventReverse.charAt(0) == '0' && dateEventReverse.charAt(3)=='0'){
+        assertEquals(dateEventReverse, "0" + (ELEMENT_CURRENT_DATE).substring(0,2) + "0" + (ELEMENT_CURRENT_DATE).substring(2,8));
+      }
+      else {
+        assertEquals(dateEventReverse, (ELEMENT_CURRENT_DATE));
       }
 
     }

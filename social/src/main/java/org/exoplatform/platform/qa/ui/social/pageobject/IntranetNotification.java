@@ -121,10 +121,10 @@ public class IntranetNotification {
       info("Retry...[" + repeat + "]");
       if (isPopup) {
         info("View detail notification when joined new space from the popup");
-        $(byXpath(ELEMENT_NOTIFICATION_POPUP_JOIN_SPACE.replace("$name", fullName))).click();
+        $(byXpath(ELEMENT_NOTIFICATION_POPUP_JOIN_SPACE.replace("$name", fullName))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       } else {
         info("View detail notification when joined new space from all notification page");
-        $(byXpath(ELEMENT_NOTIFICATION_ALL_PAGE_JOIN_SPACE.replace("$name", fullName))).click();
+        $(byXpath(ELEMENT_NOTIFICATION_ALL_PAGE_JOIN_SPACE.replace("$name", fullName))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       }
 
     }
@@ -256,7 +256,7 @@ public class IntranetNotification {
    */
   public void checkStatusSpace(String status, String space) {
     info("Verify that the status is shown");
-    $(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS_SPACE.replace("$status", status).replace("$space", space))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_INTRANET_NOTIFICATION_STATUS_SPACE.replace("$status", status).replace("$space", space))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
   }
 
   public void checkNotStatusSpace(String status, String space) {

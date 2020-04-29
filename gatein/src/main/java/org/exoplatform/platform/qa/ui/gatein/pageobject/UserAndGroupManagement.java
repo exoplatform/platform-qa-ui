@@ -70,8 +70,8 @@ public class UserAndGroupManagement {
    */
   public void goToGroupTab() {
     info("-- Choose Group Management tab--");
-    ELEMENT_GROUP_TAB.click();
-    ELEMENT_TITLE_GROUP_INFO.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_GROUP_TAB.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TITLE_GROUP_INFO.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
   }
 
   /**
@@ -118,18 +118,18 @@ public class UserAndGroupManagement {
     info("Select Platform/administration group");
     selectGroup("Platform/Administration");
     info("Add user to administration group by type");
-    homePagePlatform.refreshUntil($(ELEMENT_INPUT_USERNAME),Condition.visible,1000);
+    homePagePlatform.refreshUntil($(ELEMENT_INPUT_USERNAME),Condition.visible,2000);
     if (membership.length > 0)
       $(byXpath(ELEMENT_SELECT_MEMBERSHIP)).selectOptionByValue(membership[0]);
-    $(ELEMENT_INPUT_USERNAME).setValue(user);
-    homePagePlatform.refreshUntil($(ELEMENT_SAVE_BUTTON_2),Condition.visible,1000);
-    $(ELEMENT_SAVE_BUTTON_2).click();
-    homePagePlatform.refreshUntil($(ELEMENT_SAVE_BUTTON_2),Condition.visible,1000);
+    $(ELEMENT_INPUT_USERNAME).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(user);
+    homePagePlatform.refreshUntil($(ELEMENT_SAVE_BUTTON_2),Condition.visible,2000);
+    $(ELEMENT_SAVE_BUTTON_2).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    homePagePlatform.refreshUntil($(ELEMENT_SAVE_BUTTON_2),Condition.visible,2000);
     String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace("${username}", user);
     if ($(ELEMENT_MSG_TOTAL_PAGES).is(Condition.visible)) {
       plfBase.usePaginator(addedUser, ELEMENT_USER_NOT_FOUND.replace("${user}", user));
     } else {
-     $(byXpath(addedUser)).waitUntil(Condition.visible,Configuration.timeout);
+     $(byXpath(addedUser)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     }
     info("User is added to administration group");
   }
