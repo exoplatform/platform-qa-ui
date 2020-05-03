@@ -6,6 +6,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byId;
@@ -36,26 +37,27 @@ public class TasksManagement {
   public void addTask(String taskContent) {
 
     ELEMENT_BUTTON_ADD_TASK.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_INPUT_TASK_TITLE.waitUntil(Condition.visible, Configuration.timeout).setValue(taskContent).pressEnter();
-    ELEMENT_TASK_FORM.waitUntil(Condition.appears, Configuration.timeout);
-    $(byText(taskContent)).waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_INPUT_TASK_TITLE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(taskContent).pressEnter();
+    ELEMENT_TASK_FORM.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    $(byText(taskContent)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
   }
 
   public void editTask(String taskContent, String newTask, String priority) {
-    ELEMENT_TASKS_LIST.find(byText(taskContent)).click();
-    ELEMENT_TASK_FORM.waitUntil(Condition.appears, Configuration.timeout);
-    ELEMENT_TASK_FORM.find(byText(taskContent)).click();
-    ELEMENT_TASK_FORM_INPUT_TITLE.setValue(newTask);
-    ELEMENT_TASK_FORM_PRIORITY.waitUntil(Condition.visible, Configuration.timeout).click();
-    ELEMENT_TASK_SELECT_PRIORITY.waitUntil(Condition.appears, Configuration.timeout).selectOption(priority);
+    ELEMENT_TASKS_LIST.find(byText(taskContent)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TASK_FORM.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    ELEMENT_TASK_FORM.find(byText(taskContent)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TASK_FORM_INPUT_TITLE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(newTask);
+    sleep(3000);
+    ELEMENT_TASK_FORM_PRIORITY.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TASK_SELECT_PRIORITY.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).selectOption(priority);
   }
 
   public void deleteTask(String taskContent) {
-    ELEMENT_TASKS_LIST.find(byText(taskContent)).click();
-    ELEMENT_TASK_FORM.waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_TASK_FORM_ICOND_DROP_DOWN_MENU.click();
-    ELEMENT_TASK_BUTTON_DELETE.click();
-    ELEMENT_TASK_BUTTON_DELETE_OK.click();
+    ELEMENT_TASKS_LIST.find(byText(taskContent)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TASK_FORM.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    ELEMENT_TASK_FORM_ICOND_DROP_DOWN_MENU.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TASK_BUTTON_DELETE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TASK_BUTTON_DELETE_OK.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     $(byText(taskContent)).should(Condition.exist);
   }
 

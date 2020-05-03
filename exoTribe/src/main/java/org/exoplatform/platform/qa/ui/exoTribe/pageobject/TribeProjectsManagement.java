@@ -7,7 +7,7 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_POPUB_TRIBE_EDIT_PROJECT;
@@ -69,23 +69,23 @@ public class TribeProjectsManagement {
    *          want to disable or uncheck calendar integration
    */
   public void editProject(String projectPath, String title, String newTitle, String des, boolean... opt) {
-    ELEMENT_LIST_PROJECT.find(byText(projectPath)).click();
-    ELEMENT_LIST_PROJECT.find(byText(projectPath)).parent().parent().find(ELEMENT_ICON_PROJECT).click();
+    ELEMENT_LIST_PROJECT.find(byText(projectPath)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_LIST_PROJECT.find(byText(projectPath)).parent().parent().find(ELEMENT_ICON_PROJECT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_LIST_PROJECT.find(byText(projectPath)).parent().parent().find(ELEMENT_EDIT_PROJECT_OPTION).click();
     if (title != null && title != "") {
       info("Input title");
-      $(ELEMENT_POPUB_TRIBE_EDIT_PROJECT).find(byText(title)).click();
+      $(ELEMENT_POPUB_TRIBE_EDIT_PROJECT).find(byText(title)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 // Input a new title with clearing an old title
-      ELEMENT_EDIT_PROJECT.setValue(newTitle).pressEnter();
+      ELEMENT_EDIT_PROJECT.setValue(newTitle).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).pressEnter();
     }
     if (des != null && des != "") {
       info("Input description");
-      $(byClassName("prjDescription")).click();
+      $(byClassName("prjDescription")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
 
     if (opt.length >= 1 && opt[0] == true) {
       info("Enable Calendar intergration");
-      ELEMETN_EDIT_PROJECT_ENABLE_CALENDAR_CHECKBOX.click();
+      ELEMETN_EDIT_PROJECT_ENABLE_CALENDAR_CHECKBOX.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     } else {
       info("Disable Calendar intergration");
       evt.uncheck(ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX, 2);
@@ -94,11 +94,13 @@ public class TribeProjectsManagement {
   }
 
   public void deleteProject(String title) {
-    $(byText(title)).click();
-    $(byText(title)).parent().parent().find(ELEMENT_ICON_PROJECT).click();
-    $(byText(title)).parent().parent().find(ELEMENT_DELETE_PROJECT_OPTION).click();
-    ELEMENT_CONFIRM_DELETE.click();
-    $(byText(title)).should(Condition.not(Condition.visible));
+    $(byText(title)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    sleep(1000);
+    $(byText(title)).parent().parent().find(ELEMENT_ICON_PROJECT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byText(title)).parent().parent().find(ELEMENT_DELETE_PROJECT_OPTION).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    executeJavaScript("window.scrollBy(0,500)");
+    ELEMENT_CONFIRM_DELETE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byText(title)).waitUntil(Condition.not(Condition.visible),Configuration.openBrowserTimeoutMs);
   }
 
   /**

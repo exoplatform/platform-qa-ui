@@ -19,8 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -82,7 +81,7 @@ public class TaskManagementTestIT extends BaseTribe {
   }
 
   @Test
-  public void test04_Add_Edit_Delete_Label() {
+  public void test02_Add_Edit_Delete_Label() {
 
     String label = "label" + getRandomNumber();
     String newLabel = "newLabel" + getRandomNumber();
@@ -106,7 +105,7 @@ public class TaskManagementTestIT extends BaseTribe {
   }
 
   @Test
-  public void test07_Add_Edit_Delete_Project() {
+  public void test03_Add_Edit_Delete_Project() {
 
     String project = "project" + getRandomNumber();
     String newProject = "newProject" + getRandomNumber();
@@ -137,10 +136,11 @@ public class TaskManagementTestIT extends BaseTribe {
     homePagePlatform.goToTasksPageTribe();
 
     tribeProjectsManagement.addProject(title, "", false);
-    $(byText(title)).click();
+    executeJavaScript("window.scrollBy(0,-20000)");
+    $(byText(title)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TITLE_OF_PROJECT.waitUntil(Condition.hasText(title), Configuration.timeout);
 
-    executeJavaScript("window.scrollBy(0,-5000)");
+    executeJavaScript("window.scrollBy(0,-20000)");
     tasksManagement.addTask(task);
     $(byText(task)).should(Condition.exist);
 
@@ -159,26 +159,27 @@ public class TaskManagementTestIT extends BaseTribe {
     homePagePlatform.goToTasksPageTribe();
 
     tribeProjectsManagement.addProject(title, "", false);
+    executeJavaScript("window.scrollBy(0,-20000)");
     $(byText(title)).click();
     ELEMENT_TITLE_OF_PROJECT.waitUntil(Condition.hasText(title),Configuration.timeout);
 
-    executeJavaScript("window.scrollBy(0,-5000)");
+    executeJavaScript("window.scrollBy(0,-20000)");
     tasksManagement.addTask(task);
 
     info("edit task");
     tasksManagement.editTask(task, newTask, "Haute");
-    $(byText(task)).shouldNot(Condition.exist);
-    $(byText(newTask)).should(Condition.exist);
+    $(byText(task)).waitUntil(Condition.not(Condition.exist),Configuration.openBrowserTimeoutMs);
+    $(byText(newTask)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
 
     info("delete task");
     tasksManagement.deleteTask(newTask);
-    $(byText(newTask)).shouldNot(Condition.exist);
+    $(byText(newTask)).waitUntil(Condition.not(Condition.exist),Configuration.openBrowserTimeoutMs);
     tribeProjectsManagement.deleteProject(title);
 
   }
 
   @Test
-  public void test04_addTaskInLabel() {
+  public void test06_addTaskInLabel() {
 
     String task = "task" + getRandomNumber();
     String label = "label" + getRandomNumber();
@@ -201,7 +202,7 @@ public class TaskManagementTestIT extends BaseTribe {
   }
 
   @Test
-  public void test04_MarkTaskAsCompleted() {
+  public void test07_MarkTaskAsCompleted() {
 
     String task = "task" + getRandomNumber();
 
@@ -218,7 +219,7 @@ public class TaskManagementTestIT extends BaseTribe {
 
   @Test
   @Tag("TA-611")
-  public void test01_commentTask_WithImage() {
+  public void test08_commentTask_WithImage() {
 
     String taskName = "task" + getRandomNumber();
 

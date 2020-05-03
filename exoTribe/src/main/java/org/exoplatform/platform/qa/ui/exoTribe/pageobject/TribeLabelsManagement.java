@@ -43,12 +43,12 @@ public class TribeLabelsManagement {
   }
 
   public void deleteLabel(String label) {
-    $(byText(label)).click();
-    $(byText(label)).parent().parent().find(ELEMENT_ICON_OPEN_MENU_LABEL).click();
-    $(byText(label)).parent().parent().find(ELEMENT_OPEN_MENU_DELETE_LABEL).click();
+    $(byText(label)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byText(label)).parent().parent().find(ELEMENT_ICON_OPEN_MENU_LABEL).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byText(label)).parent().parent().find(ELEMENT_OPEN_MENU_DELETE_LABEL).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     executeJavaScript("window.scrollBy(0,250)");
-    ELEMENT_LABEL_BUTTON_CONFIRM_DELETE.click();
-    $(byText(label)).waitUntil(Condition.disappears, Configuration.timeout);
+    ELEMENT_LABEL_BUTTON_CONFIRM_DELETE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byText(label)).waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
 
   }
 
