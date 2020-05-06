@@ -35,6 +35,15 @@ public final class NavigationToolBarLocator {
   public static final By              ELEMENT_TOOLBAR_THEMELIGHT                          =
                                                                  By.xpath("(//div[@class=\"UIContainer UIToolbarContainer UIToolbarContainerLight  \"])[1]");
 
+  public static final SelenideElement ELEMENT_TOP_TOOLBAR_PORTLET                         = $("#UIToolbarContainer");
+
+
+  public static final SelenideElement ELEMENT_TOP_TOOLBAR_MENU_USER                       = ELEMENT_TOP_TOOLBAR_PORTLET.find("#UIUserPlatformToolBarPortlet");
+
+
+  public static final SelenideElement ELEMENT_TOP_TOOLBAR_MENU_USER_LOGOUT                = $(byXpath("//*[@class='uiIconPLFLogout']"));
+
+
   public static final By              ELEMENT_TOOLBAR_THEMEDARK                          =
                                                                  By.xpath("(//div[@class=\"UIContainer UIToolbarContainer UIToolbarContainerDark  \"])[1]");
 
@@ -107,7 +116,7 @@ public final class NavigationToolBarLocator {
                                                                By.xpath("//*[contains(text(),'Edit Layout')]");
 
   public static final By              ELEMENT_MENU_SEO_LINK                               =
-                                                            By.xpath("//span[contains(text(), 'SEO')]");
+                                                            By.xpath("//*[@class='SEOToolbar']");
 
   public static final By              ELEMENT_MENU_ADD_PAGE_LINK                          =
                                                                  By.xpath("//*[contains(text(), 'Add Page')]");

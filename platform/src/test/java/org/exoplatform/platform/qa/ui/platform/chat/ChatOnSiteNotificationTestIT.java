@@ -264,7 +264,6 @@ public class ChatOnSiteNotificationTestIT extends Base {
         manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
         homePagePlatform.goToChat();
         switchTo().window(1);
-        refresh();
         ELEMENT_CHAT_SETTING_NOTIFICATION.waitUntil(Condition.visible,Configuration.timeout).click();
         sleep(Configuration.timeout);
         ELEMENT_CHAT_DO_NOT_DISTURB_BUTTON_NOTIFICATION.parent().waitUntil(Condition.visible,Configuration.timeout);
@@ -285,7 +284,6 @@ public class ChatOnSiteNotificationTestIT extends Base {
         manageLogInOut.signInCas(PLFData.DATA_USER1,PLFData.DATA_PASS2);
         homePagePlatform.goToChat();
         switchTo().window(1);
-        refresh();
         ELEMENT_CHAT_SETTING_NOTIFICATION.waitUntil(Condition.visible,Configuration.timeout).click();
         sleep(Configuration.timeout);
         assertEquals("OFF",ELEMENT_CHAT_DESKTOP_NOTIFICATION_STATUS.getText());

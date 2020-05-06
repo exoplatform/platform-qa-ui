@@ -2,8 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.calendar;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.captureScreen;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.*;
@@ -777,6 +776,7 @@ public class CalendarEventRecurringTestIT extends Base {
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.MONTH);
     $(byXpath(ELEMENT_EVENT_TASK_DETAIL_DATE_MONTH_VIEW.replace("$name", titleEvent).replace("$date",
                                                                                              getDate(0, "MMM dd yyyy")))).waitUntil(Condition.visible,Configuration.timeout).hover();
+    sleep(1000);
     $(ELEMENT_TITLE_RECURRING_EVENT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_DATE_TIME_RECURRING_EVENT).waitUntil(Condition.visible, Configuration.timeout);
     $(ELEMENT_RECURRING_TEXT_RECURRING_EVENT).waitUntil(Condition.visible, Configuration.timeout);

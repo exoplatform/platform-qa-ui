@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.calendar;
 
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -241,6 +240,7 @@ public class CalendarViewTestIT extends Base {
                                               getDate(0, defaultFormatDate),
                                               true);
     eventManagement.saveQuickAddEvent();
+    sleep(1000);
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventNext,
                                               content,
@@ -248,6 +248,7 @@ public class CalendarViewTestIT extends Base {
                                               getDate(1, defaultFormatDate),
                                               true);
     eventManagement.saveQuickAddEvent();
+    sleep(1000);
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventPre,
                                               content,
@@ -523,6 +524,7 @@ public class CalendarViewTestIT extends Base {
                                               getDate(0, defaultFormatDate),
                                               true);
     eventManagement.saveQuickAddEvent();
+    sleep(1000);
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventNext,
                                               content,
@@ -530,6 +532,7 @@ public class CalendarViewTestIT extends Base {
                                               getDate(1, defaultFormatDate),
                                               true);
     eventManagement.saveQuickAddEvent();
+    sleep(1000);
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventPre,
                                               content,
@@ -827,7 +830,7 @@ public class CalendarViewTestIT extends Base {
                                               null,
                                               "Meeting");
     eventManagement.saveQuickAddEvent();
-
+    sleep(1000);
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCall,
                                               content,
@@ -837,7 +840,7 @@ public class CalendarViewTestIT extends Base {
                                               null,
                                               "Calls");
     eventManagement.saveQuickAddEvent();
-
+    sleep(1000);
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventClient,
                                               content,
@@ -847,7 +850,7 @@ public class CalendarViewTestIT extends Base {
                                               null,
                                               "Clients");
     eventManagement.saveQuickAddEvent();
-
+    sleep(1000);
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventHoliday,
                                               content,
@@ -857,7 +860,7 @@ public class CalendarViewTestIT extends Base {
                                               null,
                                               "Holiday");
     eventManagement.saveQuickAddEvent();
-
+    sleep(1000);
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventAnni,
                                               content,

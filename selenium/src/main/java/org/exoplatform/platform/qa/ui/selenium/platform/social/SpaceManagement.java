@@ -82,11 +82,10 @@ public class SpaceManagement {
   public void addNewSpaceSimple(String name, String desc, int... params) {
     ELEMENT_ADDNEWSPACE_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SPACE_NAME_INPUT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
-    ELEMENT_SPACE_DESCRIPTION_INPUT.waitUntil(Condition.visible, Configuration.timeout).setValue(desc);
+    ELEMENT_SPACE_DESCRIPTION_INPUT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(desc);
     info("Save all changes");
-    ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(Configuration.timeout);
-    ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
+    ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENET_SPACE_CREATE_BUTTON.waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout);
   }
 
   /**
