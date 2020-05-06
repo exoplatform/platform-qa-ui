@@ -160,6 +160,7 @@ public class ChatManageMessageTestIT extends Base {
       $(byXpath("//*[@class='profileMenuNav']//*[@class='uiIconBannerChat']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     refresh();
     $(byXpath("//*[@class='profileMenuNavHeader']//*[@class='uiIconBannerChat']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
+    $(byXpath("//*[@class='uiIconChatPopOut']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
     chatManagement.uploadFile("testavatar.png");
     sleep(Configuration.timeout);
     info("upload file in space chat");

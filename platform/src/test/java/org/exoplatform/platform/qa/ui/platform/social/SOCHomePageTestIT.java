@@ -732,7 +732,7 @@ public class SOCHomePageTestIT extends Base {
     homePagePlatform.goToHomePage();
     ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_BOX_ACTIVITY).get(0).find(byText(content3)).should(Condition.exist);
     ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_BOX_ACTIVITY).get(1).find(byText(name2)).should(Condition.exist);
-    Assert.assertEquals($(byXpath("//a[@class='linkTitle']")).getText(), name);
+    ELEMENT_ACTIVITY_STREAM_CONTAINER.findAll(ELEMENT_BOX_ACTIVITY).get(2).find(byText(name)).should(Condition.exist);
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.deleteData(name);
     siteExplorerHome.deleteData(name2);
