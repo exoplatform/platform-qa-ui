@@ -444,6 +444,7 @@ public class SOCActivityEditTestIT extends Base {
     homePagePlatform.refreshUntil(ELEMENT_ACTIVITY_INPUT_TEXT, Condition.visible, 2000);
     activityStream.mentionUserActivity(usertest, activity1);
     activityStream.editActivity(activity1, newactivity);
+    getExoWebDriver().getWebDriver().navigate().refresh();
     $(byText(activity1 + newactivity)).parent()
                                       .shouldHave(Condition.text(usertest + " " + usertest + " " + activity1 + newactivity));
     navigationToolbar.goToManageCommunity();
