@@ -110,7 +110,7 @@ public class EcmsSECollaborationTestIT extends Base {
   }
 
   @Test
-  public void test03_EditTagThenComment() {
+  public void test02_EditTagThenComment() {
     info("Edit Comment");
     info("Get data test");
     String title = "title" + getRandomNumber();

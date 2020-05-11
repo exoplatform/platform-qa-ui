@@ -41,7 +41,7 @@ public class ECMSManageProjectTestIT extends Base {
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
   }
   @Test
-  public void test06_AddRenameDeleteFolderInIconsView() {
+  public void test01_AddRenameDeleteFolderInIconsView() {
     String folder = "folder" + getRandomNumber();
     String folder1 = "folder" + getRandomNumber();
     String newfolder = "newfolder" + getRandomNumber();
@@ -69,7 +69,7 @@ public class ECMSManageProjectTestIT extends Base {
   }
   @Test
   @Tag("ECMS-7763")
-  public void test09_UploadDeleteFileThenCheckSubContentDisplayedWhenClickingPlusIconThenCloseButtonFunctionalityBrowsingPreference() {
+  public void test02_UploadDeleteFileThenCheckSubContentDisplayedWhenClickingPlusIconThenCloseButtonFunctionalityBrowsingPreference() {
     //8352
     info("test09 delete File");
     homePagePlatform.goToDocuments();
@@ -96,5 +96,7 @@ public class ECMSManageProjectTestIT extends Base {
     homePagePlatform.goToDocuments();
     siteExplorerHome.closeSettingsDriver();
     $(byXpath("//span[text()='Documents Browsing Preferences']")).shouldNot(Condition.visible);
+
   }
+
 }

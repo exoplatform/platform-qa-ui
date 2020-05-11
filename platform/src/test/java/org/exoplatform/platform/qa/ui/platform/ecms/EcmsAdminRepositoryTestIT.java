@@ -5,7 +5,6 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.junit.jupiter.api.BeforeEach;
@@ -56,7 +55,7 @@ public class EcmsAdminRepositoryTestIT extends Base {
   }
 
   @Test
-  public void test05_ManageLock() {
+  public void test01_ManageLock() {
     info("Test 5: Manage lock");
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();
@@ -84,7 +83,7 @@ public class EcmsAdminRepositoryTestIT extends Base {
   }
 
   @Test
-  public void test01_AddViewUnlockANode() {
+  public void test02_AddViewUnlockANode() {
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();
     String name = "name" + getRandomNumber();

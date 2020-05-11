@@ -183,6 +183,7 @@ public class NavigationToolbar {
    */
   public void goToSiteExplorer() {
     info("-- Go to site explorer home page --");
+    sleep(1000);
     if (testBase.getExoWebDriver().isIEDriver()) {
       $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs + Configuration.timeout);
       $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
@@ -214,9 +215,8 @@ public class NavigationToolbar {
    */
   public void goToEditContent() {
     info("Go to Edit content");
-    $(ELEMENT_LINK_EDIT).waitUntil(Condition.appears, Configuration.timeout);
-    $(ELEMENT_LINK_EDIT).click();
-    $(ELEMENT_EDIT_CONTENT).click();
+    $(ELEMENT_LINK_EDIT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_EDIT_CONTENT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**

@@ -41,7 +41,7 @@ public class EcmsAdminExplorerTestIT extends Base {
   }
 
   @Test
-  public void test02_AddEditDelete_DriveThenViewThenTag() {
+  public void test01_AddEditDelete_DriveThenViewThenTag() {
     info("Get data test");
     String title = "title" + getRandomNumber();
     String permission = "any";

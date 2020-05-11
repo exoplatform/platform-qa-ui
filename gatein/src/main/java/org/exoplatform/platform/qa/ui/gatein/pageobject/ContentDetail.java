@@ -32,11 +32,11 @@ public class ContentDetail {
     $(byClassName("uiIconAddPath")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     String[] arrayPath = path.split("/");
     for (String arrayElement : arrayPath) {
-      $(byId("LeftWorkspace")).find(byText(arrayElement)).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(byId("LeftWorkspace")).find(byText(arrayElement)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
     sleep(Configuration.timeout);
     if (content != "" || content != null) {
-      $(byXpath(ELEMENT_SELECT_CONTENT_POPUP_FILE.replace("${content}", content))).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(byXpath(ELEMENT_SELECT_CONTENT_POPUP_FILE.replace("${content}", content))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
   }
 

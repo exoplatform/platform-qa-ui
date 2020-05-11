@@ -52,24 +52,18 @@ public class EcmsSEAdminTestIT extends Base {
     manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
   }
 
-  /**
-   * By QuynhPT
-   * <li>Case ID:116656</li>
-   * <li>Test Case Name: Add Relation</li> Precondition: If Relations is not
-   * available on action bar, go to Content Administration/ Manage View and edit
-   * your current view in use with Relation option ticked Step Number: 1 Step
-   * Description: Step 1: Add Relation Input Data: - Add Relation - Select a node
-   * - Click on Relations icon in the action bar - Go to Select Relation tab -
-   * Select document to add relation for document/uploaded file Expected Outcome:
-   * - A relation is added for a node.
-   */
+
   @Test
   @Tag("eabis")
-  public void test01_AddRelation() {
-    info("Test 1: Add Relation");
+  public void test01_Add_Delete_Relation() {
+
+    info("Add Relation");
     info("Create data test");
     String node1 = "node1" + getRandomNumber();
     String node2 = "node2" + getRandomNumber();
+    String node3 = "node3" + getRandomNumber();
+    String property = "exo:summary";
+
     info("Finished data test");
     // Declare a string array
     String[] nameContent = { node1 };
@@ -77,7 +71,6 @@ public class EcmsSEAdminTestIT extends Base {
     info("Create content 1");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
-    sleep(Configuration.timeout);
     $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.timeout).click();
     siteExplorerHome.goToAddNewContent();
     createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
@@ -85,113 +78,26 @@ public class EcmsSEAdminTestIT extends Base {
     createNewDocument.saveAndClose();
 
     siteExplorerHome.selectNode("documents");
-
-    info("Create content 2");
+    info("Create content 3");
     siteExplorerHome.goToAddNewContent();
     createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
-    createNewDocument.addNewFile(node2, node2);
+    createNewDocument.addNewFile(node3, node3);
     createNewDocument.saveAndClose();
-    siteExplorerHome.selectNode(node2);
+    siteExplorerHome.selectNode(node3);
     info("Click on More link ");
     executeJavaScript("window.scrollBy(0,-5500)", "");
-    $(byClassName("uiIconEcmsViewAdmin")).click();
-    $(ELEMENT_ACTIONBAR_MORE).click();
-    info("Add relation");
-    siteExplorerHome.goToManageRelation();
-    siteExplorerHome.addRelation(nameContent, "sites/intranet/documents");
-    siteExplorerHome.closeAddRelationPopup();
-
-    info("Select relation tab of SE");
-    siteExplorerHome.goToRelationSideBar();
-    $(byXpath(ELEMENT_SIDE_BAR_RELATION_TAB_FILE_TITLE.replace("${nameContent}", node1))).waitUntil(Condition.visible,
-                                                                                                    Configuration.timeout);
-    $(byXpath(ELEMENT_SIDE_BAR_RELATION_TAB_FILE_TITLE.replace("${nameContent}", node1))).click();
-
-    info("Verify the file in reference section");
-    $(byXpath(ELEMENT_SIDE_BAR_RELATION_TAB_FILE_TITLE.replace("${nameContent}", node2))).waitUntil(Condition.visible,
-                                                                                                    Configuration.timeout);
-
-    info("Delete all data test");
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData(node1);
-    siteExplorerHome.deleteData(node2);
-  }
-
-  /**
-   * By QuynhPT
-   * <li>Case ID:116657.</li>
-   * <li>Test Case Name: Delete Relation</li>
-   */
-
-  @Test
-  @Tag("eabis")
-  public void test02_DeleteRelation() {
-    info("Test 02: Delete Relation");
-
-    info("Create data test");
-    String node1 = "node1" + getRandomNumber();
-    String node2 = "node2" + getRandomNumber();
-    info("Finished data test");
-    // Declare a string array
-    String[] nameContent = { node1 };
-
-    info("Create content 1");
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
-    sleep(Configuration.timeout);
-    $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.timeout).click();
-    siteExplorerHome.goToAddNewContent();
-    createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
-    createNewDocument.addNewFile(node1, node1);
-    createNewDocument.saveAndClose();
-
-    siteExplorerHome.selectNode("documents");
-
-    info("Create content 2");
-    siteExplorerHome.goToAddNewContent();
-    createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
-    createNewDocument.addNewFile(node2, node2);
-    createNewDocument.saveAndClose();
-    siteExplorerHome.selectNode(node2);
-    info("Click on More link ");
-    executeJavaScript("window.scrollBy(0,-5500)", "");
-    sleep(Configuration.timeout);
     $(byClassName("uiIconEcmsViewAdmin")).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.timeout);
     $(ELEMENT_ACTIONBAR_MORE).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.timeout);
     info("Add relation");
     siteExplorerHome.goToManageRelation();
     siteExplorerHome.addRelation(nameContent, "sites/intranet/documents");
+    info("Delete Relation");
     siteExplorerHome.deleteRelation(node1.toLowerCase());
     siteExplorerHome.closeAddRelationPopup();
     // Check Relation on left of sideBar
     siteExplorerHome.goToRelationSideBar();
     $(byXpath(ELEMENT_SIDE_BAR_RELATION_TAB_FILE_TITLE.replace("${nameContent}", node1))).shouldNot(Condition.exist);
-    info("Delete all data test");
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData(node1);
-    siteExplorerHome.deleteData(node2);
 
-  }
-
-  /**
-   * <li>Case ID:116596.</li>
-   * <li>Test Case Name: Show/ Hide Relation</li>
-   */
-  @Test
-  @Tag("eabis")
-  public void test03_ShowHideRelation() {
-    info("Test 3: Show/Hide Relation");
-    info("Create data test");
-    String node1 = "node1" + getRandomNumber();
-    String node2 = "node2" + getRandomNumber();
-    info("Finished data test");
-    // Declare a string array
-    String[] nameContent = { node1 };
-    info("Create content 1");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("sites/intranet/documents", "Collaboration");
     sleep(Configuration.timeout);
@@ -200,7 +106,9 @@ public class EcmsSEAdminTestIT extends Base {
     createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
     createNewDocument.addNewFile(node1, node1);
     createNewDocument.saveAndClose();
+
     siteExplorerHome.selectNode("documents");
+
     info("Create content 2");
     siteExplorerHome.goToAddNewContent();
     createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
@@ -215,18 +123,35 @@ public class EcmsSEAdminTestIT extends Base {
     siteExplorerHome.goToManageRelation();
     siteExplorerHome.addRelation(nameContent, "sites/intranet/documents");
     siteExplorerHome.closeAddRelationPopup();
+
+    info("Show/Hide Relation");
     // Show relation
     siteExplorerHome.goToRelationSideBar();
     $(byXpath(ELEMENT_SIDE_BAR_RELATION_TAB_FILE_TITLE.replace("${nameContent}", node1))).waitUntil(Condition.visible,
-                                                                                                    Configuration.timeout);
+            Configuration.timeout);
     // Hide relation
+    executeJavaScript("window.scrollBy(0,-2000)", "");
     $(byClassName("uiIconEcmsViewWeb")).click();
     $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).click();
+
+    info("Select relation tab of SE");
+    siteExplorerHome.goToRelationSideBar();
+    $(byXpath(ELEMENT_SIDE_BAR_RELATION_TAB_FILE_TITLE.replace("${nameContent}", node1))).waitUntil(Condition.visible,
+            Configuration.timeout);
+    executeJavaScript("window.scrollBy(0,-5500)", "");
+    $(byXpath(ELEMENT_SIDE_BAR_RELATION_TAB_FILE_TITLE.replace("${nameContent}", node1))).click();
+
+    info("Verify the file in reference section");
+    $(byXpath(ELEMENT_SIDE_BAR_RELATION_TAB_FILE_TITLE.replace("${nameContent}", node2))).waitUntil(Condition.visible,
+            Configuration.timeout);
+
     info("Delete all data test");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     siteExplorerHome.deleteData(node1);
     siteExplorerHome.deleteData(node2);
+    siteExplorerHome.deleteData(node3);
+
   }
 
   /**
@@ -240,7 +165,7 @@ public class EcmsSEAdminTestIT extends Base {
    */
   @Test
   @Tag("eabis")
-  public void test04_ExportANode() {
+  public void test02_ExportANode() {
     info("Test 4: Export a Node");
     info("Create data test");
     String node1 = "node1" + getRandomNumber();
@@ -288,7 +213,7 @@ public class EcmsSEAdminTestIT extends Base {
 
   @Test
   @Tag("eabis")
-  public void test05_ImportNode() {
+  public void test03_ImportNode() {
     info("Test 5: Import a Node");
     info("Create data test");
     String node2 = "node2" + getRandomNumber();
@@ -338,21 +263,13 @@ public class EcmsSEAdminTestIT extends Base {
     $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).click();
   }
 
-  /**
-   * <li>Case ID:116584.</li>
-   * <li>Test Case Name: Add Category.</li> Step Number: 1 Step Name:Add Category
-   * Step Description: - Add category for node - Select a document/Uploaded file -
-   * Click on Categories icon in the action bar - Select category to add for
-   * document/Uploaded file Expected Outcome: - Category added for
-   * Document/uploaded file
-   */
   @Test
   @Tag("eabis")
-  public void test06_Add_Category() {
-    info("Test 6: Add a category");
+  public void test04_Add_Delete_Category() {
 
     info("Create data test");
     String node1 = "node1" + getRandomNumber();
+    String node2 = "node2" + getRandomNumber();
     String nameSelectedCategory = "intranet";
     info("Finished data test");
 
@@ -362,6 +279,23 @@ public class EcmsSEAdminTestIT extends Base {
     siteExplorerHome.goToAddNewContent();
     createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
     createNewDocument.addNewFile(node1, node1);
+    createNewDocument.saveAndClose();
+
+    info("Add Category");
+    click(ELEMENT_ACTIONBAR_MORE);
+    siteExplorerHome.goToAddCategory();
+    $(ELEMENT_ADD_CATEGORY_POPUP_SELECT_CATEGORY_TAB).click();
+    $(byXpath("//*[@id=\"UITreeTaxonomyList\"]/div[2]/div[2]/div/div/div/div/div/a")).click();
+    info("Delete a category");
+    siteExplorerHome.deleteCategory(nameSelectedCategory);
+    siteExplorerHome.closeAddCategoryPopup();
+
+    info("Create a content");
+    navigationToolbar.goToSiteExplorer();
+    siteExplorerHome.goToPath("intranet/documents", "Site Management");
+    siteExplorerHome.goToAddNewContent();
+    createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
+    createNewDocument.addNewFile(node2, node2);
     createNewDocument.saveAndClose();
 
     info("Add Category");
@@ -370,45 +304,16 @@ public class EcmsSEAdminTestIT extends Base {
     $(ELEMENT_ADD_CATEGORY_POPUP_SELECT_CATEGORY_TAB).click();
     $(byXpath("//*[@id=\"UITreeTaxonomyList\"]/div[2]/div[2]/div/div/div/div/div/a")).click();
     $(byXpath(ELEMENT_ADD_CATEGORY_POPUP_DELETE_CATEGORY.replace("${nameCategory}",
-                                                                 nameSelectedCategory))).waitUntil(Condition.visible,
-                                                                                                   Configuration.timeout);
+            nameSelectedCategory))).waitUntil(Condition.visible,
+            Configuration.timeout);
     siteExplorerHome.closeAddCategoryPopup();
 
     info("Delete all data test");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     siteExplorerHome.deleteData(node1);
-  }
+    siteExplorerHome.deleteData(node2);
 
-  @Test
-  @Tag("eabis")
-  public void test07_Delete_Category() {
-    info("Test 7: Delete a category");
-
-    info("Create data test");
-    String node1 = "node1" + getRandomNumber();
-    String nameSelectedCategory = "intranet";
-    info("Finished data test");
-
-    info("Create a content");
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.goToAddNewContent();
-    createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
-    createNewDocument.addNewFile(node1, node1);
-    createNewDocument.saveAndClose();
-
-    info("Add Category");
-    click(ELEMENT_ACTIONBAR_MORE);
-    siteExplorerHome.goToAddCategory();
-    $(ELEMENT_ADD_CATEGORY_POPUP_SELECT_CATEGORY_TAB).click();
-    $(byXpath("//*[@id=\"UITreeTaxonomyList\"]/div[2]/div[2]/div/div/div/div/div/a")).click();
-    siteExplorerHome.deleteCategory(nameSelectedCategory);
-    siteExplorerHome.closeAddCategoryPopup();
-    info("Delete all data test");
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData(node1);
   }
 
   /**
@@ -421,14 +326,17 @@ public class EcmsSEAdminTestIT extends Base {
    * here. - New properties is added
    */
   @Test
-  @Tag("eabis")
-  public void test08_ViewNodeProperties() {
+  @Tag("ECMS-7688")
+  public void test05_ViewNodePropertiesThenManagePublication() {
     info("Test 08: View Node Properties");
 
     info("Create data test");
     String node1 = "node1" + getRandomNumber();
+    String node2 = "node2" + getRandomNumber();
     String property = "exo:summary";
-    info("Finished data test");
+    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+    Date date = new Date();
+    String content = "content" + getRandomNumber();
 
     info("Create a content");
     navigationToolbar.goToSiteExplorer();
@@ -446,48 +354,41 @@ public class EcmsSEAdminTestIT extends Base {
     $(ELEMENT_ACTIONBAR_MORE).click();
     siteExplorerHome.goToProperties();
     siteExplorerHome.addProperty(property, property);
-    info("Delete all data test");
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.goToPath("intranet/documents", "Site Management");
-    siteExplorerHome.deleteData(node1);
-  }
-
-  /**
-   * <li>Case ID:116593.</li>
-   * <li>Test Case Name: Manage Publication.</li> Step Number: 1 Step Name: - Step
-   * Description: - S elect a document/Uploaded file - Click on Publications icon
-   * in the action bar - Click on Stage - Setting time in From and To field -
-   * Click Save Expected Outcome: - Document/uploaded file is published during the
-   * time in From and To field
-   */
-  @Test
-  @Tag("eabis")
-  public void test09_ManagePublication() {
-    info("Test 09: Manage Publication");
-
-    info("Create data test");
-    String node1 = "node1" + getRandomNumber();
-    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
-    Date date = new Date();
-    info("Finished data test");
 
     info("Create a content");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     siteExplorerHome.goToAddNewContent();
     createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.FILE);
-    createNewDocument.addNewFile(node1, node1);
+    createNewDocument.addNewFile(node2, node2);
     createNewDocument.saveAndClose();
-
     info("Manage Publication");
     click(ELEMENT_ACTIONBAR_MORE);
     siteExplorerHome.goToManagePublishtation();
     siteExplorerHome.managePublication("Staged", dateFormat.format(date.getTime()), dateFormat.format(date.getTime()));
 
+    info("Search Web Content With Accented Characters");
+    navigationToolbar.goToSiteExplorer();
+    siteExplorerHome.goToPath("intranet", "Site Management");
+    siteExplorerHome.goToAddNewContent();
+    createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
+    createNewDocument.addNewWebContent("sécurité", content);
+    createNewDocument.saveAndClose();
+    navigationToolbar.goToSiteExplorer();
+    siteExplorerHome.goToPath("intranet", "Site Management");
+    ELEMENT_SEARCH_BTN.setValue("sécurité").pressEnter();
+    sleep(Configuration.timeout);
+    $(byClassName("uiSearchResult")).find(byXpath("//*[@id=\"SimpleSearchResult\"]/table/tbody/tr[1]/td[2]"))
+            .find(byText("sécurité"))
+            .shouldBe(Condition.visible);
+
     info("Delete all data test");
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.goToPath("intranet/documents", "Site Management");
     siteExplorerHome.deleteData(node1);
+    siteExplorerHome.deleteData(node2);
+    siteExplorerHome.deleteData("sécurité");
 
   }
+
 }

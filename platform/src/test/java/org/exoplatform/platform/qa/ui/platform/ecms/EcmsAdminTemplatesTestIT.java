@@ -35,7 +35,7 @@ public class EcmsAdminTemplatesTestIT extends Base {
   }
   @Test
   @Tag("ECMS-7841")
-  public void test02_EditViewDelete_MetadataThenListTemplateThenDocuments() {
+  public void test01_EditViewDelete_MetadataThenListTemplateThenDocuments() {
     info("Test 1: Edit,view and delete Metadata");
     String title = "title" + getRandomNumber();
     String newName = "newName" + getRandomNumber();
@@ -73,5 +73,7 @@ public class EcmsAdminTemplatesTestIT extends Base {
     $(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
     contentAdministration.editDocumentInTemplates(title, newTitle);
     contentAdministration.deleteCategories(newTitle);
+
   }
+
 }
