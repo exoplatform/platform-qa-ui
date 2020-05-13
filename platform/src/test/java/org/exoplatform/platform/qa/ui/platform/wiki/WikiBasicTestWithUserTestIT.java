@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.wiki;
 
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.back;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_SOURCE_EDITOR_BUTTON;
@@ -11,6 +10,7 @@ import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.E
 
 import java.util.ArrayList;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -112,6 +112,7 @@ public class WikiBasicTestWithUserTestIT extends Base {
     wikiHomePage.goToAddBlankPage();
     richTextEditor.addSimplePage(title2, content2);
     richTextEditor.goToWikiPageLink();
+    sleep(1000);
     richTextEditor.insertExistWikiPageLink(title1, label, tooltip, RichTextEditor.wikiPageLinkTab.All_pages);
     wikiManagement.saveAddPage();
     wikiValidattions.verifyTitleWikiPage(title2);
@@ -163,19 +164,22 @@ public class WikiBasicTestWithUserTestIT extends Base {
 
     info("Create a wiki page");
     String title = "title" + getRandomNumber();
+    String newTitle = "newTitle" + getRandomNumber();
+    String line1 = "line1" + getRandomNumber();
+    String line2 = "line2" + getRandomNumber();
+    String line3 = "line3" + getRandomNumber();
+    String line4 = "line4" + getRandomNumber();
+    String line5 = "line5" + getRandomNumber();
     String content = "content" + getRandomNumber();
+    String newContent = line1 + "</br>" + line2 + "</br>" + line3 + "</br>" + line4 + "</br>" + line5;
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();
     wikiManagement.goToSourceEditor();
     sourceTextEditor.addSimplePage(title, content);
     wikiManagement.saveAddPage();
-
     wikiValidattions.verifyTitleWikiPage(title);
     arrayPage.add(title);
-
     info("Edit a wiki page");
-    String newTitle = "newTitle" + getRandomNumber();
-    String newContent = "newContent" + getRandomNumber();
     wikiHomePage.goToAPage(title);
     wikiHomePage.goToEditPage();
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).isDisplayed()) {
@@ -183,138 +187,12 @@ public class WikiBasicTestWithUserTestIT extends Base {
     }
     sourceTextEditor.editSimplePage(newTitle, newContent);
     wikiManagement.saveAddPage();
-    wikiValidattions.verifyTitleWikiPage(newTitle);
+    $(byText(title)).waitUntil(Condition.not(Condition.exist), Configuration.openBrowserTimeoutMs);
+    homePagePlatform.goToHomePage();
+    activityStream.checkActivityAddWikiPage(newTitle, newContent, null);
+    homePagePlatform.goToWiki();
     arrayPage.add(newTitle);
     wikiHomePage.deleteWiki(newTitle);
-
-  }
-
-  @Test
-  @Tag("wabis")
-  public void test04_05_CreateDeletePageUsingSourceEditor() {
-    info("Test 4: Create page using Source Editor");
-    String wiki = "wiki" + getRandomNumber();
-    homePagePlatform.goToWiki();
-    wikiHomePage.goToAddBlankPage();
-    richTextEditor.addSimplePage(wiki, wiki);
-    wikiManagement.saveAddPage();
-    $(byText(wiki)).should(Condition.exist);
-    homePagePlatform.goToWiki();
-    wikiHomePage.deleteWiki(wiki);
-  }
-
-  @Test
-  @Tag("wabis")
-  public void test06_CreateNewWikiPage() {
-    info("Test 6: Create new wiki page");
-    String title = "title" + getRandomNumber();
-    String line1 = "line1" + getRandomNumber();
-    String line2 = "line2" + getRandomNumber();
-    String line3 = "line3" + getRandomNumber();
-    String line4 = "line4" + getRandomNumber();
-    String line5 = "line5" + getRandomNumber();
-    String content = line1 + "</br>" + line2 + "</br>" + line3 + "</br>" + line4 + "</br>" + line5;
-
-    info("Create a new wiki page");
-    homePagePlatform.goToWiki();
-    wikiHomePage.goToAddBlankPage();
-    richTextEditor.addSimplePage(title, content);
-    wikiManagement.saveAddPage();
-    info("Verify that the new wiki page is created successfully");
-    $(byText(title)).should(Condition.exist);
-
-    homePagePlatform.goToHomePage();
-    activityStream.checkActivityAddWikiPage(title, content, null);
-
-    info("Delete the page");
-    homePagePlatform.goToWiki();
-    wikiHomePage.deleteWiki(title);
-  }
-
-  @Test
-  public void test07_DeleteWikiPage() {
-    info("Test 07: Delete wiki page");
-    String title = "title" + getRandomNumber();
-    String content = "content" + getRandomNumber();
-
-    info("Create a new wiki page");
-    homePagePlatform.goToWiki();
-    wikiHomePage.goToAddBlankPage();
-    richTextEditor.addSimplePage(title, content);
-    wikiManagement.saveAddPage();
-    info("Verify that the new wiki page is created successfully");
-    $(byText(title)).should(Condition.exist);
-    info("Verify that an activity is added to the activity stream");
-    homePagePlatform.goToHomePage();
-    activityStream.checkActivity(title);
-
-    info("Delete the page");
-    homePagePlatform.goToWiki();
-    wikiHomePage.deleteWiki(title);
-    homePagePlatform.goToHomePage();
-    $(byText(title)).shouldNot(Condition.exist);
-  }
-
-  @Test
-  @Tag("wabis")
-  public void test08_AddAWikisActivityAfterCreateAWikiPageInSpace() {
-    info("Test 08 Add a wiki's activity after create a wiki page in space");
-    /*
-     * Step Number: 1 Step Name: Step 1: Add new space Step Description: - Connect
-     * to Intranet - Click [Join a space] - Click [Add New Space] Input Data:
-     * Expected Outcome: The new space is created successfully
-     */
-
-    info("Create a space");
-    String space = "space" + getRandomNumber();
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space, 6000);
-
-    info("Create a wiki page");
-    String title = "title" + getRandomNumber();
-    String content = "content" + getRandomNumber();
-    spaceHomePage.goToWikiTab();
-    wikiHomePage.goToAddBlankPage();
-    wikiManagement.goToSourceEditor();
-    sourceTextEditor.addSimplePage(title, content);
-    wikiManagement.saveAddPage();
-    wikiValidattions.verifyTitleWikiPage(title);
-
-    info("Check the Activity");
-    homePagePlatform.goToHomePage();
-    activityStream.checkActivity(title);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
-
-  }
-
-  @Test
-  public void test09_RemoveWikisPageOfSpace() {
-    info("Test 09 Remove wiki's page of space");
-
-    info("Create a space");
-    String space = "space" + getRandomNumber();
-
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space, 6000);
-
-    info("Create a wiki page");
-    String title = "title" + getRandomNumber();
-    String content = "content" + getRandomNumber();
-    spaceHomePage.goToWikiTab();
-    wikiHomePage.goToAddBlankPage();
-    wikiManagement.goToSourceEditor();
-    sourceTextEditor.addSimplePage(title, content);
-    wikiManagement.saveAddPage();
-    wikiValidattions.verifyTitleWikiPage(title);
-
-    homePagePlatform.goToSpecificSpace(space);
-    spaceHomePage.goToWikiTab();
-    wikiHomePage.deleteWiki(title);
-    wikiValidattions.verifyWikiPageNotDisplayedInWikiHome(title);
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
 
   }
 
@@ -331,11 +209,14 @@ public class WikiBasicTestWithUserTestIT extends Base {
     info("Create a wiki page");
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();
+    String newTitle = "newTitle" + getRandomNumber();
+    String newContent = "newContent" + getRandomNumber();
     spaceHomePage.goToWikiTab();
     wikiHomePage.goToAddBlankPage();
     wikiManagement.goToSourceEditor();
     sourceTextEditor.addSimplePage(title, content);
     wikiManagement.saveAddPage();
+    sleep(1000);
     wikiValidattions.verifyTitleWikiPage(title);
     homePagePlatform.goToHomePage();
     activityStream.checkActivity(title);
@@ -346,11 +227,13 @@ public class WikiBasicTestWithUserTestIT extends Base {
     if ($(ELEMENT_SOURCE_EDITOR_BUTTON).isDisplayed()) {
       wikiManagement.goToSourceEditor();
     }
-    String newTitle = "newTitle" + getRandomNumber();
-    String newContent = "newContent" + getRandomNumber();
     sourceTextEditor.editSimplePage(newTitle, newContent);
     wikiManagement.saveAddPage();
     wikiValidattions.verifyTitleWikiPage(newTitle);
+    homePagePlatform.goToSpecificSpace(space);
+    spaceHomePage.goToWikiTab();
+    wikiHomePage.deleteWiki(newTitle);
+    wikiValidattions.verifyWikiPageNotDisplayedInWikiHome(newTitle);
     homePagePlatform.goToHomePage();
     homePagePlatform.goToAllSpace();
     spaceManagement.deleteSpace(space, false);

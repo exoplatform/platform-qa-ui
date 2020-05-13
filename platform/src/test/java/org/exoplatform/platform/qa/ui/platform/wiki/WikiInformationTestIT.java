@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.wiki;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.core.PLFData.password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -187,6 +188,7 @@ public class WikiInformationTestIT extends Base {
     $(byText(title2)).should(Condition.exist);
 
     info("Open wiki page 1");
+    sleep(1000);
     homePagePlatform.goToSpecificSpace(space1);
     spaceHomePage.goToWikiTab();
     info("Open page 1 and Go to Page Info");

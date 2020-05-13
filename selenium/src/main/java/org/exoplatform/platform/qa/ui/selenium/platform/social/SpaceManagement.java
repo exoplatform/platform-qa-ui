@@ -631,7 +631,7 @@ public class SpaceManagement {
     info("evt.click on Accept button of the space");
     $(byText(space)).parent().parent().parent().find(ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION).waitUntil(Condition.visible, Configuration.timeout).click();
     info("Verify that the user joijed to the space");
-    ELEMENT_LIST_MY_SPACES_IN_LEFT_NAVIGATION.find(byText(space)).should(Condition.exist);
+    ELEMENT_LIST_MY_SPACES_IN_LEFT_NAVIGATION.find(byText(space)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
   }
 
   /**

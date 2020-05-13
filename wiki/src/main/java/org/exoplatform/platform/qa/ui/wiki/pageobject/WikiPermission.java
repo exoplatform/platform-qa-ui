@@ -120,9 +120,9 @@ public class WikiPermission {
     public void addPermisisonByType(String groupUsers) {
         if (!groupUsers.isEmpty()) {
             info("Type a:" + groupUsers + " to the textbox");
-            $(ELEMENT_PERMISSION_TYPE_INPUT).setValue(groupUsers);
+            $(ELEMENT_PERMISSION_TYPE_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(groupUsers);
             info("Click on Add button");
-            $(ELEMENT_PERMISSION_ADD_BUTTON).click();
+            $(ELEMENT_PERMISSION_ADD_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
             info("The group/user/membership is added successfully");
         }
     }

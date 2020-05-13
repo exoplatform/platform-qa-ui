@@ -7,6 +7,7 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_WIKI_CONTENT;
@@ -43,7 +44,7 @@ public class WikiValidattions {
         info("Verify that a draf page with the title:" + "title" + " is shown in draf table");
 
         $(byXpath(ELEMENT_DRAFT_OF_NEW_PAGE.replace("${title}", title))).waitUntil(Condition.visible,
-                Configuration.openBrowserTimeoutMs);
+                Configuration.collectionsTimeout);
     }
 
     /**
@@ -176,7 +177,7 @@ public class WikiValidattions {
      */
     public void verifyNotTitleWikiPage(String title) {
         info("Verify that the wiki page isnot created and shown in the list");
-        ELEMENT_WIKI_PAGE_LINK.find(byText(title)).shouldNot(Condition.exist);
+        ELEMENT_WIKI_PAGE_LINK.find(byText(title)).waitUntil(Condition.not(exist),Configuration.openBrowserTimeoutMs);
         info("The wiki page isnot created successfully");
     }
 
@@ -235,8 +236,7 @@ public class WikiValidattions {
         info("The compare version page is shown");
         evt.waitForAndGetElement(ELEMENT_WIKI_PAGE_COMPARE_VERSION_TITLE);
         info("Verify that Version N-1 and current version is shown on the page");
-        sleep(Configuration.timeout);
-        $(byXpath(ELEMENT_COMPARE_VERSION_VERSION_NUMBER.replace("$num", oldVersion))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+        $(byXpath(ELEMENT_COMPARE_VERSION_VERSION_NUMBER.replace("$num", oldVersion))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout);
         evt.waitForAndGetElement(ELEMENT_COMPARE_VERSION_CURRENT_VERSION);
     }
 
@@ -352,7 +352,6 @@ public class WikiValidattions {
      */
     public void verifyRestrictedPageHasChildPage() {
         info("Verify that parent page is shown under the title: restricted on the left tree");
-        sleep(Configuration.collectionsTimeout);
         (ELEMENT_WIKI_LEFT_TREE_RESTRICTED_PAGE_TITLE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).hover();
         info("Verify the tooltip of the page as:[this page is restricted, you don't have permissions to view it]");
         $(ELEMENT_WIKI_TOOLTIP_RESTRICTED_PAGE_TITLE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).exists();
@@ -450,7 +449,7 @@ public class WikiValidattions {
      */
     public void verifyWikiPageNotDisplayedInWikiHome(String title) {
         info("Verify the page is not displayed in Wiki Home");
-        ELEMENT_WIKI_PAGE_LINK.find(byText(title)).shouldNot(Condition.exist);
+        ELEMENT_WIKI_PAGE_LINK.find(byText(title)).waitUntil(Condition.not(exist),Configuration.openBrowserTimeoutMs);
         info("The wiki page is not displayed in Wiki Home");
     }
 
@@ -496,10 +495,13 @@ public class WikiValidattions {
      * @param space String
      */
     public void verifyPresentSpaceSwitcher(String space) {
-      sleep(Configuration.timeout);
         if (!space.isEmpty()) {
             info("Verify that the space is shown");
-            $(byXpath(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", space))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+            if (!$(byXpath(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", space))).isDisplayed()) {
+                testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+            } else {
+                $(byXpath(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE.replace("$space", space))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+            }
         }
 
     }

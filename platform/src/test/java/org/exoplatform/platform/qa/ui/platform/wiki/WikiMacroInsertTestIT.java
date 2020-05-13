@@ -6,6 +6,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_PAGE_WIKI_CONTENT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -59,7 +60,7 @@ public class WikiMacroInsertTestIT extends Base {
     sourceTextEditor.addSimplePage(title, "{{section}}" + content + "{{/section}}");
     wikiManagement.saveAddPage();
     homePagePlatform.goToWiki();
-    $(byText(title)).click();
+    $(byText(title)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_PAGE_WIKI_CONTENT.shouldHave(Condition.text(content));
     wikiHomePage.deleteWiki(title);
 

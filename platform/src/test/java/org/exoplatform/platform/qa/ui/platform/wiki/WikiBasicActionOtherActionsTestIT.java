@@ -86,12 +86,10 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    * notification
    */
   @Test
-  public void test01_MovePage() {
-
-    info("Test 1: Move Page");
+  public void test02_MovePage_Intranet_MyWiki_Then__MyWiki_Intranet() {
 
     String title1 = "title1" + getRandomNumber();
-    String title2 = "title2" + getRandomNumber();
+    String title2 = "title1" + getRandomNumber();
 
     info("Create first new wiki pages");
     homePagePlatform.goToWiki();
@@ -114,154 +112,126 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     homePagePlatform.goToWiki();
     wikiHomePage.deleteWiki(title2);
 
-  }
-
-  @Test
-  public void test02_MovePage_Intranet_MyWiki() {
-
-    String title1 = "title1" + getRandomNumber();
-
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();
     richTextEditor.addSimplePage(title1, title1);
     wikiManagement.saveAddPage();
-    $(byText(title1)).should(Condition.exist);
+    $(byText(title1)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
 
     info("Move page to Mywiki");
     wikiManagement.selectSpaceDestination("My Wiki");
     navigationToolbar.goToMyWiki();
-    $(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
+    $(byClassName("uiTreeExplorer")).find(byText(title1)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
     wikiHomePage.deleteWiki(title1);
 
-  }
-
-  @Test
-  public void test03_MovePage_MyWiki_Intranet() {
-
-    String title1 = "title1" + getRandomNumber();
 
     navigationToolbar.goToMyWiki();
     wikiHomePage.goToAddBlankPage();
-    richTextEditor.addSimplePage(title1, title1);
+    richTextEditor.addSimplePage(title2, title2);
     wikiManagement.saveAddPage();
-    $(byText(title1)).should(Condition.exist);
+    $(byText(title2)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
 
     info("Move page to Intranet");
     wikiManagement.selectSpaceDestination("Intranet");
     homePagePlatform.goToWiki();
-    $(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
-    wikiHomePage.deleteWiki(title1);
+    $(byClassName("uiTreeExplorer")).find(byText(title2)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
+    wikiHomePage.deleteWiki(title2);
+
   }
 
   @Test
   @Tag("wabis")
-  public void test04_MovePage_MyWiki_Space() {
+  public void test04_MovePage_MyWiki_Space_Then_Space_MyWiki() {
 
     info("Create a space");
     String space = "space" + getRandomNumber();
+    String title1 = "title1" + getRandomNumber();
+    String title2 = "title2" + getRandomNumber();
 
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
 
     info("Create a wiki page");
-    String title1 = "title1" + getRandomNumber();
     navigationToolbar.goToMyWiki();
     wikiHomePage.goToAddBlankPage();
     richTextEditor.addSimplePage(title1, title1);
     wikiManagement.saveAddPage();
-    $(byText(title1)).should(Condition.exist);
+    $(byText(title1)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
 
     info("Move page to Space");
     wikiManagement.selectSpaceDestination(space);
     homePagePlatform.goToMySpaces();
     spaceManagement.searchSpace(space);
-    ELEMENT_SPACES_LIST.find(byText(space)).click();
+    ELEMENT_SPACES_LIST.find(byText(space)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs).click();
     spaceHomePage.goToWikiTab();
-    $(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
+    $(byClassName("uiTreeExplorer")).find(byText(title1)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
     homePagePlatform.goToHomePage();
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
 
-  }
-
-  @Test
-  public void test05_MovePage_Space_MyWiki() {
-
-    info("Create a space");
-    String space = "space" + getRandomNumber();
-
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
-
     info("Create a wiki page in space");
-    String title1 = "title1" + getRandomNumber();
     spaceManagement.goToWikiTab();
     wikiHomePage.goToAddBlankPage();
-    richTextEditor.addSimplePage(title1, title1);
+    richTextEditor.addSimplePage(title2, title2);
     wikiManagement.saveAddPage();
-    $(byText(title1)).should(Condition.exist);
+    $(byText(title2)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
 
     info("Move page to MyWiki");
     wikiManagement.selectSpaceDestination("My Wiki");
     navigationToolbar.goToMyWiki();
-    $(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
-    wikiHomePage.deleteWiki(title1);
+    $(byClassName("uiTreeExplorer")).find(byText(title2)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
+    wikiHomePage.deleteWiki(title2);
     homePagePlatform.goToHomePage();
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
-
   }
 
   @Test
-  public void test06_MovePage_Intranet_Space() {
+  public void test06_MovePage_Intranet_Space_Then_Space_Intranet() {
 
     info("Create a space");
     String space = "space" + getRandomNumber();
+    String title1 = "title1" + getRandomNumber();
+    String title2 = "title2" + getRandomNumber();
+
+
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
 
     info("Create a wiki page ");
-    String title1 = "title1" + getRandomNumber();
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();
     richTextEditor.addSimplePage(title1, title1);
     wikiManagement.saveAddPage();
-    $(byText(title1)).should(Condition.exist);
+    $(byText(title1)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
 
     info("Move page to Space");
     wikiManagement.selectSpaceDestination(space);
     homePagePlatform.goToMySpaces();
     ELEMENT_SPACES_LIST.find(byText(space)).click();
     spaceHomePage.goToWikiTab();
-    $(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
+    $(byClassName("uiTreeExplorer")).find(byText(title1)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
     homePagePlatform.goToHomePage();
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
-
-  }
-
-  @Test
-  public void test07_MovePage_Space_Intranet() {
-
-    info("Create a space");
-    String space = "space" + getRandomNumber();
 
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space, 6000);
 
     info("Create a wiki page in space");
-    String title1 = "title1" + getRandomNumber();
     spaceManagement.goToWikiTab();
     wikiHomePage.goToAddBlankPage();
-    richTextEditor.addSimplePage(title1, title1);
+    richTextEditor.addSimplePage(title2, title2);
     wikiManagement.saveAddPage();
-    $(byText(title1)).should(Condition.exist);
+    $(byText(title2)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
 
     info("Move page to Intranet");
     wikiManagement.selectSpaceDestination("Intranet");
     homePagePlatform.goToWiki();
-    $(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
-    wikiHomePage.deleteWiki(title1);
+    $(byClassName("uiTreeExplorer")).find(byText(title2)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
+    wikiHomePage.deleteWiki(title2);
     homePagePlatform.goToHomePage();
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
@@ -499,80 +469,46 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     spaceManagement.deleteSpace(space, false);
   }
 
-  @Test
-  public void test13_ExportPageAsPDF() {
-    info("Test 13: Export page as PDF");
-
-    String title = "title" + getRandomNumber();
-
-    info("Create a new wiki pages");
-
-    homePagePlatform.goToWiki();
-    wikiHomePage.goToAddBlankPage();
-    richTextEditor.addSimplePage(title, title);
-    wikiManagement.saveAddPage();
-    $(byText(title)).should(Condition.exist);
-    $(ELEMENT_MORE_LINK).click();
-    $(ELEMENT_PDF_LINK).click();
-    homePagePlatform.goToWiki();
-    wikiHomePage.deleteWiki(title);
-  }
-
   /**
-   * <li>Case ID:122811.</li>
-   * <li>Test Case Name: Watch a wiki page of intranet.</li>
+   * <li>Case ID:122831.</li>
+   * <li>Test Case Name: Unwatch Page.</li>
    * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li> check issue WIKI-976 (wrong link in the mail)
-   * Step Number: 1 Step Name: Step 1: Watch Page Step Description: - Go to Wiki
-   * application from Intranet - Open an existing page by clicking on page name in
-   * navigation tree. - Click on More icon on toolbar and select Watch action in
-   * menu Input Data: Expected Outcome: Show message
-   * :"You started watching this page now." Selected page is watched.
-   * Step number: 2 Step Name: Step 2: Edit page Step Description: - Login as
-   * other user - Choose watched wiki page at step 1 and click Edit Page - Change
-   * page content - Check the check box "Publish Activity" and click Save Input
-   * Data: Expected Outcome: - Page is saved successfully - An email notification
-   * will send to email of watcher about changed content
-   * Step number: 3 Step Name: Step 3: Open the Wiki page via email notification
-   * Step Description: - Open the email notification at step 2 - Click on the wiki
-   * page link in the email Input Data: Expected Outcome: - The wiki page is
-   * opened with the link format:
-   * http://Server_IP_address:8080/portal/intranet/wiki/[wiki_page_name] (For
-   * example: http://localhost:8080/portal/intranet/wiki/Page_1) - The browser
-   * navigates to the corresponding wiki page in wiki portlet
+   * <li>Post-Condition:</li>
+   * Step Number: 1 Step Name: Step 1: Unwatch Page Step Description: - Open an
+   * existing page by clicking on page name in navigation tree. - Click on More
+   * icon on toolbar and select Unwatch action in menu Input Data: Expected
+   * Outcome: Show message : "You stopped watching this page now." Selected page
+   * is unwatched. Watch icon is switched to Unwatch icon
    */
 
-  public void test17_WatchAWikiPageOfIntranet() {
-    info("Test 17: Watch a wiki page of intranet");
-    String title = "" + getRandomNumber();
-    String update = "" + getRandomNumber();
-    String mess = "You started watching this page now.";
+  @Test
+  public void test08_UnwatchPage_ExportPageAsPDF() {
+    info("Test 8: Unwatch Page");
+    String wiki = "wiki" + getRandomNumber();
+    String mess1 = "You have started watching this page now.";
+    info("mess1:" + mess1);
+    String mess = "You have stopped watching this page now.";
     info("mess:" + mess);
 
+    info("Add new wiki page");
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();
-    richTextEditor.addSimplePage(title, title);
-
-    info("Watch the wiki");
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    homePagePlatform.goToWiki();
-    wikiHomePage.goToAPage(title);
-    wikiManagement.watchAPage(mess);
-
-    info("Edit the page");
-    manageLogInOut.signIn(DATA_USER1, DATA_PASS);
-    homePagePlatform.goToWiki();
-    wikiHomePage.goToAPage(title);
-    wikiHomePage.goToEditPage();
-    richTextEditor.editSimplePage("", update);
-    wikiManagement.publishPageWhenEditPage();
+    richTextEditor.addSimplePage(wiki, wiki);
     wikiManagement.saveAddPage();
-
-    info("Check email notification and link's format of the page");
-
-    info("Delete page");
+    $(byText(wiki)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
+    $(ELEMENT_MORE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_PDF_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    info("Watch the wiki");
     homePagePlatform.goToWiki();
-    wikiHomePage.deleteWiki(title);
+    wikiHomePage.goToAPage(wiki);
+    wikiManagement.watchAPage(mess1);
+    wikiManagement.unWatchAPage(mess);
+    info("Delete page");
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    homePagePlatform.goToWiki();
+    wikiHomePage.deleteWiki(wiki);
+
   }
 
   /**
@@ -673,13 +609,31 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    * permalink - Click Enter from the keyboard Input Data: Expected Outcome: The
    * member of space can view the page created by the manager
    */
-
+  /**
+   * <li>Case ID:122829.</li>
+   * <li>Test Case Name: Check permalink when user is not member of space.</li>
+   * <li>Pre-Condition:</li>
+   * <li>Post-Condition:</li>
+   * Step Number: 1 Step Name: Step 1: Add new page for space when set permission
+   * for page Step Description: - Login by admin<br /> - Add new space<br /> - Go
+   * to space/wiki page<br /> - Add new page <br /> - Set permission for page:
+   * remove any permission<br /> - Select More -> choose Permalink<br /> - Copy
+   * the link<br /><br /> Input Data: Expected Outcome: - Add new page have
+   * permission successfully - Copy link successfully
+   * Step number: 2 Step Name: Step 2: Check permalink when user is not member of
+   * space Step Description: - From the list "More", choose the link
+   * "Permalink"<br /> - Copy the link<br /> - Connect with User B, not a member
+   * in the space<br /> - Paste the permalink<br /> - Click Enter from the
+   * keyboard<br /> Input Data: Expected Outcome: The "Page Not found" is
+   * displayed, the user B cannot view the page
+   */
   @Test
   @Tag("wabis")
-  public void test06_CheckPermalinkWhenUserIsMemberOfSpace() {
+  public void test06_CheckPermalinkWhenUserIsMemberOfSpaceThenWhenUserIsNotMemberOfSpace() {
     info("Test 6: Check permalink when user is member of space");
     String space = "space" + getRandomNumber();
     String wiki = "wiki" + getRandomNumber();
+    String wiki2 = "wiki2" + getRandomNumber();
 
     info("Create space 1 and wiki page 1");
     homePagePlatform.goToMySpaces();
@@ -717,93 +671,26 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
 
-  }
-
-  /**
-   * <li>Case ID:122829.</li>
-   * <li>Test Case Name: Check permalink when user is not member of space.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
-   * Step Number: 1 Step Name: Step 1: Add new page for space when set permission
-   * for page Step Description: - Login by admin<br /> - Add new space<br /> - Go
-   * to space/wiki page<br /> - Add new page <br /> - Set permission for page:
-   * remove any permission<br /> - Select More -> choose Permalink<br /> - Copy
-   * the link<br /><br /> Input Data: Expected Outcome: - Add new page have
-   * permission successfully - Copy link successfully
-   * Step number: 2 Step Name: Step 2: Check permalink when user is not member of
-   * space Step Description: - From the list "More", choose the link
-   * "Permalink"<br /> - Copy the link<br /> - Connect with User B, not a member
-   * in the space<br /> - Paste the permalink<br /> - Click Enter from the
-   * keyboard<br /> Input Data: Expected Outcome: The "Page Not found" is
-   * displayed, the user B cannot view the page
-   */
-
-  @Test
-  public void test07_CheckPermalinkWhenUserIsNotMemberOfSpace() {
-    info("Test 7: Check permalink when user is not member of space");
-    String space = "space" + getRandomNumber();
-    String wiki = "wiki" + getRandomNumber();
-
     info("Create space 1 and wiki page 1");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     info("Add new wiki page 1 for space 1");
     spaceHomePage.goToWikiTab();
     wikiHomePage.goToAddBlankPage();
-    richTextEditor.addSimplePage(wiki, wiki);
+    richTextEditor.addSimplePage(wiki2, wiki2);
     wikiManagement.saveAddPage();
     wikiHomePage.goToPermalink();
-    String perLink = ELEMENT_WIKI_PERMELINK.getValue();
+    String perLink2 = ELEMENT_WIKI_PERMELINK.getValue();
     ELEMENT_BUTTON_CLOSE_PERMALINK.click();
     ELEMENT_BUTTON_CLOSE_PERMALINK.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    open(perLink);
+    open(perLink2);
     refresh();
     $(ELEMENT_WIKI_HOME_PAGENOTFOUND).waitUntil(Condition.appears, Configuration.timeout);
     info("Delete page");
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
-  }
-
-  /**
-   * <li>Case ID:122831.</li>
-   * <li>Test Case Name: Unwatch Page.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
-   * Step Number: 1 Step Name: Step 1: Unwatch Page Step Description: - Open an
-   * existing page by clicking on page name in navigation tree. - Click on More
-   * icon on toolbar and select Unwatch action in menu Input Data: Expected
-   * Outcome: Show message : "You stopped watching this page now." Selected page
-   * is unwatched. Watch icon is switched to Unwatch icon
-   */
-
-  @Test
-  public void test08_UnwatchPage() {
-    info("Test 8: Unwatch Page");
-    String wiki = "wiki" + getRandomNumber();
-    String mess1 = "You have started watching this page now.";
-    info("mess1:" + mess1);
-    String mess = "You have stopped watching this page now.";
-    info("mess:" + mess);
-
-    info("Add new wiki page");
-    homePagePlatform.goToWiki();
-    wikiHomePage.goToAddBlankPage();
-    richTextEditor.addSimplePage(wiki, wiki);
-    wikiManagement.saveAddPage();
-
-    info("Watch the wiki");
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    homePagePlatform.goToWiki();
-    wikiHomePage.goToAPage(wiki);
-    wikiManagement.watchAPage(mess1);
-    wikiManagement.unWatchAPage(mess);
-    info("Delete page");
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    homePagePlatform.goToWiki();
-    wikiHomePage.deleteWiki(wiki);
-
   }
 
   /**
@@ -825,42 +712,6 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    * the permalink - Click Enter from the keyboard Input Data: Expected Outcome:
    * The "Page Not found" is displayed, the user B cannot view the page<br />
    */
-
-  @Test
-  public void test09_CheckWhenChangeLinkIsRestricted() {
-    info("Test 9: Check when change link is restricted");
-    String title = "title" + getRandomNumber();
-
-    info("Add new wiki page");
-    homePagePlatform.goToWiki();
-    wikiHomePage.goToAddBlankPage();
-    richTextEditor.addSimplePage(title, title);
-    wikiManagement.saveAddPage();
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    homePagePlatform.goToWiki();
-    $(byText(title)).should(Condition.exist);
-
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    homePagePlatform.goToWiki();
-    wikiHomePage.goToAPage(title);
-    wikiHomePage.goToPermalink();
-    $(ELEMENT_MAKE_RESTRICT_BUTTON).click();
-    ELEMENT_MSG_MAKE_PUBLIC_RESTRICTED.shouldHave(Condition.text("restricted"));
-    $(ELEMENT_PERMALINK_CLOSE).click();
-    wikiHomePage.goToPermalink();
-    String perLink = ELEMENT_WIKI_PERMELINK.getValue();
-    $(ELEMENT_PERMALINK_CLOSE).click();
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    open(perLink);
-    refresh();
-    $(ELEMENT_WIKI_HOME_PAGENOTFOUND).waitUntil(Condition.appears, Configuration.timeout);
-
-    info("Delete page");
-    manageLogInOut.signIn(DATA_USER1, "gtngtn");
-    homePagePlatform.goToWiki();
-    wikiHomePage.deleteWiki(title);
-  }
-
   /**
    * <li>Case ID:122850.</li>
    * <li>Test Case Name: Check when change link is public.</li>
@@ -881,9 +732,38 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
    */
 
   @Test
-  public void test10_CheckWhenChangeLinkIsPublic() {
-    info("Test 10 Check when change link is public");
+  public void test09_CheckWhenChangeLinkIsRestrictedThenWhenChangeLinkIsPublic() {
+    info("Test 9: Check when change link is restricted");
     String title = "title" + getRandomNumber();
+
+    info("Add new wiki page");
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToAddBlankPage();
+    richTextEditor.addSimplePage(title, title);
+    wikiManagement.saveAddPage();
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    homePagePlatform.goToWiki();
+    $(byText(title)).should(Condition.exist);
+
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToAPage(title);
+    wikiHomePage.goToPermalink();
+    $(ELEMENT_MAKE_RESTRICT_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_MSG_MAKE_PUBLIC_RESTRICTED.shouldHave(Condition.text("restricted"));
+    $(ELEMENT_PERMALINK_CLOSE).click();
+    wikiHomePage.goToPermalink();
+    String perLink = ELEMENT_WIKI_PERMELINK.getValue();
+    $(ELEMENT_PERMALINK_CLOSE).click();
+    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    open(perLink);
+    refresh();
+    $(ELEMENT_WIKI_HOME_PAGENOTFOUND).waitUntil(Condition.appears, Configuration.timeout);
+
+    info("Delete page");
+    manageLogInOut.signIn(DATA_USER1, "gtngtn");
+    homePagePlatform.goToWiki();
+    wikiHomePage.deleteWiki(title);
 
     info("Add new wiki page");
     homePagePlatform.goToWiki();
@@ -893,16 +773,16 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     wikiManagement.unCheckViewAUserOfPage(ELEMENT_PERMISSION_VIEW_ANY);
 
     wikiHomePage.goToPermalink();
-    $(ELEMENT_MAKE_PUBLIC_BUTTON).click();
+    $(ELEMENT_MAKE_PUBLIC_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_MSG_MAKE_PUBLIC_RESTRICTED.shouldHave(Condition.text("public"));
     $(ELEMENT_PERMALINK_CLOSE).click();
     wikiHomePage.goToPermalink();
-    String perLink = ELEMENT_WIKI_PERMELINK.getValue();
+    String perLink2 = ELEMENT_WIKI_PERMELINK.getValue();
     $(ELEMENT_PERMALINK_CLOSE).click();
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);
-    open(perLink);
+    open(perLink2);
     refresh();
-    $(byText(title)).should(Condition.exist);
+    $(byText(title)).waitUntil(Condition.visible,Configuration.timeout);
 
     info("Delete page");
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
@@ -937,7 +817,7 @@ public class WikiBasicActionOtherActionsTestIT extends Base {
     wikiManagement.saveAddPage();
     wikiHomePage.goToPermalink();
     String perLink = ELEMENT_WIKI_PERMELINK.getValue();
-    $(ELEMENT_PERMALINK_CLOSE).click();
+    $(ELEMENT_PERMALINK_CLOSE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Un check view permission of any group");
     wikiManagement.unCheckViewAUserOfPage(ELEMENT_PERMISSION_VIEW_ANY);
     manageLogInOut.signIn(DATA_USER2, DATA_PASS);

@@ -70,42 +70,6 @@ public class WikiPublishActivityTestIT extends Base {
   }
 
   /**
-   * <li>Case ID:122869.</li>
-   * <li>Test Case Name: Open Wiki page from wiki's activity</li>
-   * <li>Pre-Condition: a wiki activity is already shred in the activity
-   * stream</li>
-   * <li>Post-Condition:</li>
-   */
-  @Test
-  public void test03_OpenWikiPageFromWikiActivity() {
-    info("Test 3: Open Wiki page from wiki's activity");
-
-    String title = "title" + getRandomNumber();
-    String content = "content" + getRandomNumber();
-
-    /*
-     * Step Number: 1 Step Name: Step Description: - Connect to Intranet - From the
-     * activity stream, click on the title of a wiki page displayed in activity of
-     * wiki Input Data: Expected Outcome: - The wiki application is opened in the
-     * correspond page.
-     */
-    info("Create a new wiki page");
-    homePagePlatform.goToWiki();
-    wikiHomePage.goToAddBlankPage();
-    richTextEditor.addSimplePage(title, content);
-    wikiManagement.saveAddPage();
-
-    info("Click on the title of wiki page");
-    homePagePlatform.goToHomePage();
-    ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(title)).click();
-    info("Verify that The wiki application is opened in the correspond page ");
-    ELEMENT_WIKI_PAGE_CONTAINER.find(byText(title)).should(Condition.exist);
-    info("Delete the page");
-    homePagePlatform.goToWiki();
-    wikiHomePage.deleteWiki(title);
-  }
-
-  /**
    * <li>Case ID:122865.</li>
    * <li>Test Case Name: Update activity - edit wiki page title</li>
    * <li>Pre-Condition: the wiki activity is already shared in the activity
@@ -119,7 +83,7 @@ public class WikiPublishActivityTestIT extends Base {
 
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();
-
+    String text= "text" + getRandomNumber();
     String newTitle = "newTitle" + getRandomNumber();
 
     /*
@@ -138,7 +102,12 @@ public class WikiPublishActivityTestIT extends Base {
     info("Verify that an activity is added to the activity stream");
     homePagePlatform.goToHomePage();
     activityStream.checkActivity(title);
-
+    activityStream.commentWikiActivity(title, text);
+    info("check that the comment is added successfully");
+    activityStream.checkCommentOfActivity(title, text);
+    ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(title)).click();
+    info("Verify that The wiki application is opened in the correspond page ");
+    ELEMENT_WIKI_PAGE_CONTAINER.find(byText(title)).should(Condition.exist);
     /*
      * Step Number: 2 Step Name: Edit Wiki Page Step Description: - Goto Wiki page
      * and click Edit - Edit a title of a wiki page - Click save and check [Publish
@@ -149,7 +118,7 @@ public class WikiPublishActivityTestIT extends Base {
     String comment = "Page's title has been updated to: " + newTitle;
     info("Go to Wiki porlet and select the wiki page created");
     homePagePlatform.goToWiki();
-    $(byText(title)).click();
+    $(byText(title)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Edit the title of the wiki page and check on published checkbox");
     wikiHomePage.goToEditPage();
     richTextEditor.editSimplePage(newTitle, "");
@@ -365,28 +334,6 @@ public class WikiPublishActivityTestIT extends Base {
     info("Delete the page");
     homePagePlatform.goToWiki();
     wikiHomePage.deleteWiki(title2);
-  }
-
-  @Tag("0")
-  @Tag("WIKI-1392")
-  @Test
-  public void test08_CommentWikiActivityStream(){
-    String wiki = "wiki" + getRandomNumber();
-    String text= "text" + getRandomNumber();
-
-    homePagePlatform.goToWiki();
-    wikiHomePage.goToAddBlankPage();
-    richTextEditor.addSimplePage(wiki, text);
-    wikiManagement.saveAddPage();
-    homePagePlatform.goToHomePage();
-    activityStream.checkActivity(wiki);
-    info("add the content of the wiki page as a comment on wiki activity stream");
-    activityStream.commentWikiActivity(wiki, text);
-    info("check that the comment is added successfully");
-    activityStream.checkCommentOfActivity(wiki, text);
-    info("Delete the page");
-    homePagePlatform.goToWiki();
-    wikiHomePage.deleteWiki(wiki);
   }
 
   @Test
