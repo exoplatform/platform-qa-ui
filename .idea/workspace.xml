@@ -399,7 +399,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1589170482196" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1589420104072" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -630,9 +630,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.EcmsWCMTestIT.test01_CreateNewContentListViewerPageWithModeByContentsThenEditSingleContentViewerPage" />
         <item itemvalue="JUnit.EcmsWCMTestIT.test03_ManageTheTitleThenCheckSeoToolTips" />
         <item itemvalue="JUnit.EcmsWCMTestIT.test02_EditContentListViewerPageWithModeByContents" />
+        <item itemvalue="JUnit.EcmsWCMTestIT.test01_CreateNewContentListViewerPageWithModeByContentsThenEditSingleContentViewerPage" />
         <item itemvalue="JUnit.EcmsWCMTestIT" />
         <item itemvalue="JUnit.EcmsSESearchTestIT" />
       </list>
