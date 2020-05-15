@@ -57,7 +57,7 @@ public class NavigationToolbar {
 
     $(ELEMENT_LINK_EDIT).waitUntil(Condition.visible,Configuration.timeout).click();
     $(ELEMENT_MENU_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).hover();
-    $(ELEMENT_MENU_EDIT_LAYOUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_MENU_EDIT_LAYOUT).waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   /**
@@ -145,24 +145,24 @@ public class NavigationToolbar {
         break;
       case MY_ACTIVITY:
         info("Go to Activities of User");
-        $(ELEMENT_ACTIVITIES_LINK).waitUntil(Condition.appears, Configuration.timeout);
+        $(ELEMENT_ACTIVITIES_LINK).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
         $(ELEMENT_ACTIVITIES_LINK).click();
-        $(ELEMENT_ACTIVITIES_PORTLET).waitUntil(Condition.appears, Configuration.timeout);
+        $(ELEMENT_ACTIVITIES_PORTLET).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
         break;
       case MY_CONNECTIONS:
-        evt.click(ELEMENT_MY_CONNECTION_LINK);
+        $(ELEMENT_MY_CONNECTION_LINK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
         break;
       case MY_WIKI:
-        $(ELEMENT_MY_WIKI_LINK).click();
+        $(ELEMENT_MY_WIKI_LINK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
         break;
       case MY_DASHBOARD:
-        evt.click(ELEMENT_MY_DASHBOARD_LINK);
+        $(ELEMENT_MY_DASHBOARD_LINK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
         break;
       case MY_NOTIFICATION:
-        $(ELEMENT_MY_NOTIFICATIONS_LINK).click();
+        $(ELEMENT_MY_NOTIFICATIONS_LINK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
         break;
       case SETTINGS:
-        $(ELEMENT_MY_SETTINGS_LINK).click();
+        $(ELEMENT_MY_SETTINGS_LINK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
         break;
       case CHANGE_LANGUAGE:
         break;
@@ -183,17 +183,17 @@ public class NavigationToolbar {
    */
   public void goToSiteExplorer() {
     info("-- Go to site explorer home page --");
+    sleep(1000);
     if (testBase.getExoWebDriver().isIEDriver()) {
-      $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
+      $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs + Configuration.timeout);
       $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     } else
-      $(ELEMENT_LINK_SETUP).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(ELEMENT_LINK_SETUP).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Element " + ELEMENT_MENU_CONTENT_LINK + "... is displayed");
-    sleep(Configuration.timeout);
     do {
       $(ELEMENT_MENU_CONTENT_LINK).hover();
     } while (!$(ELEMENT_MENU_SITE_EXPLORER).exists());
-    $(ELEMENT_MENU_SITE_EXPLORER).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_MENU_SITE_EXPLORER).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
     info("Site Explorer is shown successfully");
   }
 
@@ -215,9 +215,8 @@ public class NavigationToolbar {
    */
   public void goToEditContent() {
     info("Go to Edit content");
-    $(ELEMENT_LINK_EDIT).waitUntil(Condition.appears, Configuration.timeout);
-    $(ELEMENT_LINK_EDIT).click();
-    $(ELEMENT_EDIT_CONTENT).click();
+    $(ELEMENT_LINK_EDIT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_EDIT_CONTENT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -442,7 +441,7 @@ public class NavigationToolbar {
    */
   public void goToAdminNotifications() {
     info("Go to email notifications");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     $(ELEMENT_ADMINISTRATION_PORTAL).hover();
     $(ELEMENT_ADMINISTRATION_PORTAL_EMAIL_NOTIFICATIONS).waitUntil(Condition.appears, Configuration.timeout);
@@ -463,12 +462,11 @@ public class NavigationToolbar {
   }
 
   public void goToManageCommunity() {
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, 10000);
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.timeout);
-    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, 10000);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -486,6 +484,8 @@ public class NavigationToolbar {
    */
   public void goToMyNotifications() {
     selectALinkOfUserMenu(specifUserToolBar.MY_NOTIFICATION);
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+
   }
 
   /**
@@ -493,8 +493,9 @@ public class NavigationToolbar {
    */
   public void goToIntranetNotification() {
     info("Go to Intranet Notification");
-    $(ELEMENT_INTRANET_NOTIFICATION_BELL).click();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_INTRANET_NOTIFICATION_BELL).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_NOTIFICATION_DROPDOWN).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     info("The elemnt is shown successfully");
   }
 

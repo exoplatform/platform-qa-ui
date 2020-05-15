@@ -10,7 +10,10 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -18,6 +21,8 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_MY_PROFILE_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOPBAR_AVATAR;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.ELEMENT_COMMENT_EDIT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_QUICK_INPUT_EVENT_FROM_DATE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_QUICK_INPUT_EVENT_TO_DATE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_CHAT_ICON_STATUS;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ADDNEWSPACE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
@@ -56,9 +61,8 @@ public class SpaceManagement {
       ELEMENT_SPACES_LIST.find(byText(spaceName)).parent().parent().parent().find(byText("Delete")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       if (isVerify)
         alert.verifyAlertMessage(ELEMENT_SPACE_CONFIRM_DELETE);
-      $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
-      sleep(Configuration.collectionsTimeout);
-      ELEMENT_SPACES_LIST.find(byText(spaceName)).waitUntil(Condition.disappear, Configuration.collectionsTimeout);
+      $(ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+      ELEMENT_SPACES_LIST.find(byText(spaceName)).waitUntil(Condition.disappear, Configuration.collectionsTimeout + Configuration.collectionsTimeout);
     }
   }
 
@@ -179,14 +183,14 @@ public class SpaceManagement {
     if (oneUser != null) {
       $(ELEMENT_SPACE_MEMBERS).waitUntil(Condition.visible, Configuration.timeout).click();
       final String assignOrRemoveManagerRole = "(//table[@class='uiGrid table  table-hover table-striped']//th[3]/following::tr[@id='existingUsersTable']/td[contains(text(),'${user}')]/following::div[@class='uiSwitchBtn'])[1]";
-      $(byXpath(assignOrRemoveManagerRole.replace("${user}", oneUser))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+      $(byXpath(assignOrRemoveManagerRole.replace("${user}", oneUser))).waitUntil(Condition.visible, Configuration.timeout).click();
     }
     if (manyUsers != null) {
       $(ELEMENT_SPACE_MEMBERS).waitUntil(Condition.visible, Configuration.timeout).click();
 
       final String assignOrRemoveManagerRole = "(//table[@class='uiGrid table  table-hover table-striped']//th[3]/following::tr[@id='existingUsersTable']/td[contains(text(),'${user}')]/following::div[@class='uiSwitchBtn'])[1]";
-      $(byXpath(assignOrRemoveManagerRole.replace("${user}", manyUsers.get(0)))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-      $(byXpath(assignOrRemoveManagerRole.replace("${user}", manyUsers.get(2)))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+      $(byXpath(assignOrRemoveManagerRole.replace("${user}", manyUsers.get(0)))).waitUntil(Condition.visible, Configuration.timeout).click();
+      $(byXpath(assignOrRemoveManagerRole.replace("${user}", manyUsers.get(2)))).waitUntil(Condition.visible, Configuration.timeout).click();
     }
 
   }
@@ -283,10 +287,10 @@ public class SpaceManagement {
   /**
    * Check Space Description and Space Manager Name
    */
-  public void checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(String spaceDesa, String oneManagerName, ArrayList<String> managersNames, String space, String titleEvent, String dateEvent, String toolTips) {
+  public void checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(String spaceDesa, String oneManagerName, ArrayList<String> managersNames, String space, String titleEvent, String dateEvent, String toolTips) throws ParseException {
     if (spaceDesa != null) {
       info("Space Description is : " + spaceDesa);
-      ELEMENT_SPACE_DESCRIPTION.waitUntil(Condition.visible, Configuration.timeout);
+      ELEMENT_SPACE_DESCRIPTION.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
       assertEquals(spaceDesa, ELEMENT_SPACE_DESCRIPTION.getText());
     }
     if (oneManagerName != null) {
@@ -325,32 +329,29 @@ public class SpaceManagement {
       assertEquals(titleEvent, ELEMENT_TITLE_EVENT_NAME.getText());
     }
     if (dateEvent != null) {
-      final String[] ELEMENT_CURRENT_DATE = $(byXpath("//div[@class='currentDateContainer']/center/a")).getText().split(": ");
-      info("Created Event Month is : ");
-      assertEquals(dateEvent.substring(5, 7), ELEMENT_CURRENT_DATE[1].substring(0, 2));
-      info("Created Event day is : ");
-      if (dateEvent.length()==18) {
-        if($(byXpath("//center//*[contains(text(),'Yesterday')]")).isDisplayed()) {
-          assertEquals(dateEvent.substring(9, 10), ELEMENT_CURRENT_DATE[1].substring(3, 4));
-          info("Created Event Year is : ");
-          assertEquals(dateEvent.substring(0, 4), ELEMENT_CURRENT_DATE[1].substring(5, 9));
-        }
-          else{
-            assertEquals(dateEvent.substring(9, 10), ELEMENT_CURRENT_DATE[1].substring(3, 4));
-            info("Created Event Year is : ");
-            assertEquals(dateEvent.substring(0, 4), ELEMENT_CURRENT_DATE[1].substring(6, 10));
-        }
-      } else {
-        if($(byXpath("//center//*[contains(text(),'Yesterday')]")).isDisplayed()) {
-          assertEquals(dateEvent.substring(8, 10), ELEMENT_CURRENT_DATE[1].substring(3, 5));
-          info("Created Event Year is : ");
-          assertEquals(dateEvent.substring(0, 4), ELEMENT_CURRENT_DATE[1].substring(6, 10));
-        }
-        else{
-          assertEquals(dateEvent.substring(8, 10), ELEMENT_CURRENT_DATE[1].substring(3, 5));
-          info("Created Event Year is : ");
-          assertEquals(dateEvent.substring(0, 4), ELEMENT_CURRENT_DATE[1].substring(6, 10));
-        }
+
+      final String NEW_FORMAT = "MM/dd/yyyy";
+      final String OLD_FORMAT = "yyyy/MM/dd";
+
+      String dateEventReverse;
+
+      SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
+      Date d = sdf.parse(dateEvent);
+      sdf.applyPattern(NEW_FORMAT);
+      dateEventReverse = sdf.format(d);
+
+      final String ELEMENT_CURRENT_DATE = $(byXpath("//div[@class='currentDateContainer']/center/a")).getText().split(": ")[1];
+
+      info("Date" + dateEventReverse);
+
+      if (dateEventReverse.charAt(0) == '0' && dateEventReverse.charAt(3)!='0') {
+        assertEquals(dateEventReverse, "0" + (ELEMENT_CURRENT_DATE));
+      }
+      else if (dateEventReverse.charAt(0) == '0' && dateEventReverse.charAt(3)=='0'){
+        assertEquals(dateEventReverse, "0" + (ELEMENT_CURRENT_DATE).substring(0,2) + "0" + (ELEMENT_CURRENT_DATE).substring(2,8));
+      }
+      else {
+        assertEquals(dateEventReverse, (ELEMENT_CURRENT_DATE));
       }
 
     }
@@ -431,10 +432,10 @@ public class SpaceManagement {
    * Edit User Profile
    */
   public void editUserProfile(String jobTitle) {
-    $(ELEMENT_TOPBAR_AVATAR).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(ELEMENT_MY_PROFILE_LINK).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(ELEMENT_COMMENT_EDIT).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byXpath("//input[@id='position']")).waitUntil(Condition.visible, Configuration.timeout).setValue(jobTitle);
+    $(ELEMENT_TOPBAR_AVATAR).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_MY_PROFILE_LINK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_COMMENT_EDIT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//input[@id='position']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(jobTitle);
     $(byXpath("//div[@class=\"uiAction\"]/button[text()='Save']")).waitUntil(Condition.visible, Configuration.timeout).click();
     refresh();
   }
@@ -445,8 +446,8 @@ public class SpaceManagement {
   public void checkOnlineUserJobTitle(String onlineUser, String jobTitle) {
     info("Check job title of: " + onlineUser);
     $(byXpath("//h6[text()=\"Who's Online?\"]/following::img[@src=\"/portal/rest/v1/social/users/${onlineUserSpace}/avatar\"]".replace("${onlineUserSpace}", onlineUser))).waitUntil(Condition.visible, Configuration.timeout).hover();
-    final String userJobTitle = ($(byXpath("//td[@id=\"profileName\"]/div"))).waitUntil(Condition.visible, Configuration.timeout).getText();
-    Assert.assertEquals("Online User job " + jobTitle + " is not displayed", jobTitle, userJobTitle);
+    final String userJobTitle = ($(byXpath("//td[@id=\"profileName\"]"))).waitUntil(Condition.visible, Configuration.timeout).getText();
+    Assert.assertEquals("Online User job " + jobTitle + " is not displayed", jobTitle, userJobTitle.split("\n")[1]);
   }
 
   /**
@@ -475,13 +476,11 @@ public class SpaceManagement {
    */
   public void searchSpace(String name, String... number) {
     info("Waiting my space is shown");
-    sleep(Configuration.timeout);
-    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs + Configuration.timeout);
     info("Input the space into search text box");
-    ELEMENT_MY_SPACE_SEARCH_TEXT.setValue(name);
-    sleep(Configuration.timeout);
+    ELEMENT_MY_SPACE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
     info("evt.click on Search button");
-    $(ELEMENT_MY_SPACE_SEARCH_BTN).click();
+    $(ELEMENT_MY_SPACE_SEARCH_BTN).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -593,6 +592,7 @@ public class SpaceManagement {
    */
   public void goToSpace(String space) {
     info("Click on the title of the space");
+    searchSpace(space);
     $(byXpath(ELEMENT_ALL_SPACE_SPACE_NAME.replace("$space", space.toLowerCase()))).click();
     $(byXpath(ELEMENT_ALL_SPACE_SPACE_NAME.replace("$space", space))).waitUntil(Condition.not(Condition.visible),
             Configuration.timeout);
@@ -629,7 +629,7 @@ public class SpaceManagement {
     goToInvitationsReceivedTab();
     searchSpace(space);
     info("evt.click on Accept button of the space");
-    $(byText(space)).parent().parent().parent().find(ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(byText(space)).parent().parent().parent().find(ELEMENT_BUTTON_ACCEPT_SPACE_INVITATION).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     info("Verify that the user joijed to the space");
     ELEMENT_LIST_MY_SPACES_IN_LEFT_NAVIGATION.find(byText(space)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
   }
@@ -656,9 +656,8 @@ public class SpaceManagement {
   public void goToActivityStreamTab() {
     info("Open Activity STream Tab");
     homePagePlatform.refreshUntil($(ELEMENT_ACTIVITY_STREAM_TAB), Condition.visible, 1000);
-    sleep(Configuration.timeout);
-    $(ELEMENT_ACTIVITY_STREAM_TAB).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_ACTIVITY_STREAM_TAB).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byClassName("cke_wysiwyg_frame")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     info("Activity STream portlet is shown");
   }
 
@@ -667,8 +666,8 @@ public class SpaceManagement {
    */
   public void goToForumTab() {
     info("Open forum Tab");
-    evt.click(ELEMENT_FORUM_TAB);
-    evt.waitForAndGetElement(ELEMENT_FORUM_START_BUTTON_UP, 2000, 0);
+    $(ELEMENT_FORUM_TAB).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_FORUM_START_BUTTON_UP).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     info("Forum portlet is shown");
   }
 

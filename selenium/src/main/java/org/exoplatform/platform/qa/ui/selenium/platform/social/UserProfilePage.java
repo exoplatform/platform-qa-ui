@@ -87,13 +87,11 @@ public class UserProfilePage {
     if (testBase.getBrowser().contains("iexplorer"))
       evt.clickByJavascript(ELEMENT_CHANGE_AVATAR_LINK);
     else
-      $(ELEMENT_CHANGE_AVATAR_LINK).click();
-    sleep(2000);
+      $(ELEMENT_CHANGE_AVATAR_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_INPUT_UPLOAD_AVATAR.uploadFromClasspath("testavatar.png");
-    sleep(Configuration.timeout);
-    ELEMENT_BUTTON_CONFIRM_UPLOAD.waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_BUTTON_CONFIRM_UPLOAD.waitUntil(Condition.not(Condition.visible),Configuration.timeout);
-    ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_BUTTON_CONFIRM_UPLOAD.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_BUTTON_CONFIRM_UPLOAD.waitUntil(Condition.not(Condition.visible),Configuration.openBrowserTimeoutMs);
+    ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 
@@ -189,26 +187,23 @@ public class UserProfilePage {
     }
     info("-- update experience --");
     if (organization != null && organization != "") {
-      sleep(2000);
       $(byId("ExperienceSection0")).dragAndDropTo($(byXpath("//button[@class='btn btn-save']")));
-      sleep(2000);
-      $(byXpath(ELEMENT_EXPERIENCE_COMPANY_INPUT.replace("${index}", index))).setValue(organization);
-    sleep(2000);
+      $(byXpath(ELEMENT_EXPERIENCE_COMPANY_INPUT.replace("${index}", index))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).setValue(organization);
     }
     if (jobTitle != null && jobTitle != "") {
-      $(byXpath(ELEMENT_EXPERIENCE_POSITION_INPUT.replace("${index}", index))).setValue(jobTitle);
+      $(byXpath(ELEMENT_EXPERIENCE_POSITION_INPUT.replace("${index}", index))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(jobTitle);
     }
     if (jobDetail != null && jobDetail != "") {
-      $(byXpath(ELEMENT_EXPERIENCE_DESCRIPTION_INPUT.replace("${index}", index))).setValue(jobDetail);
+      $(byXpath(ELEMENT_EXPERIENCE_DESCRIPTION_INPUT.replace("${index}", index))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(jobDetail);
     }
     if (skill != null && skill != "") {
-      $(byXpath(ELEMENT_EXPERIENCE_SKILL_INPUT.replace("${index}", index))).setValue(skill);
+      $(byXpath(ELEMENT_EXPERIENCE_SKILL_INPUT.replace("${index}", index))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(skill);
     }
     if (startDate != null && startDate != "") {
-      $(byXpath(ELEMENT_EXPERIENCE_START_DATE_INPUT.replace("${index}", index))).setValue(startDate);
+      $(byXpath(ELEMENT_EXPERIENCE_START_DATE_INPUT.replace("${index}", index))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(startDate);
     }
     if (endDate != null && endDate != "") {
-      $(byXpath(ELEMENT_EXPERIENCE_END_DATE_INPUT.replace("${index}", index))).setValue(endDate);
+      $(byXpath(ELEMENT_EXPERIENCE_END_DATE_INPUT.replace("${index}", index))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(endDate);
     }
     if (curPos != null && curPos) {
       evt.check(byXpath(ELEMENT_EXPERIENCE_CURRENT_CHECKBOX.replace("${index}", index)));
@@ -226,7 +221,7 @@ public class UserProfilePage {
     evt.scrollToBottomPage(this.testBase.getExoWebDriver().getWebDriver());
     if (isSave == null || isSave) {
       info("Save updating information");
-      $(ELEMENT_CONTACT_SAVE_BUTTON).click();
+      $(ELEMENT_CONTACT_SAVE_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       $(ELEMENT_CONTACT_SAVE_BUTTON).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     } else {
       info("Cancel updating information");

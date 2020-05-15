@@ -97,7 +97,6 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
    */
   @Test
   public void test01_CheckEmailNotificationsUserSettings() throws Exception {
-    info("Test 1: Check Email Notifications User settings");
 
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@gmail.com";
@@ -110,6 +109,24 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
     navigationToolbar.goToMyNotifications();
     myNotificationsSetting.verifyTilePage();
 
+    info("Check default user settings");
+    myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.NewUser_intranet);
+    myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.ConnectionRequest_intranet);
+    myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.Space_Invitation_intranet);
+    myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.Space_Join_intranet);
+    myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.AS_Mention_intranet);
+    myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.AS_Comment_intranet);
+    myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.AS_Like_intranet);
+    myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.AS_Post_intranet);
+    myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.Space_Post_intranet);
+
+
+    info("Check Intranet Notifications User settings");
+    myNotificationsSetting.checkIntranetNotifiToggle();
+    myNotificationsSetting.turnOnOffNotiIntranet(false);
+    myNotificationsSetting.veriftyAllIntranetNotiDefaultDisable();
+
+    info("Check Email Notifications User settings");
     myNotificationsSetting.checkEmailNotifiToggle();
     homePagePlatform.refreshUntil($(ELEMENT_ACCOUNT_NAME_LINK), Condition.visible, 1000);
     myNotificationsSetting.turnOnOffNotiEmail(false);
@@ -121,6 +138,9 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
     manageLogInOut.signIn(username1, password);
     navigationToolbar.goToMyNotifications();
     myNotificationsSetting.verifyTilePage();
+    myNotificationsSetting.veriftyAllIntranetNotiDefaultDisable();
+    myNotificationsSetting.turnOnOffNotiIntranet(true);
+    myNotificationsSetting.veriftyAllIntranetNotiDefaultEnabled();
     myNotificationsSetting.veriftyAllEmailNotiDefaultDisable();
     homePagePlatform.refreshUntil($(ELEMENT_ACCOUNT_NAME_LINK), Condition.visible, 1000);
     myNotificationsSetting.turnOnOffNotiEmail(true);
@@ -130,110 +150,4 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
     addUsers.deleteUser(username1);
   }
 
-  /**
-   * <li>Case ID:125161.</li>
-   * <li>Test Case Name: Check Intranet Notifications User settings.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
-   */
-  /*
-   * Step Number: 1 Step Name: Step 1 : Go to My Notifications Step Description: -
-   * Login - Click the user menu and go to My Notifications Input Data: Expected
-   * Outcome: - The user settings page is displayed
-   */
-  /*
-   * Step number: 2 Step Name: Step 2 : Check Intranet Notifications toggle Step
-   * Description: - Check the toggle related to Intranet Notifications Input Data:
-   * Expected Outcome: - The toggle is displayed at the top of the table - The
-   * toggle is labeled : Get Intranet Notifications - The toggle if ON by default
-   */
-  /*
-   * Step number: 3 Step Name: Step 3 : Update Intranet Notifications toggle Step
-   * Description: - Switch OFF Intranet Notifications Input Data: Expected
-   * Outcome: - All settings related to Intranet Notifications are disabled and
-   * the settings of the user are remembered.
-   */
-  /*
-   * Step number: 4 Step Name: Step 4 : Update Intranet Notifications toggle Step
-   * Description: - Switch ON Intranet Notifications Input Data: Expected Outcome:
-   * - The user finds back the same configuration
-   */
-  @Test
-  public void test02_CheckIntranetNotificationsUserSettings() {
-    info("Test 2: Check Intranet Notifications User settings");
-
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@gmail.com";
-    String password = "123456";
-
-    info("Add new user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    manageLogInOut.signIn(username1, password);
-    navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.verifyTilePage();
-    myNotificationsSetting.checkIntranetNotifiToggle();
-    myNotificationsSetting.turnOnOffNotiIntranet(false);
-    myNotificationsSetting.veriftyAllIntranetNotiDefaultDisable();
-
-    info("the settings of the user are remembered");
-
-    info("User A login");
-    manageLogInOut.signIn(username1, password);
-    navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.verifyTilePage();
-    myNotificationsSetting.veriftyAllIntranetNotiDefaultDisable();
-    myNotificationsSetting.turnOnOffNotiIntranet(true);
-    myNotificationsSetting.veriftyAllIntranetNotiDefaultEnabled();
-    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-
-  }
-
-  /**
-   * <li>Case ID:125166.</li>
-   * <li>Test Case Name: Check default user settings.</li>
-   * <li>Pre-Condition: - The user connects for the first time to the platform (or
-   * haven't done any change in the user settings since his first connection)</li>
-   * <li>Post-Condition:</li>
-   */
-  /*
-   * Step Number: 1 Step Name: Step Description: - Login - Go to User Menu and
-   * click [My Notifications] - Check the Intranet Notification setings Input
-   * Data: Expected Outcome: The default Intranet Notification settings are : New
-   * User : No Notifications Connection Request : Intranet Notification * Space
-   * Invitation : Intranet Notification * Space Join Request: Intranet
-   * Notification * Mention : Intranet Notification * Comment : Intranet
-   * Notification * Like : No notifications * Post on my Steam : Intranet
-   * Notification * Post on my Space : Intranet Notification
-   */
-  @Test
-  public void test03_CheckDefaultUserSettings() {
-    info("Test 3: Check default user settings");
-
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@gmail.com";
-    String password = "123456";
-
-    info("Add new user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    manageLogInOut.signIn(username1, password);
-
-    navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.verifyTilePage();
-    myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.NewUser_intranet);
-    myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.ConnectionRequest_intranet);
-    myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.Space_Invitation_intranet);
-    myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.Space_Join_intranet);
-    myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.AS_Mention_intranet);
-    myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.AS_Comment_intranet);
-    myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.AS_Like_intranet);
-    myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.AS_Post_intranet);
-    myNotificationsSetting.verifyNotificationDefault(NotificationsAdminSeting.notificationType.Space_Post_intranet);
-    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-  }
 }

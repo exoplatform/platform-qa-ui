@@ -18,6 +18,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -71,32 +72,7 @@ public class PortletInSpaceHomePageTestIT extends Base {
   }
 
   @Test
-  public void test01_CheckTheContentOfTheSpaceDescriptionPortlet() {
-    //TC21651 //TC21641 //TC21637 //TC21649
-    info("create new space");
-    String spaceNamea = "spaceNamea" + getRandomNumber();
-    String spaceDesa = "descriptiona" + getRandomNumber();
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
-    spaceHomePage.goToSpaceSettingTab();
-    spaceSettingManagement.goToMemberTab();
-    spaceSettingManagement.inviteUser(DATA_USER3, false, "");
-    manageLogInOut.signIn(DATA_USER3, password);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.acceptAInvitation(spaceNamea);
-    info("Check Elements of the space Description portlet");
-    spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(spaceDesa, DATA_NAME_USER1, null, null, null, null, null);
-    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.searchSpace(spaceNamea);
-    spaceManagement.accessToSearchedSpace();
-    spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(spaceDesa, DATA_NAME_USER1, null, null, null, null, null);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(spaceNamea, false);
-  }
-
-  @Test
-    public void test02_CheckTheSpaceTodayEventInThePortlet() {
+    public void test01_CheckTheSpaceTodayEventInThePortlet() throws ParseException {
     //TC21640 //TC21647 //TC21648 //TC21649
 
     info("Create new space");
@@ -105,7 +81,7 @@ public class PortletInSpaceHomePageTestIT extends Base {
     DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     Date date = new Date();
     String dateEventAdded = format.format(date);
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String addDateEvent = simpleDateFormat.format(new Date());
     String toolTips = "arrows";
@@ -141,7 +117,7 @@ public class PortletInSpaceHomePageTestIT extends Base {
   }
 
   @Test
-  public void test03_CheckTheManagerPortletInTheSpaceSettings() {
+  public void test02_CheckTheManagerPortletInTheSpaceSettings() throws ParseException {
     //TC21680 //TC21638 //TC21643 //TC21649
     info("Create a space");
     String space = "space" + getRandomNumber();
@@ -171,7 +147,7 @@ public class PortletInSpaceHomePageTestIT extends Base {
   }
 
   @Test
-  public void test04_CheckTheSpaceWhoIsOnlinePortlet() {
+  public void test03_CheckTheSpaceWhoIsOnlinePortlet() {
     //TC21652 //TC21649
     info("create new space");
     String space = "space" + getRandomNumber();
@@ -197,7 +173,7 @@ public class PortletInSpaceHomePageTestIT extends Base {
   }
 
   @Test
-  public void test05_CheckSpaceCreatorNotDisplayedInSpaceManagersListAfterDelete() {
+  public void test04_CheckSpaceCreatorNotDisplayedInSpaceManagersListAfterDelete() throws ParseException {
     //TC21679
     info("Create a new space");
     String space = "space" + getRandomNumber();
@@ -243,7 +219,7 @@ public class PortletInSpaceHomePageTestIT extends Base {
   }
 
   @Test
-  public void test06_CheckTheUpdatedDescription() {
+  public void test05_CheckTheUpdatedDescription() throws ParseException {
     //TC21642
     info("create new space");
     String space = "space" + getRandomNumber();
@@ -285,7 +261,7 @@ public class PortletInSpaceHomePageTestIT extends Base {
   }
 
   @Test
-  public void test07_CheckTheSpaceWhoIsOnlinePortletAccordingToUserStatus() {
+  public void test06_CheckTheSpaceWhoIsOnlinePortletAccordingToUserStatus() {
     //TC21639 //TC21644
     info("create new space");
     String space = "space" + getRandomNumber();
@@ -334,9 +310,8 @@ public class PortletInSpaceHomePageTestIT extends Base {
   }
 
   @Test
-  public void test08_CheckTheAvatarImageDimensions() {
-    //TC21646
-    info("create some spaces");
+  public void test07_CheckTheAvatarImageDimensionsThenThePaddingOfDescriptionPortletThenTheManagerTitleDimensionsThenThatOnlySpaceManagerCanEditSpaceHomePageThenTheContentOfTheSpaceDescriptionPortlet() throws ParseException {
+    //TC21650 //TC21654 //TC21646 //TC21656 //TC21657 //TC21651 //TC21641 //TC21637 //TC21649
     String spaceNamea = "spaceNamea" + getRandomNumber();
     String spaceDesa = "descriptiona" + getRandomNumber();
     homePagePlatform.goToMySpaces();
@@ -344,31 +319,35 @@ public class PortletInSpaceHomePageTestIT extends Base {
     spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(spaceDesa, DATA_NAME_USER1, null, null, null, null, null);
     info("Check Avatar Image Dimensions");
     spaceManagement.checkAvatarUserDimensions();
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(spaceNamea, false);
-
-  }
-
-  @Test
-  public void test09_CheckOnlySpaceManagerCanEditSpaceHomePage() {
-    //TC21650
-    String spaceNamea = "spaceNamea" + getRandomNumber();
-    String spaceDesa = "descriptiona" + getRandomNumber();
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
+    info("Check the padding of Description portlet");
+    spaceManagement.checkDescriptionPortletPadding();
+    info("Check Manager Title Dimensions");
+    spaceManagement.checkManagerTitleDimensions();
+    info("Check Only Space Manager Can Edit Space Home Page");
     spaceSettingManagement.inviteUser(DATA_USER3, false, "");
     spaceManagement.editLayout("Add");
+    spaceManagement.editLayout("Delete");
+    manageLogInOut.signOut();
     manageLogInOut.signIn(DATA_USER3, password);
     homePagePlatform.goToMySpaces();
+    info("Check Only Platform Administrator Can Add Or Delete The Portlet Applications In The Space Home Page");
     spaceManagement.acceptAInvitation(spaceNamea);
+    info("Check Elements of the space Description portlet");
+    spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(spaceDesa, DATA_NAME_USER1, null, null, null, null, null);
     spaceManagement.editLayout("Add");
+    spaceManagement.editLayout("Delete");
     manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    homePagePlatform.goToMySpaces();
+    spaceManagement.searchSpace(spaceNamea);
+    spaceManagement.accessToSearchedSpace();
+    info("Check The Content Of The Space Description Portlet");
+    spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(spaceDesa, DATA_NAME_USER1, null, null, null, null, null);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(spaceNamea, false);
   }
 
   @Test
-  public void test10_CheckTheSpaceCalendarPortlet() {
+  public void test08_CheckTheSpaceCalendarPortlet() throws ParseException {
     //TC21653
     info("Create new space");
     String titleEvent = "titleEvent" + getRandomNumber();
@@ -376,7 +355,7 @@ public class PortletInSpaceHomePageTestIT extends Base {
     DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     Date date = new Date();
     String dateEventAdded = format.format(date);
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String addDateEvent = simpleDateFormat.format(new Date());
     Calendar today = Calendar.getInstance();
@@ -461,26 +440,8 @@ public class PortletInSpaceHomePageTestIT extends Base {
   }
 
   @Test
-  public void test11_CheckOnlyPlatformAdministratorCanAddOrDeleteThePortletApplicationsInTheSpaceHomePage() {
-    //TC21654
-    String spaceNamea = "spaceNamea" + getRandomNumber();
-    String spaceDesa = "descriptiona" + getRandomNumber();
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
-    spaceSettingManagement.inviteUser(DATA_USER3, false, "");
-    spaceManagement.editLayout("Add");
-    spaceManagement.editLayout("Delete");
-    manageLogInOut.signIn(DATA_USER3, password);
-    spaceManagement.editLayout("Add");
-    spaceManagement.editLayout("Delete");
-    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(spaceNamea, false);
-  }
-
-  @Test
-  public void test12_CheckPopupDisplayWhenMouseOverTheAvatarWhoIsOnline() {
-    //TC21655
+  public void test09_CheckPopupDisplayWhenMouseOverTheAvatarWhoIsOnline() {
+    //TC21655 //TC21658
     String spaceNamea = "spaceNamea" + getRandomNumber();
     String spaceDesa = "descriptiona" + getRandomNumber();
     String jobTitleFirstUser = "Business Analyst";
@@ -493,6 +454,9 @@ public class PortletInSpaceHomePageTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.acceptAInvitation(spaceNamea);
     spaceManagement.checkOnlineUserJobTitle(DATA_USER1, jobTitleFirstUser);
+    info("Check Who Is Online Portlet Dimensions");
+    spaceManagement.checkOnlineUsers(DATA_USER1);
+    spaceManagement.checkWhoIsOnlinePortletDimensions(DATA_USER1);
     manageLogInOut.signIn(DATA_USER3, password);
     homePagePlatform.goToMySpaces();
     spaceManagement.acceptAInvitation(spaceNamea);
@@ -503,64 +467,13 @@ public class PortletInSpaceHomePageTestIT extends Base {
   }
 
   @Test
-  public void test13_CheckThePaddingOfDescriptionPortlet() {
-    //TC21656
-    info("create some spaces");
-    String spaceNamea = "spaceNamea" + getRandomNumber();
-    String spaceDesa = "descriptiona" + getRandomNumber();
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
-    spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(spaceDesa, DATA_NAME_USER1, null, null, null, null, null);
-    info("Check the padding of Description portlet");
-    spaceManagement.checkDescriptionPortletPadding();
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(spaceNamea, false);
-  }
-
-  @Test
-  public void test14_CheckTheManagerTitleDimensions() {
-    //TC21657
-    info("create some spaces");
-    String spaceNamea = "spaceNamea" + getRandomNumber();
-    String spaceDesa = "descriptiona" + getRandomNumber();
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
-    spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(spaceDesa, DATA_NAME_USER1, null, null, null, null, null);
-    info("Check Manager Title Dimensions");
-    spaceManagement.checkManagerTitleDimensions();
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(spaceNamea, false);
-  }
-
-  @Test
-  public void test15_CheckWhoIsOnlinePortletDimensions() {
-    //TC21658
-    info("create new space");
-    String space = "space" + getRandomNumber();
-    String spaceDesa = "descriptiona" + getRandomNumber();
-    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
-    spaceManagement.changeStatus("Available");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, spaceDesa);
-    spaceSettingManagement.inviteUser(DATA_USER3, false, "");
-    manageLogInOut.signIn(DATA_USER3, password);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.acceptAInvitation(space);
-    spaceManagement.checkOnlineUsers(DATA_USER1);
-    spaceManagement.checkWhoIsOnlinePortletDimensions(DATA_USER1);
-    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space, false);
-  }
-
-  @Test
-  public void test16_CheckHeaderDimensionAndPaddingForCalendarPortlet() {
-    //TC21659
+  public void test10_CheckHeaderDimensionAndPaddingThenNoSettingsButtonIsDisplayedForCalendarPortlet() throws ParseException {
+    //TC21659 //TC21660
     info("create some spaces");
     String spaceNamea = "spaceNamea" + getRandomNumber();
     String spaceDesa = "descriptiona" + getRandomNumber();
     String titleEvent = "titleEvent" + getRandomNumber();
-    String pattern = "MM-dd-yyyy";
+    String pattern = "MM/dd/yyyy";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String dateEvent = simpleDateFormat.format(new Date());
     homePagePlatform.goToMySpaces();
@@ -584,42 +497,10 @@ public class PortletInSpaceHomePageTestIT extends Base {
     spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(spaceDesa, DATA_NAME_USER1, null, null, null, null, null);
     info("Check Calendar Portlet");
     spaceManagement.checkCalendarPortletInSpaceHomePage();
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(spaceNamea, false);
-  }
-
-  @Test
-  public void test17_CheckNoSettingsButtonIsDisplayedForCalendarPortlet() {
-    //TC21660
-    info("create some spaces");
-    String spaceNamea = "spaceNamea" + getRandomNumber();
-    String spaceDesa = "descriptiona" + getRandomNumber();
-    String titleEvent = "titleEvent" + getRandomNumber();
-    String pattern = "MM-dd-yyyy";
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-    String dateEvent = simpleDateFormat.format(new Date());
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(spaceNamea, spaceDesa);
-    spaceManagement.goToAgendaTab();
-    info("Add an event in personal calendar");
-    ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW.contextClick();
-    homePagePlatform.refreshUntil($(ELEMENT_BUTTON_EVENT), Condition.visible, 1000);
-    executeJavaScript("window.scrollBy(0,-2000)", "");
-    eventManagement.goToAddEventFromActionBar();
-    eventManagement.checkEventPopUp(dateEvent, DATA_NAME_USER1, DATA_USER1);
-    info("Add event");
-    ELEMENT_EVENT_TITLE_DRAWER.setValue(titleEvent);
-    eventManagement.saveQuickAddEvent();
-    calendarHomePage.verifyIsPresentEventTask(titleEvent,
-            CalendarHomePage.selectViewOption.DAY,
-            CalendarHomePage.selectDayOption.DETAILTIME);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.searchSpace(spaceNamea);
-    spaceManagement.accessToSearchedSpace();
-    spaceManagement.checkSpaceNameAndDescriptionSpaceManagerNameTitleEventNameAndDateAndToolTips(spaceDesa, DATA_NAME_USER1, null, null, null, null, null);
     info("Check No Settings Button Display For Calendar");
     spaceManagement.checkNoSettingsButtonDisplayForCalendar();
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(spaceNamea, false);
   }
+
 }

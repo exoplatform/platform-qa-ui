@@ -10,8 +10,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_CONNECTION_EVERYONE_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.ELEMENT_ANSWER_PORTLET;
-import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.ELEMENT_FAQ_QUESTION_LIST;
+import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_CALENDAR_WORKING_PANEL;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ADDNEWSPACE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -37,7 +36,6 @@ public class HomePagePlatform {
     $(ELEMENT_WIKI_LINK_PLF).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_WIKI_LINK_PLF).click();
     refreshUntil($(ELEMENT_WIKI_LINK_PLF), Condition.visible, 500);
-    sleep(Configuration.timeout);
   }
 
   public void goToChat() {
@@ -63,7 +61,7 @@ public class HomePagePlatform {
    */
   public void goToPeople() {
     info("--Go to People--");
-    $(ELEMENT_PEOPLE_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_PEOPLE_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
   }
 
@@ -72,10 +70,8 @@ public class HomePagePlatform {
    */
   public void goToHomePage() {
     info("Click on Home link of intranet page");
-    sleep(Configuration.timeout);
     executeJavaScript("window.scrollBy(0,-5500)", "");
-    sleep(Configuration.collectionsTimeout);
-    $(ELEMENT_HOME_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_HOME_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout).click();
   }
 
   /**
@@ -145,9 +141,10 @@ public class HomePagePlatform {
   public void goToConnections() {
     info("--Go to Connections page---");
     info("Click on Connection link");
-    $(ELEMENT_CONNECTIONS_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).parent().click();
+    $(ELEMENT_CONNECTIONS_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).parent().click();
     info("Verify that the connections portlet is shown");
     refreshUntil($(ELEMENT_CONNECTION_EVERYONE_TITLE), Condition.visible, 500);
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     info("The connections portlet is shown successfully");
   }
 

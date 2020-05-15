@@ -5,6 +5,9 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Configuration.*;
+
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -57,27 +60,27 @@ public class ECMS_Permission {
     if (user == "user") {
       info("User is a user");
       info("Click on Select User button");
-      $(ELEMENT_PERMISSION_SELECTUSER).waitUntil(Condition.visible, Configuration.timeout).click();
+      $(ELEMENT_PERMISSION_SELECTUSER).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
       info("Click on Add User button");
-      sleep(2000);
-      $(ELEMENT_SEARCH_USER_INPUT).setValue(name);
-      $(byXpath("//span[@class='searchByUser']//a[@data-original-title='Quick Search']")).waitUntil(Condition.visible,Configuration.timeout).click();
-      $(By.xpath((ELEMENT_PERMISSION_USER_ADDUSER).replace("${name}", name))).click();
+      $(ELEMENT_SEARCH_USER_INPUT).waitUntil(Condition.visible, openBrowserTimeoutMs).setValue(name);
+      $(byXpath("//span[@class='searchByUser']//a[@data-original-title='Quick Search']")).waitUntil(visible,openBrowserTimeoutMs).click();
+      $(By.xpath((ELEMENT_PERMISSION_USER_ADDUSER).replace("${name}", name))).waitUntil(visible, openBrowserTimeoutMs).click();
     }
     if (user == "membership") {
       info("User is a membership");
       info("Type a mebership for textbox user");
-      $(ELEMENT_PERMISSION_TEXTBOXUSER).setValue( "" + opt[0] + ":/" + opt[1] + "");
+      $(ELEMENT_PERMISSION_TEXTBOXUSER).waitUntil(Condition.visible, openBrowserTimeoutMs).setValue( "" + opt[0] + ":/" + opt[1] + "");
     }
     if (user == "all") {
       info("User is all");
       info("Click on Select everyone button");
-      $(ELEMENT_PERMISSION_SELECTEVERYONE).click();
+      $(ELEMENT_PERMISSION_SELECTEVERYONE).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     }
     info("Check on checkbox for reading, modifying and removing");
+    sleep(1000);
     selectCheckBoxRight(read, modify, remove);
     info("Click on Save button");
-    $(ELEMENT_PERMISSION_SAVE).click();
+    $(ELEMENT_PERMISSION_SAVE).waitUntil(visible, openBrowserTimeoutMs).click();
     info("Finished changing right");
   }
 
