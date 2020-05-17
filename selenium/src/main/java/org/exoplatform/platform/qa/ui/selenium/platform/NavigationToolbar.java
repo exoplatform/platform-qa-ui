@@ -495,7 +495,6 @@ public class NavigationToolbar {
     info("Go to Intranet Notification");
     $(ELEMENT_INTRANET_NOTIFICATION_BELL).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     $(ELEMENT_NOTIFICATION_DROPDOWN).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
-    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     info("The elemnt is shown successfully");
   }
 

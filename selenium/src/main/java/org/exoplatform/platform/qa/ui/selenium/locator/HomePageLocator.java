@@ -223,7 +223,14 @@ public final class HomePageLocator {
 
   public static final String          ELEMENT_COMMENT_BLOC                                                 = "CommentBlock{id}1";
 
+
   public static final SelenideElement ELEMENT_TAB_LINK                                                     =
+                                                        $(byXpath("//*[@id=\"ActivityComposerExt\"]/div[2]"));
+
+  public static final SelenideElement ELEMENT_SPACE_FILE_TAB                                                     =
+                                                       $(byXpath("//*[@id=\"ActivityComposerExt\"]/div[3]"));
+
+  public static final SelenideElement ELEMENT_ACTIVITY_COMPOSER_FILE_TAB =
                                                        $(byXpath("//*[@id=\"ActivityComposerExt\"]/div[2]"));
 
   public static final SelenideElement ELEMENT_CONTAINER_DOCUMENT                                           =

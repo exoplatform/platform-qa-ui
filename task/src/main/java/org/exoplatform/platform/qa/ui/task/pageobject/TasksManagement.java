@@ -80,7 +80,7 @@ public class TasksManagement {
   public void deleteComment (String task, String comment) {
     $(byText(task)).click();
     $(byText(comment)).waitUntil(Condition.visible,Configuration.timeout).hover();
-    $(byText(comment)).parent().parent().parent().find(byClassName("uiIconTrashMini")).click();
+    $(byText(comment)).parent().parent().parent().find(byClassName("uiIconTrashMini")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     refresh();
     $(byText(comment)).shouldNot(Condition.exist);
   }

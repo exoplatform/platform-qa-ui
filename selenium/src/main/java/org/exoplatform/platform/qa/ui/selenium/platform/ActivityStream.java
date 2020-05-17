@@ -304,7 +304,7 @@ public class ActivityStream {
         ELEMENT_TAB_LINK.click();
         refresh();
         addText(text);
-        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.timeout);
+        ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, openBrowserTimeoutMs);
         ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
         ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.timeout);
         $(ELEMENT_COMPOSER_SHARE_BUTTON).should(Condition.be(Condition.enabled));
@@ -1185,6 +1185,7 @@ public class ActivityStream {
                 .parent()
                 .getAttribute("id")
                 .split("commentContainercomment")[1];
+        sleep(1000);
         $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).waitUntil(visible, openBrowserTimeoutMs).click();
     }
 

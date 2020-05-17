@@ -156,6 +156,7 @@ public final class ActivityStreamLocator {
     public static final SelenideElement ELEMENT_INPUT_ACTIVITY=$(byXpath("/html/body"));
     public static final SelenideElement ELEMENT_INPUT_COMMENT=$(byXpath("/html/body"));
     public static final String ELEMENT_INCON_LIKE_COMMENT="LikeCommentLinkcomment{id}";
+    public static final String ELEMENT_INCON_LIKE_COMMENT_PREVIEW="likeCommentCount_comment{id}";
     public static final String ELEMENT_INCON_DELETE_COMMENT="DeleteCommentButtoncomment{id}";
     public static final String ELEMENT_lABEL_REPLY_COMMENT="CommentLinkcomment{id}";
     public static final String ELEMENT_VIEW_ALL_REPLIES_LINK="SubCommentShowAll_comment{id}";

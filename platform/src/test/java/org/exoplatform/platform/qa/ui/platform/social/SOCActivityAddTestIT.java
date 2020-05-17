@@ -54,47 +54,46 @@ public class SOCActivityAddTestIT extends Base {
   }
 
   @Test
+  @Tag("PLF-7912")
   @Tag("sabis")
-  public void test02_Upload_File_Without_Text() {
-    ELEMENT_TAB_LINK.click();
-    refresh();
-    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.timeout);
+  public void test01_UploadFileWithoutTextThenCheckIconTitleWhenLikeActivity() {
+    String activity1 = "activity1" + getRandomNumber();
+
+    info("Upload File Without Text");
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
+    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_COMPOSER_SHARE_BUTTON).should(Condition.be(Condition.enabled));
     $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
-    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.disabled,Configuration.timeout);
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.disabled,Configuration.openBrowserTimeoutMs);
     String id=$(byAttribute("data-original-title", "eXo-Platform.png")).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
     $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}",id))).waitUntil(Condition.visible,Configuration.timeout).click();
-    $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}",id))).click();
+    $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}",id))).waitUntil(Condition.visible,Configuration.timeout).click();
     ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
     $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
                                                              .parent()
                                                              .parent()
                                                              .parent()
-                                                             .waitUntil(Condition.disappear, Configuration.openBrowserTimeoutMs);
-  }
+                                                             .waitUntil(Condition.disappear, Configuration.timeout);
 
-  @Test
-  @Tag("PLF-7912")
-  @Tag("sabis")
-  public void test02_CheckIconTitleWhenLikeActivity() {
-    String activity1 = "activity1" + getRandomNumber();
-    ELEMENT_TAB_LINK.waitUntil(Condition.visible,Configuration.timeout).click();
+    info("Check Icon Title When Like Activity");
+    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.waitUntil(Condition.visible,Configuration.timeout).click();
     refresh();
-    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.openBrowserTimeoutMs);
+    ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.be(Condition.visible), Configuration.timeout);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
     activityStream.addActivity(activity1, "");
-    String id = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
-    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", id))).find(byClassName("infoFile"))
-                                                         .waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs)
-                                                         .click();
-    ELEMENT_ICON_LIKE_IN_PREVIEW_MODE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    String idI = $(byText(activity1)).parent().parent().getAttribute("id").split("ActivityContextBox")[1];
+    $(byId(ELEMENT_DOCUMENT_PREVIEW.replace("{id}", idI))).find(byClassName("infoFile"))
+            .waitUntil(Condition.visible, Configuration.timeout)
+            .click();
+    ELEMENT_ICON_LIKE_IN_PREVIEW_MODE.click();
     ELEMENT_ICON_LIKE_IN_PREVIEW_MODE.waitUntil(Condition.have(Condition.attribute("data-original-title", "Unlike")),
-                                                Configuration.timeout);
-    ELEMENT_CLOSE_DOCUMENT_PREVIEW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+            Configuration.timeout);
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW.click();
     activityStream.deleteactivity(activity1);
 
   }
+
 }

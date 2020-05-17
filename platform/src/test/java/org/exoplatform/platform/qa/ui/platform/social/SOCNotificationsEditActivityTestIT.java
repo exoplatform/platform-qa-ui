@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.social;
 
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
@@ -109,43 +108,7 @@ public class SOCNotificationsEditActivityTestIT extends Base {
   }
 
   @Test
-  public void test01_DisplayEditActivityOnsiteNotification() {
-
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String password = "123456";
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    manageLogInOut.signIn(username1, password);
-    navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.verifyLabelNotificationType("Someone comments on one of my activities");
-    myNotificationsSetting.verifyNotificationDefault(Edit_Activity);
-    manageLogInOut.signIn(username, PASS_ROOT);
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-  }
-
-  @Test
-  public void test02_DisplayEditCommentOnsiteNotification() {
-
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String password = "123456";
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    manageLogInOut.signIn(username1, password);
-    navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.verifyLabelNotificationType("Someone edits a comment");
-    myNotificationsSetting.verifyNotificationDefault(Edit_Comment);
-    manageLogInOut.signIn(username, PASS_ROOT);
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-  }
-
-  @Test
-  public void test03_CHeckOnSiteNotifWhenEditActivity() {
+  public void test01_CheckOnSiteNotifWhenEditActivityThenWhenEditCommentTest() {
 
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
@@ -153,6 +116,9 @@ public class SOCNotificationsEditActivityTestIT extends Base {
     String activity1 = "activity1" + getRandomNumber();
     String newactivity = "newactivity" + getRandomString();
     String comment1 = "comment1" + getRandomString();
+    String comment2 = "comment2" + getRandomString();
+    String newcomment1 = "newcomment1" + getRandomNumber();
+
     info("Add user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
@@ -160,19 +126,38 @@ public class SOCNotificationsEditActivityTestIT extends Base {
     connectionsManagement.connectToAUser(username1);
     homePagePlatform.goToHomePage();
     activityStream.addActivity(activity1, "");
+    activityStream.commentActivity(activity1, comment1);
     manageLogInOut.signIn(username1, password);
+    navigationToolbar.goToMyNotifications();
+    info("Display Edit Comment On Site Notification");
+    myNotificationsSetting.verifyLabelNotificationType("Someone comments on one of my activities");
+    myNotificationsSetting.verifyNotificationDefault(Edit_Activity);
+    info("Display Edit Comment On Site Notification");
+    myNotificationsSetting.verifyLabelNotificationType("Someone edits a comment");
+    myNotificationsSetting.verifyNotificationDefault(Edit_Comment);
     homePagePlatform.goToConnections();
+    sleep(1000);
     connectionsManagement.acceptAConnection(username, username + " " + username);
     refresh();
     homePagePlatform.goToHomePage();
-    activityStream.commentActivity(activity1, comment1);
+    activityStream.gotoActivityViewer(activity1);
+    activityStream.commentActivity(activity1, comment2);
+    manageLogInOut.signIn(username, PASS_ROOT);
+    activityStream.editComment(comment1, newcomment1);
+    manageLogInOut.signIn(username1, password);
+    navigationToolbar.goToIntranetNotification();
+    info("Check On Site Notif When Edit Comment");
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(DATA_NAME_ROOT))
+            .parent()
+            .shouldHave(Condition.text(DATA_NAME_ROOT + " edited a comment on your post."));
     manageLogInOut.signIn(username, PASS_ROOT);
     activityStream.editActivity(activity1, newactivity);
+    info("Check On Site Notif When Edit Activity");
     manageLogInOut.signIn(username1, password);
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(DATA_NAME_ROOT))
-                                    .parent()
-                                    .shouldHave(Condition.text(DATA_NAME_ROOT + " edited a post."));
+            .parent()
+            .shouldHave(Condition.text(DATA_NAME_ROOT + " edited a post."));
     manageLogInOut.signIn(username, PASS_ROOT);
     activityStream.deleteactivity(activity1 + newactivity);
     navigationToolbar.goToManageCommunity();
@@ -181,82 +166,7 @@ public class SOCNotificationsEditActivityTestIT extends Base {
   }
 
   @Test
-  public void test04_CHeckOnSiteNotifWhenEditComment() {
-
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String password = "123456";
-    String activity1 = "activity1" + getRandomNumber();
-    String comment1 = "comment1" + getRandomNumber();
-    String newcomment1 = "newcomment1" + getRandomNumber();
-    String comment2 = "comment2" + getRandomString();
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(username1);
-    homePagePlatform.goToHomePage();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    manageLogInOut.signIn(username1, password);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(username, username + " " + username);
-    refresh();
-    homePagePlatform.goToHomePage();
-    activityStream.commentActivity(activity1, comment2);
-    manageLogInOut.signIn(username, PASS_ROOT);
-    activityStream.editComment(comment1, newcomment1);
-    manageLogInOut.signIn(username1, password);
-    navigationToolbar.goToIntranetNotification();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(DATA_NAME_ROOT))
-                                    .parent()
-                                    .shouldHave(Condition.text(DATA_NAME_ROOT + " edited a comment on your post."));
-    manageLogInOut.signIn(username, PASS_ROOT);
-    activityStream.deleteactivity(activity1);
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-
-  }
-
-  @Test
-  public void test05_DisplayOnsiteNotificationForAllActivitvitisCommentsEdited() {
-
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String password = "123456";
-    String activity1 = "activity1" + getRandomNumber();
-    String comment1 = "comment1" + getRandomNumber();
-    String newcomment1 = "newcomment1" + getRandomNumber();
-    String comment2 = "comment2" + getRandomString();
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(username1);
-    homePagePlatform.goToHomePage();
-    activityStream.addActivity(activity1, "");
-    activityStream.commentActivity(activity1, comment1);
-    manageLogInOut.signIn(username1, password);
-    homePagePlatform.goToConnections();
-    connectionsManagement.acceptAConnection(username, username + " " + username);
-    refresh();
-    homePagePlatform.goToHomePage();
-    activityStream.commentActivity(activity1, comment2);
-    manageLogInOut.signIn(username, PASS_ROOT);
-    activityStream.editComment(comment1, newcomment1);
-    manageLogInOut.signIn(username1, password);
-    navigationToolbar.goToIntranetNotification();
-    $(ELEMENT_VIEW_ALL_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byText(DATA_NAME_ROOT)).parent().shouldHave(Condition.text(DATA_NAME_ROOT + " edited a comment on your post."));
-    manageLogInOut.signIn(username, PASS_ROOT);
-    activityStream.deleteactivity(activity1);
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-
-  }
-
-  @Test
-  public void test06_DisplayOnsiteNotificationForEveryActivityEdited() {
+  public void test02_DisplayOnsiteNotificationForEveryActivityEditedThenForAllActivitiesCommentsEdited() {
 
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
@@ -265,8 +175,11 @@ public class SOCNotificationsEditActivityTestIT extends Base {
     String activity2 = "activity2" + getRandomNumber();
     String newactivity = "newactivity" + getRandomString();
     String newactivity2 = "newactivity2" + getRandomString();
+    String comment = "comment" + getRandomNumber();
     String comment1 = "comment1" + getRandomNumber();
     String comment2 = "comment2" + getRandomNumber();
+    String newcomment1 = "newcomment1" + getRandomNumber();
+
     info("Add user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
@@ -275,7 +188,13 @@ public class SOCNotificationsEditActivityTestIT extends Base {
     homePagePlatform.goToHomePage();
     activityStream.addActivity(activity1, "");
     activityStream.addActivity(activity2, "");
+    activityStream.commentActivity(activity1, comment);
     manageLogInOut.signIn(username1, password);
+    info("Check On site Notification Edit Activity Value By Default");
+    navigationToolbar.goToMyNotifications();
+    myNotificationsSetting.verifyNotificationDefault(Edit_Activity);
+    info("Check On site Notification Edit Comment Value By Default");
+    myNotificationsSetting.verifyNotificationDefault(Edit_Comment);
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(username, username + " " + username);
     refresh();
@@ -283,14 +202,24 @@ public class SOCNotificationsEditActivityTestIT extends Base {
     activityStream.commentActivity(activity1, comment1);
     homePagePlatform.goToHomePage();
     activityStream.commentActivity(activity2, comment2);
+    info("Display On site Notification For Every Activity Edited");
     manageLogInOut.signIn(username, PASS_ROOT);
     activityStream.editActivity(activity1, newactivity);
     activityStream.editActivity(activity2, newactivity2);
     manageLogInOut.signIn(username1, password);
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(DATA_NAME_ROOT))
-                                    .parent()
-                                    .shouldHave(Condition.text(DATA_NAME_ROOT + " edited a post. "));
+            .parent()
+            .shouldHave(Condition.text(DATA_NAME_ROOT + " edited a post. "));
+
+    info("Display On Site Notification For All Activities Comments Edited");
+    manageLogInOut.signIn(username, PASS_ROOT);
+    activityStream.editComment(comment, newcomment1);
+    manageLogInOut.signIn(username1, password);
+    navigationToolbar.goToIntranetNotification();
+    $(ELEMENT_VIEW_ALL_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(byText(DATA_NAME_ROOT)).parent().shouldHave(Condition.text(DATA_NAME_ROOT + " edited a comment on your post."));
+
     manageLogInOut.signIn(username, PASS_ROOT);
     activityStream.deleteactivity(activity1 + newactivity);
     activityStream.deleteactivity(activity2 + newactivity2);
@@ -298,37 +227,4 @@ public class SOCNotificationsEditActivityTestIT extends Base {
     addUsers.deleteUser(username1);
   }
 
-  @Test
-  public void test07_CheckOnsiteNotificationEditActivityValueByDefault() {
-
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String password = "123456";
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    manageLogInOut.signIn(username1, password);
-    navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.verifyNotificationDefault(Edit_Activity);
-    manageLogInOut.signIn(username, PASS_ROOT);
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-  }
-
-  @Test
-  public void test08_CheckOnsiteNotificationEditCommentValueByDefault() {
-
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String password = "123456";
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    manageLogInOut.signIn(username1, password);
-    navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.verifyNotificationDefault(Edit_Comment);
-    manageLogInOut.signIn(username, PASS_ROOT);
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-  }
 }
