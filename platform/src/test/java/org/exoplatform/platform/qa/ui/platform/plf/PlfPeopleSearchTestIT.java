@@ -60,47 +60,9 @@ public class PlfPeopleSearchTestIT extends Base {
     }
 
     @Test
-    public void test09_SearchUserOnPeopleWithSpecialCaractor() throws Exception {
+    public void test01_SearchUserOnPeopleWithSpecialCharacterThenWithAccentThenCheckDatesExperienceDisplayedInOrder() throws Exception {
+
         info("JIRA_SOC-5775");
-        String username = "username" + getRandomNumber();
-        String password = "password" + getRandomNumber();
-        String firstName = "user-name" + getRandomString();
-        String lastName = getRandomString();
-        String email = firstName + getRandomNumber() + "@test.com";
-        getNavigationToolbar().goToAddUser();
-        info("Create new user");
-        getUseraddmanagement().addUser(username, password, email, firstName, lastName);
-        info("Search user on People");
-        getHomePagePlatform().goToConnections();
-        getConnectionsManagement().searchPeople(firstName, "","", "");
-        getHomePagePlatform().refreshUntil($(byText(firstName+" "+lastName)),Condition.visible,1000);
-
-        info("Test Case 10: Delete user");
-        getNavigationToolbar().goToManageCommunity();
-        getUserandgroupmanagement().deleteUser(username);
-    }
-
-    @Test
-    public void test10_SearchUserOnPeapleWithaccent() throws Exception {
-        String username = "username" + getRandomNumber();
-        String password = "password" + getRandomNumber();
-        String firstName = "éric" + getRandomString();
-        String lastName = getRandomString();
-        String email = firstName + getRandomNumber() + "@test.com";
-        getNavigationToolbar().goToAddUser();
-        info("Create new user");
-        getUseraddmanagement().addUser(username, password, email, firstName, lastName);
-        info("Search user on People");
-        getHomePagePlatform().goToConnections();
-        getConnectionsManagement().searchPeople(firstName, "", "", "");
-        getHomePagePlatform().refreshUntil($(byText(firstName+" "+lastName)),Condition.visible,1000);
-        info("Test Case 10: Delete user");
-        getNavigationToolbar().goToManageCommunity();
-        getUserandgroupmanagement().deleteUser(username);
-    }
-
-    @Test
-    public void test11_CheckDatesExperienceDisplayedInOrder() throws Exception {
         //8238
         String organization = "organization" + getRandomString();
         String jobTitle = "jobTitle" + getRandomString();
@@ -108,6 +70,36 @@ public class PlfPeopleSearchTestIT extends Base {
         String skill = "skill" + getRandomString();
         String dStart = getDate(-7, "MM/dd/yyyy");
         String dEnd = getDate(-1, "MM/dd/yyyy");
+        String username = "username" + getRandomNumber();
+        String password = "password" + getRandomNumber();
+        String firstName = "user-name" + getRandomString();
+        String lastName = getRandomString();
+        String email = firstName + getRandomNumber() + "@test.com";
+        String username2 = "username" + getRandomNumber();
+        String password2 = "password" + getRandomNumber();
+        String firstName2 = "éric" + getRandomString();
+        String lastName2 = getRandomString();
+        String email2 = firstName + getRandomNumber() + "@test.com";
+
+        getNavigationToolbar().goToAddUser();
+        info("Create new user");
+        getUseraddmanagement().addUser(username, password, email, firstName, lastName);
+        getUseraddmanagement().addUser(username2, password2, email2, firstName2, lastName2);
+
+        info("Search user on People");
+        getHomePagePlatform().goToConnections();
+        getConnectionsManagement().searchPeople(firstName, "", "", "");
+        getHomePagePlatform().refreshUntil($(byText(firstName + " " + lastName)), Condition.visible, 1000);
+
+        info("Search user on People");
+        getHomePagePlatform().goToConnections();
+        getConnectionsManagement().searchPeople(firstName2, "", "", "");
+        getHomePagePlatform().refreshUntil($(byText(firstName2 + " " + lastName2)), Condition.visible, 1000);
+        info("Test Case 10: Delete user");
+        getNavigationToolbar().goToManageCommunity();
+        getUserandgroupmanagement().deleteUser(username);
+        getUserandgroupmanagement().deleteUser(username2);
+
         navigationToolbar.goToMyProfile();
         userProfilePage.editUserProfile();
         userProfilePage.updateExperience(organization, jobTitle, jobDetail, skill, dStart, dEnd, false);
@@ -120,6 +112,7 @@ public class PlfPeopleSearchTestIT extends Base {
         $(byXpath(ELEMENT_STARTDATE_INFO.replace("${date}", dStart))).isDisplayed();
         $(byXpath(ELEMENT_ENDDATE_INFO.replace("${date}", dEnd))).isDisplayed();
         userProfilePage.verifyEditProfileDatesExperienceDisplayedInOrder(dStart,dEnd);
+
     }
 
     public NavigationToolbar getNavigationToolbar() {
@@ -161,6 +154,7 @@ public class PlfPeopleSearchTestIT extends Base {
     public void setConnectionsManagement(ConnectionsManagement connectionsManagement) {
         this.connectionsManagement = connectionsManagement;
     }
+
 }
 
 

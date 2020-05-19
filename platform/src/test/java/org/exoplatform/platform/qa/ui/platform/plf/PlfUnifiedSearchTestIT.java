@@ -169,7 +169,7 @@ public class PlfUnifiedSearchTestIT extends Base {
     confirm();
     switchToParentWindow();
     $(ELEMENT_EDIT_PORTLET_FORM_CLOSE_BUTTON).click();
-    ELEMENT_CLOSE_PORTLET.click();
+    $(byXpath("//*[@class='uiIconClose pull-right']")).click();
   }
 
   /**
@@ -191,8 +191,28 @@ public class PlfUnifiedSearchTestIT extends Base {
   public void test03_SortSearchResult() {
     String name = "space" + getRandomNumber();
     String wiki = "wiki" + getRandomNumber();
-    info("Test 3: Sort search result");
+
+    info("Filter search");
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToAddBlankPage();
+    richTextEditor.addSimplePage(wiki, "");
+    sleep(1000);
+    wikiManagement.saveAddPage();
+    homePagePlatform.goToHomePage();
+    refresh();
+    navigationToolbar.goToQuickSearch();
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(wiki);
+    ELEMENT_QUICKSEARCHRESULT_SEE_ALL_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_SEARCHRESULT_ALLTYPECHECK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_SEARCHRESULT_WIKITYPECHECK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_RESULT_SEARCH.waitUntil(Condition.visible, Configuration.timeout).find(byText(wiki)).should(Condition.exist);
+    homePagePlatform.goToWiki();
+    wikiHomePage.deleteWiki(wiki);
+
+    info("Sort search result");
     homePagePlatform.goToMySpaces();
+    sleep(1000);
     spaceManagement.addNewSpaceSimple(name, "");
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();
@@ -214,43 +234,6 @@ public class PlfUnifiedSearchTestIT extends Base {
   }
 
   /**
-   * <li>Case ID:120871.</li>
-   * <li>Test Case Name: Filter search.</li>
-   * <li>Pre-Condition: Some contents such as wiki, events, tasks, people,
-   * pages...are existed, and contain text "cloud"</li>
-   * <li>Post-Condition:</li> Step Number: 1 Step Name: Quick search Step
-   * Description: - Login and Open intranet home or ACME homepage - Type the text
-   * "cloud" in search box in top navigation - Press Enter key, or click Search
-   * icon Input Data: Expected Outcome: - By default, quick search returns results
-   * for items located in the current site only, as attachment SearchResult.png
-   * Step number: 2 Step Name: Filter search Step Description: On filter area,
-   * click on fields that you want to search Input Data: Expected Outcome: The
-   * page will search only selected fields for results
-   */
-
-  @Test
-  public void test04_FilterSearch() {
-    String wiki = "wiki" + getRandomNumber();
-    info("Test 4: Filter search");
-    homePagePlatform.goToWiki();
-    wikiHomePage.goToAddBlankPage();
-    richTextEditor.addSimplePage(wiki, "");
-    wikiManagement.saveAddPage();
-    homePagePlatform.goToHomePage();
-    refresh();
-    navigationToolbar.goToQuickSearch();
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(wiki);
-    ELEMENT_QUICKSEARCHRESULT_SEE_ALL_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-    $(ELEMENT_SEARCHRESULT_ALLTYPECHECK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-    $(ELEMENT_SEARCHRESULT_WIKITYPECHECK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_RESULT_SEARCH.waitUntil(Condition.visible, Configuration.timeout).find(byText(wiki)).should(Condition.exist);
-    homePagePlatform.goToWiki();
-    wikiHomePage.deleteWiki(wiki);
-
-  }
-
-  /**
    * <li>Case ID:120875.</li>
    * <li>Test Case Name: Configure Search page.</li>
    * <li>Pre-Condition:</li>
@@ -264,7 +247,7 @@ public class PlfUnifiedSearchTestIT extends Base {
    * Edit Mode settings screen is shown. - value is save - Quit the Page editor
    */
   @Test
-  public void test05_ConfigureSearchPage() {
+  public void test04_ConfigureSearchPage() {
     info("Test 5: Configure Search page");
 
     homePagePlatform.goToHomePage();
@@ -303,7 +286,7 @@ public class PlfUnifiedSearchTestIT extends Base {
    * settings.
    */
   @Test
-  public void test06_AdministrateTheUnifiedSearchEngine() {
+  public void test05_AdministrateTheUnifiedSearchEngine() {
     info("Test 6: Administrate the unified search engine");
     String wiki = "wiki" + getRandomNumber();
     info("Test 4: Filter search");
@@ -357,7 +340,7 @@ public class PlfUnifiedSearchTestIT extends Base {
    */
 
   @Test
-  public void test07_SearchFiles() {
+  public void test06_SearchFiles() {
     info("Test 7: Search files");
     String activity1 = "activity1" + getRandomNumber();
     ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.waitUntil(Condition.visible,Configuration.timeout).click();
@@ -387,7 +370,7 @@ public class PlfUnifiedSearchTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
-  public void test09_SearchDiscussions() {
+  public void test07_SearchDiscussions() {
     info("Test 9: Search Discussions");
     info("Create data test");
     String nameCat = "Category" + getRandomNumber();
@@ -424,7 +407,7 @@ public class PlfUnifiedSearchTestIT extends Base {
 
   @Test
   @Tag("ECMS-7784")
-    public void test10_searchWebContentByContent() {
+    public void test08_searchWebContentByContent() {
     String name = "name" + getRandomNumber();
     String content = "content" + getRandomNumber();
     navigationToolbar.goToSiteExplorer();
@@ -451,10 +434,20 @@ public class PlfUnifiedSearchTestIT extends Base {
 
   @Test
   @Tag("FORUM-1375")
-  public void test11_SearchDiscussionInPrivateSpace() {
+  @Tag("PLF-8027")
+  public void test09_SearchDiscussionInPrivateSpace() {
+    String space = "space" + getRandomNumber();
     String space1 = "space" + getRandomNumber();
     String topic = "topic" + getRandomNumber();
     String topic1 = "topic" + getRandomNumber();
+    homePagePlatform.goToMySpaces();
+    spaceManagement.addNewSpaceSimple(space, space);
+    homePagePlatform.goToMySpaces();
+    navigationToolbar.goToQuickSearch();
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
+    spaceManagement.deleteSpace(space, false);
+    navigationToolbar.goToQuickSearch();
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpace(space1, space1, "close", "Yes", "");
     spaceHomePage.goToForumsTab();
@@ -479,23 +472,9 @@ public class PlfUnifiedSearchTestIT extends Base {
     spaceManagement.deleteSpace(space1, false);
   }
 
-  @Tag("PLF-8027")
-  @Test
-  public void test12_checkSearchBoxActivatedAfterDeleteSpace() {
-    String space = "space" + getRandomNumber();
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
-    homePagePlatform.goToMySpaces();
-    navigationToolbar.goToQuickSearch();
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
-    spaceManagement.deleteSpace(space, false);
-    navigationToolbar.goToQuickSearch();
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
-  }
-
   @Tag("PLF-8210")
   @Test
-  public void test13_checkUnifiedSearchNotWorkingWithFilesContainingDashInTheirTitles() {
+  public void test10_checkUnifiedSearchNotWorkingWithFilesContainingDashInTheirTitles() {
     //8210
     String firstUploadedFile = "key_word.doc";
     String secondUploadedFile = "key word.doc";

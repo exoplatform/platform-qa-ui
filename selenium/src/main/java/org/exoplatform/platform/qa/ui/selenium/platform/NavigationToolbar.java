@@ -77,19 +77,19 @@ public class NavigationToolbar {
   public void goToPotalSites() {
     info("--Go to Portal-->Sites--");
 
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
 
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
 
-    $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
 
     $(ELEMENT_ADMINISTRATION_PORTAL).hover();
 
-    $(ELEMENT_ADMINISTRATION_PORTAL_SITES).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_ADMINISTRATION_PORTAL_SITES).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
 
     $(ELEMENT_ADMINISTRATION_PORTAL_SITES).click();
 
-    $(ELEMENT_MANAGESITES_TITLE).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_MANAGESITES_TITLE).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
   }
 
   /**
@@ -363,10 +363,10 @@ public class NavigationToolbar {
   }
 
   public void gotoAddTask(String name) {
-    $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_ADD_TASK_CLASS_TOOLBAR.waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_TASK_ADD_TITLE.waitUntil(Condition.visible,Configuration.timeout).setValue(name);
-    ELEMENT_TASK_BUTTON_ADD.waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_ADD_TASK_CLASS_TOOLBAR.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TASK_ADD_TITLE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(name);
+    ELEMENT_TASK_BUTTON_ADD.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**

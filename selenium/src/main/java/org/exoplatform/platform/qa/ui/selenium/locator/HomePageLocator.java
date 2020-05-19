@@ -152,7 +152,7 @@ public final class HomePageLocator {
                                                                                      By.xpath("//*[text()='Confirm']");
 
   public static final By              ELEMENT_HP_GETTINGSTARTED_CONNETTOCOWORKERS_DONE                     =
-                                                                                       By.xpath("//*[@class='done']/..//*[text()='Connect to coworkers']");
+                                                                                       By.xpath("//*[@class='done']/..//*[contains(text(),'Add connections')]");
 
   public static final By              ELEMENT_HP_GETTINGSTARTED_PROFILEPAGE                                =
                                                                             By.xpath("//*[@class='uiIconAppprofile uiIconDefaultApp']");

@@ -41,10 +41,8 @@ public class HomePagePlatform {
   public void goToChat() {
     info("--Go to chat--");
     refreshUntil($(byClassName("status-dropdown")), Condition.visible, 1000);
-    sleep(Configuration.timeout);
-    $(byClassName("status-dropdown")).waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(Configuration.timeout);
-    $(byClassName("notif-chat-open-link")).waitUntil(Condition.appears, Configuration.timeout).click();
+    $(byClassName("status-dropdown")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byClassName("notif-chat-open-link")).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -52,7 +50,7 @@ public class HomePagePlatform {
    */
   public void goToDocuments() {
     info("--Go to Documents--");
-    $(ELEMENT_DOCUMENTS_LINK_PLF).click();
+    $(ELEMENT_DOCUMENTS_LINK_PLF).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 
@@ -107,7 +105,7 @@ public class HomePagePlatform {
   public void goToAllSpace() {
     info("Click on Join a space link");
     executeJavaScript("arguments[0].scrollBy(0,5000);", $(byId("LeftNavigation")));
-    $(ELEMENT_ALL_SPACE_JOIN_LINK).waitUntil(Condition.appears, Configuration.timeout).click();
+    $(ELEMENT_ALL_SPACE_JOIN_LINK).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
 
   }
 
@@ -130,8 +128,8 @@ public class HomePagePlatform {
    */
   public void goToForum() {
     info("-- Go to forum page --");
-    sleep(Configuration.timeout);
-    $(ELEMENT_FORUM_LINK_PLF).waitUntil(Condition.visible, Configuration.timeout).click();
+    sleep(1000);
+    $(ELEMENT_FORUM_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
     refresh();
   }
 
@@ -141,7 +139,7 @@ public class HomePagePlatform {
   public void goToConnections() {
     info("--Go to Connections page---");
     info("Click on Connection link");
-    $(ELEMENT_CONNECTIONS_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).parent().click();
+    $(ELEMENT_CONNECTIONS_LINK_PLF).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).parent().waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Verify that the connections portlet is shown");
     refreshUntil($(ELEMENT_CONNECTION_EVERYONE_TITLE), Condition.visible, 500);
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
@@ -165,11 +163,8 @@ public class HomePagePlatform {
    */
   public void searchUsersPeople(String user) {
     info("Enter User Name");
-    sleep(2000);
-    $(byXpath("//div[@class='selectize-input items not-full']/input[@placeholder='Name']")).setValue(user);
-    sleep(2000);
-    $(byXpath("//button[@id='SearchButton']")).waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(2000);
+    $(byXpath("//div[@class='selectize-input items not-full']/input[@placeholder='Name']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(user);
+    $(byXpath("//button[@id='SearchButton']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
