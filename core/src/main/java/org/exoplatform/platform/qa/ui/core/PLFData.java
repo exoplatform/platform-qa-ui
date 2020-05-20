@@ -34,6 +34,26 @@ public class PLFData {
 
   public static String tribe_username             = "khalil_riahi";
 
+  public static String tribe_password1             = "firas2020";
+
+  public static String tribe_username1             = "firas.bouseha";
+
+  public static String tribe_password2             = "mejri2020";
+
+  public static String tribe_username2             = "firas.mejri";
+
+  public static String tribe_password3             = "aymen2020";
+
+  public static String tribe_username3             = "aymen.khalfi";
+
+  public static String tribe_password4             = "houssem2020";
+
+  public static String tribe_username4             = "houssem.riahi";
+
+  public static String tribe_password5             = "habib";
+
+  public static String tribe_username5             = "habib2020";
+
   public static String username             = "root";
 
   public static String password             = "gtn";

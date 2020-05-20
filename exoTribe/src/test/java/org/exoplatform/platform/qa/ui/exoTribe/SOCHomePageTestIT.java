@@ -20,7 +20,7 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_WHO_LIKED_POPUP;
-import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_TRIBE_STREAM_OLD_COMPOSER_BTN;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_TRIBE_POST_ACTIVITY_BTN;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 /**
@@ -70,29 +70,15 @@ public class SOCHomePageTestIT extends BaseTribe {
 
   @Test
   public void test01_LikeActivity() {
-    String activity1 = "activity1" + getRandomNumber();
-    info("Test 1: Like Activity");
-    ELEMENT_TRIBE_STREAM_OLD_COMPOSER_BTN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    tribeActivityStream.addActivity(activity1, "");
-    /*
-     * Step Number: 1 Step Name: Step 1: Like/Unlike Activity Step Description: - Go
-     * to Intranet home - Click on Like activity in action bar part of an activity
-     * Input Data: Expected Outcome: - Like button is highlighted and the number of
-     * likers is updated
-     */
-    // get the id of the activity created
-    String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
-    // click on the like button of the activity
-    $(byXpath(ELEMENT_LIKE_BUTTON.replace("{id}", id))).click();
-    $(byXpath(ELEMENT_UNLIKE_BUTTON.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout);
-    /*
-     * Step number: 2 Step Name: Check Likes part Step Description: - Check avatar -
-     * Mouse over the avatar Input Data: Expected Outcome: - Avatar of liker is
-     * added into likes part, the oldest liker is displayed at the right and the
-     * newest at the left. - Profile pictures of users popup
-     */
 
-    ELEMENT_WHO_LIKED_POPUP.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    String activity1 = "activity1" + getRandomNumber();
+
+    info("Test 1: Like Activity");
+    homePagePlatform.goToStreamPageTribe();
+    ELEMENT_TRIBE_POST_ACTIVITY_BTN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    tribeActivityStream.addTribeActivity(activity1, "");
+
+    tribeActivityStream.likeActivity(activity1);
     // click on the activity to appear the delete button
     tribeActivityStream.deleteactivity(activity1);
   }
@@ -103,6 +89,7 @@ public class SOCHomePageTestIT extends BaseTribe {
    */
   @Test
   public void test02_AddComment() {
+
     info("Test 2: Add comment");
     /*
      * Step Number: 1 Step Name: Add comment for activity Step Description: - Go to
@@ -113,22 +100,11 @@ public class SOCHomePageTestIT extends BaseTribe {
 
     String activity1 = "activity1" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
-    ELEMENT_TRIBE_STREAM_OLD_COMPOSER_BTN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    tribeActivityStream.addActivity(activity1, "");
-    // get the id of activity created
-    String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
-    // click on comment link
-    $(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-    // insert comment
-    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
-    sleep(1000);
-    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-    // click on the button comment
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).pressEnter().waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
+    homePagePlatform.goToStreamPageTribe();
+    ELEMENT_TRIBE_POST_ACTIVITY_BTN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    tribeActivityStream.addTribeActivity(activity1, "");
 
-    $(byText(comment)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
-    sleep(1000);
-    executeJavaScript("window.scrollBy(0,-2000)");
+    tribeActivityStream.addActivityComment(activity1,comment);
 
     info("Delete comment");
     activityStream.deletecomment(activity1, comment);

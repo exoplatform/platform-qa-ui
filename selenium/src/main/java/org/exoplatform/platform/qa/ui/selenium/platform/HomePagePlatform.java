@@ -95,6 +95,25 @@ public class HomePagePlatform {
 
 
   /**
+   * Go to People page Tribe
+   */
+  public void goToPeoplePageTribe() {
+    info("Click on People page");
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_PEOPLE_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+  }
+
+  /**
+   * Go to People page Tribe
+   */
+  public void goToSettingsPageTribe() {
+    info("Click on People page");
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    sleep(1000);
+    ELEMENT_TRIBE_SETTINGS_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+  }
+
+  /**
    * Go to Home page Tribe
    */
   public void goToSnapshotPageTribe() {

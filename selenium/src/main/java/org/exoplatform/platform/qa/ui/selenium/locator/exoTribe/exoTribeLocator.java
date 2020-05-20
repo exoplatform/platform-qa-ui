@@ -75,12 +75,19 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_PAGE = $(byXpath("//*[@class='uiIcon uiIconFile uiIconToolbarNavItem uiIconHome iconHome null']"));
 
+    public static final SelenideElement ELEMENT_TRIBE_PEOPLE_PAGE = $(byXpath("//*[@class='uiIcon uiIconFile uiIconToolbarNavItem uiIconPeople iconPeople null']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SETTINGS_PAGE = $(byXpath("//*[@class='uiIcon uiIconToolbarNavItem settingsIcon']"));
+
     public static final SelenideElement ELEMENT_TRIBE_TASKS_PAGE = $(byXpath("(//*[@class='caption color-title'])[1]"));
 
-    public static final SelenideElement ELEMENT_TRIBE_STREAM_OLD_COMPOSER_BTN = $(byXpath("//*[@class='oldComposerButton']"));
+    //STREAM
+
+    public static final SelenideElement ELEMENT_TRIBE_POST_ACTIVITY_BTN = $(byXpath("//*[@class='uiIconGoUp']"));
+    public static final By              ELEMENT_TRIBE_POST_ACTIVITY_BUTTON                        = By.xpath("//*[@class='btn btn-primary ignore-vuetify-classes btnStyle']");
 
 
-    //SPACE
+  //SPACE
 
     public static final SelenideElement GO_TO_SPACES_TRIBE_BTN = $(byXpath("//*[@class='uiIcon uiIconFile uiIconToolbarNavItem uiIconSpaces iconSpaces null']"));
 
@@ -162,6 +169,38 @@ public class exoTribeLocator {
 
     //TASK
     public static final By ELEMENT_POPUB_TRIBE_EDIT_PROJECT    =By.xpath("//*[@id='taskManagement']//*[@class='PopupContent popupContent']");
+
+    //PEOPLE
+    public static final SelenideElement ELEMENT_PEOPLE_TRIBE_SEARCH_TEXT = $(byXpath("//*[@class='v-text-field__slot']/input"));
+
+    //SETTINGS
+    public static final SelenideElement ELEMENT_TRIBE_EDIT_LANGUAGE = $(byXpath("(//*[@class='uiIconEdit uiIconLightBlue pb-2'])[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_EDIT_TIME_ZONE = $(byXpath("(//*[@class='uiIconEdit uiIconLightBlue pb-2'])[2]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_EDIT_PASSWORD = $(byXpath("(//*[@class='v-list-item__action']/button)[4]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_OLD_PASSWORD = $(byXpath("(//input[@type='password'])[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_NEW_PASSWORD = $(byXpath("(//input[@type='password'])[2]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_NEW_PASSWORD_CONFIRM = $(byXpath("(//input[@type='password'])[3]"));
+
+    public static final String          ELEMENT_TRIBE_CHANGE_LANGUAGE     = "//*[contains(text(),'${language}')]";
+
+    public static final String          ELEMENT_TRIBE_CHANGE_TIMEZONE    = "//*[contains(text(),'${timeZone}')]";
+
+    public static final SelenideElement ELEMENT_TRIBE_APPLY_CHANGE_LANGUAGE_BUTTON = $(byXpath("(//button[@class='btn btn-primary v-btn v-btn--contained theme--light v-size--default']//*[@class='v-btn__content'])[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_CANCEL_CHANGE_LANGUAGE_BUTTON = $(byXpath("(//button[@class='btn mr-2 v-btn v-btn--contained theme--light v-size--default']//*[@class='v-btn__content'])[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_CANCEL_CHANGE_TIMEZONE_BUTTON = $(byXpath("(//button[@class='btn mr-2 v-btn v-btn--contained theme--light v-size--default']//*[@class='v-btn__content'])[2]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_APPLY_CHANGE_TIMEZONE_BUTTON = $(byXpath("(//button[@class='btn btn-primary v-btn v-btn--contained theme--light v-size--default']//*[@class='v-btn__content'])[2]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_CANCEL_EDIT_PASSWORD = $(byXpath("(//input[@type='password'])[3]/following::*[@class='v-btn__content'][1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_CONFIRM_EDIT_PASSWORD = $(byXpath("(//input[@type='password'])[3]/following::*[@class='v-btn__content'][2]"));
 
 }
 
