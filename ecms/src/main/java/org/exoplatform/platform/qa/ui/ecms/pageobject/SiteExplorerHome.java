@@ -2,14 +2,16 @@ package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_FILE_UPLOAD_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.PlatformLocator.ELEMENT_FILEFORM_BLANK_CONTENT;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 import static org.junit.Assert.assertEquals;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Configuration.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Button;
@@ -67,11 +69,9 @@ public class SiteExplorerHome {
     $(byText(drive)).click();
     $(byId("uiActionsBarContainer")).find(byId("driveAction")).waitUntil(Condition.have(Condition.text(drive)),Configuration.timeout);
     if( $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).is(Condition.not(Condition.visible))){
-      sleep(Configuration.timeout);
-      $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     }
-    sleep(Configuration.timeout);
-    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     info("Go to folder");
     if (!path.isEmpty()) {
       String[] arrayPath = path.split("/");
@@ -79,8 +79,7 @@ public class SiteExplorerHome {
         selectNode(arrayElement);
       }
     }
-    $(byId("address")).waitUntil(Condition.hasValue("/"+path),Configuration.timeout);
-    sleep(Configuration.timeout);
+    $(byId("address")).waitUntil(Condition.hasValue("/"+path), openBrowserTimeoutMs + timeout);
   }
 
   /**
@@ -130,10 +129,9 @@ public class SiteExplorerHome {
   public void goToAddNewContent() {
 
     info("Click on New Document on Action Bar");
-    $(ELEMENT_ACTIONBAR_ADDDOCUMENT).waitUntil(Condition.appears, Configuration.collectionsTimeout).click();
+    $(ELEMENT_ACTIONBAR_ADDDOCUMENT).waitUntil(Condition.appears, openBrowserTimeoutMs).click();
     info("Verify that New content page is shown");
-    sleep(Configuration.timeout);
-    $(ELEMENT_ADDDOCUMENT_CHOICETYPE).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_ADDDOCUMENT_CHOICETYPE).waitUntil(Condition.appears, openBrowserTimeoutMs);
     info("New content page is shown successfully");
   }
 
@@ -155,11 +153,11 @@ public class SiteExplorerHome {
    * @param destination boolean
    */
   public void deleteData(String title, boolean... destination) {
+    boolean verify = (destination.length > 0 ? destination[0] : false);
     info("Click on File Explorer icon");
     // scroll de 50 pixel
     executeJavaScript("window.scrollBy(0,50);", "");
-    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    sleep(Configuration.collectionsTimeout);
+    $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + timeout).click();
     info("Right click on nodename");
     executeJavaScript("window.scrollBy(0,-250)", "");
     $(byXpath("//div[@id='UITreeExplorer']//i[@title='${title}']".replace("${title}",title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
@@ -167,11 +165,9 @@ public class SiteExplorerHome {
     ELEMENT_CONTENT_LIST.find(byLinkText(title)).waitUntil(Condition.visible,Configuration.timeout).contextClick();
     executeJavaScript("window.scrollBy(0,100);", "");
     info("Click on Delete link");
-    sleep(Configuration.timeout);
-    $(ELEMENT_SITEEXPLORER_ACTION_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.timeout);
+    $(ELEMENT_SITEEXPLORER_ACTION_DELETE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
     info("Click on Delete button on Confirm popup");
-    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.visible,Configuration.collectionsTimeout + openBrowserTimeoutMs).click();
     $(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
     refresh();
     if(destination.equals(true))
@@ -206,27 +202,17 @@ public class SiteExplorerHome {
    * @param destination String
    */
   public void cutPasteNode(String title, String destination) {
-    sleep(2000);
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
-    sleep(3000);
+    $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
     $(byXpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title))).waitUntil(Condition.visible,2000).contextClick();
-    sleep(Configuration.timeout);
     executeJavaScript("window.scrollBy(0,250)", "");
-    sleep(2000);
-    $(ELEMENT_SITEEXPLORER_ACTION_CUT).click();
-    sleep(2000);
-    $(ELEMENT_ACCOUNT_NAME_LINK).click();
-    sleep(2000);
+    $(ELEMENT_SITEEXPLORER_ACTION_CUT).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
     executeJavaScript("window.scrollBy(0,-1000)", "");
-    sleep(2000);
-    $(byXpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", destination))).waitUntil(Condition.visible,Configuration.timeout).contextClick();
-    sleep(3000);
-    $(ELEMENT_SITEEXPLORER_ACTION_PASTE).click();
-    sleep(2000);
+    $(byXpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", destination))).waitUntil(Condition.visible, openBrowserTimeoutMs).contextClick();
+    $(ELEMENT_SITEEXPLORER_ACTION_PASTE).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
     refresh();
     executeJavaScript("window.scrollBy(0,-5500)", "");
-    $(ELEMENT_SIDEBAR_SITES_MANAGEMENT).click();
-    sleep(3000);
+    $(ELEMENT_SIDEBAR_SITES_MANAGEMENT).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 
@@ -238,18 +224,16 @@ public class SiteExplorerHome {
    */
   public void uploadFile(String link, Object... params) {
     Boolean verify = (Boolean) (params.length > 0 ? params[0] : true);
-    sleep(2000);
+    sleep(1000);
     $(byId("MultiUploadInputFiles")).uploadFromClasspath(link);
-    sleep(Configuration.collectionsTimeout);
-    refresh();
+    sleep(timeout);
     info("verify:" + verify);
     if (verify) {
       String links[] = link.split("/");
       int length = links.length;
-
-      evt.waitForAndGetElement(By.xpath("//*[contains(text(),'" + links[length - 1] + "')]"), 3000, 1);
+      $(By.xpath("//*[contains(text(),'" + links[length - 1] + "')]")).waitUntil(Condition.visible, 90000);
     }
-
+    $(By.xpath(ELEMENT_ACTIVITY_FILE_UPLOAD_TITLE.replace("{$title}", link))).waitUntil(visible, openBrowserTimeoutMs);
     info("Upload file successfully");
 
   }
@@ -260,19 +244,18 @@ public class SiteExplorerHome {
    * @param tag String
    */
   public void addTag(String tag) {
-    sleep(Configuration.timeout);
     info("Click on More menu");
     executeJavaScript("window.scrollBy(0,-400);", "");
-    $(ELEMENT_ACTIONBAR_MORE).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_ACTIONBAR_MORE).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     info("Click on Tag link");
-    $(ELEMENT_ACTIONBAR_TAG).click();
+    $(ELEMENT_ACTIONBAR_TAG).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
     info("Input name of tag");
-    $(ELEMENT_TAG_FORM).setValue(tag);
+    $(ELEMENT_TAG_FORM).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(tag);
     info("Click on Add button");
-    $(ELEMENT_ADD_TAG_FORM).click();
+    $(ELEMENT_ADD_TAG_FORM).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
     info("The tag is created successfully");
     info("Close the popup");
-    $(ELEMENT_TAG_POPUP_CLOSE).click();
+    $(ELEMENT_TAG_POPUP_CLOSE).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -335,13 +318,13 @@ public class SiteExplorerHome {
    */
   public void editDocument(String newTitle, String content) {
 
-    $(ELEMENT_ACTIONBAR_MORE).click();
-    $(ELEMENT_ACTIONBAR_EDIT).click();
+    $(ELEMENT_ACTIONBAR_MORE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_ACTIONBAR_EDIT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
     if ($(ELEMENT_FILE_FORM_TITLE).is(Condition.enabled)) {
       $(ELEMENT_FILE_FORM_TITLE).sendKeys(newTitle);
     }
-    $(ELEMENT_FILEFORM_BLANK_CONTENT).click();
+    $(ELEMENT_FILEFORM_BLANK_CONTENT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     switchTo().frame($(ELEMENT_FILEFORM_BLANK_CONTENT));
     $(byXpath("/html/body")).sendKeys(content);
     switchTo().defaultContent();
@@ -424,8 +407,7 @@ public class SiteExplorerHome {
   public void selectNode(String nodeName) {
     info("Verify that nodeName:" + nodeName + " is shown");
     info("Click on the nodeName:" + nodeName);
-    sleep(Configuration.timeout);
-    ELEMENT_CONTENT_LIST.find(byText(nodeName)).shouldBe( Condition.visible);
+    ELEMENT_CONTENT_LIST.find(byText(nodeName)).waitUntil( Condition.visible, openBrowserTimeoutMs);
     ELEMENT_CONTENT_LIST.find(byText(nodeName)).waitUntil(Condition.appears, Configuration.timeout).click();
 
     info("Finished selecting nodeName:" + nodeName);
@@ -447,6 +429,7 @@ public class SiteExplorerHome {
    */
   public void lockNode(String name) {
     info("lock node:" + name);
+    sleep(2000);
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", name))).waitUntil(Condition.visible,Configuration.collectionsTimeout).contextClick();
     $(ELEMENT_SITEEXPLORER_LIST_LOCK_NODE).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
@@ -482,8 +465,7 @@ public class SiteExplorerHome {
   public void addRelation(String[] nameContent, String path) {
     for (String arrayElement : nameContent) {
       goToPathHasFiles(path);
-      sleep(Configuration.timeout);
-      $(byXpath(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB_SELECT_CONTENT_RIGHT_TREE.replace("${nameContent}", arrayElement))).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(byXpath(ELEMENT_RELATION_POPUP_SELECT_RELATION_TAB_SELECT_CONTENT_RIGHT_TREE.replace("${nameContent}", arrayElement))).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
 
     }
   }
@@ -492,8 +474,7 @@ public class SiteExplorerHome {
    * Open Add Category popup By QuynhPT date 16/01/2015
    */
   public void goToAddCategory() {
-    sleep(Configuration.timeout);
-    $(ELEMENT_ACTIONBAR_CATEGORY).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_ACTIONBAR_CATEGORY).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
 
   }
 
@@ -715,14 +696,13 @@ public class SiteExplorerHome {
    * Go to publication
    */
   public void goToPublication() {
-    sleep(Configuration.timeout);
     if (!$(ELEMENT_ACTIONBAR_MORE).exists()) {
       do {
         executeJavaScript("window.scrollBy(0,-2000)");
       }while ($(ELEMENT_ACTIONBAR_MORE).exists());
     }
-    $(ELEMENT_ACTIONBAR_MORE).waitUntil(Condition.visible,Configuration.timeout).click();
-    $(ELEMENT_ACTIONBAR_PUBLICATION).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_ACTIONBAR_MORE).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+    $(ELEMENT_ACTIONBAR_PUBLICATION).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
   }
 
   /**
@@ -734,15 +714,15 @@ public class SiteExplorerHome {
   public void addCategoryForNode(String node, String category) {
     info("Click on More menu");
     if( $(ELEMENT_ACTIONBAR_CATEGORY).is(Condition.not(Condition.visible)))
-    $(ELEMENT_ACTIONBAR_MORE).click();
+    $(ELEMENT_ACTIONBAR_MORE).waitUntil(Condition.visible,Configuration.timeout).click();
 
-    $(ELEMENT_ACTIONBAR_CATEGORY).click();
+    $(ELEMENT_ACTIONBAR_CATEGORY).waitUntil(Condition.visible,Configuration.timeout).click();
 
-    $(ELEMENT_CATEGORY_CHANGE_FORM_SELECT_CATEGORY).click();
+    $(ELEMENT_CATEGORY_CHANGE_FORM_SELECT_CATEGORY).waitUntil(Condition.visible,Configuration.timeout).click();
 
-    $(ELEMENT_CATEGORY_SELECT_CATEGORY_TREE).selectOption(category);
+    $(ELEMENT_CATEGORY_SELECT_CATEGORY_TREE).waitUntil(Condition.visible,Configuration.timeout).selectOption(category);
 
-    $(ELEMENT_CATEGORY_ADD_ROOT_NODE).click();
+    $(ELEMENT_CATEGORY_ADD_ROOT_NODE).waitUntil(Condition.visible,Configuration.timeout).click();
 
   }
 
@@ -751,9 +731,9 @@ public class SiteExplorerHome {
    * @param status String
    */
   public void changeStatusPulication(String status) {
-    $(byXpath(ELEMENT_PUBLICATION_STATUS.replace("${status}", status))).waitUntil(Condition.visible,Configuration.timeout);
+    $(byXpath(ELEMENT_PUBLICATION_STATUS.replace("${status}", status))).waitUntil(Condition.visible, openBrowserTimeoutMs);
     $(byXpath(ELEMENT_PUBLICATION_STATUS.replace("${status}", status))).click();
-    $(Button.ELEMENT_CLOSE_BUTTON).click();
+    $(Button.ELEMENT_CLOSE_BUTTON).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
 
   }
 
@@ -764,13 +744,13 @@ public class SiteExplorerHome {
     info("View Metadata");
     info("Click on More link");
     if ( $(ELEMENT_ACTIONBAR_METADATA).is(Condition.not(Condition.visible)))
-    $(ELEMENT_ACTIONBAR_MORE).click();
+    $(ELEMENT_ACTIONBAR_MORE).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     info("Click on Metadata link");
-    $(ELEMENT_ACTIONBAR_METADATA).click();
+    $(ELEMENT_ACTIONBAR_METADATA).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     info("Verify that View metadata popup is shown");
     $(ELEMENT_METADATA_POPUP).waitUntil(Condition.visible,Configuration.timeout);
     info("Close the popup");
-    $(ELEMENT_METADATA_POPUP_CANCEL).click();
+    $(ELEMENT_METADATA_POPUP_CANCEL).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     info("Metadata popup is shown successfully");
   }
 
@@ -784,17 +764,17 @@ public class SiteExplorerHome {
     info("Add/Edit a comment");
     if (isAdd == true) {
       info("Click on Add comment on action bar");
-      $(ELEMENT_ACTIONBAR_ADDCOMMENT).click();
+      $(ELEMENT_ACTIONBAR_ADDCOMMENT).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     } else {
       info("Click on Edit comment button on action bar");
-      $(ELEMENT_SITEEXPLORER_COMMENT_EDIT).click();
+      $(ELEMENT_SITEEXPLORER_COMMENT_EDIT).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     }
     info("Refresh the page");
     refresh();
     info("Input a content to the frame");
-    $(byId("comment")).sendKeys(content);
+    $(byId("comment")).waitUntil(Condition.visible, openBrowserTimeoutMs).sendKeys(content);
     info("Click on Save button");
-    $(ELEMENT_SITEEXPLORER_COMMENT_SAVE).click();
+    $(ELEMENT_SITEEXPLORER_COMMENT_SAVE).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     info("Finish adding/Editing the Comment");
   }
 
@@ -805,7 +785,7 @@ public class SiteExplorerHome {
    */
   public void verifyContentCreatedSuccessfully(String title) {
     info("Verify Content was created successfully");
-    $(byText(title)).waitUntil(Condition.appears, Configuration.timeout);
+    $(byText(title)).waitUntil(Condition.appears, openBrowserTimeoutMs);
     info("Content was created successfully");
   }
 
@@ -827,4 +807,37 @@ public class SiteExplorerHome {
   public enum selectDriverOrder {
     ASCENDING, DESCENDING
   }
+
+  /**
+   * Select a value for behavior by quynhpt date 16/01/2015
+   */
+  public enum defineValueBehavior {
+    CREATE_NEW, REMOVE_EXISTING, REPLACE_EXISTING, THROW_EXEPTION;
+  }
+
+  /**
+   * Click on View Document button
+   */
+  public void clickViewDocumentButton() {
+    $(".uiIconEcmsPermlink").waitUntil(visible, openBrowserTimeoutMs).click();
+  }
+
+  /**
+   * Click on Check button
+   */
+  public void checkButtonDocument(String officeDocument) {
+    info("click on CheckBox button for Document");
+    $(byXpath("(//div[@class='columnText']//span[@class='nodeName' and text()='${word}']/preceding::span[@class='uiCheckbox'])[last()]".replace("${word}",officeDocument))).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byXpath("(//div[@class='columnText']//span[text()='${word}']/following::*[@class='fileInfoBottom'])[1]".replace("${word}",officeDocument))).waitUntil(Condition.visible,Configuration.timeout).click();
+  }
+
+  /**
+   * Click on Delete button
+   */
+  public void clickDeleteButtonDocument() {
+    info("click on Delete button for Document");
+    $(ELEMENT_DELETE_BUTTON).waitUntil(visible,openBrowserTimeoutMs).click();
+    $(ELEMENT_DELETE_POPUP_BUTTON).waitUntil(visible,openBrowserTimeoutMs).click();
+  }
+
 }

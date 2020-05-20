@@ -5,7 +5,6 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.junit.jupiter.api.BeforeEach;
@@ -55,119 +54,8 @@ public class EcmsAdminRepositoryTestIT extends Base {
 
   }
 
-  /**
-   * <li>Case ID:116588.</li>
-   * <li>Test Case Name: Unlock a Node.</li> Step Number: 1 Step Name: - Step
-   * Description: Step 1: Unlock a node Input Data: - Go to Site explorer :
-   * perform to lock a node - Go to Administration/Repository/ Locks - Go to
-   * Locked node tab - Click corresponding Unlock icon of locked node Expected
-   * Outcome: - Node is unlocked
-   */
   @Test
-  public void test01_UnlockANode() {
-    info("Test 1: Unlock a Node");
-    String title = "title" + getRandomNumber();
-    String content = "content" + getRandomNumber();
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.goToAddNewContent();
-    info("Create new file document");
-    createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
-    createNewDocument.addNewWebContent(title, content);
-    createNewDocument.saveAndClose();
-    siteExplorerHome.lockNode(title);
-    navigationToolbar.goToContentAdministration();
-    contentAdministration.goToSpecificMainFunctions(ContentAdministration.mainEcmFunctions.REPOSITORY);
-    contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.LOCKS);
-    $(byXpath(ELEMENT_ECM_REPOSITORY_UNLOCK_NODE_LIST.replace("{$name}", title))).click();
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.deleteData(title);
-  }
-
-  /**
-   * <li>Case ID:116590.</li>
-   * <li>Test Case Name: Add Node types.</li>
-   * <li>Case ID:116628.</li>
-   * <li>Test Case Name: View Node types.</li> Step Number: 1 Step Name: - Step
-   * Description: Step 1: Add Node types Input Data: Add new node type - Go to
-   * Content Administration/Repository/Node Types - Click on Add button - Input
-   * Node Type Name - Select super type - Click Save button Expected Outcome: New
-   * node type is created
-   */
-  @Test
-  public void test02_AddNodeTypes() {
-    info("Test 2: Add Node and show it");
-
-    String name = "name" + getRandomNumber();
-    String superTypes = "exo:calendar";
-    navigationToolbar.goToContentAdministration();
-    contentAdministration.goToSpecificMainFunctions(ContentAdministration.mainEcmFunctions.REPOSITORY);
-    contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.NODESTYPES);
-    contentAdministration.addNodeType(name, superTypes);
-    contentAdministration.searchNodeAndCheckIt(name, superTypes + ", nt:base");
-
-  }
-
-  @Test
-  public void test03_ViewNode() {
-    info("Test 2: Add Node and show it");
-
-    String name = "name" + getRandomNumber();
-    String superTypes = "exo:calendar";
-    navigationToolbar.goToContentAdministration();
-    contentAdministration.goToSpecificMainFunctions(ContentAdministration.mainEcmFunctions.REPOSITORY);
-    contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.NODESTYPES);
-    contentAdministration.addNodeType(name, superTypes);
-    contentAdministration.searchNodeAndCheckIt(name, superTypes + ", nt:base");
-  }
-
-  /**
-   * <li>Case ID:116601.</li>
-   * <li>Test Case Name: Namespace registry.</li> Step Number: 1 Step Name: - Step
-   * Description: Step 1: Namespace registry Input Data: - Go to Content
-   * Administration/Repository/Namespace - Click on Register button - Put value in
-   * required fields - Click Save button Expected Outcome: New namespace is
-   * registered successfully.
-   */ // *[@id="UINamespaceList"]/div[1]/ul
-  @Test
-  public void test04_NamespaceRegistry() {
-    info("Test 3: Namespace registry");
-    String prefix = "prefix" + getRandomNumber();
-    String url = "www.exo-fqa-test" + getRandomNumber() + ".com";
-    navigationToolbar.goToContentAdministration();
-    contentAdministration.goToSpecificMainFunctions(ContentAdministration.mainEcmFunctions.REPOSITORY);
-    contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.NAMESPACES);
-    contentAdministration.registerNamespace(prefix, url);
-    $(byXpath(ELEMENT_ECM_REPOSITORY_NAMESPACES_CHECK_LIST_URL_AND_PREFIX.replace("{$url}", "http://www.exoplatform.com/plf/acme/4.0/").replace("{$prefix}", "acme"))).waitUntil(Condition.visible,Configuration.timeout);
-    for (int i = 1; i < 9; i++) {
-      homePagePlatform.refreshUntil($(byXpath(ELEMENT_ECM_REPOSITORY_NAMESPACES_CHECK_LIST_URL_AND_PREFIX.replace("{$url}", "Namespace URI").replace("{$prefix}", "Prefix"))).waitUntil(Condition.visible,Configuration.timeout),Condition.visible,1000);
-      if ($(byXpath(ELEMENT_ECM_REPOSITORY_NAMESPACES_CHECK_LIST_URL_AND_PREFIX.replace("{$url}", url)
-                                                                               .replace("{$prefix}", prefix)))
-                                                                                                              .is(Condition.not(Condition.visible))) {
-        $(ELEMENT_ICON_NEXT_ARROW).click();
-      }
-      if ($(byXpath(ELEMENT_ECM_REPOSITORY_NAMESPACES_CHECK_LIST_URL_AND_PREFIX.replace("{$url}", url)
-                                                                               .replace("{$prefix}", prefix)))
-                                                                                                              .is(Condition.visible)) {
-        break;
-      }
-    }
-    $(byXpath(ELEMENT_ECM_REPOSITORY_NAMESPACES_CHECK_LIST_URL_AND_PREFIX.replace("{$url}", url)
-                                                                         .replace("{$prefix}", prefix)))
-                                                                                                        .should(Condition.visible);
-  }
-
-  /**
-   * <li>Case ID:116629.</li>
-   * <li>Test Case Name: Manage lock.</li> Step Number: 1 Step Name: - Step
-   * Description: Step 1: Manage lock Input Data: - Go to
-   * Administration/Repository/ Locks - Go to Manage lock tab - Perform to add
-   * some group/ users which have permission to unlock a locked node - Can Delete
-   * permission of group/ user by click Delete icon Expected Outcome: - Group is
-   * added permission. All users In the group will be able unlock a locked node -
-   * Group is removed permission
-   */
-  @Test
-  public void test05_ManageLock() {
+  public void test01_ManageLock() {
     info("Test 5: Manage lock");
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();
@@ -187,10 +75,62 @@ public class EcmsAdminRepositoryTestIT extends Base {
     $(ELEMENT_ECM_REPOSITORY_LOCKS_DEVELOPMENT_GROUP).click();
     $(ELEMENT_ECM_REPOSITORY_LOCKS_ALL_GROUP).click();
     $(byXpath(ELEMENT_ECM_REPOSITORY_CHECK_LOCK_PERMISSION.replace("{$group}", group))).waitUntil(Condition.visible,
-                                                                                                  Configuration.timeout);
+            Configuration.timeout);
     $(byXpath(ELEMENT_ECM_REPOSITORY_DELETE_LOCK_PERMISSION.replace("{$group}", group))).click();
     $(byXpath(ELEMENT_ECM_REPOSITORY_CHECK_LOCK_PERMISSION.replace("{$group}", group))).shouldNot(Condition.visible);
     navigationToolbar.goToSiteExplorer();
     siteExplorerHome.deleteData(title);
   }
+
+  @Test
+  public void test02_AddViewUnlockANode() {
+    String title = "title" + getRandomNumber();
+    String content = "content" + getRandomNumber();
+    String name = "name" + getRandomNumber();
+    String superTypes = "exo:calendar";
+    String prefix = "prefix" + getRandomNumber();
+    String url = "www.exo-fqa-test" + getRandomNumber() + ".com";
+
+    navigationToolbar.goToContentAdministration();
+    contentAdministration.goToSpecificMainFunctions(ContentAdministration.mainEcmFunctions.REPOSITORY);
+    contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.NAMESPACES);
+    info("Namespace registry");
+    contentAdministration.registerNamespace(prefix, url);
+    $(byXpath(ELEMENT_ECM_REPOSITORY_NAMESPACES_CHECK_LIST_URL_AND_PREFIX.replace("{$url}", "http://www.exoplatform.com/plf/acme/4.0/").replace("{$prefix}", "acme"))).waitUntil(Condition.visible,Configuration.timeout);
+    for (int i = 1; i < 9; i++) {
+      homePagePlatform.refreshUntil($(byXpath(ELEMENT_ECM_REPOSITORY_NAMESPACES_CHECK_LIST_URL_AND_PREFIX.replace("{$url}", "Namespace URI").replace("{$prefix}", "Prefix"))).waitUntil(Condition.visible,Configuration.timeout),Condition.visible,1000);
+      if ($(byXpath(ELEMENT_ECM_REPOSITORY_NAMESPACES_CHECK_LIST_URL_AND_PREFIX.replace("{$url}", url)
+              .replace("{$prefix}", prefix)))
+              .is(Condition.not(Condition.visible))) {
+        $(ELEMENT_ICON_NEXT_ARROW).click();
+      }
+      if ($(byXpath(ELEMENT_ECM_REPOSITORY_NAMESPACES_CHECK_LIST_URL_AND_PREFIX.replace("{$url}", url)
+              .replace("{$prefix}", prefix)))
+              .is(Condition.visible)) {
+        break;
+      }
+    }
+    $(byXpath(ELEMENT_ECM_REPOSITORY_NAMESPACES_CHECK_LIST_URL_AND_PREFIX.replace("{$url}", url)
+            .replace("{$prefix}", prefix)))
+            .should(Condition.visible);
+    navigationToolbar.goToSiteExplorer();
+    siteExplorerHome.goToAddNewContent();
+    info("Create new file document");
+    createNewDocument.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
+    createNewDocument.addNewWebContent(title, content);
+    createNewDocument.saveAndClose();
+    siteExplorerHome.lockNode(title);
+    navigationToolbar.goToContentAdministration();
+    info("Add Node and show it");
+    contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.NODESTYPES);
+    contentAdministration.addNodeType(name, superTypes);
+    contentAdministration.searchNodeAndCheckIt(name, superTypes + ", nt:base");
+    info("Unlock a Node");
+    contentAdministration.goToSpecificFunctions(ContentAdministration.specificEcmFunctions.LOCKS);
+    $(byXpath(ELEMENT_ECM_REPOSITORY_UNLOCK_NODE_LIST.replace("{$name}", title))).click();
+    navigationToolbar.goToSiteExplorer();
+    siteExplorerHome.deleteData(title);
+
+  }
+
 }

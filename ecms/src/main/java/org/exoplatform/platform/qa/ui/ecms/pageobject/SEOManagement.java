@@ -2,7 +2,6 @@ package org.exoplatform.platform.qa.ui.ecms.pageobject;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
 
 import com.codeborne.selenide.Condition;
@@ -31,11 +30,10 @@ public class SEOManagement {
    * @param language String
    */
   public void deleteLanguage(String language) {
-    $(byXpath(ELEMENT_SEO_SELECTED_LANGUAGE.replace("${language}", language))).waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(Configuration.timeout);
-    $(ELEMENT_SEO_DELETE).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byXpath(ELEMENT_SEO_SELECTED_LANGUAGE.replace("${language}", language))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_SEO_DELETE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     magAlert.acceptAlert();
-    $(ELEMENT_SEO_CLOSE).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_SEO_CLOSE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
 }

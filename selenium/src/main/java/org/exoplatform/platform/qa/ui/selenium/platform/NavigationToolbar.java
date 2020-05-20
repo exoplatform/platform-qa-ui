@@ -244,7 +244,7 @@ public class NavigationToolbar {
   public void goToContentAdministration() {
     info("Go to content administration");
     info("Base url is " + testBase.getExoWebDriver().getBaseUrl());
-    String url = testBase.getExoWebDriver().getBaseUrl() + "/g/:platform:web-contributors/wcmAdmin";
+    String url = testBase.getExoWebDriver().getBaseUrl() + "g/:platform:web-contributors/wcmAdmin";
     info("base url of content admin is " + url);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
