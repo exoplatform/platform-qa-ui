@@ -26,9 +26,9 @@ public class RoomManagement {
         ELEMENT_CHAT_INPUT_ROOMUSERSS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(users[i]);
         ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
         ELEMENT_CHAT_INPUT_ROOMUSERSS.pressEnter();
-        sleep(Configuration.timeout);
+        sleep(2000);
     }
-    ELEMENT_BUTTON_SAVE_ROOM.waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_BUTTON_SAVE_ROOM.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_CONTACT_LIST.find(byText(name)).should(Condition.exist);
   }
 
@@ -49,9 +49,9 @@ public class RoomManagement {
 
   }
 public void startStopmeeting(String room){
-  $(byText(room)).click();
-  ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
-  ELEMENT_CHAT_ROOM_STARTSTOPMEETING.click();
+  $(byText(room)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+  ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+  ELEMENT_CHAT_ROOM_STARTSTOPMEETING.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
 
   }
