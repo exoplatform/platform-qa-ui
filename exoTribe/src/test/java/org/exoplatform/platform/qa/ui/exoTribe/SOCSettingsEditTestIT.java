@@ -10,14 +10,17 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.UserProfilePage;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selenide.refresh;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("tribe")
@@ -71,7 +74,6 @@ public class SOCSettingsEditTestIT extends BaseTribe {
 
 
   @Test
-  @Tag("sabis")
   public void test01_CancelThenAcceptEditLanguage() {
 
     String language = "English";
@@ -94,7 +96,6 @@ public class SOCSettingsEditTestIT extends BaseTribe {
 
 
   @Test
-  @Tag("sabis")
   public void test02_CancelThenConfirmEditTimeZone() {
 
     String timeZone = "+02:00";
@@ -117,7 +118,6 @@ public class SOCSettingsEditTestIT extends BaseTribe {
   }
 
   @Test
-  @Tag("sabis")
   public void test03_CancelThenConfirmEditPassword() {
 
     String newPassword = "password" + getRandomNumber();
@@ -137,6 +137,72 @@ public class SOCSettingsEditTestIT extends BaseTribe {
     homePagePlatform.goToSettingsPageTribe();
     tribeChangeSettings.tribeEditPassword(newPassword, tribe_password);
     tribeChangeSettings.tribeAcceptEditPassword();
+
+  }
+
+  @Test
+  public void test04_EnableDisableNotificationViaMail() {
+
+    homePagePlatform.goToSettingsPageTribe();
+
+    info("Disable Notification Via Mail");
+    sleep(2000);
+    tribeChangeSettings.tribeEnableDisableNotificationViaMail();
+    refresh();
+
+    info("Notification Via Mail is disabled");
+    Assert.assertEquals(ELEMENT_TRIBE_NOTIFICATION_VIA_MAIL_STATUS.getAttribute("aria-checked"), "false");
+
+    info("Enable Notification Via Mail");
+    tribeChangeSettings.tribeEnableDisableNotificationViaMail();
+    refresh();
+
+    info("Notification Via Mail is enabled");
+    Assert.assertEquals(ELEMENT_TRIBE_NOTIFICATION_VIA_MAIL_STATUS.getAttribute("aria-checked"), "true");
+
+  }
+
+  @Test
+  public void test05_EnableDisableNotificationOnMobile() {
+
+    homePagePlatform.goToSettingsPageTribe();
+
+    info("Disable Notification On Mobile");
+    sleep(2000);
+    tribeChangeSettings.tribeEnableDisableNotificationOnMobile();
+    refresh();
+
+    info("Notification On Mobile is disabled");
+    Assert.assertEquals(ELEMENT_TRIBE_NOTIFICATION_ON_MOBILE_STATUS.getAttribute("aria-checked"), "false");
+
+    info("Enable Notification On Mobile");
+    tribeChangeSettings.tribeEnableDisableNotificationOnMobile();
+    refresh();
+
+    info("Notification On Mobile is enabled");
+    Assert.assertEquals(ELEMENT_TRIBE_NOTIFICATION_ON_MOBILE_STATUS.getAttribute("aria-checked"), "true");
+
+  }
+
+  @Test
+  public void test06_EnableDisableNotificationOnSite() {
+
+    homePagePlatform.goToSettingsPageTribe();
+
+    info("Disable Notification On Site");
+    sleep(2000);
+    tribeChangeSettings.tribeEnableDisableNotificationOnSite();
+    refresh();
+
+    info("Notification On Site is disabled");
+    Assert.assertEquals(ELEMENT_TRIBE_NOTIFICATION_ON_SITE_STATUS.getAttribute("aria-checked"), "false");
+
+    info("Enable Notification On Site");
+    tribeChangeSettings.tribeEnableDisableNotificationOnSite();
+    refresh();
+
+    info("Notification On Site is enabled");
+    Assert.assertEquals(ELEMENT_TRIBE_NOTIFICATION_ON_SITE_STATUS.getAttribute("aria-checked"), "true");
 
   }
 

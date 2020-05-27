@@ -10,6 +10,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 public class TribeChangeSettings {
@@ -61,6 +62,24 @@ public class TribeChangeSettings {
 
     info("Confirm the new password");
     $(ELEMENT_TRIBE_NEW_PASSWORD_CONFIRM).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(password);
+
+  }
+
+  public void tribeEnableDisableNotificationViaMail() {
+
+    evt.check(ELEMENT_TRIBE_NOTIFICATION_VIA_MAIL, 2);
+
+  }
+
+  public void tribeEnableDisableNotificationOnMobile() {
+
+    evt.check(ELEMENT_TRIBE_NOTIFICATION_ON_MOBILE, 2);
+
+  }
+
+  public void tribeEnableDisableNotificationOnSite() {
+
+    evt.check(ELEMENT_TRIBE_NOTIFICATION_ON_SITE, 2);
 
   }
 

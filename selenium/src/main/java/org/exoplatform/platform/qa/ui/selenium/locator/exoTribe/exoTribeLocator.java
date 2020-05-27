@@ -202,6 +202,18 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_CONFIRM_EDIT_PASSWORD = $(byXpath("(//input[@type='password'])[3]/following::*[@class='v-btn__content'][2]"));
 
+    public static final SelenideElement ELEMENT_TRIBE_NOTIFICATION_VIA_MAIL_STATUS = $(byXpath("((//*[@class='v-list-item__title title text-color'])[3]/following::*[@class='v-input--selection-controls__input']//input)[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_NOTIFICATION_ON_SITE_STATUS = $(byXpath("((//*[@class='v-list-item__title title text-color'])[3]/following::*[@class='v-input--selection-controls__input']//input)[2]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_NOTIFICATION_ON_MOBILE_STATUS = $(byXpath("((//*[@class='v-list-item__title title text-color'])[3]/following::*[@class='v-input--selection-controls__input']//input)[3]"));
+
+    public static final By ELEMENT_TRIBE_NOTIFICATION_VIA_MAIL = By.xpath("((//*[@class='v-list-item__title title text-color'])[3]/following::*[@class='v-input--selection-controls__input'])[1]");
+
+    public static final By ELEMENT_TRIBE_NOTIFICATION_ON_SITE = By.xpath("((//*[@class='v-list-item__title title text-color'])[3]/following::*[@class='v-input--selection-controls__input'])[2]");
+
+    public static final By ELEMENT_TRIBE_NOTIFICATION_ON_MOBILE = By.xpath("((//*[@class='v-list-item__title title text-color'])[3]/following::*[@class='v-input--selection-controls__input'])[3]");
+
 }
 
 
