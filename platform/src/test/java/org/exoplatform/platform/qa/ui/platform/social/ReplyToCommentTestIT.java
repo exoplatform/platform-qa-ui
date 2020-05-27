@@ -244,6 +244,7 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToConnections();
         connectionsManagement.acceptAConnection(DATA_USER1);
         homePagePlatform.goToHomePage();
+        sleep(2000);
         activityStream.commentTopicActivity(description, comment);
         activityStream.commentTopicActivity(description, comment2);
         homePagePlatform.goToForum();
@@ -252,6 +253,7 @@ public class ReplyToCommentTestIT extends Base {
         forumTopicManagement.postReply(title, content);
         manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
         $(byXpath("//*[@class='titleForum']/*[contains(text(),'${topic}')]/following::*[@class='commentListInfo clearfix'][1]".replace("${topic}",nameTopic))).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+        sleep(2000);
         activityStream.replyToComment(comment, reply, DATA_NAME_USER1);
         sleep(2000);
         activityStream.replyToComment(comment2, reply2, DATA_NAME_USER1);

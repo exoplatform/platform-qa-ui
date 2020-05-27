@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.social;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_DROPDOWN;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMPOSER_SHARE_BUTTON;
@@ -63,6 +62,7 @@ public class SOCActivityAddTestIT extends Base {
     ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.click();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
+    sleep(2000);
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_COMPOSER_SHARE_BUTTON).should(Condition.be(Condition.enabled));
     $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
@@ -70,12 +70,12 @@ public class SOCActivityAddTestIT extends Base {
     String id=$(byAttribute("data-original-title", "eXo-Platform.png")).parent().parent().parent().parent().parent().parent().parent().getAttribute("id").split("ActivityContextBox")[1];
     $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}",id))).waitUntil(Condition.visible,Configuration.timeout).click();
     $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}",id))).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     $(byAttribute("data-original-title", "eXo-Platform.png")).parent()
                                                              .parent()
                                                              .parent()
                                                              .parent()
-                                                             .waitUntil(Condition.disappear, Configuration.timeout);
+                                                             .waitUntil(Condition.disappear, Configuration.openBrowserTimeoutMs);
 
     info("Check Icon Title When Like Activity");
     ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.waitUntil(Condition.visible,Configuration.timeout).click();

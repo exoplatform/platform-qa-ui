@@ -93,25 +93,7 @@ public class SOCSpaceManageNavigationTestIT extends Base {
     spaceSettingManagement.addANodeSimple(node1);
     info("Edit node 1");
     spaceSettingManagement.editANodeSimple(node1, node2);
-    homePagePlatform.goToMySpaces();
-    spaceManagement.deleteSpace(space, false);
-
-  }
-
-  @Test
-  public void test03_DeleteNode() {
-    info("Test 01: Add new node");
-    String space = "space" + getRandomNumber();
-    String node = "node" + getRandomNumber();
-
-    info("Create a space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
-    info("Open Setting tab");
-    spaceHomePage.goToSpaceSettingTab();
-    spaceSettingManagement.goToNavigationTab();
-    spaceSettingManagement.addANodeSimple(node);
-    spaceSettingManagement.deleteANode(node);
+    spaceSettingManagement.deleteANode(node2);
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
 

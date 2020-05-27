@@ -110,22 +110,17 @@ public class SOCPeopleProfileActivitiesTestIT extends Base {
     userProfilePage.saveCancelUpdateInfo(true);
     $(byXpath(ELEMENT_COMPANY_INFO.replace("${company}", organization))).should(Condition.visible);
     $(byXpath(ELEMENT_POSITION_INFO.replace("${position}", jobTitle))).should(Condition.visible);
-    $(byText(actContactInfo)).should(Condition.visible);
+    $(byText(actContactInfo)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
 
     info("edit avatar");
-    sleep(2000);
-    click(ELEMENT_EDIT_MY_PROFILE_LINK);
-    sleep(2000);
-    ELEMENT_BUTTON_CHANGE_AVATAR.waitUntil(Condition.visible,Configuration.timeout).click();
-    sleep(Configuration.timeout);
+
+    $(ELEMENT_EDIT_MY_PROFILE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_BUTTON_CHANGE_AVATAR.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_INPUT_UPLOAD_AVATAR.uploadFromClasspath("testavatar.png");
-    sleep(2000);
-    ELEMENT_BUTTON_CONFIRM_UPLOAD.click();
-    sleep(2000);
-    ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.click();
-    sleep(2000);
+    ELEMENT_BUTTON_CONFIRM_UPLOAD.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     userProfilePage.saveCancelUpdateInfo(false);
-    $(byText(actContactInfo)).should(Condition.visible);
+    $(byText(actContactInfo)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
 
     info("edit about me");
     click(ELEMENT_EDIT_MY_PROFILE_LINK);

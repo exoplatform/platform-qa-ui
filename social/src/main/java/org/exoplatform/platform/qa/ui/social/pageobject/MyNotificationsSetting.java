@@ -9,6 +9,7 @@ import static com.codeborne.selenide.Condition.not;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_ADD_TOOTLBAR;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -109,6 +110,7 @@ public class MyNotificationsSetting {
         break;
       case AS_Comment_intranet:
         $(ELEMENT_EDIT_COMMENT_ICON).waitUntil(visible, Configuration.timeout).click();
+        sleep(1000);
         if ($(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX).is(Condition.selected)) {
           $(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX).parent().waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         }

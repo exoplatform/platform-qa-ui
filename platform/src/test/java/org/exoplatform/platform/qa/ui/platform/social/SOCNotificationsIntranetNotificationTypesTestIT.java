@@ -1259,6 +1259,7 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     manageLogInOut.signIn(username3, password);
     homePagePlatform.goToAllSpace();
     spaceManagement.acceptAInvitation(space);
+    sleep(1000);
     activityStream.commentActivity(activity, comment2);
     info("Check comment notification in the notification list");
     manageLogInOut.signIn(username1, password);
@@ -1280,12 +1281,14 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     manageLogInOut.signIn(username4, password);
     homePagePlatform.goToAllSpace();
     spaceManagement.acceptAInvitation(space);
+    sleep(2000);
     activityStream.commentActivity(activity, comment3);
     info("user2 comments in John's activity");
     manageLogInOut.signIn(username2, password);
     homePagePlatform.goToMySpaces();
     spaceManagement.goToAllSpacesTab();
-    ELEMENT_SPACES_LIST.find(byText(space)).click();
+    ELEMENT_SPACES_LIST.find(byText(space)).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
     activityStream.commentActivity(activity, comment4);
     info("Check comment notification in the notification list");
     manageLogInOut.signIn(username1, password);
@@ -1444,7 +1447,6 @@ public class SOCNotificationsIntranetNotificationTypesTestIT extends Base {
     manageLogInOut.signIn(username1, password);
     ELEMENT_ALERT_NOTIFICATION.shouldNot(visible);
     navigationToolbar.goToIntranetNotification();
-    ;
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(activity)).shouldNot(exist);
     manageLogInOut.signIn(DATA_USER1, "gtngtn");
     navigationToolbar.goToManageCommunity();

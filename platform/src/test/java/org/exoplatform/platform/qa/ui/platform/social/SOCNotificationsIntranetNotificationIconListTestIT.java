@@ -98,6 +98,9 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
     String comment = "comment" + getRandomNumber();
     String password = "123456";
 
+    navigationToolbar.goToIntranetNotification();
+    navigationToolbar.goToMyNotifications();
+    myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.NewUser_intranet);
     info("Add 3 new users");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
@@ -122,7 +125,7 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
     info("Login with user 1 and enable new user and like notifications");
     manageLogInOut.signIn(username1, password);
     navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.NewUser_intranet);
+    myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.NewUser_intranet);
     myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Like_intranet);
     myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Comment_intranet);
 
@@ -156,11 +159,12 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
     manageLogInOut.signIn(username1, password);
     ELEMENT_ALERT_NOTIFICATION_EXIST.waitUntil(visible, Configuration.timeout).click();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(comment)).waitUntil(Condition.visible, Configuration.timeout).click();
-    sleep(1000);
+    sleep(2000);
     info("Read connection request notification");
     navigationToolbar.goToIntranetNotification();
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username3 + " " + username3)).click();
-    ELEMENT_CONTENT_NAME_PROFILE.find(byText(username3 + " " + username3)).waitUntil(appears, Configuration.timeout);
+    sleep(2000);
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username3 + " " + username3)).waitUntil(visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CONTENT_NAME_PROFILE.find(byText(username3 + " " + username3)).waitUntil(appears, Configuration.openBrowserTimeoutMs);
 
     info("Check notification icon");
     navigationToolbar.goToIntranetNotification();

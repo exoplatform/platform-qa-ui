@@ -698,6 +698,10 @@ public final class SocialLocator {
   public static final String          ELEMENT_RECENT_ACTIVITY_CONTENT                                   =
                                                                       "//*[@id='UIRecentActivitiesPortlet']//*[@class='activityCont']/div[${index}]//*[@class='status']/span[contains(text(),'${content}')]";
 
+  // Recent activity
+  public static final String          ELEMENT_RECENT_ACTIVITY_STATUS                                   =
+                                                                     "//*[@id='UIRecentActivitiesPortlet']//*[@class='activityCont']/div[${index}]//*[@class='status']/span";
+
   public static final String          ELEMENT_RECENT_ACTIVITY_NO_CONTENT                                =
                                                                          "//*[@id='UIRecentActivitiesPortlet']//*[contains(text(),'${content}')]";
 
