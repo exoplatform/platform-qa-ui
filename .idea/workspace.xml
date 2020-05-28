@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc4a0367-df54-4081-9eb5-c93d6d50856e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/pageobject/ForumStatisticManagement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/testapi/ForumStatisticTestAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/pageobject/UserGroups.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/testapi/UserGroupsTestAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/forum/target/" />
@@ -85,12 +84,12 @@
     <favorites_list name="platform-qa-ui" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/testapi/ForumStatisticTestAPI.java">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/pageobject/UserGroups.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-536">
-              <caret line="17" column="34" lean-forward="true" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+            <state relative-caret-position="1440">
+              <caret line="103" column="68" selection-start-line="103" selection-start-column="68" selection-end-line="103" selection-end-column="68" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -98,11 +97,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/pageobject/ForumStatisticManagement.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/testapi/UserGroupsTestAPI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="63" column="14" selection-start-line="63" selection-start-column="14" selection-end-line="63" selection-end-column="14" />
+            <state relative-caret-position="360">
+              <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -173,17 +172,13 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="RewriteScenariosToRemoveRedundantSteps" />
+        <entry key="$PROJECT_DIR$" value="exoNewTribe" />
       </map>
     </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/NavigationToolBarLocator.java" />
-        <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/gatein/GateinGlobalSettingsTestIT.java" />
-        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/social/SpaceManagement.java" />
-        <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarEventRecurringTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/calendar/CalendarViewTestIT.java" />
         <option value="$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/chat/ChatOnSiteNotificationTestIT.java" />
         <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java" />
@@ -231,6 +226,10 @@
         <option value="$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/pageobject/SocialSpacesManagement.java" />
         <option value="$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/testapi/ForumStatisticTestAPI.java" />
         <option value="$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/pageobject/ForumStatisticManagement.java" />
+        <option value="$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/pageobject/UserGroupsManagement.java" />
+        <option value="$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/testapi/UserGroupsMangementTestAPI.java" />
+        <option value="$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/pageobject/UserGroups.java" />
+        <option value="$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/testapi/UserGroupsTestAPI.java" />
       </list>
     </option>
   </component>
@@ -267,7 +266,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -294,15 +292,33 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="restAssured" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="restAssured" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="restAssured" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="restAssured" type="462c0819:PsiDirectoryNode" />
+              <item name="testapi" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1590073219139" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1590621336524" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -332,7 +348,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ForumStatisticTestAPI">
+  <component name="RunManager" selected="JUnit.UserGroupsTestAPI">
     <configuration name="CalendarBasicTestsInSpaceTestIT.test01_AddEventInSpace" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
@@ -346,96 +362,6 @@
       <option name="METHOD_NAME" value="test01_AddEventInSpace" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-53-01.exoplatform.org/" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ForumStatisticTestAPI" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-restAssured" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.restAssured.testapi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi.ForumStatisticTestAPI" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org/" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ForumStatisticTestAPI.test02_getEventsAPI" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-restAssured" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.restAssured.testapi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi.ForumStatisticTestAPI" />
-      <option name="METHOD_NAME" value="test02_getEventsAPI" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-53-02.exoplatform.org/" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ForumStatisticTestAPI.test03_getActiveUsersNumberAPI" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-restAssured" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.restAssured.testapi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi.ForumStatisticTestAPI" />
-      <option name="METHOD_NAME" value="test03_getActiveUsersNumberAPI" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-53-02.exoplatform.org/" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ForumStatisticTestAPI.test04_getPostsNumberAPI" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-restAssured" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.restAssured.testapi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi.ForumStatisticTestAPI" />
-      <option name="METHOD_NAME" value="test04_getPostsNumberAPI" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-53-02.exoplatform.org/" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ForumStatisticTestAPI.test05_getTopicsNumberAPI" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-restAssured" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.restAssured.testapi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi.ForumStatisticTestAPI" />
-      <option name="METHOD_NAME" value="test05_getTopicsNumberAPI" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-53-02.exoplatform.org/" />
       <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -495,6 +421,96 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UserGroupsTestAPI" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-restAssured" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.restAssured.testapi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi.UserGroupsTestAPI" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org/" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserGroupsTestAPI.test01_addSpaceAPI" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-restAssured" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.restAssured.testapi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi.UserGroupsTestAPI" />
+      <option name="METHOD_NAME" value="test01_addSpaceAPI" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org/" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserGroupsTestAPI.test02_getSpacesAPI" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-restAssured" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.restAssured.testapi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi.UserGroupsTestAPI" />
+      <option name="METHOD_NAME" value="test02_getSpacesAPI" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org/" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserGroupsTestAPI.test03_getUserGroupsByLabelAPI" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-restAssured" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.restAssured.testapi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi.UserGroupsTestAPI" />
+      <option name="METHOD_NAME" value="test03_getUserGroupsByLabelAPI" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org/" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserGroupsTestAPI.test04_getUserGroupsByGroupNameAPI" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-restAssured" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.restAssured.testapi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.restAssured.testapi.UserGroupsTestAPI" />
+      <option name="METHOD_NAME" value="test04_getUserGroupsByGroupNameAPI" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-03.exoplatform.org/" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="MAIN_CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
@@ -528,20 +544,20 @@
       <item itemvalue="JUnit.PlfNavigationTopNavigationTestIT.test05_CreateANewTaskViaTheTopNavigation" />
       <item itemvalue="JUnit.PlfUnifiedSearchTestIT.test13_checkUnifiedSearchNotWorkingWithFilesContainingDashInTheirTitles" />
       <item itemvalue="JUnit.PortletInSpaceHomePageTestIT.test04_CheckTheSpaceWhoIsOnlinePortlet" />
+      <item itemvalue="JUnit.UserGroupsTestAPI" />
+      <item itemvalue="JUnit.UserGroupsTestAPI.test01_addSpaceAPI" />
+      <item itemvalue="JUnit.UserGroupsTestAPI.test02_getSpacesAPI" />
+      <item itemvalue="JUnit.UserGroupsTestAPI.test03_getUserGroupsByLabelAPI" />
+      <item itemvalue="JUnit.UserGroupsTestAPI.test04_getUserGroupsByGroupNameAPI" />
       <item itemvalue="JUnit.org.exoplatform.platform.qa.ui.chat.smoke in platform-qa-ui-chat" />
-      <item itemvalue="JUnit.ForumStatisticTestAPI.test02_getEventsAPI" />
-      <item itemvalue="JUnit.ForumStatisticTestAPI" />
-      <item itemvalue="JUnit.ForumStatisticTestAPI.test03_getActiveUsersNumberAPI" />
-      <item itemvalue="JUnit.ForumStatisticTestAPI.test04_getPostsNumberAPI" />
-      <item itemvalue="JUnit.ForumStatisticTestAPI.test05_getTopicsNumberAPI" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ForumStatisticTestAPI" />
-        <item itemvalue="JUnit.ForumStatisticTestAPI.test05_getTopicsNumberAPI" />
-        <item itemvalue="JUnit.ForumStatisticTestAPI.test04_getPostsNumberAPI" />
-        <item itemvalue="JUnit.ForumStatisticTestAPI.test03_getActiveUsersNumberAPI" />
-        <item itemvalue="JUnit.ForumStatisticTestAPI.test02_getEventsAPI" />
+        <item itemvalue="JUnit.UserGroupsTestAPI" />
+        <item itemvalue="JUnit.UserGroupsTestAPI.test04_getUserGroupsByGroupNameAPI" />
+        <item itemvalue="JUnit.UserGroupsTestAPI.test03_getUserGroupsByLabelAPI" />
+        <item itemvalue="JUnit.UserGroupsTestAPI.test01_addSpaceAPI" />
+        <item itemvalue="JUnit.UserGroupsTestAPI.test02_getSpacesAPI" />
       </list>
     </recent_temporary>
   </component>
@@ -559,35 +575,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ForumStatisticTestAPI_test02_getEventsAPI - 2020.05.21 at 12h 31m 24s.xml">
-      <configuration name="ForumStatisticTestAPI.test02_getEventsAPI" configurationId="JUnit" />
+    <history-entry file="UserGroupsTestAPI_test03_getUserGroupsByLabelAPI - 2020.05.28 at 01h 05m 26s.xml">
+      <configuration name="UserGroupsTestAPI.test03_getUserGroupsByLabelAPI" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ForumStatisticTestAPI - 2020.05.21 at 12h 39m 52s.xml">
-      <configuration name="ForumStatisticTestAPI" configurationId="JUnit" />
+    <history-entry file="UserGroupsTestAPI_test03_getUserGroupsByLabelAPI - 2020.05.28 at 01h 05m 40s.xml">
+      <configuration name="UserGroupsTestAPI.test03_getUserGroupsByLabelAPI" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ForumStatisticTestAPI_test03_getActiveUsersNumberAPI - 2020.05.21 at 12h 45m 22s.xml">
-      <configuration name="ForumStatisticTestAPI.test03_getActiveUsersNumberAPI" configurationId="JUnit" />
+    <history-entry file="UserGroupsTestAPI_test03_getUserGroupsByLabelAPI - 2020.05.28 at 01h 05m 47s.xml">
+      <configuration name="UserGroupsTestAPI.test03_getUserGroupsByLabelAPI" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ForumStatisticTestAPI - 2020.05.21 at 12h 47m 19s.xml">
-      <configuration name="ForumStatisticTestAPI" configurationId="JUnit" />
+    <history-entry file="UserGroupsTestAPI_test03_getUserGroupsByLabelAPI - 2020.05.28 at 01h 07m 12s.xml">
+      <configuration name="UserGroupsTestAPI.test03_getUserGroupsByLabelAPI" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ForumStatisticTestAPI - 2020.05.21 at 12h 47m 36s.xml">
-      <configuration name="ForumStatisticTestAPI" configurationId="JUnit" />
+    <history-entry file="UserGroupsTestAPI_test03_getUserGroupsByLabelAPI - 2020.05.28 at 01h 07m 31s.xml">
+      <configuration name="UserGroupsTestAPI.test03_getUserGroupsByLabelAPI" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ForumStatisticTestAPI_test04_getPostsNumberAPI - 2020.05.21 at 13h 05m 16s.xml">
-      <configuration name="ForumStatisticTestAPI.test04_getPostsNumberAPI" configurationId="JUnit" />
+    <history-entry file="UserGroupsTestAPI_test03_getUserGroupsByLabelAPI - 2020.05.28 at 01h 07m 43s.xml">
+      <configuration name="UserGroupsTestAPI.test03_getUserGroupsByLabelAPI" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ForumStatisticTestAPI - 2020.05.21 at 13h 06m 02s.xml">
-      <configuration name="ForumStatisticTestAPI" configurationId="JUnit" />
+    <history-entry file="UserGroupsTestAPI_test04_getUserGroupsByGroupNameAPI - 2020.05.28 at 01h 10m 12s.xml">
+      <configuration name="UserGroupsTestAPI.test04_getUserGroupsByGroupNameAPI" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ForumStatisticTestAPI_test05_getTopicsNumberAPI - 2020.05.21 at 13h 08m 56s.xml">
-      <configuration name="ForumStatisticTestAPI.test05_getTopicsNumberAPI" configurationId="JUnit" />
+    <history-entry file="UserGroupsTestAPI_test03_getUserGroupsByLabelAPI - 2020.05.28 at 01h 10m 34s.xml">
+      <configuration name="UserGroupsTestAPI.test03_getUserGroupsByLabelAPI" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ForumStatisticTestAPI - 2020.05.21 at 13h 09m 10s.xml">
-      <configuration name="ForumStatisticTestAPI" configurationId="JUnit" />
+    <history-entry file="UserGroupsTestAPI_test04_getUserGroupsByGroupNameAPI - 2020.05.28 at 01h 10m 44s.xml">
+      <configuration name="UserGroupsTestAPI.test04_getUserGroupsByGroupNameAPI" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ForumStatisticTestAPI - 2020.05.21 at 13h 09m 59s.xml">
-      <configuration name="ForumStatisticTestAPI" configurationId="JUnit" />
+    <history-entry file="UserGroupsTestAPI - 2020.05.28 at 01h 14m 08s.xml">
+      <configuration name="UserGroupsTestAPI" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -601,9 +617,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1533" height="875" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" visible="true" weight="0.15601882" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" visible="true" weight="0.21385339" />
       <window_info id="Structure" order="1" sideWeight="0.22285715" side_tool="true" weight="0.24815063" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -614,10 +629,10 @@
       <window_info anchor="bottom" id="Find" order="1" weight="0.30563003" />
       <window_info anchor="bottom" id="Cvs" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="3" weight="0.4" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" sideWeight="0.64223266" visible="true" weight="0.42761394" />
-      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.49764627" weight="0.38337803" />
+      <window_info active="true" anchor="bottom" id="Run" order="4" sideWeight="0.64223266" visible="true" weight="0.37801608" />
+      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.49764627" weight="0.5254692" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.58042896" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" weight="0.17426273" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" visible="true" weight="0.37935656" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.21856086" side_tool="true" weight="0.6447721" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.5683646" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.48927614" />
@@ -633,7 +648,7 @@
       <window_info anchor="right" id="Maven" order="8" sideWeight="0.7607527" weight="0.036987223" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" visible="true" weight="0.1593813" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.77629066" visible="true" weight="0.2555481" />
       <window_info id="Structure" order="1" sideWeight="0.22285715" side_tool="true" weight="0.24815063" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -644,8 +659,8 @@
       <window_info anchor="bottom" id="Find" order="1" weight="0.30563003" />
       <window_info anchor="bottom" id="Cvs" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="3" weight="0.4" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" sideWeight="0.64223266" visible="true" weight="0.34986594" />
-      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.49764627" weight="0.3297587" />
+      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.64223266" weight="0.44906166" />
+      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.49764627" weight="0.38337803" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.58042896" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7881641" weight="0.17426273" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.21856086" side_tool="true" weight="0.6447721" />
@@ -824,6 +839,18 @@
           <properties />
           <option name="timeStamp" value="4310" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/testapi/UserGroupsTestAPI.java</url>
+          <line>20</line>
+          <properties />
+          <option name="timeStamp" value="4312" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/testapi/UserGroupsTestAPI.java</url>
+          <line>51</line>
+          <properties />
+          <option name="timeStamp" value="4313" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -927,117 +954,53 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>String newUser = response.asString().split(&quot;newMembers&quot;)[1].split(&quot;:&quot;)[1].split(&quot;\&quot;&quot;)[1].split(&quot;\&quot;&quot;)[0];</expression-string>
+        <expression-string>response.asString().split(&quot;label&quot;)[14].split(&quot;:&quot;)[1].split(&quot;\&quot;&quot;)[1];</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>String newUser = response.asString().split(&quot;newMembers&quot;)[1].split(&quot;:&quot;)[1].split(&quot;\&quot;&quot;)[1].split(&quot;\&quot;&quot;)[0]</expression-string>
+        <expression-string>response.asString().split(&quot;label&quot;)[15].split(&quot;:&quot;)[1].split(&quot;\&quot;&quot;)[1];</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>String newUser = response.asString().split(&quot;newMembers&quot;)[1].split(&quot;:&quot;)[1].split(&quot;\&quot;&quot;)[1]</expression-string>
+        <expression-string>response.asString().split(&quot;label&quot;)[0].split(&quot;:&quot;)[1].split(&quot;\&quot;&quot;)[1];</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>String newUser = response.asString().split(&quot;newMembers&quot;)[1].split(&quot;:&quot;)[1].split(&quot;\&quot;&quot;)[0]</expression-string>
+        <expression-string>response.asString().split(&quot;label&quot;)[5].split(&quot;:&quot;)[1].split(&quot;\&quot;&quot;)[1];</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>String newUser = response.asString().split(&quot;newMembers&quot;)[1].split(&quot;:&quot;)[1]</expression-string>
+        <expression-string>response.asString().split(&quot;label&quot;)[4].split(&quot;:&quot;)[1].split(&quot;\&quot;&quot;)[1];</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>String newUser = response.asString().split(&quot;newMembers&quot;)[1].split(&quot;:&quot;)</expression-string>
+        <expression-string>response.asString().split(&quot;label&quot;)[3].split(&quot;:&quot;)[1].split(&quot;\&quot;&quot;)[1];</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>String newUser = response.asString().split(&quot;newMembers&quot;)[1]</expression-string>
+        <expression-string>response.asString().split(&quot;label&quot;)[2].split(&quot;:&quot;)[1].split(&quot;\&quot;&quot;)[1];</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>String newUser = response.asString().split(&quot;newMembers&quot;)</expression-string>
+        <expression-string>response.asString().split(&quot;label&quot;)[1].split(&quot;:&quot;)[1].split(&quot;\&quot;&quot;)[1];</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>String newUser = response.asString().split(&quot;activeUsers&quot;)[1].split(&quot;postCount&quot;)[0].split(&quot;:&quot;)[1].split(&quot;,&quot;)[0].split(&quot;\&quot;&quot;)[0];</expression-string>
+        <expression-string>response.asString().split(&quot;label&quot;)[1].split(&quot;:&quot;)[1].split(&quot;\&quot;&quot;)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsSEBasicActionTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2303">
-          <caret line="178" column="22" selection-start-line="178" selection-start-column="22" selection-end-line="178" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsSECollaborationTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1410">
-          <caret line="112" column="20" selection-start-line="112" selection-start-column="20" selection-end-line="112" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsSECreateTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1918">
-          <caret line="188" column="35" lean-forward="true" selection-start-line="188" selection-start-column="35" selection-end-line="188" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsSEInfoTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsSEPublishActivitiesTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1957">
-          <caret line="82" selection-start-line="82" selection-end-line="82" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/ecms/EcmsSESearchTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="51" column="20" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ecms/src/main/java/org/exoplatform/platform/qa/ui/ecms/pageobject/SEOManagement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gatein/src/main/java/org/exoplatform/platform/qa/ui/gatein/pageobject/ContentList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="148">
@@ -1325,16 +1288,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/testapi/DisplayWikiPagesTestAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/testapi/DisplayUserNotificationsTestAPI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -1342,13 +1295,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/testapi/SocialSpacesTestAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="29" column="11" selection-start-line="27" selection-end-line="47" />
         </state>
       </provider>
     </entry>
@@ -1366,10 +1312,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/testapi/SocialActivitiesTestAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/testapi/SocialSpacesTestAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="40" column="84" selection-start-line="40" selection-start-column="84" selection-end-line="40" selection-end-column="101" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/pageobject/ForumStatisticManagement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="63" column="14" selection-start-line="63" selection-start-column="14" selection-end-line="63" selection-end-column="14" />
+        <state relative-caret-position="194">
+          <caret line="47" column="12" selection-start-line="46" selection-end-line="58" selection-end-column="63" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1378,8 +1338,66 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/testapi/ForumStatisticTestAPI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-536">
-          <caret line="17" column="34" lean-forward="true" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+        <state relative-caret-position="585">
+          <caret line="51" column="36" lean-forward="true" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/pageobject/SocialRelationshipsManagement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/testapi/SocialUsersTestAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="69" column="33" selection-start-line="69" selection-start-column="33" selection-end-line="69" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/pageobject/SocialUsersManagement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-162">
+          <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/testapi/SocialRelationshipsTestAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-540">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/testapi/DisplayWikiPagesTestAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="193" column="18" selection-start-line="191" selection-end-line="198" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/pageobject/UserGroups.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1440">
+          <caret line="103" column="68" selection-start-line="103" selection-start-column="68" selection-end-line="103" selection-end-column="68" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/restAssured/src/test/java/org/exoplatform/platform/qa/ui/restAssured/testapi/UserGroupsTestAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
