@@ -105,7 +105,7 @@ public class WikiManagement {
     info("Save all changes");
     executeJavaScript("window.scrollBy(0,-5500)", "");
     ELEMENT_SAVE_BUTTON_ADD_PAGE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout).click();
-   $(ELEMENT_SAVE_BUTTON_ADD_PAGE).waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
+   $(ELEMENT_SAVE_BUTTON_ADD_PAGE).waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs + Configuration.openBrowserTimeoutMs);
     info("Wiki page simple is created successfully");
 
   }

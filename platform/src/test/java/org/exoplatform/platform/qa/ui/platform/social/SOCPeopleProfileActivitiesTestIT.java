@@ -116,6 +116,7 @@ public class SOCPeopleProfileActivitiesTestIT extends Base {
 
     $(ELEMENT_EDIT_MY_PROFILE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_BUTTON_CHANGE_AVATAR.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
     ELEMENT_INPUT_UPLOAD_AVATAR.uploadFromClasspath("testavatar.png");
     ELEMENT_BUTTON_CONFIRM_UPLOAD.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_BUTTON_SAVE_UPLOAD_AVATAR.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();

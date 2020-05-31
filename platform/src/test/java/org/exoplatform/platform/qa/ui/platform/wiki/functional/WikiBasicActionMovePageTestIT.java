@@ -974,6 +974,7 @@ public class WikiBasicActionMovePageTestIT extends Base {
         wikiHomePage.goToEditPage();
         richTextEditor.goToAttachedImageLink();
         richTextEditor.insertImage(image2, true);
+        sleep(1000);
         wikiManagement.saveAddPage();
         wikiValidattions.verifyTitleWikiPage(subPage2);
         info("Move page of space 1 to Wiki Home of space 2");

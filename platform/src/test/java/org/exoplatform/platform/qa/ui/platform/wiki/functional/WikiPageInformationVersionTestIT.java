@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.wiki.functional;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
@@ -172,15 +173,17 @@ public class WikiPageInformationVersionTestIT extends Base {
     info("Compare versions");
     wikiPageInformation.goToPageHistory();
     info("Button Compare Selected is disable, user can't click on it");
-    $(ELEMENT_COMPARE_VERISON_BTN_DISABLED).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_COMPARE_VERISON_BTN_DISABLED).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     info("Compare version when select 2 versions");
     wikiHomePage.goToPageInformation(newPage1);
     info("Compare versions");
+    sleep(2000);
     wikiPageInformation.goToPageHistory();
     wikiPageInformation.compareTwoReversion("v.1", "v.2");
     info("Compare version when select only 1 version");
     info("Compare versions");
     wikiHomePage.goToPageInformation(newPage1);
+    sleep(1000);
     wikiPageInformation.goToPageHistory();
     wikiPageInformation.compareTwoReversion("v.1", "");
     info("Button Compare Selected is disable, user can't click on it");

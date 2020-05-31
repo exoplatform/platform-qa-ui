@@ -102,7 +102,7 @@ public class SOCPeopleProfileRecentActivitiesTestIT extends Base {
     $(ELEMENT_RECENT_ACTIVITY_VIEWALL_BTN).click();
     $(ELEMENT_HORIZONTAL_TOOLBAR_SECOND_APP_ACTIVITIES).should(visible);
     $(byText(textDes2)).should(visible);
-    $(byText(mention)).parent().shouldHave(Condition.text(username2 + " " + username2 + " " + mention)).should(visible);
+    $(byText(mention)).parent().shouldHave(Condition.text(username2 + " " + username2 + " " + mention)).waitUntil(visible,Configuration.openBrowserTimeoutMs);
     $(byAttribute("data-original-title", "eXo-Platform.png")).should(Condition.exist);
     $(byText(textDes2)).parent()
                        .parent()

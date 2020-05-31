@@ -280,7 +280,7 @@ public class ActivityStream {
         }
         shareActivity();
         info("-- Verify that an activity has been added --");
-        $(byText(text)).should(Condition.exist);
+        $(byText(text)).waitUntil(Condition.exist, openBrowserTimeoutMs);
         $(ELEMENT_COMPOSER_SHARE_BUTTON).shouldBe(Condition.disabled);
         info("The activity is shared success");
     }
@@ -854,6 +854,7 @@ public class ActivityStream {
         // click on comment link
         $(byText(activity)).parent().find(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).waitUntil(visible, Configuration.openBrowserTimeoutMs).click();
         // insert comment
+        sleep(1000);
         $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
         executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
         // click on the button comment
@@ -1315,7 +1316,7 @@ public class ActivityStream {
                 .getAttribute("id")
                 .split("UIActivityLoader")[1];
         // Click on reply link
-        $(byId(ELEMENT_lABEL_REPLY_COMMENT.replace("{id}", idBlocReply))).click();
+        $(byId(ELEMENT_lABEL_REPLY_COMMENT.replace("{id}", idBlocReply))).waitUntil(visible, openBrowserTimeoutMs).click();
         // Insert the reply
         $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
         executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + replytoreply + "\")", "");

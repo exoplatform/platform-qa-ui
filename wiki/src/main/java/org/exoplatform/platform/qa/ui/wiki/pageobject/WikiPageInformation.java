@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -69,11 +70,10 @@ public class WikiPageInformation {
      */
     public void goToPageHistory() {
         info("Click on View page info button");
-        $(ELEMENT_PAGE_INFO_VIEW_PAGE_INFO_BTN).waitUntil(Condition.appears, Configuration.timeout);
+        $(ELEMENT_PAGE_INFO_VIEW_PAGE_INFO_BTN).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
         $(ELEMENT_PAGE_INFO_VIEW_PAGE_INFO_BTN).click();
-
         info("Page history is shown");
-        $(ELEMENT_WIKI_PAGE_PAGE_HISTORY_TITLE).waitUntil(Condition.appears, Configuration.timeout);
+        $(ELEMENT_WIKI_PAGE_PAGE_HISTORY_TITLE).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     }
 
     /**

@@ -652,7 +652,8 @@ public class RichTextEditor {
    */
   public void uploadAttachedFile(String link) {
     info("Double Click on Upload New file button");
-    $(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_NEW_FILE_BTN).doubleClick();
+    $(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_NEW_FILE_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).doubleClick();
+    sleep(1000);
     $(byClassName("gwt-FileUpload")).uploadFromClasspath(link);
   }
 

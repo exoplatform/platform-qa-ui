@@ -113,33 +113,33 @@ public class SOCPeopleTestIT extends Base {
             .parent()
             .parent()
             .find(byText(connect))
-            .should(Condition.exist);
+            .waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
     ELEMENT_CONTENT_PEOPLE.find(byText(username3 + " " + username3))
             .parent()
             .parent()
             .parent()
             .find(byText(connect))
-            .should(Condition.exist);
+            .waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
     ELEMENT_CONTENT_PEOPLE.find(byText(username4 + " " + username4))
             .parent()
             .parent()
             .parent()
             .find(byText(connect))
-            .should(Condition.exist);
+            .waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
     homePagePlatform.searchUsersPeople(username5);
     ELEMENT_CONTENT_PEOPLE.find(byText(username5 + " " + username5))
             .parent()
             .parent()
             .parent()
             .find(byText(connect))
-            .should(Condition.exist);
+            .waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
     info("Click on Connections on the left panel");
     homePagePlatform.goToConnections();
     info("Click on Connect button to invite an user");
     connectionsManagement.connectToAUser(username2);
-    $(ELEMENT_CONNECTION_CANCEL_BTN).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_CONNECTION_CANCEL_BTN).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     connectionsManagement.goToConnectionTab(ConnectionsManagement.selectTabOption.PENDING);
-    $(ELEMENT_CONNECTION_CANCEL_BTN).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_CONNECTION_CANCEL_BTN).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
 
     info("Cancel request");
     connectionsManagement.cancelConnection(username2);
@@ -165,7 +165,6 @@ public class SOCPeopleTestIT extends Base {
     info("Verify after accept");
     ELEMENT_CONNECTION_REVOVE_BTN.should(Condition.exist);
     navigationToolbar.goToIntranetNotification();
-    $(ELEMENT_INTRANET_NOTIFICATION_BELL).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1+" "+username1)).parent().shouldHave(Condition.text(comment));
     $(ELEMENT_NOTIFICATION_DROPDOWN).findAll(byText(username1+" "+username1)).shouldHaveSize(1);
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1 + " " + username1)).parent().shouldNotHave(text(username1 + " " + username1 + " wants to connect with you"));

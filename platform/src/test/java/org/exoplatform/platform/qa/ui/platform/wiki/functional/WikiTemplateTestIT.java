@@ -329,8 +329,6 @@ public class WikiTemplateTestIT extends Base {
 
   }
 
-
-
     @Test
   public void test_SearchTemplateWhenTheKeyIsMatchedThenWhenKeyIsNotMatchedThenUsingTemplateToCreateNewPageThenSearchTemplateWhenSearchFieldIsBlank() {
     info("Using template to create new page");

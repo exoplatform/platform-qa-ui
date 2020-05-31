@@ -1,9 +1,12 @@
 package org.exoplatform.platform.qa.ui.platform.wiki.functional;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_CANCEL_BUTTON_ADD_PAGE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -89,6 +92,9 @@ public class WikiBasicActionAddAutoSaveTestIT extends Base {
     wikiManagement.goToSourceEditor();
     wikiValidattions.verifyResumADraf(title);
     info("Create a draf wiki page");
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToAddBlankPage();
+    wikiManagement.goToSourceEditor();
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();
     wikiManagement.goToSourceEditor();

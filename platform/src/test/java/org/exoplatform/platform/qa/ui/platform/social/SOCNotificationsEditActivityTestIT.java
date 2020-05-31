@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.social;
 
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
@@ -199,6 +198,7 @@ public class SOCNotificationsEditActivityTestIT extends Base {
     connectionsManagement.acceptAConnection(username, username + " " + username);
     refresh();
     homePagePlatform.goToHomePage();
+    sleep(1000);
     activityStream.commentActivity(activity1, comment1);
     homePagePlatform.goToHomePage();
     activityStream.commentActivity(activity2, comment2);
