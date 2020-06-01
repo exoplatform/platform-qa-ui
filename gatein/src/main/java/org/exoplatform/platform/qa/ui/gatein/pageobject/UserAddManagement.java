@@ -10,6 +10,8 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocat
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 import java.util.ArrayList;
+
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.Button;
 import org.exoplatform.platform.qa.ui.selenium.Dialog;
@@ -52,12 +54,12 @@ public class UserAddManagement {
     info("Add an user");
 
     $(ELEMENT_USERNAME).waitUntil(appears, 10000);
-    $(ELEMENT_USERNAME).setValue(userName);
-    $(ELEMENT_PASSWORD).setValue(password);
-    $(ELEMENT_CONFIRM_PASSWORD).setValue(password);
-    $(ELEMENT_EMAIL).setValue(email);
-    $(ELEMENT_FIRSTNAME).setValue(firstname);
-    $(ELEMENT_LASTNAME).setValue(lastName);
+    $(ELEMENT_USERNAME).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(userName);
+    $(ELEMENT_PASSWORD).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(password);
+    $(ELEMENT_CONFIRM_PASSWORD).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(password);
+    $(ELEMENT_EMAIL).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(email);
+    $(ELEMENT_FIRSTNAME).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(firstname);
+    $(ELEMENT_LASTNAME).waitUntil(visible,Configuration.openBrowserTimeoutMs).setValue(lastName);
     $(ELEMENT_SAVE_ADD_USER).waitUntil(visible,Configuration.openBrowserTimeoutMs).click();
     $(byText("You have registered a new account.")).waitUntil(appears, 10000);
     $(byText("OK")).click();

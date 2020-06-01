@@ -2,13 +2,13 @@ package org.exoplatform.platform.qa.ui.chat.smoke;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_USER_PROFILE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_USER_RESULT_SEARCH;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_MINI_CHAT;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ICON_ACCEPT_SPACE_REQUEST_IN_MEMBERS_TAB;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -123,7 +123,7 @@ public class SpaceManageMessageTestIT extends Base {
     homePagePlatform.goToChat();
     switchTo().window(1);
     info("check that space exist");
-    $(byText(space)).should(Condition.exist);
+    $(byText(space)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).exists();
     switchTo().window(0);
     homePagePlatform.goToAllSpace();
     spaceManagement.deleteSpace(space, false);
