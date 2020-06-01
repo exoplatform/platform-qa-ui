@@ -653,6 +653,7 @@ public class RichTextEditor {
   public void uploadAttachedFile(String link) {
     info("Double Click on Upload New file button");
     $(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_NEW_FILE_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).doubleClick();
+    sleep(1000);
     $(byClassName("gwt-FileUpload")).uploadFromClasspath(link);
   }
 
@@ -884,7 +885,6 @@ public class RichTextEditor {
       }while (!$(ELEMENT_TITLE_WIKI_INPUT).exists());
     }
     if (!title.isEmpty())
-      sleep(1000);
       $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).val(title);
     info("Input a content for the page");
     if (!content.isEmpty()) {

@@ -316,9 +316,9 @@ public class SOCHomePageTestIT extends Base {
     homePagePlatform.goToHomePage();
     $(byText(username+" "+username)).parent().parent().parent().parent().find(byText(comment2)).should(Condition.exist);
     info("Check Connections Filter");
-    $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.timeout).click();
-    $(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES).waitUntil(Condition.visible,Configuration.timeout).click();
-    $(ELEMENT_PUBLICATION_DISPLAYMODE_CONNECTION_OPTION).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_PUBLICATION_DISPLAYMODE_CONNECTION_OPTION).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     executeJavaScript("window.scrollBy(0,-1500)", "");
     $(byText(text)).should(Condition.exist);
     manageLogInOut.signIn(username,password);

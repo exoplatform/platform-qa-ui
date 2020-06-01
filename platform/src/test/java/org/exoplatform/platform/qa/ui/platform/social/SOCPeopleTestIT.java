@@ -5,7 +5,6 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.*;
@@ -114,33 +113,33 @@ public class SOCPeopleTestIT extends Base {
             .parent()
             .parent()
             .find(byText(connect))
-            .should(Condition.exist);
+            .waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
     ELEMENT_CONTENT_PEOPLE.find(byText(username3 + " " + username3))
             .parent()
             .parent()
             .parent()
             .find(byText(connect))
-            .should(Condition.exist);
+            .waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
     ELEMENT_CONTENT_PEOPLE.find(byText(username4 + " " + username4))
             .parent()
             .parent()
             .parent()
             .find(byText(connect))
-            .should(Condition.exist);
+            .waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
     homePagePlatform.searchUsersPeople(username5);
     ELEMENT_CONTENT_PEOPLE.find(byText(username5 + " " + username5))
             .parent()
             .parent()
             .parent()
             .find(byText(connect))
-            .should(Condition.exist);
+            .waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
     info("Click on Connections on the left panel");
     homePagePlatform.goToConnections();
     info("Click on Connect button to invite an user");
     connectionsManagement.connectToAUser(username2);
-    $(ELEMENT_CONNECTION_CANCEL_BTN).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_CONNECTION_CANCEL_BTN).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     connectionsManagement.goToConnectionTab(ConnectionsManagement.selectTabOption.PENDING);
-    $(ELEMENT_CONNECTION_CANCEL_BTN).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_CONNECTION_CANCEL_BTN).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
 
     info("Cancel request");
     connectionsManagement.cancelConnection(username2);
@@ -164,8 +163,7 @@ public class SOCPeopleTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(username1);
     info("Verify after accept");
-    ELEMENT_CONNECTION_REVOVE_BTN.waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
-    sleep(2000);
+    ELEMENT_CONNECTION_REVOVE_BTN.should(Condition.exist);
     navigationToolbar.goToIntranetNotification();
     $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username1+" "+username1)).parent().shouldHave(Condition.text(comment));
     $(ELEMENT_NOTIFICATION_DROPDOWN).findAll(byText(username1+" "+username1)).shouldHaveSize(1);

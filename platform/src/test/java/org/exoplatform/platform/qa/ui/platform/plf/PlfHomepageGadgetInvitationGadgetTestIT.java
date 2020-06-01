@@ -3,10 +3,13 @@ package org.exoplatform.platform.qa.ui.platform.plf;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.QuickSearchResultLocator.ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import com.codeborne.selenide.Configuration;
@@ -71,29 +74,6 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     manageLogInOut.signInCas(DATA_USER1, "gtngtn");
   }
 
-  /**
-   * <li>Case ID:120861.</li>
-   * <li>Test Case Name: Not show Invitation gadget.</li>
-   * <li>Pre-Condition: - UserA does not receive any invitation from user or
-   * space</li> Step Number: 1 Step Name: - Check if no invitation Step
-   * Description: - Login as UserA - Go to intranet home page Input Data: Expected
-   * Outcome: This gadget is not shown
-   */
-  @Test
-  public void test01_NotShowInvitationGadget() {
-    info("Test 01: Not show Invitation gadget");
-    info("Add new user");
-    String usernamea = "usernamea" + getRandomString();
-    String password = "123456";
-    String email1 = usernamea + "@test.com";
-    navigationToolbar.goToAddUser();
-    userAddManagement.addUser(usernamea, password, email1, usernamea, usernamea);
-    manageLogInOut.signIn(usernamea,password);
-    waitForElementNotPresent(ELEMENT_INVITATIONS_GADGET);
-    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
-    navigationToolbar.goToUsersAndGroupsManagement();
-    userAndGroupManagement.deleteUser(usernamea);
-  }
 
   /**
    * <li>Case ID:120854.</li>
@@ -111,7 +91,7 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
    * 4
    */
   @Test
-  public void test02_CheckDisplayInvitationGadget() {
+  public void test01_CheckDisplayInvitationGadgetThenAcceptRefuseARequest() {
     info("prepare data");
 
     info("Create datatest");
@@ -124,6 +104,24 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     String email3 = usernamec + "@test.com";
     String username4 = "usernamed" + getRandomString();
     String email4 = username4 + "@test.com";
+    String usernamed = "usernamed" + getRandomString();
+    String email5 = usernamed + "@test.com";
+    String usernamee = "usernamee" + getRandomString();
+    String email6 = usernamee + "@test.com";
+
+    info("Go to user profile");
+    String title = "title" + getRandomNumber();
+    homePagePlatform.goToUserProfile();
+    $(ELEMENT_EDIT_PROFILE).waitUntil(Condition.appears, Configuration.timeout).click();
+    $(ELEMENT_TITLE_INPUT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_TITLE_INPUT).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).setValue(title);
+    $(ELEMENT_BUTTON_SAVE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_EDIT_PROFILE).waitUntil(Condition.visible, Configuration.timeout + Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_TITLE_INPUT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue("");
+    $(ELEMENT_BUTTON_SAVE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).doubleClick();
+    executeJavaScript("window.scrollBy(0,150)");
+    $(ELEMENT_BUTTON_SAVE).waitUntil(Condition.not(Condition.visible),Configuration.collectionsTimeout);
+    $(ELEMENT_ABOUT_ME).shouldNot(Condition.visible);
 
     /* Create data test */
     info("Add new user");
@@ -131,10 +129,15 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     userAddManagement.addUser(usernamea, password, email1, usernamea, usernamea);
     userAddManagement.addUser(usernameb, password, email2, usernameb, usernameb);
     userAddManagement.addUser(usernamec, password, email3, usernamec, usernamec);
+    userAddManagement.addUser(usernamed, password, email5, usernamed, usernamed);
+    userAddManagement.addUser(usernamee, password, email6, usernamee, usernamee);
     userAddManagement.addUser(username4, password, email4, username4, username4);
     info("--Send request 2 to John");
     info("Sign in with username1 account");
     manageLogInOut.signIn(usernamea, password);
+    info("Not show Invitation gadget");
+    waitForElementNotPresent(ELEMENT_INVITATIONS_GADGET);
+
     homePagePlatform.goToConnections();
     connectionsManagement.connectToAUser(username4);
 
@@ -144,7 +147,7 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
     connectionsManagement.connectToAUser(username4);
 
     info("Sign in with username3 account");
-    manageLogInOut.signIn(usernamec, password);
+    manageLogInOut.signIn(usernamed, password);
     homePagePlatform.goToConnections();
     connectionsManagement.connectToAUser(username4);
 
@@ -154,125 +157,44 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
 
     ELEMENT_GADGET_INVITATION.find(byText(usernamea + " " + usernamea)).should(Condition.exist);
     ELEMENT_GADGET_INVITATION.find(byText(usernameb + " " + usernameb)).should(Condition.exist);
+    ELEMENT_GADGET_INVITATION.find(byText(usernamed + " " + usernamed)).should(Condition.exist);
+
+    info("Accept a Request");
+    navigationToolbar.goToQuickSearch();
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_GADGET_INVITATION.find(byText(usernameb + " " + usernameb)).parent().hover();
+    ELEMENT_GADGET_INVITATION.find(byText(usernameb + " " + usernameb)).parent().parent().find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_GADGET_INVITATION.find(byText(usernameb + " " + usernameb)).shouldNot(Condition.exist);
+    ELEMENT_GADGET_INVITATION.find(byText(usernamea + " " + usernamea)).should(Condition.exist);
+
+    info("Sign in with username4 account");
+    manageLogInOut.signIn(usernamec, password);
+    homePagePlatform.goToConnections();
+    connectionsManagement.connectToAUser(username4);
+
+    info("Sign in with username5 account");
+    manageLogInOut.signIn(usernamee, password);
+    homePagePlatform.goToConnections();
+    connectionsManagement.connectToAUser(username4);
+
+    manageLogInOut.signIn(username4, password);
+    navigationToolbar.goToQuickSearch();
+    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_GADGET_INVITATION.find(byText(usernamee + " " + usernamee)).parent().hover();
+    ELEMENT_GADGET_INVITATION.find(byText(usernamee + " " + usernamee)).parent().parent().find(byClassName("uiIconClose")).click();
+    ELEMENT_GADGET_INVITATION.find(byText(usernamee + " " + usernamee)).shouldNot(Condition.exist);
     ELEMENT_GADGET_INVITATION.find(byText(usernamec + " " + usernamec)).should(Condition.exist);
+
     info("Delete DATA for the last test");
     manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
     navigationToolbar.goToUsersAndGroupsManagement();
     userAndGroupManagement.deleteUser(usernamea);
     userAndGroupManagement.deleteUser(usernameb);
     userAndGroupManagement.deleteUser(usernamec);
+    userAndGroupManagement.deleteUser(usernamed);
+    userAndGroupManagement.deleteUser(usernamee);
     userAndGroupManagement.deleteUser(username4);
+
   }
 
-  /**
-   * <li>Case ID:120855.</li>
-   * <li>Test Case Name: Accept a request.</li>
-   * <li>Pre-Condition: - Add users (root, mary) - Root sends request to connect
-   * to John - Mary sends connection request to John</li> Step Number: 1 Step
-   * Name: Accept a request Step Description: - Login as John - Open intranet
-   * homepage - On this gadget, mouse over an invitation of mary - Click on Accept
-   * button Input Data: /*Expected Outcome: - The invitation of root, mary is
-   * shown on the invitation gadget - The Accept and Refuse button are displayed.
-   * - John is connected to mary and the invitation fades out and is permanently
-   * removed from the list - Request of root are moving to the top of the gadget
-   * if needed
-   */
-  @Test
-  public void test03_AcceptARequest() {
-    info("Test03: Accept a Request");
-    info("prepare data");
-    /* Create data test */
-    String username1 = "usernamea" + getRandomString();
-    String password = "123456";
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String username3 = "usernamec" + getRandomString();
-    String email3 = username3 + "@test.com";
-    info("Add new user");
-    navigationToolbar.goToAddUser();
-    userAddManagement.addUser(username1, password, email1, username1, username1);
-    userAddManagement.addUser(username2, password, email2, username2, username2);
-    userAddManagement.addUser(username3, password, email3, username3, username3);
-    info("Sign in with mary account");
-    manageLogInOut.signIn(username1, password);
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(username3);
-
-    info("--Send request 2 to John");
-    manageLogInOut.signIn(username2, password);
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(username3);
-
-    manageLogInOut.signIn(username3,password);
-    navigationToolbar.goToQuickSearch();
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().hover();
-    ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().parent().find(ELEMENT_BUTTON_CONNECT_USER_FROM_GADGET).waitUntil(Condition.visible, Configuration.timeout).click();
-    ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).shouldNot(Condition.exist);
-    ELEMENT_GADGET_INVITATION.find(byText(username1 + " " + username1)).should(Condition.exist);
-
-    info("Clear Data");
-    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
-    navigationToolbar.goToUsersAndGroupsManagement();
-    userAndGroupManagement.deleteUser(username1);
-    userAndGroupManagement.deleteUser(username2);
-    userAndGroupManagement.deleteUser(username3);
-  }
-
-  /**
-   * <li>Case ID:120856.</li>
-   * <li>Test Case Name: Refuse a request.</li>
-   * <li>Pre-Condition: - Root sends connection request to mary - John sends
-   * connection request to mary</li> Step Number: 1 Step Name: Refuse a request
-   * Step Description: - Login as mary - Open intranet homepage - On this gadget,
-   * mouse over an invitation of Jack(demo) - Click on Refuse icon Input Data:
-   * Expected Outcome: - Invitations of root, james are displayed on Invitation
-   * gadget - The Accept and Refuse button are displayed. - The invitation of jack
-   * fades out and is permanently removed from the list - Requests of James is
-   * moved to the top of the gadget
-   */
-  @Test
-  public void test04_RefuseARequest() {
-    info("Test 04: Refuse a request");
-    info("prepare data");
-    /* Create data test */
-    String username1 = "usernamea" + getRandomString();
-    String password = "123456";
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String username3 = "usernamec" + getRandomString();
-    String email3 = username3 + "@test.com";
-    info("Add new user");
-    navigationToolbar.goToAddUser();
-    userAddManagement.addUser(username1, password, email1, username1, username1);
-    userAddManagement.addUser(username2, password, email2, username2, username2);
-    userAddManagement.addUser(username3, password, email3, username3, username3);
-    info("Sign in with mary account");
-    manageLogInOut.signIn(username1, password);
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(username3);
-
-    info("--Send request 2 to John");
-    manageLogInOut.signIn(username2, password);
-    homePagePlatform.goToConnections();
-    connectionsManagement.connectToAUser(username3);
-
-    info("Sign in with ROOT account");
-    manageLogInOut.signIn(username3, password);
-    navigationToolbar.goToQuickSearch();
-    $(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.timeout);
-    ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().hover();
-    ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).parent().parent().find(byClassName("uiIconClose")).click();
-    ELEMENT_GADGET_INVITATION.find(byText(username2 + " " + username2)).shouldNot(Condition.exist);
-    ELEMENT_GADGET_INVITATION.find(byText(username1 + " " + username1)).should(Condition.exist);
-
-    info("Clear Data");
-    manageLogInOut.signIn(PLFData.DATA_USER1,"gtngtn");
-    navigationToolbar.goToUsersAndGroupsManagement();
-    userAndGroupManagement.deleteUser(username1);
-    userAndGroupManagement.deleteUser(username2);
-    userAndGroupManagement.deleteUser(username3);
-  }
 }

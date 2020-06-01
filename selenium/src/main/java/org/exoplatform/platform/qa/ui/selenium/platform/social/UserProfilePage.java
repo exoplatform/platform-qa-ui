@@ -37,8 +37,8 @@ public class UserProfilePage {
    */
   public void goToEditProfile() {
     info("Go to edit profile");
-    $(ELEMENT_EDIT_MY_PROFILE_LINK).click();
-    $(ELEMENT_EDIT_PROFILE_FORM).waitUntil(Condition.visible,Configuration.timeout);
+    $(ELEMENT_EDIT_MY_PROFILE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_EDIT_PROFILE_FORM).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
   }
 
   /**

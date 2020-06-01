@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.wiki.pageobject;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -42,8 +43,8 @@ public class WikiSettingPage {
     $(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).pressEnter();
 
     info("Verify that the search results is shown that matchs with keyword");
-
-    $(byId("UIWikiTemplateGrid")).find(byText(template)).waitUntil(Condition.visible,Configuration.timeout);
+    sleep(1000);
+    $(byId("UIWikiTemplateGrid")).find(byText(template)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
 
   }
 
@@ -82,7 +83,7 @@ public class WikiSettingPage {
   public void deleteTemplate(String template) {
       info("Delete template " + template);
       searchTemplate(template);
-      $(byXpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template))).click();
+      $(byXpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       alert.acceptAlert();
       $(By.xpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template))).waitUntil(Condition.not(Condition.visible),Configuration.timeout);
   }
@@ -94,7 +95,7 @@ public class WikiSettingPage {
    */
   public void deleteTemplateWithCanceling(String template) {
     info("Delete template " + template);
-    $(byXpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template))).click();
+    $(byXpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     alert.cancelAlert();
     $(byXpath(ELEMENT_DELETE_TEMPLATE.replace("{$template}", template))).waitUntil(Condition.visible,Configuration.timeout);
   }

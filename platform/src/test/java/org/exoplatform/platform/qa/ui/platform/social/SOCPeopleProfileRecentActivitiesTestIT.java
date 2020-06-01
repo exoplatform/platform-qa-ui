@@ -2,7 +2,8 @@ package org.exoplatform.platform.qa.ui.platform.social;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
@@ -90,7 +91,6 @@ public class SOCPeopleProfileRecentActivitiesTestIT extends Base {
     $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.disabled, Configuration.timeout);
 
     info("add activity");
-    sleep(2000);
     activityStream.addActivity(textDes2, "");
     activityStream.commentActivity(textDes2, comment);
     info("goto my profile");
@@ -102,8 +102,7 @@ public class SOCPeopleProfileRecentActivitiesTestIT extends Base {
     $(ELEMENT_RECENT_ACTIVITY_VIEWALL_BTN).click();
     $(ELEMENT_HORIZONTAL_TOOLBAR_SECOND_APP_ACTIVITIES).should(visible);
     $(byText(textDes2)).should(visible);
-    executeJavaScript("window.scrollBy(0,1000)");
-    $(byText(mention)).parent().shouldHave(Condition.text(username2 + " " + username2 + " " + mention)).should(visible);
+    $(byText(mention)).parent().shouldHave(Condition.text(username2 + " " + username2 + " " + mention)).waitUntil(visible,Configuration.openBrowserTimeoutMs);
     $(byAttribute("data-original-title", "eXo-Platform.png")).should(Condition.exist);
     $(byText(textDes2)).parent()
                        .parent()

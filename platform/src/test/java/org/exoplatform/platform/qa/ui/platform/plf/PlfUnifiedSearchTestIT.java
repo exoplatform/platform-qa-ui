@@ -169,7 +169,7 @@ public class PlfUnifiedSearchTestIT extends Base {
     confirm();
     switchToParentWindow();
     $(ELEMENT_EDIT_PORTLET_FORM_CLOSE_BUTTON).click();
-    ELEMENT_CLOSE_PORTLET.click();
+    $(byXpath("//*[@class='uiIconClose pull-right']")).click();
   }
 
   /**

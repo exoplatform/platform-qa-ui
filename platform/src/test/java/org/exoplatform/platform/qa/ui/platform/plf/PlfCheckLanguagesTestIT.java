@@ -1,28 +1,26 @@
 package org.exoplatform.platform.qa.ui.platform.plf;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_ACTIVITY;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_POPUP_OK;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_LINK_SETUP;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.administration.ChangeLanguages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import com.codeborne.selenide.Condition;
-
-import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.core.PLFData;
-import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
-import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_BUTTON_CANCEL_CHANGE_LANGUAGES;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_POPUP_LIST_OF_LANGUAGES;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_LINK_SETUP;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 /**
  * Created by exo on 06/03/18.
@@ -32,7 +30,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 public class PlfCheckLanguagesTestIT extends Base {
   NavigationToolbar navigationToolbar;
 
-  ManageLogInOut    manageLogInOut;
+  ManageLogInOut manageLogInOut;
 
   ChangeLanguages changeLanguages;
 
@@ -44,13 +42,15 @@ public class PlfCheckLanguagesTestIT extends Base {
     manageLogInOut = new ManageLogInOut(this);
     navigationToolbar = new NavigationToolbar(this);
     manageLogInOut.signInCas(PLFData.DATA_USER1, "gtngtn");
-    changeLanguages= new ChangeLanguages (this);
-    activityStream=new ActivityStream (this);
+    changeLanguages = new ChangeLanguages(this);
+    activityStream = new ActivityStream(this);
   }
 
   @Test
   @Tag("testCheck")
-  public void test01_checkListOfLanguages() {
+  public void test01_CheckListOfLanguagesThenAddActivity_on_spanichAndPortugueseLanguageThenCheckBadUIContentManagementStatusColumnWidthLimitAfterLanguageChange() {
+    //8336
+
     navigationToolbar.goToChangeLanguage();
     ELEMENT_POPUP_LIST_OF_LANGUAGES.find(byText("Arabic")).shouldBe(Condition.visible);
     ELEMENT_POPUP_LIST_OF_LANGUAGES.find(byText("Catalan")).shouldBe(Condition.visible);
@@ -75,51 +75,45 @@ public class PlfCheckLanguagesTestIT extends Base {
     ELEMENT_POPUP_LIST_OF_LANGUAGES.find(byText("Ukrainian")).shouldBe(Condition.visible);
     ELEMENT_POPUP_LIST_OF_LANGUAGES.find(byText("Simplified Chinese")).shouldBe(Condition.visible);
     ELEMENT_BUTTON_CANCEL_CHANGE_LANGUAGES.click();
-  }
 
-  @Test
-  public void test02_addActivity_on_spanichlanguage() {
-    info("Test 1: add activity on spanich language");
+    info("add activity on spanich language");
     // change language
     navigationToolbar.goToChangeLanguage();
-    changeLanguages.changeLanguage("Spanish - Spain","Apply");
+    changeLanguages.changeLanguage("Spanish - Spain", "Apply");
     String activity1 = "activity1" + getRandomNumber();
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    sleep(2000);
     activityStream.addActivity(activity1, "");
     activityStream.deleteactivity(activity1);
     info("the activity is removed successfully");
     navigationToolbar.goToChangeLanguage();
-    changeLanguages.changeLanguage("Inglés","Aplicar");
-  }
+    changeLanguages.changeLanguage("Inglés", "Aplicar");
 
-  @Test
-  public void test03_addActivity_on_Portugueselanguage() {
-    info("Test 1: add activity on Portuguese - Brazil language");
+    info("add activity on Portuguese - Brazil language");
     // change language
     navigationToolbar.goToChangeLanguage();
-    changeLanguages.changeLanguage("Portuguese - Brazil","Apply");
-    String activity1 = "activity1" + getRandomNumber();
+    changeLanguages.changeLanguage("Portuguese - Brazil", "Apply");
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    sleep(2000);
     activityStream.addActivity(activity1, "");
     activityStream.deleteactivity(activity1);
     info("the activity is removed successfully");
     navigationToolbar.goToChangeLanguage();
-    changeLanguages.changeLanguage("Inglês","Aplicar");
-  }
+    changeLanguages.changeLanguage("Inglês", "Aplicar");
 
-  @Test
-  public void test04_checkBadUIContentManagementStatusColumnWidthLimitAfterLanguageChange() {
-    //8336
-    String columnName ="Etat de publication";
+    String columnName = "Etat de publication";
     navigationToolbar.goToChangeLanguage();
-    changeLanguages.changeLanguage("French","Apply");    // change language
+    changeLanguages.changeLanguage("French", "Apply");    // change language
     $(ELEMENT_LINK_SETUP).waitUntil(Condition.visible, Configuration.timeout).click();
     sleep(Configuration.timeout);
     do {
       $(byXpath("//li[@class='dropdown-submenu']/a[text()='Contenu']")).hover();
     } while (!$(byXpath("(//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Administration de Contenu')]/preceding::a[1])[1]")).exists());
-    $(byXpath("(//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Administration de Contenu')]/preceding::a[1])[1]")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byXpath("(//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Administration de Contenu')]/preceding::a[1])[1]")).waitUntil(Condition.visible, Configuration.timeout).click();
     info("Site Explorer is shown successfully");
     navigationToolbar.verifyColumnName(columnName);
     navigationToolbar.goToChangeLanguage();
-    changeLanguages.changeLanguage("English","Appliquer");
+    changeLanguages.changeLanguage("English", "Appliquer");
   }
+
 }

@@ -77,19 +77,19 @@ public class NavigationToolbar {
   public void goToPotalSites() {
     info("--Go to Portal-->Sites--");
 
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
 
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
 
-    $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_ADMINISTRATION_PORTAL).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
 
     $(ELEMENT_ADMINISTRATION_PORTAL).hover();
 
-    $(ELEMENT_ADMINISTRATION_PORTAL_SITES).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_ADMINISTRATION_PORTAL_SITES).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
 
     $(ELEMENT_ADMINISTRATION_PORTAL_SITES).click();
 
-    $(ELEMENT_MANAGESITES_TITLE).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_MANAGESITES_TITLE).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
   }
 
   /**
@@ -304,18 +304,22 @@ public class NavigationToolbar {
   public void goToAddPoll(String location, String forum) {
     info("Go to add poll from tootlbar");
     $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
     info("Click on Poll link");
     $(ELEMENT_ADD_POOL_TOOLBAR).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
     if (location != "" && location != null) {
       info("Set location for the poll");
       $(ELEMENT_ADD_POLL_SET_LOCATION).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     }
+    sleep(2000);
     info("evt.click on Next button");
     $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-
+    sleep(2000);
     info("Select a forum for poll");
     $(ELEMENT_SELECT_FORUM_COMBOBOX).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
     $(byText(forum)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
     info("Click on next button");
     $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.enabled, Configuration.openBrowserTimeoutMs);
     $(ELEMENT_NEXT_BUTTON).click();
@@ -363,10 +367,10 @@ public class NavigationToolbar {
   }
 
   public void gotoAddTask(String name) {
-    $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_ADD_TASK_CLASS_TOOLBAR.waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_TASK_ADD_TITLE.waitUntil(Condition.visible,Configuration.timeout).setValue(name);
-    ELEMENT_TASK_BUTTON_ADD.waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_ADD_TASK_CLASS_TOOLBAR.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TASK_ADD_TITLE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(name);
+    ELEMENT_TASK_BUTTON_ADD.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**

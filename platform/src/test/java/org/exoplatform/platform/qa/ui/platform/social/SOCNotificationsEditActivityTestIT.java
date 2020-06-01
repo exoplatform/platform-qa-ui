@@ -136,7 +136,6 @@ public class SOCNotificationsEditActivityTestIT extends Base {
     myNotificationsSetting.verifyLabelNotificationType("Someone edits a comment");
     myNotificationsSetting.verifyNotificationDefault(Edit_Comment);
     homePagePlatform.goToConnections();
-    sleep(1000);
     connectionsManagement.acceptAConnection(username, username + " " + username);
     refresh();
     homePagePlatform.goToHomePage();
@@ -199,6 +198,7 @@ public class SOCNotificationsEditActivityTestIT extends Base {
     connectionsManagement.acceptAConnection(username, username + " " + username);
     refresh();
     homePagePlatform.goToHomePage();
+    sleep(1000);
     activityStream.commentActivity(activity1, comment1);
     homePagePlatform.goToHomePage();
     activityStream.commentActivity(activity2, comment2);

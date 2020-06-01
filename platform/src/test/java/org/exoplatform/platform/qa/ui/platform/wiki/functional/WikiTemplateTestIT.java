@@ -1,6 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.wiki.functional;
 
 import static com.codeborne.selenide.Selectors.byId;
+import static com.codeborne.selenide.Selectors.byValue;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TEMPLATE_SEARCH_TEXTBOX;
@@ -327,8 +328,6 @@ public class WikiTemplateTestIT extends Base {
     wikiSettingPage.deleteTemplate(title9);
 
   }
-
-
 
     @Test
   public void test_SearchTemplateWhenTheKeyIsMatchedThenWhenKeyIsNotMatchedThenUsingTemplateToCreateNewPageThenSearchTemplateWhenSearchFieldIsBlank() {

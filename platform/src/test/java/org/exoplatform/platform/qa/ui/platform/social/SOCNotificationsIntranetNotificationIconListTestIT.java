@@ -64,6 +64,67 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
   }
 
   /**
+   * <li>Case ID:122977.</li>
+   * <li>Test Case Name: Check Notifications icon in the top navigation.</li> Step
+   * Number: 1 Step Name: Step 1: Step Description: - Login with User A - Check
+   * the top navigation Input Data: Expected Outcome: - The Notifications icon is
+   * displayed in the top navigation, next to the profile menu* Step Number: 2
+   * Step Name: Step 2: Step Description: - Check the badge number Input Data:
+   * Expected Outcome: - The number displayed in the badge is 3* Step Number: 3
+   * Step Name: Step 3: Step Description: - Click the notifications icon Input
+   * Data: Expected Outcome: - The notifications list is revealed - - The number
+   * displayed in the badge is reset and not displayed anymore Step Number: 4 Step
+   * Name: Step 4: Step Description: - Generate 1 new notification for User A
+   * Input Data: Expected Outcome: - The badge is update with the number 1
+   */
+  @Test
+  public void test01_CheckNotificationIconInTheTopNavigation() {
+    // set Data test
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@test.com";
+
+    String username2 = "usernameb" + getRandomString();
+    String email2 = username2 + "@test.com";
+
+    String username3 = "usernamec" + getRandomString();
+    String email3 = username3 + "@test.com";
+    String password = "123456";
+    String username4 = "usernameb" + getRandomString();
+    String email4 = username4 + "@test.com";
+    navigationToolbar.goToIntranetNotification();
+    navigationToolbar.goToMyNotifications();
+    myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.NewUser_intranet);
+    info("Check number of notifications in badge before ccreate more notifications");
+    info("Create 3 notifications for add new user");
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username1, password, email1, username1, username1);
+    addUsers.addUser(username2, password, email2, username2, username2);
+    addUsers.addUser(username3, password, email3, username3, username3);
+
+    info("Check the notification icon in the top navigation");
+    waitForAndGetElement(ELEMENT_POSITION_OF_INTRANET_NOTIFICATION);
+
+    info("Check number of notifications after add more notifications");
+    ELEMENT_ALERT_NOTIFICATION_EXIST.waitUntil(visible, Configuration.timeout);
+    intranetNotification.checkBadgeNoti(3);
+
+    info("Check notification list");
+    ELEMENT_ALERT_NOTIFICATION_EXIST.waitUntil(visible, Configuration.timeout).click();
+    intranetNotification.checkNotBadgeNoti(3);
+
+    navigationToolbar.goToAddUser();
+    addUsers.addUser(username4, password, email4, username4, username4);
+    intranetNotification.checkBadgeNoti(1);
+    navigationToolbar.goToManageCommunity();
+    addUsers.deleteUser(username1);
+    addUsers.deleteUser(username2);
+    addUsers.deleteUser(username3);
+    addUsers.deleteUser(username4);
+    navigationToolbar.goToMyNotifications();
+    myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.NewUser_intranet);
+  }
+
+  /**
    * <li>Case ID:122978.</li>
    * <li>Test Case Name: Check UI of the notifications list.</li> Step Number: 1
    * Step Name: Step 1: Check notification icon Step Description: - Login to
@@ -80,7 +141,7 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
    * user match with with the above notifications
    */
   @Test
-  public void test01_CheckUIOfTheNotificationsList() throws InterruptedException {
+  public void test02_CheckUIOfTheNotificationsList() throws InterruptedException {
     // set Data test
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
@@ -91,41 +152,19 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
     String username3 = "usernamec" + getRandomString();
     String email3 = username3 + "@test.com";
 
-    String username4 = "usernameb" + getRandomString();
-    String email4 = username4 + "@test.com";
-
     String activity = "activity" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
     String password = "123456";
 
-    navigationToolbar.goToIntranetNotification();
-    navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.NewUser_intranet);
     info("Add 3 new users");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
     addUsers.addUser(username2, password, email2, username2, username2);
     addUsers.addUser(username3, password, email3, username3, username3);
 
-    info("Check the notification icon in the top navigation");
-    waitForAndGetElement(ELEMENT_POSITION_OF_INTRANET_NOTIFICATION);
-
-    info("Check number of notifications after add more notifications");
-    ELEMENT_ALERT_NOTIFICATION_EXIST.waitUntil(visible, Configuration.openBrowserTimeoutMs);
-    intranetNotification.checkBadgeNoti(3);
-
-    info("Check notification list");
-    ELEMENT_ALERT_NOTIFICATION_EXIST.waitUntil(visible, Configuration.openBrowserTimeoutMs).click();
-    intranetNotification.checkNotBadgeNoti(3);
-
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username4, password, email4, username4, username4);
-    intranetNotification.checkBadgeNoti(1);
-
-    info("Login with user 1 and enable new user and like notifications");
     manageLogInOut.signIn(username1, password);
     navigationToolbar.goToMyNotifications();
-    myNotificationsSetting.disableNotification(MyNotificationsSetting.myNotiType.NewUser_intranet);
+    myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.NewUser_intranet);
     myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Like_intranet);
     myNotificationsSetting.enableNotification(MyNotificationsSetting.myNotiType.AS_Comment_intranet);
 
@@ -162,9 +201,8 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
     sleep(2000);
     info("Read connection request notification");
     navigationToolbar.goToIntranetNotification();
-    sleep(2000);
-    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username3 + " " + username3)).waitUntil(visible, Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_CONTENT_NAME_PROFILE.find(byText(username3 + " " + username3)).waitUntil(appears, Configuration.openBrowserTimeoutMs);
+    $(ELEMENT_NOTIFICATION_DROPDOWN).find(byText(username3 + " " + username3)).click();
+    ELEMENT_CONTENT_NAME_PROFILE.find(byText(username3 + " " + username3)).waitUntil(appears, Configuration.timeout);
 
     info("Check notification icon");
     navigationToolbar.goToIntranetNotification();
@@ -189,7 +227,7 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
   }
 
   @Test
-  public void test02_CheckMarlAllAsReadInAllNotifcationPageThenClickMarkAsRead(){
+  public void test03_CheckMarlAllAsReadInAllNotifcationPageThenClickMarkAsRead(){
     String username11 = "usernamea" + getRandomString();
     String username1 = "usernamea" + getRandomString();
     String FirstNameA="FirstNameA"+getRandomString();
