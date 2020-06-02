@@ -1,24 +1,7 @@
 package org.exoplatform.platform.qa.ui.chat.smoke;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.core.PLFData.*;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_USER_PROFILE;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_USER_RESULT_SEARCH;
-import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_MINI_CHAT;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-
 import com.codeborne.selenide.Condition;
-
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.chat.pageobject.ChatManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
@@ -30,25 +13,38 @@ import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_USER_PROFILE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_USER_RESULT_SEARCH;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("smoke")
 @Tag("chat")
 public class SpaceManageMessageTestIT extends Base {
-  HomePagePlatform       homePagePlatform;
+  HomePagePlatform homePagePlatform;
 
-  NavigationToolbar      navigationToolbar;
+  NavigationToolbar navigationToolbar;
 
-  UserAddManagement      userAddManagement;
+  UserAddManagement userAddManagement;
 
-  ManageLogInOut         manageLogInOut;
+  ManageLogInOut manageLogInOut;
 
   UserAndGroupManagement userandgroupmanagement;
 
-  ChatManagement         chatManagement;
+  ChatManagement chatManagement;
 
-  SpaceManagement        spaceManagement;
+  SpaceManagement spaceManagement;
 
-  SpaceHomePage          spaceHomePage;
+  SpaceHomePage spaceHomePage;
 
   SpaceSettingManagement spaceSettingManagement;
 
@@ -92,10 +88,12 @@ public class SpaceManageMessageTestIT extends Base {
     spaceHomePage.goToSpaceSettingTab();
     info("accept request by user 1");
     spaceSettingManagement.goToMemberTabInSpaceSettingTab();
-    $(byText(usernamea + " " + usernamea)).parent().waitUntil(Condition.visible,Configuration.timeout);
+    $(byText(usernamea + " " + usernamea)).parent().waitUntil(Condition.visible, Configuration.timeout);
     homePagePlatform.goToHomePage();
     homePagePlatform.goToChat();
     switchTo().window(1);
+    info("check that space exist");
+    $(byText(space)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).exists();
     info("send message on space");
     chatManagement.sendMessageInRoomOrSpace(space, message);
     switchTo().window(0);
@@ -110,32 +108,17 @@ public class SpaceManageMessageTestIT extends Base {
     info("delete data");
     homePagePlatform.goToMySpaces();
     spaceManagement.deleteSpace(space, false);
-    navigationToolbar.goToManageCommunity();
-    userandgroupmanagement.deleteUser(usernamea);
-  }
-
-  @Test
-  public void test02_checkSpaceChatDeletedAfterDelete() {
-    String space = "space" + getRandomNumber();
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
-    homePagePlatform.goToHomePage();
-    homePagePlatform.goToChat();
-    switchTo().window(1);
-    info("check that space exist");
-    $(byText(space)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).exists();
-    switchTo().window(0);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.deleteSpace(space, false);
     switchTo().window(1);
     refresh();
     info("check that space chat deleted");
     $(byText(space)).shouldNot(Condition.exist);
     switchTo().window(0);
+    navigationToolbar.goToManageCommunity();
+    userandgroupmanagement.deleteUser(usernamea);
   }
 
   @Test
-  public void test03_sendMessageAndItsAnswerFromOtherUser() {
+  public void test02_sendMessageAndItsAnswerFromOtherUser() {
     String usernamea = "usernamea" + getRandomString();
     String password = "123456";
     String emaila = usernamea + getRandomNumber() + "@test.com";
@@ -155,7 +138,7 @@ public class SpaceManageMessageTestIT extends Base {
     refresh();
     ELEMENT_USER_RESULT_SEARCH.find(byText(usernamea + " " + usernamea)).click();
     ELEMENT_USER_PROFILE.waitUntil(Condition.appear, Configuration.timeout);
-    $(byXpath("(//i[@class='uiIconBannerChat'])[2]")).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byXpath("(//i[@class='uiIconBannerChat'])[2]")).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_MINI_CHAT.waitUntil(Condition.appear, Configuration.timeout);
     MiniChatName = $(byClassName("title-left")).parent().parent().find(byClassName("fullname")).getText();
     assertEquals(usernamea + " " + usernamea, MiniChatName);

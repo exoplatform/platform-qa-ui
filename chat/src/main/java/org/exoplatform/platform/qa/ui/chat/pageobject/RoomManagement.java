@@ -41,11 +41,11 @@ public class RoomManagement {
   }
 
   public void editTitleofAroom(String room, String newroom) {
-    $(byText(room)).click();
-    ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
-    ELEMENT_CHAT_ROOM_EDIT.click();
-    ELEMENT_CHAT_INPUT_ROOM_NAME.setValue(newroom);
-    ELEMENT_CHAT_BUTTON_SAVE_ADD_ROOM.click();
+    $(byText(room)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CHAT_ROOM_EDIT.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CHAT_INPUT_ROOM_NAME.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(newroom);
+    ELEMENT_CHAT_BUTTON_SAVE_ADD_ROOM.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 public void startStopmeeting(String room){

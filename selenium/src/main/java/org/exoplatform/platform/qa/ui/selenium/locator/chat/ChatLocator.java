@@ -72,7 +72,7 @@ public class ChatLocator {
 
     public static final SelenideElement ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN = $(byClassName("uiIconVerticalDots"));
 
-    public static final SelenideElement ELEMENT_CHAT_ROOM_EDIT = $(byXpath("//*[@id=\"room-detail\"]/div[2]/div[2]/div[3]/ul/li[5]/a"));
+    public static final SelenideElement ELEMENT_CHAT_ROOM_EDIT = $(byXpath("//*[@class='uiIconRoomSetting uiIconEditInfo']"));
 
 
     public static final SelenideElement ELEMENT_CHAT_MESSAGE_INPUT = $(byId("messageComposerArea"));

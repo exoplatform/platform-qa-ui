@@ -26,156 +26,114 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 @Tag("smoke")
 public class RoomBaseActionTestIT extends Base {
 
-    HomePagePlatform homePagePlatform;
-    RoomManagement roomManagement;
-    NavigationToolbar navigationToolbar;
-    UserAddManagement userAddManagement;
-    ManageLogInOut manageLogInOut;
-    UserAndGroupManagement userandgroupmanagement;
-    ChatManagement chatManagement;
+  HomePagePlatform homePagePlatform;
+  RoomManagement roomManagement;
+  NavigationToolbar navigationToolbar;
+  UserAddManagement userAddManagement;
+  ManageLogInOut manageLogInOut;
+  UserAndGroupManagement userandgroupmanagement;
+  ChatManagement chatManagement;
 
-    @BeforeEach
-    public void setupBeforeMethod() {
-        info("Start setUpBeforeMethod");
-        homePagePlatform = new HomePagePlatform(this);
-        roomManagement = new RoomManagement(this);
-        navigationToolbar = new NavigationToolbar(this);
-        userAddManagement = new UserAddManagement(this);
-        manageLogInOut = new ManageLogInOut(this);
-        userandgroupmanagement = new UserAndGroupManagement(this);
-        chatManagement = new ChatManagement(this);
-    }
+  @BeforeEach
+  public void setupBeforeMethod() {
+    info("Start setUpBeforeMethod");
+    homePagePlatform = new HomePagePlatform(this);
+    roomManagement = new RoomManagement(this);
+    navigationToolbar = new NavigationToolbar(this);
+    userAddManagement = new UserAddManagement(this);
+    manageLogInOut = new ManageLogInOut(this);
+    userandgroupmanagement = new UserAndGroupManagement(this);
+    chatManagement = new ChatManagement(this);
+  }
 
-    @Test
-    public void Test01_AddRoomWithSeveralUsers() {
-        String usernamea = "usernamea" + getRandomString();
-        String usernameb = "usernameb" + getRandomString();
-        String usernamec = "usernamec" + getRandomString();
-        String password = "123456";
-        String room = "room" + getRandomNumber();
-        String emaila = usernamea + getRandomNumber() + "@test.com";
-        String emailb = usernameb + getRandomNumber() + "@test.com";
-        String emailc = usernamec + getRandomNumber() + "@test.com";
-        navigationToolbar.goToAddUser();
-        info("Create 3 users");
-        userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
-        userAddManagement.addUser(usernameb, password, emailb, usernameb, usernamec);
-        userAddManagement.addUser(usernamec, password, emailc, usernamec, usernamec);
-        manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
-        homePagePlatform.goToChat();
-        info("Add room with users");
-        switchTo().window(1);
-        roomManagement.addRoom(room, usernamea, usernameb, usernamec);
-        switchTo().window(0);
-        manageLogInOut.signIn(usernamea, password);
-        homePagePlatform.goToChat();
-        switchTo().window(1);
-        ELEMENT_CONTACT_LIST.find(byText(room)).should(Condition.exist);
-        switchTo().window(0);
-        manageLogInOut.signIn(usernameb, password);
-        homePagePlatform.goToChat();
-        switchTo().window(1);
-        ELEMENT_CONTACT_LIST.find(byText(room)).should(Condition.exist);
-        switchTo().window(0);
-        manageLogInOut.signIn(usernamec, password);
-        homePagePlatform.goToChat();
-        switchTo().window(1);
-        ELEMENT_CONTACT_LIST.find(byText(room)).should(Condition.exist);
-        info("delete data");
-        switchTo().window(0);
-        manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
-        homePagePlatform.goToChat();
-        switchTo().window(1);
-        roomManagement.deleteRomm(room);
-        switchTo().window(0);
-        navigationToolbar.goToManageCommunity();
-        userandgroupmanagement.deleteUser(usernamea);
-        userandgroupmanagement.deleteUser(usernameb);
-        userandgroupmanagement.deleteUser(usernamec);
-    }
+  @Test
+  public void Test01_AddRoomWithSeveralUsers() {
+    String usernamea = "usernamea" + getRandomString();
+    String usernameb = "usernameb" + getRandomString();
+    String usernamec = "usernamec" + getRandomString();
+    String password = "123456";
+    String room = "room" + getRandomNumber();
+    String emaila = usernamea + getRandomNumber() + "@test.com";
+    String emailb = usernameb + getRandomNumber() + "@test.com";
+    String emailc = usernamec + getRandomNumber() + "@test.com";
+    navigationToolbar.goToAddUser();
+    info("Create 3 users");
+    userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
+    userAddManagement.addUser(usernameb, password, emailb, usernameb, usernamec);
+    userAddManagement.addUser(usernamec, password, emailc, usernamec, usernamec);
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+    homePagePlatform.goToChat();
+    info("Add room with users");
+    switchTo().window(1);
+    roomManagement.addRoom(room, usernamea, usernameb, usernamec);
+    switchTo().window(0);
+    manageLogInOut.signIn(usernamea, password);
+    homePagePlatform.goToChat();
+    switchTo().window(1);
+    ELEMENT_CONTACT_LIST.find(byText(room)).should(Condition.exist);
+    switchTo().window(0);
+    manageLogInOut.signIn(usernameb, password);
+    homePagePlatform.goToChat();
+    switchTo().window(1);
+    ELEMENT_CONTACT_LIST.find(byText(room)).should(Condition.exist);
+    switchTo().window(0);
+    manageLogInOut.signIn(usernamec, password);
+    homePagePlatform.goToChat();
+    switchTo().window(1);
+    ELEMENT_CONTACT_LIST.find(byText(room)).should(Condition.exist);
+    info("delete data");
+    switchTo().window(0);
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+    homePagePlatform.goToChat();
+    switchTo().window(1);
+    roomManagement.deleteRomm(room);
+    switchTo().window(0);
+    navigationToolbar.goToManageCommunity();
+    userandgroupmanagement.deleteUser(usernamea);
+    userandgroupmanagement.deleteUser(usernameb);
+    userandgroupmanagement.deleteUser(usernamec);
+  }
 
-    @Test
-    public void test02_deleteRoom() {
-        String usernamea = "usernamea" + getRandomString();
+  @Test
+  public void test02_SendMessageInAROOM() {
 
-        String password = "123456";
-        String room = "room" + getRandomNumber();
-        String emaila = usernamea + "@test.com";
-        navigationToolbar.goToAddUser();
-        info("Create new user");
-        userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
-        manageLogInOut.signIn(usernamea, password);
-        homePagePlatform.goToChat();
-        switchToParentWindow();
-        manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
-        homePagePlatform.goToChat();
-        switchTo().window(1);
-        info("add room");
-        roomManagement.addRoom(room, usernamea);
-        info("delete room");
-        roomManagement.deleteRomm(room);
-        info("delete data");
-        switchToParentWindow();
-        navigationToolbar.goToManageCommunity();
-        userandgroupmanagement.deleteUser(usernamea);
-    }
+    String newroom = "newroom" + getRandomNumber();
+    String usernamea = "usernamea" + getRandomString();
+    String password = "123456";
+    String emaila = usernamea + "@test.com";
+    String room = "room" + getRandomNumber();
+    String message = "message" + getRandomNumber();
+    navigationToolbar.goToAddUser();
+    info("Create new user");
+    userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
+    switchToParentWindow();
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+    homePagePlatform.goToChat();
+    switchTo().window(1);
+    info("add room");
+    roomManagement.addRoom(room, usernamea);
+    info("edit title");
+    roomManagement.editTitleofAroom(room, newroom);
+    ELEMENT_CONTACT_LIST.$(byText(newroom)).should(Condition.exist);
+    info("send message");
+    chatManagement.sendMessageInRoomOrSpace(newroom, message);
+    switchTo().window(0);
+    manageLogInOut.signIn(usernamea, password);
+    homePagePlatform.goToChat();
+    switchTo().window(1);
+    ELEMENT_CONTACT_LIST.find(byText(newroom)).should(Condition.exist);
+    info("verify message");
+    ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
 
-    @Test
-    public void test03_SendMessageInAROOM() {
-        String usernamea = "usernamea" + getRandomString();
-        String password = "123456";
-        String emaila = usernamea + "@test.com";
-        String room = "room" + getRandomNumber();
-        String message = "message" + getRandomNumber();
-        navigationToolbar.goToAddUser();
-        info("Create new user");
-        userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
-        switchToParentWindow();
-        manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
-        homePagePlatform.goToChat();
-        switchTo().window(1);
-        info("add room");
-        roomManagement.addRoom(room, usernamea);
-        info("send message");
-        chatManagement.sendMessageInRoomOrSpace(room, message);
-        switchTo().window(0);
-        manageLogInOut.signIn(usernamea, password);
-        homePagePlatform.goToChat();
-        switchTo().window(1);
-        ELEMENT_CONTACT_LIST.find(byText(room)).should(Condition.exist);
-        info("verify message");
-        ELEMENT_CHAT_LIST_MSG.find(byText(message)).should(Condition.exist);
-        switchToParentWindow();
-        manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
-        homePagePlatform.goToChat();
-        switchTo().window(1);
-        roomManagement.deleteRomm(room);
-        switchTo().window(0);
-        navigationToolbar.goToManageCommunity();
-        userandgroupmanagement.deleteUser(usernamea);
-    }
+    switchToParentWindow();
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+    homePagePlatform.goToChat();
+    switchTo().window(1);
+    roomManagement.deleteRomm(newroom);
+    switchTo().window(0);
+    navigationToolbar.goToManageCommunity();
+    userandgroupmanagement.deleteUser(usernamea);
 
-    @Test
-    public void test04_modifyTheTittleOfAroom() {
-        String usernamea = "usernamea" + getRandomString();
-        String password = "123456";
-        String emaila = usernamea + "@test.com";
-        String room = "room" + getRandomNumber();
-        String newroom = "newroom" + getRandomNumber();
-        navigationToolbar.goToAddUser();
-        info("Create new user");
-        userAddManagement.addUser(usernamea, password, emaila, usernamea, usernamea);
-        manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
-        homePagePlatform.goToChat();
-        switchTo().window(1);
-        info("add room");
-        roomManagement.addRoom(room, usernamea);
-        info("edit title");
-        roomManagement.editTitleofAroom(room, newroom);
-        ELEMENT_CONTACT_LIST.$(byText(newroom)).should(Condition.exist);
-        roomManagement.deleteRomm(newroom);
-        switchTo().window(0);
-        navigationToolbar.goToManageCommunity();
-        userandgroupmanagement.deleteUser(usernamea);
-    }
+  }
+
 }

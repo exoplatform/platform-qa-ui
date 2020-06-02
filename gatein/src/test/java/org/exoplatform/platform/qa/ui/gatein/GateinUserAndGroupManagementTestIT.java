@@ -1,6 +1,17 @@
 package org.exoplatform.platform.qa.ui.gatein;
 
-import static com.codeborne.selenide.Selectors.*;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
+import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -9,34 +20,23 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_NAME_OF_PEOPLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_INPUT_SEARCH_USER_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-import com.codeborne.selenide.Condition;
-import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
-import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
-import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
-import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 
 /**
- * @date March 10 2015
  * @author tult
+ * @date March 10 2015
  */
 @Tag("gatein")
 @Tag("smoke")
 public class GateinUserAndGroupManagementTestIT extends Base {
 
-  NavigationToolbar      navigationToolbar;
+  NavigationToolbar navigationToolbar;
 
   UserAndGroupManagement userandgroupmanagement;
 
-  UserAddManagement      useraddmanagement;
+  UserAddManagement useraddmanagement;
 
-  HomePagePlatform       homePagePlatform;
+  HomePagePlatform homePagePlatform;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -59,7 +59,7 @@ public class GateinUserAndGroupManagementTestIT extends Base {
    * <li>Test Case Name: Delete group.</li>
    */
   @Test
-  public void test01_02_03_04_AddEditDeleteGroupAddUsersToGroup() {
+  public void test01_AddEditDeleteGroupAddUsersToGroup() {
     String groupName = "groupName" + getRandomNumber();
     String groupLabel = "groupLabel" + getRandomNumber();
     String groupDesc = "groupDesc" + getRandomNumber();
@@ -118,7 +118,7 @@ public class GateinUserAndGroupManagementTestIT extends Base {
    * <li>Test Case Name: Delete user.</li>
    */
   @Test
-  public void test08EditUser() {
+  public void test02_AddEditAUser() {
     String username = "username" + getRandomNumber();
     String password = "password" + getRandomNumber();
     String firstName = getRandomString();
@@ -165,108 +165,9 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     userandgroupmanagement.deleteUser(username);
   }
 
-  /**
-   * <li>Case ID:123098.</li>
-   * <li>Test Case Name: Edit User information.</li>
-   * <li>Case ID:123071.</li>
-   * <li>Test Case Name: Search user.</li>
-   * <li>Case ID:123070.</li>
-   * <li>Test Case Name: Delete user.</li>
-   */
-  @Test
-  public void test09_SearchUser() {
-    String username = "username" + getRandomNumber();
-    String password = "password" + getRandomNumber();
-    String firstName = getRandomString();
-    String lastName = getRandomString();
-    String email = firstName + getRandomNumber() + "@test.com";
-    navigationToolbar.goToAddUser();
-    info("Create new user");
-    useraddmanagement.addUser(username, password, email, firstName, lastName);
-
-    /*
-     * Step Number: 1 Step Name: Step 1: Edit User information Step Description: -
-     * Go to Group/Organization/ User and group management - Select a user and click
-     * [Edit user info] icon - Change some fields and click Save Input Data:
-     * Expected Outcome: - Users list is shown properly - User is updated with the
-     * change value
-     */
-    info("Test Case 08: Edit user information");
-    navigationToolbar.goToUsersAndGroupsManagement();
-    /*
-     * if(waitForAndGetElement(ELEMENT_USER_MANAGEMENT_ACTIVE_TAB, 3000, 0) == null)
-     * click(ELEMENT_USER_MANAGEMENT_TAB);
-     */
-
-    /*
-     * Step Number: 2 Step Name: Step 2: Search User Step Description: - Search user
-     * by: + User name + Last Name + First Name + Email Input Data: Expected
-     * Outcome: - The results are displayed matching with the search keyword
-     */
-    /*
-     * info("Test Case 09: Search user follow username, last name, first name, email"
-     * ); userandgroupmanagement.searchUser(DATA_USER1, searchUserName);
-     * userandgroupmanagement.searchUser(searchUser1, searchLastName);
-     * userandgroupmanagement.searchUser(searchUser2, searchFirstName);
-     * userandgroupmanagement.searchUser(newEmail, searchEmail); /*Step Number: 3
-     * Step Name: Step 3: Delete User Step Description: - Go to Group/Organization/
-     * User and group management - Select a user in list and click [Delete user]
-     * icon Input Data: Expected Outcome: - - The user will be removed from the list
-     */
-    info("Test Case 10: Delete user");
-    userandgroupmanagement.deleteUser(username);
-  }
-
-  /**
-   * <li>Case ID:123098.</li>
-   * <li>Test Case Name: Edit User information.</li>
-   * <li>Case ID:123071.</li>
-   * <li>Test Case Name: Search user.</li>
-   * <li>Case ID:123070.</li>
-   * <li>Test Case Name: Delete user.</li>
-   */
-  @Test
-  public void test10_DeleteUser() {
-    String username = "username" + getRandomNumber();
-    String password = "password" + getRandomNumber();
-    String firstName = getRandomString();
-    String lastName = getRandomString();
-    String email = firstName + getRandomNumber() + "@test.com";
-    navigationToolbar.goToAddUser();
-    info("Create new user");
-    useraddmanagement.addUser(username, password, email, firstName, lastName);
-
-    /*
-     * Step Number: 1 Step Name: Step 1: Edit User information Step Description: -
-     * Go to Group/Organization/ User and group management - Select a user and click
-     * [Edit user info] icon - Change some fields and click Save Input Data:
-     * Expected Outcome: - Users list is shown properly - User is updated with the
-     * change value
-     */
-    info("Test Case 08: Edit user information");
-    navigationToolbar.goToUsersAndGroupsManagement();
-    /*
-     * Step Number: 2 Step Name: Step 2: Search User Step Description: - Search user
-     * by: + User name + Last Name + First Name + Email Input Data: Expected
-     * Outcome: - The results are displayed matching with the search keyword
-     */
-    /*
-     * info("Test Case 09: Search user follow username, last name, first name, email"
-     * ); userandgroupmanagement.searchUser(DATA_USER1, searchUserName);
-     * userandgroupmanagement.searchUser(searchUser1, searchLastName);
-     * userandgroupmanagement.searchUser(searchUser2, searchFirstName);
-     * userandgroupmanagement.searchUser(newEmail, searchEmail); /*Step Number: 3
-     * Step Name: Step 3: Delete User Step Description: - Go to Group/Organization/
-     * User and group management - Select a user in list and click [Delete user]
-     * icon Input Data: Expected Outcome: - - The user will be removed from the list
-     */
-    info("Test Case 10: Delete user");
-    userandgroupmanagement.deleteUser(username);
-  }
-
   @Test
   @Tag("search")
-  public void test11_SearchUserFromHomeSearchBar() {
+  public void test03_SearchUserFromHomeSearchBar() {
     String username = "username" + getRandomNumber();
     String password = "password" + getRandomNumber();
     String firstName = getRandomString();
@@ -301,7 +202,7 @@ public class GateinUserAndGroupManagementTestIT extends Base {
 
   @Test
   @Tag("search")
-  public void test12_SearchUserFromPeopleSearchByName() {
+  public void test04_SearchUserFromPeopleSearchByName() {
     String username = "username" + getRandomNumber();
     String password = "password" + getRandomNumber();
     String firstName = getRandomString();
@@ -334,12 +235,13 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     userandgroupmanagement.deleteUser(username2);
 
   }
+
   @Test
   @Tag("search")
-  public void test09_SearchUserWithDashInFirstName() {
+  public void test05_SearchUserWithDashInFirstName() {
     String username = "username" + getRandomNumber();
     String password = "password" + getRandomNumber();
-    String firstName = "user-name"+getRandomString();
+    String firstName = "user-name" + getRandomString();
     String lastName = getRandomString();
     String email = firstName + getRandomNumber() + "@test.com";
     navigationToolbar.goToAddUser();
@@ -354,5 +256,7 @@ public class GateinUserAndGroupManagementTestIT extends Base {
     ELEMENT_TABLE_LIST_USERS.findAll(ELEMENT_LINE_IN_TABLE_LIST_USERS).shouldHaveSize(1);
     info("Test Case 10: Delete user");
     userandgroupmanagement.deleteUser(username);
+
   }
+
 }
