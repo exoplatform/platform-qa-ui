@@ -9,72 +9,38 @@ import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_WHO_LIKED_POPUP;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("social")
 @Tag("smoke")
 public class SOCHomePageTestIT extends Base {
-    NavigationToolbar navigationToolbar;
+  NavigationToolbar navigationToolbar;
 
-    HomePagePlatform  homePagePlatform;
+  HomePagePlatform homePagePlatform;
 
-    ActivityStream    activityStream;
+  ActivityStream activityStream;
 
-    @BeforeEach
-    public void setupBeforeMethod() {
-        info("Start setUpBeforeMethod");
-        navigationToolbar = new NavigationToolbar(this);
-        homePagePlatform = new HomePagePlatform(this);
-        activityStream = new ActivityStream(this);
-    }
+  @BeforeEach
+  public void setupBeforeMethod() {
+    info("Start setUpBeforeMethod");
+    navigationToolbar = new NavigationToolbar(this);
+    homePagePlatform = new HomePagePlatform(this);
+    activityStream = new ActivityStream(this);
+  }
 
-    /**
-     * <li>Case ID:121888.</li>
-     * <li>Test Case Name: Like Activity.</li>
-     * <li>Pre-Condition:</li>
-     * <li>Post-Condition:</li>
-     */
-    @Test
-    public void test01_LikeActivity() {
-        info("Test 1: Like Activity");
-        String activity1 = "activity1" + getRandomNumber();
-        activityStream.addActivity(activity1, "");
-    /*
-     * Step Number: 1 Step Name: Step 1: Like/Unlike Activity Step Description: - Go
-     * to Intranet home - Click on Like activity in action bar part of an activity
-     * Input Data: Expected Outcome: - Like button is highlighted and the number of
-     * likers is updated
-     */
-        // get the id of the activity created
-        String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
-        // click on the like button of the activity
-        $(byXpath(ELEMENT_LIKE_BUTTON.replace("{id}", id))).click();
-        $(byXpath(ELEMENT_UNLIKE_BUTTON.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout);
-    /*
-     * Step number: 2 Step Name: Check Likes part Step Description: - Check avatar -
-     * Mouse over the avatar Input Data: Expected Outcome: - Avatar of liker is
-     * added into likes part, the oldest liker is displayed at the right and the
-     * newest at the left. - Profile pictures of users popup
-     */
-
-        ELEMENT_WHO_LIKED_POPUP.waitUntil(Condition.appears, Configuration.timeout);
-        // click on the activity to appear the delete button
-       activityStream.deleteactivity(activity1);
-    }
-
-    /**
-     * <li>Case ID:121909.</li>
-     * <li>Test Case Name: Add comment.</li>
-     */
-    @Test
-    public void test02AddComment() {
-        info("Test 2: Add comment");
+  /**
+   * <li>Case ID:121909.</li>
+   * <li>Test Case Name: Add comment.</li>
+   */
+  @Test
+  public void test01_Add_Delete_CommentAndActivity() {
     /*
      * Step Number: 1 Step Name: Add comment for activity Step Description: - Go to
      * Intranet home - Select the activity - Click comment icon to show input text
@@ -82,80 +48,37 @@ public class SOCHomePageTestIT extends Base {
      * Comment will be shown in comment section of activity
      */
 
-        String activity1 = "activity1" + getRandomNumber();
-        String comment = "comment" + getRandomNumber();
-        activityStream.addActivity(activity1, "");
-        // get the id of activity created
-        String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
-        // click on comment link
-        $(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
-        // insert comment
-        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
-        executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-        // click on the button comment
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-        $(byText(comment)).should(Condition.exist);
-        // click on the activity to appear the delete button
-        activityStream.deleteactivity(activity1);
-    }
+    String activity1 = "activity1" + getRandomNumber();
+    String comment = "comment" + getRandomNumber();
+    activityStream.addActivity(activity1, "");
+    // get the id of activity created
+    String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
 
-    /**
-     * <li>Case ID:121933.</li>
-     * <li>Test Case Name: Delete comment.</li>
-     * <li>Pre-Condition:</li>
-     * <li>Post-Condition:</li>
-     */
-    @Test
-    public void test_15DeleteComment() {
-        info("Test 2: Add comment");
-    /*
-     * Step Number: 1 Step Name: Add comment for activity Step Description: - Go to
-     * Intranet home - Select the activity - Click comment icon to show input text
-     * field - input the comment and click comment Input Data: Expected Outcome: -
-     * Comment will be shown in comment section of activity
-     */
+    info("Like Activity");
+    // click on the like button of the activity
+    $(byXpath(ELEMENT_LIKE_BUTTON.replace("{id}", id))).click();
+    $(byXpath(ELEMENT_UNLIKE_BUTTON.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_WHO_LIKED_POPUP.waitUntil(Condition.appears, Configuration.timeout);
 
-        String activity1 = "activity1" + getRandomNumber();
-        String comment = "comment" + getRandomNumber();
-        activityStream.addActivity(activity1, "");
-        // get the id of activity created
-        String id = $(byClassName("activityStream")).parent().getAttribute("id").split("UIActivityLoader")[1];
-        // click on comment link
-        $(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
-        // insert comment
-        $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
-        executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-        // click on the button comment
-        $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
-        info("Test 15: Delete comment");
-        activityStream.deletecomment(activity1,comment);
-        // verify that the comment is deleted
-        $(byText(comment)).shouldNot(Condition.exist);
-        // click on the activity to appear the delete button
-        activityStream.deleteactivity(activity1);
-    }
+    // click on comment link
+    $(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", id))).click();
+    // insert comment
+    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.timeout).click();
+    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
+    // click on the button comment
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
+    $(byText(comment)).should(Condition.exist);
 
-    /**
-     * <li>Case ID:121910.</li>
-     * <li>Test Case Name: Delete your activity.</li>
-     * <li>Pre-Condition:</li>
-     * <li>Post-Condition:</li>
-     */
-    @Test
-    public void test03_DeleteYourActivity() {
-        info("Test 3: Delete your activity");
-    /*
-     * Step Number: 1 Step Name: - Delete a comment Step Description: - Go to
-     * Intranet home - Select the activity - mouse over activity you want to delete
-     * - Click the (x) icon to delete Input Data: Expected Outcome: - Comment will
-     * be shown in comment section of activity - the (x) icon display on the top
-     * -right of activity - activity is deteled successfully
-     */
-        // get the id of the webContent created
-        String activity1 = "activity1" + getRandomNumber();
-        activityStream.addActivity(activity1, "");
-        activityStream.deleteactivity(activity1);
-        $(byText(activity1)).shouldNot(Condition.exist);
-        info("the activity is removed successfully");
-    }
+    info("Delete comment");
+    activityStream.deletecomment(activity1, comment);
+    // verify that the comment is deleted
+    $(byText(comment)).shouldNot(Condition.exist);
+
+    // click on the activity to appear the delete button
+    homePagePlatform.goToHomePage();
+    activityStream.deleteactivity(activity1);
+    $(byText(activity1)).shouldNot(Condition.exist);
+    info("the activity is removed successfully");
+  }
+
 }

@@ -1,53 +1,46 @@
 package org.exoplatform.platform.qa.ui.ecms.smoke;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selectors.byTitle;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static com.codeborne.selenide.Selenide.refresh;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_ADDNEWPAGE_BTNNEXT;
-import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_CONTENT_LIST_ADDPATH_BTN;
-import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_MULTIPLE_CONTENT_POPUP_FILE;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.CreateNewDocument;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 /**
- * @date 15-January-2015
  * @author exo update 26/01/2015
+ * @date 15-January-2015
  */
 
 @Tag("ecms")
 @Tag("smoke")
 public class EcmsWCMTestIT extends Base {
 
-  NavigationToolbar    navigationToolbar;
+  NavigationToolbar navigationToolbar;
 
-  SiteExplorerHome     siteExplorerHome;
+  SiteExplorerHome siteExplorerHome;
 
-  CreateNewDocument    createNewDoc;
+  CreateNewDocument createNewDoc;
 
-  PageCreationWizard   pageCreationWizard;
+  PageCreationWizard pageCreationWizard;
 
-  PortalManagePages    paMang;
+  PortalManagePages paMang;
 
-  PortalManageSites    portalManageSites;
+  PortalManageSites portalManageSites;
 
   NavigationManagement navigationManagement;
 
-  ContentList          contentList;
+  ContentList contentList;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -64,51 +57,6 @@ public class EcmsWCMTestIT extends Base {
   }
 
   /**
-   * <li>Case ID:116571.</li>
-   * <li>Test Case Name: Create Single Content Viewer page.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
-   */
-  @Test
-  public void test03_CreateSingleContentViewerPage() {
-    info("Test 3: Create Single Content Viewer page");
-    String content = "content" + getRandomNumber();
-
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.goToPath("intranet", "Site Management");
-    // Create node
-    siteExplorerHome.goToAddNewContent();
-    createNewDoc.createNewDoc(CreateNewDocument.selectDocumentType.WEBCONTENT);
-    createNewDoc.addNewWebContent(content, content);
-    createNewDoc.saveAndClose();
-    siteExplorerHome.verifyContentCreatedSuccessfully(content);
-    /*
-     * Step Number: 1 Step Name: Step 1: Create Single Content Viewer page Step
-     * Description: - Login acme by Admin/Web contributor - Choose Edit/Page/Add
-     * Page+ Fill name+ Next+ Next+ Drag and drop Content/ Content Detail portlet to
-     * this Page+ Click Edit icon to edit this porlet+ Select [Content Path] where
-     * stores these web contents/documents+ Click icon in Action column in the right
-     * to select one of them+ Click Save+ Click Close+ Click Finish icon in page
-     * editor Input Data: Expected Outcome: - The selected web content/document is
-     * displayed
-     */
-    navigationToolbar.goToAddPage();
-
-    pageCreationWizard.inputPageInfoStep1(content, true, "English", content, true, false);
-    $(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
-    $(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
-    pageCreationWizard.addContentDetail("General Drives/Sites Management/intranet", content);
-    info("Delete Data test");
-    info("Delete created file");
-    navigationToolbar.goToSiteExplorer();
-    siteExplorerHome.deleteData(content, true);
-    info("Delete created page");
-    navigationToolbar.goToPotalPages();
-    paMang.deletePage(content, "group");
-
-  }
-
-  /**
    * <li>Case ID:116614.</li>
    * <li>Test Case Name: Edit Single Content Viewer page.</li>
    * <li>Pre-Condition:</li>
@@ -116,7 +64,7 @@ public class EcmsWCMTestIT extends Base {
    */
   @Test
 
-  public void test10_EditSingleContentViewerPage() {
+  public void test01_CreateEditSingleContentViewerPage() {
     info("Test 10 Edit Single Content Viewer page");
     String title = "title" + getRandomNumber();
     String content1 = "content1" + getRandomNumber();
@@ -157,7 +105,7 @@ public class EcmsWCMTestIT extends Base {
     $(ELEMENT_ADDNEWPAGE_BTNNEXT).click();
     pageCreationWizard.addContentDetail("General Drives/Sites Management/intranet", content1);
 
-     navigationToolbar.goToEditContent();
+    navigationToolbar.goToEditContent();
     refresh();
     /*
      * Step number: 2 Step Name: Step 2: Edit Single Content Viewer page Step
@@ -171,7 +119,7 @@ public class EcmsWCMTestIT extends Base {
     $(byTitle("Portlet Mode")).click();
     $(byTitle("Edit")).click();
     $(ELEMENT_CONTENT_LIST_ADDPATH_BTN).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}", content2))).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(byXpath(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}", content2))).waitUntil(Condition.visible, Configuration.timeout).click();
     // scroll up
     executeJavaScript("window.scrollBy(0,-350);", "");
     $(byText("Done")).waitUntil(Condition.appears, Configuration.timeout);

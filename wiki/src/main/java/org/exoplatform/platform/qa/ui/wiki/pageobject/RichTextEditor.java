@@ -776,6 +776,7 @@ public class RichTextEditor {
   public void selectPageInAllPagesTab(String page) {
     info("Select the page");
     goToAllPagesTab();
+    sleep(1000);
     $(byClassName("gwt-TabPanel")).find(byText("intranet")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     sleep(1000);
     if (!$(byClassName("gwt-TabPanel")).find(byText(page)).exists()){
