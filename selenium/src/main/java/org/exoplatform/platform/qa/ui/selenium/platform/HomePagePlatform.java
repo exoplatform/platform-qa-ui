@@ -109,7 +109,7 @@ public class HomePagePlatform {
   public void goToSettingsPageTribe() {
     info("Click on People page");
     ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    sleep(1000);
+    sleep(Configuration.timeout);
     ELEMENT_TRIBE_SETTINGS_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 

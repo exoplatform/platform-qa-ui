@@ -186,6 +186,8 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_NEW_PASSWORD_CONFIRM = $(byXpath("(//input[@type='password'])[3]"));
 
+    public static final SelenideElement ELEMENT_TRIBE_EDIT_NOTIFICATIONS_GENERAL = $(byXpath("(//*[@class='uiIconEdit uiIconLightBlue pb-2'])[1]"));
+
     public static final String          ELEMENT_TRIBE_CHANGE_LANGUAGE     = "//*[contains(text(),'${language}')]";
 
     public static final String          ELEMENT_TRIBE_CHANGE_TIMEZONE    = "//*[contains(text(),'${timeZone}')]";
@@ -213,6 +215,20 @@ public class exoTribeLocator {
     public static final By ELEMENT_TRIBE_NOTIFICATION_ON_SITE = By.xpath("((//*[@class='v-list-item__title title text-color'])[3]/following::*[@class='v-input--selection-controls__input'])[2]");
 
     public static final By ELEMENT_TRIBE_NOTIFICATION_ON_MOBILE = By.xpath("((//*[@class='v-list-item__title title text-color'])[3]/following::*[@class='v-input--selection-controls__input'])[3]");
+
+    public static final By ELEMENT_TRIBE_GENERAL_NOTIFICATION_ON_MOBILE = By.xpath("(//*[@class='v-input--selection-controls__input'])[2]");
+
+    public static final By ELEMENT_TRIBE_GENERAL_NOTIFICATION_VIA_MAIL = By.xpath("(//*[@class='v-input--selection-controls__input'])[1]");
+
+    public static final By ELEMENT_TRIBE_GENERAL_NOTIFICATION_ON_SITE = By.xpath("(//*[@class='v-input--selection-controls__input'])[3]");
+
+    public static final SelenideElement ELEMENT_TRIBE_APPLY_EDIT_GENERAL_NOTIFICATIONS_BUTTON = $(byXpath("(//button[@class='btn btn-primary v-btn v-btn--contained theme--light v-size--default']//*[@class='v-btn__content'])[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_CANCEL_EDIT_GENERAL_NOTIFICATIONS_BUTTON = $(byXpath("(//button[@class='btn mr-2 v-btn v-btn--contained theme--light v-size--default']//*[@class='v-btn__content'])[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_GENERAL_NOTIFICATIONS_SELECT_MAIL_SENDING_TYPE = $(By.xpath("//select[@name='EMAIL_DIGEST']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_MANAGE_NOTIFICATIONS = $(By.xpath("(//*[@class='v-list-item__action'])[6]//button"));
 
 }
 
