@@ -1,31 +1,30 @@
 package org.exoplatform.platform.qa.ui.calendar.smoke;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-
 import com.codeborne.selenide.Condition;
-
 import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarHomePage;
 import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("calendar")
 @Tag("smoke")
 public class CALManagePersonalCalendarTestIT extends Base {
 
-  HomePagePlatform   homePagePlatform;
+  HomePagePlatform homePagePlatform;
 
   CalendarManagement calendarManagement;
 
-  CalendarHomePage   calendarHomePage;
+  CalendarHomePage calendarHomePage;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -36,47 +35,14 @@ public class CALManagePersonalCalendarTestIT extends Base {
   }
 
   /**
-   * <li>Case ID:116384.</li>
-   * <li>Test Case Name: Add new calendar with valid information.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
-   */
-  @Test
-  public void test03_AddNewCalendarWithValidInformation() {
-    info("Test 3: Add new calendar with valid information");
-    /*
-     * Step Number: 1 Step Name: Step 1: Add calendar Step Description: Click
-     * Calendar action icon and select Add calendar Input Data: Expected Outcome:
-     * Add new calendar form is shown
-     */
-
-    /*
-     * Step number: 2 Step Name: Step 2: Add calendar with valid information Step
-     * Description: - Input valid values for all fields in Calendar details tab -
-     * Click Save Input Data: Expected Outcome: Calendar is saved successfully and
-     * listed in personal calendar box
-     */
-    info("Create a new calendar");
-    String calendar = "calendar" + getRandomNumber();
-    homePagePlatform.goToCalendarPage();
-    calendarHomePage.goToView(CalendarHomePage.selectViewOption.WEEK);
-    calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.ADDCAL);
-    calendarManagement.inputDataInDetailTabCalendarForm(calendar, calendar, null);
-    calendarManagement.saveAddCalendar();
-    homePagePlatform.goToCalendarPage();
-    $(byText(calendar)).waitUntil(Condition.appears, 10000);
-    calendarManagement.deleteCalendar(calendar, true);
-  }
-
-  /**
    * <li>Case ID:116450.</li>
    * <li>Test Case Name: Edit a personal calendar with valid value.</li>
    * <li>Pre-Condition:</li>
    * <li>Post-Condition:</li>
    */
   @Test
-  public void test04_EditAPersonalCalendarWithValidValue() {
-    info("Test 4: Edit a personal calendar with valid value");
+  public void test01_EditAPersonalCalendarWithValidValue() {
+    info("Edit a personal calendar with valid value");
     /*
      * Step Number: 1 Step Name: - Step Description: Step 1: Show edit personal
      * calendar form Input Data: - Create new personal calendar[ Details ] - Right
@@ -89,6 +55,7 @@ public class CALManagePersonalCalendarTestIT extends Base {
     String calendar = "calendar" + getRandomNumber();
     homePagePlatform.goToCalendarPage();
     calendarHomePage.goToView(CalendarHomePage.selectViewOption.WEEK);
+    sleep(2000);
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.ADDCAL);
     calendarManagement.inputDataInDetailTabCalendarForm(calendar, calendar, null);
     calendarManagement.saveAddCalendar();
@@ -107,6 +74,7 @@ public class CALManagePersonalCalendarTestIT extends Base {
     $(byText(calendar1)).waitUntil(Condition.appears, 10000);
     $(byClassName("light_blue")).waitUntil(Condition.appears, 10000);
     calendarManagement.deleteCalendar(calendar1, true);
+
   }
 
 }

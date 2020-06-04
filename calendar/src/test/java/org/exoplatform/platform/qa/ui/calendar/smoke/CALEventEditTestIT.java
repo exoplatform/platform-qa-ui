@@ -1,5 +1,18 @@
 package org.exoplatform.platform.qa.ui.calendar.smoke;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarHomePage;
+import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarManagement;
+import org.exoplatform.platform.qa.ui.calendar.pageobject.EventManagement;
+import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -8,33 +21,19 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarL
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-
-import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarHomePage;
-import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarManagement;
-import org.exoplatform.platform.qa.ui.calendar.pageobject.EventManagement;
-import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
-import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
-
 @Tag("calendar")
 @Tag("smoke")
 public class CALEventEditTestIT extends Base {
 
-  HomePagePlatform   homePagePlatform;
+  HomePagePlatform homePagePlatform;
 
   CalendarManagement calendarManagement;
 
-  EventManagement    eventManagement;
+  EventManagement eventManagement;
 
-  ManageLogInOut     manageLogInOut;
+  ManageLogInOut manageLogInOut;
 
-  CalendarHomePage   calendarHomePage;
+  CalendarHomePage calendarHomePage;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -53,8 +52,8 @@ public class CALEventEditTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
-  public void test03_EditEventOfGroupCalendar() {
-    info("Test 3: Edit event of group calendar");
+  public void test01_EditEventOfGroupCalendar() {
+    info("Edit event of group calendar");
     /*
      * Step Number: 1 Step Name: Step 1: Add event Step Description: - Add new group
      * calendar - Assign calendar for an user with edit right - Add new event on
@@ -62,12 +61,12 @@ public class CALEventEditTestIT extends Base {
      * successfully - Group calendar and its event(s) are displayed for all member
      * of its group(s)
      */
-    String DATA_USER2 = "mary1";
+    String DATA_USER2 = "mary";
     String DATA_USER1 = "john";
     String DATA_PASS = "123456";
     info("Create a new calendar");
     String userGroup = "/platform/users";
-    String[] user = { DATA_USER1 };
+    String[] user = {DATA_USER1};
     String calendar = "calendar" + getRandomNumber();
     homePagePlatform.goToCalendarPage();
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.ADDCAL);
@@ -89,7 +88,7 @@ public class CALEventEditTestIT extends Base {
      * have edit right on that calendar - Right click on group calendar's event
      * Input Data: Expected Outcome: Only "View" action is displayed.
      */
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER2, PLFData.DATA_PASS);
     homePagePlatform.goToCalendarPage();
     // rightClickOnElement(ELEMENT_EVENT_TASK_TITLE.replace("${name}",titleEvent));
     $(byText(titleEvent)).contextClick();
@@ -106,7 +105,7 @@ public class CALEventEditTestIT extends Base {
      * or event is changed date/time as drag and drop - Edit event successfully by
      * shared user with edit right
      */
-    manageLogInOut.signIn(DATA_USER1, DATA_PASS);
+    manageLogInOut.signIn(DATA_USER1, PLFData.DATA_PASS2);
     info("Edit the Event");
     homePagePlatform.goToCalendarPage();
     String titleEvent1 = "titleEvent1" + getRandomNumber();
@@ -117,6 +116,7 @@ public class CALEventEditTestIT extends Base {
     $(byText(titleEvent1)).should(Condition.exist);
 
     calendarManagement.deleteCalendar(calendar);
+
   }
 
   /**
@@ -126,8 +126,8 @@ public class CALEventEditTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
-  public void test19_EditEventWithValidData() {
-    info("Test 19 Edit event with valid data");
+  public void test02_EditEventWithValidData() {
+    info("Edit event with valid data");
     /*
      * Step Number: 1 Step Name: - Step Description: Step 1: Add event Input Data: -
      * Add category [ Details ] - calendar [ Details ] - event [ Details ] Expected
@@ -179,5 +179,7 @@ public class CALEventEditTestIT extends Base {
     }
     calendarManagement.deleteCalendar(calendar);
     calendarManagement.deleteEventCategory(categoryName);
+
   }
+
 }

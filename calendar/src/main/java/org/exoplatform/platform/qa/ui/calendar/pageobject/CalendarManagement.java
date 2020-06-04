@@ -59,8 +59,8 @@ public class CalendarManagement {
   public void goToMenuFromMainCalendar(menuOfMainCalendar action) {
     info("Select action from menu");
 
-    $(ELEMENT_CALENDAR_MENU_ACTIONS_ICON).waitUntil(Condition.visible, Configuration.timeout).click();
-    $(ELEMENT_CALENDAR_MENU).waitUntil(Condition.visible, Configuration.collectionsTimeout);
+    $(ELEMENT_CALENDAR_MENU_ACTIONS_ICON).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_CALENDAR_MENU).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     switch (action) {
       case ADDCAL:
         info("Go to add calendar");
@@ -279,7 +279,7 @@ public class CalendarManagement {
    */
   public void openMenuOfCalendar(String calendar) {
     info("Open menu of a calendar");
-    ELEMENT_LIST_CALENDAR.find(byText(calendar)).waitUntil(Condition.appears, Configuration.collectionsTimeout)
+    ELEMENT_LIST_CALENDAR.find(byText(calendar)).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs)
             .hover()
             .parent()
             .parent()

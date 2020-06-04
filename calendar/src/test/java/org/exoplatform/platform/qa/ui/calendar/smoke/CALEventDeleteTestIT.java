@@ -1,36 +1,35 @@
 package org.exoplatform.platform.qa.ui.calendar.smoke;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_CONTEXT_MENU_VIEW;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-
 import com.codeborne.selenide.Condition;
-
 import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarManagement;
 import org.exoplatform.platform.qa.ui.calendar.pageobject.EventManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_CONTEXT_MENU_VIEW;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("calendar")
 @Tag("smoke")
 
 public class CALEventDeleteTestIT extends Base {
 
-  HomePagePlatform   homePagePlatform;
+  HomePagePlatform homePagePlatform;
 
   CalendarManagement calendarManagement;
 
-  EventManagement    eventManagement;
+  EventManagement eventManagement;
 
-  ManageLogInOut     manageLogInOut;
+  ManageLogInOut manageLogInOut;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -49,9 +48,9 @@ public class CALEventDeleteTestIT extends Base {
    */
 
   @Test
-  public void test05_DeleteEventOfGroupCalendar() {
+  public void test01_DeleteEventOfGroupCalendar() {
 
-    info("Test 5: Delete event of group calendar");
+    info("Delete event of group calendar");
     /*
      * Step Number: 1 Step Name: Step 1: Add event Step Description: - Add new group
      * calendar - Assign calendar for an user with edit right - Add new event on
@@ -66,7 +65,7 @@ public class CALEventDeleteTestIT extends Base {
     String DATA_USER2 = "mary";
     String DATA_USER3 = "james";
     String DATA_PASS = "123456";
-    String[] user = { DATA_USER2 };
+    String[] user = {DATA_USER2};
     homePagePlatform.goToCalendarPage();
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.ADDCAL);
     calendarManagement.inputDataInDetailTabCalendarForm(calendar, calendar, null);
@@ -89,7 +88,9 @@ public class CALEventDeleteTestIT extends Base {
      */
 
     // manageLogInOut.signOut();
-    manageLogInOut.signIn(DATA_USER3, DATA_PASS);
+    manageLogInOut.signIn(PLFData.DATA_USER3, PLFData.DATA_PASS);
+    refresh();
+    sleep(2000);
     homePagePlatform.goToCalendarPage();
     // rightClickOnElement(ELEMENT_EVENT_TASK_TITLE.replace("${name}",titleEvent));
     $(byText(titleEvent)).contextClick();
@@ -103,9 +104,12 @@ public class CALEventDeleteTestIT extends Base {
      * Input Data: Expected Outcome: Event is removed from group calendar
      */
     // manageLogInOut.signOut();
-    manageLogInOut.signIn(DATA_USER2, DATA_PASS);
+    manageLogInOut.signIn(PLFData.DATA_USER2, PLFData.DATA_PASS);
+    refresh();
+    sleep(2000);
     homePagePlatform.goToCalendarPage();
     calendarManagement.deleteTaskEvent(titleEvent);
 
   }
+
 }

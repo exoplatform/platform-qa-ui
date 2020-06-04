@@ -136,7 +136,8 @@ public class SpaceManageMessageTestIT extends Base {
     homePagePlatform.goToPeople();
     homePagePlatform.searchUsersPeople(usernamea);
     refresh();
-    ELEMENT_USER_RESULT_SEARCH.find(byText(usernamea + " " + usernamea)).click();
+    sleep(2000);
+    ELEMENT_USER_RESULT_SEARCH.find(byText(usernamea + " " + usernamea)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_USER_PROFILE.waitUntil(Condition.appear, Configuration.timeout);
     $(byXpath("(//i[@class='uiIconBannerChat'])[2]")).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_MINI_CHAT.waitUntil(Condition.appear, Configuration.timeout);

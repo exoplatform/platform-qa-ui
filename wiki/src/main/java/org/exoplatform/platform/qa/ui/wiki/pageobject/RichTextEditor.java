@@ -778,7 +778,7 @@ public class RichTextEditor {
     goToAllPagesTab();
     sleep(1000);
     $(byClassName("gwt-TabPanel")).find(byText("intranet")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
-    sleep(1000);
+    sleep(2000);
     if (!$(byClassName("gwt-TabPanel")).find(byText(page)).exists()){
       $(ELEMENT_EXPLORER_WIKIHOME).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }

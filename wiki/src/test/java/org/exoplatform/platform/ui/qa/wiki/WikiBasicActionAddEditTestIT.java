@@ -11,8 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.back;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -129,6 +128,7 @@ public class WikiBasicActionAddEditTestIT extends Base {
 
     richTextEditor.addSimplePage(title2, content2);
     richTextEditor.goToWikiPageLink();
+    sleep(2000);
     richTextEditor.insertExistWikiPageLink(title1, label, tooltip, RichTextEditor.wikiPageLinkTab.All_pages);
     wikiManagement.saveAddPage();
     wikiValidattions.verifyTitleWikiPage(title2);
