@@ -16,10 +16,12 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_CONTEXT_MENU_VIEW;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 @Tag("calendar")
 @Tag("smoke")
@@ -43,7 +45,12 @@ public class CALEventEditTestIT extends Base {
     eventManagement = new EventManagement(this);
     manageLogInOut = new ManageLogInOut(this);
     calendarHomePage = new CalendarHomePage(this);
-  }
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signIn(PLFData.username, PLFData.password);
+}
 
   /**
    * <li>Case ID:116425.</li>
@@ -52,6 +59,7 @@ public class CALEventEditTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
+  @Tag("te")
   public void test01_EditEventOfGroupCalendar() {
     info("Edit event of group calendar");
     /*
@@ -63,7 +71,6 @@ public class CALEventEditTestIT extends Base {
      */
     String DATA_USER2 = "mary";
     String DATA_USER1 = "john";
-    String DATA_PASS = "123456";
     info("Create a new calendar");
     String userGroup = "/platform/users";
     String[] user = {DATA_USER1};

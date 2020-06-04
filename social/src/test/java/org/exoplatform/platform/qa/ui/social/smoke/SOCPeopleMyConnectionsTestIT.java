@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.social.smoke;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.platform.ConnectionsManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
@@ -16,6 +17,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 @Tag("smoke")
 @Tag("social")
@@ -36,9 +38,12 @@ public class SOCPeopleMyConnectionsTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     homePagePlatform = new HomePagePlatform(this);
     addUsers = new AddUsers(this);
-    manageLogInOut = new ManageLogInOut(this);
     connectionsManagement = new ConnectionsManagement(this);
-
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
   }
 
   /**

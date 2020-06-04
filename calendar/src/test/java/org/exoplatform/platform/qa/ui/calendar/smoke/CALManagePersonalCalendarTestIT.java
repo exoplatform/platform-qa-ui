@@ -4,7 +4,9 @@ import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarHomePage;
 import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -15,6 +17,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 @Tag("calendar")
 @Tag("smoke")
@@ -26,13 +29,20 @@ public class CALManagePersonalCalendarTestIT extends Base {
 
   CalendarHomePage calendarHomePage;
 
+    ManageLogInOut manageLogInOut;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
     homePagePlatform = new HomePagePlatform(this);
     calendarManagement = new CalendarManagement(this);
     calendarHomePage = new CalendarHomePage(this);
-  }
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signIn(PLFData.username, PLFData.password);
+}
 
   /**
    * <li>Case ID:116450.</li>

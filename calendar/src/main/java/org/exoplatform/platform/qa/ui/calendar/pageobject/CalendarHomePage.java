@@ -231,7 +231,9 @@ public class CalendarHomePage {
         if( $(byId("UIListUsers")).find(byText(name)).is(Condition.not(Condition.visible))){
           ELEMENT_NEXT_RIGHT_LIST_DAY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
         }
+        sleep(1000);
         $(ELEMENT_ACCOUNT_NAME_LINK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+        sleep(2000);
         $(byText(name)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs + Configuration.timeout).contextClick();
       }
     } else {

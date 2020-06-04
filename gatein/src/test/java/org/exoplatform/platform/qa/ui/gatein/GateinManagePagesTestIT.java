@@ -2,10 +2,12 @@ package org.exoplatform.platform.qa.ui.gatein;
 
 import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.MyDashBoard;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.PageCreationWizard;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.PortalManagePages;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -15,6 +17,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 /**
  * @author eXo
@@ -33,6 +36,8 @@ public class GateinManagePagesTestIT extends Base {
 
   MyDashBoard myDashoard;
 
+  ManageLogInOut manageLogInOut;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -42,6 +47,11 @@ public class GateinManagePagesTestIT extends Base {
     portalmanagepages = new PortalManagePages(this);
     pagecreationwizard = new PageCreationWizard(this);
     myDashoard = new MyDashBoard(this);
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
   }
 
   /**

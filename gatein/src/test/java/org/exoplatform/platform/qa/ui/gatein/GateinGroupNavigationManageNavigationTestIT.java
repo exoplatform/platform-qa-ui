@@ -1,18 +1,23 @@
 package org.exoplatform.platform.qa.ui.gatein;
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.PortalGroupNavigation;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_GROUP_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 @Tag("gatein")
 @Tag("smoke")
@@ -26,6 +31,8 @@ public class GateinGroupNavigationManageNavigationTestIT extends Base {
 
   PortalGroupNavigation portalGroupNavigation;
 
+  ManageLogInOut manageLogInOut;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -34,6 +41,11 @@ public class GateinGroupNavigationManageNavigationTestIT extends Base {
     userAndGroupManagement = new UserAndGroupManagement(this);
     navigationToolbar = new NavigationToolbar(this);
     portalGroupNavigation = new PortalGroupNavigation(this);
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
   }
 
   /**

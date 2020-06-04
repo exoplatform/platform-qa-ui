@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.gatein;
 
 import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.NavigationManagement;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.PageCreationWizard;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.PortalManageSites;
@@ -16,6 +17,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 /**
  * @author eXo
@@ -41,7 +43,10 @@ public class GateinPortalNavigationEditNavigationTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     navigationmanagement = new NavigationManagement(this);
     manageLogInOut = new ManageLogInOut(this);
-
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
   }
 
   /**

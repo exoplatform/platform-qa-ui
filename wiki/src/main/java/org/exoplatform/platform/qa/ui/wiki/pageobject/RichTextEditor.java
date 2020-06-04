@@ -215,6 +215,7 @@ public class RichTextEditor {
       info("Select All pages tab");
       goToAllPagesTab();
       info("Expand WikiHome node");
+      sleep(2000);
       goToExplorerWikiHome();
       info("Select a page in the list");
       selectPageInAllPagesTab(page);

@@ -25,6 +25,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_USER_RESULT_SEARCH;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("smoke")
@@ -60,7 +61,12 @@ public class SpaceManageMessageTestIT extends Base {
     spaceManagement = new SpaceManagement(this);
     spaceHomePage = new SpaceHomePage(this);
     spaceSettingManagement = new SpaceSettingManagement(this);
-  }
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signIn(PLFData.username, PLFData.password);
+}
 
   @Test
   public void test01_SendMessageOnSpaceChat() {

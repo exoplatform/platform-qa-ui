@@ -17,6 +17,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_CONTEXT_MENU_VIEW;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 @Tag("calendar")
 @Tag("smoke")
@@ -38,7 +39,12 @@ public class CALEventDeleteTestIT extends Base {
     calendarManagement = new CalendarManagement(this);
     eventManagement = new EventManagement(this);
     manageLogInOut = new ManageLogInOut(this);
-  }
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signIn(PLFData.username, PLFData.password);
+
+}
 
   /**
    * <li>Case ID:116397.</li>

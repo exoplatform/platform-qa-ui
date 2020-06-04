@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.social.smoke;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
@@ -19,6 +20,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.EL
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_POPUP_OK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_ADD_TOOTLBAR;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 import static org.junit.Assert.assertEquals;
 
 @Tag("smoke")
@@ -45,10 +47,14 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     homePagePlatform = new HomePagePlatform(this);
     addUsers = new AddUsers(this);
-    manageLogInOut = new ManageLogInOut(this);
     connectionsManagement = new ConnectionsManagement(this);
     activityStream = new ActivityStream(this);
     userPageBase = new UserPageBase(this);
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
   }
 
   /**

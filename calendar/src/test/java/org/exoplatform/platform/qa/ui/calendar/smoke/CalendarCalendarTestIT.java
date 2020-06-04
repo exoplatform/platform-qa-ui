@@ -3,7 +3,9 @@ package org.exoplatform.platform.qa.ui.calendar.smoke;
 import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -12,6 +14,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 @Tag("calendar")
 @Tag("smoke")
@@ -20,12 +23,19 @@ public class CalendarCalendarTestIT extends Base {
 
   CalendarManagement calendarManagement;
 
+  ManageLogInOut manageLogInOut;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
     homePagePlatform = new HomePagePlatform(this);
     calendarManagement = new CalendarManagement(this);
-  }
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signIn(PLFData.username, PLFData.password);
+}
 
   /**
    * Case ID:115672. Test Case Name: Edit Personal Calendar.

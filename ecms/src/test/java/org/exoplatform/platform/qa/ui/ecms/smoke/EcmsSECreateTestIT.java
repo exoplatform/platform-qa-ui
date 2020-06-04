@@ -1,16 +1,21 @@
 package org.exoplatform.platform.qa.ui.ecms.smoke;
 
+import com.codeborne.selenide.Condition;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.CreateNewDocument;
 import org.exoplatform.platform.qa.ui.ecms.pageobject.SiteExplorerHome;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.administration.ContentAdministration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 @Tag("ecms")
 @Tag("smoke")
@@ -23,6 +28,8 @@ public class EcmsSECreateTestIT extends Base {
 
   CreateNewDocument createNewDoc;
 
+  ManageLogInOut manageLogInOut;
+
   @BeforeEach
   public void setupBeforeMethod() {
     info("Start setUpBeforeMethod");
@@ -31,7 +38,12 @@ public class EcmsSECreateTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     siteExplorerHome = new SiteExplorerHome(this);
     createNewDoc = new CreateNewDocument(this);
-  }
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+}
 
   /**
    * <li>Test Case Name: Edit File document.</li>

@@ -3,7 +3,9 @@ package org.exoplatform.platform.qa.ui.ecms.smoke;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.administration.ContentAdministration;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +20,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.ELEMENT_ECM_EXPLORER_CLOSE_VIEW_MODE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.administration.AdministrationLocator.ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 /**
  * @author rosso
@@ -29,6 +32,8 @@ public class EcmsAdminExplorerTestIT extends Base {
 
   NavigationToolbar navigationToolbar;
 
+  ManageLogInOut manageLogInOut;
+
   TestBase testBase;
 
   @BeforeEach
@@ -37,8 +42,12 @@ public class EcmsAdminExplorerTestIT extends Base {
 
     contentAdministration = new ContentAdministration(this);
     navigationToolbar = new NavigationToolbar(this);
-
-  }
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signInCas(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+}
 
   /**
    * <li>Case ID:116627.</li>

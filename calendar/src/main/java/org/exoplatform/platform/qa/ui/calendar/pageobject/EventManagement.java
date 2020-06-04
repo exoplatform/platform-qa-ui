@@ -142,14 +142,14 @@ public class EventManagement {
   public void inputBasicQuickEvent(String name, String note, String... opt) {
     info("Input into basic fields of Quick EVENT form");
     if (name != null) {
-      $(ELEMENT_EVENT_TITLE_DRAWER).setValue(name);
+      $(ELEMENT_EVENT_TITLE_DRAWER).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(name);
     }
     if (note != null) {
-      $(ELEMENT_ADD_EDIT_EVENT_NOTE).setValue(note);
+      $(ELEMENT_ADD_EDIT_EVENT_NOTE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(note);
     }
     if (opt.length > 0 && opt[0] != null) {
-      $(byXpath("//*[@class='control-label']/following::*[@class='dropdown']")).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
-      $(byXpath("//*[@class='dropdown-submenu']//*[@class='trimText' and contains(text(),'${calendarName}')]".replace("${calendarName}",opt[0]))).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+      $(byXpath("//*[@class='control-label']/following::*[@class='dropdown']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+      $(byXpath("//*[@class='dropdown-submenu']//*[@class='trimText' and contains(text(),'${calendarName}')]".replace("${calendarName}",opt[0]))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.openBrowserTimeoutMs).click();
     }
     if (opt.length > 1 && opt[1] != null) {
       $(byXpath("//*[@id='ExoCalendarEventForm']/div[1]/div[2]/form/div[1]/div[1]/span/select")).selectOption(opt[1]);
@@ -798,6 +798,7 @@ public class EventManagement {
    * @param opt    String
    */
   public void inputDataEventInQuickForm(String name, String note, String from, String to, boolean allDay, String... opt) {
+    sleep(2000);
     inputFromToQuickEvent(from, to, allDay);
     inputBasicQuickEvent(name, note, opt);
 

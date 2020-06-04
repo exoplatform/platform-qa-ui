@@ -1,10 +1,12 @@
 package org.exoplatform.platform.qa.ui.calendar.smoke;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarHomePage;
 import org.exoplatform.platform.qa.ui.calendar.pageobject.CalendarManagement;
 import org.exoplatform.platform.qa.ui.calendar.pageobject.EventManagement;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +19,7 @@ import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_ADD_EDIT_EVENT_NAME;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 @Tag("calendar")
 @Tag("smoke")
@@ -39,8 +42,12 @@ public class CalendarEventTestIT extends Base {
     calendarHomePage = new CalendarHomePage(this);
     eventManagement = new EventManagement(this);
     manageLogInOut = new ManageLogInOut(this);
-
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signIn(PLFData.username, PLFData.password);
   }
+
 
   /**
    * ID:115677. Test Case Name: Edit an Event in personal calendar. Case
@@ -79,6 +86,7 @@ public class CalendarEventTestIT extends Base {
             getDate(0, "MM/dd/yyyy" + " HH"),
             false);
     eventManagement.saveQuickAddEvent();
+    sleep(3000);
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
             CalendarHomePage.selectViewOption.LIST,
             CalendarHomePage.selectDayOption.DETAILTIME);
@@ -159,14 +167,15 @@ public class CalendarEventTestIT extends Base {
             getDate(0, "MM/dd/yyyy" + " HH"),
             getDate(0, "MM/dd/yyyy" + " HH"),
             false);
+    sleep(2000);
     eventManagement.saveQuickAddEvent();
-    $(byText(titleEvent)).should(Condition.exist);
+    $(byText(titleEvent)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
             CalendarHomePage.selectViewOption.LIST,
             CalendarHomePage.selectDayOption.DETAILTIME);
 
     info("Delete an Event in personal calendar");
-
+    sleep(1000);
     calendarHomePage.deleteEventTask(titleEvent,
             CalendarHomePage.selectViewOption.LIST,
             CalendarHomePage.selectDayOption.DETAILTIME,

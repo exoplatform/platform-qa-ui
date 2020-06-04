@@ -3,7 +3,9 @@ package org.exoplatform.platform.ui.qa.wiki;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -15,6 +17,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 @Tag("wiki")
 @Tag("smoke")
@@ -33,6 +36,8 @@ public class WikiBasicActionAddEditTestIT extends Base {
   WikiManagement wikiManagement;
 
   ArrayList<String> arrayPage;
+
+  ManageLogInOut manageLogInOut;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -54,7 +59,11 @@ public class WikiBasicActionAddEditTestIT extends Base {
     }
 
     arrayPage = new ArrayList<String>();
-
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signInCas(PLFData.username, PLFData.password);
   }
 
   /**
@@ -112,6 +121,7 @@ public class WikiBasicActionAddEditTestIT extends Base {
     }
     sourceTextEditor.editSimplePage(newTitle, newContent);
     wikiManagement.saveAddPage();
+    sleep(2000);
     wikiValidattions.verifyTitleWikiPage(newTitle);
     arrayPage.add(newTitle);
 
@@ -130,6 +140,7 @@ public class WikiBasicActionAddEditTestIT extends Base {
     richTextEditor.goToWikiPageLink();
     sleep(2000);
     richTextEditor.insertExistWikiPageLink(title1, label, tooltip, RichTextEditor.wikiPageLinkTab.All_pages);
+    sleep(2000);
     wikiManagement.saveAddPage();
     wikiValidattions.verifyTitleWikiPage(title2);
     arrayPage.add(title2);
