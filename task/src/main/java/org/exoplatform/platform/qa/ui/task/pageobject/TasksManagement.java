@@ -8,9 +8,7 @@ import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.openqa.selenium.Keys;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
@@ -49,7 +47,7 @@ public class TasksManagement {
     ELEMENT_TASK_FORM_INPUT_TITLE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(newTask);
     sleep(3000);
     ELEMENT_TASK_FORM_PRIORITY.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_TASK_SELECT_PRIORITY.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).selectOption(priority);
+    ELEMENT_TASK_SELECT_PRIORITY.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).sendKeys(priority);
   }
 
   public void deleteTask(String taskContent) {
@@ -59,6 +57,15 @@ public class TasksManagement {
     ELEMENT_TASK_BUTTON_DELETE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TASK_BUTTON_DELETE_OK.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     $(byText(taskContent)).should(Condition.exist);
+  }
+
+  public void deleteTaskDW(String taskContent) {
+    $(byXpath("//*[@class='table-project']//*[@class='column-item column-title taskName' and contains(text(),'${taskContent}')]".replace("${taskContent}", taskContent))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TASK_FORM.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    ELEMENT_TASK_FORM_ICOND_DROP_DOWN_MENU.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TASK_BUTTON_DELETE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TASK_BUTTON_DELETE_OK.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byText(taskContent)).should(Condition.not(Condition.exist));
   }
 
   public void addCoworker(String task) {

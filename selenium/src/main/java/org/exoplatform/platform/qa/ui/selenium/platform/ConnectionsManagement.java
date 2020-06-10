@@ -8,10 +8,9 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_PEOPLE_TRIBE_SEARCH_TEXT;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_CONTENT_NAME_PROFILE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -97,7 +96,6 @@ public class ConnectionsManagement {
       tribeSearchPeople(name[0], null, null, null);
     else
       tribeSearchPeople(username, null, null, null);
-    refresh();
     if ($(ELEMENT_CONNECTION_REVOVE_BTN).is(Condition.exist)) {
       $(ELEMENT_CONNECTION_REVOVE_BTN).click();
     }
@@ -169,6 +167,37 @@ public class ConnectionsManagement {
     info("Accepted to the user");
   }
 
+  public void acceptAConnectionDW(String username, String... fullName) {
+    info("--Accept a connection of a user--");
+    info("Click on Confirm button");
+    if (fullName.length > 0)
+      tribeSearchPeople(fullName[0], null, null, null);
+    else
+      tribeSearchPeople(username, null, null, null);
+    ELEMENT_CONNECTION_CONFIRM_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CONNECTION_DISONNECT_REFUSE_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    info("Accepted to the user");
+  }
+
+  public void ignoreConnectionDW(String username) {
+    info("--Ignore a connection of a user--");
+    info("Click on Ignore button");
+    tribeSearchPeople(username, null, null, null);
+    ELEMENT_CONNECTION_REFUSE_SHOW_BTN_DW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
+    ELEMENT_CONNECTION_DISONNECT_REFUSE_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byText("Connect")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+  }
+
+  public void removeConnectionDW(String username) {
+    info("--Ignore a connection of a user--");
+    info("Click on Ignore button");
+    tribeSearchPeople(username, null, null, null);
+    sleep(2000);
+    ELEMENT_CONNECTION_DISONNECT_REFUSE_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("(//*[@class='v-card__actions']//button)[1]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+  }
+
   /**
    * Function Verify connection
    *
@@ -186,6 +215,17 @@ public class ConnectionsManagement {
       evt.waitForElementNotPresent(ELEMENT_CONNECTION_REVOVE_BTN);
   }
 
+  public void verifyConnectionDW(String username, Boolean accept, String option) {
+
+    ELEMENT_MY_CONNECTIONS_BTN_DW.sendKeys(option);
+    tribeSearchPeople(username, null, null, null);
+    if (accept) {
+
+      ELEMENT_CONNECTION_DISONNECT_REFUSE_BTN_DW.should(Condition.exist);
+    } else
+      evt.waitForElementNotPresent(ELEMENT_CONNECTION_DISONNECT_REFUSE_BTN_DW);
+
+  }
   /**
    * Function search people
    *

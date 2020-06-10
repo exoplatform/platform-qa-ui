@@ -6,15 +6,19 @@ import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
+import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_CONNECTION_EVERYONE_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_CALENDAR_WORKING_PANEL;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ADDNEWSPACE_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream.homePagePlatform;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 public class HomePagePlatform {
@@ -84,23 +88,40 @@ public class HomePagePlatform {
     $(ELEMENT_HOME_SPACE_TRIBE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout).click();
   }
 
+  public void goToSpaceHomeDW() {
+    $(byXpath("//*[@class='v-slide-group__prev']//i")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_SPACE_HOME_TAB_DW).waitUntil(Condition.appears, Configuration.timeout).click();
+    info("Space setting page is shown");
+    $(ELEMENT_HOME_SPACE_DW).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout).click();
+  }
+
   /**
    * Go to Home page Tribe
    */
   public void goToStreamPageTribe() {
     info("Click on Home page");
+    $(byXpath("//*[@id='brandingTopBar']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    sleep(1000);
     ELEMENT_TRIBE_STREAM_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
-
 
   /**
    * Go to People page Tribe
    */
   public void goToPeoplePageTribe() {
     info("Click on People page");
+    $(byXpath("//*[@id='brandingTopBar']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TRIBE_PEOPLE_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+  }
+
+  public void goToMyConnectionsFromHomePageDW() {
+    info("Click on People page");
+    $(byXpath("//*[@id='brandingTopBar']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_PEOPLE_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_MY_CONNECTIONS_BTN_DW.sendKeys("My Connections");
   }
 
   /**
@@ -108,8 +129,9 @@ public class HomePagePlatform {
    */
   public void goToSettingsPageTribe() {
     info("Click on People page");
+    sleep(2000);
     ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    sleep(Configuration.timeout);
+    sleep(2000);
     ELEMENT_TRIBE_SETTINGS_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
@@ -134,6 +156,14 @@ public class HomePagePlatform {
 
   }
 
+  public void goToTasksPageDW() {
+    info("Open Tasks page by link");
+    open(Configuration.baseUrl+ "portal/dw/tasks/my-task");
+  }
+
+  public void goToTheLabel(String label) {
+    $(byXpath("//*[@class='list-labels']//*[@class='label-name' and contains(text(),'${label}')]".replace("${label}", label))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+  }
 
   /**
    * Go to Home Calendar Page

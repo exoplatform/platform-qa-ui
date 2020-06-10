@@ -69,13 +69,17 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_SIGN_OUT = $(byXpath("//*[@class='uiIcon uiIconToolbarNavItem logoutIcon']"));
 
-    public static final SelenideElement ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU = $(byXpath("//*[@class='HamburgerNavigationMenuLink']"));
+    public static final SelenideElement ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU = $(byXpath("//*[@id='app']"));
+
+    public static final SelenideElement ELEMENT_DW_ADMINISTRATION_PAGE = $(byXpath("//*[@class='uiIcon uiIconToolbarNavItem uiAdministrationIcon']"));
 
     public static final SelenideElement ELEMENT_TRIBE_STREAM_PAGE = $(byXpath("//*[@class='uiIcon uiIconFile uiIconToolbarNavItem uiIconStream iconStream null']"));
 
     public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_PAGE = $(byXpath("//*[@class='uiIcon uiIconFile uiIconToolbarNavItem uiIconHome iconHome null']"));
 
     public static final SelenideElement ELEMENT_TRIBE_PEOPLE_PAGE = $(byXpath("//*[@class='uiIcon uiIconFile uiIconToolbarNavItem uiIconPeople iconPeople null']"));
+
+    public static final SelenideElement ELEMENT_CONNECTIONS_PAGE_FROM_HOME = $(byXpath("(//*[@class='v-card__text pa-1 subtitle-1 text-color'])[2]"));
 
     public static final SelenideElement ELEMENT_TRIBE_SETTINGS_PAGE = $(byXpath("//*[@class='uiIcon uiIconToolbarNavItem settingsIcon']"));
 
@@ -85,6 +89,7 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_POST_ACTIVITY_BTN = $(byXpath("//*[@class='uiIconGoUp']"));
     public static final By              ELEMENT_TRIBE_POST_ACTIVITY_BUTTON                        = By.xpath("//*[@class='btn btn-primary ignore-vuetify-classes btnStyle']");
+    public static final SelenideElement              ELEMENT_DW_POST_ACTIVITY_BUTTON                        = $(By.xpath("//*[@class='activityComposer']//*[@class='uiIconEdit']"));
 
 
   //SPACE
@@ -137,17 +142,29 @@ public class exoTribeLocator {
 
     //WIKI
 
+    public static final SelenideElement ELEMENT_SPACE_HOME_TAB_DW = $(byXpath("(//*[@class='spaceNavigationTab v-tab'])[1]"));
+
+    public static final SelenideElement ELEMENT_ADD_PAGE_DW = $(byXpath("(//*[@class='dropdown uiActionWithLabel'])[1]"));
+
     public static final By ELEMENT_ADD_PAGE_TRIBE = By.xpath("//div[@data-toggle and text()='Ajouter une Page']");
 
     public static final By ELEMENT_DELETE_LINK_TRIBE = By.xpath(".//*[text()='Supprimer']");
+
+    public static final By ELEMENT_DELETE_WIKI_PAGE_DW = By.xpath("(//*[@class='open']//ul//li)[5]");
+
+    public static final By ELEMENT_CONFIRM_WIKI_PAGE_DELETE_DW = By.xpath("(//*[@id='UIWikiDeletePageConfirm']//button)[1 ]");
 
     public static final By ELEMENT_CONFIRM_WIKI_DELETE_TRIBE = By.xpath(".//*[@id='UIWikiDeletePageConfirm']//button[text()='Valider']");
 
     public static final By ELEMENT_CONTENT_WIKI_INPUT_TRIBE = By.xpath("//*[@id='body']");
 
+    public static final By ELEMENT_CONTENT_WIKI_INPUT_DW = By.xpath("//*[@id='Markup']");
+
     public static final By ELEMENT_TEMPLATE_TRIBE_SELECT_BTN = By.xpath("//*[@id='UIWikiSelectTemplateForm']//*[text()='Sélectionner']");
 
-    public static final By ELEMENT_WIKI_TRIBE_MOVE_POPUP_SAVE = By.xpath(".//*[@id='UIWikiMovePageForm']//button[contains(text(),'Déplacer')]");
+    public static final By ELEMENT_TEMPLATE_DW_SELECT_BTN = By.xpath("//*[@class='btn selectTemplateAction']");
+
+    public static final By ELEMENT_WIKI_TRIBE_MOVE_POPUP_SAVE = By.xpath("//*[@id='UIWikiMovePageForm']//button[@class='btn btn-primary']");
 
     public static final By ELEMENT_WIKI_TRIBE_COMPARE_VERSION_TITLE = By.xpath(".//h4[text()='Comparer les Versions']");
 
@@ -157,15 +174,17 @@ public class exoTribeLocator {
 
     public static final By   ELEMENT_HOME_SPACE_TRIBE = By.xpath("//*[@class='uiIconAppSpaceHomePage uiIconDefaultApp']");
 
+    public static final By   ELEMENT_HOME_SPACE_DW = By.xpath("//*[@class='uiSocApplication uiSpaceActivityStreamPortlet']");
+
     public static final By ELEMENT_TRIBE_INFO_ADD_MORE_RELATIONS = By.xpath(".//*[@id='UIWikiPageInfo']//button[text()='Associer une Page']");
 
     public static final By ELEMENT_ADD_RELATED_TRIBE_POPUP_DROPDOWN = By.xpath(".//*[contains(text(),'Associer une Page')]");
 
-    public static final By ELEMENT_ADD_RELATED_TRIBE_SLECTION = By.xpath("//*[contains(text(),'Ajouter une Page Associée')]/../..//*[@data-toggle='dropdown']");
+    public static final By ELEMENT_ADD_RELATED_TRIBE_SLECTION = By.xpath("//*[@class='PopupTitle popupTitle']/../..//*[@data-toggle='dropdown']");
 
-    public static final String ELEMENT_ADD_RELATED_POPUP_TRIBE_LOCATION = ".//*[contains(text(),'Ajouter une Page Associée')]/../..//*[contains(text(),'${location}')]";
+    public static final String ELEMENT_ADD_RELATED_POPUP_TRIBE_LOCATION = "//*[@class='PopupTitle popupTitle']/../..//*[contains(text(),'${location}')]";
 
-    public static final String ELEMENT_ADD_RELATED_POPUP_TRIBE_CONTENT = ".//*[contains(text(),'Ajouter une Page Associée')]/../..//*[contains(text(),'${page}')]";
+    public static final String ELEMENT_ADD_RELATED_POPUP_TRIBE_CONTENT = "//*[@class='PopupTitle popupTitle']/../..//*[contains(text(),'${page}')]";
 
     //TASK
     public static final By ELEMENT_POPUB_TRIBE_EDIT_PROJECT    =By.xpath("//*[@id='taskManagement']//*[@class='PopupContent popupContent']");
@@ -173,8 +192,28 @@ public class exoTribeLocator {
     //PEOPLE
     public static final SelenideElement ELEMENT_PEOPLE_TRIBE_SEARCH_TEXT = $(byXpath("//*[@class='v-text-field__slot']/input"));
 
-    //SETTINGS
+    public static final SelenideElement ELEMENT_CONNECTION_CONFIRM_BTN_DW       = $(byXpath("(//*[@class='acceptToConnectButtonParent']//button)[1]"));
+
+    public static final SelenideElement ELEMENT_CONNECTION_REFUSE_SHOW_BTN_DW       = $(byXpath("(//*[@class='acceptToConnectButtonParent']//button)[2]"));
+
+    public static final SelenideElement ELEMENT_CONNECTION_DISONNECT_REFUSE_BTN_DW       = $(byXpath("//*[@class='uiIconSocCancelConnectUser d-none d-sm-inline']"));
+
+    public static final SelenideElement ELEMENT_MY_CONNECTIONS_BTN_DW       = $(byXpath("//*[@id='peopleListToolbar']//select"));
+
+    public static final SelenideElement ELEMENT_NOTIFICATIONS_BTN_DW       = $(byXpath("//*[@id='NotificationPopoverPortlet']"));
+
+    public static final SelenideElement  ELEMENT_NOTIFICATION_DROPDOWN_DW   =   $(byXpath("//*[@class='notifDrawerItem']"));
+
+    public static final SelenideElement ELEMENT_CLOSE_NOTIFICATIONS_DW       = $(byXpath("//*[@class='uiCloseIcon notifDrawerClose']"));
+
+  //SETTINGS
     public static final SelenideElement ELEMENT_TRIBE_EDIT_LANGUAGE = $(byXpath("(//*[@class='uiIconEdit uiIconLightBlue pb-2'])[1]"));
+
+    public static final SelenideElement  ELEMENT_SETTINGS_APP_TAB_DW  = $(byXpath("(//*[@class='v-btn__content'])[8]"));
+
+    public static final SelenideElement  ELEMENT_APPLICATION_TAB_ADD_APPLICATION_DW  = $(byXpath("(//*[@class='v-btn__content'])[12]"));
+
+    public static final SelenideElement  ELEMENT_REMOVE_APPLICATION_DW  = $(byXpath("(//*[@class='v-list-item__title'])[1]"));
 
     public static final SelenideElement ELEMENT_TRIBE_EDIT_TIME_ZONE = $(byXpath("(//*[@class='uiIconEdit uiIconLightBlue pb-2'])[2]"));
 
@@ -229,6 +268,13 @@ public class exoTribeLocator {
     public static final SelenideElement ELEMENT_TRIBE_GENERAL_NOTIFICATIONS_SELECT_MAIL_SENDING_TYPE = $(By.xpath("//select[@name='EMAIL_DIGEST']"));
 
     public static final SelenideElement ELEMENT_TRIBE_MANAGE_NOTIFICATIONS = $(By.xpath("(//*[@class='v-list-item__action'])[6]//button"));
+
+    public static final SelenideElement ELEMENT_DIGITALWORKPLACE_MANAGE_NOTIFICATIONS = $(By.xpath("(//*[@class='v-list-item__action'])[7]//button"));
+
+    //Home
+
+    public static final SelenideElement ELEMENT_SEARCH_HOME_PAGE = $(By.xpath("//*[@class='uiIconPLF24x24Search']"));
+
 
 }
 

@@ -1354,6 +1354,27 @@ public class ActivityStream {
         $(byText(comment)).shouldNot(Condition.exist);
     }
 
+    public void deletecommentDW(String activity, String comment) {
+        String idBlocComment = $(byText(activity)).parent()
+                .parent()
+                .parent()
+                .find(byText(comment))
+                .parent()
+                .parent()
+                .parent()
+                .parent()
+                .parent()
+                .getAttribute("id")
+                .split("commentContainercomment")[1];
+
+        $(byXpath("//*[@id='dropDownEditCommentcomment{id}']//*[@class='uiIconActivityAction uiIconLightGray']".replace("{id}", idBlocComment))).hover().click();
+        $(byId(ELEMENT_INCON_DELETE_COMMENT.replace("{id}", idBlocComment))).waitUntil(visible, openBrowserTimeoutMs).click();
+        // Confirm delete
+        ELEMENT_DELETE_POPUP_OK.click();
+        ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.not(Condition.visible), Configuration.timeout);
+        $(byText(comment)).shouldNot(Condition.exist);
+    }
+
     public void likeReply(String reply) {
         String idReplyContainer = $(byText(reply)).parent()
                 .parent()

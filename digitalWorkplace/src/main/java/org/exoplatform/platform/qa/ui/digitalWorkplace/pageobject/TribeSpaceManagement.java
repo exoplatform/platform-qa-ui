@@ -1,4 +1,4 @@
-package org.exoplatform.platform.qa.ui.exoTribe.pageobject;
+package org.exoplatform.platform.qa.ui.digitalWorkplace.pageobject;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -9,7 +9,6 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 
 import java.util.ArrayList;
 
@@ -23,7 +22,6 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.E
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_PROJECT_ICON_ADD_PROJECT;
-import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -154,13 +152,13 @@ public class TribeSpaceManagement {
       for (int i = 0; i < groups.size(); i++) {
         ELEMENT_SPACE_INPUT_USER_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
         ELEMENT_SPACE_INPUT_USER_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(groups.get(i));
-        $(byXpath("//*[@class='v-list-item__title text-truncate identitySuggestionMenuItemText' and contains(text(),'${group}')]".replace("${group}", groups.get(i)))).click();
+        $(byXpath("//*[@class='v-list-item__title text-truncate identitySuggestionMenuItemText' and contains(text(),'${group}')]".replace("${group}", groups.get(i)))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         }
     }
     info("Save all changes");
     ELEMENT_CREATE_SPACE_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    $(byXpath("//*[@class='pl-2 align-self-center brandingContainer space']//*[contains(text(),'${spaceName}')]".replace("${spaceName}",name))).waitUntil(Condition.visible,60000);
-  }
+    $(byXpath("//*[@class='pl-2 align-self-center brandingContainer space']//*[contains(text(),'${spaceName}')]".replace("${spaceName}",name))).waitUntil(Condition.visible,60000);  }
+
 
   /**
    * Update Space Description
@@ -499,7 +497,7 @@ public class TribeSpaceManagement {
    * Access to the searched space
    */
   public void accessToSearchedSpace() {
-    ELEMENT_SEARCHED_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_SEARCHED_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -694,6 +692,22 @@ public class TribeSpaceManagement {
     $(ELEMENT_WIKI_TAB).click();
     $(ELEMENT_WIKI_HOME_TITLE).waitUntil(Condition.visible, Configuration.timeout);
     info("Wiki portlet is shown");
+  }
+
+  public void goToWikiTabDW(String space) {
+    info("Open Wiki Tab");
+    $(byXpath("//*[@id='MiddleToolBar']//*[@href='/portal/g/:spaces:{space}/{space}/wiki']".replace("{space}",space)))
+            .waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs)
+            .click();
+    $(ELEMENT_WIKI_HOME_TITLE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    info("Wiki portlet is shown");
+  }
+
+  public void goBackToSettingsTabDW() {
+    info("Open Wiki Tab");
+    $(byXpath("//*[@class='v-toolbar__content']//*[@class='v-btn__content']"))
+            .waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs)
+            .click();
   }
 
   public void goToTaskTab() {

@@ -94,6 +94,36 @@ public class ManageLogInOut {
     }
   }
 
+  public void signInDigitalWorkplace(String username, String password, Boolean... opParams) {
+    Boolean verify = (Boolean) (opParams.length > 0 ? opParams[0] : false);
+      signOutTribe();
+    if (testBase.getSsoType() != "" && testBase.getSsoType() != null) {
+      SSO sso = SSO.valueOf(testBase.getSsoType().toUpperCase());
+      switch (sso) {
+        case OPENAM:
+          info("login by openam with user " + username + " and pass " + password);
+          signInOpenam(username, password);
+          break;
+        case CAS:
+          info("Login by cas with user " + username + " and pass " + password);
+          signInCas(username, password);
+          break;
+      }
+      if (evt.waitForAndGetElement(ELEMENT_REGISTER_SKIP_BUTTON, 3000, 0, 2) != null) {
+        info("-- Skipping register account--");
+        evt.click(ELEMENT_REGISTER_SKIP_BUTTON);
+        evt.waitForElementNotPresent(ELEMENT_REGISTER_SKIP_BUTTON);
+      }
+    } else {
+      info("login normally if not use SSO with user " + username + " and pass " + password);
+      $(ELEMENT_INPUT_USERNAME).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(username);
+      $(ELEMENT_INPUT_PASSWORD).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(password);
+      evt.clickByJavascript(ManageLogInOutLocator.ELEMENT_SIGN_IN_BUTTON, 2);
+      if (verify)
+        evt.waitForElementNotPresent(ManageLogInOutLocator.ELEMENT_SIGN_IN_BUTTON);
+    }
+  }
+
   /**
    * Log in via OpenAM
    *

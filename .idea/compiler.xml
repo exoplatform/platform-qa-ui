@@ -11,6 +11,7 @@
         <module name="platform-qa-ui-chat" />
         <module name="platform-qa-ui-commons" />
         <module name="platform-qa-ui-core" />
+        <module name="platform-qa-ui-digitalWorkplace" />
         <module name="platform-qa-ui-ecms" />
         <module name="platform-qa-ui-exoTribe" />
         <module name="platform-qa-ui-forum" />
@@ -31,6 +32,7 @@
       <module name="platform-qa-ui-chat" target="1.8" />
       <module name="platform-qa-ui-commons" target="1.8" />
       <module name="platform-qa-ui-core" target="1.8" />
+      <module name="platform-qa-ui-digitalWorkplace" target="1.8" />
       <module name="platform-qa-ui-ecms" target="1.8" />
       <module name="platform-qa-ui-exoTribe" target="1.8" />
       <module name="platform-qa-ui-forum" target="1.8" />

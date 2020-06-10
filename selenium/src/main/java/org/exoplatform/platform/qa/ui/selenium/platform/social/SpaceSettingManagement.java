@@ -10,8 +10,8 @@ import org.exoplatform.platform.qa.ui.selenium.platform.PlatformPermission;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.junit.Assert;
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -145,6 +145,15 @@ public class SpaceSettingManagement {
     info("the application is removed");
   }
 
+  public void removeApplicationDW(String app) {
+    info("Click on Remove icon");
+    $(byXpath("//*[@id='Application']//*[@title='${app}']/following::*[@class='v-btn__content'][1]//i".replace("${app}",app)))
+            .waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs)
+            .click();
+    ELEMENT_REMOVE_APPLICATION_DW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    info("the application is removed");
+  }
+
   /**
    * Accept a pending request to a space
    *
@@ -179,6 +188,12 @@ public class SpaceSettingManagement {
     $(ELEMENT_SETTINGS_APP_TAB).click();
     info("The tab is opened succcessfully");
     $(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_BTN).waitUntil(Condition.appears, Configuration.timeout);
+  }
+
+  public void goToApplicationTabDW() {
+    info("Select Application tab");
+    $(ELEMENT_SETTINGS_APP_TAB_DW).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    $(ELEMENT_SETTINGS_APP_TAB_DW).click();
   }
 
   /**
@@ -239,6 +254,20 @@ public class SpaceSettingManagement {
     $(ELEMENT_ADD_APPLICATION_POPUP_TITLE).waitUntil(Condition.disappears, Configuration.timeout);
     info("Check Application added");
       Assert.assertEquals($(byXpath("//div[@class='communityContainer']/strong[text()='${app}']".replace("${app}",application))).getText(),application);
+  }
+
+  public void addApplicationDW(String application) {
+    info("Click on Add application button");
+    sleep(2000);
+    $(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_DW).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//*[@title='${application}']/following::*[@class='v-btn__content']".replace("${application}",application)))
+            .waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs)
+            .click();
+    info("Check Application added");
+    sleep(1000);
+    $(byXpath("//*[@id='Application']//*[@title='${app}']/following::*[@class='v-btn__content'][1]//i".replace("${app}",application)))
+            .waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+
   }
 
   /**

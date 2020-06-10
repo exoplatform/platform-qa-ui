@@ -27,11 +27,14 @@ import org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
+
+import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_MANAGESITES_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_PAGE_CREATION_WIZARD;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
@@ -469,6 +472,21 @@ public class NavigationToolbar {
     ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
+  public void goToAddUsersPageDW() {
+    info("Click on Home page");
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    sleep(1000);
+    ELEMENT_DW_ADMINISTRATION_PAGE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//*[@href='/portal/g/:platform:administrators/administration/newStaff']"))
+            .waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs)
+            .click();  }
+
+  public void goToManageUsersPageDW() {
+
+    open(baseUrl + "portal/g/:platform:administrators/administration/management");
+
+  }
+
   /**
    * Open Notification list
    */
@@ -494,6 +512,17 @@ public class NavigationToolbar {
     $(ELEMENT_INTRANET_NOTIFICATION_BELL).click();
     $(ELEMENT_NOTIFICATION_DROPDOWN).waitUntil(Condition.visible, Configuration.timeout);
     info("The elemnt is shown successfully");
+  }
+
+  public void goToIntranetNotificationDW() {
+    info("Go to Intranet Notification");
+    ELEMENT_NOTIFICATIONS_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_NOTIFICATION_DROPDOWN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    info("The elemnt is shown successfully");
+  }
+
+  public void closeNotificationsDW() {
+    ELEMENT_CLOSE_NOTIFICATIONS_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
