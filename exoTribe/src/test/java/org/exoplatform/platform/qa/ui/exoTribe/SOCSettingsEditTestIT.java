@@ -1,9 +1,9 @@
 package org.exoplatform.platform.qa.ui.exoTribe;
 
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
-import org.exoplatform.platform.qa.ui.exoTribe.pageobject.TribeActivityStream;
-import org.exoplatform.platform.qa.ui.exoTribe.pageobject.TribeChangeSettings;
-import org.exoplatform.platform.qa.ui.exoTribe.pageobject.TribeSpaceManagement;
+import org.exoplatform.platform.qa.ui.digitalWorkplace.pageobject.TribeActivityStream;
+import org.exoplatform.platform.qa.ui.digitalWorkplace.pageobject.TribeChangeSettings;
+import org.exoplatform.platform.qa.ui.digitalWorkplace.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
@@ -240,7 +240,7 @@ public class SOCSettingsEditTestIT extends BaseTribe {
 
     info("Notification On Site is disabled");
     tribeChangeSettings.goToManageNotifications();
-    Assert.assertFalse($(By.xpath("(//*[@class='v-list-item__content pa-0'])[1]")).getText().contains( "Notifications sur le site"));
+    Assert.assertFalse($(By.xpath("(//*[@class='v-list-item__content pa-0'])[1]")).getText().contains("Notifications sur le site"));
 
   }
 
@@ -332,7 +332,7 @@ public class SOCSettingsEditTestIT extends BaseTribe {
 
     info("Select Weekly at Send Me A Summary Email");
     tribeChangeSettings.selectSendMeASummaryEmail(TribeChangeSettings.mailSendingType.WEEKLY);
-      Assert.assertTrue(ELEMENT_TRIBE_GENERAL_NOTIFICATIONS_SELECT_MAIL_SENDING_TYPE.getText().contains("Hebdomadaire"));
+    Assert.assertTrue(ELEMENT_TRIBE_GENERAL_NOTIFICATIONS_SELECT_MAIL_SENDING_TYPE.getText().contains("Hebdomadaire"));
     info("Cancel Select Weekly at Send Me A Summary Email");
     tribeChangeSettings.tribeCancelEditGeneralNotifications();
 

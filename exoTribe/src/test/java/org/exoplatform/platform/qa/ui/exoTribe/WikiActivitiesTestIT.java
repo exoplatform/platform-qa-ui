@@ -1,7 +1,7 @@
 package org.exoplatform.platform.qa.ui.exoTribe;
 
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
-import org.exoplatform.platform.qa.ui.exoTribe.pageobject.*;
+import org.exoplatform.platform.qa.ui.digitalWorkplace.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
@@ -14,11 +14,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selectors.byText;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACES_LIST;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("tribe")

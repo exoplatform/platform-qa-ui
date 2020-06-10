@@ -1,34 +1,19 @@
 package org.exoplatform.platform.qa.ui.exoTribe;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.core.PLFData.*;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
-import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
-
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
-import org.exoplatform.platform.qa.ui.exoTribe.pageobject.TribeActivityStream;
-import org.exoplatform.platform.qa.ui.exoTribe.pageobject.TribeSpaceManagement;
+import org.exoplatform.platform.qa.ui.digitalWorkplace.pageobject.TribeActivityStream;
+import org.exoplatform.platform.qa.ui.digitalWorkplace.pageobject.TribeSpaceManagement;
+import org.exoplatform.platform.qa.ui.selenium.platform.*;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
+import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-
-import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.core.PLFData;
-import org.exoplatform.platform.qa.ui.selenium.platform.*;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
-import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
+import static org.exoplatform.platform.qa.ui.core.PLFData.*;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 /**
  * Created by exo on 11/09/17.

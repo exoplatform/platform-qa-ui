@@ -3,7 +3,7 @@ package org.exoplatform.platform.qa.ui.exoTribe;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
-import org.exoplatform.platform.qa.ui.exoTribe.pageobject.*;
+import org.exoplatform.platform.qa.ui.digitalWorkplace.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;

@@ -1,10 +1,8 @@
 package org.exoplatform.platform.qa.ui.exoTribe;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
-import org.exoplatform.platform.qa.ui.exoTribe.pageobject.TribeActivityStream;
-import org.exoplatform.platform.qa.ui.exoTribe.pageobject.TribeSpaceManagement;
+import org.exoplatform.platform.qa.ui.digitalWorkplace.pageobject.TribeActivityStream;
+import org.exoplatform.platform.qa.ui.digitalWorkplace.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
@@ -13,11 +11,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selectors.byText;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_SPACENAME_TRIBE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 /**
@@ -80,7 +76,7 @@ public class SOCManageSpacesTestIT extends BaseTribe {
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.addNewSpace(spaceNameb, spaceDesb, "Open", "No", null);
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpace(spaceNamec, spaceDesc,"Open", "No", null);
+    tribeSpaceManagement.addNewSpace(spaceNamec, spaceDesc, "Open", "No", null);
 
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.deleteTribeSpace(spaceNamea);

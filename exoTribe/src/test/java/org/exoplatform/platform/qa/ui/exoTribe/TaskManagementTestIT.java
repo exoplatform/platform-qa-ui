@@ -3,15 +3,14 @@ package org.exoplatform.platform.qa.ui.exoTribe;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
-import org.exoplatform.platform.qa.ui.exoTribe.pageobject.TribeActivityStream;
-import org.exoplatform.platform.qa.ui.exoTribe.pageobject.TribeLabelsManagement;
-import org.exoplatform.platform.qa.ui.exoTribe.pageobject.TribeProjectsManagement;
-import org.exoplatform.platform.qa.ui.exoTribe.pageobject.TribeSpaceManagement;
+import org.exoplatform.platform.qa.ui.digitalWorkplace.pageobject.TribeActivityStream;
+import org.exoplatform.platform.qa.ui.digitalWorkplace.pageobject.TribeLabelsManagement;
+import org.exoplatform.platform.qa.ui.digitalWorkplace.pageobject.TribeProjectsManagement;
+import org.exoplatform.platform.qa.ui.digitalWorkplace.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
-
 import org.exoplatform.platform.qa.ui.task.pageobject.TasksManagement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -19,7 +18,8 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -29,11 +29,11 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 @Tag("smoke")
 @Tag("task")
 public class TaskManagementTestIT extends BaseTribe {
-  HomePagePlatform   homePagePlatform;
-  SpaceManagement    spaceManagement;
-  SpaceHomePage      spaceHomePage;
-  TasksManagement    tasksManagement;
-  ManageLogInOut     manageLogInOut;
+  HomePagePlatform homePagePlatform;
+  SpaceManagement spaceManagement;
+  SpaceHomePage spaceHomePage;
+  TasksManagement tasksManagement;
+  ManageLogInOut manageLogInOut;
   TribeLabelsManagement tribeLabelsManagement;
   TribeProjectsManagement tribeProjectsManagement;
   TribeActivityStream tribeActivityStream;
@@ -137,7 +137,7 @@ public class TaskManagementTestIT extends BaseTribe {
 
     tribeProjectsManagement.addProject(title, "", false);
     executeJavaScript("window.scrollBy(0,-20000)");
-    $(byText(title)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byText(title)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TITLE_OF_PROJECT.waitUntil(Condition.hasText(title), Configuration.timeout);
 
     executeJavaScript("window.scrollBy(0,-20000)");
@@ -149,6 +149,7 @@ public class TaskManagementTestIT extends BaseTribe {
     tribeProjectsManagement.deleteProject(title);
 
   }
+
   @Test
   public void test05_Edit_TaskInProject() {
 
@@ -161,19 +162,19 @@ public class TaskManagementTestIT extends BaseTribe {
     tribeProjectsManagement.addProject(title, "", false);
     executeJavaScript("window.scrollBy(0,-20000)");
     $(byText(title)).click();
-    ELEMENT_TITLE_OF_PROJECT.waitUntil(Condition.hasText(title),Configuration.timeout);
+    ELEMENT_TITLE_OF_PROJECT.waitUntil(Condition.hasText(title), Configuration.timeout);
 
     executeJavaScript("window.scrollBy(0,-20000)");
     tasksManagement.addTask(task);
 
     info("edit task");
     tasksManagement.editTask(task, newTask, "Haute");
-    $(byText(task)).waitUntil(Condition.not(Condition.exist),Configuration.openBrowserTimeoutMs);
-    $(byText(newTask)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
+    $(byText(task)).waitUntil(Condition.not(Condition.exist), Configuration.openBrowserTimeoutMs);
+    $(byText(newTask)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
 
     info("delete task");
     tasksManagement.deleteTask(newTask);
-    $(byText(newTask)).waitUntil(Condition.not(Condition.exist),Configuration.openBrowserTimeoutMs);
+    $(byText(newTask)).waitUntil(Condition.not(Condition.exist), Configuration.openBrowserTimeoutMs);
     tribeProjectsManagement.deleteProject(title);
 
   }
@@ -189,7 +190,7 @@ public class TaskManagementTestIT extends BaseTribe {
 
     tribeLabelsManagement.addLabel(label);
     $(byText(label)).click();
-    ELEMENT_TITLE_OF_PROJECT.waitUntil(Condition.hasText(label),Configuration.timeout);
+    ELEMENT_TITLE_OF_PROJECT.waitUntil(Condition.hasText(label), Configuration.timeout);
 
     tasksManagement.addTask(task);
     ELEMENT_TASKS_LIST.find(byText(task)).parent().find(byText(label)).should(Condition.exist);
@@ -227,8 +228,8 @@ public class TaskManagementTestIT extends BaseTribe {
 
     tasksManagement.addTask(taskName);
 
-    ELEMENT_INPUT_COMMENT_TASK.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_ICON_ADD_IMAGE_IN_COMMENT.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_INPUT_COMMENT_TASK.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_ICON_ADD_IMAGE_IN_COMMENT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
 
     $(byClassName("file")).uploadFromClasspath("eXo-Platform.png");

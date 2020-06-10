@@ -3,7 +3,7 @@ package org.exoplatform.platform.qa.ui.exoTribe;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
-import org.exoplatform.platform.qa.ui.exoTribe.pageobject.TribeActivityStream;
+import org.exoplatform.platform.qa.ui.digitalWorkplace.pageobject.TribeActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
@@ -13,13 +13,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_WHO_LIKED_POPUP;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_TRIBE_POST_ACTIVITY_BTN;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -75,7 +73,7 @@ public class SOCHomePageTestIT extends BaseTribe {
 
     info("Test 1: Like Activity");
     homePagePlatform.goToStreamPageTribe();
-    ELEMENT_TRIBE_POST_ACTIVITY_BTN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_POST_ACTIVITY_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");
 
     tribeActivityStream.likeActivity(activity1);
@@ -101,10 +99,10 @@ public class SOCHomePageTestIT extends BaseTribe {
     String activity1 = "activity1" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
     homePagePlatform.goToStreamPageTribe();
-    ELEMENT_TRIBE_POST_ACTIVITY_BTN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_POST_ACTIVITY_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");
 
-    tribeActivityStream.addActivityComment(activity1,comment);
+    tribeActivityStream.addActivityComment(activity1, comment);
 
     info("Delete comment");
     activityStream.deletecomment(activity1, comment);
