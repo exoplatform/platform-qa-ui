@@ -1,37 +1,40 @@
 package org.exoplatform.platform.qa.ui.forum.smoke;
 
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumCategoryManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumForumManagement;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumHomePage;
 import org.exoplatform.platform.qa.ui.forum.pageobject.ForumTopicManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 @Tag("smoke")
 @Tag("forum")
 public class ForumTopicTestIT extends Base {
 
-  HomePagePlatform        homePagePlatform;
+  HomePagePlatform homePagePlatform;
 
   ForumCategoryManagement forumCategoryManagement;
 
-  ForumHomePage           forumHomePage;
+  ForumHomePage forumHomePage;
 
-  ForumForumManagement    forumForumManagement;
+  ForumForumManagement forumForumManagement;
 
-  ForumTopicManagement    forumTopicManagement;
+  ForumTopicManagement forumTopicManagement;
+
+  ManageLogInOut manageLogInOut;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -42,8 +45,12 @@ public class ForumTopicTestIT extends Base {
     forumCategoryManagement = new ForumCategoryManagement(this);
     forumForumManagement = new ForumForumManagement(this);
     forumTopicManagement = new ForumTopicManagement(this);
-
-  }
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+}
 
   /**
    * <li>Case ID:116764.</li>
@@ -56,7 +63,7 @@ public class ForumTopicTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
-  public void test09_CreateNewTopic() {
+  public void test01_CreateNewTopic() {
     info("Test 9: Create new Topic");
     String name = "name" + getRandomNumber();
     String name2 = "name2" + getRandomNumber();
@@ -91,43 +98,7 @@ public class ForumTopicTestIT extends Base {
     info("Delete data");
     forumHomePage.goToHomeCategory();
     forumCategoryManagement.deleteCategory(name);
+
   }
 
-  @Test
-  public void test09_DeleteNewTopic() {
-    info("Test 9: Create new Topic");
-    String name = "name" + getRandomNumber();
-    String name2 = "name2" + getRandomNumber();
-    String desc = "desc" + getRandomNumber();
-    String topic = "topic" + getRandomNumber();
-    /*
-     * Step Number: 1 Step Name: - Create new category Step Description: - Login and
-     * goto Forum application - Click [Add Category] - Fill the information and
-     * click [Save] Input Data: Expected Outcome: - New category is created - No
-     * activity is added in activity stream
-     */
-    homePagePlatform.goToForum();
-    info("Add a category");
-    forumCategoryManagement.addCategorySimple(name, "", desc);
-    /*
-     * Step number: 2 Step Name: - Create new Forum Step Description: - Click [Add
-     * Forum] - Fill the information and click [Save] Input Data: Expected Outcome:
-     * - New forum is created - No activity is added in activity stream
-     */
-    info("Add a forum in the category");
-    forumForumManagement.addForumSimple(name2, "", desc);
-    /*
-     * Step number: 3 Step Name: - Create new Topic Step Description: - Click [start
-     * Topic] - input the information and click [Save] Input Data: Expected Outcome:
-     * - New Topic is created
-     */
-    info("Add and go to a topic in the forums");
-    forumForumManagement.goToStartTopic();
-    forumTopicManagement.startTopic(topic, topic, "", "");
-    forumHomePage.goToTopic(topic);
-    $(byText(name2)).waitUntil(Condition.appears, Configuration.timeout);
-    info("Delete data");
-    forumHomePage.goToHomeCategory();
-    forumCategoryManagement.deleteCategory(name);
-  }
 }

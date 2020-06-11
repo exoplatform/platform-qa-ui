@@ -1,38 +1,38 @@
 package org.exoplatform.platform.qa.ui.social.smoke;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
+import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-
-import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
-import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
-import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
-import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
-import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 @Tag("smoke")
 @Tag("social")
 public class SOCSpaceManagementTestIT extends Base {
   NavigationToolbar navigationToolbar;
 
-  AddUsers          addUsers;
+  AddUsers addUsers;
 
-  ManageLogInOut    manageLogInOut;
+  ManageLogInOut manageLogInOut;
 
-  HomePagePlatform  homePagePlatform;
+  HomePagePlatform homePagePlatform;
 
-  SpaceManagement   spaceManagement;
+  SpaceManagement spaceManagement;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -40,8 +40,12 @@ public class SOCSpaceManagementTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     homePagePlatform = new HomePagePlatform(this);
     addUsers = new AddUsers(this);
-    manageLogInOut = new ManageLogInOut(this);
     spaceManagement = new SpaceManagement(this);
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
   }
 
   /**
@@ -51,8 +55,8 @@ public class SOCSpaceManagementTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
-  public void test04_CreateNewSpace() {
-    info("Test 04: Create a new Space");
+  public void test01_Create_Delete_NewSpace() {
+    info("Test 01: Create a new Space");
     String space = "space" + getRandomNumber();
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@gmail.com";
@@ -95,52 +99,5 @@ public class SOCSpaceManagementTestIT extends Base {
     addUsers.deleteUser(username2);
   }
 
-  /**
-   * <li>Case ID:121912.</li>
-   * <li>Test Case Name: Delete a space.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
-   */
-  @Test
-  public void test06_DeleteASpace() {
-    info("Test 06:Delete a space");
-    String space = "space" + getRandomNumber();
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@gmail.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@gmail.com";
-    String password = "123456";
-
-    info("Add user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-    manageLogInOut.signIn(username1, password);
-    /*
-     * Step Number: 1 Step Name: Step 1: Delete a space Step Description: - Login
-     * Intranet - Click on My space on Admin bar - Add new space - Go to My Space
-     * page, select the space - Click on Delete Space icon - Click on OK button to
-     * confirm Input Data: Expected Outcome: - Space is removed. It doesn't display
-     * on My space list of user and all spaces list of other user.
-     */
-    info("Create a space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.addNewSpaceSimple(space, space);
-
-    info("Delete a Space");
-    homePagePlatform.goToMySpaces();
-    spaceManagement.searchSpace(space, "");
-    spaceManagement.deleteSpace(space, false);
-
-    manageLogInOut.signIn(username2, password);
-    homePagePlatform.goToAllSpace();
-    spaceManagement.searchSpace(space, "");
-    $(byClassName("boxSpaceList")).find(byText(space)).shouldNot(Condition.exist);
-    manageLogInOut.signIn("root", "gtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-
-  }
 
 }

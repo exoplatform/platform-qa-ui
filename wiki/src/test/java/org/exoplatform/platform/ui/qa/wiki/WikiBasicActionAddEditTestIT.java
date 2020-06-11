@@ -1,43 +1,43 @@
 package org.exoplatform.platform.ui.qa.wiki;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.back;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_BUTTON_WIKI_RITCH_TEXT;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_CONTENT_WIKI_INPUT;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import java.util.ArrayList;
-
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import org.exoplatform.platform.qa.ui.wiki.pageobject.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import com.codeborne.selenide.Condition;
+import java.util.ArrayList;
 
-import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
-import org.exoplatform.platform.qa.ui.wiki.pageobject.RichTextEditor;
-import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
-import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
-import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
+import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 @Tag("wiki")
 @Tag("smoke")
-public class WikiBasicActionAddRichTextTestIT extends Base {
+public class WikiBasicActionAddEditTestIT extends Base {
 
-  HomePagePlatform  homePagePlatform;
+  HomePagePlatform homePagePlatform;
 
-  WikiHomePage      wikiHomePage;
+  WikiHomePage wikiHomePage;
 
-  RichTextEditor    richTextEditor;
+  RichTextEditor richTextEditor;
 
-  WikiValidattions  wikiValidattions;
+  SourceTextEditor sourceTextEditor;
 
-  WikiManagement    wikiManagement;
+  WikiValidattions wikiValidattions;
+
+  WikiManagement wikiManagement;
 
   ArrayList<String> arrayPage;
+
+  ManageLogInOut manageLogInOut;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -52,9 +52,18 @@ public class WikiBasicActionAddRichTextTestIT extends Base {
     } catch (Exception e) {
       e.printStackTrace();
     }
+    try {
+      sourceTextEditor = new SourceTextEditor(this);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
     arrayPage = new ArrayList<String>();
-
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signIn(PLFData.username, PLFData.password);
   }
 
   /**
@@ -65,7 +74,7 @@ public class WikiBasicActionAddRichTextTestIT extends Base {
    */
   @Test
   public void test01_AddAPageWithLinkWikiPageExisted() {
-    info("Test 1: Add a page with link wiki page existed");
+    info("Add a page with link wiki page existed");
     /*
      * Step Number: 1 Step Name: Step 1: Add a page with link wiki page Step
      * Description: - Go to [Intranet] - -> [Wiki] - Click [Add Page] - -> [Blank
@@ -82,12 +91,39 @@ public class WikiBasicActionAddRichTextTestIT extends Base {
     info("Create a wiki page 1");
     String title1 = "title" + getRandomNumber();
     String content1 = "content" + getRandomNumber();
+    String title3 = "title" + getRandomNumber();
+    String content3 = "content" + getRandomNumber();
     homePagePlatform.goToWiki();
     wikiHomePage.goToAddBlankPage();
     richTextEditor.addSimplePage(title1, content1);
     wikiManagement.saveAddPage();
     wikiValidattions.verifyTitleWikiPage(title1);
     arrayPage.add(title1);
+
+    homePagePlatform.goToWiki();
+    wikiHomePage.goToAddBlankPage();
+    $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.appears, Configuration.timeout);
+    if ($(ELEMENT_SOURCE_EDITOR_BUTTON).isDisplayed()) {
+      wikiManagement.goToSourceEditor();
+    }
+    sourceTextEditor.addSimplePage(title3, content3);
+    wikiManagement.saveAddPage();
+    wikiValidattions.verifyTitleWikiPage(title3);
+    arrayPage.add(title3);
+
+    info("Edit a wiki page");
+    String newTitle = "newTitle" + getRandomNumber();
+    String newContent = "newContent" + getRandomNumber();
+    wikiHomePage.goToAPage(title3);
+    wikiHomePage.goToEditPage();
+    if ($(ELEMENT_SOURCE_EDITOR_BUTTON).isDisplayed()) {
+      wikiManagement.goToSourceEditor();
+    }
+    sourceTextEditor.editSimplePage(newTitle, newContent);
+    wikiManagement.saveAddPage();
+    sleep(2000);
+    wikiValidattions.verifyTitleWikiPage(newTitle);
+    arrayPage.add(newTitle);
 
     info("Create a wiki page 2");
     String title2 = "title2" + getRandomNumber();
@@ -102,7 +138,9 @@ public class WikiBasicActionAddRichTextTestIT extends Base {
 
     richTextEditor.addSimplePage(title2, content2);
     richTextEditor.goToWikiPageLink();
+    sleep(2000);
     richTextEditor.insertExistWikiPageLink(title1, label, tooltip, RichTextEditor.wikiPageLinkTab.All_pages);
+    sleep(2000);
     wikiManagement.saveAddPage();
     wikiValidattions.verifyTitleWikiPage(title2);
     arrayPage.add(title2);
@@ -116,6 +154,7 @@ public class WikiBasicActionAddRichTextTestIT extends Base {
     wikiHomePage.goToAPage(title2);
     wikiValidattions.verifyInsertedExistLink(label, title1);
     wikiHomePage.deleteWiki(title1);
+    wikiHomePage.deleteWiki(newTitle);
     wikiHomePage.deleteWiki(title2);
 
   }
@@ -127,7 +166,7 @@ public class WikiBasicActionAddRichTextTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
-  public void test04_AddWebPage() {
+  public void test02_AddWebPage() {
     info("Test 4: Add web page");
     /*
      * Step Number: 1 Step Name: Step 1: Add web page Step Description: - Go to

@@ -1,47 +1,44 @@
 package org.exoplatform.platform.qa.ui.social.smoke;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_DROPDOWN;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMPOSER_SHARE_BUTTON;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_DELETE_ACTIVITY_LINK;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_ALL_CONNECTIONS_TAB;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
+import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.selenium.platform.*;
+import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
+import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
-
-import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
-import org.exoplatform.platform.qa.ui.selenium.platform.*;
-import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
-import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_ALL_CONNECTIONS_TAB;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("smoke")
 @Tag("social")
 public class SOCPeopleActivityAddTestIT extends Base {
-  NavigationToolbar     navigationToolbar;
+  NavigationToolbar navigationToolbar;
 
-  AddUsers              addUsers;
+  AddUsers addUsers;
 
-  ManageLogInOut        manageLogInOut;
+  ManageLogInOut manageLogInOut;
 
-  HomePagePlatform      homePagePlatform;
+  HomePagePlatform homePagePlatform;
 
   ConnectionsManagement connectionsManagement;
 
-  ActivityStream        activityStream;
+  ActivityStream activityStream;
 
-  UserPageBase          userPageBase;
+  UserPageBase userPageBase;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -49,10 +46,14 @@ public class SOCPeopleActivityAddTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     homePagePlatform = new HomePagePlatform(this);
     addUsers = new AddUsers(this);
-    manageLogInOut = new ManageLogInOut(this);
-    connectionsManagement = new ConnectionsManagement(this);
     activityStream = new ActivityStream(this);
     userPageBase = new UserPageBase(this);
+    connectionsManagement = new ConnectionsManagement(this);
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
   }
 
   /**
@@ -62,13 +63,39 @@ public class SOCPeopleActivityAddTestIT extends Base {
    * <li>Post-Condition:</li>
    */
   @Test
-  public void test03_AddNewYourActivity() {
+  public void test01_AddLinkWithoutText_AndYourNewActivity() {
+
     /* Create data test */
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@gmail.com";
     String username2 = "usernameb" + getRandomString();
     String email2 = username2 + "@gmail.com";
     String password = "123456";
+
+    info("Add link without text");
+    String link = "http://www.google.fr";
+    ELEMENT_TAB_ADD_LINK.click();
+    ELEMENT_INPUT_LINK.setValue(link);
+    ELEMENT_BUTTON_ATTACH_LINK.click();
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.be(Condition.enabled), Configuration.timeout);
+    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+    $(byText(link)).should(Condition.exist);
+    $(byText(link)).click();
+    switchTo().window(1);
+    String title = "Google";
+    sleep(2000);
+    assertEquals(title, Selenide.title());
+    switchTo().window(0);
+    String id = $(byText(link)).parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent().getAttribute("id").split("ActivityContextBox")[1];
+    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", id))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", id))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byText(link)).parent().parent().parent().parent().parent().waitUntil(Condition.disappear, Configuration.openBrowserTimeoutMs);
+
     info("Add new user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
@@ -89,7 +116,7 @@ public class SOCPeopleActivityAddTestIT extends Base {
     refresh();
     connectionsManagement.verifyConnection(username1, true);
 
-    info("Test 3: Add new your activity");
+    info("Test 3: Add your new activity");
     /*
      * Step Number: 1 Step Name: - Step Description: Step 1: Go to my profile page
      * Input Data: - Sign in system - Select Activities page on User Toolbar portlet
@@ -124,29 +151,5 @@ public class SOCPeopleActivityAddTestIT extends Base {
     addUsers.deleteUser(username2);
 
   }
-  @Test
-  public void test03_add_link_without_text() {
-    String link = "http://www.google.fr";
-    ELEMENT_TAB_ADD_LINK.click();
-    ELEMENT_INPUT_LINK.setValue(link);
-    ELEMENT_BUTTON_ATTACH_LINK.click();
-    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.be(Condition.enabled), Configuration.timeout);
-    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
-    $(byText(link)).should(Condition.exist);
-    $(byText(link)).click();
-    switchTo().window(1);
-    String title = "Google";
-    assertEquals(title, Selenide.title());
-    switchTo().window(0);
-    String id=$(byText(link)).parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent().getAttribute("id").split("ActivityContextBox")[1];
-    $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", id))).click();
-    $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", id))).click();
-    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byText(link)).parent().parent().parent().parent().parent().waitUntil(Condition.disappear, Configuration.timeout);
 
-  }
 }

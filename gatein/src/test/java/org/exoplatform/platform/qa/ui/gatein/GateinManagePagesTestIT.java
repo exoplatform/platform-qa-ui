@@ -1,22 +1,23 @@
 package org.exoplatform.platform.qa.ui.gatein;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-
 import com.codeborne.selenide.Condition;
-
 import org.exoplatform.platform.qa.ui.commons.Base;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.MyDashBoard;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.PageCreationWizard;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.PortalManagePages;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
+import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
 
 /**
  * @author eXo
@@ -25,15 +26,17 @@ import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 @Tag("smoke")
 public class GateinManagePagesTestIT extends Base {
 
-  NavigationToolbar  navigationToolbar;
+  NavigationToolbar navigationToolbar;
 
-  HomePagePlatform   homePagePlatform;
+  HomePagePlatform homePagePlatform;
 
-  PortalManagePages  portalmanagepages;
+  PortalManagePages portalmanagepages;
 
   PageCreationWizard pagecreationwizard;
 
-  MyDashBoard        myDashoard;
+  MyDashBoard myDashoard;
+
+  ManageLogInOut manageLogInOut;
 
   @BeforeEach
   public void setupBeforeMethod() {
@@ -44,28 +47,11 @@ public class GateinManagePagesTestIT extends Base {
     portalmanagepages = new PortalManagePages(this);
     pagecreationwizard = new PageCreationWizard(this);
     myDashoard = new MyDashBoard(this);
-  }
-
-  /**
-   * <li>Case ID:123032.</li>
-   * <li>Test Case Name: Add page of portal using Page Management.</li>
-   */
-  @Test
-  public void test02_AddPageOfPortalUsingPageManagement() {
-    info("Test 02:Add page of portal using Page Management");
-    String num = getRandomNumber();
-    String pageName = "pageName" + num;
-    String title = "title" + num;
-    /*
-     * Step Number: 1 Step Name: Step 1: Add page of portal Step Description: - Go
-     * to Administration/Portal/Pages - Click Add new page - Choose Owner type is
-     * portal - Add some fields required - Click Save Input Data: Expected Outcome:
-     * - Add page successfully
-     */
-    navigationToolbar.goToPotalPages();
-    portalmanagepages.addPage(pageName, title, "");
-    info("Verify that the page is added successfully");
-    portalmanagepages.searchPage(title, "", "", true);
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
   }
 
   /**
@@ -74,7 +60,7 @@ public class GateinManagePagesTestIT extends Base {
    */
 
   @Test
-  public void test10_EditPageOfPortal() {
+  public void test01_AddEditDelete_PageOfPortal() {
     info("Test 10: Edit page of portal");
     String num = getRandomNumber();
     String pageName = "pageName" + num;
@@ -94,36 +80,16 @@ public class GateinManagePagesTestIT extends Base {
     portalmanagepages.addPage(pageName, title, "");
     portalmanagepages.editPage(title, "");
     pagecreationwizard.addApp("",
-                              "Application Registry",
-                              $(byId("Administration/portlet_ApplicationRegistryPortlet")),
-                              $(byClassName("VIEW-PAGE")));
+            "Application Registry",
+            $(byId("Administration/ApplicationRegistryPortlet")),
+            $(byClassName("VIEW-PAGE")));
     info("Verify that all changes of page is saved");
     portalmanagepages.editPage(title, "");
     $(byText("Application Registry")).should(Condition.exist);
     pagecreationwizard.saveChangesPageEditor();
     portalmanagepages.deletePage(title, "");
-  }
-
-  /**
-   * <li>Case ID:123102.</li>
-   * <li>Test Case Name: Delete page of portal.</li>
-   */
-  @Test
-  public void test03_DeletePageOfPortal() {
-    info("Test 03: Delete page of portal");
-    String num = getRandomNumber();
-    String pageName = "pageName" + num;
-    String title = "title" + num;
-    /*
-     * Step Number: 1 Step Name: Step 1: Delete page of portal Step Description: -
-     * Go to Group/Administration/Page Management - Select a page of portal and
-     * click [Delete page] Input Data: Expected Outcome: - The page is removed from
-     * the list
-     */
-    navigationToolbar.goToPotalPages();
-    portalmanagepages.addPage(pageName, title, "");
-    portalmanagepages.deletePage(title, "");
 
   }
+
 
 }

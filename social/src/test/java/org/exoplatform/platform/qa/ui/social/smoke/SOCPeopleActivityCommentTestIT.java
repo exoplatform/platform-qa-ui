@@ -1,49 +1,44 @@
 package org.exoplatform.platform.qa.ui.social.smoke;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.refresh;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_TOOLBAR_ADMINISTRATION;
-import static org.junit.Assert.assertEquals;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_COMMENT_BLOC;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_POPUP_OK;
-import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_ADD_TOOTLBAR;
-import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.commons.Base;
 import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.selenium.platform.*;
+import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
+import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-
-import org.exoplatform.platform.qa.ui.commons.Base;
-import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
-import org.exoplatform.platform.qa.ui.selenium.platform.*;
-import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
-import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_COMMENT_BLOC;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_POPUP_OK;
+import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.ELEMENT_ADD_TOOTLBAR;
+import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_SKIP_BUTTON;
+import static org.junit.Assert.assertEquals;
 
 @Tag("smoke")
 @Tag("social")
 public class SOCPeopleActivityCommentTestIT extends Base {
-  NavigationToolbar     navigationToolbar;
+  NavigationToolbar navigationToolbar;
 
-  AddUsers              addUsers;
+  AddUsers addUsers;
 
-  ManageLogInOut        manageLogInOut;
+  ManageLogInOut manageLogInOut;
 
-  HomePagePlatform      homePagePlatform;
+  HomePagePlatform homePagePlatform;
 
   ConnectionsManagement connectionsManagement;
 
-  ActivityStream        activityStream;
+  ActivityStream activityStream;
 
-  UserPageBase          userPageBase;
+  UserPageBase userPageBase;
 
 
   @BeforeEach
@@ -52,10 +47,14 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     navigationToolbar = new NavigationToolbar(this);
     homePagePlatform = new HomePagePlatform(this);
     addUsers = new AddUsers(this);
-    manageLogInOut = new ManageLogInOut(this);
     connectionsManagement = new ConnectionsManagement(this);
     activityStream = new ActivityStream(this);
     userPageBase = new UserPageBase(this);
+    manageLogInOut = new ManageLogInOut(this);
+    if ($(ELEMENT_SKIP_BUTTON).is(Condition.exist)) {
+      $(ELEMENT_SKIP_BUTTON).click();
+    }
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
   }
 
   /**
@@ -66,7 +65,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
    */
   @Test
   public void test01_CommentOnYourActivity() {
-    info("Test 1: Comment on your activity");
+    info("Comment on your activity");
     /*
      * Step Number: 1 Step Name: - Step Description: Step 1: Add new activities
      * Input Data: - Sign in system - Select Activities page on User Toolbar portlet
@@ -85,6 +84,8 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     manageLogInOut.signIn(username1, password);
 
     String activity1 = "activity1" + getRandomNumber();
+    String activity2 = "activity2" + getRandomNumber();
+
     activityStream.addActivity(activity1, "");
 
     /*
@@ -114,6 +115,41 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter();
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
+
+    info("Delete Comment");
+    $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    /*
+     * Step number: 3 Step Name: - Step Description: Step 3: Delete comment Input
+     * Data: - Select an comment - Click on Delete - Click OK to confirm deleting
+     * Expected Outcome: This comment is deleted.
+     */
+    // scroll up
+    executeJavaScript("window.scrollBy(0,-250);", "");
+    // the id of the comment is id of the activity+1
+    Integer idComment = Integer.parseInt(id) + 1;
+    // hover on the comment to appear the delete button
+    $(byId(ELEMENT_COMMENT_BLOC.replace("{id}", id))).hover().click();
+    $(byId("dropDownEditCommentcomment" + idComment.toString())).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(byId("DeleteCommentButtoncomment" + idComment.toString())).waitUntil(Condition.visible, Configuration.timeout).click();
+    // Confirm
+    ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    // verify that the comment is deleted
+    $(byText(comment)).shouldNot(Condition.exist);
+
+    info("Delete activity by the user");
+    manageLogInOut.signIn(username1, password);
+    navigationToolbar.goToMyActivities();
+    activityStream.addActivity(activity2, "");
+
+    /*
+     * Step number: 2 Step Name: - Step Description: Step 2: Delete activity Input
+     * Data: - Select an activity - Click on Delete - Click OK to confirm deleting
+     * Expected Outcome: The activity is deleted. All comments of activity are
+     * deleted too.
+     */
+    activityStream.deleteactivity(activity2);
+    info("the activity is removed successfully");
+
     manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -205,6 +241,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
 
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter().waitUntil(Condition.disappears, Configuration.timeout);
     $(byText(comment)).should(Condition.exist);
+
     manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
@@ -212,83 +249,8 @@ public class SOCPeopleActivityCommentTestIT extends Base {
 
   }
 
-  /**
-   * <li>Case ID:122787.</li>
-   * <li>Test Case Name: Delete comment.</li>
-   * <li>Pre-Condition:</li>
-   * <li>Post-Condition:</li>
-   */
   @Test
-  public void test03_DeleteComment() {
-    info("Test 3: Delete comment");
-    /*
-     * Step Number: 1 Step Name: - Step Description: Step 1: Add new activities
-     * Input Data: - Sign in system - Select Activities page on User Toolbar portlet
-     * in the upper right corner of the screen - Select activity in the left pane -
-     * Enter some text into text box - Click on [Share] button Expected Outcome: Add
-     * an activity successfully: - This activity is added into users activities
-     * list.User who is in your contact, can view your active on his/her activity
-     * list
-     */
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@gmail.com";
-    String password = "123456";
-    info("Add new user");
-    navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    manageLogInOut.signIn(username1, password);
-
-    String activity1 = "activity1" + getRandomNumber();
-    activityStream.addActivity(activity1, "");
-
-    /*
-     * Step number: 2 Step Name: - Step Description: Step 2: Add a comment Input
-     * Data: - Click on comment link under the activity - Enter some text into text
-     * box comment - Click on Comment button - Add more comments Expected Outcome:
-     * Add an activity successfully: - This activity is added into users activities
-     * list.User who is in your contact, can view your active on his/her activity
-     * list
-     */
-    String comment = "comment" + getRandomNumber();
-    // get the id of webContent created
-    String id = $(byClassName("heading")).parent().getAttribute("id").split("ActivityContextBox")[1];
-    // click on comment icon
-    $(byXpath("//*[@id=\"CommentLink" + id + "\"]")).click();
-    // insert comment
-    $(byId("cke_CommentTextarea" + id)).waitUntil(Condition.appears, Configuration.timeout).click();
-    executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
-    // click on the button comment
-
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).pressEnter();
-
-    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.disappears, Configuration.timeout);
-    $(byText(comment)).should(Condition.exist);
-    $(ELEMENT_ADD_TOOTLBAR).click();
-    /*
-     * Step number: 3 Step Name: - Step Description: Step 3: Delete comment Input
-     * Data: - Select an comment - Click on Delete - Click OK to confirm deleting
-     * Expected Outcome: This comment is deleted.
-     */
-    // scroll up
-    executeJavaScript("window.scrollBy(0,-250);", "");
-    // the id of the comment is id of the activity+1
-    Integer idComment = Integer.parseInt(id) + 1;
-    // hover on the comment to appear the delete button
-    $(byId(ELEMENT_COMMENT_BLOC.replace("{id}", id))).hover().click();
-    $(byId("dropDownEditCommentcomment" + idComment.toString())).waitUntil(Condition.visible,Configuration.timeout).click();
-    $(byId("DeleteCommentButtoncomment" + idComment.toString())).waitUntil(Condition.visible,Configuration.timeout).click();
-    // Confirm
-    ELEMENT_DELETE_POPUP_OK.click();
-    // verify that the comment is deleted
-    $(byText(comment)).shouldNot(Condition.exist);
-    manageLogInOut.signIn("root", "gtn");
-    navigationToolbar.goToManageCommunity();
-    addUsers.deleteUser(username1);
-  }
-
-
-  @Test
-  public void test04_LikeComment() {
+  public void test03_LikeComment() {
     info("Test 4: Like comment");
 
     String username1 = "usernamea" + getRandomString();
@@ -318,16 +280,16 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     homePagePlatform.goToConnections();
     connectionsManagement.acceptAConnection(username1);
     homePagePlatform.goToHomePage();
-    activityStream.commentActivity(activity1,comment);
-    String idBlocComment=$(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
-    manageLogInOut.signIn(username2,password);
-    activityStream.likeUnlikeComment(activity1,comment);
-    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().shouldHave(Condition.text("(1)"));
+    activityStream.commentActivity(activity1, comment);
+    String idBlocComment = $(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
+    manageLogInOut.signIn(username2, password);
+    activityStream.likeUnlikeComment(activity1, comment);
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().shouldHave(Condition.text("(1)"));
     //rgba(47, 94, 146, 1) is the css value of blue
-    assertEquals("rgba(87, 141, 201, 1)",$(byId("LikeCommentLinkcomment"+idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
-    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).hover();
+    assertEquals("rgba(87, 141, 201, 1)", $(byId("LikeCommentLinkcomment" + idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).hover();
     ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Unlike"));
-    manageLogInOut.signIn("root","gtn");
+    manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
@@ -335,9 +297,8 @@ public class SOCPeopleActivityCommentTestIT extends Base {
 
   }
 
-
   @Test
-  public void test05_UnlikeComment() {
+  public void test04_UnlikeComment() {
     info("Test 5: Like comment");
 
     String username1 = "usernamea" + getRandomString();
@@ -367,25 +328,25 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     connectionsManagement.acceptAConnection(username1);
     homePagePlatform.goToHomePage();
     String comment = "comment" + getRandomNumber();
-    activityStream.commentActivity(activity1,comment);
-    manageLogInOut.signIn(username2,password);
-    String idBlocComment=$(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
-    activityStream.likeUnlikeComment(activity1,comment);
-    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().shouldHave(Condition.text("(1)"));
-    assertEquals("rgba(87, 141, 201, 1)",$(byId("LikeCommentLinkcomment"+idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
-    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).hover();
+    activityStream.commentActivity(activity1, comment);
+    manageLogInOut.signIn(username2, password);
+    String idBlocComment = $(byText(activity1)).parent().parent().parent().find(byText(comment)).parent().parent().parent().parent().getAttribute("id").split("commentContainercomment")[1];
+    activityStream.likeUnlikeComment(activity1, comment);
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().shouldHave(Condition.text("(1)"));
+    assertEquals("rgba(87, 141, 201, 1)", $(byId("LikeCommentLinkcomment" + idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).hover();
     ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Unlike"));
-    activityStream.likeUnlikeComment(activity1,comment);
+    activityStream.likeUnlikeComment(activity1, comment);
     refresh();
-    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).parent().shouldHave(Condition.text(""));
-    assertEquals("rgba(87, 141, 201, 1)",$(byId("LikeCommentLinkcomment"+idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
-    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}",idBlocComment))).hover();
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).parent().shouldHave(Condition.text(""));
+    assertEquals("rgba(87, 141, 201, 1)", $(byId("LikeCommentLinkcomment" + idBlocComment)).find(byClassName("uiIconThumbUp")).getCssValue("color"));
+    $(byId(ELEMENT_INCON_LIKE_COMMENT.replace("{id}", idBlocComment))).hover();
     ELEMENT_TOLLTIP_WHO_LIKE_COMMENT.shouldHave(Condition.text("Like"));
-    manageLogInOut.signIn("root","gtn");
+    manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToManageCommunity();
     addUsers.deleteUser(username1);
     addUsers.deleteUser(username2);
-    
+
   }
 
- }
+}

@@ -142,10 +142,10 @@ public class EventManagement {
   public void inputBasicQuickEvent(String name, String note, String... opt) {
     info("Input into basic fields of Quick EVENT form");
     if (name != null) {
-      $(ELEMENT_EVENT_TITLE_DRAWER).setValue(name);
+      $(ELEMENT_EVENT_TITLE_DRAWER).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(name);
     }
     if (note != null) {
-      $(ELEMENT_ADD_EDIT_EVENT_NOTE).setValue(note);
+      $(ELEMENT_ADD_EDIT_EVENT_NOTE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(note);
     }
     if (opt.length > 0 && opt[0] != null) {
       $(byXpath("//*[@class='control-label']/following::*[@class='dropdown']")).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
@@ -176,7 +176,7 @@ public class EventManagement {
     }
 
     if (opt.length > 1 && opt[1] != null) {
-      $(ELEMENT_ADD_EDIT_EVENT_CATEGORY).selectOption(opt[1]);
+      $(ELEMENT_ADD_EDIT_EVENT_CATEGORY).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(opt[1]);
     }
     if (opt.length > 2 && opt[2] != null) {
       $(ELEMENT_ADD_EDIT_EVENT_LOCATION).setValue(opt[2]);
