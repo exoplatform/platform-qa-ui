@@ -1,5 +1,7 @@
 package org.exoplatform.platform.qa.ui.exoTribe;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
 import org.exoplatform.platform.qa.ui.digitalWorkplace.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
@@ -14,9 +16,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_APPLICATION_TAB_ADD_APPLICATION_DW;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("tribe")
@@ -116,8 +120,8 @@ public class WikiActivitiesTestIT extends BaseTribe {
     info("Create a wiki page");
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();
-    spaceHomePage.goToWikiTab();
-    tribeWikiHomePage.goToAddBlankPage();
+    tribeSpaceManagement.goToWikiTabDW(space);
+    tribeWikiHomePage.goToAddBlankPageDW();
     tribeWikiManagement.goToSourceEditor();
     tribeSourceTextEditor.addSimplePage(title, content);
     tribeWikiManagement.saveAddPage();
@@ -145,7 +149,7 @@ public class WikiActivitiesTestIT extends BaseTribe {
     tribeWikiValidattions.verifyCompareVersions("1");
     tribeWikiHomePage.goToHomeWikiPage();
     getExoWebDriver().getWebDriver().navigate().refresh();
-    tribeWikiHomePage.deleteWiki(editTitle);
+    tribeWikiHomePage.deleteWikiDW(editTitle);
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.deleteTribeSpace(space);
   }
@@ -164,7 +168,7 @@ public class WikiActivitiesTestIT extends BaseTribe {
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.searchSpace(space);
     tribeSpaceManagement.accessToSearchedSpace();
-    tribeSpaceManagement.goToWikiTab();
+    tribeSpaceManagement.goToWikiTabDW(space);
     tribeWikiHomePage.goToAddBlankPage();
     tribeWikiManagement.goToSourceEditor();
     tribeSourceTextEditor.addSimplePage(title, content);
@@ -175,11 +179,13 @@ public class WikiActivitiesTestIT extends BaseTribe {
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.searchSpace(space);
     tribeSpaceManagement.accessToSearchedSpace();
-    spaceHomePage.goToSpaceSettingTab();
-    spaceSettingManagement.goToApplicationTab();
-    spaceSettingManagement.removeApplication("Wiki");
+    spaceHomePage.goToSpaceSettingTabDW(space);
+    spaceSettingManagement.goToApplicationTabDW();
+    spaceSettingManagement.removeApplicationDW("Wiki");
+    $(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_DW).waitUntil(Condition.appears, Configuration.timeout);
+    spaceSettingManagement.addApplicationDW("Wiki");
     info("Check on AS");
-    homePagePlatform.goToSpaceHomeTribe();
+    homePagePlatform.goToSpaceHomeDW();
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.deleteTribeSpace(space);
 

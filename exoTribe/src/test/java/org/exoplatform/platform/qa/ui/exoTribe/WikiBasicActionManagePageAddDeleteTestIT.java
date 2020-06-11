@@ -89,8 +89,8 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
     String space = "space" + getRandomNumber();
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
-    spaceHomePage.goToWikiTab();
-    tribeWikiHomePage.goToAddTemplateWikiPage();
+    tribeSpaceManagement.goToWikiTabDW(space);
+    tribeWikiHomePage.goToAddTemplateWikiPageDW();
     tribeWikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_HowToGuide, title);
     tribeWikiHomePage.goToHomeWikiPage();
     tribeWikiHomePage.goToAddTemplateWikiPage();
@@ -135,11 +135,11 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
     String space = "space" + getRandomNumber();
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
-    spaceHomePage.goToWikiTab();
-    tribeWikiHomePage.goToAddTemplateWikiPage();
+    tribeSpaceManagement.goToWikiTabDW(space);
+    tribeWikiHomePage.goToAddTemplateWikiPageDW();
     tribeWikiManagement.addSimpleWikiPageByTemplate(template, title);
     $(byText(title)).should(Condition.exist);
-    tribeWikiHomePage.deleteWiki(title);
+    tribeWikiHomePage.deleteWikiDW(title);
     info("Test 10: Delete data");
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.deleteTribeSpace(space);

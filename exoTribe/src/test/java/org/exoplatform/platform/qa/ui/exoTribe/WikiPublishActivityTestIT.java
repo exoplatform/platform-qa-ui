@@ -124,15 +124,15 @@ public class WikiPublishActivityTestIT extends BaseTribe {
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
     info("Add new wiki page for space");
-    spaceHomePage.goToWikiTab();
-    tribeWikiHomePage.goToAddBlankPage();
+    tribeSpaceManagement.goToWikiTabDW(space);
+    tribeWikiHomePage.goToAddBlankPageDW();
     tribeWikiManagement.goToSourceEditor();
-    tribeSourceTextEditor.addSimplePage(title, content);
+    tribeSourceTextEditor.addSimplePageDW(title, content);
     tribeWikiManagement.saveAddPage();
 
     info("Verify that an activity is added to the activity stream");
     getExoWebDriver().getWebDriver().navigate().refresh();
-    homePagePlatform.goToSpaceHomeTribe();
+    homePagePlatform.goToSpaceHomeDW();
     activityStream.checkActivity(title);
     activityStream.commentWikiActivity(title, text);
     info("check that the comment is added successfully");
@@ -154,11 +154,11 @@ public class WikiPublishActivityTestIT extends BaseTribe {
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.searchSpace(space);
     tribeSpaceManagement.accessToSearchedSpace();
-    spaceHomePage.goToWikiTab();
+    tribeSpaceManagement.goToWikiTabDW(space);
     $(byText(title)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     info("Edit the title of the wiki page and check on published checkbox");
     tribeWikiHomePage.goToEditPage();
-    tribeSourceTextEditor.editSimplePage(newTitle, "");
+    tribeSourceTextEditor.editSimplePageDW(newTitle, "");
     tribeWikiManagement.publishPageWhenEditPage();
     tribeWikiManagement.saveAddPage();
     info("The title of wiki page's activity is updated");
@@ -166,8 +166,8 @@ public class WikiPublishActivityTestIT extends BaseTribe {
     activityStream.checkActivity(newTitle);
 
     info("Delete the page");
-    spaceHomePage.goToWikiTab();
-    tribeWikiHomePage.deleteWiki(newTitle);
+    tribeSpaceManagement.goToWikiTabDW(space);
+    tribeWikiHomePage.deleteWikiDW(newTitle);
     homePagePlatform.goToSpaceHomeTribe();
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.deleteTribeSpace(space);

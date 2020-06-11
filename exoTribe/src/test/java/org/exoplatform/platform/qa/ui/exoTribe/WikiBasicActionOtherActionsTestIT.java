@@ -110,7 +110,7 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.searchSpace(space);
     tribeSpaceManagement.accessToSearchedSpace();
-    spaceHomePage.goToWikiTab();
+    tribeSpaceManagement.goToWikiTabDW(space);
     $(byClassName("uiTreeExplorer")).find(byText(title1)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
     homePagePlatform.goToStreamPageTribe();
     homePagePlatform.goToMySpacesTribe();
@@ -118,8 +118,8 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     tribeSpaceManagement.addNewSpace(space1, space1, "Open", "No", null);
 
     info("Create a wiki page in space");
-    tribeSpaceManagement.goToWikiTab();
-    tribeWikiHomePage.goToAddBlankPage();
+    tribeSpaceManagement.goToWikiTabDW(space1);
+    tribeWikiHomePage.goToAddBlankPageDW();
     tribeRichTextEditor.addSimplePage(title2, title2);
     tribeWikiManagement.saveAddPage();
     $(byText(title2)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
@@ -127,7 +127,7 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     info("Move page to Intranet");
     tribeWikiManagement.selectSpaceDestination("Mes Notes");
     $(byClassName("uiTreeExplorer")).find(byText(title2)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
-    tribeWikiHomePage.deleteWiki(title2);
+    tribeWikiHomePage.deleteWikiDW(title2);
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.deleteTribeSpace(space1);
   }
@@ -147,8 +147,8 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
 
     info("Create a wiki page in space2");
     String title1 = "title1" + getRandomNumber();
-    tribeSpaceManagement.goToWikiTab();
-    tribeWikiHomePage.goToAddBlankPage();
+    tribeSpaceManagement.goToWikiTabDW(space2);
+    tribeWikiHomePage.goToAddBlankPageDW();
     tribeRichTextEditor.addSimplePage(title1, title1);
     tribeWikiManagement.saveAddPage();
     $(byText(title1)).should(Condition.exist);
@@ -159,7 +159,7 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.searchSpace(space1);
     tribeSpaceManagement.accessToSearchedSpace();
-    tribeSpaceManagement.goToWikiTab();
+    tribeSpaceManagement.goToWikiTabDW(space1);
     $(byClassName("uiTreeExplorer")).find(byText(title1)).should(Condition.exist);
     homePagePlatform.goToStreamPageTribe();
     homePagePlatform.goToMySpacesTribe();

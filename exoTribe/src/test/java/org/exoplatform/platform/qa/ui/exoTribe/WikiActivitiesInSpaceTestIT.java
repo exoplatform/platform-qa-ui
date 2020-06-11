@@ -105,7 +105,7 @@ public class WikiActivitiesInSpaceTestIT extends BaseTribe {
     info("Edit wiki page");
     tribeWikiHomePage.goToAPage(title);
     wikiHomePage.goToEditPage();
-    tribeSourceTextEditor.editSimplePageDW(newTitle, newContent);
+    tribeSourceTextEditor.editSimplePage(newTitle, newContent);
     tribeWikiManagement.saveAddPage();
     getExoWebDriver().getWebDriver().navigate().refresh();
     wikiValidattions.verifyTitleWikiPage(newTitle);
