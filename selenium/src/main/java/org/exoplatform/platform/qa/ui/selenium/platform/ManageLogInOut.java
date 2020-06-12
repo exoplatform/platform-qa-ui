@@ -20,7 +20,9 @@
  */
 package org.exoplatform.platform.qa.ui.selenium.platform;
 
+import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.*;
@@ -151,6 +153,8 @@ public class ManageLogInOut {
     if (ELEMENT_TRIBE_TOOLBAR.exists()){
       signOutTribe();
     }
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    open(baseUrl);
     ELEMENT_TRIBE_COMMUNITY_NAVIGATION_SIGN_IN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     USERNAME_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(username);
     PASSWORD_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(password);

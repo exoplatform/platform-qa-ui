@@ -1,13 +1,13 @@
-package org.exoplatform.platform.qa.ui.exoTribe;
+package org.exoplatform.platform.qa.ui.digitalWorkplace;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.commons.BaseTribe;
-import org.exoplatform.platform.qa.ui.pageobject.*;
-import org.exoplatform.platform.qa.ui.pageobject.*;
+import org.exoplatform.platform.qa.ui.commons.BaseDW;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
@@ -19,8 +19,6 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
-import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_STREAM_CONTAINER;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_WIKI_PAGE_CONTAINER;
@@ -29,7 +27,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 @Tag("tribe")
 @Tag("wiki")
 @Tag("sniff")
-public class WikiPublishActivityTestIT extends BaseTribe {
+public class WikiPublishActivityTestDWIT extends BaseDW {
   HomePagePlatform homePagePlatform;
 
   WikiHomePage wikiHomePage;
@@ -93,7 +91,7 @@ public class WikiPublishActivityTestIT extends BaseTribe {
     tribeActivityStream = new TribeActivityStream(this);
     tribeSpaceManagement = new TribeSpaceManagement(this);
     manageLogInOut = new ManageLogInOut(this);
-    manageLogInOut.signInTribe(tribe_username, tribe_password);
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
   }
 
   /**
@@ -128,9 +126,8 @@ public class WikiPublishActivityTestIT extends BaseTribe {
     tribeSpaceManagement.goToWikiTabDW(space);
     tribeWikiHomePage.goToAddBlankPageDW();
     tribeWikiManagement.goToSourceEditor();
-    tribeSourceTextEditor.addSimplePage(title, content);
+    tribeSourceTextEditor.addSimplePageDW(title, content);
     tribeWikiManagement.saveAddPage();
-
     info("Verify that an activity is added to the activity stream");
     getExoWebDriver().getWebDriver().navigate().refresh();
     homePagePlatform.goToSpaceHomeDW();
@@ -159,7 +156,7 @@ public class WikiPublishActivityTestIT extends BaseTribe {
     $(byText(title)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     info("Edit the title of the wiki page and check on published checkbox");
     tribeWikiHomePage.goToEditPage();
-    tribeSourceTextEditor.editSimplePage(newTitle, "");
+    tribeSourceTextEditor.editSimplePageDW(newTitle, "");
     tribeWikiManagement.publishPageWhenEditPage();
     tribeWikiManagement.saveAddPage();
     info("The title of wiki page's activity is updated");

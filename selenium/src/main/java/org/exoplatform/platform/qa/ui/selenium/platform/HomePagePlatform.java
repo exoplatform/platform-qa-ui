@@ -90,7 +90,7 @@ public class HomePagePlatform {
 
   public void goToSpaceHomeDW() {
     $(byXpath("//*[@class='v-slide-group__prev']//i")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    $(ELEMENT_SPACE_HOME_TAB_DW).waitUntil(Condition.appears, Configuration.timeout).click();
+    $(ELEMENT_SPACE_HOME_TAB_DW).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
     info("Space setting page is shown");
     $(ELEMENT_HOME_SPACE_DW).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout).click();
   }
@@ -100,7 +100,8 @@ public class HomePagePlatform {
    */
   public void goToStreamPageTribe() {
     info("Click on Home page");
-    $(byXpath("//*[@id='brandingTopBar']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    sleep(3000);
+    //$(byXpath("//*[@id='brandingTopBar']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     sleep(1000);
     ELEMENT_TRIBE_STREAM_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();

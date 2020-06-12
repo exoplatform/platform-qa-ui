@@ -11,7 +11,6 @@
         <module name="platform-qa-ui-chat" />
         <module name="platform-qa-ui-commons" />
         <module name="platform-qa-ui-core" />
-        <module name="platform-qa-ui-digitalWorkplace" />
         <module name="platform-qa-ui-ecms" />
         <module name="platform-qa-ui-exoTribe" />
         <module name="platform-qa-ui-forum" />

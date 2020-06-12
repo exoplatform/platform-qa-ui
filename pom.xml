@@ -51,7 +51,6 @@
     <module>onlyOffice</module>
     <module>news</module>
     <module>exoTribe</module>
-    <module>digitalWorkplace</module>
 
   </modules>
   <scm>

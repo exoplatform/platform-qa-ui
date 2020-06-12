@@ -1,8 +1,9 @@
 package org.exoplatform.platform.qa.ui.exoTribe;
 
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
-import org.exoplatform.platform.qa.ui.digitalWorkplace.pageobject.TribeActivityStream;
-import org.exoplatform.platform.qa.ui.digitalWorkplace.pageobject.TribeSpaceManagement;
+import org.exoplatform.platform.qa.ui.pageobject.*;
+import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
+import org.exoplatform.platform.qa.ui.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;

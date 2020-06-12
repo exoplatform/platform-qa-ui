@@ -1,9 +1,7 @@
-package org.exoplatform.platform.qa.ui.exoTribe;
+package org.exoplatform.platform.qa.ui.digitalWorkplace;
 
-import org.exoplatform.platform.qa.ui.commons.BaseTribe;
+import org.exoplatform.platform.qa.ui.commons.BaseDW;
 import org.exoplatform.platform.qa.ui.pageobject.*;
-import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
-import org.exoplatform.platform.qa.ui.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
@@ -12,8 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
-import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -23,7 +21,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 @Tag("tribe")
 @Tag("social")
 @Tag("sniff")
-public class SOCManageSpacesTestIT extends BaseTribe {
+public class SOCManageSpacesDWTestIT extends BaseDW {
   NavigationToolbar navigationToolbar;
 
   AddUsers addUsers;
@@ -57,7 +55,7 @@ public class SOCManageSpacesTestIT extends BaseTribe {
     spaceHomePage = new SpaceHomePage(this);
     tribeSpaceManagement = new TribeSpaceManagement(this);
     spaceSettingManagement = new SpaceSettingManagement(this);
-    manageLogInOut.signInTribe(tribe_username, tribe_password);
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
 
   }
 

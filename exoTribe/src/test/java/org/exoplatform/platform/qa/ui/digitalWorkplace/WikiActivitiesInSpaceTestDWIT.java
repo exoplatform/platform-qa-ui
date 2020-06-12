@@ -1,13 +1,13 @@
-package org.exoplatform.platform.qa.ui.exoTribe;
+package org.exoplatform.platform.qa.ui.digitalWorkplace;
 
-import org.exoplatform.platform.qa.ui.commons.BaseTribe;
+import org.exoplatform.platform.qa.ui.commons.BaseDW;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
-import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
@@ -17,15 +17,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
-import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("tribe")
 @Tag("wiki")
 @Tag("sniff")
-public class WikiActivitiesInSpaceTestIT extends BaseTribe {
+public class WikiActivitiesInSpaceTestDWIT extends BaseDW {
 
   HomePagePlatform homePagePlatform;
 
@@ -71,7 +69,7 @@ public class WikiActivitiesInSpaceTestIT extends BaseTribe {
     tribeActivityStream = new TribeActivityStream(this);
     tribeSpaceManagement = new TribeSpaceManagement(this);
     manageLogInOut = new ManageLogInOut(this);
-    manageLogInOut.signInTribe(tribe_username, tribe_password);
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
 
   }
 
@@ -82,8 +80,8 @@ public class WikiActivitiesInSpaceTestIT extends BaseTribe {
     String space = "space" + getRandomNumber();
     String newTitle = "newTitle" + getRandomNumber();
     String newContent = "newContent" + getRandomNumber();
-    String user1= "Beter Bimel";
-    String user2= "Bret Muller";
+    String user1 = "Adam Larsen";
+    String user2 = "Adem Reim";
 
     ArrayList<String> inviteUsers = new ArrayList<>();
     inviteUsers.add(user1);
@@ -96,7 +94,7 @@ public class WikiActivitiesInSpaceTestIT extends BaseTribe {
     tribeSpaceManagement.goToWikiTabDW(space);
     tribeWikiHomePage.goToAddBlankPageDW();
     wikiManagement.goToSourceEditor();
-    tribeSourceTextEditor.addSimplePage(title, content);
+    tribeSourceTextEditor.addSimplePageDW(title, content);
     tribeWikiManagement.saveAddPage();
     getExoWebDriver().getWebDriver().navigate().refresh();
     wikiValidattions.verifyTitleWikiPage(title);
@@ -106,7 +104,7 @@ public class WikiActivitiesInSpaceTestIT extends BaseTribe {
     info("Edit wiki page");
     tribeWikiHomePage.goToAPage(title);
     wikiHomePage.goToEditPage();
-    tribeSourceTextEditor.editSimplePage(newTitle, newContent);
+    tribeSourceTextEditor.editSimplePageDW(newTitle, newContent);
     tribeWikiManagement.saveAddPage();
     getExoWebDriver().getWebDriver().navigate().refresh();
     wikiValidattions.verifyTitleWikiPage(newTitle);
@@ -119,7 +117,6 @@ public class WikiActivitiesInSpaceTestIT extends BaseTribe {
     homePagePlatform.goToStreamPageTribe();
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.deleteTribeSpace(space);
-
 
   }
 

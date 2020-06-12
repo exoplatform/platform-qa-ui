@@ -62,11 +62,6 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>platform-qa-ui-digitalWorkplace</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>platform-qa-ui-forum</artifactId>
         <version>${project.version}</version>
@@ -76,6 +71,5 @@
             <artifactId>platform-qa-ui-task</artifactId>
             <version>${project.version}</version>
         </dependency>
-
     </dependencies>
 </project>

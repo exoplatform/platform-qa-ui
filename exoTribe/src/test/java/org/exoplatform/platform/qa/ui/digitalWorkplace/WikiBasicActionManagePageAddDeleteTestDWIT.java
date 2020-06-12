@@ -1,16 +1,16 @@
-package org.exoplatform.platform.qa.ui.exoTribe;
+package org.exoplatform.platform.qa.ui.digitalWorkplace;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import org.exoplatform.platform.qa.ui.commons.BaseTribe;
-import org.exoplatform.platform.qa.ui.pageobject.*;
-import org.exoplatform.platform.qa.ui.pageobject.*;
+import org.exoplatform.platform.qa.ui.commons.BaseDW;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
+import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,8 +19,6 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
-import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
@@ -28,7 +26,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 @Tag("tribe")
 @Tag("wiki")
 @Tag("sniff")
-public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
+public class WikiBasicActionManagePageAddDeleteTestDWIT extends BaseDW {
 
 
   HomePagePlatform homePagePlatform;
@@ -75,7 +73,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
     tribeActivityStream = new TribeActivityStream(this);
     tribeSpaceManagement = new TribeSpaceManagement(this);
     manageLogInOut = new ManageLogInOut(this);
-    manageLogInOut.signInTribe(tribe_username, tribe_password);
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
 
   }
 
@@ -94,16 +92,16 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
     tribeWikiHomePage.goToAddTemplateWikiPageDW();
     tribeWikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_HowToGuide, title);
     tribeWikiHomePage.goToHomeWikiPage();
-    tribeWikiHomePage.goToAddTemplateWikiPage();
+    tribeWikiHomePage.goToAddTemplateWikiPageDW();
     tribeWikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_ThreeColumnLayout, title2);
     tribeWikiHomePage.goToHomeWikiPage();
-    tribeWikiHomePage.goToAddTemplateWikiPage();
+    tribeWikiHomePage.goToAddTemplateWikiPageDW();
     tribeWikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_StatusMeeting, title3);
     tribeWikiHomePage.goToHomeWikiPage();
-    tribeWikiHomePage.goToAddTemplateWikiPage();
+    tribeWikiHomePage.goToAddTemplateWikiPageDW();
     tribeWikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_LeavePlanning, title4);
     tribeWikiHomePage.goToHomeWikiPage();
-    tribeWikiHomePage.goToAddTemplateWikiPage();
+    tribeWikiHomePage.goToAddTemplateWikiPageDW();
     tribeWikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_TwoColumnLayout, title5);
     info("Delete the space");
     homePagePlatform.goToStreamPageTribe();

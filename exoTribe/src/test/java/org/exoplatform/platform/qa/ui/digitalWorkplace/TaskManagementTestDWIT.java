@@ -1,13 +1,10 @@
-package org.exoplatform.platform.qa.ui.exoTribe;
+package org.exoplatform.platform.qa.ui.digitalWorkplace;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.commons.BaseTribe;
+import org.exoplatform.platform.qa.ui.commons.BaseDW;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.pageobject.*;
-import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
-import org.exoplatform.platform.qa.ui.pageobject.TribeLabelsManagement;
-import org.exoplatform.platform.qa.ui.pageobject.TribeProjectsManagement;
-import org.exoplatform.platform.qa.ui.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
@@ -19,17 +16,14 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
-import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("smoke")
 @Tag("task")
-public class TaskManagementTestIT extends BaseTribe {
+public class TaskManagementTestDWIT extends BaseDW {
   HomePagePlatform homePagePlatform;
   SpaceManagement spaceManagement;
   SpaceHomePage spaceHomePage;
@@ -53,7 +47,7 @@ public class TaskManagementTestIT extends BaseTribe {
     tribeActivityStream = new TribeActivityStream(this);
     tribeSpaceManagement = new TribeSpaceManagement(this);
     manageLogInOut = new ManageLogInOut(this);
-    manageLogInOut.signInTribe(tribe_username, tribe_password);
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
 
   }
 
@@ -64,7 +58,7 @@ public class TaskManagementTestIT extends BaseTribe {
     String newTaskName = "newTaskName" + getRandomNumber();
 
     info("Add Task");
-    homePagePlatform.goToTasksPageTribe();
+    homePagePlatform.goToTasksPageDW();
     tasksManagement.addTask(taskName);
     info("verify task added");
     $(byText(taskName)).should(Condition.exist);
@@ -88,7 +82,7 @@ public class TaskManagementTestIT extends BaseTribe {
     String newLabel = "newLabel" + getRandomNumber();
 
     info("Add Label");
-    homePagePlatform.goToTasksPageTribe();
+    homePagePlatform.goToTasksPageDW();
     tribeLabelsManagement.addLabel(label);
     info("verify label added");
     $(byText(label)).should(Condition.exist);
@@ -112,7 +106,7 @@ public class TaskManagementTestIT extends BaseTribe {
     String newProject = "newProject" + getRandomNumber();
 
     info("Add Project");
-    homePagePlatform.goToTasksPageTribe();
+    homePagePlatform.goToTasksPageDW();
     tribeProjectsManagement.addProject(project, "", false);
     info("verify project added");
     $(byText(project)).should(Condition.exist);
@@ -134,7 +128,7 @@ public class TaskManagementTestIT extends BaseTribe {
     String title = "title" + getRandomNumber();
     String task = "task" + getRandomNumber();
 
-    homePagePlatform.goToTasksPageTribe();
+    homePagePlatform.goToTasksPageDW();
 
     tribeProjectsManagement.addProject(title, "", false);
     executeJavaScript("window.scrollBy(0,-20000)");
@@ -158,7 +152,7 @@ public class TaskManagementTestIT extends BaseTribe {
     String task = "task" + getRandomNumber();
     String newTask = "newTask" + getRandomNumber();
 
-    homePagePlatform.goToTasksPageTribe();
+    homePagePlatform.goToTasksPageDW();
 
     tribeProjectsManagement.addProject(title, "", false);
     executeJavaScript("window.scrollBy(0,-20000)");
@@ -187,7 +181,7 @@ public class TaskManagementTestIT extends BaseTribe {
     String label = "label" + getRandomNumber();
 
     info("add task in label");
-    homePagePlatform.goToTasksPageTribe();
+    homePagePlatform.goToTasksPageDW();
 
     tribeLabelsManagement.addLabel(label);
     $(byText(label)).click();
@@ -196,9 +190,9 @@ public class TaskManagementTestIT extends BaseTribe {
     tasksManagement.addTask(task);
     ELEMENT_TASKS_LIST.find(byText(task)).parent().find(byText(label)).should(Condition.exist);
 
-    homePagePlatform.goToTasksPageTribe();
-
-    tasksManagement.deleteTask(task);
+    homePagePlatform.goToTasksPageDW();
+    homePagePlatform.goToTheLabel(label);
+    tasksManagement.deleteTaskDW(task);
     tribeLabelsManagement.deleteLabel(label);
 
   }
@@ -208,7 +202,7 @@ public class TaskManagementTestIT extends BaseTribe {
 
     String task = "task" + getRandomNumber();
 
-    homePagePlatform.goToTasksPageTribe();
+    homePagePlatform.goToTasksPageDW();
 
     info("add task");
     tasksManagement.addTask(task);
@@ -225,19 +219,21 @@ public class TaskManagementTestIT extends BaseTribe {
 
     String taskName = "task" + getRandomNumber();
 
-    homePagePlatform.goToTasksPageTribe();
+    homePagePlatform.goToTasksPageDW();
 
     tasksManagement.addTask(taskName);
 
+    sleep(2000);
     ELEMENT_INPUT_COMMENT_TASK.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
     ELEMENT_ICON_ADD_IMAGE_IN_COMMENT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-
 
     $(byClassName("file")).uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BUTTON_OK_UPLOAD.waitUntil(Condition.not(Condition.attribute("disabled")), Configuration.openBrowserTimeoutMs).click();
     COMMENT_BUTTON.waitUntil(Condition.enabled, Configuration.openBrowserTimeoutMs).pressEnter();
 
-    tasksManagement.deleteTask(taskName);
+    sleep(2000);
+    tasksManagement.deleteTaskDW(taskName);
   }
 
 }

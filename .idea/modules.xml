@@ -8,7 +8,6 @@
       <module fileurl="file://$PROJECT_DIR$/chat/platform-qa-ui-chat.iml" filepath="$PROJECT_DIR$/chat/platform-qa-ui-chat.iml" />
       <module fileurl="file://$PROJECT_DIR$/commons/platform-qa-ui-commons.iml" filepath="$PROJECT_DIR$/commons/platform-qa-ui-commons.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/platform-qa-ui-core.iml" filepath="$PROJECT_DIR$/core/platform-qa-ui-core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/digitalWorkplace/platform-qa-ui-digitalWorkplace.iml" filepath="$PROJECT_DIR$/digitalWorkplace/platform-qa-ui-digitalWorkplace.iml" />
       <module fileurl="file://$PROJECT_DIR$/ecms/platform-qa-ui-ecms.iml" filepath="$PROJECT_DIR$/ecms/platform-qa-ui-ecms.iml" />
       <module fileurl="file://$PROJECT_DIR$/exoTribe/platform-qa-ui-exoTribe.iml" filepath="$PROJECT_DIR$/exoTribe/platform-qa-ui-exoTribe.iml" />
       <module fileurl="file://$PROJECT_DIR$/forum/platform-qa-ui-forum.iml" filepath="$PROJECT_DIR$/forum/platform-qa-ui-forum.iml" />

@@ -209,7 +209,7 @@ public class exoTribeLocator {
   //SETTINGS
     public static final SelenideElement ELEMENT_TRIBE_EDIT_LANGUAGE = $(byXpath("(//*[@class='uiIconEdit uiIconLightBlue pb-2'])[1]"));
 
-    public static final SelenideElement  ELEMENT_SETTINGS_APP_TAB_DW  = $(byXpath("(//*[@class='v-btn__content'])[8]"));
+    public static final SelenideElement  ELEMENT_SETTINGS_APP_TAB_DW  = $(byXpath("(//*[contains(text(),'Applications')])[2]/following::*[@class='v-btn__content']"));
 
     public static final SelenideElement  ELEMENT_APPLICATION_TAB_ADD_APPLICATION_DW  = $(byXpath("(//*[@class='v-btn__content'])[12]"));
 

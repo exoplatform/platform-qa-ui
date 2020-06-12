@@ -1,10 +1,9 @@
-package org.exoplatform.platform.qa.ui.exoTribe;
+package org.exoplatform.platform.qa.ui.digitalWorkplace;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import org.exoplatform.platform.qa.ui.commons.BaseTribe;
-import org.exoplatform.platform.qa.ui.pageobject.*;
-import org.exoplatform.platform.qa.ui.pageobject.*;
+import org.exoplatform.platform.qa.ui.commons.BaseDW;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
@@ -14,6 +13,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
+import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -21,16 +21,13 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
-import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
-import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("tribe")
 @Tag("wiki")
 @Tag("sniff")
-public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
+public class WikiBasicActionOtherActionsTestDWIT extends BaseDW {
 
   HomePagePlatform homePagePlatform;
 
@@ -82,7 +79,7 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     tribeActivityStream = new TribeActivityStream(this);
     tribeSpaceManagement = new TribeSpaceManagement(this);
     manageLogInOut = new ManageLogInOut(this);
-    manageLogInOut.signInTribe(tribe_username, tribe_password);
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
 
   }
 
@@ -103,7 +100,6 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     info("Create a wiki page ");
     tribeSpaceManagement.goToWikiTabDW(space);
     tribeWikiHomePage.goToAddBlankPageDW();
-    sleep(2000);
     tribeSourceTextEditor.addSimplePage(title1, title1);
     tribeWikiManagement.saveAddPage();
     $(byText(title1)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
@@ -128,7 +124,7 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     $(byText(title2)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
 
     info("Move page to Intranet");
-    tribeWikiManagement.selectSpaceDestination("Mes Notes");
+    tribeWikiManagement.selectSpaceDestination("My Wiki");
     $(byClassName("uiTreeExplorer")).find(byText(title2)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
     tribeWikiHomePage.deleteWikiDW(title2);
     homePagePlatform.goToMySpacesTribe();
