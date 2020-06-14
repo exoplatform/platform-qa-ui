@@ -144,6 +144,7 @@ public class TribeActivityStream {
         }
         postActivity();
         info("-- Verify that an activity has been added --");
+        sleep(1000);
         $(byText(text)).waitUntil(Condition.exist, openBrowserTimeoutMs);
         $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).shouldBe(Condition.disabled);
         info("The activity is shared success");
@@ -201,6 +202,7 @@ public class TribeActivityStream {
         $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", id))).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
         sleep(2000);
         executeJavaScript("CKEDITOR.instances.CommentTextarea" + id + ".insertText(\"" + comment + "\")", "");
+        sleep(2000);
         // click on the button comment
         $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", id))).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).pressEnter().waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
 

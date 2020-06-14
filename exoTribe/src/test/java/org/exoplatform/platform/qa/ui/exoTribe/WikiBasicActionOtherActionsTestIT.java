@@ -4,7 +4,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
 import org.exoplatform.platform.qa.ui.pageobject.*;
-import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
@@ -86,7 +85,6 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
 
   }
 
-
   @Test
   public void test01_MovePage_Intranet_Space_Then_Space_Intranet() {
 
@@ -97,7 +95,7 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     String title2 = "title2" + getRandomNumber();
 
 
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
 
     info("Create a wiki page ");
@@ -133,17 +131,17 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     tribeWikiHomePage.deleteWikiDW(title2);
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.deleteTribeSpace(space1);
+
   }
 
   @Test
-  @Tag("wabis")
   public void test02_MovePage_Space2_Space1() {
 
     info("Create a space");
     String space1 = "space" + getRandomNumber();
     String space2 = "space" + getRandomNumber();
 
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(space1, space1, "Open", "No", null);
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.addNewSpace(space2, space2, "Open", "No", null);

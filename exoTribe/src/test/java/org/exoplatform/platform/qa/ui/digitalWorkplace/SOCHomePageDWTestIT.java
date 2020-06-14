@@ -3,8 +3,8 @@ package org.exoplatform.platform.qa.ui.digitalWorkplace;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseDW;
+import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
-import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
@@ -21,10 +21,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_DW_POST_ACTIVITY_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-/**
- * Created by exo on 11/09/17.
- */
-@Tag("tribe")
+@Tag("dw")
 @Tag("social")
 @Tag("sniff")
 public class SOCHomePageDWTestIT extends BaseDW {
@@ -65,30 +62,26 @@ public class SOCHomePageDWTestIT extends BaseDW {
 
   }
 
-
   @Test
   public void test01_LikeActivity() {
 
     String activity1 = "activity1" + getRandomNumber();
 
-    info("Test 1: Like Activity");
-    homePagePlatform.goToStreamPageTribe();
+    info("Like Activity");
+    homePagePlatform.goToStreamPageTribeViaUrl();
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");
 
     tribeActivityStream.likeActivityDW(activity1);
     // click on the activity to appear the delete button
     tribeActivityStream.deleteactivityDW(activity1);
+
   }
 
-  /**
-   * <li>Case ID:121909.</li>
-   * <li>Test Case Name: Add comment.</li>
-   */
   @Test
   public void test02_AddComment() {
 
-    info("Test 2: Add comment");
+    info("Add comment");
     /*
      * Step Number: 1 Step Name: Add comment for activity Step Description: - Go to
      * Intranet home - Select the activity - Click comment icon to show input text
@@ -98,7 +91,8 @@ public class SOCHomePageDWTestIT extends BaseDW {
 
     String activity1 = "activity1" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
-    homePagePlatform.goToStreamPageTribe();
+
+    homePagePlatform.goToStreamPageTribeViaUrl();
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");
 
@@ -111,6 +105,7 @@ public class SOCHomePageDWTestIT extends BaseDW {
 
     // click on the activity to appear the delete button
     tribeActivityStream.deleteactivityDW(activity1);
+
   }
 
 }

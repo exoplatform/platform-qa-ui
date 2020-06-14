@@ -24,7 +24,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_BUTTON_SELECT_RELATION;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-@Tag("tribe")
+@Tag("dw")
 @Tag("wiki")
 @Tag("sniff")
 public class WikiInformationTestDWIT extends BaseDW {

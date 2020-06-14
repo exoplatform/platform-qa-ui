@@ -23,6 +23,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("smoke")
 @Tag("task")
+@Tag("dw")
 public class TaskManagementTestDWIT extends BaseDW {
   HomePagePlatform homePagePlatform;
   SpaceManagement spaceManagement;

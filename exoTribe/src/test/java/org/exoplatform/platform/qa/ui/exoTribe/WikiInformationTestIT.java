@@ -4,7 +4,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
 import org.exoplatform.platform.qa.ui.pageobject.*;
-import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
@@ -96,18 +95,17 @@ public class WikiInformationTestIT extends BaseTribe {
     manageLogInOut.signInTribe(tribe_username, tribe_password);
   }
 
-
   @Test
-  @Tag("wabis")
   public void test01_AddRelationWithIntranetPortal() {
-    info("Test 02: Add relations with Intranet portal");
+
+    info("Add relations with Intranet portal");
     String space1 = "space1" + getRandomNumber();
     String space2 = "space2" + getRandomNumber();
     String title1 = "title1" + getRandomNumber();
     String title2 = "title2" + getRandomNumber();
 
     info("Create space 1 and wiki page 1");
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(space1, space1, "Open", "No", null);
     info("Add new wiki page for space 1");
     tribeSpaceManagement.goToWikiTabDW(space1);

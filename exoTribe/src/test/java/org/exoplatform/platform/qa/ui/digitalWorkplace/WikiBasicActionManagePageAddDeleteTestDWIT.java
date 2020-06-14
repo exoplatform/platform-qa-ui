@@ -23,7 +23,7 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-@Tag("tribe")
+@Tag("dw")
 @Tag("wiki")
 @Tag("sniff")
 public class WikiBasicActionManagePageAddDeleteTestDWIT extends BaseDW {

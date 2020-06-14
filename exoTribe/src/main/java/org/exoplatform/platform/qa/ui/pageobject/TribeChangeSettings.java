@@ -44,7 +44,7 @@ public class TribeChangeSettings {
 
   public void tribeEditTimeZone(String timeZone) {
     info("Select Time Zone and change it");
-    $(ELEMENT_TRIBE_EDIT_TIME_ZONE).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_TRIBE_EDIT_TIME_ZONE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     $(byXpath(ELEMENT_TRIBE_CHANGE_TIMEZONE.replace("${timeZone}", timeZone))).waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
@@ -115,6 +115,12 @@ public class TribeChangeSettings {
   public void goToManageNotifications() {
 
     ELEMENT_DIGITALWORKPLACE_MANAGE_NOTIFICATIONS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
+  }
+
+  public void goToManageNotificationsTribe() {
+
+    ELEMENT_TRIBE_MANAGE_NOTIFICATIONS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 

@@ -96,15 +96,19 @@ public class HomePagePlatform {
   }
 
   /**
-   * Go to Home page Tribe
+   * Go to Stream page Tribe
    */
   public void goToStreamPageTribe() {
     info("Click on Home page");
-    sleep(3000);
-    //$(byXpath("//*[@id='brandingTopBar']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
     ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     sleep(1000);
     ELEMENT_TRIBE_STREAM_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+  }
+
+  public void goToStreamPageTribeViaUrl() {
+    info("Open Stream page by link");
+    open(Configuration.baseUrl+ "portal/dw/stream");
   }
 
   /**
@@ -125,9 +129,6 @@ public class HomePagePlatform {
     ELEMENT_MY_CONNECTIONS_BTN_DW.sendKeys("My Connections");
   }
 
-  /**
-   * Go to People page Tribe
-   */
   public void goToSettingsPageTribe() {
     info("Click on People page");
     sleep(2000);
@@ -136,24 +137,22 @@ public class HomePagePlatform {
     ELEMENT_TRIBE_SETTINGS_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
-  /**
-   * Go to Home page Tribe
-   */
+  public void goToSettingsPageTribeViaUrl() {
+
+    open(Configuration.baseUrl+ "portal/dw/settings");
+  }
+
   public void goToSnapshotPageTribe() {
     info("Click on Home page");
     ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TRIBE_SNAPSHOT_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
-  /**
-   * Go to Home page Tribe
-   */
   public void goToTasksPageTribe() {
     info("Click on Home page");
     ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TRIBE_SNAPSHOT_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TRIBE_TASKS_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-
 
   }
 
@@ -200,6 +199,11 @@ public class HomePagePlatform {
     GO_TO_SPACES_TRIBE_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
+  public void goToMySpacesTribeViaUrl() {
+
+    open(Configuration.baseUrl+ "portal/dw/spaces");
+
+  }
   /**
    * Go to All space list
    */

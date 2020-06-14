@@ -1,7 +1,6 @@
 package org.exoplatform.platform.qa.ui.exoTribe;
 
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
-import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
 import org.exoplatform.platform.qa.ui.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
@@ -17,9 +16,6 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-/**
- * Created by exo on 11/09/17.
- */
 @Tag("tribe")
 @Tag("social")
 @Tag("sniff")
@@ -62,7 +58,6 @@ public class SOCManageSpacesTestIT extends BaseTribe {
   }
 
   @Test
-  @Tag("sabis")
   public void test01_CheckTheExistanceOfTheSpacesInTheManageSpacesTab() {
 
     String spaceNamea = "spaceNamea" + getRandomNumber();
@@ -72,7 +67,7 @@ public class SOCManageSpacesTestIT extends BaseTribe {
     String spaceNamec = "spaceNamec" + getRandomNumber();
     String spaceDesc = "descriptionc" + getRandomNumber();
 
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.addNewSpace(spaceNameb, spaceDesb, "Open", "No", null);
@@ -83,7 +78,7 @@ public class SOCManageSpacesTestIT extends BaseTribe {
     tribeSpaceManagement.deleteTribeSpace(spaceNamea);
     tribeSpaceManagement.deleteTribeSpace(spaceNameb);
     tribeSpaceManagement.deleteTribeSpace(spaceDesc);
-  }
 
+  }
 
 }

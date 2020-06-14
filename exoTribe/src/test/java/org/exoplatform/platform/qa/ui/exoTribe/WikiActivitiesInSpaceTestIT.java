@@ -7,7 +7,6 @@ import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
-import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
@@ -77,18 +76,18 @@ public class WikiActivitiesInSpaceTestIT extends BaseTribe {
 
   @Test
   public void test01_AddEditRemoveAWikiActivityAfterCreateAWikiPageInSpace() {
-    info("Test 13 Remove wiki's page of space");
+    info("Remove wiki's page of space");
     info("Create a space");
     String space = "space" + getRandomNumber();
     String newTitle = "newTitle" + getRandomNumber();
     String newContent = "newContent" + getRandomNumber();
-    String user1= "Beter Bimel";
-    String user2= "Bret Muller";
+    String user1 = "Beter Bimel";
+    String user2 = "Bret Muller";
 
     ArrayList<String> inviteUsers = new ArrayList<>();
     inviteUsers.add(user1);
     inviteUsers.add(user2);
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(space, space, "Open", "No", inviteUsers);
     info("Create a wiki page");
     String title = "title" + getRandomNumber();
@@ -119,7 +118,6 @@ public class WikiActivitiesInSpaceTestIT extends BaseTribe {
     homePagePlatform.goToStreamPageTribe();
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.deleteTribeSpace(space);
-
 
   }
 

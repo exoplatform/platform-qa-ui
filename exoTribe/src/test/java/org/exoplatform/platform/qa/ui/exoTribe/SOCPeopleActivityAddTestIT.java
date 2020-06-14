@@ -4,7 +4,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
-import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
@@ -18,9 +17,10 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_TRIBE_POST_ACTIVITY_BTN;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_DROPDOWN;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_DELETE_ACTIVITY_LINK;
+import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_POPUP_OK;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_DW_POST_ACTIVITY_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -64,27 +64,24 @@ public class SOCPeopleActivityAddTestIT extends BaseTribe {
     String link = "http://www.google.fr";
     String title = "Google";
 
-    ELEMENT_TRIBE_POST_ACTIVITY_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_TAB_ADD_LINK.click();
-    ELEMENT_INPUT_LINK.setValue(link);
-    ELEMENT_BUTTON_ATTACH_LINK.click();
-    $(ELEMENT_COMPOSER_SHARE_BUTTON).waitUntil(Condition.be(Condition.enabled), Configuration.openBrowserTimeoutMs);
-    $(ELEMENT_COMPOSER_SHARE_BUTTON).click();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    tribeActivityStream.addTribeActivity(link, "");
     $(byText(link)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
     $(byText(link)).click();
     sleep(1000);
     switchTo().window(1);
     assertEquals(title, Selenide.title());
     switchTo().window(0);
-    String id = $(byText(link)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).parent()
-            .parent()
+    String id = $(byText(link)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs)
             .parent()
             .parent()
             .parent().getAttribute("id").split("ActivityContextBox")[1];
     $(byId(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", id))).click();
     $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", id))).click();
     ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byText(link)).parent().parent().parent().parent().parent().waitUntil(Condition.disappear, Configuration.timeout);
+    $(byText(link)).parent().parent().parent().parent().parent().waitUntil(Condition.disappear, Configuration.openBrowserTimeoutMs);
 
   }
+
 }

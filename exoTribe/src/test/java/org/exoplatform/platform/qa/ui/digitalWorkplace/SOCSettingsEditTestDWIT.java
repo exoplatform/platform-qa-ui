@@ -20,8 +20,8 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-@Tag("tribe")
-@Tag("sniff01")
+@Tag("dw")
+@Tag("sniff")
 @Tag("social")
 public class SOCSettingsEditTestDWIT extends BaseDW {
   NavigationToolbar navigationToolbar;

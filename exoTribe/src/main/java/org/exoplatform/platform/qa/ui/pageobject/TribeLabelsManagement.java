@@ -7,8 +7,7 @@ import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.*;
 
 /**
@@ -45,9 +44,12 @@ public class TribeLabelsManagement {
   public void deleteLabel(String label) {
     $(byText(label)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     $(byText(label)).parent().parent().find(ELEMENT_ICON_OPEN_MENU_LABEL).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    sleep(1000);
     $(byText(label)).parent().parent().find(ELEMENT_OPEN_MENU_DELETE_LABEL).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
     executeJavaScript("window.scrollBy(0,2000)");
     ELEMENT_LABEL_BUTTON_CONFIRM_DELETE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    sleep(3000);
     $(byText(label)).waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
 
   }

@@ -42,12 +42,16 @@ public class TasksManagement {
 
   public void editTask(String taskContent, String newTask, String priority) {
     ELEMENT_TASKS_LIST.find(byText(taskContent)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_TASK_FORM.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
-    ELEMENT_TASK_FORM.find(byText(taskContent)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TASK_FORM.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).find(byText(taskContent)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(1000);
     ELEMENT_TASK_FORM_INPUT_TITLE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(newTask);
-    sleep(3000);
+    sleep(2000);
+    ELEMENT_TASK_FORM_INPUT_TITLE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).pressEnter();
     ELEMENT_TASK_FORM_PRIORITY.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TASK_SELECT_PRIORITY.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).sendKeys(priority);
+    sleep(1000);
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    sleep(1000);
   }
 
   public void deleteTask(String taskContent) {

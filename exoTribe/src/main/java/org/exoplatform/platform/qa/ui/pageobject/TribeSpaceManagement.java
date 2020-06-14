@@ -65,6 +65,7 @@ public class TribeSpaceManagement {
   public void deleteTribeSpace(String spaceName) {
       info("Do delete space");
       searchSpace(spaceName);
+      sleep(1000);
       $(ELEMENT_TRIBE_MANAGE_SPACE_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       $(ELEMENT_TRIBE_REMOVE_SPACE_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       $(ELEMENT_TRIBE_REMOVE_SPACE_OK_BUTTON).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();

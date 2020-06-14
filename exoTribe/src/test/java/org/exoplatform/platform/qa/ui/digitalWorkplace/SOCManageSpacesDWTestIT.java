@@ -1,7 +1,8 @@
 package org.exoplatform.platform.qa.ui.digitalWorkplace;
 
 import org.exoplatform.platform.qa.ui.commons.BaseDW;
-import org.exoplatform.platform.qa.ui.pageobject.*;
+import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
+import org.exoplatform.platform.qa.ui.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
@@ -15,10 +16,7 @@ import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-/**
- * Created by exo on 11/09/17.
- */
-@Tag("tribe")
+@Tag("dw")
 @Tag("social")
 @Tag("sniff")
 public class SOCManageSpacesDWTestIT extends BaseDW {
@@ -60,7 +58,6 @@ public class SOCManageSpacesDWTestIT extends BaseDW {
   }
 
   @Test
-  @Tag("sabis")
   public void test01_CheckTheExistanceOfTheSpacesInTheManageSpacesTab() {
 
     String spaceNamea = "spaceNamea" + getRandomNumber();
@@ -70,7 +67,7 @@ public class SOCManageSpacesDWTestIT extends BaseDW {
     String spaceNamec = "spaceNamec" + getRandomNumber();
     String spaceDesc = "descriptionc" + getRandomNumber();
 
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.addNewSpace(spaceNameb, spaceDesb, "Open", "No", null);
@@ -81,7 +78,7 @@ public class SOCManageSpacesDWTestIT extends BaseDW {
     tribeSpaceManagement.deleteTribeSpace(spaceNamea);
     tribeSpaceManagement.deleteTribeSpace(spaceNameb);
     tribeSpaceManagement.deleteTribeSpace(spaceDesc);
-  }
 
+  }
 
 }

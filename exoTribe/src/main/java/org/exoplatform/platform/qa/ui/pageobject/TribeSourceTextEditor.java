@@ -51,7 +51,7 @@ public class TribeSourceTextEditor {
     $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(title);
 
     info("Input a content for the page");
-    sleep(1000);
+    sleep(2000);
     switchTo().frame($(byXpath("//*[@class='gwt-RichTextArea']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs));
     $(ELEMENT_CONTENT_WIKI_INPUT_TRIBE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(content);
     switchTo().defaultContent();

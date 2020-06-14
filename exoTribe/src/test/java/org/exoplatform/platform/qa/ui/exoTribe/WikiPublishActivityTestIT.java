@@ -4,7 +4,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
 import org.exoplatform.platform.qa.ui.pageobject.*;
-import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
@@ -96,17 +95,9 @@ public class WikiPublishActivityTestIT extends BaseTribe {
     manageLogInOut.signInTribe(tribe_username, tribe_password);
   }
 
-  /**
-   * <li>Case ID:122865.</li>
-   * <li>Test Case Name: Update activity - edit wiki page title</li>
-   * <li>Pre-Condition: the wiki activity is already shared in the activity
-   * stream</li>
-   * <li>Post-Condition:</li>
-   */
   @Test
-  @Tag("wabis")
   public void test01_OpenWikiPageFromWikiActivity() {
-    info("Test 04: Update activity - edit wiki page title");
+    info("Update activity - edit wiki page title");
 
     String space = "space" + getRandomNumber();
     String title = "title" + getRandomNumber();
@@ -172,6 +163,7 @@ public class WikiPublishActivityTestIT extends BaseTribe {
     homePagePlatform.goToSpaceHomeDW();
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.deleteTribeSpace(space);
+
   }
 
 }

@@ -5,7 +5,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import org.exoplatform.platform.qa.ui.commons.BaseDW;
 import org.exoplatform.platform.qa.ui.core.PLFData;
-import org.exoplatform.platform.qa.ui.pageobject.*;
+import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
@@ -23,7 +23,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Tag("tribe")
+@Tag("dw")
 @Tag("smoke")
 @Tag("social")
 public class SOCPeopleActivityAddTestDWIT extends BaseDW {
@@ -63,7 +63,7 @@ public class SOCPeopleActivityAddTestDWIT extends BaseDW {
     String link = "http://www.google.fr";
     String title = "Google";
 
-    homePagePlatform.goToStreamPageTribe();
+    homePagePlatform.goToStreamPageTribeViaUrl();
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(link, "");
     $(byText(link)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
@@ -82,4 +82,5 @@ public class SOCPeopleActivityAddTestDWIT extends BaseDW {
     $(byText(link)).parent().parent().parent().parent().parent().waitUntil(Condition.disappear, Configuration.openBrowserTimeoutMs);
 
   }
+
 }

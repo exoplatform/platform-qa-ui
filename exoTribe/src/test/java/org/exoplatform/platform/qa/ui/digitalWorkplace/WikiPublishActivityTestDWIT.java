@@ -24,7 +24,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLoca
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_WIKI_PAGE_CONTAINER;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-@Tag("tribe")
+@Tag("dw")
 @Tag("wiki")
 @Tag("sniff")
 public class WikiPublishActivityTestDWIT extends BaseDW {

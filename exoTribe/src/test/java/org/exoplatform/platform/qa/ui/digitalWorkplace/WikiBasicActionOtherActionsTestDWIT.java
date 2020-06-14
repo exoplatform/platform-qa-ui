@@ -24,7 +24,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-@Tag("tribe")
+@Tag("dw")
 @Tag("wiki")
 @Tag("sniff")
 public class WikiBasicActionOtherActionsTestDWIT extends BaseDW {

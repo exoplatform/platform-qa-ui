@@ -69,7 +69,7 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_SIGN_OUT = $(byXpath("//*[@class='uiIcon uiIconToolbarNavItem logoutIcon']"));
 
-    public static final SelenideElement ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU = $(byXpath("//*[@id='app']"));
+    public static final SelenideElement ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU = $(byXpath("//*[@class='HamburgerNavigationMenuLink']"));
 
     public static final SelenideElement ELEMENT_DW_ADMINISTRATION_PAGE = $(byXpath("//*[@class='uiIcon uiIconToolbarNavItem uiAdministrationIcon']"));
 
@@ -87,7 +87,7 @@ public class exoTribeLocator {
 
     //STREAM
 
-    public static final SelenideElement ELEMENT_TRIBE_POST_ACTIVITY_BTN = $(byXpath("//*[@class='uiIconGoUp']"));
+    public static final SelenideElement ELEMENT_TRIBE_POST_ACTIVITY_BTN = $(byXpath("//*[@class='uiIconEdit']"));
     public static final By              ELEMENT_TRIBE_POST_ACTIVITY_BUTTON                        = By.xpath("//*[@class='btn btn-primary ignore-vuetify-classes btnStyle']");
     public static final SelenideElement              ELEMENT_DW_POST_ACTIVITY_BUTTON                        = $(By.xpath("//*[@class='activityComposer']//*[@class='uiIconEdit']"));
 
@@ -189,7 +189,11 @@ public class exoTribeLocator {
     //TASK
     public static final By ELEMENT_POPUB_TRIBE_EDIT_PROJECT    =By.xpath("//*[@id='taskManagement']//*[@class='PopupContent popupContent']");
 
-    //PEOPLE
+    public static final SelenideElement ELEMENT_ICON_ADD_IMAGE_IN_COMMENT_DW = $(byXpath("//*[@class='cke_button_icon cke_button__selectimage_icon']"));
+
+    public static final SelenideElement ELEMENT_INPUT_COMMENT_TASK_DW  = $(byXpath("//*[@class='cke_wysiwyg_frame cke_reset']"));
+
+  //PEOPLE
     public static final SelenideElement ELEMENT_PEOPLE_TRIBE_SEARCH_TEXT = $(byXpath("//*[@class='v-text-field__slot']/input"));
 
     public static final SelenideElement ELEMENT_CONNECTION_CONFIRM_BTN_DW       = $(byXpath("(//*[@class='acceptToConnectButtonParent']//button)[1]"));

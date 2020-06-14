@@ -8,7 +8,6 @@ import org.exoplatform.platform.qa.ui.selenium.platform.ConnectionsManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
-import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -16,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
@@ -27,6 +25,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("social")
 @Tag("sniff")
+@Tag("dw")
 public class SOCPeopleTestDWIT extends BaseDW {
   NavigationToolbar navigationToolbar;
 
@@ -362,38 +361,4 @@ public class SOCPeopleTestDWIT extends BaseDW {
     addUsers.deleteUser(username2);
   }
 
-  @Tag("SOC-5917")
-  @Test
-  public void test06_CheckNotificationsAfterRefuseInvitation() {
-    info("test01_06_AcceptDenyRecievedInvitation");
-    /* Create data test */
-    String username1 = "usernamea" + getRandomString();
-    String email1 = username1 + "@test.com";
-    String username2 = "usernameb" + getRandomString();
-    String email2 = username2 + "@test.com";
-    String password = "123456";
-    info("Add user");
-    navigationToolbar.goToAddUsersPageDW();
-    addUsers.addUser(username1, password, email1, username1, username1);
-    addUsers.addUser(username2, password, email2, username2, username2);
-
-    manageLogInOut.signOutTribe();
-    manageLogInOut.signIn(username1, password);
-    info("Click on Connections on the left panel");
-    homePagePlatform.goToPeoplePageTribe();
-    info("Click on Connect button to invite about 2 users");
-    connectionsManagement.tribeConnectToAUser(username2);
-    info("Login by invited users, go to My Connections/Requests Received and accept invitation");
-    manageLogInOut.signOutTribe();
-    manageLogInOut.signIn(username2, password);
-    homePagePlatform.goToPeoplePageTribe();
-    connectionsManagement.ignoreConnectionDW(username1);
-    navigationToolbar.goToIntranetNotificationDW();
-    $(ELEMENT_NOTIFICATION_DROPDOWN_DW).find(byText(username1 + " " + username1)).shouldNotBe(visible);
-    manageLogInOut.signOutTribe();
-    manageLogInOut.signIn(PLFData.DATA_USER1, "gtngtn");
-    navigationToolbar.goToManageUsersPageDW();
-    addUsers.deleteUser(username1);
-    addUsers.deleteUser(username2);
-  }
 }
