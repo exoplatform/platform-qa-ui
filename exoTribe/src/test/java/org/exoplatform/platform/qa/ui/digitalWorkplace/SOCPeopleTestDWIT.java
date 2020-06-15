@@ -84,7 +84,7 @@ public class SOCPeopleTestDWIT extends BaseDW {
     manageLogInOut.signOutTribe();
     manageLogInOut.signIn(username1, password);
     info("Click on Connections on the left panel");
-    homePagePlatform.goToPeoplePageTribe();
+    homePagePlatform.goToPeoplePageTribeViaUrl();
 
     info("Click on Connect button to invite about 2 users");
     connectionsManagement.tribeConnectToAUser(username2);
@@ -94,7 +94,7 @@ public class SOCPeopleTestDWIT extends BaseDW {
     info("Login by invited users, go to My Connections/Requests Received and accept invitation");
     manageLogInOut.signOutTribe();
     manageLogInOut.signIn(username2, password);
-    homePagePlatform.goToPeoplePageTribe();
+    homePagePlatform.goToPeoplePageTribeViaUrl();
     connectionsManagement.acceptAConnectionDW(username1);
 
     info("Login by invited users, go to My Connections/Requests Received and ignore invitation");
@@ -148,7 +148,7 @@ public class SOCPeopleTestDWIT extends BaseDW {
     manageLogInOut.signIn(username1, password);
 
     info("Click on Connections on the left panel");
-    homePagePlatform.goToPeoplePageTribe();
+    homePagePlatform.goToPeoplePageTribeViaUrl();
 
     info("Access people list, invite an user");
     connectionsManagement.tribeConnectToAUser(username2);
@@ -209,7 +209,7 @@ public class SOCPeopleTestDWIT extends BaseDW {
     manageLogInOut.signIn(username1, password);
 
     info("Click on Connections on the left panel");
-    homePagePlatform.goToPeoplePageTribe();
+    homePagePlatform.goToPeoplePageTribeViaUrl();
 
     info("Click on Connect button to invite about 2 users");
     connectionsManagement.tribeConnectToAUser(username2);
@@ -219,12 +219,14 @@ public class SOCPeopleTestDWIT extends BaseDW {
     info("Verify before accept John's invitaion");
     manageLogInOut.signOutTribe();
     manageLogInOut.signIn(username2, password);
+    homePagePlatform.goToPeoplePageTribeViaUrl();
     homePagePlatform.goToMyConnectionsFromHomePageDW();
     connectionsManagement.verifyConnectionDW(username1, false, "My Connections");
     info("Accept John'sinvitaion");
     homePagePlatform.goToPeoplePageTribe();
     connectionsManagement.acceptAConnectionDW(username1);
     info("Verify after accept John's invitaion");
+    homePagePlatform.goToPeoplePageTribeViaUrl();
     homePagePlatform.goToMyConnectionsFromHomePageDW();
     homePagePlatform.refreshUntil(ELEMENT_CONNECTION_DISONNECT_REFUSE_BTN_DW, Condition.exist, 2000);
 
@@ -237,6 +239,7 @@ public class SOCPeopleTestDWIT extends BaseDW {
     info("Login by John and check Connections by click on My Connections in Avartar");
     manageLogInOut.signOutTribe();
     manageLogInOut.signIn(username1, password);
+    homePagePlatform.goToPeoplePageTribeViaUrl();
     homePagePlatform.goToMyConnectionsFromHomePageDW();
     connectionsManagement.verifyConnectionDW(username2, true, "My Connections");
     connectionsManagement.verifyConnectionDW(username3, true, "My Connections");
@@ -283,7 +286,7 @@ public class SOCPeopleTestDWIT extends BaseDW {
     manageLogInOut.signIn(username1, password);
 
     info("Click on Connections on the left panel");
-    homePagePlatform.goToPeoplePageTribe();
+    homePagePlatform.goToPeoplePageTribeViaUrl();
     connectionsManagement.tribeSearchPeople(username2);
     info("Show all users on Social and user can send friend request to connect with other users");
     ($(By.id("peopleListBody"))).find(byText(username2 + " " + username2))
@@ -341,13 +344,13 @@ public class SOCPeopleTestDWIT extends BaseDW {
     manageLogInOut.signOutTribe();
     manageLogInOut.signIn(username1, password);
     info("Click on Connections on the left panel");
-    homePagePlatform.goToPeoplePageTribe();
+    homePagePlatform.goToPeoplePageTribeViaUrl();
     info("Click on Connect button to invite about 2 users");
     connectionsManagement.tribeConnectToAUser(username2);
     info("Login by invited users, go to My Connections/Requests Received and accept invitation");
     manageLogInOut.signOutTribe();
     manageLogInOut.signIn(username2, password);
-    homePagePlatform.goToPeoplePageTribe();
+    homePagePlatform.goToPeoplePageTribeViaUrl();
     connectionsManagement.acceptAConnectionDW(username1);
     navigationToolbar.goToIntranetNotificationDW();
     $(ELEMENT_NOTIFICATION_DROPDOWN_DW).find(byText(username1 + " " + username1)).parent().shouldHave(Condition.text(comment));

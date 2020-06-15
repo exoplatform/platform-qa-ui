@@ -4,10 +4,10 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseDW;
 import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
-import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.NavigationToolbar;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
@@ -94,17 +94,9 @@ public class WikiPublishActivityTestDWIT extends BaseDW {
     manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
   }
 
-  /**
-   * <li>Case ID:122865.</li>
-   * <li>Test Case Name: Update activity - edit wiki page title</li>
-   * <li>Pre-Condition: the wiki activity is already shared in the activity
-   * stream</li>
-   * <li>Post-Condition:</li>
-   */
   @Test
-  @Tag("wabis")
   public void test01_OpenWikiPageFromWikiActivity() {
-    info("Test 04: Update activity - edit wiki page title");
+    info("Update activity - edit wiki page title");
 
     String space = "space" + getRandomNumber();
     String title = "title" + getRandomNumber();
@@ -120,7 +112,7 @@ public class WikiPublishActivityTestDWIT extends BaseDW {
      * activity stream
      */
     info("Create a new wiki page");
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
     info("Add new wiki page for space");
     tribeSpaceManagement.goToWikiTabDW(space);
@@ -169,6 +161,7 @@ public class WikiPublishActivityTestDWIT extends BaseDW {
     homePagePlatform.goToSpaceHomeDW();
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.deleteTribeSpace(space);
+
   }
 
 }

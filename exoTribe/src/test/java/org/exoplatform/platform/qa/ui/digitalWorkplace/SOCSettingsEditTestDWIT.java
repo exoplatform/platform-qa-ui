@@ -2,8 +2,10 @@ package org.exoplatform.platform.qa.ui.digitalWorkplace;
 
 import org.exoplatform.platform.qa.ui.commons.BaseDW;
 import org.exoplatform.platform.qa.ui.core.PLFData;
-import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAndGroupManagement;
+import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
+import org.exoplatform.platform.qa.ui.pageobject.TribeChangeSettings;
+import org.exoplatform.platform.qa.ui.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
@@ -76,7 +78,7 @@ public class SOCSettingsEditTestDWIT extends BaseDW {
     String language = "French";
     String firstLanguage = "English";
 
-    homePagePlatform.goToSettingsPageTribe();
+    homePagePlatform.goToSettingsPageTribeViaUrl();
 
     info("Cancel Edit Language");
     tribeChangeSettings.tribeEditLanguage(language);
@@ -91,14 +93,13 @@ public class SOCSettingsEditTestDWIT extends BaseDW {
     tribeChangeSettings.tribeAcceptEditLanguage();
   }
 
-
   @Test
   public void test02_CancelThenConfirmEditTimeZone() {
 
     String timeZone = "+02:00";
     String firstTimeZone = "+01:00";
 
-    homePagePlatform.goToSettingsPageTribe();
+    homePagePlatform.goToSettingsPageTribeViaUrl();
 
     info("Cancel Edit Time Zone");
     tribeChangeSettings.tribeEditTimeZone(timeZone);
@@ -119,7 +120,7 @@ public class SOCSettingsEditTestDWIT extends BaseDW {
 
     String newPassword = "password" + getRandomNumber();
 
-    homePagePlatform.goToSettingsPageTribe();
+    homePagePlatform.goToSettingsPageTribeViaUrl();
 
     info("Cancel Edit Password");
     sleep(2000);
@@ -140,19 +141,19 @@ public class SOCSettingsEditTestDWIT extends BaseDW {
   @Test
   public void test04_EnableDisableNotificationViaMail() {
 
-    homePagePlatform.goToSettingsPageTribe();
+    homePagePlatform.goToSettingsPageTribeViaUrl();
 
     info("Disable Notification Via Mail");
     sleep(3000);
     tribeChangeSettings.tribeEnableDisableNotificationViaMail();
-    refresh();
+    getExoWebDriver().getWebDriver().navigate().refresh();
 
     info("Notification Via Mail is disabled");
     Assert.assertEquals(ELEMENT_TRIBE_NOTIFICATION_VIA_MAIL_STATUS.getAttribute("aria-checked"), "false");
 
     info("Enable Notification Via Mail");
     tribeChangeSettings.tribeEnableDisableNotificationViaMail();
-    refresh();
+    getExoWebDriver().getWebDriver().navigate().refresh();
 
     info("Notification Via Mail is enabled");
     Assert.assertEquals(ELEMENT_TRIBE_NOTIFICATION_VIA_MAIL_STATUS.getAttribute("aria-checked"), "true");
@@ -162,19 +163,19 @@ public class SOCSettingsEditTestDWIT extends BaseDW {
   @Test
   public void test05_EnableDisableNotificationOnMobile() {
 
-    homePagePlatform.goToSettingsPageTribe();
+    homePagePlatform.goToSettingsPageTribeViaUrl();
 
     info("Disable Notification On Mobile");
     sleep(2000);
     tribeChangeSettings.tribeEnableDisableNotificationOnMobile();
-    refresh();
+    getExoWebDriver().getWebDriver().navigate().refresh();
 
     info("Notification On Mobile is disabled");
     Assert.assertEquals(ELEMENT_TRIBE_NOTIFICATION_ON_MOBILE_STATUS.getAttribute("aria-checked"), "false");
 
     info("Enable Notification On Mobile");
     tribeChangeSettings.tribeEnableDisableNotificationOnMobile();
-    refresh();
+    getExoWebDriver().getWebDriver().navigate().refresh();
 
     info("Notification On Mobile is enabled");
     Assert.assertEquals(ELEMENT_TRIBE_NOTIFICATION_ON_MOBILE_STATUS.getAttribute("aria-checked"), "true");
@@ -184,19 +185,19 @@ public class SOCSettingsEditTestDWIT extends BaseDW {
   @Test
   public void test06_EnableDisableNotificationOnSite() {
 
-    homePagePlatform.goToSettingsPageTribe();
+    homePagePlatform.goToSettingsPageTribeViaUrl();
 
     info("Disable Notification On Site");
     sleep(2000);
     tribeChangeSettings.tribeEnableDisableNotificationOnSite();
-    refresh();
+    getExoWebDriver().getWebDriver().navigate().refresh();
 
     info("Notification On Site is disabled");
     Assert.assertEquals(ELEMENT_TRIBE_NOTIFICATION_ON_SITE_STATUS.getAttribute("aria-checked"), "false");
 
     info("Enable Notification On Site");
     tribeChangeSettings.tribeEnableDisableNotificationOnSite();
-    refresh();
+    getExoWebDriver().getWebDriver().navigate().refresh();
 
     info("Notification On Site is enabled");
     Assert.assertEquals(ELEMENT_TRIBE_NOTIFICATION_ON_SITE_STATUS.getAttribute("aria-checked"), "true");
@@ -206,7 +207,7 @@ public class SOCSettingsEditTestDWIT extends BaseDW {
   @Test
   public void test07_EnableDisableGeneralNotificationsOnSite() {
 
-    homePagePlatform.goToSettingsPageTribe();
+    homePagePlatform.goToSettingsPageTribeViaUrl();
 
     sleep(2000);
     tribeChangeSettings.goToManageNotifications();
@@ -245,7 +246,7 @@ public class SOCSettingsEditTestDWIT extends BaseDW {
   @Test
   public void test08_EnableDisableGeneralNotificationsOnMobile() {
 
-    homePagePlatform.goToSettingsPageTribe();
+    homePagePlatform.goToSettingsPageTribeViaUrl();
 
     sleep(2000);
     tribeChangeSettings.goToManageNotifications();
@@ -284,7 +285,7 @@ public class SOCSettingsEditTestDWIT extends BaseDW {
   @Test
   public void test09_EnableDisableGeneralNotificationsViaMail() {
 
-    homePagePlatform.goToSettingsPageTribe();
+    homePagePlatform.goToSettingsPageTribeViaUrl();
 
     sleep(2000);
     tribeChangeSettings.goToManageNotifications();
@@ -323,7 +324,7 @@ public class SOCSettingsEditTestDWIT extends BaseDW {
   @Test
   public void test11_EnableDisableAllGeneralNotifications() {
 
-    homePagePlatform.goToSettingsPageTribe();
+    homePagePlatform.goToSettingsPageTribeViaUrl();
 
     sleep(2000);
     tribeChangeSettings.goToManageNotifications();

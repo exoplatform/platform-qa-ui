@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseDW;
 import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
@@ -13,7 +14,6 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
-import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -83,7 +84,6 @@ public class WikiBasicActionOtherActionsTestDWIT extends BaseDW {
 
   }
 
-
   @Test
   public void test01_MovePage_Intranet_Space_Then_Space_Intranet() {
 
@@ -94,12 +94,13 @@ public class WikiBasicActionOtherActionsTestDWIT extends BaseDW {
     String title2 = "title2" + getRandomNumber();
 
 
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
 
     info("Create a wiki page ");
     tribeSpaceManagement.goToWikiTabDW(space);
     tribeWikiHomePage.goToAddBlankPageDW();
+    sleep(2000);
     tribeSourceTextEditor.addSimplePage(title1, title1);
     tribeWikiManagement.saveAddPage();
     $(byText(title1)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
@@ -129,17 +130,17 @@ public class WikiBasicActionOtherActionsTestDWIT extends BaseDW {
     tribeWikiHomePage.deleteWikiDW(title2);
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.deleteTribeSpace(space1);
+
   }
 
   @Test
-  @Tag("wabis")
   public void test02_MovePage_Space2_Space1() {
 
     info("Create a space");
     String space1 = "space" + getRandomNumber();
     String space2 = "space" + getRandomNumber();
 
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(space1, space1, "Open", "No", null);
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.addNewSpace(space2, space2, "Open", "No", null);

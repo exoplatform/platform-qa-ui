@@ -111,6 +111,10 @@ public class HomePagePlatform {
     open(Configuration.baseUrl+ "portal/dw/stream");
   }
 
+  public void goToPeoplePageTribeViaUrl() {
+    info("Open Stream page by link");
+    open(Configuration.baseUrl+ "portal/dw/people");
+  }
   /**
    * Go to People page Tribe
    */
@@ -122,10 +126,6 @@ public class HomePagePlatform {
   }
 
   public void goToMyConnectionsFromHomePageDW() {
-    info("Click on People page");
-    $(byXpath("//*[@id='brandingTopBar']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_TRIBE_PEOPLE_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_MY_CONNECTIONS_BTN_DW.sendKeys("My Connections");
   }
 

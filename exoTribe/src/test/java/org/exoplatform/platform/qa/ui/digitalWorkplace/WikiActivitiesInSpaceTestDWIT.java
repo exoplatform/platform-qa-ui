@@ -75,7 +75,7 @@ public class WikiActivitiesInSpaceTestDWIT extends BaseDW {
 
   @Test
   public void test01_AddEditRemoveAWikiActivityAfterCreateAWikiPageInSpace() {
-    info("Test 13 Remove wiki's page of space");
+    info("Remove wiki's page of space");
     info("Create a space");
     String space = "space" + getRandomNumber();
     String newTitle = "newTitle" + getRandomNumber();
@@ -86,7 +86,7 @@ public class WikiActivitiesInSpaceTestDWIT extends BaseDW {
     ArrayList<String> inviteUsers = new ArrayList<>();
     inviteUsers.add(user1);
     inviteUsers.add(user2);
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(space, space, "Open", "No", inviteUsers);
     info("Create a wiki page");
     String title = "title" + getRandomNumber();
