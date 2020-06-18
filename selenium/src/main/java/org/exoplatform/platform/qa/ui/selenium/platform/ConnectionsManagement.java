@@ -102,7 +102,7 @@ public class ConnectionsManagement {
     if ($(ELEMENT_CONNECTION_CANCEL_BTN).is(Condition.exist)) {
       $(ELEMENT_CONNECTION_CANCEL_BTN).click();
     }
-    $(byText("Connect")).click();
+    $(byText("Connect")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Connected to the user");
   }
 
@@ -272,12 +272,21 @@ public class ConnectionsManagement {
    * @param number
    */
   public void tribeSearchPeople(String name, String... number) {
-    info("Waiting my space is shown");
+
     ELEMENT_PEOPLE_TRIBE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout);
-    info("Input the space into search text box");
+    info("Input the user into search text box");
     ELEMENT_PEOPLE_TRIBE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).clear();
     ELEMENT_PEOPLE_TRIBE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
   }
+
+
+  public void tribeSearchSpace(String space, String... number) {
+    ELEMENT_PEOPLE_TRIBE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout);
+    info("Input the space into search text box");
+    ELEMENT_PEOPLE_TRIBE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).clear();
+    ELEMENT_PEOPLE_TRIBE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(space);
+  }
+
 
   /**
    * Go to User

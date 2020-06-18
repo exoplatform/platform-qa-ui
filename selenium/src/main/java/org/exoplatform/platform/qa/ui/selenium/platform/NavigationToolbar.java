@@ -29,15 +29,17 @@ import org.junit.Assert;
 import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Configuration.baseUrl;
+import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.NavigationToolBarLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ecms.ECMSLocator.ELEMENT_QUICK_SEARCH_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_MANAGESITES_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.gatein.GateinLocator.ELEMENT_PAGE_CREATION_WIZARD;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_DOCUMENT_FOLDER_UPLOADED_FILE;
+import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACE_ADMIN_PAGE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
@@ -58,9 +60,9 @@ public class NavigationToolbar {
   public void goToEditLayout() {
     info("--Go to Edit Layout--");
 
-    $(ELEMENT_LINK_EDIT).waitUntil(Condition.visible,Configuration.timeout).click();
-    $(ELEMENT_MENU_PAGE_LINK).waitUntil(Condition.visible,Configuration.timeout).hover();
-    $(ELEMENT_MENU_EDIT_LAYOUT).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_LINK_EDIT).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_MENU_PAGE_LINK).waitUntil(Condition.visible, Configuration.timeout).hover();
+    $(ELEMENT_MENU_EDIT_LAYOUT).waitUntil(Condition.visible, Configuration.timeout).click();
   }
 
   /**
@@ -70,7 +72,7 @@ public class NavigationToolbar {
     info("Go to add page form");
     $(ELEMENT_LINK_EDIT).click();
     $(ELEMENT_MENU_PAGE_LINK).hover();
-    $(ELEMENT_MENU_ADD_PAGE_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_MENU_ADD_PAGE_LINK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     $(ELEMENT_PAGE_CREATION_WIZARD).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
   }
 
@@ -128,9 +130,9 @@ public class NavigationToolbar {
    */
   public void goToUsersAndGroupsManagement() {
     info("--Go to Users and groups management--");
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible, Configuration.timeout).click();
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -190,12 +192,12 @@ public class NavigationToolbar {
       $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs + Configuration.timeout);
       $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     } else
-      $(ELEMENT_LINK_SETUP).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+      $(ELEMENT_LINK_SETUP).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     info("Element " + ELEMENT_MENU_CONTENT_LINK + "... is displayed");
     do {
       $(ELEMENT_MENU_CONTENT_LINK).hover();
     } while (!$(ELEMENT_MENU_SITE_EXPLORER).exists());
-    $(ELEMENT_MENU_SITE_EXPLORER).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
+    $(ELEMENT_MENU_SITE_EXPLORER).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
     info("Site Explorer is shown successfully");
   }
 
@@ -209,7 +211,7 @@ public class NavigationToolbar {
     info("Hover over on Page link");
     evt.mouseOver(ELEMENT_MENU_PAGE_LINK, true);
     info("Click on Seo Menu");
-    $(ELEMENT_MENU_SEO_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_MENU_SEO_LINK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -288,13 +290,13 @@ public class NavigationToolbar {
    */
   public void goToCreateWikiPage(String location) {
     info("Go to create wiki page");
-    $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.visible,Configuration.timeout).click();
-    $(ELEMENT_ADD_WIKI_TOOLBAR).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_ADD_WIKI_TOOLBAR).waitUntil(Condition.visible, Configuration.timeout).click();
     if (!location.isEmpty()) {
-      $(ELEMENT_ADD_WIKI_SET_LOCATION).waitUntil(Condition.visible,Configuration.timeout).click();
-      $(ELEMENT_ADD_WIKI_CHOOSE_LOCATION.replace("{$location}", location)).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(ELEMENT_ADD_WIKI_SET_LOCATION).waitUntil(Condition.visible, Configuration.timeout).click();
+      $(ELEMENT_ADD_WIKI_CHOOSE_LOCATION.replace("{$location}", location)).waitUntil(Condition.visible, Configuration.timeout).click();
     }
-    $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
   }
 
@@ -332,19 +334,19 @@ public class NavigationToolbar {
    */
   public void goToAddTopic(String location, String forum) {
     info("Go to add a topic from toolbar");
-    $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.visible,Configuration.timeout).click();
-    $(ELEMENT_ADD_TOPIC_TOOLBAR).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.visible, Configuration.timeout).click();
+    $(ELEMENT_ADD_TOPIC_TOOLBAR).waitUntil(Condition.visible, Configuration.timeout).click();
     if (location != "") {
-      $(ELEMENT_ADD_POLL_SET_LOCATION).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(ELEMENT_ADD_POLL_SET_LOCATION).waitUntil(Condition.visible, Configuration.timeout).click();
     }
     info("evt.click on Next button");
-    $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
     info("Select a forum for topic");
     if (ELEMENT_SELECT_FORUM_COMBOBOX.is(Condition.exist)) {
       ELEMENT_SELECT_FORUM_COMBOBOX.waitUntil(Condition.appears, Configuration.timeout).click();
       $(byText(forum)).waitUntil(Condition.appears, Configuration.timeout).click();
       info("Click on next button");
-      $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.visible,Configuration.timeout).click();
+      $(ELEMENT_NEXT_BUTTON).waitUntil(Condition.visible, Configuration.timeout).click();
     }
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
   }
@@ -366,10 +368,10 @@ public class NavigationToolbar {
   }
 
   public void gotoAddTask(String name) {
-    $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_ADD_TASK_CLASS_TOOLBAR.waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_TASK_ADD_TITLE.waitUntil(Condition.visible,Configuration.timeout).setValue(name);
-    ELEMENT_TASK_BUTTON_ADD.waitUntil(Condition.visible,Configuration.timeout).click();
+    $(ELEMENT_ADD_TOOTLBAR).waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_ADD_TASK_CLASS_TOOLBAR.waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_TASK_ADD_TITLE.waitUntil(Condition.visible, Configuration.timeout).setValue(name);
+    ELEMENT_TASK_BUTTON_ADD.waitUntil(Condition.visible, Configuration.timeout).click();
   }
 
   /**
@@ -379,7 +381,7 @@ public class NavigationToolbar {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.timeout);
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     $(ELEMENT_MENU_CONTENT_LINK).hover();
-    $(ELEMENT_SEARCH_LINK).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_SEARCH_LINK).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -400,7 +402,7 @@ public class NavigationToolbar {
    */
   public void goToQuickSearch() {
     info("Click on Quick search icon");
-    $(ELEMENT_TOOLBAR_QUICKSEARCH).waitUntil(Condition.visible,Configuration.collectionsTimeout).click();
+    $(ELEMENT_TOOLBAR_QUICKSEARCH).waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
 
   }
 
@@ -461,25 +463,26 @@ public class NavigationToolbar {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).click();
     ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_ADD_USERS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_ADMINISTRATION_ADD_USERS.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   public void goToManageCommunity() {
     $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
-    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_TOOLBAR_ADMINISTRATION).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_ADMINISTRATION_COMMUNITY.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     ELEMENT_ADMINISTRATION_COMMUNITY.hover();
-    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_ADMINISTRATION_MANAGE_COMMUNITY.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   public void goToAddUsersPageDW() {
     info("Click on Home page");
-    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     sleep(1000);
-    ELEMENT_DW_ADMINISTRATION_PAGE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_DW_ADMINISTRATION_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     $(byXpath("//*[@href='/portal/g/:platform:administrators/administration/newStaff']"))
-            .waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs)
-            .click();  }
+            .waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs)
+            .click();
+  }
 
   public void goToManageUsersPageDW() {
 
@@ -516,13 +519,110 @@ public class NavigationToolbar {
 
   public void goToIntranetNotificationDW() {
     info("Go to Intranet Notification");
+    sleep(2000);
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     ELEMENT_NOTIFICATIONS_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_NOTIFICATION_DROPDOWN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     info("The elemnt is shown successfully");
   }
 
+  public void acceptJoinSpaceViaNotificationnDW(String space) {
+    info("Accept to join a space via notification");
+    $(byXpath(ELEMENT_ACCEPT_JOIN_SPACE_NOTIFICATION_BTN_DW.replace("${space}", space))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+  }
+
+  public void verifyAcceptJoinSpaceViaNotificationDW(String space) {
+
+    Assert.assertEquals($(byXpath("//*[@class='media']//*[@data-link='/portal/g/:spaces:{space}/{space}']//*[@class='status']"
+            .replace("{space}", space)))
+            .getText(), "You joined " + space + " space.");
+  }
+
+  public void markAllNotificationAsReadDW() {
+
+    ELEMENT_MARK_AS_READ.waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+
+  }
+
+  public void checkThatAllNotificationAreMarkedAsReadDW() {
+
+    ELEMENT_SEE_ALL_NOTIFICATIONS.waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+    info("Check That Mark As Read Button Is Disabled");
+    $(byXpath("//*[@class='notificationsActions']//*[@class='actionMark enabled']")).waitUntil(Condition.not(Condition.visible), openBrowserTimeoutMs).isDisplayed();
+
+  }
+
+  public void JoinSpaceViaNotificationDW(String space) {
+
+   $(byXpath("//*[@class='media']//*[@data-link='/portal/g/:spaces:{space}/{space}']//*[@class='status']"
+            .replace("{space}", space))).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+  }
+
+  public void refuseJoinSpaceViaNotificationnDW(String space) {
+    info("Refuse to join a space via notification");
+    $(byXpath(ELEMENT_REFUSE_JOIN_SPACE_NOTIFICATION_BTN_DW.replace("${space}", space))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+  }
+
+  public void removeFirstNotificationDW() {
+    String id = $(byXpath("//*[@class='notifDrawerItem'][1]/li")).waitUntil(Condition.visible, openBrowserTimeoutMs).getAttribute("data-id");
+    ELEMENT_DELETE_FIRST_NOTIFICATION_DW.waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+    sleep(2000);
+    Assert.assertEquals($(byXpath("//*[@data-id='{id}']".replace("{id}", id))).getAttribute("style"), "display: none;");
+    info("The notification is removed successfully");
+  }
+
   public void closeNotificationsDW() {
     ELEMENT_CLOSE_NOTIFICATIONS_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+  }
+
+  public void openChatDrawerDW() {
+    info("Open Chat Drawer");
+    ELEMENT_TRIBE_MINICHAT_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CHAT_CONTACT_LINK_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    ELEMENT_CHAT_CONTACT_LIST_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+
+  }
+
+  public void goToChatPageDW() {
+    info("Go To The Chat Page");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+
+    ELEMENT_CHAT_CONTACT_LINK_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    ELEMENT_CHAT_CONTACT_LIST_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+
+  }
+
+  public void closeChatDrawerDW() {
+    info("Close Chat Drawer");
+    ELEMENT_CLOSE_CHAT_DRAWER_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CHAT_CONTACT_LINK_DW.waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
+    ELEMENT_CHAT_CONTACT_LIST_DW.waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
+  }
+
+  public void goToAChatContactDW(String contact) {
+    info("Go To A Chat Contact");
+    $(byXpath(ELEMENT_CHAT_CONTACT_DW.replace("${title}", contact))).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+    ELEMENT_CHAT_EMOTICON_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    ELEMENT_CHAT_APPS_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    ELEMENT_CHAT_MESSAGE_AREA_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    ELEMENT_CHAT_SEND_BUTTON_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    ELEMENT_OPEN_CHAT_CONTACT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    ELEMENT_CLOSE_CHAT_CONTACT_BUTTON_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    ELEMENT_BACK_TO_CHAT_CONTACT_LIST_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    info("Check That Chat Contact is displayed" + contact);
+    $(byXpath("//*[@class='leftHeaderDrawer']//span[@title='${contact}']".replace("${contact}", contact)))
+            .waitUntil(Condition.visible, openBrowserTimeoutMs)
+            .isDisplayed();
+
+  }
+
+  public void goBackToChatContactListDW() {
+
+    info("Go Back To The Chat Contact List");
+    ELEMENT_BACK_TO_CHAT_CONTACT_LIST_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CHAT_CONTACT_LINK_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    ELEMENT_CHAT_CONTACT_LIST_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+
   }
 
   /**

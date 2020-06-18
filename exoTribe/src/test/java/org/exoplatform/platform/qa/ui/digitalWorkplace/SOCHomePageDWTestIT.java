@@ -72,7 +72,8 @@ public class SOCHomePageDWTestIT extends BaseDW {
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");
 
-    tribeActivityStream.likeActivityDW(activity1);
+    String activityId = tribeActivityStream.getActivityIdDW(activity1);
+    tribeActivityStream.likeActivityDW(activityId);
     // click on the activity to appear the delete button
     tribeActivityStream.deleteactivityDW(activity1);
 
@@ -96,7 +97,8 @@ public class SOCHomePageDWTestIT extends BaseDW {
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");
 
-    tribeActivityStream.addActivityComment(activity1, comment);
+    String activityId = tribeActivityStream.getActivityIdDW(activity1);
+    tribeActivityStream.addActivityComment(activityId, comment);
 
     info("Delete comment");
     activityStream.deletecommentDW(activity1, comment);

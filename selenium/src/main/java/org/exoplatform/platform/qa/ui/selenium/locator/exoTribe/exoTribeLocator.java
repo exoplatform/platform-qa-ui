@@ -77,6 +77,46 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_PAGE = $(byXpath("//*[@class='uiIcon uiIconFile uiIconToolbarNavItem uiIconHome iconHome null']"));
 
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_CHECK_ORDER = $(byXpath("(//*[@id='SiteHamburgerNavigation']//i)[1]/following::div[1]//div"));
+
+    public static final SelenideElement ELEMENT_TRIBE_STREAM_CHECK_ORDER = $(byXpath("(//*[@id='SiteHamburgerNavigation']//i)[2]/following::div[1]//div"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SPACES_CHECK_ORDER = $(byXpath("(//*[@id='SiteHamburgerNavigation']//i)[3]/following::div[1]//div"));
+
+    public static final SelenideElement ELEMENT_TRIBE_PEOPLE_CHECK_ORDER = $(byXpath("(//*[@id='SiteHamburgerNavigation']//i)[4]/following::div[1]//div"));
+
+    public static final SelenideElement ELEMENT_TRIBE_LAST_VISITED_SPACES_CHECK_ORDER = $(byXpath("(//*[@class='flex']//i)[5]/following::div[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_RECENT_SPACES = $(byXpath("//*[@class='uiIcon uiArrowBackIcon']/following::div[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_FILTER_SPACES_SEARCH = $(byXpath("//input[@placeholder='Filter spaces here']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SEARCH_SPACE = $(byXpath("//*[@class='uiIcon uiArrowBackIcon']/following::button[1]//i"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SETTINGS_CHECK_ORDER = $(byXpath("(//*[@class='flex']//i)[7]/following::div[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_LOGOUT_CHECK_ORDER = $(byXpath("(//*[@class='flex']//i)[8]/following::div[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_BRANDING_TOPBAR = $(byXpath("//*[@id='brandingTopBar']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SEARCH_TOPBAR = $(byXpath("//*[@class='uiIconPLF24x24Search']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_MINICHAT_TOPBAR = $(byXpath("//*[@id='miniChatDrawer']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_APPLICATIONS_TOPBAR = $(byXpath("//*[@id='appLauncher']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_NOTIFICATIONS_TOPBAR = $(byXpath("//*[@id='NotificationPopoverPortlet']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SIDEBAR_MENU_CHECK_ORDER = $(byXpath("((//*[@id='UITopBarContainer']//*[@class='VuetifyApp'])[1]//div)[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_BRANDING_CHECK_ORDER = $(byXpath("((//*[@id='UITopBarContainer']//*[@class='VuetifyApp'])[2]//div)[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_MINICHAT_CHECK_ORDER = $(byXpath("((//*[@id='UITopBarContainer']//*[@class='VuetifyApp'])[3]//div)[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_APPLICATIONS_CHECK_ORDER = $(byXpath("((//*[@id='UITopBarContainer']//*[@class='VuetifyApp'])[4]//div)[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_NOTIFICATIONS_CHECK_ORDER = $(byXpath("((//*[@id='UITopBarContainer']//*[@class='VuetifyApp'])[5]//div)[1]"));
+
     public static final SelenideElement ELEMENT_TRIBE_PEOPLE_PAGE = $(byXpath("//*[@class='uiIcon uiIconFile uiIconToolbarNavItem uiIconPeople iconPeople null']"));
 
     public static final SelenideElement ELEMENT_CONNECTIONS_PAGE_FROM_HOME = $(byXpath("(//*[@class='v-card__text pa-1 subtitle-1 text-color'])[2]"));
@@ -88,9 +128,30 @@ public class exoTribeLocator {
     //STREAM
 
     public static final SelenideElement ELEMENT_TRIBE_POST_ACTIVITY_BTN = $(byXpath("//*[@class='uiIconEdit']"));
-    public static final By              ELEMENT_TRIBE_POST_ACTIVITY_BUTTON                        = By.xpath("//*[@class='btn btn-primary ignore-vuetify-classes btnStyle']");
-    public static final SelenideElement              ELEMENT_DW_POST_ACTIVITY_BUTTON                        = $(By.xpath("//*[@class='activityComposer']//*[@class='uiIconEdit']"));
 
+    public static final By ELEMENT_TRIBE_POST_ACTIVITY_BUTTON = By.xpath("//*[@class='btn btn-primary ignore-vuetify-classes btnStyle']");
+
+    public static final SelenideElement ELEMENT_DW_POST_ACTIVITY_BUTTON  = $(By.xpath("//*[@class='activityComposer']//*[@class='uiIconEdit']"));
+
+    public static final SelenideElement ELEMENT_DW_ADD_FILE_BUTTON  = $(By.xpath("//*[@class='addFileComposerIcon']"));
+
+    public static final SelenideElement ELEMENT_DW_UPLOAD_MANUALLY_BUTTON  = $(By.xpath("(//*[@class='uploadButton'])[1]"));
+
+    public static final String ELEMENT_DW_CHECKING_ATTACHED_FILE  = "//*[@class='attachment']//*[@class='fileNameLabel' and contains(text(),'${file}')]";
+
+    public static final SelenideElement ELEMENT_DW_APPLY_BUTTON  = $(By.xpath("//*[@class='btn btn-primary ignore-vuetify-classes']"));
+
+    public static final String ELEMENT_DW_PREVIEW_UPLOADED_FILE  = "(//*[@class='previews Previews{id}'])[1]//*[@class='infoFile']";
+
+    public static final String ELEMENT_DW_PREVIEW_HOVER_ON_UPLOADED_FILE  = "(//*[@class='previews Previews{id}'])[1]";
+
+    public static final SelenideElement ELEMENT_DW_ATTACHED_FILE_PREVIEW_DROPDOWN  = $(byXpath("//*[@class='uiVerticalDots']"));
+
+    public static final SelenideElement ELEMENT_DW_ATTACHED_FILE_PREVIEW_OPEN_IN_DOCUMENTS  = $(byXpath("//*[@class='openBtn']"));
+
+    public static final SelenideElement ELEMENT_DW_ATTACHED_FILE_PREVIEW_DOWNLOAD  = $(byXpath("//*[@class='downloadBtn']"));
+
+    public static final SelenideElement ELEMENT_DW_DOCUMENT_EDIT_IN_ONLYOFFICE  = $(byXpath("//*[@class='detailContainer']//*[@class='uiIconEcmsOfficeOnlineOpen uiIconEcmsLightGray uiIconEdit']"));
 
   //SPACE
 
@@ -140,7 +201,29 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_SEARCHED_SPACE_TRIBE   = $(byXpath("//*[@class='spaceDisplayName text-truncate d-block']"));
 
-    //WIKI
+    public static final String ELEMENT_SPACE_SIDEBAR_ORDER = "((//*[@class='flex']//i)[5]/following::div[@role='listbox'][1]//div[@class='v-list-item__content']/div)[{id}]";
+
+    public static final String ELEMENT_LAST_VISITED_SPACES_SIDEBAR_ORDER = "((//*[@class='flex filterSpaces']//i)[2]/following::div[@role='listbox'][1]//div[@class='v-list-item__content']/div)[{id}]";
+
+    public static final String ELEMENT_SELECTED_LAST_VISITED_SPACE = "(//*[@class='flex filterSpaces']//i)[2]/following::div[@role='listbox'][1]//div[@class='v-list-item__content']/div[contains(text(),'${space}')]";
+
+    public static final String ELEMENT_SPACE_WIKI_TAB_TOP_BAR = "//*[@id='MiddleToolBar']//*[@href='/portal/g/:spaces:{space}/{space}/wiki']";
+
+    public static final String ELEMENT_SPACE_TASKS_TAB_TOP_BAR = "//*[@id='MiddleToolBar']//*[@href='/portal/g/:spaces:{space}/{space}/tasks']";
+
+    public static final String ELEMENT_SPACE_FORUM_TAB_TOP_BAR = "//*[@id='MiddleToolBar']//*[@href='/portal/g/:spaces:{space}/{space}/forum']";
+
+    public static final String ELEMENT_SPACE_MEMBERS_TAB_TOP_BAR = "//*[@id='MiddleToolBar']//*[@href='/portal/g/:spaces:{space}/{space}/members']";
+
+    public static final String ELEMENT_SPACE_SETTINGS_TAB_TOP_BAR = "//*[@id='MiddleToolBar']//*[@href='/portal/g/:spaces:{space}/{space}/settings']";
+
+    public static final String ELEMENT_HOME_SPACE_TAB_TOP_BAR = "//*[@id='MiddleToolBar']//*[@href='/portal/g/:spaces:{space}/{space}']";
+
+    public static final String ELEMENT_SPACE_DOCUMENTS_TAB_TOP_BAR = "//*[@id='MiddleToolBar']//*[@href='/portal/g/:spaces:{space}/{space}/documents']";
+
+    public static final String ELEMENT_SPACE_TABS_TOP_BAR_ORDER = "//*[@class='v-application--wrap']//*[@class='v-slide-group__wrapper']//*[@tabindex][{i}]";
+
+  //WIKI
 
     public static final SelenideElement ELEMENT_SPACE_HOME_TAB_DW = $(byXpath("(//*[@class='spaceNavigationTab v-tab'])[1]"));
 
@@ -206,9 +289,63 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_NOTIFICATIONS_BTN_DW       = $(byXpath("//*[@id='NotificationPopoverPortlet']"));
 
-    public static final SelenideElement  ELEMENT_NOTIFICATION_DROPDOWN_DW   =   $(byXpath("//*[@class='notifDrawerItem']"));
+    public static final String ELEMENT_ACCEPT_JOIN_SPACE_NOTIFICATION_BTN_DW       = "(//*[@class='media']//*[contains(text(),'${space}')]/following::*[@class='btn btn-mini btn-primary action-item'])[1]";
+
+    public static final String ELEMENT_REFUSE_JOIN_SPACE_NOTIFICATION_BTN_DW       = "(//*[@class='media']//*[contains(text(),'${space}')]/following::*[@class='btn btn-mini cancel-item'])[1]";
+
+    public static final SelenideElement  ELEMENT_NOTIFICATION_DROPDOWN_DW   =   $(byXpath("//*[@class='notifDrawerItems']"));
 
     public static final SelenideElement ELEMENT_CLOSE_NOTIFICATIONS_DW       = $(byXpath("//*[@class='uiCloseIcon notifDrawerClose']"));
+
+    public static final SelenideElement  ELEMENT_NOTIFICATION_TITLE_DW   =   $(byXpath("//*[@class='notifDrawerTitle']"));
+
+    public static final SelenideElement  ELEMENT_NOTIFICATION_SETTINGS_DW   =   $(byXpath("//*[@class='notifDrawerTitle']/following::div[1]//i[1]"));
+
+    public static final SelenideElement  ELEMENT_SEE_ALL_NOTIFICATIONS   =  $(byXpath("//*[@class='notifDrawerItems']/following::button[2]"));
+
+    public static final SelenideElement  ELEMENT_MARK_AS_READ   =  $(byXpath("//*[@class='notifDrawerItems']/following::button[1]"));
+
+    public static final SelenideElement  ELEMENT_NOTIFICATION_ACTIONS_DW   =  $(byXpath("//*[@id='UIIntranetNotificationsPortlet']//*[@class='notificationsActions']"));
+
+    public static final SelenideElement  ELEMENT_ALL_NOTIFICATIONS_DISPLAYED_DW   =  $(byXpath("//*[@id='UIIntranetNotificationsPortlet']//*[@class='displayItems']"));
+
+    public static final SelenideElement  ELEMENT_DELETE_FIRST_NOTIFICATION_DW   =  $(byXpath("(//*[@class='uiIconClose uiIconLightGray'])[1]"));
+
+    public static final SelenideElement  ELEMENT_KUDOS_MESSAGE_DW   =  $(byXpath("//*[@id='kudosMessage']"));
+
+    public static final SelenideElement  ELEMENT_SEND_KUDOS_BTN_DW   =  $(byXpath("(//*[@class='v-card__actions']//button)[1]"));
+
+    public static final SelenideElement  ELEMENT_CLOSE_SEND_KUDOS_BTN_DW   =  $(byXpath("(//*[@class='v-card__actions']//button)[2]"));
+
+
+  //CHAT
+    public static final SelenideElement  ELEMENT_CHAT_CONTACT_LINK_DW   =  $(byXpath("(//*[@class='chat-contact']/div)[1]"));
+
+    public static final SelenideElement  ELEMENT_CHAT_DISCUSSIONS_FILTER_DW   =  $(byXpath("//*[@class='searchDrawer']/following::button[2]"));
+
+    public static final SelenideElement  ELEMENT_CLOSE_CHAT_DRAWER_DW   =  $(byXpath("//*[@class='searchDrawer']/following::button[4]"));
+
+    public static final SelenideElement  ELEMENT_OPEN_CHAT_BUTTON_DW   =  $(byXpath("//*[@class='searchDrawer']/following::button[3]"));
+
+    public static final SelenideElement  ELEMENT_CHAT_CONTACT_LIST_DW   =  $(byXpath("//*[@id='chat-users']"));
+
+    public static final String  ELEMENT_CHAT_CONTACT_DW   =  "//*[@title='${title}']//*[@class='chat-contact']";
+
+    public static final SelenideElement  ELEMENT_CHAT_EMOTICON_DW   =  $(byXpath("//*[@class='action-emoji']//i"));
+
+    public static final SelenideElement  ELEMENT_CHAT_APPS_DW   =  $(byXpath("//*[@class='action-apps']//i"));
+
+    public static final SelenideElement  ELEMENT_CHAT_MESSAGE_AREA_DW   =  $(byXpath("//*[@id='messageComposerArea']"));
+
+    public static final SelenideElement  ELEMENT_CHAT_SEND_BUTTON_DW   =  $(byXpath("//*[@class='action-send']//i"));
+
+    public static final SelenideElement  ELEMENT_BACK_TO_CHAT_CONTACT_LIST_DW   =  $(byXpath("//*[@class='leftHeaderDrawer']//button"));
+
+    public static final SelenideElement  ELEMENT_OPEN_CHAT_CONTACT_BUTTON_DW   =  $(byXpath("//*[@class='leftHeaderDrawer']/following::button[3]"));
+
+    public static final SelenideElement  ELEMENT_CLOSE_CHAT_CONTACT_BUTTON_DW   =  $(byXpath("//*[@class='leftHeaderDrawer']/following::button[4]"));
+
+    public static final SelenideElement  ELEMENT_CHAT_PAGE_DISPLAYED_DW   =  $(byXpath("//*[@id='chat-application']"));
 
   //SETTINGS
     public static final SelenideElement ELEMENT_TRIBE_EDIT_LANGUAGE = $(byXpath("(//*[@class='uiIconEdit uiIconLightBlue pb-2'])[1]"));
@@ -274,10 +411,6 @@ public class exoTribeLocator {
     public static final SelenideElement ELEMENT_TRIBE_MANAGE_NOTIFICATIONS = $(By.xpath("(//*[@class='v-list-item__action'])[6]//button"));
 
     public static final SelenideElement ELEMENT_DIGITALWORKPLACE_MANAGE_NOTIFICATIONS = $(By.xpath("(//*[@class='v-list-item__action'])[7]//button"));
-
-    //Home
-
-    public static final SelenideElement ELEMENT_SEARCH_HOME_PAGE = $(By.xpath("//*[@class='uiIconPLF24x24Search']"));
 
 
 }

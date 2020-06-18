@@ -6,19 +6,15 @@ import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
 
-import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.ELEMENT_CONNECTION_EVERYONE_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_CALENDAR_CONTAINER_WEEK_VIEW;
+import static org.exoplatform.platform.qa.ui.selenium.locator.answer.AnswerLocator.ELEMENT_ANSWER_PORTLET;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.ELEMENT_CALENDAR_WORKING_PANEL;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_ADDNEWSPACE_BUTTON;
-import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
-import static org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream.homePagePlatform;
 import static org.exoplatform.platform.qa.ui.selenium.testbase.LocatorTestBase.ELEMENT_ACCOUNT_NAME_LINK;
 
 public class HomePagePlatform {
@@ -89,7 +85,13 @@ public class HomePagePlatform {
   }
 
   public void goToSpaceHomeDW() {
-    $(byXpath("//*[@class='v-slide-group__prev']//i")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//*[@class='v-slide-group__prev']//i")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(ELEMENT_SPACE_HOME_TAB_DW).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
+    info("Space setting page is shown");
+    $(ELEMENT_HOME_SPACE_DW).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout).click();
+  }
+
+  public void goToHomeSpaceTribe() {
     $(ELEMENT_SPACE_HOME_TAB_DW).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
     info("Space setting page is shown");
     $(ELEMENT_HOME_SPACE_DW).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout).click();
@@ -99,30 +101,46 @@ public class HomePagePlatform {
    * Go to Stream page Tribe
    */
   public void goToStreamPageTribe() {
+
     info("Click on Home page");
     sleep(2000);
-    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     sleep(1000);
     ELEMENT_TRIBE_STREAM_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//*[@id='StreamPage']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
   }
 
   public void goToStreamPageTribeViaUrl() {
+
     info("Open Stream page by link");
-    open(Configuration.baseUrl+ "portal/dw/stream");
+    open(Configuration.baseUrl + "portal/dw/stream");
+    sleep(2000);
+    $(byXpath("//*[@id='StreamPage']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
   }
 
   public void goToPeoplePageTribeViaUrl() {
-    info("Open Stream page by link");
-    open(Configuration.baseUrl+ "portal/dw/people");
+
+    info("Open People page by link");
+    open(Configuration.baseUrl + "portal/dw/people");
+    sleep(2000);
+    $(byXpath("//*[@id='peopleListApplication']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
   }
+
   /**
    * Go to People page Tribe
    */
   public void goToPeoplePageTribe() {
+
     info("Click on People page");
-    $(byXpath("//*[@id='brandingTopBar']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
     ELEMENT_TRIBE_PEOPLE_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//*[@id='peopleListApplication']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
   }
 
   public void goToMyConnectionsFromHomePageDW() {
@@ -130,27 +148,42 @@ public class HomePagePlatform {
   }
 
   public void goToSettingsPageTribe() {
-    info("Click on People page");
+    info("Click on Settings page");
     sleep(2000);
-    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     sleep(2000);
     ELEMENT_TRIBE_SETTINGS_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//*[@id='UserSettingLanguage']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
   }
 
   public void goToSettingsPageTribeViaUrl() {
 
-    open(Configuration.baseUrl+ "portal/dw/settings");
+    open(Configuration.baseUrl + "portal/dw/settings");
+    sleep(2000);
+    $(byXpath("//*[@id='UserSettingLanguage']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
   }
 
   public void goToSnapshotPageTribe() {
+
     info("Click on Home page");
-    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TRIBE_SNAPSHOT_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//*[@id='digitalWorkplaceHomePage']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+  }
+
+  public void goToSnapshotPageTribeViaUrl() {
+
+    open(Configuration.baseUrl + "portal/dw/home");
+    sleep(2000);
+    $(byXpath("//*[@id='digitalWorkplaceHomePage']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
   }
 
   public void goToTasksPageTribe() {
-    info("Click on Home page");
-    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    info("Click on Task page");
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TRIBE_SNAPSHOT_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TRIBE_TASKS_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
@@ -158,11 +191,11 @@ public class HomePagePlatform {
 
   public void goToTasksPageDW() {
     info("Open Tasks page by link");
-    open(Configuration.baseUrl+ "portal/dw/tasks/my-task");
+    open(Configuration.baseUrl + "portal/dw/tasks/my-task");
   }
 
   public void goToTheLabel(String label) {
-    $(byXpath("//*[@class='list-labels']//*[@class='label-name' and contains(text(),'${label}')]".replace("${label}", label))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//*[@class='list-labels']//*[@class='label-name' and contains(text(),'${label}')]".replace("${label}", label))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   /**
@@ -194,16 +227,22 @@ public class HomePagePlatform {
    * Go to my spaces Tribe
    */
   public void goToMySpacesTribe() {
+
     info("-- Go to my spaces --");
-    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     GO_TO_SPACES_TRIBE_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//*[@id='spacesListApplication']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
   }
 
   public void goToMySpacesTribeViaUrl() {
 
-    open(Configuration.baseUrl+ "portal/dw/spaces");
+    open(Configuration.baseUrl + "portal/dw/spaces");
+    sleep(2000);
+    $(byXpath("//*[@id='spacesListApplication']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
 
   }
+
   /**
    * Go to All space list
    */
@@ -258,7 +297,7 @@ public class HomePagePlatform {
   public void goToSpecificSpace(String space) {
     info("Go to space " + space);
     $(byXpath("//*[@class='ps__scrollbar-y']")).dragAndDropTo(ELEMENT_SPECIFIC_PANEL);
-    ELEMENT_SPECIFIC_PANEL.find(byText(space)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_SPECIFIC_PANEL.find(byText(space)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
   }
 
@@ -307,6 +346,12 @@ public class HomePagePlatform {
 
     $(ELEMENT_ACCOUNT_NAME_LINK).click();
     $(ELEMENT_USER_PROFILE).click();
+
+  }
+
+  public void goToSideBarMenuTribe() {
+
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
   }
 
