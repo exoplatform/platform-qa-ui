@@ -102,7 +102,7 @@ public class NotificationsManagementTestIt extends BaseTribe {
   }
 
   @Test
-  public void test03_MarkANotificationAsRead() {
+  public void test03_MarkANotificationReceivedByOtherUserAsRead() {
 
     String spaceNamea = "spacenamea" + getRandomNumber();
     String spaceDesa = "descriptiona" + getRandomNumber();

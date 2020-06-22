@@ -237,8 +237,9 @@ public class HomePagePlatform {
 
   public void goToMySpacesTribeViaUrl() {
 
+    sleep(1000);
     open(Configuration.baseUrl + "portal/dw/spaces");
-    sleep(2000);
+    sleep(1000);
     $(byXpath("//*[@id='spacesListApplication']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
 
   }

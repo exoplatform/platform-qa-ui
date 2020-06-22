@@ -102,6 +102,7 @@ public class ConnectionsManagement {
     if ($(ELEMENT_CONNECTION_CANCEL_BTN).is(Condition.exist)) {
       $(ELEMENT_CONNECTION_CANCEL_BTN).click();
     }
+    sleep(2000);
     $(byText("Connect")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Connected to the user");
   }

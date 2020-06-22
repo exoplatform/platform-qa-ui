@@ -85,7 +85,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
 
     // click on the activity to appear the delete button
     tribeActivityStream.deleteactivityDW(activity1);
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(spaceNamea);
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
@@ -99,7 +99,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     String spaceDesa = "descriptiona" + getRandomNumber();
     String activity1 = "activity1" + getRandomNumber();
 
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
 
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
@@ -113,7 +113,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
 
     // click on the activity to appear the delete button
     tribeActivityStream.deleteactivityDW(activity1);
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(spaceNamea);
 
   }
@@ -242,7 +242,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     ArrayList<String> inviteUsers = new ArrayList<>();
     inviteUsers.add(user1);
 
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", inviteUsers);
 
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
@@ -287,7 +287,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     tribeActivityStream.checkThatUserWhoDislikesActivityIsNotDisplayedDW(tribe_user3, activity1);
 
     tribeActivityStream.deleteactivityDW(activity1);
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(spaceNamea);
 
   }
@@ -304,7 +304,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     ArrayList<String> inviteUsers = new ArrayList<>();
     inviteUsers.add(user1);
 
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", inviteUsers);
 
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
@@ -335,7 +335,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     tribeActivityStream.checkThatUserWhoSendsAKudosIsDisplayedDW(tribe_user4, activity1, kudosMessage, tribe_user);
 
     tribeActivityStream.deleteactivityDW(activity1);
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(spaceNamea);
 
   }
@@ -355,7 +355,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     inviteUsers.add(user1);
     inviteUsers.add(user2);
 
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", inviteUsers);
 
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
@@ -407,7 +407,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     tribeActivityStream.checkThatUserWhoReplyToActivityCommentIsDisplayedDW(activity1, tribe_user4, comment, reply);
 
     tribeActivityStream.deleteactivityDW(activity1);
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(spaceNamea);
 
   }

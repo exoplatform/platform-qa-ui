@@ -121,7 +121,7 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     info("Create a wiki page in space");
     tribeSpaceManagement.goToWikiTabDW(space1);
     tribeWikiHomePage.goToAddBlankPageDW();
-    tribeRichTextEditor.addSimplePage(title2, title2);
+    tribeSourceTextEditor.addSimplePage(title2, title2);
     tribeWikiManagement.saveAddPage();
     $(byText(title2)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
 
@@ -150,7 +150,7 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     String title1 = "title1" + getRandomNumber();
     tribeSpaceManagement.goToWikiTabDW(space2);
     tribeWikiHomePage.goToAddBlankPageDW();
-    tribeRichTextEditor.addSimplePage(title1, title1);
+    tribeSourceTextEditor.addSimplePage(title1, title1);
     tribeWikiManagement.saveAddPage();
     $(byText(title1)).should(Condition.exist);
 

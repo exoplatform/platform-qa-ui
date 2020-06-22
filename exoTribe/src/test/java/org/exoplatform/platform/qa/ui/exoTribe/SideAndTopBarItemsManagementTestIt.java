@@ -80,6 +80,7 @@ public class SideAndTopBarItemsManagementTestIt extends BaseTribe {
     Assert.assertTrue(ELEMENT_TRIBE_MINICHAT_CHECK_ORDER.getAttribute("id").contains("miniChatDrawer"));
     Assert.assertTrue(ELEMENT_TRIBE_APPLICATIONS_CHECK_ORDER.getAttribute("id").contains("appLauncher"));
     Assert.assertTrue(ELEMENT_TRIBE_NOTIFICATIONS_CHECK_ORDER.getAttribute("id").contains("NotificationPopoverPortlet"));
+    Assert.assertTrue(ELEMENT_TRIBE_SEARCH_CHECK_ORDER.getAttribute("id").contains("SearchApplication"));
 
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();

@@ -73,7 +73,7 @@ public class TaskManagementTestIT extends BaseTribe {
     info("Edit Task");
     tasksManagement.editTask(taskName, newTaskName, "Haute");
     info("verify task edited");
-    $(byText(newTaskName)).should(Condition.exist);
+    $(byText(newTaskName)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
 
     info("Delete Task");
     tasksManagement.deleteTask(newTaskName);

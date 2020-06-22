@@ -52,9 +52,7 @@ public class TribeSourceTextEditor {
 
     info("Input a content for the page");
     sleep(2000);
-    switchTo().frame($(byXpath("//*[@class='gwt-RichTextArea']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs));
     $(ELEMENT_CONTENT_WIKI_INPUT_TRIBE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(content);
-    switchTo().defaultContent();
   }
 
   public void addSimplePageDW(String title, String content) {
@@ -141,15 +139,14 @@ public class TribeSourceTextEditor {
    */
   public void editSimplePage(String newTitle, String newContent) {
     info("Input a title for the page");
+    sleep(1000);
     $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).clear();
     $(ELEMENT_TITLE_WIKI_INPUT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(newTitle);
 
     info("Input a content for the page");
     sleep(1000);
-    switchTo().frame($(byXpath("//*[@class='gwt-RichTextArea']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs));
     $(ELEMENT_CONTENT_WIKI_INPUT_TRIBE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).clear();
     $(ELEMENT_CONTENT_WIKI_INPUT_TRIBE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(newContent);
-    switchTo().defaultContent();
 
   }
 

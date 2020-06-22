@@ -49,9 +49,9 @@ public class TasksManagement {
     ELEMENT_TASK_FORM_INPUT_TITLE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).pressEnter();
     ELEMENT_TASK_FORM_PRIORITY.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TASK_SELECT_PRIORITY.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).sendKeys(priority);
-    sleep(1000);
+    sleep(2000);
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    sleep(1000);
+    sleep(2000);
   }
 
   public void deleteTask(String taskContent) {

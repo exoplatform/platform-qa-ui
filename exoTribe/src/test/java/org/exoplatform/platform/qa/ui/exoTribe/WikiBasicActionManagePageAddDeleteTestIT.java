@@ -101,9 +101,6 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
     tribeWikiHomePage.goToHomeWikiPage();
     tribeWikiHomePage.goToAddTemplateWikiPage();
     tribeWikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_LeavePlanning, title4);
-    tribeWikiHomePage.goToHomeWikiPage();
-    tribeWikiHomePage.goToAddTemplateWikiPage();
-    tribeWikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_TwoColumnLayout, title5);
     info("Delete the space");
     homePagePlatform.goToStreamPageTribe();
     homePagePlatform.goToMySpacesTribeViaUrl();

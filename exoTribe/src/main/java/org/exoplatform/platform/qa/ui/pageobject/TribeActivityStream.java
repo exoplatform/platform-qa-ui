@@ -230,7 +230,8 @@ public class TribeActivityStream {
 
   public void verifyThatWordAttachedFileIsDisplayedInDocuments(String attachedFile) {
 
-    $(byXpath("//*[@class='document-preview-default']//*[@class='nameDoc' and contains(text(),'${attachedFile}')]".replace("${attachedFile}",attachedFile)))
+    $(byXpath("//*[@value='/Activity Stream Documents/{attachedFile}']/following::*[@id='viewerContainer']"
+            .replace("{attachedFile}",attachedFile)))
     .waitUntil(Condition.visible, openBrowserTimeoutMs)
     .isDisplayed();
 
@@ -277,7 +278,7 @@ public class TribeActivityStream {
 
     $(byXpath("(//*[@class='description']//*[text()='${activity}']/following::*[@class='SendKudosButtonTemplate VuetifyApp']//button)[1]"
             .replace("${activity}", activity))).click();
-    sleep(1000);
+    sleep(2000);
     ELEMENT_KUDOS_MESSAGE_DW.waitUntil(Condition.visible, openBrowserTimeoutMs).sendKeys(message);
     sleep(1000);
     ELEMENT_SEND_KUDOS_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
