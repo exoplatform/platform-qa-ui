@@ -109,7 +109,7 @@ public class ChatManagementTestIt extends BaseTribe {
   @Test
   public void test02_GoToAChatContact() {
 
-    String contact = "QA team";
+    String room = "room" + getRandomNumber();
 
     info("Open Chat Drawer");
     navigationToolbar.openChatDrawerDW();
@@ -117,9 +117,19 @@ public class ChatManagementTestIt extends BaseTribe {
     ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
     info("Check that Discussions Filter Button is displayed");
     ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    navigationToolbar.goToChatPageDW();
 
     info("Go To A Chat Contact");
-    navigationToolbar.goToAChatContactDW(contact);
+    switchTo().window(1);
+    roomManagement.addRoomTribe(room);
+
+    switchTo().window(0);
+    navigationToolbar.closeChatDrawerDW();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+
+    navigationToolbar.openChatDrawerDW();
+    navigationToolbar.goToAChatContactDW(room);
 
     info("Go Back To The Chat Contact List");
     navigationToolbar.goBackToChatContactListDW();
@@ -128,9 +138,12 @@ public class ChatManagementTestIt extends BaseTribe {
     info("Check that Discussions Filter Button is displayed");
     ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
 
+    switchTo().window(1);
+    roomManagement.deleteRomm(room);
+
+    switchTo().window(0);
     info("Close Chat Drawer");
     navigationToolbar.closeChatDrawerDW();
-
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
 

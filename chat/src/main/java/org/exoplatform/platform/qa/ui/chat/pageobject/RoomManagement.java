@@ -34,10 +34,10 @@ public class RoomManagement {
   }
 
   public void addRoomTribe(String name, String... users) {
-    ELEMENT_CREATE_ROOM.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_CREATE_ROOM.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     ELEMENT_CREATE_ROOM.click();
-    ELEMENT_POPUP_ROOM.waitUntil(Condition.appear, Configuration.timeout);
-    ELEMENT_ROOM_NAME.waitUntil(Condition.visible, Configuration.timeout).setValue(name);
+    ELEMENT_POPUP_ROOM.waitUntil(Condition.appear, Configuration.openBrowserTimeoutMs);
+    ELEMENT_ROOM_NAME.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
     for (int i = 0; i <= users.length - 1; i++) {
       ELEMENT_CHAT_INPUT_ROOMUSERSS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(users[i]);
       ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);

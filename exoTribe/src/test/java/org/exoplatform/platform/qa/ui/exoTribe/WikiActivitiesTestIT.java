@@ -163,8 +163,7 @@ public class WikiActivitiesTestIT extends BaseTribe {
     $(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_DW).waitUntil(Condition.appears, Configuration.timeout);
     spaceSettingManagement.addApplicationDW("Wiki");
     info("Check on AS");
-    homePagePlatform.goToSpaceHomeDW();
-    homePagePlatform.goToMySpacesTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(space);
 
   }

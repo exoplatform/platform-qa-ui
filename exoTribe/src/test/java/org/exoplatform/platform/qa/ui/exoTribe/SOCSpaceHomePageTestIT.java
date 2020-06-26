@@ -143,7 +143,7 @@ public class SOCSpaceHomePageTestIT extends BaseTribe {
 
     tribeActivityStream.postActivity();
     info("-- Verify that an activity has been added --");
-    sleep(1000);
+    sleep(2000);
     $(byText(attachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
     $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
     info("The activity is shared success");
