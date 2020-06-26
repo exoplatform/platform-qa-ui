@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static junit.framework.TestCase.assertEquals;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_ASSIGN_TASK_DW;
 import static org.exoplatform.platform.qa.ui.selenium.locator.social.SocialLocator.ELEMENT_COLLABORATION_ACTIONS;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -233,8 +234,25 @@ public class ChatManagement {
     ELEMENT_CHAT_CLOSE_ICON.should(Condition.appears).click();
     ELEMENT_ASSIGN_TASK_WINDOW.shouldNot(Condition.appears);
   }
-  public void CreateTask(String task, String... users) {
+
+  public void checkPopUpAssignTaskTribe() {
+    ELEMENT_ASSIGN_TASK_DW.waitUntil(Condition.appear, Configuration.timeout);
+    ELEMENT_ASSIGN_TASK_CONTAINER.find(byXpath("//input[@placeholder='Titre de la tâche']")).waitUntil(Condition.appear, Configuration.timeout);
+    assertEquals(ELEMENT_CHAT_ASSIGNEE_TASK.getAttribute("placeholder"),"Affectée à");
+    ELEMENT_ASSIGN_TASK_CONTAINER.find(byXpath("//input[@placeholder='Echéance']")).waitUntil(Condition.appear, Configuration.timeout);
+    ELEMENT_CHAT_POST_TASK_BUTTON.should(Condition.appears);
+    info("check that cancel button works");
+    ELEMENT_CHAT_CANCEL_TASK_BUTTON.should(Condition.appears).click();
+    ELEMENT_ASSIGN_TASK_DW.shouldNot(Condition.appears);
+    info("check the close button");
     ELEMENT_COLLABORATION_ACTIONS.click();
+    ELEMENT_CHAT_CREATE_TASK.click();
+    ELEMENT_CHAT_CLOSE_ICON.should(Condition.appears).click();
+    ELEMENT_ASSIGN_TASK_DW.shouldNot(Condition.appears);
+  }
+
+  public void CreateTask(String task, String... users) {
+    ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_CHAT_CREATE_TASK.click();
     $(ELEMENT_CHAT_TASK_NAME).setValue(task);
     for (int i = 0; i <= users.length - 1; i++) {
@@ -245,7 +263,7 @@ public class ChatManagement {
       ELEMENT_CHAT_DUE_DATE_TASK.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       ELEMENT_CHAT_CURRENT_DATE_TASK.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       ELEMENT_CHAT_POST_TASK_BUTTON.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-      ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(task)).shouldBe(Condition.visible);
+      ELEMENT_CONTAINER_LIST_MESSAGES.find(byLinkText(task)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     }
     public void sendSmile(String Emoticon){
     ELEMENT_CHAT_EMOTICON.click();

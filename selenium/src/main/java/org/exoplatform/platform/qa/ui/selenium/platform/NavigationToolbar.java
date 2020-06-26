@@ -479,9 +479,15 @@ public class NavigationToolbar {
     ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     sleep(1000);
     ELEMENT_DW_ADMINISTRATION_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-    $(byXpath("//*[@href='/portal/g/:platform:administrators/administration/newStaff']"))
+    $(byXpath("//*[@href='/portal/g/:platform:administrators/usersManagement']"))
             .waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs)
             .click();
+  }
+
+  public void goToAddUsersPageViaUrlDW() {
+
+    open(baseUrl + "portal/g/:platform:administrators/usersManagement");
+
   }
 
   public void goToManageUsersPageDW() {
@@ -523,6 +529,14 @@ public class NavigationToolbar {
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     ELEMENT_NOTIFICATIONS_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_NOTIFICATION_DROPDOWN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    info("The elemnt is shown successfully");
+  }
+
+  public void goToIntranetNotificationDigitalWorkplace() {
+    info("Go to Intranet Notification");
+    sleep(2000);
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    ELEMENT_NOTIFICATIONS_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     info("The elemnt is shown successfully");
   }
 

@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.digitalWorkplace;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseDW;
+import org.exoplatform.platform.qa.ui.commons.BaseTribe;
 import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
 import org.exoplatform.platform.qa.ui.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
@@ -14,20 +15,25 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
+import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_DW_POST_ACTIVITY_BUTTON;
-import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_TRIBE_POST_ACTIVITY_BUTTON;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_NO_NOTIFICATION_DISPLAY_DW;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-@Tag("dw")
+
+@Tag("tribe")
 @Tag("social")
 @Tag("sniff")
-public class SOCHomePageDWTestIT extends BaseDW {
+public class ActivityStreamManagementDWTestIt extends BaseDW {
   NavigationToolbar navigationToolbar;
 
   AddUsers addUsers;
@@ -60,32 +66,30 @@ public class SOCHomePageDWTestIT extends BaseDW {
     connectionsManagement = new ConnectionsManagement(this);
     activityStream = new ActivityStream(this);
     tribeActivityStream = new TribeActivityStream(this);
+    tribeSpaceManagement = new TribeSpaceManagement(this);
     spaceHomePage = new SpaceHomePage(this);
     spaceManagement = new SpaceManagement(this);
     spaceSettingManagement = new SpaceSettingManagement(this);
-    tribeSpaceManagement = new TribeSpaceManagement(this);
     manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
 
   }
 
   @Test
-  public void test01_LikeActivity() {
+  public void test01_PostDelete_Activity() {
 
-    String activity1 = "activity1" + getRandomNumber();
     String spaceNamea = "spaceNamea" + getRandomNumber();
     String spaceDesa = "descriptiona" + getRandomNumber();
+    String activity1 = "activity1" + getRandomNumber();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
-    info("Like Activity");
+
+    info("Post Activity");
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");
 
-    String activityId = tribeActivityStream.getActivityIdDW(activity1);
-    tribeActivityStream.likeActivityDW(activityId);
     // click on the activity to appear the delete button
     tribeActivityStream.deleteactivityDW(activity1);
-
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(spaceNamea);
     homePagePlatform.goToSnapshotPageTribeViaUrl();
@@ -94,17 +98,44 @@ public class SOCHomePageDWTestIT extends BaseDW {
   }
 
   @Test
-  public void test02_AddComment() {
+  public void test02_LikeDislike_Activity() {
 
-    info("Add comment");
-
-    String activity1 = "activity1" + getRandomNumber();
-    String comment = "comment" + getRandomNumber();
     String spaceNamea = "spaceNamea" + getRandomNumber();
     String spaceDesa = "descriptiona" + getRandomNumber();
+    String activity1 = "activity1" + getRandomNumber();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    tribeActivityStream.addTribeActivity(activity1, "");
+
+    String activityId = tribeActivityStream.getActivityIdDW(activity1);
+    info("Like Activity");
+    tribeActivityStream.likeActivityDW(activityId);
+    info("Dislike Activity");
+    tribeActivityStream.dislikeActivityDW(activityId);
+
+    // click on the activity to appear the delete button
+    tribeActivityStream.deleteactivityDW(activity1);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamea);
+
+  }
+
+  @Test
+  public void test03_AddDelete_Comment() {
+
+    info("Add comment");
+
+    String comment = "comment" + getRandomNumber();
+    String spaceNamea = "spaceNamea" + getRandomNumber();
+    String spaceDesa = "descriptiona" + getRandomNumber();
+    String activity1 = "activity1" + getRandomNumber();
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");
 
@@ -118,7 +149,6 @@ public class SOCHomePageDWTestIT extends BaseDW {
 
     // click on the activity to appear the delete button
     tribeActivityStream.deleteactivityDW(activity1);
-
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(spaceNamea);
     homePagePlatform.goToSnapshotPageTribeViaUrl();
@@ -127,39 +157,39 @@ public class SOCHomePageDWTestIT extends BaseDW {
   }
 
   @Test
-  public void test03_UploadPictureAndOpenItInDocument() {
+  public void test04_Reply_ToAComment() {
 
+    info("Add comment");
+
+    String comment = "comment" + getRandomNumber();
+    String reply = "reply" + getRandomNumber();
     String spaceNamea = "spaceNamea" + getRandomNumber();
     String spaceDesa = "descriptiona" + getRandomNumber();
-    String attachedFile = "eXo-Platform.png";
+    String activity1 = "activity1" + getRandomNumber();
+    String user = "Khalil Riahi";
 
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-    sleep(1000);
+    tribeActivityStream.addTribeActivity(activity1, "");
 
-    info("-- Upload the picture --");
-    tribeActivityStream.uploadFileActivityStreamDW(attachedFile);
+    String activityId = tribeActivityStream.getActivityIdDW(activity1);
+    tribeActivityStream.addActivityComment(activityId, comment);
 
-    tribeActivityStream.postActivity();
-    info("-- Verify that an activity has been added --");
-    sleep(1000);
-    $(byText(attachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
-    $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
-    info("The activity is shared success");
+    info("Reply to a comment");
+    activityStream.replyToCommentDW(comment, reply, user);
+    activityStream.deleteReplyDW(comment, reply);
+    // verify that the reply is deleted
+    $(byText(reply)).waitUntil(Condition.not(Condition.exist), openBrowserTimeoutMs);
 
-    info("Preview The Attached File");
-    tribeActivityStream.previewAttachedFile(attachedFile);
+    info("Delete comment");
+    activityStream.deletecommentDW(activity1, comment);
+    // verify that the comment is deleted
+    $(byText(comment)).waitUntil(Condition.not(Condition.exist), Configuration.openBrowserTimeoutMs);
 
-    info("Open The Attached File In Documents");
-    tribeActivityStream.openAttachedFileInDocuments(attachedFile);
-    tribeActivityStream.verifyThatPictureAttachedFileIsDisplayedInDocuments(attachedFile);
-
-    homePagePlatform.goToHomeSpaceTribe();
-
-    info("Delete The Attached File");
-    tribeActivityStream.deleteAttachedFileDW(attachedFile);
-
+    // click on the activity to appear the delete button
+    tribeActivityStream.deleteactivityDW(activity1);
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(spaceNamea);
     homePagePlatform.goToSnapshotPageTribeViaUrl();
@@ -168,49 +198,37 @@ public class SOCHomePageDWTestIT extends BaseDW {
   }
 
   @Test
-  public void test04_UploadDocxOpenItInDocumentAndEditItInOnlyOffice() {
+  public void test05_LikeDislike_AComment() {
 
+    info("Add comment");
+
+    String comment = "comment" + getRandomNumber();
     String spaceNamea = "spaceNamea" + getRandomNumber();
     String spaceDesa = "descriptiona" + getRandomNumber();
-    String attachedFile = "docx_test.docx";
-    String document = "docx_test";
-    String extension = ".docx";
-    String userName = tribe_user;
+    String activity1 = "activity1" + getRandomNumber();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-    sleep(1000);
+    tribeActivityStream.addTribeActivity(activity1, "");
 
-    info("-- Upload the Word Document --");
-    tribeActivityStream.uploadFileActivityStreamDW(attachedFile);
+    String activityId = tribeActivityStream.getActivityIdDW(activity1);
+    tribeActivityStream.addActivityComment(activityId, comment);
 
-    tribeActivityStream.postActivity();
-    info("-- Verify that an activity has been added --");
-    sleep(1000);
-    $(byText(attachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
-    $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
-    info("The activity is shared success");
+    info("Like Comment");
+    activityStream.likeCommentDW(activity1, comment);
 
-    info("Preview The Attached File");
-    tribeActivityStream.previewAttachedFile(attachedFile);
+    info("Dislike Comment");
+    activityStream.dislikeCommentDW(activity1, comment);
 
-    info("Open The Attached File In Documents");
-    tribeActivityStream.openAttachedFileInDocuments(attachedFile);
-    tribeActivityStream.verifyThatWordAttachedFileIsDisplayedInDocuments(attachedFile);
-    tribeActivityStream.editFileInOnlyOfficeFromDocumentsTab( attachedFile);
-    switchTo().window(1);
-    info("Check That The Document is opened with Edit Online");
-    tribeActivityStream.checkOpeningDocumentWithEditOnlineDW(document,extension,userName);
+    info("Delete comment");
+    activityStream.deletecommentDW(activity1, comment);
+    // verify that the comment is deleted
+    $(byText(comment)).waitUntil(Condition.not(Condition.exist), Configuration.openBrowserTimeoutMs);
 
-    switchTo().window(1).close();
-    switchTo().window(0);
-
-    homePagePlatform.goToHomeSpaceTribe();
-
-    info("Delete The Attached File");
-    tribeActivityStream.deleteAttachedFileDW(attachedFile);
-
+    // click on the activity to appear the delete button
+    tribeActivityStream.deleteactivityDW(activity1);
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(spaceNamea);
     homePagePlatform.goToSnapshotPageTribeViaUrl();

@@ -278,7 +278,7 @@ public class TribeActivityStream {
 
     $(byXpath("(//*[@class='description']//*[text()='${activity}']/following::*[@class='SendKudosButtonTemplate VuetifyApp']//button)[1]"
             .replace("${activity}", activity))).click();
-    sleep(2000);
+    sleep(3000);
     ELEMENT_KUDOS_MESSAGE_DW.waitUntil(Condition.visible, openBrowserTimeoutMs).sendKeys(message);
     sleep(1000);
     ELEMENT_SEND_KUDOS_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();

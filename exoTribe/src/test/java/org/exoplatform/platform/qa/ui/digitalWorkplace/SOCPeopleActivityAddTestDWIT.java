@@ -6,6 +6,7 @@ import com.codeborne.selenide.Selenide;
 import org.exoplatform.platform.qa.ui.commons.BaseDW;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
+import org.exoplatform.platform.qa.ui.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.social.pageobject.UserPageBase;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_DROPDOWN;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_DELETE_ACTIVITY_LINK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.HomePageLocator.ELEMENT_DELETE_POPUP_OK;
@@ -41,6 +43,8 @@ public class SOCPeopleActivityAddTestDWIT extends BaseDW {
 
   TribeActivityStream tribeActivityStream;
 
+  TribeSpaceManagement tribeSpaceManagement;
+
   UserPageBase userPageBase;
 
   @BeforeEach
@@ -53,6 +57,7 @@ public class SOCPeopleActivityAddTestDWIT extends BaseDW {
     connectionsManagement = new ConnectionsManagement(this);
     activityStream = new ActivityStream(this);
     tribeActivityStream = new TribeActivityStream(this);
+    tribeSpaceManagement = new TribeSpaceManagement(this);
     manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
 
   }
@@ -62,8 +67,10 @@ public class SOCPeopleActivityAddTestDWIT extends BaseDW {
 
     String link = "http://www.google.fr";
     String title = "Google";
-
-    homePagePlatform.goToStreamPageTribeViaUrl();
+    String spaceNamea = "spaceNamea" + getRandomNumber();
+    String spaceDesa = "descriptiona" + getRandomNumber();
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(link, "");
     $(byText(link)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
@@ -80,6 +87,9 @@ public class SOCPeopleActivityAddTestDWIT extends BaseDW {
     $(byId(ELEMENT_DELETE_ACTIVITY_LINK.replace("{id}", id))).click();
     ELEMENT_DELETE_POPUP_OK.waitUntil(Condition.visible, Configuration.timeout).click();
     $(byText(link)).parent().parent().parent().parent().parent().waitUntil(Condition.disappear, Configuration.openBrowserTimeoutMs);
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamea);
 
   }
 

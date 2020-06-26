@@ -190,8 +190,13 @@ public class HomePagePlatform {
   }
 
   public void goToTasksPageDW() {
-    info("Open Tasks page by link");
+    info("Open My Tasks page by link");
     open(Configuration.baseUrl + "portal/dw/tasks/my-task");
+  }
+
+  public void goToTasksIncomingPageDW() {
+    info("Open Tasks page by link");
+    open(Configuration.baseUrl + "portal/dw/tasks/");
   }
 
   public void goToTheLabel(String label) {

@@ -3,11 +3,10 @@ package org.exoplatform.platform.qa.ui.digitalWorkplace;
 import org.exoplatform.platform.qa.ui.commons.BaseDW;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.pageobject.*;
-import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
-import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
-import org.exoplatform.platform.qa.ui.selenium.platform.ManageLogInOut;
+import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
+import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiHomePage;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiManagement;
 import org.exoplatform.platform.qa.ui.wiki.pageobject.WikiValidattions;
@@ -18,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("dw")
@@ -41,6 +41,8 @@ public class WikiActivitiesInSpaceTestDWIT extends BaseDW {
 
   WikiHomePage wikiHomePage;
 
+  AddUsers addUsers;
+
   SpaceHomePage spaceHomePage;
 
   ActivityStream activityStream;
@@ -48,6 +50,8 @@ public class WikiActivitiesInSpaceTestDWIT extends BaseDW {
   TribeActivityStream tribeActivityStream;
 
   TribeSpaceManagement tribeSpaceManagement;
+
+  NavigationToolbar navigationToolbar;
 
   ManageLogInOut manageLogInOut;
 
@@ -67,6 +71,8 @@ public class WikiActivitiesInSpaceTestDWIT extends BaseDW {
     spaceManagement = new SpaceManagement(this);
     activityStream = new ActivityStream(this);
     tribeActivityStream = new TribeActivityStream(this);
+    addUsers = new AddUsers(this);
+    navigationToolbar = new NavigationToolbar(this);
     tribeSpaceManagement = new TribeSpaceManagement(this);
     manageLogInOut = new ManageLogInOut(this);
     manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
@@ -80,12 +86,20 @@ public class WikiActivitiesInSpaceTestDWIT extends BaseDW {
     String space = "space" + getRandomNumber();
     String newTitle = "newTitle" + getRandomNumber();
     String newContent = "newContent" + getRandomNumber();
-    String user1 = "Adam Larsen";
-    String user2 = "Adem Reim";
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@test.com";
+    String username2 = "usernameb" + getRandomString();
+    String email2 = username2 + "@test.com";
+    String password = "12345678";
+
+    info("Add user");
+    navigationToolbar.goToAddUsersPageViaUrlDW();
+    addUsers.addUserTribe(username1, password, email1, username1, username1, "");
+    addUsers.addUserTribe(username2, password, email2, username2, username2, "");
 
     ArrayList<String> inviteUsers = new ArrayList<>();
-    inviteUsers.add(user1);
-    inviteUsers.add(user2);
+    inviteUsers.add(username1);
+    inviteUsers.add(username2);
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(space, space, "Open", "No", inviteUsers);
     info("Create a wiki page");

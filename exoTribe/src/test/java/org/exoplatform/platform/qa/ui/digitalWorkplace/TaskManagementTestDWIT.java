@@ -198,7 +198,7 @@ public class TaskManagementTestDWIT extends BaseDW {
     tasksManagement.addTask(task);
     ELEMENT_TASKS_LIST.find(byText(task)).parent().find(byText(label)).should(Condition.exist);
 
-    homePagePlatform.goToTasksPageTribe();
+    homePagePlatform.goToTasksIncomingPageDW();
 
     tasksManagement.deleteTask(task);
     tribeLabelsManagement.deleteLabel(label);

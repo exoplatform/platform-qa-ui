@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.selenium.Button.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_CHAT_ADD_ROOM_SAVE_DW;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -32,12 +33,27 @@ public class RoomManagement {
     ELEMENT_CONTACT_LIST.find(byText(name)).should(Condition.exist);
   }
 
+  public void addRoomTribe(String name, String... users) {
+    ELEMENT_CREATE_ROOM.waitUntil(Condition.appears, Configuration.timeout);
+    ELEMENT_CREATE_ROOM.click();
+    ELEMENT_POPUP_ROOM.waitUntil(Condition.appear, Configuration.timeout);
+    ELEMENT_ROOM_NAME.waitUntil(Condition.visible, Configuration.timeout).setValue(name);
+    for (int i = 0; i <= users.length - 1; i++) {
+      ELEMENT_CHAT_INPUT_ROOMUSERSS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(users[i]);
+      ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+      ELEMENT_CHAT_INPUT_ROOMUSERSS.pressEnter();
+      sleep(Configuration.timeout);
+    }
+    ELEMENT_CHAT_ADD_ROOM_SAVE_DW.waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_CONTACT_LIST.find(byText(name)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
+  }
+
     public void deleteRomm(String room) {
-      ELEMENT_CHAT_CONTACT.parent().parent().parent().parent().find(byText(room)).click();
+      ELEMENT_CHAT_CONTACT.parent().parent().parent().parent().find(byText(room)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
       ELEMENT_DELETE_ROOM.click();
       ELEMENT_CONFIRM_BUTTON_DELETE_ROOM.click();
-      ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.not(Condition.appear),Configuration.timeout);
+      ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.not(Condition.appear),Configuration.openBrowserTimeoutMs);
   }
 
   public void editTitleofAroom(String room, String newroom) {

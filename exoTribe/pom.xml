@@ -71,5 +71,11 @@
             <artifactId>platform-qa-ui-task</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.exoplatform.platform.qa.ui</groupId>
+            <artifactId>platform-qa-ui-chat</artifactId>
+            <version>1.0.x-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

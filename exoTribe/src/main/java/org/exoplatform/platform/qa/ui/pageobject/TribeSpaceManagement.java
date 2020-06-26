@@ -769,6 +769,31 @@ public class TribeSpaceManagement {
 
   }
 
+  public void checkThatSpaceTabsAreDisplayedInOrder(String space) {
+
+    info("Top Bar Tabs after Space Creation are displayed in order");
+
+    Assert.assertTrue($(byXpath(ELEMENT_SPACE_TABS_TOP_BAR_ORDER.replace("{i}","1"))).getAttribute("href")
+            .contains($(byXpath(ELEMENT_HOME_SPACE_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
+
+    Assert.assertTrue($(byXpath(ELEMENT_SPACE_TABS_TOP_BAR_ORDER.replace("{i}","2"))).getAttribute("href")
+            .contains($(byXpath(ELEMENT_SPACE_DOCUMENTS_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
+
+    Assert.assertTrue($(byXpath(ELEMENT_SPACE_TABS_TOP_BAR_ORDER.replace("{i}","3"))).getAttribute("href")
+            .contains($(byXpath(ELEMENT_SPACE_TASKS_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
+
+    Assert.assertTrue($(byXpath(ELEMENT_SPACE_TABS_TOP_BAR_ORDER.replace("{i}","4"))).getAttribute("href")
+            .contains($(byXpath(ELEMENT_SPACE_CALENDAR_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
+
+    Assert.assertTrue($(byXpath(ELEMENT_SPACE_TABS_TOP_BAR_ORDER.replace("{i}","5"))).getAttribute("href")
+            .contains($(byXpath(ELEMENT_SPACE_MEMBERS_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
+
+    Assert.assertTrue($(byXpath(ELEMENT_SPACE_TABS_TOP_BAR_ORDER.replace("{i}","6"))).getAttribute("href")
+            .contains($(byXpath(ELEMENT_SPACE_SETTINGS_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
+
+
+  }
+
   public void goBackToSettingsTabDW() {
     info("Open Wiki Tab");
     $(byXpath("//*[@class='v-toolbar__content']//*[@class='v-btn__content']"))

@@ -9,6 +9,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.By;
 
 /**
  * This class will define actions about management tasks
@@ -97,6 +98,15 @@ public class ProjectsManagement {
     $(byText(title)).parent().parent().find(ELEMENT_DELETE_PROJECT_OPTION).click();
     ELEMENT_CONFIRM_DELETE.click();
     $(byText(title)).should(Condition.not(Condition.visible));
+  }
+
+  public void deleteProjectTribe(String title) {
+    $(byXpath("//*[@class='project-name' and contains(text(),'${title}')]".replace("${title}",title))).click();
+    String id = $(byXpath("//*[@class='project-name' and contains(text(),'${title}')]".replace("${title}",title))).getAttribute("data-id");
+    $(byXpath("//*[@class='dropdown project-item active' and @data-projectid='${id}']//i[@class='uiIconRightMenu uiIconLightGray']".replace("${id}",id))).click();
+    $(byXpath("//*[@class='uiDropdownMenu project-menu' and @data-projectid='${id}']//*[@class='uiIconTrash uiIconLightGray']".replace("${id}",id))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CONFIRM_DELETE.click();
+    $(byText(title)).waitUntil(Condition.not(Condition.visible),Configuration.openBrowserTimeoutMs);
   }
 
   /**
