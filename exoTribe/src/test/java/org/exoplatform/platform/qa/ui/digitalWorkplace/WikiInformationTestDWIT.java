@@ -111,7 +111,7 @@ public class WikiInformationTestDWIT extends BaseDW {
     tribeSpaceManagement.goToWikiTabDW(space1);
     tribeWikiHomePage.goToAddBlankPageDW();
     tribeWikiManagement.goToSourceEditor();
-    tribeSourceTextEditor.addSimplePageDW(title1, title1);
+    tribeSourceTextEditor.addSimplePage(title1, title1);
     tribeWikiManagement.saveAddPage();
     getExoWebDriver().getWebDriver().navigate().refresh();
     $(byText(title1)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
@@ -123,7 +123,7 @@ public class WikiInformationTestDWIT extends BaseDW {
     tribeSpaceManagement.goToWikiTabDW(space2);
     tribeWikiHomePage.goToAddBlankPageDW();
     tribeWikiManagement.goToSourceEditor();
-    tribeSourceTextEditor.addSimplePageDW(title2, title2);
+    tribeSourceTextEditor.addSimplePage(title2, title2);
     tribeWikiManagement.saveAddPage();
     $(byText(title2)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
 

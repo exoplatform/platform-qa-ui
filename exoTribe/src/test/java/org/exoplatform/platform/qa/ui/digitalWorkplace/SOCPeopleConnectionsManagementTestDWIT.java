@@ -28,7 +28,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 @Tag("social")
 @Tag("sniff")
 @Tag("dw")
-public class SOCPeopleTestDWIT extends BaseDW {
+public class SOCPeopleConnectionsManagementTestDWIT extends BaseDW {
   NavigationToolbar navigationToolbar;
 
   AddUsers addUsers;

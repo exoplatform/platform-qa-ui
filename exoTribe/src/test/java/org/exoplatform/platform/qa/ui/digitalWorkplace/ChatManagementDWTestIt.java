@@ -1,6 +1,9 @@
 package org.exoplatform.platform.qa.ui.digitalWorkplace;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import org.exoplatform.platform.qa.ui.chat.pageobject.ChatManagement;
+import org.exoplatform.platform.qa.ui.chat.pageobject.RoomManagement;
 import org.exoplatform.platform.qa.ui.commons.BaseDW;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
 import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
@@ -10,18 +13,25 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
+import org.exoplatform.platform.qa.ui.task.pageobject.ProjectsManagement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_TABLE_PROJECT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
@@ -47,7 +57,13 @@ public class ChatManagementDWTestIt extends BaseDW {
 
   SpaceManagement spaceManagement;
 
+  RoomManagement roomManagement;
+
+  ChatManagement chatManagement;
+
   TribeSpaceManagement tribeSpaceManagement;
+
+  ProjectsManagement projectsManagement;
 
   SpaceSettingManagement spaceSettingManagement;
 
@@ -64,6 +80,9 @@ public class ChatManagementDWTestIt extends BaseDW {
     tribeSpaceManagement = new TribeSpaceManagement(this);
     spaceHomePage = new SpaceHomePage(this);
     spaceManagement = new SpaceManagement(this);
+    roomManagement = new RoomManagement(this);
+    chatManagement = new ChatManagement(this);
+    projectsManagement = new ProjectsManagement(this);
     spaceSettingManagement = new SpaceSettingManagement(this);
     manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
 
@@ -146,6 +165,141 @@ public class ChatManagementDWTestIt extends BaseDW {
     info("Close Chat Drawer");
     navigationToolbar.closeChatDrawerDW();
 
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test04_CheckPopupAssignTasK() {
+
+    String room = "room" + getRandomNumber();
+    navigationToolbar.openChatDrawerDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+
+    info("Go To The Chat Page");
+    navigationToolbar.goToChatPageDW();
+
+    switchTo().window(1);
+    info("Check that the Chat Page is displayed");
+    ELEMENT_CHAT_PAGE_DISPLAYED_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+
+    roomManagement.addRoomTribe(room);
+    ELEMENT_CONTACT_LIST.find(byText(room)).click();
+    ELEMENT_COLLABORATION_ACTIONS.click();
+    ELEMENT_CHAT_CREATE_TASK.click();
+    info("check the popup assign task is displayed with task title, Assignee, Due date");
+    chatManagement.checkPopUpAssignTaskDW();
+    roomManagement.deleteRomm(room);
+    switchTo().window(0);
+    navigationToolbar.closeChatDrawerDW();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test05_CheckTaskWithNoAssignee() {
+
+    String room = "room" + getRandomNumber();
+    String task = "task" + getRandomNumber();
+
+    navigationToolbar.openChatDrawerDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+
+    navigationToolbar.goToChatPageDW();
+    switchTo().window(1);
+    roomManagement.addRoomTribe(room);
+    ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.exist, openBrowserTimeoutMs);
+    chatManagement.CreateTask(task);
+    switchToParentWindow();
+    homePagePlatform.goToTasksPageDW();
+    $(byXpath("//*[@class='project-name' and contains(text(),'${title}')]".replace("${title}",room))).waitUntil(Condition.visible, openBrowserTimeoutMs);
+    $(byXpath("//*[@class='project-name' and contains(text(),'${title}')]".replace("${title}",room))).click();
+    ELEMENT_TABLE_PROJECT.parent().parent().parent().find(byText(task)).waitUntil(Condition.exist, openBrowserTimeoutMs);
+    projectsManagement.deleteProjectTribe(room);
+    switchTo().window(1);
+    roomManagement.deleteRomm(room);
+    switchTo().window(0);
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test06_CheckTaskWithAssigneeFirstName() {
+
+    String room = "room" + getRandomNumber();
+    String task = "task" + getRandomNumber();
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@test.com";
+    String password = "12345678";
+
+    info("Add user");
+    navigationToolbar.goToAddUsersPageViaUrlDW();
+    addUsers.addUserTribe(username1, password, email1, username1, username1, "");
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(username1);
+    navigationToolbar.openChatDrawerDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+
+    navigationToolbar.goToChatPageDW();
+    switchTo().window(1);
+    roomManagement.addRoomTribe(room, username1);
+    switchTo().window(1).close();
+    switchToParentWindow();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(username1, password);
+    navigationToolbar.openChatDrawerDW();
+    navigationToolbar.goToChatPageDW();
+    switchTo().window(1);
+    ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    switchTo().window(1).close();
+    switchToParentWindow();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    navigationToolbar.openChatDrawerDW();
+    navigationToolbar.goToChatPageDW();
+    switchTo().window(1);
+    ELEMENT_CONTACT_LIST.find(byText(room)).click();
+    chatManagement.CreateTask(task, username1);
+    switchTo().window(1).close();
+    switchToParentWindow();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(username1, password);
+    $(byClassName("uiIconStatus")).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+    homePagePlatform.goToTasksPageDW();
+    $(byXpath("//*[@class='project-name' and contains(text(),'${title}')]".replace("${title}",room))).waitUntil(Condition.visible, openBrowserTimeoutMs);
+    $(byXpath("//*[@class='project-name' and contains(text(),'${title}')]".replace("${title}",room))).click();
+    ELEMENT_TABLE_PROJECT.parent().parent().parent().find(byText(task)).waitUntil(Condition.exist, openBrowserTimeoutMs).click();
+    ELEMENT_ASSIGNEE_TASK.shouldHave(Condition.text(username1));
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+
+    navigationToolbar.openChatDrawerDW();
+    navigationToolbar.goToChatPageDW();
+    switchTo().window(1);
+    roomManagement.deleteRomm(room);
+    switchTo().window(1).close();
+    switchToParentWindow();
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
 

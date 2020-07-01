@@ -540,13 +540,24 @@ public class NavigationToolbar {
     info("The elemnt is shown successfully");
   }
 
+
+  public void goToIntranetNotificationDW_WithoutRefresh() {
+    info("Go to Intranet Notification");
+    sleep(2000);
+    ELEMENT_NOTIFICATIONS_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_NOTIFICATION_DROPDOWN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    info("The elemnt is shown successfully");
+  }
+
   public void acceptJoinSpaceViaNotificationnDW(String space) {
     info("Accept to join a space via notification");
+    sleep(3000);
     $(byXpath(ELEMENT_ACCEPT_JOIN_SPACE_NOTIFICATION_BTN_DW.replace("${space}", space))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   public void verifyAcceptJoinSpaceViaNotificationDW(String space) {
 
+    sleep(2000);
     Assert.assertEquals($(byXpath("//*[@class='media']//*[@data-link='/portal/g/:spaces:{space}/{space}']//*[@class='status']"
             .replace("{space}", space)))
             .getText(), "You joined " + space + " space.");

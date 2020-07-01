@@ -322,6 +322,60 @@ public class SOCSettingsEditTestDWIT extends BaseDW {
   }
 
   @Test
+  public void test10_SelectSendMeASummaryEmailAtGeneralNotifications() {
+
+    homePagePlatform.goToSettingsPageTribeViaUrl();
+
+    sleep(2000);
+    tribeChangeSettings.goToManageNotifications();
+    tribeChangeSettings.goToTribeEditGeneralNotifications();
+    Assert.assertTrue(ELEMENT_TRIBE_GENERAL_NOTIFICATIONS_SELECT_MAIL_SENDING_TYPE.getText().contains("Daily"));
+
+    info("Select Weekly at Send Me A Summary Email");
+    tribeChangeSettings.selectSendMeASummaryEmail(TribeChangeSettings.mailSendingType.WEEKLY);
+    Assert.assertTrue(ELEMENT_TRIBE_GENERAL_NOTIFICATIONS_SELECT_MAIL_SENDING_TYPE.getText().contains("Weekly"));
+    info("Cancel Select Weekly at Send Me A Summary Email");
+    tribeChangeSettings.tribeCancelEditGeneralNotifications();
+
+    refresh();
+    tribeChangeSettings.goToManageNotifications();
+    tribeChangeSettings.goToTribeEditGeneralNotifications();
+    Assert.assertTrue(ELEMENT_TRIBE_GENERAL_NOTIFICATIONS_SELECT_MAIL_SENDING_TYPE.getText().contains("Daily"));
+    info("Select Weekly at Send Me A Summary Email");
+    tribeChangeSettings.selectSendMeASummaryEmail(TribeChangeSettings.mailSendingType.WEEKLY);
+    Assert.assertTrue(ELEMENT_TRIBE_GENERAL_NOTIFICATIONS_SELECT_MAIL_SENDING_TYPE.getText().contains("Weekly"));
+    info("Apply Select Weekly at Send Me A Summary Email");
+    tribeChangeSettings.tribeApplyEditGeneralNotifications();
+
+    refresh();
+    tribeChangeSettings.goToManageNotifications();
+    tribeChangeSettings.goToTribeEditGeneralNotifications();
+    Assert.assertTrue(ELEMENT_TRIBE_GENERAL_NOTIFICATIONS_SELECT_MAIL_SENDING_TYPE.getText().contains("Weekly"));
+    info("Select Never at Send Me A Summary Email");
+    tribeChangeSettings.selectSendMeASummaryEmail(TribeChangeSettings.mailSendingType.NEVER);
+    Assert.assertTrue(ELEMENT_TRIBE_GENERAL_NOTIFICATIONS_SELECT_MAIL_SENDING_TYPE.getText().contains("Never"));
+    info("Apply Select Never at Send Me A Summary Email");
+    tribeChangeSettings.tribeApplyEditGeneralNotifications();
+
+    refresh();
+    tribeChangeSettings.goToManageNotifications();
+    tribeChangeSettings.goToTribeEditGeneralNotifications();
+    Assert.assertTrue(ELEMENT_TRIBE_GENERAL_NOTIFICATIONS_SELECT_MAIL_SENDING_TYPE.getText().contains("Never"));
+    info("Select Daily at Send Me A Summary Email");
+    tribeChangeSettings.selectSendMeASummaryEmail(TribeChangeSettings.mailSendingType.DAILY);
+    Assert.assertTrue(ELEMENT_TRIBE_GENERAL_NOTIFICATIONS_SELECT_MAIL_SENDING_TYPE.getText().contains("Daily"));
+    info("Apply Select Daily at Send Me A Summary Email");
+    tribeChangeSettings.tribeApplyEditGeneralNotifications();
+
+    refresh();
+    tribeChangeSettings.goToManageNotifications();
+    tribeChangeSettings.goToTribeEditGeneralNotifications();
+    Assert.assertTrue(ELEMENT_TRIBE_GENERAL_NOTIFICATIONS_SELECT_MAIL_SENDING_TYPE.getText().contains("Daily"));
+    tribeChangeSettings.tribeCancelEditGeneralNotifications();
+
+  }
+
+  @Test
   public void test11_EnableDisableAllGeneralNotifications() {
 
     homePagePlatform.goToSettingsPageTribeViaUrl();

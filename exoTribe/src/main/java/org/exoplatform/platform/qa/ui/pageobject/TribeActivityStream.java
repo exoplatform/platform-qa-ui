@@ -149,9 +149,12 @@ public class TribeActivityStream {
     postActivity();
     info("-- Verify that an activity has been added --");
     sleep(1000);
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+    sleep(1000);
     $(byText(text)).waitUntil(Condition.exist, openBrowserTimeoutMs);
-    $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).shouldBe(Condition.disabled);
+    $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
     info("The activity is shared success");
+
   }
 
 
@@ -243,6 +246,12 @@ public class TribeActivityStream {
 
   }
 
+  public void closeIcon() {
+
+    $(byXpath("//*[@class='closeIcon']")).waitUntil(visible, openBrowserTimeoutMs).click();
+
+  }
+
   public void deleteAttachedFileDW(String attachedFile) {
 
     String activityid = $(byXpath("//*[@data-original-title='${attachedFile}']/following::*[@class='commentBox '][1]".replace("${attachedFile}", attachedFile))).getAttribute("id").split("CommentBlockBound")[1];
@@ -271,12 +280,12 @@ public class TribeActivityStream {
     $(byXpath(ELEMENT_LIKE_BUTTON.replace("{id}", activityId))).click();
     $(byXpath(ELEMENT_UNLIKE_BUTTON.replace("{id}", activityId))).waitUntil(Condition.appears, Configuration.timeout);
 
-    ELEMENT_WHO_LIKED_POPUP.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
+    $(byClassName("activityLikersAndKudosDrawer")).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
   }
 
   public void sendActivityKudosDW(String activity, String message) {
 
-    $(byXpath("(//*[@class='description']//*[text()='${activity}']/following::*[@class='SendKudosButtonTemplate VuetifyApp']//button)[1]"
+    $(byXpath("(//*[@class='description']//*[text()='${activity}']/following::*[@class='SendKudosButtonTemplate VuetifyApp']//a)[1]"
             .replace("${activity}", activity))).click();
     sleep(3000);
     ELEMENT_KUDOS_MESSAGE_DW.waitUntil(Condition.visible, openBrowserTimeoutMs).sendKeys(message);
@@ -287,10 +296,10 @@ public class TribeActivityStream {
 
   public void checkThatUserWholikesActivityIsDisplayedDW(String user, String activity) {
 
-    $(byXpath("(//*[@class='description']//*[contains(text(),'${activity}')]/following::*[@class='listPeopleContent']//*[contains(text(),'${user}')])[1]"
+    $(byXpath("(//*[@class='description']//*[contains(text(),'${activity}')]/following::*[@class='activityReactionsContainer']//*[contains(text(),'${user}')])[1]"
             .replace("${user}", user)
             .replace("${activity}",activity)))
-            .waitUntil(Condition.visible, openBrowserTimeoutMs).isDisplayed();
+            .waitUntil(exist, openBrowserTimeoutMs);
 
   }
 
@@ -299,6 +308,14 @@ public class TribeActivityStream {
    Assert.assertEquals($(byXpath("(//*[@class='description']//*[contains(text(),'${activity}')]/following::*[contains(text(),'${user}')]/following::*[@class='contentComment'])[1]"
             .replace("${user}", user)
             .replace("${activity}",activity))).getText(), "Kudos à " + userToSend + " : " + kudosMessage) ;
+
+  }
+
+  public void checkThatUserWhoSendsAKudosIsDisplayedDigitalWorkplace(String user, String activity, String kudosMessage, String userToSend) {
+
+    Assert.assertEquals($(byXpath("(//*[@class='description']//*[contains(text(),'${activity}')]/following::*[contains(text(),'${user}')]/following::*[@class='contentComment'])[1]"
+            .replace("${user}", user)
+            .replace("${activity}",activity))).getText(), "Kudos to " + userToSend + " : " + kudosMessage) ;
 
   }
 

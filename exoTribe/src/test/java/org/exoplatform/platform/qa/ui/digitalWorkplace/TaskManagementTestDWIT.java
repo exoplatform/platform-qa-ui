@@ -201,6 +201,7 @@ public class TaskManagementTestDWIT extends BaseDW {
     homePagePlatform.goToTasksIncomingPageDW();
 
     tasksManagement.deleteTask(task);
+    sleep(2000);
     tribeLabelsManagement.deleteLabel(label);
 
   }

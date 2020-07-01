@@ -216,6 +216,7 @@ public class SOCPeopleConnectionsManagementTestDWIT extends BaseTribe {
     $(ELEMENT_NOTIFICATION_DROPDOWN_DW).find(byText(tribe_user)).parent().shouldNotHave(text(tribe_user1 + " wants to connect with you"));
     navigationToolbar.removeFirstNotificationDW();
     navigationToolbar.closeNotificationsDW();
+    homePagePlatform.goToPeoplePageTribeViaUrl();
     manageLogInOut.signOutTribe();
     manageLogInOut.signInTribe(tribe_username, tribe_password);
     homePagePlatform.goToPeoplePageTribeViaUrl();

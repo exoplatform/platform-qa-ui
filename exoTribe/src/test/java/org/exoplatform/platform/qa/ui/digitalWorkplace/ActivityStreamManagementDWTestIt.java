@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseDW;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
 import org.exoplatform.platform.qa.ui.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
@@ -20,8 +21,7 @@ import java.util.ArrayList;
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
@@ -233,6 +233,214 @@ public class ActivityStreamManagementDWTestIt extends BaseDW {
     tribeSpaceManagement.deleteTribeSpace(spaceNamea);
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test06_LikeDislike_ActivityByOtherUser() {
+
+    String spaceNamea = "spacenamea" + getRandomNumber();
+    String spaceDesa = "descriptiona" + getRandomNumber();
+    String activity1 = "activity1" + getRandomNumber();
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@test.com";
+    String password = "12345678";
+
+    info("Add user");
+    navigationToolbar.goToAddUsersPageViaUrlDW();
+    addUsers.addUserTribe(username1, password, email1, username1, username1, "");
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(username1);
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", inviteUsers);
+
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    tribeActivityStream.addTribeActivity(activity1, "");
+
+    String activityId = tribeActivityStream.getActivityIdDW(activity1);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(username1, password);
+
+    navigationToolbar.goToIntranetNotificationDW();
+    navigationToolbar.acceptJoinSpaceViaNotificationnDW(spaceNamea);
+
+    navigationToolbar.goToIntranetNotificationDW();
+    navigationToolbar.verifyAcceptJoinSpaceViaNotificationDW(spaceNamea);
+    navigationToolbar.closeNotificationsDW();
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    connectionsManagement.tribeSearchSpace(spaceNamea);
+    tribeSpaceManagement.accessToSearchedSpace();
+
+    info("Like Activity");
+    tribeActivityStream.likeActivityDW(activityId);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    connectionsManagement.tribeSearchSpace(spaceNamea);
+    tribeSpaceManagement.accessToSearchedSpace();
+    tribeActivityStream.checkThatUserWholikesActivityIsDisplayedDW(username1, activity1);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(username1, password);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    connectionsManagement.tribeSearchSpace(spaceNamea);
+    tribeSpaceManagement.accessToSearchedSpace();
+
+    info("Dislike Activity");
+    tribeActivityStream.dislikeActivityDW(activityId);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    connectionsManagement.tribeSearchSpace(spaceNamea);
+    tribeSpaceManagement.accessToSearchedSpace();
+    tribeActivityStream.checkThatUserWhoDislikesActivityIsNotDisplayedDW(username1, activity1);
+
+    tribeActivityStream.deleteactivityDW(activity1);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamea);
+
+  }
+
+  @Test
+  public void test07_SendActivityKudosByOtherUser() {
+
+    String spaceNamea = "spacenamea" + getRandomNumber();
+    String spaceDesa = "descriptiona" + getRandomNumber();
+    String activity1 = "activity1" + getRandomNumber();
+    String kudosMessage = "Thanks for your help";
+
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@test.com";
+    String password = "12345678";
+
+    info("Add user");
+    navigationToolbar.goToAddUsersPageViaUrlDW();
+    addUsers.addUserTribe(username1, password, email1, username1, username1, "");
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(username1);
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", inviteUsers);
+
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    tribeActivityStream.addTribeActivity(activity1, "");
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(username1, password);
+
+    navigationToolbar.goToIntranetNotificationDW_WithoutRefresh();
+    navigationToolbar.acceptJoinSpaceViaNotificationnDW(spaceNamea);
+    navigationToolbar.verifyAcceptJoinSpaceViaNotificationDW(spaceNamea);
+    navigationToolbar.closeNotificationsDW();
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    connectionsManagement.tribeSearchSpace(spaceNamea);
+    tribeSpaceManagement.accessToSearchedSpace();
+
+    info("Send A Kudos");
+    tribeActivityStream.sendActivityKudosDW(activity1, kudosMessage);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    connectionsManagement.tribeSearchSpace(spaceNamea);
+    tribeSpaceManagement.accessToSearchedSpace();
+
+    info("Check That User Who Sends A Kudos Is Displayed");
+    tribeActivityStream.checkThatUserWhoSendsAKudosIsDisplayedDigitalWorkplace(username1, activity1, kudosMessage, DATA_NAME_USER1);
+
+    tribeActivityStream.deleteactivityDW(activity1);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamea);
+
+  }
+
+  @Test
+  public void test08_CommentAndReplyToAComment_ActivityByOtherUser() {
+
+    String spaceNamea = "spacenamea" + getRandomNumber();
+    String spaceDesa = "descriptiona" + getRandomNumber();
+    String activity1 = "activity1" + getRandomNumber();
+    String comment = "comment" + getRandomNumber();
+    String reply = "reply" + getRandomNumber();
+
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@test.com";
+    String username2 = "usernameb" + getRandomString();
+    String email2 = username2 + "@test.com";
+    String password = "12345678";
+
+    info("Add user");
+    navigationToolbar.goToAddUsersPageViaUrlDW();
+    addUsers.addUserTribe(username1, password, email1, username1, username1, "");
+    addUsers.addUserTribe(username2, password, email2, username2, username2, "");
+
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(username1);
+    inviteUsers.add(username2);
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", inviteUsers);
+
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    tribeActivityStream.addTribeActivity(activity1, "");
+
+    String activityId = tribeActivityStream.getActivityIdDW(activity1);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(username1, password);
+
+    navigationToolbar.goToIntranetNotificationDW_WithoutRefresh();
+    navigationToolbar.acceptJoinSpaceViaNotificationnDW(spaceNamea);
+    navigationToolbar.verifyAcceptJoinSpaceViaNotificationDW(spaceNamea);
+    navigationToolbar.closeNotificationsDW();
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    connectionsManagement.tribeSearchSpace(spaceNamea);
+    tribeSpaceManagement.accessToSearchedSpace();
+
+    info("Comment Activity");
+    tribeActivityStream.addActivityComment(activityId, comment);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    connectionsManagement.tribeSearchSpace(spaceNamea);
+    tribeSpaceManagement.accessToSearchedSpace();
+    tribeActivityStream.checkThatUserWhoCommentsActivityIsDisplayedDW(activity1, username1, comment);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(username2, password);
+    navigationToolbar.goToIntranetNotificationDW_WithoutRefresh();
+    navigationToolbar.acceptJoinSpaceViaNotificationnDW(spaceNamea);
+    //navigationToolbar.verifyAcceptJoinSpaceViaNotificationDW(spaceNamea);
+    navigationToolbar.closeNotificationsDW();
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    connectionsManagement.tribeSearchSpace(spaceNamea);
+    tribeSpaceManagement.accessToSearchedSpace();
+
+    info("Reply To A Comment");
+    activityStream.replyToCommentByOtherUserDigitalWorkplace(comment, reply, username2);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    connectionsManagement.tribeSearchSpace(spaceNamea);
+    tribeSpaceManagement.accessToSearchedSpace();
+    tribeActivityStream.checkThatUserWhoReplyToActivityCommentIsDisplayedDW(activity1, username2, comment, reply);
+
+    tribeActivityStream.deleteactivityDW(activity1);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamea);
 
   }
 

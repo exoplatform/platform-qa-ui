@@ -182,6 +182,7 @@ public class TribeSpaceManagement {
     ELEMENT_INVITE_USERS_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     if (groups!= null) {
       for (int i = 0; i < groups.size(); i++) {
+        sleep(2000);
         ELEMENT_SPACE_INPUT_USER_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
         ELEMENT_SPACE_INPUT_USER_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(groups.get(i));
         $(byXpath("//*[@class='v-list-item__title text-truncate identitySuggestionMenuItemText' and contains(text(),'${group}')]".replace("${group}", groups.get(i)))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
@@ -189,7 +190,10 @@ public class TribeSpaceManagement {
     }
     info("Save all changes");
     ELEMENT_CREATE_SPACE_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    $(byXpath("//*[@class='pl-2 align-self-center brandingContainer space']//*[contains(text(),'${spaceName}')]".replace("${spaceName}",name))).waitUntil(Condition.visible,60000);  }
+    $(byXpath("//*[@class='pl-2 align-self-center brandingContainer space']//*[contains(text(),'${spaceName}')]"
+            .replace("${spaceName}",name))).waitUntil(Condition.visible,60000);
+
+  }
 
 
   /**
@@ -783,12 +787,18 @@ public class TribeSpaceManagement {
             .contains($(byXpath(ELEMENT_SPACE_TASKS_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
 
     Assert.assertTrue($(byXpath(ELEMENT_SPACE_TABS_TOP_BAR_ORDER.replace("{i}","4"))).getAttribute("href")
-            .contains($(byXpath(ELEMENT_SPACE_CALENDAR_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
+            .contains($(byXpath(ELEMENT_SPACE_FORUM_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
 
     Assert.assertTrue($(byXpath(ELEMENT_SPACE_TABS_TOP_BAR_ORDER.replace("{i}","5"))).getAttribute("href")
-            .contains($(byXpath(ELEMENT_SPACE_MEMBERS_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
+            .contains($(byXpath(ELEMENT_SPACE_WIKI_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
 
     Assert.assertTrue($(byXpath(ELEMENT_SPACE_TABS_TOP_BAR_ORDER.replace("{i}","6"))).getAttribute("href")
+            .contains($(byXpath(ELEMENT_SPACE_CALENDAR_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
+
+    Assert.assertTrue($(byXpath(ELEMENT_SPACE_TABS_TOP_BAR_ORDER.replace("{i}","7"))).getAttribute("href")
+            .contains($(byXpath(ELEMENT_SPACE_MEMBERS_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
+
+    Assert.assertTrue($(byXpath(ELEMENT_SPACE_TABS_TOP_BAR_ORDER.replace("{i}","8"))).getAttribute("href")
             .contains($(byXpath(ELEMENT_SPACE_SETTINGS_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
 
 

@@ -108,7 +108,7 @@ public class WikiActivitiesInSpaceTestDWIT extends BaseDW {
     tribeSpaceManagement.goToWikiTabDW(space);
     tribeWikiHomePage.goToAddBlankPageDW();
     wikiManagement.goToSourceEditor();
-    tribeSourceTextEditor.addSimplePageDW(title, content);
+    tribeSourceTextEditor.addSimplePage(title, content);
     tribeWikiManagement.saveAddPage();
     getExoWebDriver().getWebDriver().navigate().refresh();
     wikiValidattions.verifyTitleWikiPage(title);
@@ -118,7 +118,7 @@ public class WikiActivitiesInSpaceTestDWIT extends BaseDW {
     info("Edit wiki page");
     tribeWikiHomePage.goToAPage(title);
     wikiHomePage.goToEditPage();
-    tribeSourceTextEditor.editSimplePageDW(newTitle, newContent);
+    tribeSourceTextEditor.editSimplePage(newTitle, newContent);
     tribeWikiManagement.saveAddPage();
     getExoWebDriver().getWebDriver().navigate().refresh();
     wikiValidattions.verifyTitleWikiPage(newTitle);

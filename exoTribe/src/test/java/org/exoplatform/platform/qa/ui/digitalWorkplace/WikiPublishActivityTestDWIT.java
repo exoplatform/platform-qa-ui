@@ -104,13 +104,6 @@ public class WikiPublishActivityTestDWIT extends BaseDW {
     String text = "text" + getRandomNumber();
     String newTitle = "newTitle" + getRandomNumber();
 
-    /*
-     * Step Number: 1 Step Name: Add new wiki page Step Description: - Login and
-     * goto intranet - Click Wiki on left Navigation to go to Wiki Application -
-     * Click add page-> Blank page - Fill the title and content and click save Input
-     * Data: Expected Outcome: - Wiki page is created - An activity is added into
-     * activity stream
-     */
     info("Create a new wiki page");
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
@@ -118,7 +111,7 @@ public class WikiPublishActivityTestDWIT extends BaseDW {
     tribeSpaceManagement.goToWikiTabDW(space);
     tribeWikiHomePage.goToAddBlankPageDW();
     tribeWikiManagement.goToSourceEditor();
-    tribeSourceTextEditor.addSimplePageDW(title, content);
+    tribeSourceTextEditor.addSimplePage(title, content);
     tribeWikiManagement.saveAddPage();
     info("Verify that an activity is added to the activity stream");
     getExoWebDriver().getWebDriver().navigate().refresh();
@@ -130,13 +123,7 @@ public class WikiPublishActivityTestDWIT extends BaseDW {
     ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(title)).click();
     info("Verify that The wiki application is opened in the correspond page ");
     ELEMENT_WIKI_PAGE_CONTAINER.find(byText(title)).should(Condition.exist);
-    /*
-     * Step Number: 2 Step Name: Edit Wiki Page Step Description: - Goto Wiki page
-     * and click Edit - Edit a title of a wiki page - Click save and check [Publish
-     * Activity] - Go to the Homepage Input Data: Expected Outcome: - The wiki
-     * activity is updated - A comment is added in the activity: Page's title has
-     * been updated to: $value.
-     */
+
     String comment = "Page's title has been updated to: " + newTitle;
     info("Go to Wiki porlet and select the wiki page created");
     info("Open wiki page 1");
@@ -148,7 +135,7 @@ public class WikiPublishActivityTestDWIT extends BaseDW {
     $(byText(title)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     info("Edit the title of the wiki page and check on published checkbox");
     tribeWikiHomePage.goToEditPage();
-    tribeSourceTextEditor.editSimplePageDW(newTitle, "");
+    tribeSourceTextEditor.editSimplePage(newTitle, "");
     tribeWikiManagement.publishPageWhenEditPage();
     tribeWikiManagement.saveAddPage();
     info("The title of wiki page's activity is updated");

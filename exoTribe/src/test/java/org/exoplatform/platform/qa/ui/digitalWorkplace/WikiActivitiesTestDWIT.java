@@ -101,7 +101,7 @@ public class WikiActivitiesTestDWIT extends BaseDW {
     tribeSpaceManagement.goToWikiTabDW(space);
     tribeWikiHomePage.goToAddBlankPageDW();
     tribeWikiManagement.goToSourceEditor();
-    tribeSourceTextEditor.addSimplePageDW(title, content);
+    tribeSourceTextEditor.addSimplePage(title, content);
     tribeWikiManagement.saveAddPage();
     getExoWebDriver().getWebDriver().navigate().refresh();
     wikiValidattions.verifyTitleWikiPage(title);
@@ -117,7 +117,7 @@ public class WikiActivitiesTestDWIT extends BaseDW {
     tribeSpaceManagement.goToWikiTabDW(space);
     tribeWikiHomePage.goToAPage(title);
     tribeWikiHomePage.goToEditPage();
-    tribeSourceTextEditor.editSimplePageDW(editTitle, editContent);
+    tribeSourceTextEditor.editSimplePage(editTitle, editContent);
     tribeWikiManagement.saveAddPage();
     wikiValidattions.verifyTitleWikiPage(editTitle);
     info("In the create page's activity a Wiki page's version 'View change' is displayed");
@@ -150,7 +150,7 @@ public class WikiActivitiesTestDWIT extends BaseDW {
     tribeSpaceManagement.goToWikiTabDW(space);
     tribeWikiHomePage.goToAddBlankPageDW();
     tribeWikiManagement.goToSourceEditor();
-    tribeSourceTextEditor.addSimplePageDW(title, content);
+    tribeSourceTextEditor.addSimplePage(title, content);
     tribeWikiManagement.saveAddPage();
     getExoWebDriver().getWebDriver().navigate().refresh();
     wikiValidattions.verifyTitleWikiPage(title);
@@ -161,7 +161,7 @@ public class WikiActivitiesTestDWIT extends BaseDW {
     spaceHomePage.goToSpaceSettingTabDW(space);
     spaceSettingManagement.goToApplicationTabDW();
     spaceSettingManagement.removeApplicationDW("Wiki");
-    $(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_DW).waitUntil(Condition.appears, Configuration.timeout);
+    $(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_DW).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     spaceSettingManagement.addApplicationDW("Wiki");
     info("Check on AS");
     homePagePlatform.goToSpaceHomeDW();

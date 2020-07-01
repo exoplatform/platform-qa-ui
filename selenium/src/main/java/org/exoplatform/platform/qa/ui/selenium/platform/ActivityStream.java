@@ -1237,7 +1237,6 @@ public class ActivityStream {
     $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", idBlocComment))).pressEnter().waitUntil(Condition.disappears, openBrowserTimeoutMs);
     $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", idBlocComment))).waitUntil(Condition.not(Condition.visible), openBrowserTimeoutMs);
     $(byText(reply)).waitUntil(exist, openBrowserTimeoutMs);
-    $(byText(reply)).parent().parent().find(byText(user)).waitUntil(exist, openBrowserTimeoutMs);
 
   }
 
@@ -1248,7 +1247,7 @@ public class ActivityStream {
             .getAttribute("id")
             .split("commentContainercomment")[1];
 
-    int idInteger = Integer.parseInt(id) - 2;
+    int idInteger = Integer.parseInt(id) - 1;
     String idBlocComment = String.valueOf(idInteger);
 
     // Get id Comment button
@@ -1257,7 +1256,7 @@ public class ActivityStream {
     $(byId(ELEMENT_lABEL_REPLY_COMMENT.replace("{id}", id))).waitUntil(visible, openBrowserTimeoutMs).click();
     sleep(2000);
     // Insert the reply
-    $(byXpath("//*[@id='CommentFormBlock{id}']//*[@class='commentInput']".replace("{id}", idBlocComment))).waitUntil(Condition.appears, openBrowserTimeoutMs).click();
+    $(byXpath("(//*[@id='commentContainercomment{id}']/following::*[@class='commentInput'])[1]".replace("{id}", id))).waitUntil(Condition.appears, openBrowserTimeoutMs).click();
     sleep(2000);
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + idBlocComment + ".insertText(\"" + reply + "\")", "");
     info("Verify that the reply is added");
@@ -1267,6 +1266,40 @@ public class ActivityStream {
     $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", idBlocComment))).waitUntil(Condition.not(Condition.visible), openBrowserTimeoutMs);
     $(byText(reply)).waitUntil(exist, openBrowserTimeoutMs);
     $(byText(reply)).parent().parent().find(byText(user)).waitUntil(exist, openBrowserTimeoutMs);
+
+  }
+
+  public void replyToCommentByOtherUserDigitalWorkplace(String comment, String reply, String user) {
+
+    String id = $(byText(comment)).waitUntil(visible, openBrowserTimeoutMs).parent()
+            .parent().parent().parent().parent()
+            .getAttribute("id")
+            .split("commentContainercomment")[1];
+
+    int idInteger = Integer.parseInt(id) - 1;
+    String idBlocComment = String.valueOf(idInteger);
+
+    // Get id Comment button
+    executeJavaScript("window.scrollBy(0,-250)");
+    // Click on reply link
+    $(byId(ELEMENT_lABEL_REPLY_COMMENT.replace("{id}", id))).waitUntil(visible, openBrowserTimeoutMs).click();
+    sleep(2000);
+    // Insert the reply
+    $(byXpath("(//*[@id='commentContainercomment{id}']/following::*[@class='commentInput'])[1]".replace("{id}", id))).waitUntil(Condition.appears, openBrowserTimeoutMs).click();
+    sleep(2000);
+    executeJavaScript("CKEDITOR.instances.CommentTextarea" + idBlocComment + ".insertText(\"" + reply + "\")", "");
+    info("Verify that the reply is added");
+    sleep(2000);
+    // click on the button comment
+    $(byXpath(ELEMENT_COMMENT_BUTTON.replace("{id}", idBlocComment))).pressEnter().waitUntil(Condition.disappears, openBrowserTimeoutMs);
+    $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", idBlocComment))).waitUntil(Condition.not(Condition.visible), openBrowserTimeoutMs);
+    $(byText(reply)).waitUntil(exist, openBrowserTimeoutMs);
+
+    $(byXpath("(//*[@class='author']//*[contains(text(),'${user}')]/following::*[contains(text(),'${reply}')])[1]"
+
+            .replace("${user}",user)
+            .replace("${reply}",reply)))
+            .waitUntil(exist, openBrowserTimeoutMs);
 
   }
 

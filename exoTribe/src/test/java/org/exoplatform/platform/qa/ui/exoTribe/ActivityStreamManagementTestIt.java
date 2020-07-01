@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -174,6 +175,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
 
     info("Reply to a comment");
     activityStream.replyToCommentDW(comment, reply, user);
+    $(byText(reply)).parent().parent().find(byText(user)).waitUntil(exist, openBrowserTimeoutMs);
     activityStream.deleteReplyDW(comment, reply);
     // verify that the reply is deleted
     $(byText(reply)).waitUntil(Condition.not(Condition.exist), openBrowserTimeoutMs);

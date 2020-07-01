@@ -361,6 +361,7 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_ASSIGN_TASK_DW= $(byClassName("apps-composer-modal")).find(byText("Affecter une tâche"));
 
+    public static final SelenideElement ELEMENT_ASSIGN_TASK_DIGITAL_WORKPLACE= $(byClassName("apps-composer-modal")).find(byText("Assign Task"));
 
   //SETTINGS
     public static final SelenideElement ELEMENT_TRIBE_EDIT_LANGUAGE = $(byXpath("(//*[@class='uiIconEdit uiIconLightBlue pb-2'])[1]"));

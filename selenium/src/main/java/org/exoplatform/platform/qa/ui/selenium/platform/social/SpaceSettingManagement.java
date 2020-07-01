@@ -151,6 +151,7 @@ public class SpaceSettingManagement {
             .waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs)
             .click();
     ELEMENT_REMOVE_APPLICATION_DW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("(//*[@class='v-card__actions']//button)[1]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("the application is removed");
   }
 

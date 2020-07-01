@@ -812,6 +812,18 @@ public class WikiLocators {
     public static final SelenideElement ELEMENT_SELECT_TEMPLATE_TwoColumnLayout =
             $(byXpath("//*[@id=\"UIWikiTemplateGrid\"]/tbody/tr[6]/td[1]/div/input"));
 
+  // select Status Meeting template
+    public static final SelenideElement ELEMENT_SELECT_TEMPLATE_StatusMeetingDW =
+          $(byXpath("//*[@id=\"UIWikiTemplateGrid\"]/tbody/tr[3]/td[1]/div/input"));
+
+  // select Leave Planning template
+    public static final SelenideElement ELEMENT_SELECT_TEMPLATE_LeavePlanningDW =
+          $(byXpath("//*[@id=\"UIWikiTemplateGrid\"]/tbody/tr[4]/td[1]/div/input"));
+
+  // select HOW-TO Guide template
+    public static final SelenideElement ELEMENT_SELECT_TEMPLATE_HowToGuideDW =
+          $(byXpath("//*[@id=\"UIWikiTemplateGrid\"]/tbody/tr[2]/td[1]/div/input"));
+
     public static final SelenideElement ELEMENT_TREE_NAME_WIKI =
             $(byClassName("uiLeftContainerArea"));
 

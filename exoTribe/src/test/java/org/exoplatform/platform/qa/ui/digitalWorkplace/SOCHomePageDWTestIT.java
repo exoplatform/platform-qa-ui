@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.digitalWorkplace;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseDW;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
 import org.exoplatform.platform.qa.ui.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
@@ -132,6 +133,7 @@ public class SOCHomePageDWTestIT extends BaseDW {
     String spaceNamea = "spaceNamea" + getRandomNumber();
     String spaceDesa = "descriptiona" + getRandomNumber();
     String attachedFile = "eXo-Platform.png";
+    String activity = "activity" + getRandomNumber();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
@@ -140,10 +142,11 @@ public class SOCHomePageDWTestIT extends BaseDW {
 
     info("-- Upload the picture --");
     tribeActivityStream.uploadFileActivityStreamDW(attachedFile);
-
+    tribeActivityStream.addMessage(activity);
     tribeActivityStream.postActivity();
     info("-- Verify that an activity has been added --");
     sleep(1000);
+    getExoWebDriver().getWebDriver().navigate().refresh();
     $(byText(attachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
     $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
     info("The activity is shared success");
@@ -155,7 +158,9 @@ public class SOCHomePageDWTestIT extends BaseDW {
     tribeActivityStream.openAttachedFileInDocuments(attachedFile);
     tribeActivityStream.verifyThatPictureAttachedFileIsDisplayedInDocuments(attachedFile);
 
-    homePagePlatform.goToHomeSpaceTribe();
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    connectionsManagement.tribeSearchSpace(spaceNamea);
+    tribeSpaceManagement.accessToSearchedSpace();
 
     info("Delete The Attached File");
     tribeActivityStream.deleteAttachedFileDW(attachedFile);
@@ -175,7 +180,8 @@ public class SOCHomePageDWTestIT extends BaseDW {
     String attachedFile = "docx_test.docx";
     String document = "docx_test";
     String extension = ".docx";
-    String userName = tribe_user;
+    String activity = "activity" + getRandomNumber();
+
 
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
@@ -184,10 +190,11 @@ public class SOCHomePageDWTestIT extends BaseDW {
 
     info("-- Upload the Word Document --");
     tribeActivityStream.uploadFileActivityStreamDW(attachedFile);
-
+    tribeActivityStream.addMessage(activity);
     tribeActivityStream.postActivity();
     info("-- Verify that an activity has been added --");
     sleep(1000);
+    getExoWebDriver().getWebDriver().navigate().refresh();
     $(byText(attachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
     $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
     info("The activity is shared success");
@@ -201,7 +208,7 @@ public class SOCHomePageDWTestIT extends BaseDW {
     tribeActivityStream.editFileInOnlyOfficeFromDocumentsTab( attachedFile);
     switchTo().window(1);
     info("Check That The Document is opened with Edit Online");
-    tribeActivityStream.checkOpeningDocumentWithEditOnlineDW(document,extension,userName);
+    tribeActivityStream.checkOpeningDocumentWithEditOnlineDW(document,extension, DATA_NAME_USER1);
 
     switchTo().window(1).close();
     switchTo().window(0);
