@@ -273,7 +273,7 @@ public class ConnectionsManagement {
    * @param number
    */
   public void tribeSearchPeople(String name, String... number) {
-
+    sleep(2000);
     ELEMENT_PEOPLE_TRIBE_SEARCH_TEXT.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout);
     info("Input the user into search text box");
     ELEMENT_PEOPLE_TRIBE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).clear();

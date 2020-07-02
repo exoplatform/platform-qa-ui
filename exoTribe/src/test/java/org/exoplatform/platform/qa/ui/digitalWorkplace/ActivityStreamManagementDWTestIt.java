@@ -3,8 +3,6 @@ package org.exoplatform.platform.qa.ui.digitalWorkplace;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseDW;
-import org.exoplatform.platform.qa.ui.commons.BaseTribe;
-import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
 import org.exoplatform.platform.qa.ui.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
@@ -18,15 +16,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_DW_POST_ACTIVITY_BUTTON;
-import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_NO_NOTIFICATION_DISPLAY_DW;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
@@ -419,13 +415,9 @@ public class ActivityStreamManagementDWTestIt extends BaseDW {
 
     manageLogInOut.signOutTribe();
     manageLogInOut.signIn(username2, password);
-    navigationToolbar.goToIntranetNotificationDW_WithoutRefresh();
-    navigationToolbar.acceptJoinSpaceViaNotificationnDW(spaceNamea);
-    //navigationToolbar.verifyAcceptJoinSpaceViaNotificationDW(spaceNamea);
-    navigationToolbar.closeNotificationsDW();
-
     homePagePlatform.goToMySpacesTribeViaUrl();
     connectionsManagement.tribeSearchSpace(spaceNamea);
+    navigationToolbar.acceptJoinSpaceViaSpacesDW();
     tribeSpaceManagement.accessToSearchedSpace();
 
     info("Reply To A Comment");

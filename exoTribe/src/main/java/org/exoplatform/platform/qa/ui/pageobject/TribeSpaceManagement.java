@@ -533,9 +533,13 @@ public class TribeSpaceManagement {
    * Access to the searched space
    */
   public void accessToSearchedSpace() {
+    sleep(2000);
     ELEMENT_SEARCHED_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
+  public void joinSpaceDW() {
+    ELEMENT_JOIN_SPACE_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+  }
   /**
    * Edit Layout
    */

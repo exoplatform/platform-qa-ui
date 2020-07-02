@@ -207,6 +207,8 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_SEARCHED_SPACE_TRIBE   = $(byXpath("//*[@class='spaceDisplayName text-truncate d-block']"));
 
+    public static final SelenideElement ELEMENT_JOIN_SPACE_DW   = $(byXpath("//*[@class='v-card__actions spaceCardActions']//button"));
+
     public static final String ELEMENT_SPACE_SIDEBAR_ORDER = "((//*[@class='flex']//i)[5]/following::div[@role='listbox'][1]//div[@class='v-list-item__content']/div)[{id}]";
 
     public static final String ELEMENT_LAST_VISITED_SPACES_SIDEBAR_ORDER = "((//*[@class='flex filterSpaces']//i)[2]/following::div[@role='listbox'][1]//div[@class='v-list-item__content']/div)[{id}]";
@@ -230,6 +232,8 @@ public class exoTribeLocator {
     public static final String ELEMENT_SPACE_DOCUMENTS_TAB_TOP_BAR = "//*[@id='MiddleToolBar']//*[@href='/portal/g/:spaces:{space}/{space}/documents']";
 
     public static final String ELEMENT_SPACE_TABS_TOP_BAR_ORDER = "//*[@class='v-application--wrap']//*[@class='v-slide-group__wrapper']//*[@tabindex][{i}]";
+
+    public static final SelenideElement ELEMENT_ACCEPT_JOIN_SPACE=  $(byXpath("(//*[@class='acceptToJoinSpaceButtonParent']//button)[1]"));
 
   //WIKI
 

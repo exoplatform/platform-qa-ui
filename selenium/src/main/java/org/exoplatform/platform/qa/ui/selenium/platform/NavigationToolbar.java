@@ -543,7 +543,7 @@ public class NavigationToolbar {
 
   public void goToIntranetNotificationDW_WithoutRefresh() {
     info("Go to Intranet Notification");
-    sleep(2000);
+    sleep(3000);
     ELEMENT_NOTIFICATIONS_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_NOTIFICATION_DROPDOWN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     info("The elemnt is shown successfully");
@@ -553,6 +553,12 @@ public class NavigationToolbar {
     info("Accept to join a space via notification");
     sleep(3000);
     $(byXpath(ELEMENT_ACCEPT_JOIN_SPACE_NOTIFICATION_BTN_DW.replace("${space}", space))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+  }
+
+  public void acceptJoinSpaceViaSpacesDW() {
+    info("Accept to join a space");
+    sleep(3000);
+    ELEMENT_ACCEPT_JOIN_SPACE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
   public void verifyAcceptJoinSpaceViaNotificationDW(String space) {

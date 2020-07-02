@@ -3,7 +3,6 @@ package org.exoplatform.platform.qa.ui.digitalWorkplace;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseDW;
-import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
 import org.exoplatform.platform.qa.ui.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
@@ -18,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_DW_POST_ACTIVITY_BUTTON;
@@ -205,10 +203,10 @@ public class SOCHomePageDWTestIT extends BaseDW {
     info("Open The Attached File In Documents");
     tribeActivityStream.openAttachedFileInDocuments(attachedFile);
     tribeActivityStream.verifyThatWordAttachedFileIsDisplayedInDocuments(attachedFile);
-    tribeActivityStream.editFileInOnlyOfficeFromDocumentsTab( attachedFile);
+    tribeActivityStream.editFileInOnlyOfficeFromDocumentsTab(attachedFile);
     switchTo().window(1);
     info("Check That The Document is opened with Edit Online");
-    tribeActivityStream.checkOpeningDocumentWithEditOnlineDW(document,extension, DATA_NAME_USER1);
+    tribeActivityStream.checkOpeningDocumentWithEditOnlineDW(document, extension, DATA_NAME_USER1);
 
     switchTo().window(1).close();
     switchTo().window(0);
