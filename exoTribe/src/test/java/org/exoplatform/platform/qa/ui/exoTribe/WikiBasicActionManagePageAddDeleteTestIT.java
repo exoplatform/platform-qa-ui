@@ -85,7 +85,6 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
     String title2 = "title2" + getRandomNumber();
     String title3 = "title3" + getRandomNumber();
     String title4 = "title4" + getRandomNumber();
-    String title5 = "title4" + getRandomNumber();
     String space = "space" + getRandomNumber();
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
@@ -94,7 +93,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
     tribeWikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_HowToGuide, title);
     tribeWikiHomePage.goToHomeWikiPage();
     tribeWikiHomePage.goToAddTemplateWikiPage();
-    tribeWikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_ThreeColumnLayout, title2);
+    tribeWikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_SupportGuide, title2);
     tribeWikiHomePage.goToHomeWikiPage();
     tribeWikiHomePage.goToAddTemplateWikiPage();
     tribeWikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_StatusMeeting, title3);

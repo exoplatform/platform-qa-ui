@@ -80,7 +80,7 @@ public class NotificationsManagementTestIt extends BaseTribe {
     ELEMENT_NOTIFICATION_SETTINGS_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
 
     info("Close Notifications");
-    navigationToolbar.closeNotificationsDW();
+    navigationToolbar.closeNotificationsTribe();
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
 
@@ -130,7 +130,7 @@ public class NotificationsManagementTestIt extends BaseTribe {
 
     navigationToolbar.goToIntranetNotificationDW();
     navigationToolbar.verifyAcceptJoinSpaceViaNotificationDW(spaceNamea);
-    navigationToolbar.closeNotificationsDW();
+    navigationToolbar.closeNotificationsTribe();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
     connectionsManagement.tribeSearchSpace(spaceNamea);
@@ -170,7 +170,7 @@ public class NotificationsManagementTestIt extends BaseTribe {
     ELEMENT_MARK_AS_READ.waitUntil(Condition.visible, openBrowserTimeoutMs).click();
 
     info("Close Notifications");
-    navigationToolbar.closeNotificationsDW();
+    navigationToolbar.closeNotificationsTribe();
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
 
@@ -208,7 +208,7 @@ public class NotificationsManagementTestIt extends BaseTribe {
     navigationToolbar.removeFirstNotificationDW();
 
     info("Close Notifications");
-    navigationToolbar.closeNotificationsDW();
+    navigationToolbar.closeNotificationsTribe();
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
 

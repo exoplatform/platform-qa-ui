@@ -241,7 +241,7 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_ADD_PAGE_DW = $(byXpath("(//*[@class='dropdown uiActionWithLabel'])[1]"));
 
-    public static final By ELEMENT_ADD_PAGE_TRIBE = By.xpath("//div[@data-toggle and text()='Ajouter une Page']");
+    public static final By ELEMENT_ADD_PAGE_TRIBE = By.xpath("//div[@data-toggle and text()='Add Page']");
 
     public static final By ELEMENT_DELETE_LINK_TRIBE = By.xpath(".//*[text()='Supprimer']");
 
@@ -269,7 +269,7 @@ public class exoTribeLocator {
 
     public static final By   ELEMENT_HOME_SPACE_TRIBE = By.xpath("//*[@class='uiIconAppSpaceHomePage uiIconDefaultApp']");
 
-    public static final By   ELEMENT_HOME_SPACE_DW = By.xpath("//*[@class='uiSocApplication uiSpaceActivityStreamPortlet']");
+    public static final By   ELEMENT_HOME_SPACE_DW = By.xpath("//*[@id='UISpaceActivityStreamPortlet']");
 
     public static final By ELEMENT_TRIBE_INFO_ADD_MORE_RELATIONS = By.xpath(".//*[@id='UIWikiPageInfo']//button[text()='Associer une Page']");
 
@@ -309,7 +309,9 @@ public class exoTribeLocator {
 
     public static final SelenideElement  ELEMENT_NO_NOTIFICATION_DISPLAY_DW   =   $(byXpath("//*[@class='noNoticationWrapper']"));
 
-    public static final SelenideElement ELEMENT_CLOSE_NOTIFICATIONS_DW       = $(byXpath("//*[@class='uiCloseIcon notifDrawerClose']"));
+    public static final SelenideElement ELEMENT_CLOSE_NOTIFICATIONS_DW       = $(byXpath("(//*[@class='uiIconClose uiIconLightGray'])[2]"));
+
+    public static final SelenideElement ELEMENT_CLOSE_NOTIFICATIONS_TRIBE       = $(byXpath("//*[@class='uiCloseIcon notifDrawerClose']"));
 
     public static final SelenideElement  ELEMENT_NOTIFICATION_TITLE_DW   =   $(byXpath("//*[@class='notifDrawerTitle']"));
 
@@ -372,7 +374,7 @@ public class exoTribeLocator {
 
     public static final SelenideElement  ELEMENT_SETTINGS_APP_TAB_DW  = $(byXpath("(//*[contains(text(),'Applications')]/following::*[@class='v-btn__content'])[last()]"));
 
-    public static final SelenideElement  ELEMENT_APPLICATION_TAB_ADD_APPLICATION_DW  = $(byXpath("(//*[@id='SpaceSettings']//*[@class='v-btn__content'])[last()-1]"));
+    public static final SelenideElement  ELEMENT_APPLICATION_TAB_ADD_APPLICATION_DW  = $(byXpath("(//*[@id='SpaceSettings']//*[@class='v-btn__content'])[last()-2]"));
 
     public static final SelenideElement  ELEMENT_REMOVE_APPLICATION_DW  = $(byXpath("(//*[@class='v-list-item__title'])[1]"));
 

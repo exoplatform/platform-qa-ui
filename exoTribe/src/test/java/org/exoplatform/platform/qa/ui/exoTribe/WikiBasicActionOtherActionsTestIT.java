@@ -152,7 +152,7 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     tribeWikiHomePage.goToAddBlankPageDW();
     tribeSourceTextEditor.addSimplePage(title1, title1);
     tribeWikiManagement.saveAddPage();
-    $(byText(title1)).should(Condition.exist);
+    $(byText(title1)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
 
     info("Move page to Space1");
 

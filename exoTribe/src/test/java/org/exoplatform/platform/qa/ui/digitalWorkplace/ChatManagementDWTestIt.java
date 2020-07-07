@@ -90,9 +90,16 @@ public class ChatManagementDWTestIt extends BaseDW {
   @Test
   public void test01_OpenClose_ChatDrawer() {
 
+    String room = "room" + getRandomNumber();
     info("Open Chat Drawer");
-    navigationToolbar.openChatDrawerDW();
+    ELEMENT_TRIBE_MINICHAT_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs).click();
 
+    switchTo().window(1);
+    roomManagement.addRoomTribe(room);
+    ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.exist, openBrowserTimeoutMs);
+
+    switchTo().window(0);
     info("Check that Open Chat Page Button is displayed");
     ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
     info("Check that Discussions Filter Button is displayed");

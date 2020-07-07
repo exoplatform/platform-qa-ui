@@ -95,8 +95,11 @@ public class TribeWikiManagement {
   public void saveAddPage() {
     info("Save all changes");
     executeJavaScript("window.scrollBy(0,-5500)", "");
+    sleep(1000);
     ELEMENT_SAVE_BUTTON_ADD_PAGE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout).click();
+    sleep(2000);
     $(ELEMENT_SAVE_BUTTON_ADD_PAGE).waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
+    sleep(2000);
     info("Wiki page simple is created successfully");
 
   }

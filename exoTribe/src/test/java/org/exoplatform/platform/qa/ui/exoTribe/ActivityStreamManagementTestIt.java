@@ -259,7 +259,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
 
     navigationToolbar.goToIntranetNotificationDW();
     navigationToolbar.verifyAcceptJoinSpaceViaNotificationDW(spaceNamea);
-    navigationToolbar.closeNotificationsDW();
+    navigationToolbar.closeNotificationsTribe();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
     connectionsManagement.tribeSearchSpace(spaceNamea);
@@ -272,7 +272,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     homePagePlatform.goToMySpacesTribeViaUrl();
     connectionsManagement.tribeSearchSpace(spaceNamea);
     tribeSpaceManagement.accessToSearchedSpace();
-    tribeActivityStream.checkThatUserWholikesActivityIsDisplayedDW(tribe_user3, activity1);
+    tribeActivityStream.checkThatUserWholikesActivityIsDisplayedTribe(tribe_user3, activity1);
 
     manageLogInOut.signInTribe(tribe_username3, tribe_password3);
     homePagePlatform.goToMySpacesTribeViaUrl();
@@ -319,7 +319,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
 
     navigationToolbar.goToIntranetNotificationDW();
     navigationToolbar.verifyAcceptJoinSpaceViaNotificationDW(spaceNamea);
-    navigationToolbar.closeNotificationsDW();
+    navigationToolbar.closeNotificationsTribe();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
     connectionsManagement.tribeSearchSpace(spaceNamea);
@@ -372,7 +372,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
 
     navigationToolbar.goToIntranetNotificationDW();
     navigationToolbar.verifyAcceptJoinSpaceViaNotificationDW(spaceNamea);
-    navigationToolbar.closeNotificationsDW();
+    navigationToolbar.closeNotificationsTribe();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
     connectionsManagement.tribeSearchSpace(spaceNamea);
@@ -393,7 +393,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
 
     navigationToolbar.goToIntranetNotificationDW();
     navigationToolbar.verifyAcceptJoinSpaceViaNotificationDW(spaceNamea);
-    navigationToolbar.closeNotificationsDW();
+    navigationToolbar.closeNotificationsTribe();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
     connectionsManagement.tribeSearchSpace(spaceNamea);

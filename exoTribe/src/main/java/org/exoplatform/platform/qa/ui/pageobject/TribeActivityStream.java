@@ -255,6 +255,7 @@ public class TribeActivityStream {
   public void deleteAttachedFileDW(String attachedFile) {
 
     String activityid = $(byXpath("//*[@data-original-title='${attachedFile}']/following::*[@class='commentBox '][1]".replace("${attachedFile}", attachedFile))).getAttribute("id").split("CommentBlockBound")[1];
+    testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     executeJavaScript("window.scrollBy(0,-300)");
     sleep(1000);
     $(By.id(ELEMENT_ACTIVITY_DROPDOWN.replace("{id}", activityid))).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
@@ -295,6 +296,16 @@ public class TribeActivityStream {
   }
 
   public void checkThatUserWholikesActivityIsDisplayedDW(String user, String activity) {
+    String userWhoLikeActivity = user + " " + user;
+
+    $(byXpath("(//*[@class='description']//*[contains(text(),'${activity}')]/following::*[@class='activityReactionsContainer']//*[@title='${user}'])[1]"
+            .replace("${user}", userWhoLikeActivity)
+            .replace("${activity}",activity)))
+            .waitUntil(exist, openBrowserTimeoutMs);
+
+  }
+
+  public void checkThatUserWholikesActivityIsDisplayedTribe(String user, String activity) {
 
     $(byXpath("(//*[@class='description']//*[contains(text(),'${activity}')]/following::*[@class='activityReactionsContainer']//*[contains(text(),'${user}')])[1]"
             .replace("${user}", user)

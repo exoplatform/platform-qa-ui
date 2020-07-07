@@ -13,6 +13,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
+import org.openqa.selenium.By;
 
 public class ChatManagement {
   private final TestBase testBase;
@@ -93,7 +94,7 @@ public class ChatManagement {
     ELEMENT_CHAT_COLLABORATION_MENU.waitUntil(Condition.appear, Configuration.timeout);
     ELEMENT_CHAT_ADD_EVENT.should(Condition.visible);
     ELEMENT_CHAT_SHARE_LINK.should(Condition.visible);
-    ELEMENT_CHAT_UPLOAD_FILE.should(Condition.visible);
+    $(By.className("uiIconChatUpload")).should(Condition.visible);
     ELEMENT_CHAT_ASK_QUESTION.should(Condition.visible);
     ELEMENT_CHAT_RAISE_HAND.should(Condition.visible);
     ELEMENT_CHAT_CREATE_TASK.should(Condition.visible);
@@ -106,6 +107,15 @@ public class ChatManagement {
     assertEquals("Cancel", ELEMENT_CHAT_CANCEL_BUTTON.getText());
     ELEMENT_CHAT_CANCEL_BUTTON.click();
     ELEMENT_POPUP_CONTAINER.find(byText("Ask a Question")).shouldNot(Condition.appear);
+  }
+
+  public void checkAskQuestionPopUpTribe(){
+    ELEMENT_POPUP_CONTAINER.find(byText("Poser une question")).waitUntil(Condition.appear,Configuration.timeout);
+    ELEMENT_POPUP_CONTAINER.find(byXpath("//input[@placeholder='Quelle est votre question?']")).waitUntil(Condition.appear, Configuration.timeout);
+    assertEquals("Demander",ELEMENT_CHAT_ASK_BUTTON.getText());
+    assertEquals("Annuler", ELEMENT_CHAT_CANCEL_BUTTON.getText());
+    ELEMENT_CHAT_CANCEL_BUTTON.click();
+    ELEMENT_POPUP_CONTAINER.find(byText("Poser une question")).shouldNot(Condition.appear);
   }
 
   public void uploadFileChatUser(String file) {
@@ -143,6 +153,14 @@ public class ChatManagement {
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byClassName("uiIconChatQuestion")).waitUntil(Condition.appear, Configuration.timeout);
   }
 
+  public void addQuestionInChatTribe(String question){
+    ELEMENT_COLLABORATION_ACTIONS.click();
+    ELEMENT_CHAT_ASK_QUESTION.click();
+    ELEMENT_POPUP_CONTAINER.find(byXpath("//input[@placeholder='Quelle est votre question?']")).sendKeys(question+"?");
+    ELEMENT_CHAT_ASK_BUTTON.click();
+    ELEMENT_CONTAINER_LIST_MESSAGES.find(byText(question+"?")).waitUntil(Condition.appear, Configuration.timeout);
+    ELEMENT_CONTAINER_LIST_MESSAGES.find(byClassName("uiIconChatQuestion")).waitUntil(Condition.appear, Configuration.timeout);
+  }
 
   public void checkAddEventPopUp(){
     ELEMENT_POPUP_CONTAINER.find(byText("Add Event")).waitUntil(Condition.appear,Configuration.timeout);
@@ -173,8 +191,35 @@ public class ChatManagement {
     ELEMENT_POPUP_CONTAINER.find(byText("Add Event")).shouldNot(Condition.appear);
   }
 
+  public void checkAddEventPopUpTribe(){
 
-
+    ELEMENT_POPUP_CONTAINER.find(byText("Ajouter un événement")).waitUntil(Condition.appear,Configuration.timeout);
+    ELEMENT_POPUP_CONTAINER.find(byXpath("//input[@placeholder=\"Titre de l'événement\"]")).waitUntil(Condition.appear, Configuration.timeout);
+    ELEMENT_POPUP_CONTAINER.find(byClassName("event-item")).parent().findAll(byClassName("action-label")).get(0)
+            .shouldHave(Condition.text("De"))
+            .find(byXpath("//input[@placeholder='mm/dd/yyyy']")).waitUntil(Condition.appear, Configuration.timeout);
+    ELEMENT_POPUP_CONTAINER.find(byClassName("event-item")).parent().findAll(byClassName("action-label")).get(0)
+            .find(byXpath("//input[@placeholder='mm/dd/yyyy']")).click();
+    ELEMENT_CHAT_EVENT_CALENDAR.should(Condition.appear);
+    ELEMENT_POPUP_CONTAINER.find(byClassName("event-item")).parent().findAll(byClassName("action-label")).get(0)
+            .find(byXpath("//input[@placeholder='mm/dd/yyyy']")).click();
+    $(byClassName("chat-app-event")).click();
+    ELEMENT_POPUP_CONTAINER.find(byClassName("event-item")).parent().findAll(byClassName("action-label")).get(1)
+            .shouldHave(Condition.text("À"))
+            .find(byXpath("//input[@placeholder='mm/dd/yyyy']")).waitUntil(Condition.appear, Configuration.timeout);
+    ELEMENT_POPUP_CONTAINER.find(byClassName("event-item")).parent().findAll(byClassName("action-label")).get(1)
+            .find(byXpath("//input[@placeholder='mm/dd/yyyy']")).click();
+    ELEMENT_CHAT_EVENT_CALENDAR.should(Condition.appear);
+    ELEMENT_POPUP_CONTAINER.find(byClassName("event-item")).parent().findAll(byClassName("action-label")).get(1)
+            .find(byXpath("//input[@placeholder='mm/dd/yyyy']")).click();
+    ELEMENT_POPUP_CONTAINER.find(byXpath("//input[@placeholder='Emplacement']")).waitUntil(Condition.appear, Configuration.timeout);
+    assertEquals("Jour Entier",$("select[name=startTime]").getText());
+    assertEquals("Jour Entier",$("select[name=endTime]").getText());
+    assertEquals("Poster",ELEMENT_CHAT_POST_EVENT.getText());
+    assertEquals("Annuler", ELEMENT_CHAT_CANCEL_BUTTON.getText());
+    ELEMENT_CHAT_CANCEL_BUTTON.click();
+    ELEMENT_POPUP_CONTAINER.find(byText("Ajouter un événement")).shouldNot(Condition.appear);
+  }
 
   public void checkRaiseHandPopUp(){
     ELEMENT_POPUP_CONTAINER.find(byText("Raise Hand")).waitUntil(Condition.appear,Configuration.timeout);
@@ -183,6 +228,15 @@ public class ChatManagement {
     assertEquals("Cancel", ELEMENT_CHAT_CANCEL_BUTTON.getText());
     ELEMENT_CHAT_CANCEL_BUTTON.click();
     ELEMENT_POPUP_CONTAINER.find(byText("Raise Hand")).shouldNot(Condition.appear);
+  }
+
+  public void checkRaiseHandPopUpTribe(){
+    ELEMENT_POPUP_CONTAINER.find(byText("Lever la main")).waitUntil(Condition.appear,Configuration.timeout);
+    ELEMENT_POPUP_CONTAINER.find(byXpath("//input[@placeholder='Commentaire optionnel']")).waitUntil(Condition.appear, Configuration.timeout);
+    assertEquals("Lever la main",ELEMENT_RAISE_HAND_BUTTON.getText());
+    assertEquals("Annuler", ELEMENT_CHAT_CANCEL_BUTTON.getText());
+    ELEMENT_CHAT_CANCEL_BUTTON.click();
+    ELEMENT_POPUP_CONTAINER.find(byText("Lever la main")).shouldNot(Condition.appear);
   }
 
   public void raiseHandInChat(String comment){

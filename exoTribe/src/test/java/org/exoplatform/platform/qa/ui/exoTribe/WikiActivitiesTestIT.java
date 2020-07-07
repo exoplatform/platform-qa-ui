@@ -147,7 +147,7 @@ public class WikiActivitiesTestIT extends BaseTribe {
     tribeSpaceManagement.searchSpace(space);
     tribeSpaceManagement.accessToSearchedSpace();
     tribeSpaceManagement.goToWikiTabDW(space);
-    tribeWikiHomePage.goToAddBlankPage();
+    tribeWikiHomePage.goToAddBlankPageDW();
     tribeWikiManagement.goToSourceEditor();
     tribeSourceTextEditor.addSimplePage(title, content);
     tribeWikiManagement.saveAddPage();

@@ -606,6 +606,10 @@ public class NavigationToolbar {
     ELEMENT_CLOSE_NOTIFICATIONS_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
+  public void closeNotificationsTribe() {
+    ELEMENT_CLOSE_NOTIFICATIONS_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+  }
+
   public void openChatDrawerDW() {
     info("Open Chat Drawer");
     ELEMENT_TRIBE_MINICHAT_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();

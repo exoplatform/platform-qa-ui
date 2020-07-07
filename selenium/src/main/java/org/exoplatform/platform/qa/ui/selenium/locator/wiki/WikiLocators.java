@@ -797,7 +797,7 @@ public class WikiLocators {
             $(byXpath("//*[@id=\"UIWikiTemplateGrid\"]/tbody/tr[2]/td[1]/div/input"));
 
     // select Three-Column Layout template
-    public static final SelenideElement ELEMENT_SELECT_TEMPLATE_ThreeColumnLayout =
+    public static final SelenideElement ELEMENT_SELECT_TEMPLATE_SupportGuide =
             $(byXpath("//*[@id=\"UIWikiTemplateGrid\"]/tbody/tr[3]/td[1]/div/input"));
 
     // select Status Meeting template

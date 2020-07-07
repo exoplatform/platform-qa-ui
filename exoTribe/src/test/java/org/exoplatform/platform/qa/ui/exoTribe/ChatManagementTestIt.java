@@ -19,6 +19,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -288,6 +290,221 @@ public class ChatManagementTestIt extends BaseTribe {
     ELEMENT_ASSIGNEE_TASK.shouldHave(Condition.text(tribe_user3));
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
+    navigationToolbar.openChatDrawerDW();
+    navigationToolbar.goToChatPageDW();
+    switchTo().window(1);
+    roomManagement.deleteRomm(room);
+    switchTo().window(1).close();
+    switchToParentWindow();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test07_checkMenuCollaborativeActions() {
+
+    String room = "room" + getRandomNumber();
+    String user1 = tribe_user3;
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(user1);
+
+    navigationToolbar.openChatDrawerDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+
+    navigationToolbar.goToChatPageDW();
+    switchTo().window(1);
+    roomManagement.addRoomTribe(room, user1);
+    chatManagement.checkMenuCollaborativeAction();
+    ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+    roomManagement.deleteRomm(room);
+    switchTo().window(1).close();
+    switchToParentWindow();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test08_checkaddEventPopUp() {
+
+    String room = "room" + getRandomNumber();
+    String user1 = tribe_user3;
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(user1);
+
+    navigationToolbar.openChatDrawerDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+
+    navigationToolbar.goToChatPageDW();
+    switchTo().window(1);
+    roomManagement.addRoomTribe(room, user1);
+    ELEMENT_COLLABORATION_ACTIONS.click();
+    ELEMENT_CHAT_ADD_EVENT.click();
+    chatManagement.checkAddEventPopUpTribe();
+    roomManagement.deleteRomm(room);
+    switchTo().window(1).close();
+    switchToParentWindow();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test09_addEventInChatRoom() {
+
+    String room = "room" + getRandomNumber();
+    String event = "event" + getRandomNumber();
+    String location = "location" + getRandomNumber();
+
+    String user1 = tribe_user3;
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(user1);
+
+    navigationToolbar.openChatDrawerDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    navigationToolbar.goToChatPageDW();
+    switchTo().window(1);
+    roomManagement.addRoomTribe(room, user1);
+    ELEMENT_CONTACT_LIST.find(byText(room)).click();
+    chatManagement.addEventInChat(event, location);
+    switchToParentWindow();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username3, tribe_password3);
+    ELEMENT_CHAT_ICON_STATUS.click();
+    ELEMENT_CHAT_NOTIFICATION.find(byText(event)).should(Condition.appears);
+    ELEMENT_CHAT_NOTIFICATION.find(byClassName("uiIconChatCreateEvent")).should(Condition.appears);
+    homePagePlatform.goToCalendarPage();
+    $(byText(event)).waitUntil(Condition.appear, Configuration.timeout);
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
+    navigationToolbar.openChatDrawerDW();
+    navigationToolbar.goToChatPageDW();
+    switchTo().window(1);
+    roomManagement.deleteRomm(room);
+    switchTo().window(1).close();
+    switchToParentWindow();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test10_checkAskQuestionPopUp() {
+
+    String room = "room" + getRandomNumber();
+    String user1 = tribe_user3;
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(user1);
+
+    navigationToolbar.openChatDrawerDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+
+    navigationToolbar.goToChatPageDW();
+    switchTo().window(1);
+    roomManagement.addRoomTribe(room, user1);
+    ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    ELEMENT_CHAT_ASK_QUESTION.waitUntil(Condition.visible, Configuration.collectionsTimeout).click();
+    chatManagement.checkAskQuestionPopUpTribe();
+    roomManagement.deleteRomm(room);
+    switchTo().window(1).close();
+    switchToParentWindow();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test11_checkRaiseHandPopUp() {
+
+    String room = "room" + getRandomNumber();
+    String user1 = tribe_user3;
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(user1);
+
+    navigationToolbar.openChatDrawerDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+
+    navigationToolbar.goToChatPageDW();
+    switchTo().window(1);
+    roomManagement.addRoomTribe(room, user1);
+    ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CHAT_RAISE_HAND.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    chatManagement.checkRaiseHandPopUpTribe();
+    roomManagement.deleteRomm(room);
+    switchTo().window(1).close();
+    switchToParentWindow();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test12_addQuestionInChat() {
+
+    String room = "room" + getRandomNumber();
+    String Question = "Question" + getRandomString();
+
+    String user1 = tribe_user3;
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(user1);
+
+    navigationToolbar.openChatDrawerDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    navigationToolbar.goToChatPageDW();
+    switchTo().window(1);
+    roomManagement.addRoomTribe(room, user1);
+    chatManagement.addQuestionInChatTribe(Question);
+    switchTo().window(1).close();
+    switchToParentWindow();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username3, tribe_password3);
+    navigationToolbar.openChatDrawerDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Go To A Chat Contact");
+    navigationToolbar.goToAChatContactDW(room);
+    $(byClassName("uiIconChatQuestion")).should(Condition.appears);
+    $(byText(Question + "?")).should(Condition.appears);
+    info("Go Back To The Chat Contact List");
+    navigationToolbar.goBackToChatContactListDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Close Chat Drawer");
+    navigationToolbar.closeChatDrawerDW();
     manageLogInOut.signOutTribe();
     manageLogInOut.signInTribe(tribe_username, tribe_password);
     navigationToolbar.openChatDrawerDW();
