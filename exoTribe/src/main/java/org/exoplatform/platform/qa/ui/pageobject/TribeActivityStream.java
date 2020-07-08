@@ -150,7 +150,7 @@ public class TribeActivityStream {
     info("-- Verify that an activity has been added --");
     sleep(1000);
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
-    sleep(1000);
+    sleep(2000);
     $(byText(text)).waitUntil(Condition.exist, openBrowserTimeoutMs);
     $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
     info("The activity is shared success");

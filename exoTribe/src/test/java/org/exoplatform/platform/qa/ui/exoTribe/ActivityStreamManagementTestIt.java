@@ -78,7 +78,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     String activity1 = "activity1" + getRandomNumber();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", null);
 
     info("Post Activity");
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();

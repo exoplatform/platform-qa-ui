@@ -191,11 +191,11 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_SPACE_DESCRIPTION_SECOND_TRIBE_INPUT     = $(byXpath("//form/textarea[@placeholder]"));
 
-    public static final SelenideElement ELEMENT_SPACE_DETAILS_TRIBE = $(byXpath("//*[@class='v-stepper__label' and contains(text(),'Détails de l'espace')]"));
+    public static final SelenideElement ELEMENT_SPACE_DETAILS_TRIBE = $(byXpath("//*[@class='v-stepper__label' and contains(text(),\"Détails de l'espace\")]"));
 
     public static final SelenideElement ELEMENT_INVITE_USERS_TRIBE = $(byXpath("//*[@class='v-stepper__label' and contains(text(),'Inviter des utilisateurs')]"));
 
-    public static final SelenideElement ELEMENT_SPACE_ACCESS_TRIBE = $(byXpath("//*[@class='v-stepper__label' and contains(text(),'Accès à l'espace')]"));
+    public static final SelenideElement ELEMENT_SPACE_ACCESS_TRIBE = $(byXpath("//*[@class='v-stepper__label' and contains(text(),\"Accès à l'espace\")]"));
 
     public static final SelenideElement ELEMENT_SPACE_DETAILS_DW = $(byXpath("//*[@class='v-stepper__label' and contains(text(),'Space details')]"));
 
