@@ -152,6 +152,7 @@ public class TribeChangeSettings {
 
   public void tribeAcceptEditPassword() {
     info("Click on Confirm");
+    sleep(2000);
     ELEMENT_TRIBE_CONFIRM_EDIT_PASSWORD.waitUntil(Condition.visible,Configuration.timeout).click();
   }
 

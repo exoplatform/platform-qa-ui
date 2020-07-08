@@ -132,7 +132,7 @@ public class SOCSettingsEditTestIT extends BaseTribe {
     tribeChangeSettings.tribeAcceptEditPassword();
 
     info("Reset Data : Set the first Time Zone");
-    homePagePlatform.goToSettingsPageTribe();
+    homePagePlatform.goToSettingsPageTribeViaUrl();
     tribeChangeSettings.tribeEditPassword(newPassword, tribe_password);
     tribeChangeSettings.tribeAcceptEditPassword();
 
