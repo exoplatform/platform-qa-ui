@@ -185,23 +185,29 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_ADDNEWSPACE_SECOND_TRIBE_BUTTON  = $(byXpath("//*[@id='spacesListToolbar']//*[@class='d-none d-sm-inline']"));
 
-    public static final By ELEMENT_ADDNEWSPACE_SECOND_TRIBE_FORM  = By.xpath("//*[@class='v-navigation-drawer__content']//*[contains(text(),'Add Space')]");
+    public static final By ELEMENT_ADDNEWSPACE_SECOND_TRIBE_FORM  = By.xpath("(//*[@id='spacesListToolbar']//button)[1]");
 
-    public static final SelenideElement ELEMENT_SPACE_NAME_SECOND_TRIBE_INPUT      = $(byXpath("//*[@placeholder='Display name']"));
+    public static final SelenideElement ELEMENT_SPACE_NAME_SECOND_TRIBE_INPUT      = $(byXpath("//form/input[@placeholder]"));
 
-    public static final SelenideElement ELEMENT_SPACE_DESCRIPTION_SECOND_TRIBE_INPUT     = $(byXpath("//*[@placeholder='Description']"));
+    public static final SelenideElement ELEMENT_SPACE_DESCRIPTION_SECOND_TRIBE_INPUT     = $(byXpath("//form/textarea[@placeholder]"));
 
-    public static final SelenideElement ELEMENT_SPACE_DETAILS_TRIBE = $(byXpath("//*[@class='v-stepper__label' and contains(text(),'Space details')]"));
+    public static final SelenideElement ELEMENT_SPACE_DETAILS_TRIBE = $(byXpath("//*[@class='v-stepper__label' and contains(text(),'Détails de l'espace')]"));
 
-    public static final SelenideElement ELEMENT_INVITE_USERS_TRIBE = $(byXpath("//*[@class='v-stepper__label' and contains(text(),'Invite users')]"));
+    public static final SelenideElement ELEMENT_INVITE_USERS_TRIBE = $(byXpath("//*[@class='v-stepper__label' and contains(text(),'Inviter des utilisateurs')]"));
 
-    public static final SelenideElement ELEMENT_SPACE_ACCESS_TRIBE = $(byXpath("//*[@class='v-stepper__label' and contains(text(),'Space access')]"));
+    public static final SelenideElement ELEMENT_SPACE_ACCESS_TRIBE = $(byXpath("//*[@class='v-stepper__label' and contains(text(),'Accès à l'espace')]"));
+
+    public static final SelenideElement ELEMENT_SPACE_DETAILS_DW = $(byXpath("//*[@class='v-stepper__label' and contains(text(),'Space details')]"));
+
+    public static final SelenideElement ELEMENT_INVITE_USERS_DW = $(byXpath("//*[@class='v-stepper__label' and contains(text(),'Invite users')]"));
+
+    public static final SelenideElement ELEMENT_SPACE_ACCESS_DW = $(byXpath("//*[@class='v-stepper__label' and contains(text(),'Space access')]"));
 
     public static final SelenideElement ELEMENT_SPACE_INPUT_USER_TRIBE = $(byXpath("//input[@content-class='identitySuggesterContent']"));
 
-    public static final SelenideElement ELEMENT_CREATE_SPACE_TRIBE = $(byXpath("//*[@class='v-btn__content' and contains(text(),'Create')]"));
+    public static final SelenideElement ELEMENT_CREATE_SPACE_TRIBE = $(byXpath("(//*[@class='d-flex']/button)[2]"));
 
-    public static final SelenideElement ELEMENT_CANCEL_SPACE_TRIBE = $(byXpath("//*[@class='v-btn__content' and contains(text(),'Cancel')]"));
+    public static final SelenideElement ELEMENT_CANCEL_SPACE_TRIBE = $(byXpath("(//*[@class='d-flex']/button)[1]"));
 
     public static final SelenideElement ELEMENT_SPACES_TRIBE_SEARCH_TEXT = $(byXpath("(//*[@class='v-input__slot']//*[@class='v-text-field__slot']/input)[2]"));
 

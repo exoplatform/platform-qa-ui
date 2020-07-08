@@ -569,6 +569,14 @@ public class NavigationToolbar {
             .getText(), "You joined " + space + " space.");
   }
 
+  public void verifyAcceptJoinSpaceViaNotificationTribe(String space) {
+
+    sleep(2000);
+    $(byXpath("//*[@class='media']//*[@data-link='/portal/g/:spaces:{space}/{space}']//*[@class='status']"
+            .replace("{space}", space)))
+            .waitUntil(Condition.visible, openBrowserTimeoutMs);
+  }
+
   public void markAllNotificationAsReadDW() {
 
     ELEMENT_MARK_AS_READ.waitUntil(Condition.visible, openBrowserTimeoutMs).click();

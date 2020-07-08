@@ -322,6 +322,14 @@ public class TribeActivityStream {
 
   }
 
+  public void checkThatUserWhoSendsAKudosIsDisplayedTribe(String user, String activity, String kudosMessage, String userToSend) {
+
+    $(byXpath("(//*[@class='description']//*[contains(text(),'${activity}')]/following::*[contains(text(),'${user}')]/following::*[@class='contentComment'])[1]"
+            .replace("${user}", user)
+            .replace("${activity}",activity)));
+
+  }
+
   public void checkThatUserWhoSendsAKudosIsDisplayedDigitalWorkplace(String user, String activity, String kudosMessage, String userToSend) {
 
     Assert.assertEquals($(byXpath("(//*[@class='description']//*[contains(text(),'${activity}')]/following::*[contains(text(),'${user}')]/following::*[@class='contentComment'])[1]"

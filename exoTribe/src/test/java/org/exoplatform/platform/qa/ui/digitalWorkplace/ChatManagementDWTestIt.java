@@ -34,7 +34,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.Tas
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
-@Tag("tribe")
+@Tag("dw")
 @Tag("social")
 @Tag("sniff")
 public class ChatManagementDWTestIt extends BaseDW {

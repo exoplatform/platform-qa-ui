@@ -27,7 +27,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
-@Tag("tribe")
+@Tag("dw")
 @Tag("social")
 @Tag("sniff")
 public class NotificationsManagementDWTestIt extends BaseDW {

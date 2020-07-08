@@ -101,7 +101,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     String activity1 = "activity1" + getRandomNumber();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", null);
 
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");
@@ -130,7 +130,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     String activity1 = "activity1" + getRandomNumber();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", null);
 
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");
@@ -165,7 +165,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     String user = "Khalil Riahi";
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", null);
 
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");
@@ -205,7 +205,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     String activity1 = "activity1" + getRandomNumber();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", null);
 
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");
@@ -245,7 +245,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     inviteUsers.add(user1);
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", inviteUsers);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", inviteUsers);
 
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");
@@ -258,7 +258,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     navigationToolbar.acceptJoinSpaceViaNotificationnDW(spaceNamea);
 
     navigationToolbar.goToIntranetNotificationDW();
-    navigationToolbar.verifyAcceptJoinSpaceViaNotificationDW(spaceNamea);
+    navigationToolbar.verifyAcceptJoinSpaceViaNotificationTribe(spaceNamea);
     navigationToolbar.closeNotificationsTribe();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
@@ -307,7 +307,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     inviteUsers.add(user1);
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", inviteUsers);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", inviteUsers);
 
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");
@@ -318,7 +318,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     navigationToolbar.acceptJoinSpaceViaNotificationnDW(spaceNamea);
 
     navigationToolbar.goToIntranetNotificationDW();
-    navigationToolbar.verifyAcceptJoinSpaceViaNotificationDW(spaceNamea);
+    navigationToolbar.verifyAcceptJoinSpaceViaNotificationTribe(spaceNamea);
     navigationToolbar.closeNotificationsTribe();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
@@ -334,7 +334,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     tribeSpaceManagement.accessToSearchedSpace();
 
     info("Check That User Who Sends A Kudos Is Displayed");
-    tribeActivityStream.checkThatUserWhoSendsAKudosIsDisplayedDW(tribe_user4, activity1, kudosMessage, tribe_user);
+    tribeActivityStream.checkThatUserWhoSendsAKudosIsDisplayedTribe(tribe_user4, activity1, kudosMessage, tribe_user);
 
     tribeActivityStream.deleteactivityDW(activity1);
     homePagePlatform.goToMySpacesTribeViaUrl();
@@ -358,7 +358,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     inviteUsers.add(user2);
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", inviteUsers);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", inviteUsers);
 
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");
@@ -371,7 +371,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     navigationToolbar.acceptJoinSpaceViaNotificationnDW(spaceNamea);
 
     navigationToolbar.goToIntranetNotificationDW();
-    navigationToolbar.verifyAcceptJoinSpaceViaNotificationDW(spaceNamea);
+    navigationToolbar.verifyAcceptJoinSpaceViaNotificationTribe(spaceNamea);
     navigationToolbar.closeNotificationsTribe();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
@@ -392,7 +392,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     navigationToolbar.acceptJoinSpaceViaNotificationnDW(spaceNamea);
 
     navigationToolbar.goToIntranetNotificationDW();
-    navigationToolbar.verifyAcceptJoinSpaceViaNotificationDW(spaceNamea);
+    navigationToolbar.verifyAcceptJoinSpaceViaNotificationTribe(spaceNamea);
     navigationToolbar.closeNotificationsTribe();
 
     homePagePlatform.goToMySpacesTribeViaUrl();

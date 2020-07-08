@@ -139,7 +139,7 @@ public class TribeSpaceManagement {
    * @param groups
    * @param params
    */
-  public void addNewSpace(String name, String desc, String access, String hidden, ArrayList<String> groups, int... params) {
+  public void addNewSpaceTribe(String name, String desc, String access, String hidden, ArrayList<String> groups, int... params) {
     if ($(ELEMENT_ADDNEWSPACE_SECOND_TRIBE_BUTTON).waitUntil(Condition.visible, Configuration.timeout) != null) {
       $(ELEMENT_ADDNEWSPACE_SECOND_TRIBE_BUTTON).click();
     }
@@ -147,7 +147,7 @@ public class TribeSpaceManagement {
     ELEMENT_SPACE_DETAILS_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     $(ELEMENT_SPACE_NAME_SECOND_TRIBE_INPUT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
     $(ELEMENT_SPACE_DESCRIPTION_SECOND_TRIBE_INPUT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(desc);
-    $(byXpath("(//*[@class='layout column']//*[@class='v-btn__content' and contains(text(),'Continue')])[1]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("(//*[@class='layout column']//*[@class='v-btn__content'])[1]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SPACE_ACCESS_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
 
     if (hidden == "Yes") {
@@ -178,7 +178,7 @@ public class TribeSpaceManagement {
       }
     }
 
-    $(byXpath("(//*[@class='layout column']//*[@class='v-btn__content' and contains(text(),'Continue')])[2]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("(//*[@class='layout column']//*[@class='v-btn__content'])[3]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_INVITE_USERS_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     if (groups!= null) {
       for (int i = 0; i < groups.size(); i++) {
@@ -195,6 +195,61 @@ public class TribeSpaceManagement {
 
   }
 
+  public void addNewSpace(String name, String desc, String access, String hidden, ArrayList<String> groups, int... params) {
+    if ($(ELEMENT_ADDNEWSPACE_SECOND_TRIBE_BUTTON).waitUntil(Condition.visible, Configuration.timeout) != null) {
+      $(ELEMENT_ADDNEWSPACE_SECOND_TRIBE_BUTTON).click();
+    }
+    $(ELEMENT_ADDNEWSPACE_SECOND_TRIBE_FORM).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    ELEMENT_SPACE_DETAILS_DW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+    $(ELEMENT_SPACE_NAME_SECOND_TRIBE_INPUT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
+    $(ELEMENT_SPACE_DESCRIPTION_SECOND_TRIBE_INPUT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(desc);
+    $(byXpath("(//*[@class='layout column']//*[@class='v-btn__content' and contains(text(),'Continue')])[1]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_SPACE_ACCESS_DW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+
+    if (hidden == "Yes") {
+      if ($(byXpath("//*[@class='v-input--selection-controls__input']/input[@type='checkbox' and @aria-checked='false']")).exists()) {
+        evt.check(byXpath("//*[@class='v-input--selection-controls__input']"));
+
+      }
+    }
+    if (hidden == "No") {
+      if ($(byXpath("//*[@class='v-input--selection-controls__input']/input[@type='checkbox' and @aria-checked='true']")).exists()) {
+        evt.check(byXpath("//*[@class='v-input--selection-controls__input']"));
+      }
+    }
+    if (!access.isEmpty()) {
+      info("Select a permission for space:" + access);
+
+      if(access=="Open"){
+        evt.check(byXpath("//input[@value='open']"));
+      }
+
+      if(access=="Validation"){
+        evt.check(byXpath("//input[@value='validation']"));
+      }
+
+      if(access=="Closed"){
+        evt.check(byXpath("//input[@value='closed']"));
+        ;
+      }
+    }
+
+    $(byXpath("(//*[@class='layout column']//*[@class='v-btn__content' and contains(text(),'Continue')])[2]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_INVITE_USERS_DW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+    if (groups!= null) {
+      for (int i = 0; i < groups.size(); i++) {
+        sleep(2000);
+        ELEMENT_SPACE_INPUT_USER_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+        ELEMENT_SPACE_INPUT_USER_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(groups.get(i));
+        $(byXpath("//*[@class='v-list-item__title text-truncate identitySuggestionMenuItemText' and contains(text(),'${group}')]".replace("${group}", groups.get(i)))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+      }
+    }
+    info("Save all changes");
+    ELEMENT_CREATE_SPACE_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//*[@class='pl-2 align-self-center brandingContainer space']//*[contains(text(),'${spaceName}')]"
+            .replace("${spaceName}",name))).waitUntil(Condition.visible,60000);
+
+  }
 
   /**
    * Update Space Description
