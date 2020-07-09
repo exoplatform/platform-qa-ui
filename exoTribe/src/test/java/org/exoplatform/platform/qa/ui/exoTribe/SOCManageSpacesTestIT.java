@@ -74,11 +74,11 @@ public class SOCManageSpacesTestIT extends BaseTribe {
     String spaceDesc = "descriptionc" + getRandomNumber();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", null);
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpace(spaceNameb, spaceDesb, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNameb, spaceDesb, "Open", "No", null);
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpace(spaceNamec, spaceDesc, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamec, spaceDesc, "Open", "No", null);
 
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.deleteTribeSpace(spaceNamea);
@@ -106,19 +106,19 @@ public class SOCManageSpacesTestIT extends BaseTribe {
     String spaceDesg = "descriptiong" + getRandomNumber();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", null);
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNameb, spaceDesb, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNameb, spaceDesb, "Open", "No", null);
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamec, spaceDesc, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamec, spaceDesc, "Open", "No", null);
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamed, spaceDesd, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamed, spaceDesd, "Open", "No", null);
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamee, spaceDese, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamee, spaceDese, "Open", "No", null);
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamef, spaceDesf, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamef, spaceDesf, "Open", "No", null);
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNameg, spaceDesg, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNameg, spaceDesg, "Open", "No", null);
 
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
@@ -163,7 +163,7 @@ public class SOCManageSpacesTestIT extends BaseTribe {
     String spaceDesa = "descriptiona" + getRandomNumber();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", null);
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
 
@@ -184,7 +184,7 @@ public class SOCManageSpacesTestIT extends BaseTribe {
     String spaceDesa = "descriptiona" + getRandomNumber();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", null);
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
 
@@ -205,7 +205,7 @@ public class SOCManageSpacesTestIT extends BaseTribe {
     String spaceDesa = "descriptiona" + getRandomNumber();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", null);
 
     info("Top Bar Tabs after Space Creation are displayed in order");
     tribeSpaceManagement.checkThatSpaceTabsAreDisplayedInOrderDW(spaceNamea);

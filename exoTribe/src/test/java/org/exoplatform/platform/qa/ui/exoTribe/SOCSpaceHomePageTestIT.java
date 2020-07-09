@@ -76,7 +76,7 @@ public class SOCSpaceHomePageTestIT extends BaseTribe {
     String spaceDesa = "descriptiona" + getRandomNumber();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", null);
     info("Like Activity");
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");
@@ -104,7 +104,7 @@ public class SOCSpaceHomePageTestIT extends BaseTribe {
     String spaceDesa = "descriptiona" + getRandomNumber();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", null);
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");
 
@@ -134,7 +134,7 @@ public class SOCSpaceHomePageTestIT extends BaseTribe {
     String attachedFile = "eXo-Platform.png";
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", null);
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     sleep(1000);
 
@@ -180,7 +180,7 @@ public class SOCSpaceHomePageTestIT extends BaseTribe {
     String userName = tribe_user;
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", null);
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     sleep(1000);
 
@@ -188,8 +188,10 @@ public class SOCSpaceHomePageTestIT extends BaseTribe {
     tribeActivityStream.uploadFileActivityStreamDW(attachedFile);
 
     tribeActivityStream.postActivity();
+    sleep(2000);
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    sleep(2000);
     info("-- Verify that an activity has been added --");
-    sleep(1000);
     $(byText(attachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
     $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
     info("The activity is shared success");

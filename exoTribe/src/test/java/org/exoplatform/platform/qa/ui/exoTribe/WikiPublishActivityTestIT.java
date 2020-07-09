@@ -107,7 +107,7 @@ public class WikiPublishActivityTestIT extends BaseTribe {
 
     info("Create a new wiki page");
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(space, space, "Open", "No", null);
     info("Add new wiki page for space");
     tribeSpaceManagement.goToWikiTabDW(space);
     tribeWikiHomePage.goToAddBlankPageDW();

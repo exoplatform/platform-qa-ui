@@ -96,7 +96,7 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
 
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(space, space, "Open", "No", null);
 
     info("Create a wiki page ");
     tribeSpaceManagement.goToWikiTabDW(space);
@@ -116,11 +116,12 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     homePagePlatform.goToStreamPageTribe();
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.deleteTribeSpace(space);
-    tribeSpaceManagement.addNewSpace(space1, space1, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(space1, space1, "Open", "No", null);
 
     info("Create a wiki page in space");
     tribeSpaceManagement.goToWikiTabDW(space1);
     tribeWikiHomePage.goToAddBlankPageDW();
+    sleep(2000);
     tribeSourceTextEditor.addSimplePage(title2, title2);
     tribeWikiManagement.saveAddPage();
     $(byText(title2)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
@@ -142,14 +143,15 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     String space2 = "space" + getRandomNumber();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(space1, space1, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(space1, space1, "Open", "No", null);
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpace(space2, space2, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(space2, space2, "Open", "No", null);
 
     info("Create a wiki page in space2");
     String title1 = "title1" + getRandomNumber();
     tribeSpaceManagement.goToWikiTabDW(space2);
     tribeWikiHomePage.goToAddBlankPageDW();
+    sleep(2000);
     tribeSourceTextEditor.addSimplePage(title1, title1);
     tribeWikiManagement.saveAddPage();
     $(byText(title1)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);

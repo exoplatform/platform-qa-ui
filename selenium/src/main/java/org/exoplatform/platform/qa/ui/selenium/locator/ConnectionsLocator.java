@@ -31,7 +31,7 @@ public class ConnectionsLocator {
   public static final By              ELEMENT_CONNECTION_EVERYONE_TITLE       =
                                                                         By.xpath(".//*[@id='UIAllPeople']//*[contains(text(),'Everyone')]");
 
-  public static final SelenideElement ELEMENT_CONNECTION_CANCEL_BTN           = $(byText("Cancel Request"));
+  public static final SelenideElement ELEMENT_CONNECTION_CANCEL_BTN           = $(byXpath("(//*[@class='v-card__actions peopleCardActions']//button)[1]"));
 
   public static final SelenideElement ELEMENT_CONNECTION_REVOVE_BTN           = $(byText("Remove Connection"));
 

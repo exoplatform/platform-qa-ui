@@ -116,7 +116,7 @@ public class NotificationsManagementTestIt extends BaseTribe {
     inviteUsers.add(user2);
 
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", inviteUsers);
+    tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", inviteUsers);
 
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");

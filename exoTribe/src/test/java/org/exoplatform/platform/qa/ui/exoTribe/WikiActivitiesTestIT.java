@@ -95,7 +95,7 @@ public class WikiActivitiesTestIT extends BaseTribe {
     info("Create a space");
     String space = "space" + getRandomNumber();
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(space, space, "Open", "No", null);
     info("Create a wiki page");
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();
@@ -139,7 +139,7 @@ public class WikiActivitiesTestIT extends BaseTribe {
     info("Create a space");
     String space = "space" + getRandomNumber();
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(space, space, "Open", "No", null);
     info("Create a wiki page");
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();

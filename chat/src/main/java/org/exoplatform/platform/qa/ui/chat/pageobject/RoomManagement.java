@@ -38,6 +38,7 @@ public class RoomManagement {
     ELEMENT_CREATE_ROOM.click();
     ELEMENT_POPUP_ROOM.waitUntil(Condition.appear, Configuration.openBrowserTimeoutMs);
     ELEMENT_ROOM_NAME.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
+    sleep(1000);
     for (int i = 0; i <= users.length - 1; i++) {
       ELEMENT_CHAT_INPUT_ROOMUSERSS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(users[i]);
       ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
@@ -64,6 +65,16 @@ public class RoomManagement {
     ELEMENT_CHAT_BUTTON_SAVE_ADD_ROOM.click();
 
   }
+
+  public void editTitleofAroomTribe(String room, String newroom) {
+    $(byText(room)).click();
+    ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
+    ELEMENT_CHAT_ROOM_EDIT_TRIBE.click();
+    ELEMENT_CHAT_INPUT_ROOM_NAME.setValue(newroom);
+    ELEMENT_CHAT_BUTTON_SAVE_ADD_ROOM_TRIBE.click();
+
+  }
+
 public void startStopmeeting(String room){
   $(byText(room)).click();
   ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();

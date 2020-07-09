@@ -103,7 +103,7 @@ public class ConnectionsManagement {
       $(ELEMENT_CONNECTION_CANCEL_BTN).click();
     }
     sleep(2000);
-    $(byText("Connect")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//*[@class='uiIconSocConnectUser peopleRelationshipIcon d-inline']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Connected to the user");
   }
 
@@ -187,7 +187,7 @@ public class ConnectionsManagement {
     ELEMENT_CONNECTION_REFUSE_SHOW_BTN_DW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     sleep(2000);
     ELEMENT_CONNECTION_DISONNECT_REFUSE_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-    $(byText("Connect")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+    $(byXpath("(//*[@class='v-card__actions peopleCardActions']//button)[1]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
   }
 
   public void removeConnectionDW(String username) {

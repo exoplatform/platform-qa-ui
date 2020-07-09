@@ -106,7 +106,7 @@ public class WikiInformationTestIT extends BaseTribe {
 
     info("Create space 1 and wiki page 1");
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(space1, space1, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(space1, space1, "Open", "No", null);
     info("Add new wiki page for space 1");
     tribeSpaceManagement.goToWikiTabDW(space1);
     tribeWikiHomePage.goToAddBlankPageDW();
@@ -118,7 +118,7 @@ public class WikiInformationTestIT extends BaseTribe {
 
     info("Create space 2 and wiki page 2");
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpace(space2, space2, "Open", "No", null);
+    tribeSpaceManagement.addNewSpaceTribe(space2, space2, "Open", "No", null);
     info("Add new wiki page for space 1");
     tribeSpaceManagement.goToWikiTabDW(space2);
     tribeWikiHomePage.goToAddBlankPageDW();

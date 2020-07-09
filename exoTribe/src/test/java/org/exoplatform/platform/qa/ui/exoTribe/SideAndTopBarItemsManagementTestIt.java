@@ -98,10 +98,10 @@ public class SideAndTopBarItemsManagementTestIt extends BaseTribe {
     sleep(2000);
 
     Assert.assertEquals(ELEMENT_TRIBE_SNAPSHOT_CHECK_ORDER.getText(), "Snapshot");
-    Assert.assertEquals(ELEMENT_TRIBE_STREAM_CHECK_ORDER.getText(), "Stream");
-    Assert.assertEquals(ELEMENT_TRIBE_SPACES_CHECK_ORDER.getText(), "Spaces");
-    Assert.assertEquals(ELEMENT_TRIBE_PEOPLE_CHECK_ORDER.getText(), "People");
-    Assert.assertEquals(ELEMENT_TRIBE_LAST_VISITED_SPACES_CHECK_ORDER.getText(), "Last visited spaces");
+    Assert.assertEquals(ELEMENT_TRIBE_STREAM_CHECK_ORDER.getText(), "Activités");
+    Assert.assertEquals(ELEMENT_TRIBE_SPACES_CHECK_ORDER.getText(), "Espaces");
+    Assert.assertEquals(ELEMENT_TRIBE_PEOPLE_CHECK_ORDER.getText(), "Personnes");
+    Assert.assertEquals(ELEMENT_TRIBE_LAST_VISITED_SPACES_CHECK_ORDER.getText(), "Espaces récemment visités");
     Assert.assertEquals(ELEMENT_TRIBE_SETTINGS_CHECK_ORDER.getText(), "Paramètres");
     Assert.assertEquals(ELEMENT_TRIBE_LOGOUT_CHECK_ORDER.getText(), "Déconnexion");
     getExoWebDriver().getWebDriver().navigate().refresh();

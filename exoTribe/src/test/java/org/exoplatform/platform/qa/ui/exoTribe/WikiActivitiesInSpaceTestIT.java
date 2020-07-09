@@ -88,7 +88,7 @@ public class WikiActivitiesInSpaceTestIT extends BaseTribe {
     inviteUsers.add(user1);
     inviteUsers.add(user2);
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(space, space, "Open", "No", inviteUsers);
+    tribeSpaceManagement.addNewSpaceTribe(space, space, "Open", "No", inviteUsers);
     info("Create a wiki page");
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();
