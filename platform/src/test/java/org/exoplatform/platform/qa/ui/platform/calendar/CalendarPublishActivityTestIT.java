@@ -2,6 +2,7 @@ package org.exoplatform.platform.qa.ui.platform.calendar;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER2;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.*;
@@ -356,9 +357,10 @@ public class CalendarPublishActivityTestIT extends Base {
                                             "5");
     click(ELEMENT_SAVE_EVENT_OCCURRING);
     eventManagement.saveAddEventDetails();
+    sleep(3000);
     homePagePlatform.goToHomePage();
     $(byXpath(ELEMENT_ACTIVITY_TASK_EVENT_COMMENT.replace("$name", titleEvent).replace("$comment",
-                                                                                       comment))).should(Condition.visible);
+                                                                                       comment))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     info("Clear data");
     homePagePlatform.goToCalendarPage();
     eventManagement.deleteRecurringEvent(titleEvent,
@@ -410,11 +412,13 @@ public class CalendarPublishActivityTestIT extends Base {
                                                        getDate(0, "MMM dd yyyy"));
     check(ELEMENT_ADD_EDIT_EVENT_ALLDAY, 2);
     eventManagement.saveAddEventDetails();
+    sleep(3000);
     homePagePlatform.goToHomePage();
     $(byXpath(ELEMENT_ACTIVITY_TASK_EVENT_COMMENT.replace("$name", titleEvent).replace("$comment",
-                                                                                       comment))).should(Condition.visible);
+                                                                                       comment))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     info("Clear data");
     homePagePlatform.goToCalendarPage();
+    sleep(2000);
     calendarHomePage.deleteEventTask(titleEvent,
                                      CalendarHomePage.selectViewOption.MONTH,
                                      CalendarHomePage.selectDayOption.ALLDAY,
@@ -462,10 +466,10 @@ public class CalendarPublishActivityTestIT extends Base {
                                                        getDate(0, "MMM dd yyyy"));
     eventManagement.inputBasicDetailEvent(newTitleEvent, null);
     eventManagement.saveAddEventDetails();
-
+    sleep(3000);
     homePagePlatform.goToHomePage();
     $(byXpath(ELEMENT_ACTIVITY_TASK_EVENT_COMMENT.replace("$name", newTitleEvent).replace("$comment",
-                                                                                          comment))).should(Condition.visible);
+                                                                                          comment))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
 
     info("Clear data");
     homePagePlatform.goToCalendarPage();
@@ -517,6 +521,7 @@ public class CalendarPublishActivityTestIT extends Base {
                                                        getDate(0, "MMM dd yyyy"));
     eventManagement.inputBasicDetailEvent(null, newContent);
     eventManagement.saveAddEventDetails();
+    sleep(3000);
     homePagePlatform.goToHomePage();
     $(byXpath(ELEMENT_ACTIVITY_TASK_EVENT_COMMENT.replace("$name", titleEvent).replace("$comment",
                                                                                        comment))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
@@ -570,10 +575,10 @@ public class CalendarPublishActivityTestIT extends Base {
                                                        getDate(0, "MMM dd yyyy"));
     eventManagement.inputBasicDetailEvent(null, null, null, null, location);
     eventManagement.saveAddEventDetails();
-
+    sleep(3000);
     homePagePlatform.goToHomePage();
     $(byXpath(ELEMENT_ACTIVITY_TASK_EVENT_COMMENT.replace("$name", titleEvent).replace("$comment",
-                                                                                       comment))).should(Condition.visible);
+                                                                                       comment))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
 
     info("Clear data");
     homePagePlatform.goToCalendarPage();
@@ -747,6 +752,7 @@ public class CalendarPublishActivityTestIT extends Base {
                                               getDate(0, "MM/dd/yyyy HH") + ":30",
                                               false);
     eventManagement.saveQuickAddEvent();
+    sleep(2000);
     homePagePlatform.goToCalendarPage();
     info("create event for personal calendar");
     calendarManagement.executeActionCalendar(personalCalendar, CalendarManagement.menuOfCalendarOption.ADDEVENT);

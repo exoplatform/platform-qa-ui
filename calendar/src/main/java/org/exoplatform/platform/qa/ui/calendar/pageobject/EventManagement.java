@@ -840,15 +840,10 @@ public class EventManagement {
     info("Check default suggestion EVENT time");
     if (fromDateTime == null || fromDateTime == "") {
       info("Check time suggestion default");
-      if (testBase.getCurrentDate("MM/dd/yyyy").charAt(0) == '0' && testBase.getCurrentDate("MM/dd/yyyy").charAt(3)!='0') {
-        assert ("0" + dateFrom).equals(testBase.getCurrentDate("MM/dd/yyyy"));
-      }
-      else if (testBase.getCurrentDate("MM/dd/yyyy").charAt(0) == '0' && testBase.getCurrentDate("MM/dd/yyyy").charAt(3)=='0'){
-        assertEquals(testBase.getCurrentDate("MM/dd/yyyy"), "0" + $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue().substring(0,2) + "0" + $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue().substring(2,8));
-      }
-      else{
-        assert dateFrom.equals(testBase.getCurrentDate("MM-dd-yyyy"));
-       }
+
+        assertEquals(testBase.getCurrentDate("MM/dd/yyyy"), $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue().substring(0,2) + $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue().substring(2,10));
+
+
     } else {
       info("Check suggesion when select from time");
       try {
@@ -863,15 +858,9 @@ public class EventManagement {
     }
     if (toDateTime == null || toDateTime == "") {
       info("Check time suggestion default");
-      if (testBase.getCurrentDate("MM/dd/yyyy").charAt(0) == '0' && testBase.getCurrentDate("MM/dd/yyyy").charAt(3)!='0') {
-        assert ("0" + dateTo).equals(testBase.getCurrentDate("MM/dd/yyyy"));
-      }
-      else if (testBase.getCurrentDate("MM/dd/yyyy").charAt(0) == '0' && testBase.getCurrentDate("MM/dd/yyyy").charAt(3)=='0'){
-        assertEquals(testBase.getCurrentDate("MM/dd/yyyy"), "0" + $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue().substring(0,2) + "0" + $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue().substring(2,8));
-      }
-      else{
-        assert dateTo.equals(testBase.getCurrentDate("MM-dd-yyyy"));
-      }
+
+        assertEquals(testBase.getCurrentDate("MM/dd/yyyy"), $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue().substring(0,2) + $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue().substring(2,10));
+
     } else {
       info("Check suggesion when select to time");
       try {
@@ -918,15 +907,9 @@ public class EventManagement {
     info("Check default suggestion EVENT time");
     if (fromDateTime == null || fromDateTime == "") {
       info("Check time suggestion default");
-      if (testBase.getCurrentDate("MM/dd/yyyy").charAt(0) == '0' && testBase.getCurrentDate("MM/dd/yyyy").charAt(3)!='0') {
-        assert ("0" + dateFrom).equals(testBase.getCurrentDate("MM/dd/yyyy"));
-      }
-      else if (testBase.getCurrentDate("MM/dd/yyyy").charAt(0) == '0' && testBase.getCurrentDate("MM/dd/yyyy").charAt(3)=='0'){
-        assertEquals(testBase.getCurrentDate("MM/dd/yyyy"), "0" + $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue().substring(0,2) + "0" + $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue().substring(2,8));
-      }
-      else{
-        assert dateFrom.equals(testBase.getCurrentDate("MM-dd-yyyy"));
-      }
+
+        assertEquals(testBase.getCurrentDate("MM/dd/yyyy"), $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue().substring(0,2) + $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue().substring(2,10));
+
     } else {
       info("Check suggesion when select from time");
       try {
@@ -941,15 +924,9 @@ public class EventManagement {
     }
     if (toDateTime == null || toDateTime == "") {
       info("Check time suggestion default");
-      if (testBase.getCurrentDate("MM/dd/yyyy").charAt(0) == '0' && testBase.getCurrentDate("MM/dd/yyyy").charAt(3)!='0') {
-        assert ("0" + dateTo).equals(testBase.getCurrentDate("MM/dd/yyyy"));
-      }
-      else if (testBase.getCurrentDate("MM/dd/yyyy").charAt(0) == '0' && testBase.getCurrentDate("MM/dd/yyyy").charAt(3)=='0'){
-        assertEquals(testBase.getCurrentDate("MM/dd/yyyy"), "0" + $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue().substring(0,2) + "0" + $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue().substring(2,8));
-      }
-      else{
-        assert dateTo.equals(testBase.getCurrentDate("MM-dd-yyyy"));
-      }
+
+        assertEquals(testBase.getCurrentDate("MM/dd/yyyy"), $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue().substring(0,2) + $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue().substring(2,10));
+
     } else {
       info("Check suggesion when select to time");
       try {
@@ -1254,27 +1231,13 @@ public class EventManagement {
     assertEquals("Enter a location for this event", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[4]/div[2]/input")).getAttribute("placeholder"));
     assertEquals("Participants", $(byXpath("//*[@id=\"ExoCalendarEventForm\"]/div[1]/div[2]/form/div[2]/div[5]/div[1]")).getText());
     info("Date From is" + date);
-    if (date.charAt(0) == '0' && date.charAt(3)!='0') {
-      assertEquals(date, "0" + $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue());
-    }
-    else if (date.charAt(0) == '0' && date.charAt(3)=='0'){
-      assertEquals(date, "0" + $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue().substring(0,2) + "0" + $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue().substring(2,8));
-    }
-    else {
-      assertEquals(date, $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue());
-    }
-    info("Date To is" + date);
-    if (date.charAt(0) == '0' && date.charAt(3)!='0') {
-      assertEquals(date, "0" + $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue());
-    }
-    else if (date.charAt(0) == '0' && date.charAt(3)=='0'){
-      assertEquals(date, "0" + $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue().substring(0,2) + "0" + $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue().substring(2,8));
-    }
-    else
-    {
-      assertEquals(date, $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue());
 
-    }
+      assertEquals(date, $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue().substring(0,2) + $(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE).getValue().substring(2,10));
+
+    info("Date To is" + date);
+
+      assertEquals(date, $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue().substring(0,2) + $(ELEMENT_QUICK_INPUT_EVENT_TO_DATE).getValue().substring(2,10));
+
     $(ELEMENT_ADD_EDIT_EVENT_REPEAT_CHECKBOX).exists();
     $(ELEMENT_ADD_EDIT_EVENT_REMINDER_CHECKBOX).exists();
     assertEquals(userName, $(byXpath("//*[@data-value='${user}']".replace("${user}",user))).getText().split("\n")[0]);

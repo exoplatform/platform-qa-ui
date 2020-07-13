@@ -279,6 +279,7 @@ public class CalendarManagement {
    */
   public void openMenuOfCalendar(String calendar) {
     info("Open menu of a calendar");
+    sleep(2000);
     ELEMENT_LIST_CALENDAR.find(byText(calendar)).waitUntil(Condition.appears, Configuration.collectionsTimeout)
             .hover()
             .parent()
@@ -538,7 +539,7 @@ public class CalendarManagement {
    */
   public void saveSetting() {
     sleep(2000);
-    evt.click(ELEMENT_SETTING_FORM_SAVE_BUTTON);
+    $(ELEMENT_SETTING_FORM_SAVE_BUTTON).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     evt.waitForElementNotPresent(ELEMENT_CALENDAR_SETTING_FORM);
   }
 

@@ -62,7 +62,7 @@ public class EcmsSEBasicActionTestIT extends Base {
         String folderTitle = "folderTitle" + getRandomNumber();
         String node = folderTitle.toLowerCase();
 
-        info("Add symlink for a node");
+       /* info("Add symlink for a node");
         navigationToolbar.goToSiteExplorer();
         siteExplorerHome.goToAddNewFolder();
         siteExplorerHome.createFolder(folderTitle, "Content Folder");
@@ -94,7 +94,7 @@ public class EcmsSEBasicActionTestIT extends Base {
         $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", destination))).click();
         siteExplorerHome.deleteData(titleCommonNode,false);
         $(byXpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", secondDestination))).click();
-        siteExplorerHome.deleteData(titleCommonNode);
+        siteExplorerHome.deleteData(titleCommonNode);*/
 
         navigationToolbar.goToSiteExplorer();
         $(ELEMENT_SIDEBAR_SITES_MANAGEMENT).click();

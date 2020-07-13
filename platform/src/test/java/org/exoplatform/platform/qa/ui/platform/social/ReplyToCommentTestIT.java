@@ -246,6 +246,7 @@ public class ReplyToCommentTestIT extends Base {
         homePagePlatform.goToHomePage();
         sleep(2000);
         activityStream.commentTopicActivity(description, comment);
+        sleep(2000);
         activityStream.commentTopicActivity(description, comment2);
         homePagePlatform.goToForum();
         forumHomePage.goToTopic(nameTopic);

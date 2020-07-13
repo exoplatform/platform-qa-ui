@@ -1,8 +1,7 @@
 package org.exoplatform.platform.qa.ui.platform.calendar;
 
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.calendar.CalendarLocator.*;
@@ -76,8 +75,9 @@ public class CalendarEventTestIT extends Base {
     eventManagement.goToAddEventFromActionBar();
     info("Add attachment");
     $(ELEMENT_ADD_EDIT_EVENT_NAME).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(titleEvent);
+    sleep(2000);
     $(byId("cal-attach-file")).uploadFromClasspath("eXo-Platform.png");
-    eventManagement.saveQuickAddEvent();
+    sleep(2000);    eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.DAY,
                                               CalendarHomePage.selectDayOption.DETAILTIME);
@@ -112,11 +112,14 @@ public class CalendarEventTestIT extends Base {
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.CALSETTING);
     calendarManagement.changeSettingCalendar(null, "(GMT +01:00) Africa/Tunis", null, null, null, null, null);
     calendarManagement.saveSetting();
+    sleep(2000);
     eventManagement.goToAddEventFromActionBar();
     info("Add attachment");
     eventManagement.inputDataEventInDetailForm(titleEvent, content, getDate(0, "MM/dd/yyyy"), getDate(0, "MM/dd/yyyy"), false);
-    $(ELEMENT_ADD_EDIT_EVENT_NAME).click();
+    $(ELEMENT_ADD_EDIT_EVENT_NAME).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
     $(byId("cal-attach-file")).uploadFromClasspath("eXo-Platform.png");
+    sleep(2000);
     eventManagement.saveQuickAddEvent();
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.DAY,
@@ -268,6 +271,7 @@ public class CalendarEventTestIT extends Base {
                     waitForAndGetElement(ELEMENT_QUICK_INPUT_EVENT_FROM_TIME_INPUT, DEFAULT_TIMEOUT, 1, 2).getAttribute("value");
     String toTime = waitForAndGetElement(ELEMENT_QUICK_INPUT_EVENT_TO_TIME_INPUT, DEFAULT_TIMEOUT, 1, 2).getAttribute("value");
     eventManagement.saveQuickAddEvent();
+    sleep(2000);
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.LIST,
                                               CalendarHomePage.selectDayOption.DETAILTIME);
@@ -370,6 +374,7 @@ public class CalendarEventTestIT extends Base {
                                               getDate(0, "MM/dd/yyyy" + " HH"),
                                               false);
     eventManagement.saveQuickAddEvent();
+    sleep(2000);
     calendarHomePage.verifyIsPresentEventTask(titleEvent,
                                               CalendarHomePage.selectViewOption.WEEK,
                                               CalendarHomePage.selectDayOption.DETAILTIME);
@@ -403,6 +408,7 @@ public class CalendarEventTestIT extends Base {
                                                getDate(0, "MM/dd/yyyy" + " HH"),
                                                false);
     eventManagement.saveAddEventDetails();
+    sleep(2000);
     calendarHomePage.verifyIsPresentEventTask(titleEvent2,
                                               CalendarHomePage.selectViewOption.WEEK,
                                               CalendarHomePage.selectDayOption.DETAILTIME);
@@ -521,12 +527,12 @@ public class CalendarEventTestIT extends Base {
   public void test22DeleteAnEventInSharedCalendar() {
     String titleEvent = "titleEvent" + getRandomNumber();
     String contentEvent = "contentEvent" + getRandomNumber();
-    String titleEvent2 = "titleEvent2" + getRandomNumber();
-    String contentEvent2 = "contentEvent2" + getRandomNumber();
     String calendarName = "calendarName" + getRandomNumber();
     String calendarColor = "purple";
     String[] groupShare = { DATA_USER2 };
     boolean[] edit = { true };
+    String beginTime = "12:00 AM";
+    String endTime = "12:30 AM";
 
     info("Test 20 Add an event for shared calendar");
 
@@ -541,7 +547,11 @@ public class CalendarEventTestIT extends Base {
     homePagePlatform.goToCalendarPage();
     calendarManagement.goToMenuFromMainCalendar(CalendarManagement.menuOfMainCalendar.CALSETTING);
     calendarManagement.changeSettingCalendar(null, "(GMT +01:00) Africa/Tunis", null, null, null, null, null);
+    select(ELEMENT_CALENDAR_SETTING_SHOW_WORKING_BEGIN_TIME, beginTime, 2);
+    select(ELEMENT_CALENDAR_SETTING_SHOW_WORKING_END_TIME, endTime, 2);
+
     calendarManagement.saveSetting();
+    sleep(3000);
     calendarManagement.executeActionCalendar(calendarName, CalendarManagement.menuOfCalendarOption.ADDEVENT);
     info("Check default date");
     eventManagement.checkSuggestionEventTimeInQuickForm(null, null, 60);

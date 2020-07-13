@@ -61,7 +61,7 @@ public class AddUsers {
     $(ELEMENT_INPUT_SEARCH_USER_NAME).setValue(username);
     ELEMENT_INPUT_SEARCH_USER.click();
     ELEMENT_POPUP_NO_RESULT_FOUNF.waitUntil(Condition.appears, Configuration.timeout);
-    $(ELEMENT_CONFIRM_INFORMATION).click();
+    $(ELEMENT_CONFIRM_INFORMATION).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
 }

@@ -455,7 +455,7 @@ public class SpaceManagement {
    */
   public void checkOnlineUsers(String onlineUser) {
     info("Online User is displayed: " + onlineUser);
-    final SelenideElement onlineUserInSpace = $(byXpath("//h6[text()=\"Who's Online?\"]/following::img[@src=\"/portal/rest/v1/social/users/${onlineUserSpace}/avatar\"]".replace("${onlineUserSpace}", onlineUser)));
+    final SelenideElement onlineUserInSpace = $(byXpath("(//h6[text()=\"Who's Online?\"]/following::img[@src=\"/portal/rest/v1/social/users/${onlineUserSpace}/avatar\"])[1]".replace("${onlineUserSpace}", onlineUser)));
     onlineUserInSpace.waitUntil(Condition.appears, Configuration.timeout);
   }
 

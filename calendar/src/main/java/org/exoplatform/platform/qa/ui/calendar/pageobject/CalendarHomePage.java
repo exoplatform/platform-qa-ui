@@ -92,7 +92,6 @@ public class CalendarHomePage {
     switch (optionDay) {
       case DETAILTIME:
         homePagePlatform.refreshUntil($(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name))),Condition.visible,1000);
-        executeJavaScript("window.scrollBy(0,450)", "");
         $(byXpath(ELEMENT_EVENT_TASK_DAY_VIEW_ONE_DAY.replace("$name", name))).contextClick();
         break;
       case ALLDAY:
@@ -451,7 +450,7 @@ public class CalendarHomePage {
       case WEEK:
         switch (optionDay) {
           case DETAILTIME:
-            $(byText(name)).waitUntil(Condition.appears, Configuration.collectionsTimeout);
+            $(byXpath("//*[@class='eventContainer' and contains(text(),'$name')]".replace("$name", name))).waitUntil(Condition.appears,Configuration.openBrowserTimeoutMs);
             break;
           case ALLDAY:
 
@@ -790,7 +789,9 @@ public class CalendarHomePage {
 
       verifyIsNotPresentEventTask(name, view, optionDay);
     } else
+      sleep(3000);
       button.yes();
+      sleep(1000);
     $(byText(name)).waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs + Configuration.openBrowserTimeoutMs);
   }
 

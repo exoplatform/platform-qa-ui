@@ -63,11 +63,11 @@ public class SiteExplorerHome {
   public void goToPath(String path, String drive) {
     info("Go to selected Drive");
 
-    $(byId("uiActionsBarContainer")).find(byId("driveAction")).click();
+    $(byId("uiActionsBarContainer")).find(byId("driveAction")).waitUntil(visible, openBrowserTimeoutMs).click();
 
-    $(byText(drive)).waitUntil(Condition.appears, Configuration.timeout);
+    $(byText(drive)).waitUntil(Condition.appears, openBrowserTimeoutMs);
     $(byText(drive)).click();
-    $(byId("uiActionsBarContainer")).find(byId("driveAction")).waitUntil(Condition.have(Condition.text(drive)),Configuration.timeout);
+    $(byId("uiActionsBarContainer")).find(byId("driveAction")).waitUntil(Condition.have(Condition.text(drive)), openBrowserTimeoutMs);
     if( $(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON).is(Condition.not(Condition.visible))){
       $(byClassName("uiIconEcmsViewWeb")).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     }

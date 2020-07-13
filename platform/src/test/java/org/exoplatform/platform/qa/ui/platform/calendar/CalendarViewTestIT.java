@@ -71,6 +71,7 @@ public class CalendarViewTestIT extends Base {
                                               getDate(0, defaultFormatDate),
                                               true);
     eventManagement.saveQuickAddEvent();
+    sleep(2000);
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventNext,
                                               content,
@@ -78,6 +79,7 @@ public class CalendarViewTestIT extends Base {
                                               getDate(1, defaultFormatDate),
                                               true);
     eventManagement.saveQuickAddEvent();
+    sleep(2000);
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventPre,
                                               content,
@@ -144,6 +146,7 @@ public class CalendarViewTestIT extends Base {
                                               getDate(0, defaultFormatDate),
                                               true);
     eventManagement.saveQuickAddEvent();
+    sleep(2000);
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventNextWeek,
                                               content,
@@ -332,6 +335,7 @@ public class CalendarViewTestIT extends Base {
                                               getDate(0, defaultFormatDate),
                                               true);
     eventManagement.saveQuickAddEvent();
+    sleep(2000);
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventNextMonth,
                                               content,
@@ -432,6 +436,7 @@ public class CalendarViewTestIT extends Base {
                                               getDate(0, defaultFormatDate),
                                               true);
     eventManagement.saveQuickAddEvent();
+    sleep(2000);
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventNextWeek,
                                               content,
@@ -439,6 +444,7 @@ public class CalendarViewTestIT extends Base {
                                               getDate(7, defaultFormatDate),
                                               true);
     eventManagement.saveQuickAddEvent();
+    sleep(2000);
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventPreWeek,
                                               content,
@@ -622,7 +628,7 @@ public class CalendarViewTestIT extends Base {
                                               null,
                                               "Meeting");
     eventManagement.saveQuickAddEvent();
-
+    sleep(2000);
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventCall,
                                               content,
@@ -652,6 +658,7 @@ public class CalendarViewTestIT extends Base {
                                               null,
                                               "Holiday");
     eventManagement.saveQuickAddEvent();
+    sleep(2000);
 
     eventManagement.goToAddEventFromActionBar();
     eventManagement.inputDataEventInQuickForm(titleEventAnni,

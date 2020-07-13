@@ -155,7 +155,7 @@ public class ManageSpacesTestIT extends Base {
             .click();
 
     switchTo().window(1);
-    ELEMENT_SPACE_SETTING_PAGE.waitUntil(Condition.visible, Configuration.timeout);
+    ELEMENT_SPACE_SETTING_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     ELEMENT_SPACE_NAME_PAGE.setValue(spaceNamea + "zfzff");
     ELEMENT_SPACE_DESCRIPTION_PAGE.setValue(spaceDesa + "zfzff");
     $(ELEMENET_SPACE_UPDATE_SAVE_BTN).click();
