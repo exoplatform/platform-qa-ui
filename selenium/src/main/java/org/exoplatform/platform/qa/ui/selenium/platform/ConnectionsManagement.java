@@ -96,11 +96,11 @@ public class ConnectionsManagement {
       tribeSearchPeople(name[0], null, null, null);
     else
       tribeSearchPeople(username, null, null, null);
-    if ($(ELEMENT_CONNECTION_REVOVE_BTN).is(Condition.exist)) {
-      $(ELEMENT_CONNECTION_REVOVE_BTN).click();
+    if ($(ELEMENT_CONNECTION_REMOVE_DW_BTN).is(Condition.exist)) {
+      $(ELEMENT_CONNECTION_REMOVE_DW_BTN).click();
     }
-    if ($(ELEMENT_CONNECTION_CANCEL_BTN).is(Condition.exist)) {
-      $(ELEMENT_CONNECTION_CANCEL_BTN).click();
+    if ($(ELEMENT_CONNECTION_CANCEL_DW_BTN).is(Condition.exist)) {
+      $(ELEMENT_CONNECTION_CANCEL_DW_BTN).click();
     }
     sleep(2000);
     $(byXpath("//*[@class='uiIconSocConnectUser peopleRelationshipIcon d-inline']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();

@@ -33,6 +33,10 @@ public class ConnectionsLocator {
 
   public static final SelenideElement ELEMENT_CONNECTION_CANCEL_BTN           = $(byXpath("(//*[@class='v-card__actions peopleCardActions']//button)[1]"));
 
+  public static final SelenideElement ELEMENT_CONNECTION_CANCEL_DW_BTN           = $(byXpath("//*[@class='uiIconSocCancelConnectUser peopleRelationshipIcon d-inline']"));
+
+  public static final SelenideElement ELEMENT_CONNECTION_REMOVE_DW_BTN           = $(byXpath("//*[@class='uiIconSocCancelConnectUser peopleRelationshipIcon d-inline']"));
+
   public static final SelenideElement ELEMENT_CONNECTION_REVOVE_BTN           = $(byText("Remove Connection"));
 
   public static final String          ELEMENT_CONNECTION_IGNORE_BTN           =

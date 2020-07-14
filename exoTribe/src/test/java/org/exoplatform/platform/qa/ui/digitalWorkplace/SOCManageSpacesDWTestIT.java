@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -125,6 +126,7 @@ public class SOCManageSpacesDWTestIT extends BaseDW {
     homePagePlatform.goToSideBarMenuTribe();
     info("Check That the created spaces are displayed in order on SideBar menu");
     info("Last space created is the first displayed on SideBar menu");
+    sleep(2000);
     Assert.assertEquals($(By.xpath(ELEMENT_SPACE_SIDEBAR_ORDER.replace("{id}", "1"))).getText(), spaceNameg);
     Assert.assertEquals($(By.xpath(ELEMENT_SPACE_SIDEBAR_ORDER.replace("{id}", "2"))).getText(), spaceNamef);
     Assert.assertEquals($(By.xpath(ELEMENT_SPACE_SIDEBAR_ORDER.replace("{id}", "3"))).getText(), spaceNamee);
