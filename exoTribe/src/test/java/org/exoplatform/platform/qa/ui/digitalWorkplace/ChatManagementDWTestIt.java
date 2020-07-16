@@ -24,13 +24,15 @@ import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
-import static org.exoplatform.platform.qa.ui.core.PLFData.*;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_TABLE_PROJECT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @Tag("dw")
@@ -719,6 +721,194 @@ public class ChatManagementDWTestIt extends BaseDW {
     roomManagement.editTitleofAroomTribe(room, newroom);
     ELEMENT_CONTACT_LIST.$(byText(newroom)).should(Condition.exist);
     roomManagement.deleteRomm(newroom);
+    switchTo().window(1).close();
+    switchToParentWindow();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test16_CheckOnSiteNotificationWhenSendEmoticons() {
+
+    String room = "room" + getRandomNumber();
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@test.com";
+    String password = "12345678";
+
+    info("Add user");
+    navigationToolbar.goToAddUsersPageViaUrlDW();
+    addUsers.addUserTribe(username1, password, email1, username1, username1, "");
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(username1);
+
+    navigationToolbar.openChatDrawerDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+
+    navigationToolbar.goToChatPageDW();
+    switchTo().window(1);
+    roomManagement.addRoomTribe(room, username1);
+    chatManagement.sendSmile("smile");
+    switchTo().window(1).close();
+    switchToParentWindow();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(username1, password);
+    navigationToolbar.openChatDrawerDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Go To A Chat Contact");
+    navigationToolbar.goToAChatContactDW(room);
+    $(byXpath("//*[@class='chat-emoticon emoticon-smile']//*[contains(text(),':)')]")).waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Go Back To The Chat Contact List");
+    navigationToolbar.goBackToChatContactListDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Close Chat Drawer");
+    navigationToolbar.closeChatDrawerDW();
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+    navigationToolbar.openChatDrawerDW();
+    navigationToolbar.goToChatPageDW();
+    switchTo().window(1);
+    roomManagement.deleteRomm(room);
+    switchTo().window(1).close();
+    switchToParentWindow();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test17_CheckOnSiteNotificationWhenStartMeeting() {
+
+    String room = "room" + getRandomNumber();
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@test.com";
+    String password = "12345678";
+
+    info("Add user");
+    navigationToolbar.goToAddUsersPageViaUrlDW();
+    addUsers.addUserTribe(username1, password, email1, username1, username1, "");
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(username1);
+
+    navigationToolbar.openChatDrawerDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+
+    navigationToolbar.goToChatPageDW();
+    switchTo().window(1);
+    roomManagement.addRoomTribe(room, username1);
+    roomManagement.startStopmeetingDW(room);
+    switchTo().window(1).close();
+    switchToParentWindow();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(username1, password);
+    navigationToolbar.openChatDrawerDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Go To A Chat Contact");
+    navigationToolbar.goToAChatContactDW(room);
+
+    $(byClassName("uiIconChatMeeting")).should(Condition.visible);
+    assertEquals("Meeting started", $(byXpath("//*[@class='message-content']//*[contains(text(),'Meeting started')]")).getText());
+
+    info("Go Back To The Chat Contact List");
+    navigationToolbar.goBackToChatContactListDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Close Chat Drawer");
+    navigationToolbar.closeChatDrawerDW();
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+    navigationToolbar.openChatDrawerDW();
+    navigationToolbar.goToChatPageDW();
+    switchTo().window(1);
+    roomManagement.deleteRomm(room);
+    switchTo().window(1).close();
+    switchToParentWindow();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test18_CheckOnSiteNotificationWhenStopMeeting() {
+
+    String room = "room" + getRandomNumber();
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@test.com";
+    String password = "12345678";
+
+    info("Add user");
+    navigationToolbar.goToAddUsersPageViaUrlDW();
+    addUsers.addUserTribe(username1, password, email1, username1, username1, "");
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(username1);
+
+    navigationToolbar.openChatDrawerDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+
+    navigationToolbar.goToChatPageDW();
+    switchTo().window(1);
+    roomManagement.addRoomTribe(room, username1);
+    roomManagement.startStopmeetingDW(room);
+    roomManagement.startStopmeetingDW(room);
+
+    switchTo().window(1).close();
+    switchToParentWindow();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(username1, password);
+    navigationToolbar.openChatDrawerDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Go To A Chat Contact");
+    navigationToolbar.goToAChatContactDW(room);
+
+    $(byClassName("uiIconChatMeeting")).should(Condition.visible);
+    assertEquals("The notes have been saved", $(byXpath("//*[@class='message-content msMeetingNotes']//b")).getText());
+
+    info("Go Back To The Chat Contact List");
+    navigationToolbar.goBackToChatContactListDW();
+    info("Check that Open Chat Page Button is displayed");
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Check that Discussions Filter Button is displayed");
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
+    info("Close Chat Drawer");
+    navigationToolbar.closeChatDrawerDW();
+    manageLogInOut.signOutTribe();
+
+    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+    navigationToolbar.openChatDrawerDW();
+    navigationToolbar.goToChatPageDW();
+    switchTo().window(1);
+    roomManagement.deleteRomm(room);
     switchTo().window(1).close();
     switchToParentWindow();
     homePagePlatform.goToSnapshotPageTribeViaUrl();

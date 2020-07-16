@@ -75,13 +75,21 @@ public class RoomManagement {
 
   }
 
-public void startStopmeeting(String room){
+  public void startStopmeeting(String room){
   $(byText(room)).click();
   ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
   ELEMENT_CHAT_ROOM_STARTSTOPMEETING.click();
 
+  }
+
+  public void startStopmeetingDW(String room){
+    $(byText(room)).click();
+    ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
+    sleep(2000);
+    ELEMENT_CHAT_ROOM_DW_STARTSTOPMEETING.click();
 
   }
+
   public void leaveRoom(String room) {
     $(byText(room)).click();
     ELEMENT_MORE_ACTION.click();
