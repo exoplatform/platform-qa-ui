@@ -800,6 +800,9 @@ public class WikiLocators {
     public static final SelenideElement ELEMENT_SELECT_TEMPLATE_SupportGuide =
             $(byXpath("//*[@id=\"UIWikiTemplateGrid\"]/tbody/tr[3]/td[1]/div/input"));
 
+  public static final SelenideElement ELEMENT_SELECT_TEMPLATE_ThreeColumnLayout =
+          $(byXpath("//*[@id=\"UIWikiTemplateGrid\"]/tbody/tr[3]/td[1]/div/input"));
+
     // select Status Meeting template
     public static final SelenideElement ELEMENT_SELECT_TEMPLATE_StatusMeeting =
             $(byXpath("//*[@id=\"UIWikiTemplateGrid\"]/tbody/tr[4]/td[1]/div/input"));

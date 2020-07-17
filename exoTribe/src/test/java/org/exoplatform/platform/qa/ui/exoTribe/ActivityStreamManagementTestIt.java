@@ -272,7 +272,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     homePagePlatform.goToMySpacesTribeViaUrl();
     connectionsManagement.tribeSearchSpace(spaceNamea);
     tribeSpaceManagement.accessToSearchedSpace();
-    tribeActivityStream.checkThatUserWholikesActivityIsDisplayedTribe(tribe_user3, activity1);
+    tribeActivityStream.checkThatUserWholikesActivityIsDisplayedDW(tribe_user3, activity1);
 
     manageLogInOut.signInTribe(tribe_username3, tribe_password3);
     homePagePlatform.goToMySpacesTribeViaUrl();
