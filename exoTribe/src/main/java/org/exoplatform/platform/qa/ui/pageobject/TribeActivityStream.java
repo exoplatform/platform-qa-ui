@@ -296,7 +296,7 @@ public class TribeActivityStream {
   }
 
   public void checkThatUserWholikesActivityIsDisplayedDW(String user, String activity) {
-    String userWhoLikeActivity = user;
+    String userWhoLikeActivity = user + " " + user;
 
     $(byXpath("(//*[@class='description']//*[contains(text(),'${activity}')]/following::*[@class='activityReactionsContainer']//*[@title='${user}'])[1]"
             .replace("${user}", userWhoLikeActivity)

@@ -537,6 +537,8 @@ public class NavigationToolbar {
     sleep(2000);
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     ELEMENT_NOTIFICATIONS_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_NO_NOTIFICATION_DISPLAY_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+
     info("The elemnt is shown successfully");
   }
 
@@ -656,6 +658,21 @@ public class NavigationToolbar {
     $(byXpath("//*[@class='leftHeaderDrawer']//span[@title='${contact}']".replace("${contact}", contact)))
             .waitUntil(Condition.visible, openBrowserTimeoutMs)
             .isDisplayed();
+
+  }
+
+  public void searchARoomViaDiscussionsFilter(String room) {
+
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_SEARCH_DW.waitUntil(Condition.visible, openBrowserTimeoutMs).setValue(room);
+    $(byXpath("//*[@title='${room}']".replace("${room}",room))).waitUntil(Condition.visible, openBrowserTimeoutMs).isDisplayed();
+
+  }
+
+  public void closeSearchARoomViaDiscussionsFilter() {
+
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_CLOSE_DW.waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+    ELEMENT_CHAT_DISCUSSIONS_FILTER_SEARCH_DW.waitUntil(Condition.not(Condition.visible), openBrowserTimeoutMs);
 
   }
 

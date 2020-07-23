@@ -118,6 +118,7 @@ public class ChatLocator {
     public static final SelenideElement ELEMENT_CHAT_POST_EVENT =$(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button"));
     public static final SelenideElement ELEMENT_CHAT_SHARE_LINK = $(byClassName("uiIconChatLink"));
     public static final SelenideElement ELEMENT_CHAT_UPLOAD_FILE= $(byXpath("//div[text()='Upload File']"));
+    public static final SelenideElement ELEMENT_CHAT_UPLOAD_FILE_TRIBE= $(byXpath("//*[@class='uiIconChatUpload']"));
     public static final SelenideElement ELEMENT_CHAT_ASK_QUESTION= $(byClassName("uiIconChatQuestion"));
     public static final SelenideElement ELEMENT_CHAT_ASK_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/button"));
     public static final SelenideElement ELEMENT_CHAT_CANCEL_BUTTON= $(byXpath("//*[@id=\"appComposerForm\"]/div[2]/div"));

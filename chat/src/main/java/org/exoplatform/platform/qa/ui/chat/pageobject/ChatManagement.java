@@ -30,7 +30,7 @@ public class ChatManagement {
 
   public void uploadFile(String file) {
     ELEMENT_COLLABORATION_ACTIONS.waitUntil(Condition.visible,Configuration.timeout).click();
-    ELEMENT_CHAT_UPLOAD_FILE.waitUntil(Condition.visible,Configuration.timeout).click();
+    ELEMENT_CHAT_UPLOAD_FILE_TRIBE.waitUntil(Condition.visible,Configuration.timeout).click();
     sleep(2000);
     ELEMENT_CHAT_INPUT_UPLOAD.uploadFromClasspath(file);
     ELEMENT_CONTAINER_LIST_MESSAGES.find(byText(file)).waitUntil(Condition.appear,Configuration.timeout);
@@ -256,6 +256,14 @@ public class ChatManagement {
     ELEMENT_POPUP_CONTAINER.find(byText("Upload File")).shouldNot(Condition.appear);
   }
 
+  public void checkUploadFilePopUpTribe(){
+    ELEMENT_POPUP_CONTAINER.find(byText("Uploader un fichier")).waitUntil(Condition.appear,Configuration.timeout);
+    assertEquals("DÉPOSEZ VOTRE FICHIER ICI",$(byClassName(" label-inner")).getText());
+    assertEquals("Sélectionner manuellement",ELEMENT_CHAT_SELECT_FILE.getText());
+    ELEMENT_CHAT_CANCEL_UPLOAD_FILE_BUTTON.click();
+    ELEMENT_POPUP_CONTAINER.find(byText("Uploader un fichier")).shouldNot(Condition.appear);
+  }
+
   public void checkShareLinPopUp(){
     ELEMENT_POPUP_CONTAINER.find(byText("Share Link")).waitUntil(Condition.appear,Configuration.timeout);
     ELEMENT_POPUP_CONTAINER.find(byXpath("//input[@placeholder='E.g: http://www.exoplatform.com']")).waitUntil(Condition.appear, Configuration.timeout);
@@ -263,6 +271,15 @@ public class ChatManagement {
     assertEquals("Cancel", ELEMENT_CHAT_CANCEL_BUTTON.getText());
     ELEMENT_CHAT_CANCEL_BUTTON.click();
     ELEMENT_POPUP_CONTAINER.find(byText("Share Link")).shouldNot(Condition.appear);
+  }
+
+  public void checkShareLinPopUpTribe(){
+    ELEMENT_POPUP_CONTAINER.find(byText("Partager un lien")).waitUntil(Condition.appear,Configuration.timeout);
+    ELEMENT_POPUP_CONTAINER.find(byXpath("//input[@placeholder='E.g: http://www.exoplatform.com']")).waitUntil(Condition.appear, Configuration.timeout);
+    assertEquals("Partager",ELEMENT_CHAT_SHARE_LINK_BUTTON.getText());
+    assertEquals("Annuler", ELEMENT_CHAT_CANCEL_BUTTON.getText());
+    ELEMENT_CHAT_CANCEL_BUTTON.click();
+    ELEMENT_POPUP_CONTAINER.find(byText("Partager un lien")).shouldNot(Condition.appear);
   }
 
   public void shareLinkInChat(String link){

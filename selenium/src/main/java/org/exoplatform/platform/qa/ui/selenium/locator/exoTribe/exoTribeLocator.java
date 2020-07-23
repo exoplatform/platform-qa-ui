@@ -315,7 +315,7 @@ public class exoTribeLocator {
 
     public static final SelenideElement  ELEMENT_NO_NOTIFICATION_DISPLAY_DW   =   $(byXpath("//*[@class='noNoticationWrapper']"));
 
-    public static final SelenideElement ELEMENT_CLOSE_NOTIFICATIONS_DW       = $(byXpath("(//*[@class='uiIconClose uiIconLightGray'])[2]"));
+    public static final SelenideElement ELEMENT_CLOSE_NOTIFICATIONS_DW       = $(byXpath("//*[@class='uiCloseIcon notifDrawerClose']"));
 
     public static final SelenideElement ELEMENT_CLOSE_NOTIFICATIONS_TRIBE       = $(byXpath("//*[@class='uiCloseIcon notifDrawerClose']"));
 
@@ -344,6 +344,10 @@ public class exoTribeLocator {
     public static final SelenideElement  ELEMENT_CHAT_CONTACT_LINK_DW   =  $(byXpath("(//*[@class='chat-contact']/div)[1]"));
 
     public static final SelenideElement  ELEMENT_CHAT_DISCUSSIONS_FILTER_DW   =  $(byXpath("//*[@class='searchDrawer']/following::button[2]"));
+
+    public static final SelenideElement  ELEMENT_CHAT_DISCUSSIONS_FILTER_CLOSE_DW   =  $(byXpath("//*[@placeholder='Filter discussions']/following::button[1]"));
+
+    public static final SelenideElement  ELEMENT_CHAT_DISCUSSIONS_FILTER_SEARCH_DW   =  $(byXpath("//*[@placeholder='Filter discussions']"));
 
     public static final SelenideElement  ELEMENT_CLOSE_CHAT_DRAWER_DW   =  $(byXpath("//*[@class='searchDrawer']/following::button[4]"));
 

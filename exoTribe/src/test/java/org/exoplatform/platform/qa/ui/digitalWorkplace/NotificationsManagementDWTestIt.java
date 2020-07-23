@@ -167,7 +167,7 @@ public class NotificationsManagementDWTestIt extends BaseDW {
   public void test04_MarkAllNotificationsAsRead() {
 
     info("Open Notifications");
-    navigationToolbar.goToIntranetNotificationDW();
+    navigationToolbar.goToIntranetNotificationDigitalWorkplace();
 
     info("Check that Notification Settings Button is displayed");
     ELEMENT_NOTIFICATION_TITLE_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
@@ -187,7 +187,7 @@ public class NotificationsManagementDWTestIt extends BaseDW {
   public void test05_SeeAllNotifications() {
 
     info("Open Notifications");
-    navigationToolbar.goToIntranetNotificationDW();
+    navigationToolbar.goToIntranetNotificationDigitalWorkplace();
 
     info("Check that Notification Settings Button is displayed");
     ELEMENT_NOTIFICATION_TITLE_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
@@ -205,7 +205,7 @@ public class NotificationsManagementDWTestIt extends BaseDW {
   public void test06_Remove_Notification() {
 
     info("Open Notifications");
-    navigationToolbar.goToIntranetNotificationDW();
+    navigationToolbar.goToIntranetNotificationDigitalWorkplace();
 
     info("Check that Notification Settings Button is displayed");
     ELEMENT_NOTIFICATION_TITLE_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
