@@ -22,4 +22,9 @@ public class OnlyOfficeLocator {
     public static final SelenideElement ELEMENT_PERMISSION_BUTTON_FROM_DOCUMENT_APP = $(".uiIconEcmsViewPermissions.uiIconEcmsLightGray");
     public static final SelenideElement ELEMENT_VERSION_BUTTON_FROM_DOCUMENT_APP = $(".uiIconEcmsManageVersions.uiIconEcmsLightGray");
     public static final SelenideElement ELEMENT_EDIT_DOCUMENT_PROP_BUTTON_FROM_DOCUMENT_APP = $(".uiIconEcmsOnlyofficeOpen.uiIconEcmsLightGray.uiIconEdit");
+
+    public static final SelenideElement ELEMENT_OPEN_DRAWER_BUTTON = $("#open-drawer-btn");
+    public static final SelenideElement ELEMENT_CLOSE_DRAWER_BUTTON = $(".closebtn");
+    public static final SelenideElement ELEMENT_SAVE_VERSION_BUTTON = $("#save-btn");
+    public static final SelenideElement ELEMENT_SEE_MORE_BUTTON = $("#see-more-btn");
 }

@@ -29,6 +29,12 @@ import static com.codeborne.selenide.Configuration.*;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
 import org.exoplatform.platform.qa.ui.gatein.pageobject.UserAddManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.ConnectionsManagement;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class OnlyOfficeTestIT extends Base {
@@ -386,6 +392,36 @@ public class OnlyOfficeTestIT extends Base {
     addUsers.deleteUser(userA_name);
     addUsers.deleteUser(userB_name);
     addUsers.deleteUser(userC_name);
+    manageLogInOut.signOut();
+  }
+
+
+
+  @Test
+  /**
+   * Save_version_drawer_US01
+   * Check that "Add new version" button existing and that the drawer is opened
+   */
+  public void checkOpeningDrawerVersions() {
+    String document = "OO_test";
+    String extension = ".docx";
+    String userName = PLFData.DATA_NAME_ROOT;
+    info("Edit Online from document from AS");
+    activityStream.uploadFileFromAS(document + extension);
+    homePagePlatform.refreshUntil($(byXpath(ELEMENT_CHECK_FILE_IS_UPLOADED.replace("$doc", document + extension))), visible, timeout);
+    onlyOfficeActivityStream.editOnlineFromAS();
+    switchTo().window(1);
+    onlyOfficeEditingPage.checkOpeningDocumentWithEditOnline(document, extension, userName);
+    ELEMENT_OPEN_DRAWER_BUTTON.hover();
+    $(".tooltip.fada.bottom.in").should(visible);
+    ELEMENT_OPEN_DRAWER_BUTTON.waitUntil(visible, timeout).click();
+    ELEMENT_SAVE_VERSION_BUTTON.should(visible);
+    ELEMENT_SEE_MORE_BUTTON.should(visible);
+    ELEMENT_CLOSE_DRAWER_BUTTON.waitUntil(visible, timeout).click();
+    switchTo().window(1).close();
+    switchTo().window(0);
+    ELEMENT_CLOSE_DOCUMENT_PREVIEW_FROM_AS.waitUntil(visible, collectionsTimeout).click();
+    activityStream.deleteDocumentFromAS(document + extension);
     manageLogInOut.signOut();
   }
 }
