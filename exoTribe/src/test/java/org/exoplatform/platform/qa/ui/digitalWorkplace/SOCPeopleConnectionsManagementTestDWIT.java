@@ -249,6 +249,7 @@ public class SOCPeopleConnectionsManagementTestDWIT extends BaseDW {
             .parent()
             .find(byText(connect))
             .should(Condition.exist);
+    getExoWebDriver().getWebDriver().navigate().refresh();
     connectionsManagement.tribeSearchPeople(username3);
     ($(By.id("peopleListBody"))).find(byText(username3 + " " + username3))
             .parent()
@@ -256,6 +257,7 @@ public class SOCPeopleConnectionsManagementTestDWIT extends BaseDW {
             .parent()
             .find(byText(connect))
             .should(Condition.exist);
+    getExoWebDriver().getWebDriver().navigate().refresh();
     connectionsManagement.tribeSearchPeople(username4);
     ($(By.id("peopleListBody"))).find(byText(username4 + " " + username4))
             .parent()
@@ -263,6 +265,7 @@ public class SOCPeopleConnectionsManagementTestDWIT extends BaseDW {
             .parent()
             .find(byText(connect))
             .should(Condition.exist);
+    getExoWebDriver().getWebDriver().navigate().refresh();
     connectionsManagement.tribeSearchPeople(username5);
     ($(By.id("peopleListBody"))).find(byText(username5 + " " + username5))
             .parent()

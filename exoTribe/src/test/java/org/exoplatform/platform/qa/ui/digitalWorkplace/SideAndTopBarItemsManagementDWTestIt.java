@@ -98,10 +98,10 @@ public class SideAndTopBarItemsManagementDWTestIt extends BaseDW {
     sleep(2000);
 
     Assert.assertEquals(ELEMENT_TRIBE_SNAPSHOT_CHECK_ORDER.getText(), "Snapshot");
-    Assert.assertEquals(ELEMENT_TRIBE_STREAM_CHECK_ORDER.getText(), "Stream");
+    Assert.assertEquals(ELEMENT_TRIBE_STREAM_CHECK_ORDER.getText(), "Streams");
     Assert.assertEquals(ELEMENT_TRIBE_SPACES_CHECK_ORDER.getText(), "Spaces");
     Assert.assertEquals(ELEMENT_TRIBE_PEOPLE_CHECK_ORDER.getText(), "People");
-    Assert.assertEquals(ELEMENT_TRIBE_LAST_VISITED_SPACES_CHECK_ORDER.getText(), "Last visited spaces");
+    Assert.assertEquals(ELEMENT_TRIBE_LAST_VISITED_SPACES_CHECK_ORDER.getText(), "Recent spaces");
     Assert.assertEquals(ELEMENT_TRIBE_SETTINGS_DW_CHECK_ORDER.getText(), "Settings");
     Assert.assertEquals(ELEMENT_TRIBE_LOGOUT_DW_CHECK_ORDER.getText(), "Logout");
     getExoWebDriver().getWebDriver().navigate().refresh();

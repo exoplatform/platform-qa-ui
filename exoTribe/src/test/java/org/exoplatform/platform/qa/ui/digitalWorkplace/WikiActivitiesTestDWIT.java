@@ -123,7 +123,7 @@ public class WikiActivitiesTestDWIT extends BaseDW {
     info("In the create page's activity a Wiki page's version 'View change' is displayed");
     homePagePlatform.goToStreamPageTribe();
     tribeActivityStream.checkActivity(editTitle);
-    activityStream.checkActivityWikiPage(editTitle, editContent, "2", true);
+    activityStream.checkActivityWikiPageDW(editTitle, editContent, "2", true);
     activityStream.clickOnViewChange(editTitle);
     tribeWikiValidattions.verifyCompareVersions("1");
     tribeWikiHomePage.goToHomeWikiPage();

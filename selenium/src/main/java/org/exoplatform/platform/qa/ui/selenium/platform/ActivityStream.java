@@ -171,6 +171,44 @@ public class ActivityStream {
     }
   }
 
+  public void checkActivityWikiPageDW(String title, String content, String version, boolean isEdit) {
+    if (!title.isEmpty()) {
+      info("Check wiki page's title");
+
+      $(byXpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}", title))).waitUntil(Condition.visible,
+              Configuration.timeout);
+    }
+    if (!content.isEmpty()) {
+      info("Check the content");
+      String[] arrayline;
+      arrayline = content.split("</br>");
+      if (arrayline.length > 1) {
+        info("Check first 4 lines of the wiki page");
+        $(byXpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", title))).waitUntil(Condition.visible,
+                Configuration.timeout);
+        $(byXpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", title))).waitUntil(Condition.visible,
+                Configuration.timeout);
+        $(byXpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", title))).waitUntil(Condition.visible,
+                Configuration.timeout);
+        $(byXpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", title))).waitUntil(Condition.visible,
+                Configuration.timeout);
+        info("Check line 5 of the wiki page is not shown");
+        $(byXpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}", title))).shouldNotBe();
+      } else {
+        info("Check first line of the wiki page");
+        $(byXpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}", title))).waitUntil(Condition.visible,
+                Configuration.timeout);
+      }
+    }
+    if (isEdit) {
+      info("View change link is shown");
+      $(byXpath("//*[contains(text(),'$title')]/preceding::*[@class='uiIconActivityAction uiIconLightGray']".replace("$title", title))).waitUntil(Condition.visible,
+              Configuration.timeout).click();
+      $(byXpath(ELEMENT_ACTIVITY_WIKI_VIEW_CHANGE_LINK.replace("$title", title))).waitUntil(Condition.visible,
+              Configuration.timeout);
+    }
+  }
+
   /**
    * Check activity after add a web content
    *

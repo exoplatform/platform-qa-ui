@@ -263,6 +263,9 @@ public class WikiLocators {
     public static final By ELEMENT_SEARCH_BROWSERS_WIKI_SETTINGS =
             By.xpath(".//*[@class='dropdown-menu']//*[text()='Wiki Settings']");
 
+    public static final By ELEMENT_SEARCH_BROWSERS_WIKI_SETTINGS_DW =
+          By.xpath(".//*[@class='dropdown-menu']//*[text()='Notebook Settings']");
+
     public static final By ELEMENT_SEARCH_BROWSERS_MY_DRAFT =
             By.xpath(".//*[@class='dropdown-menu']//*[text()='My Drafts']");
 

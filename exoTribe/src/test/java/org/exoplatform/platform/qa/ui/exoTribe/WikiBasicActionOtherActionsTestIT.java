@@ -17,13 +17,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
-import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
-import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
+import static com.codeborne.selenide.Selenide.*;
+import static org.exoplatform.platform.qa.ui.core.PLFData.*;
+import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_PERMALINK_CLOSE;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("tribe")
@@ -168,6 +172,162 @@ public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.deleteTribeSpace(space1);
     tribeSpaceManagement.deleteTribeSpace(space2);
+
+  }
+
+  @Test
+  public void test03_WatchAndUnwatchAPageByAnOtherUser() {
+
+    info("Unwatch Page");
+    String wiki = "wiki" + getRandomNumber();
+    String space1 = "space" + getRandomNumber();
+    String user1 = tribe_user3;
+    String mess1 = "You have started watching this page now.";
+    info("mess1:" + mess1);
+    String mess = "You have stopped watching this page now.";
+    info("mess:" + mess);
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(user1);
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpaceTribe(space1, space1, "Open", "No", inviteUsers);
+
+    info("Create a wiki page in space1");
+    tribeSpaceManagement.goToWikiTabDW(space1);
+    tribeWikiHomePage.goToAddBlankPageDW();
+    sleep(2000);
+    tribeSourceTextEditor.addSimplePage(wiki, wiki);
+    tribeWikiManagement.saveAddPage();
+    $(byText(wiki)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
+
+    info("Watch the wiki");
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username3, tribe_password3);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.searchSpace(space1);
+    navigationToolbar.acceptJoinSpaceViaSpacesDW();
+    tribeSpaceManagement.accessToSearchedSpace();
+    tribeSpaceManagement.goToWikiTabDW(space1);
+    wikiHomePage.goToAPage(wiki);
+    wikiManagement.watchAPage(mess1);
+    wikiManagement.unWatchAPage(mess);
+
+    info("Delete space");
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(space1);
+
+  }
+
+  @Test
+  public void test04_CheckWhenChangeLinkIsRestrictedByAnOtherUser() {
+    info("Check when change link is restricted");
+    String title = "title" + getRandomNumber();
+    String space1 = "space" + getRandomNumber();
+    String user1 = tribe_user3;
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(user1);
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpaceTribe(space1, space1, "Open", "No", inviteUsers);
+
+    info("Add new wiki page");
+    tribeSpaceManagement.goToWikiTabDW(space1);
+    tribeWikiHomePage.goToAddBlankPageDW();
+    sleep(2000);
+    tribeSourceTextEditor.addSimplePage(title, title);
+    wikiManagement.saveAddPage();
+    manageLogInOut.signOutTribe();
+
+    manageLogInOut.signInTribe(tribe_username3, tribe_password3);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.searchSpace(space1);
+    navigationToolbar.acceptJoinSpaceViaSpacesDW();
+    tribeSpaceManagement.accessToSearchedSpace();
+    tribeSpaceManagement.goToWikiTabDW(space1);
+    $(byText(title)).should(Condition.exist);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
+    homePagePlatform.goToMySpacesTribe();
+    tribeSpaceManagement.searchSpace(space1);
+    tribeSpaceManagement.accessToSearchedSpace();
+    tribeSpaceManagement.goToWikiTabDW(space1);
+    wikiHomePage.goToAPage(title);
+    wikiHomePage.goToPermalink();
+    ELEMENT_MSG_MAKE_PUBLIC_RESTRICTED.shouldHave(Condition.text("restreint"));
+    $(ELEMENT_PERMALINK_CLOSE).click();
+    wikiHomePage.goToPermalink();
+    String perLink = ELEMENT_WIKI_PERMELINK.getValue();
+    $(ELEMENT_PERMALINK_CLOSE).click();
+    manageLogInOut.signOutTribe();
+
+    manageLogInOut.signInTribe(tribe_username3, tribe_password3);
+    open(perLink);
+    sleep(2000);
+    wikiHomePage.goToPermalink();
+    ELEMENT_MSG_MAKE_PUBLIC_RESTRICTED.shouldHave(Condition.text("restricted"));
+    $(ELEMENT_PERMALINK_CLOSE).click();
+    manageLogInOut.signOutTribe();
+
+    info("Delete space");
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(space1);
+
+  }
+
+  @Test
+  public void test05_CheckWhenChangeLinkIsPublicByAnOtherUser() {
+    info("Check when change link is public");
+    String title = "title" + getRandomNumber();
+    String space1 = "space" + getRandomNumber();
+    String user1 = tribe_user3;
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(user1);
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpaceTribe(space1, space1, "Open", "No", inviteUsers);
+
+    info("Add new wiki page");
+    tribeSpaceManagement.goToWikiTabDW(space1);
+
+    tribeWikiHomePage.goToAddBlankPageDW();
+    sleep(2000);
+    tribeSourceTextEditor.addSimplePage(title, title);
+    wikiManagement.saveAddPage();
+
+    wikiHomePage.goToPermalink();
+    $(ELEMENT_MAKE_PUBLIC_BUTTON).click();
+    ELEMENT_MSG_MAKE_PUBLIC_RESTRICTED.shouldHave(Condition.text("publique"));
+    $(ELEMENT_PERMALINK_CLOSE).click();
+    wikiHomePage.goToPermalink();
+    String perLink = ELEMENT_WIKI_PERMELINK.getValue();
+    $(ELEMENT_PERMALINK_CLOSE).click();
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username3, tribe_password3);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.searchSpace(space1);
+    navigationToolbar.acceptJoinSpaceViaSpacesDW();
+    tribeSpaceManagement.accessToSearchedSpace();
+    tribeSpaceManagement.goToWikiTabDW(space1);
+    $(byText(title)).should(Condition.exist);
+
+    open(perLink);
+    sleep(2000);
+    wikiHomePage.goToPermalink();
+    ELEMENT_MSG_MAKE_PUBLIC_RESTRICTED.shouldHave(Condition.text("public"));
+    $(ELEMENT_PERMALINK_CLOSE).click();
+    manageLogInOut.signOutTribe();
+
+    info("Delete space");
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(space1);
 
   }
 

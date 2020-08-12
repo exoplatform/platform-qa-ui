@@ -170,6 +170,16 @@ public class WikiHomePage {
         } while (!$(ELEMENT_WIKI_SETTING_ADD_MORE_TEMPALTE).exists());
     }
 
+    public void goToWikiSettingPageDW() {
+        do{
+            info("Click on Browser drop down");
+            $(ELEMENT_SEARCH_BROWSERS_DROPDOWN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+            info("Select wiki settings label");
+            $(ELEMENT_SEARCH_BROWSERS_WIKI_SETTINGS_DW).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
+            testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+        } while (!$(ELEMENT_WIKI_SETTING_ADD_MORE_TEMPALTE).exists());
+    }
+
     /**
      * Open permissions for the wiki
      */

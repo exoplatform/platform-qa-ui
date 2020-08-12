@@ -537,7 +537,7 @@ public class NavigationToolbar {
     sleep(2000);
     testBase.getExoWebDriver().getWebDriver().navigate().refresh();
     ELEMENT_NOTIFICATIONS_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_NO_NOTIFICATION_DISPLAY_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    //ELEMENT_NO_NOTIFICATION_DISPLAY_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
 
     info("The elemnt is shown successfully");
   }
