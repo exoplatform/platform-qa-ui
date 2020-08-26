@@ -88,7 +88,7 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
 
     String username3 = "usernamec" + getRandomString();
     String email3 = username3 + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
     String username4 = "usernameb" + getRandomString();
     String email4 = username4 + "@test.com";
     navigationToolbar.goToIntranetNotification();
@@ -154,7 +154,7 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
 
     String activity = "activity" + getRandomNumber();
     String comment = "comment" + getRandomNumber();
-    String password = "123456";
+    String password = "Aa123456";
 
     info("Add 3 new users");
     navigationToolbar.goToAddUser();
@@ -241,7 +241,7 @@ public class SOCNotificationsIntranetNotificationIconListTestIT extends Base {
     String username4 = "usernameb" + getRandomString();
     String email4 = username4 + "@test.com";
 
-    String password="123456"+getRandomNumber();
+    String password="Aa123456"+getRandomNumber();
     String activity="activity"+getRandomString();
     String comment="comment"+getRandomString();
 

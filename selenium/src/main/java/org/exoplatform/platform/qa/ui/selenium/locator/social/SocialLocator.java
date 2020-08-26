@@ -1255,7 +1255,7 @@ public final class SocialLocator {
                                                                $(byId("spaceMenuTab")).find(byText("Forums"));
 
   public static final SelenideElement ELEMENT_INPUT_INVITE_USER                                         =
-                                                                $(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[2]/div/div[1]/input"));
+                                                                $(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[1]/div/div[1]/input"));
 
   public static final SelenideElement ELEMENT_ALERT_NOTIFICATION_EXIST                                  =
                                                                        $(byXpath("//*[@id=\"UINotificationPopoverToolbarPortlet\"]/div[2]/a/i/span"));

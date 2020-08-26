@@ -73,7 +73,7 @@ public class SOCPeopleProfileConnectionTestIT extends Base {
     /* Create data test */
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
 
     String numberAllConnection = "13";
 
@@ -101,7 +101,7 @@ public class SOCPeopleProfileConnectionTestIT extends Base {
       String userName = userList.get(i);
       String email = userName + "@test.com";
       info("Add user " + userName);
-      addUsers.addUser(userName, userName, email, userName, userName);
+      addUsers.addUser(userName, "A1" + userName, email, userName, userName);
     }
     manageLogInOut.signIn(username1, password);
 
@@ -133,7 +133,7 @@ public class SOCPeopleProfileConnectionTestIT extends Base {
     for (int i = 0; i < 13; i++) {
       String userName = userList.get(i);
       info(userName + " accept request");
-      manageLogInOut.signIn(userName, userName);
+      manageLogInOut.signIn(userName, "A1" + userName);
       homePagePlatform.goToConnections();
       connectionsManagement.acceptAConnection(username1);
     }

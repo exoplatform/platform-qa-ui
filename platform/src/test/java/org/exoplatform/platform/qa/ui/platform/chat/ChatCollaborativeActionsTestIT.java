@@ -64,7 +64,7 @@ public class ChatCollaborativeActionsTestIT extends Base {
     String username2 = "username" + getRandomNumber();
     String event = "event" + getRandomNumber();
     String location = "location" + getRandomNumber();
-    String password = "123456";
+    String password = "Aa123456";
     String FirstName = "FirstName" + getRandomString();
     String LastName = "LastName" + getRandomString();
     String email = username + "@test.com";

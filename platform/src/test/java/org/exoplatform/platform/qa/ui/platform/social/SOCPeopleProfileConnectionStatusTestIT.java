@@ -81,7 +81,7 @@ public class SOCPeopleProfileConnectionStatusTestIT extends Base {
     String email3 = username3 + "@test.com";
     String username4 = "usernameb" + getRandomString();
     String email4 = username4 + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
     info("Add user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);

@@ -66,7 +66,7 @@ public class SOCSpaceMemberManagementInviteTestIT extends Base {
     String email1 = username1 + "@gmail.com";
     String username2 = "usernameb" + getRandomString();
     String email2 = username2 + "@gmail.com";
-    String password = "123456";
+    String password = "Aa123456";
     info("Add new user");
     manageLogInOut.signIn("root", "gtn");
     navigationToolbar.goToAddUser();

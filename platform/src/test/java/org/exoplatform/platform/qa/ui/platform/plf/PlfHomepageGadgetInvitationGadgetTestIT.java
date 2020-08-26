@@ -96,7 +96,7 @@ public class PlfHomepageGadgetInvitationGadgetTestIT extends Base {
 
     info("Create datatest");
     String usernamea = "usernamea" + getRandomString();
-    String password = "123456";
+    String password = "Aa123456";
     String email1 = usernamea + "@test.com";
     String usernameb = "usernameb" + getRandomString();
     String email2 = usernameb + "@test.com";

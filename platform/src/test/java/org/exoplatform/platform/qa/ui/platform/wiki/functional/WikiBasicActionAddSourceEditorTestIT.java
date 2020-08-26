@@ -186,7 +186,7 @@ public class WikiBasicActionAddSourceEditorTestIT extends Base {
         info("Add new page when user does not have add page permission on space");
         info("Create a new user");
         String username1 = "username" + getRandomString();
-        String password = "123456";
+        String password = "Aa123456";
         String email1 = username1 + "@test.com";
         navigationToolbar.goToAddUser();
         addUsers.addUser(username1, password, email1, username1, username1);

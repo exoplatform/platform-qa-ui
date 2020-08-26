@@ -100,11 +100,11 @@ public class SOCNotificationIntranetUserSettingsTestIT extends Base {
 
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@gmail.com";
-    String password = "123456";
+    String password = "Aa123456";
 
     info("Add new user");
     navigationToolbar.goToAddUser();
-    addUsers.addUser(username1, "123456", email1, username1, username1);
+    addUsers.addUser(username1, "Aa123456", email1, username1, username1);
     manageLogInOut.signIn(username1, password);
     navigationToolbar.goToMyNotifications();
     myNotificationsSetting.verifyTilePage();

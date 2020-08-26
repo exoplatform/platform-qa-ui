@@ -60,7 +60,7 @@ public class ChatOnSiteNotificationTestIT extends Base {
 
     String room = "room" + getRandomNumber();
     String username = "username" + getRandomNumber();
-    String password = "123456";
+    String password = "Aa123456";
     String email = "emaila" + getRandomNumber() + "@test.com";
     String Firstname = "FirstName" + getRandomString();
     String LastName = "LastName" + getRandomString();
@@ -153,7 +153,7 @@ public class ChatOnSiteNotificationTestIT extends Base {
     String room4 = "room4" + getRandomNumber();
     String message = "message" + getRandomNumber();
     String username = "username" + getRandomNumber();
-    String password = "123456";
+    String password = "Aa123456";
     String FirstName = "FirstName" + getRandomString();
     String LastName = "LastName" + getRandomString();
     String email = username + "@test.com";
@@ -270,7 +270,7 @@ public class ChatOnSiteNotificationTestIT extends Base {
   public void test05_CheckOnSiteNotificationWhenToggleIsOFF() {
     String message = "message" + getRandomNumber();
     String username = "username" + getRandomNumber();
-    String password = "123456";
+    String password = "Aa123456";
     String email = "emaila" + getRandomNumber() + "@test.com";
     String Firstname = "FirstName" + getRandomString();
     String LastName = "LastName" + getRandomString();

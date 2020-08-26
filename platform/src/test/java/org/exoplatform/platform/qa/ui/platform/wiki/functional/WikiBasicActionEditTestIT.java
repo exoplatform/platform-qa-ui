@@ -141,10 +141,10 @@ public class WikiBasicActionEditTestIT extends Base {
     String username4 = "username4" + getRandomString();
     String firstname3 = "test" + getRandomString();
     String firstname4 = "testt" + getRandomString();
-    String password0 = "123456";
+    String password0 = "Aa123456";
     String email3 = username3 + "@test.com";
     String email4 = username4 + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
     String email1 = username1 + "@test.com";
     String email2 = username2 + "@test.com";
     navigationToolbar.goToAddUser();
@@ -160,7 +160,7 @@ public class WikiBasicActionEditTestIT extends Base {
     userAndGroupManagement.addUsersToGroup(username1, "*", false, false);
     userAndGroupManagement.addUsersToGroup(username2, "*", false, false);
     info("Login with User A");
-    manageLogInOut.signIn(username1, "123456");
+    manageLogInOut.signIn(username1, "Aa123456");
     info("Create a wiki page");
     String title = "title" + getRandomNumber();
     String content = "content" + getRandomNumber();
@@ -171,7 +171,7 @@ public class WikiBasicActionEditTestIT extends Base {
     wikiManagement.saveAddPage();
     wikiValidattions.verifyTitleWikiPage(title);
     info("Login with User B");
-    manageLogInOut.signIn(username2, "123456");
+    manageLogInOut.signIn(username2, "Aa123456");
     info("Edit the page");
     String newTitle = "newTitle" + getRandomNumber();
     String newContent = "newContent" + getRandomNumber();
@@ -186,7 +186,7 @@ public class WikiBasicActionEditTestIT extends Base {
     wikiHomePage.goToMyDraft();
     wikiValidattions.verifyTitleDrafPage(newTitle);
     info("Login with User A");
-    manageLogInOut.signIn(username1, "123456");
+    manageLogInOut.signIn(username1, "Aa123456");
     info("Edit the page");
     String newTitle1 = "newTitle1" + getRandomNumber();
     String newContent1 = "newContent1" + getRandomNumber();
@@ -200,7 +200,7 @@ public class WikiBasicActionEditTestIT extends Base {
     info("A new version of the page is created");
     wikiHomePage.viewInformationTable(newTitle1, "V2");
     info("Login with User B");
-    manageLogInOut.signIn(username2, "123456");
+    manageLogInOut.signIn(username2, "Aa123456");
     info("Edit the page");
     String message = "Your version is outdated. A version of this content has been updated by another user. You can ";
     homePagePlatform.goToWiki();
@@ -232,7 +232,7 @@ public class WikiBasicActionEditTestIT extends Base {
     userAndGroupManagement.addUsersToGroup(username3, "*", false, false);
     userAndGroupManagement.addUsersToGroup(username4, "*", false, false);
     info("Login with User C");
-    manageLogInOut.signIn(username3, "123456");
+    manageLogInOut.signIn(username3, "Aa123456");
     info("Create a wiki page");
     String title0 = "title0" + getRandomNumber();
     String content0 = "content0" + getRandomNumber();
@@ -248,7 +248,7 @@ public class WikiBasicActionEditTestIT extends Base {
     wikiManagement.goToSourceEditor();
     sourceTextEditor.editSimplePageWithAutoSave(title1, content1);
     info("Login with User D");
-    manageLogInOut.signIn(username4, "123456");
+    manageLogInOut.signIn(username4, "Aa123456");
     info("Edit the page");
     homePagePlatform.goToWiki();
     wikiHomePage.goToAPage(title0);

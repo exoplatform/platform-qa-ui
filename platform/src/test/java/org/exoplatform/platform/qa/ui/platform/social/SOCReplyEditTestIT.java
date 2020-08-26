@@ -112,7 +112,7 @@ public class SOCReplyEditTestIT extends Base {
     String newreply = "newreply" + getRandomNumber();
     String usernametest = "usernametest" + getRandomString();
     String email = usernametest + "@gmail.com";
-    String password = "123456";
+    String password = "Aa123456";
     String activity2 = "activity2" + getRandomNumber();
     String comment2 = "comment2" + getRandomNumber();
     String reply2 = "reply2" + getRandomNumber();
@@ -185,7 +185,7 @@ public class SOCReplyEditTestIT extends Base {
     String email = usernametest + "@gmail.com";
     String usernametest1 = "usernametesta" + getRandomString();
     String email1 = usernametest1 + "@gmail.com";
-    String password = "123456";
+    String password = "Aa123456";
     String comment1 = "comment1" + getRandomNumber();
     String newreply = "newreply" + getRandomNumber();
     String activity0 = "activity0" + getRandomNumber();

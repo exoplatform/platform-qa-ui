@@ -57,7 +57,7 @@ public class SOCPeopleProfileEditProfileTestIT extends Base {
   public void test07_CheckEmptyGenderIsSynchronizedInMangeUsers(){
     String username = "username" + getRandomString();
     String email = username + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
     String organization = "organization" + getRandomString();
     String jobTitle = "jobTitle" + getRandomString();
     String jobDetail = "jobDetail" + getRandomString();

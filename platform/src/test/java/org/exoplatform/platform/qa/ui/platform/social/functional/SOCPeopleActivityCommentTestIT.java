@@ -53,7 +53,7 @@ public class SOCPeopleActivityCommentTestIT extends Base {
     String email1 = username1 + "@gmail.com";
     String username2 = "usernameb" + getRandomString();
     String email2 = username2 + "@gmail.com";
-    String password = "123456";
+    String password = "Aa123456";
     String activity2 = "activity2" + getRandomNumber();
     String activity3 = "activity3" + getRandomNumber();
     String textDes = "textDes" + getRandomNumber();

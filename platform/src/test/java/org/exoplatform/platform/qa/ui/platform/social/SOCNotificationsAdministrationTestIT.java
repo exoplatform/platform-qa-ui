@@ -104,7 +104,7 @@ public class SOCNotificationsAdministrationTestIT extends Base {
     String comment = "comment" + getRandomNumber();
     String username = "username" + getRandomString();
     String email = username + "@gmail.com";
-    String password = "123456";
+    String password = "Aa123456";
 
     info("Notification Administration");
     navigationToolbar.goToAdminNotifications();

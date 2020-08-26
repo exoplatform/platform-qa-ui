@@ -315,7 +315,7 @@ public class SOCActivityEditTestIT extends Base {
     String newActivity = "newActivity" + getRandomNumber();
     String usertest = "usernamea" + getRandomString();
     String email1 = usertest + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
     String activity3 = "activity1" + getRandomNumber();
     String newactivity3 = "newactivity" + getRandomNumber();
     String newActivity4 = "newActivity" + getRandomNumber();
@@ -373,10 +373,10 @@ public class SOCActivityEditTestIT extends Base {
     String newActivity = "newActivity" + getRandomNumber();
     String usernametest = "usernametest" + getRandomString();
     String email = usernametest + "@gmail.com";
-    String password = "123456";
+    String password = "Aa123456";
     String user = "user" + getRandomString();
     String email1 = user + "@gmail.com";
-    String password1 = "123456";
+    String password1 = "Aa123456";
     info("Add new user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(usernametest, password, email, usernametest, usernametest);

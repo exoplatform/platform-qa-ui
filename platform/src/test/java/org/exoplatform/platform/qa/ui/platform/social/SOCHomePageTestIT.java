@@ -267,7 +267,7 @@ public class SOCHomePageTestIT extends Base {
     String comment1 = "Contact information has been updated.";
     String textDesfirst = "textDesfirst" + getRandomNumber();
     String username = "username" + getRandomString();
-    String password = "123456";
+    String password = "Aa123456";
     String email = username + "@test.com";
     String email1 = getRandomString() + "@test.com";
 
@@ -416,7 +416,7 @@ public class SOCHomePageTestIT extends Base {
     String username1 = "usernameb" + getRandomString();
     String email1 = username1 + "@gmail.com";
     String fullName1 = username1 + " " + username1;
-    String password = "123456";
+    String password = "Aa123456";
 
     info("Promote a member as manager");
     navigationToolbar.goToAddUser();

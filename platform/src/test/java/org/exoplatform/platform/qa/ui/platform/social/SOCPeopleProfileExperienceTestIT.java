@@ -66,7 +66,7 @@ public class SOCPeopleProfileExperienceTestIT extends Base {
     /* Create data test */
     String username1 = "" + getRandomString();
     String email1 = username1 + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
 
     info("Add user");
     navigationToolbar.goToAddUser();

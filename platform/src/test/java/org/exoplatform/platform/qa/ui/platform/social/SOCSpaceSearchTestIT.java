@@ -80,7 +80,7 @@ public class SOCSpaceSearchTestIT extends Base {
     String space1 = "1space" + getRandomNumber();
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@gmail.com";
-    String password = "123456";
+    String password = "Aa123456";
 
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);

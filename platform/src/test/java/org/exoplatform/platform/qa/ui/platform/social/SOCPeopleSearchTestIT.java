@@ -69,7 +69,7 @@ public class SOCPeopleSearchTestIT extends Base {
     String email2 = username2 + "@test.com";
     String username3 = "usernamec" + getRandomString();
     String email3 = username3 + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
 
     info("Add user");
     navigationToolbar.goToAddUser();

@@ -87,7 +87,7 @@ public class LeaveChatRoomTestIT extends Base {
   public void test01_CheckLeaveRoomButtonThenCheckUserLeaveSpaceRoomWhenLeavingSpace() {
 
     info("Create 4 new users");
-    String password = "123456";
+    String password = "Aa123456";
     String room1 = "room1" + getRandomNumber();
     String room2 = "room2" + getRandomNumber();
     ArrayList<String> arrayUsers = new ArrayList<String>();
@@ -177,7 +177,7 @@ public class LeaveChatRoomTestIT extends Base {
     String room2 = "room" + getRandomNumber();
     String room3 = "room" + getRandomNumber();
     String usernamec = "usernamec" + getRandomNumber();
-    String password = "123456";
+    String password = "Aa123456";
     String emailc = "emailc" + getRandomNumber() + "@test.com";
     String FirstnameC = "FirstNameC" + getRandomString();
     String LastNameC = "LastNameC" + getRandomString();
@@ -297,7 +297,7 @@ public class LeaveChatRoomTestIT extends Base {
     String room = "room" + getRandomNumber();
     String message = "message" + getRandomNumber();
     String usernamea = "username" + getRandomNumber();
-    String password = "123456";
+    String password = "Aa123456";
     String emaila = "emaila" + getRandomNumber() + "@test.com";
     String FirstnameA = "FirstNameA" + getRandomString();
     String LastNameA = "LastNameA" + getRandomString();

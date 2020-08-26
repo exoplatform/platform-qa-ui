@@ -76,7 +76,7 @@ public class SOCNotificationsUserSettingsTestIT extends Base {
     String email2 = username2 + "@test.com";
     String username3 = "usernamec" + getRandomString();
     String email3 = username3 + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
     info("Add user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);

@@ -77,7 +77,7 @@ public class SOCPeopleTestIT extends Base {
     String email2 = username2 + "@test.com";
     String username3 = "usernamec" + getRandomString();
     String email3 = username3 + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
     String comment="You are connected with "+username1+" "+username1;
     String username4 = "usernamed" + getRandomString();
     String email4 = username4 + "@test.com";

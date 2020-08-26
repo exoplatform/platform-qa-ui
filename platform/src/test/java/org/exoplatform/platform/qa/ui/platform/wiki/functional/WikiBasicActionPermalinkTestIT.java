@@ -128,9 +128,9 @@ public class WikiBasicActionPermalinkTestIT extends Base {
     public void test03_RestrictButtonForGrantedUserThenForGrantedUserWithoutEditPagePermissionThenForNoGrantedUser() {
 
         info("Create new users");
-        String password0 = "345678";
-        String password = "123456";
-        String password2 = "456789";
+        String password0 = "Aa345678";
+        String password = "Aa123456";
+        String password2 = "Aa456789";
         ArrayList<String> arrayUsers = new ArrayList<String>();
         ArrayList<String> arrayUsers2 = new ArrayList<String>();
         ArrayList<String> arrayUsers0 = new ArrayList<String>();
@@ -279,7 +279,7 @@ public class WikiBasicActionPermalinkTestIT extends Base {
     public void test06_AccessByAnUserWhoIsNotMemberOfTheSpaceThenToPagePermissionThenToSpaceSettingByAPageCreator() {
         info("Access to page by an user who is not member of the space");
         info("Create 1 new users");
-        String password = "123456";
+        String password = "Aa123456";
         ArrayList<String> arrayUsers = new ArrayList<String>();
         navigationToolbar.goToAddUser();
         arrayUsers = userAddManagement.addUsers(1, password);
@@ -402,8 +402,8 @@ public class WikiBasicActionPermalinkTestIT extends Base {
     public void test07_DisplayAncestorRestrictedPageInLeftTreePanelThenDescendantRestrictedPageInLeftTreePanel() {
         info("Display ancestor Restricted page in left tree panel");
         info("Create 1 new users");
-        String password = "123456";
-        String password2 = "456789";
+        String password = "Aa123456";
+        String password2 = "Aa456789";
         ArrayList<String> arrayUsers = new ArrayList<String>();
         ArrayList<String> arrayUsers1 = new ArrayList<String>();
         navigationToolbar.goToAddUser();

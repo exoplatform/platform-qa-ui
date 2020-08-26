@@ -112,7 +112,7 @@ public class SOCNotificationsEditActivityTestIT extends Base {
 
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
     String activity1 = "activity1" + getRandomNumber();
     String newactivity = "newactivity" + getRandomString();
     String comment1 = "comment1" + getRandomString();
@@ -169,7 +169,7 @@ public class SOCNotificationsEditActivityTestIT extends Base {
 
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
     String activity1 = "activity1" + getRandomNumber();
     String activity2 = "activity2" + getRandomNumber();
     String newactivity = "newactivity" + getRandomString();

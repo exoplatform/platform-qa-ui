@@ -93,7 +93,7 @@ public class SOCNotificationIntranetSpaceInvitationTestIT extends Base {
     String email1 = username1 + "@gmail.com";
     String username2 = "usernameb" + getRandomString();
     String email2 = username2 + "@gmail.com";
-    String password = "123456";
+    String password = "Aa123456";
 
     info("CheckRefuseInvitation");
     homePagePlatform.goToPeople();
@@ -131,7 +131,7 @@ public class SOCNotificationIntranetSpaceInvitationTestIT extends Base {
     refresh();
     spaceSettingManagement.inviteUser(username1, false, "");
     info("User A login");
-    manageLogInOut.signIn(username1, "123456");
+    manageLogInOut.signIn(username1, "Aa123456");
     String status = "You're invited to join";
     intranetNotification.goToAllNotification();
     intranetNotification.checkStatusSpace(status, spaceName);

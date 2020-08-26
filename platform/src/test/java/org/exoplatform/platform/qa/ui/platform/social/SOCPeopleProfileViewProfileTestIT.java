@@ -86,7 +86,7 @@ public class SOCPeopleProfileViewProfileTestIT extends Base {
 
     String email = "email" + getRandomString() + "@test.com";
     String actContactInfo = "Contact information has been updated.";
-    String password = "123456";
+    String password = "Aa123456";
 
     info("Add user");
     navigationToolbar.goToAddUser();

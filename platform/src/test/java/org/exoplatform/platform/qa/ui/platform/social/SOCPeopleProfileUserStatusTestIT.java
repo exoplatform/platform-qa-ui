@@ -88,7 +88,7 @@ public class SOCPeopleProfileUserStatusTestIT extends Base {
     String greenColor = "rgba(70, 165, 70, 1)";
     String username2 = "usernameb" + getRandomString();
     String email2 = username2 + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
     String statusOnline = "Offline";
     // Create data test
     String username1 = "usernamea" + getRandomString();
@@ -161,7 +161,7 @@ public class SOCPeopleProfileUserStatusTestIT extends Base {
     String email1 = username1 + "@test.com";
     String username2 = "usernameb" + getRandomString();
     String email2 = username2 + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
     String statusOnline = "Offline";
 
     info("Add user");

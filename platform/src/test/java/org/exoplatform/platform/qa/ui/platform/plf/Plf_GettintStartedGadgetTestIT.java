@@ -74,7 +74,7 @@ public class Plf_GettintStartedGadgetTestIT extends Base {
     String spacename = "spacename" + getRandomNumber();
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
 
     info("Perform an action on Getting started Gadget");
 

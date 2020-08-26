@@ -591,10 +591,10 @@ public class CalendarLocator {
                                                                      "Would you like to delete only this event, all events in the series, or this and all following events in the series?";
 
   public static final By              ELEMENT_CONFIRM_DELETE_RECURRING_EVENT                      =
-                                                                                  By.xpath("(//*[@class='media-body'])[2]");
+                                                                                  By.xpath("(//*[@id='confirm']//*[@class='media-body'])[2]");
 
   public static final By              ELEMENT_CONFIRM_EDIT_RECURRING_EVENT                      =
-                                                                                    By.xpath("//*[@class='media-body']");
+                                                                                    By.xpath("//*[@id='confirm']//*[@class='media-body']");
 
   /* Delete recurring event */
   public static final By              ELEMENT_CONFIRM_EDIT_BUTTON                                      =

@@ -322,7 +322,7 @@ public class SOCCommentEditTestIT extends Base {
     String activity2 = "activity1" + getRandomNumber();
     String comment2 = "comment" + getRandomNumber();
     String newcomment = "newacomment" + getRandomNumber();
-    String password = "123456";
+    String password = "Aa123456";
     String comment3 = "comment1" + getRandomNumber();
     String newComment3 = "newComment" + getRandomNumber();
     String activity3 = "activity1" + getRandomNumber();
@@ -379,10 +379,10 @@ public class SOCCommentEditTestIT extends Base {
     String activity1 = "activity1" + getRandomNumber();
     String usernametest = "usernametest" + getRandomString();
     String email = usernametest + "@gmail.com";
-    String password = "123456";
+    String password = "Aa123456";
     String user = "user" + getRandomString();
     String email1 = user + "@gmail.com";
-    String password1 = "123456";
+    String password1 = "Aa123456";
     String comment2 = "comment1" + getRandomNumber();
     String newComment2 = "newComment" + getRandomNumber();
     String activity2 = "activity1" + getRandomNumber();

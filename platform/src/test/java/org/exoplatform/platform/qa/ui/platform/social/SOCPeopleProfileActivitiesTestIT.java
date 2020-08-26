@@ -81,7 +81,7 @@ public class SOCPeopleProfileActivitiesTestIT extends Base {
     String aboutMe = "" + getRandomNumber();
     String organization = "organization" + getRandomString();
     String jobTitle = "jobTitle" + getRandomString();
-    String password = "123456";
+    String password = "Aa123456";
     String actContactInfo = "Contact information has been updated.";
 
     /* Create data test */

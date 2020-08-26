@@ -151,7 +151,7 @@ public  void test04_CreateNewAccountInPrivateMode() {
     *Expected Outcome:
         - Login successfully and new user display with username or display name*/
   String username= "username"+ getRandomNumber();
-  String pass= "123456";
+  String pass= "Aa123456";
   String email = "email"+ getRandomNumber()+"@gmail.com";
   String firstname= "firstname";
   String lastname= "lastname";

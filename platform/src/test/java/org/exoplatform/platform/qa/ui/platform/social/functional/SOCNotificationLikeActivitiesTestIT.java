@@ -111,7 +111,7 @@ public class SOCNotificationLikeActivitiesTestIT extends Base {
     String content = "content" + getRandomNumber();
     String name1 = "name1" + getRandomNumber();
     String content1 = "content1" + getRandomNumber();
-    String password = "123456";
+    String password = "Aa123456";
 
     info("Add new user");
     navigationToolbar.goToAddUser();
@@ -382,7 +382,7 @@ public class SOCNotificationLikeActivitiesTestIT extends Base {
     String email1 = username1 + "@gmail.com";
     String username2 = "usernameb" + getRandomString();
     String email2 = username2 + "@gmail.com";
-    String password = "123456";
+    String password = "Aa123456";
     info("Add new user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);
@@ -471,7 +471,7 @@ public class SOCNotificationLikeActivitiesTestIT extends Base {
 
     String username3 = "usernamec" + getRandomString();
     String email3 = username3 + "@gmail.com";
-    String password = "123456";
+    String password = "Aa123456";
     info("Add new user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);

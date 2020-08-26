@@ -97,7 +97,7 @@ public class WikiSpaceSwitcherTestIT extends Base {
   public void test01_ChangingWikiShouldDisplayTheRootPageOfTheTargetedWikiThenChangingFromOneSpaceWikiToAnotherShouldChangeTheCurrentlyBrowsedSpace() {
     info("Create 2 new users");
     ArrayList<String> arrayUsers;
-    String password = "123456";
+    String password = "Aa123456";
     navigationToolbar.goToAddUser();
     arrayUsers = userAddManagement.addUsers(1, password);
     info("Login with user 1");
@@ -191,7 +191,7 @@ public class WikiSpaceSwitcherTestIT extends Base {
   public void test_SwitchingToMyWikiFromCompanyWikiShouldDisplayUserNavigationThenSwitchingToASpaceWikiFromCompanyWikiShouldDisplaySpaceNavigationThenSelectingTheSameWikiShouldRedirectToTheWikisHome() {
     info("Switching to My Wiki from Company Wiki should display User Navigation");
     info("Create 2 new users");
-    String password = "123456";
+    String password = "Aa123456";
     ArrayList<String> arrayUsers;
     navigationToolbar.goToAddUser();
     arrayUsers = userAddManagement.addUsers(1, password);

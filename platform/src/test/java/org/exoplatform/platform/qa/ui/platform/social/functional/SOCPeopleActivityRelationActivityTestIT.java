@@ -52,7 +52,7 @@ public class SOCPeopleActivityRelationActivityTestIT extends Base {
     String email1 = username1 + "@gmail.com";
     String username2 = "usernameb" + getRandomString();
     String email2 = username2 + "@gmail.com";
-    String password = "123456";
+    String password = "Aa123456";
     info("Add new user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);

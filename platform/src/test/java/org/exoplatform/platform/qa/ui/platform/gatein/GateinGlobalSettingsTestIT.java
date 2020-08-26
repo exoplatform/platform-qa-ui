@@ -78,9 +78,9 @@ public class GateinGlobalSettingsTestIT extends Base {
     @Test
     public void test01_ChangePassword() {
         String username = "username" + getRandomNumber();
-        String password = "123456";
+        String password = "Aa123456";
         String email = "email" + getRandomNumber() + "@gmail.com";
-        String newpass = "12345678";
+        String newpass = "Aa12345678";
         String firstname = "firstname";
         String lastname = "lastname";
 
@@ -115,7 +115,7 @@ public class GateinGlobalSettingsTestIT extends Base {
     @Test
     public void test02_ChangeUserProfile() {
         String username = "username" + getRandomNumber();
-        String password = "123456" + getRandomNumber();
+        String password = "Aa123456" + getRandomNumber();
         String email = "email" + getRandomNumber() + "@gmail.com";
 
         String FirstName = "FirstName";
@@ -157,7 +157,7 @@ public class GateinGlobalSettingsTestIT extends Base {
     @Test
     public void test03_ChangeLanguageForAnotherUser() {
         String username = "username" + getRandomNumber();
-        String password = "123456" + getRandomNumber();
+        String password = "Aa123456" + getRandomNumber();
         String email = "email" + getRandomNumber() + "@gmail.com";
         String FirstName = "FirstName";
         String LastName = "LastName";
@@ -209,7 +209,7 @@ public class GateinGlobalSettingsTestIT extends Base {
         String language1 = "French";
         String language2 = "Anglais";
         String username = "username" + getRandomNumber();
-        String password = "123456" + getRandomNumber();
+        String password = "Aa123456" + getRandomNumber();
         String email = "email" + getRandomNumber() + "@gmail.com";
         String FirstName = "FirstName";
         String LastName = "LastName";

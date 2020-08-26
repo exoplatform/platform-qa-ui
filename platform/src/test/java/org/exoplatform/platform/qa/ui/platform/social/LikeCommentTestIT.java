@@ -285,8 +285,6 @@ public class LikeCommentTestIT extends Base {
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space, space);
     $(byXpath("//*[@class='uidocactivitycomposer']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    ELEMENT_ACTIVITY_COMPOSER_FILE_TAB.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    refresh();
     ELEMENT_CONTAINER_DOCUMENT.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     ELEMENT_INPUT_DOCUMENT.uploadFromClasspath("eXo-Platform.png");
     ELEMENT_BAR_PROGRESS.waitUntil(Condition.disappears, Configuration.openBrowserTimeoutMs);
@@ -435,7 +433,7 @@ public class LikeCommentTestIT extends Base {
     String email10 = username10 + "@gmail.com";
     String username11 = "l" + getRandomString();
     String email11 = username11 + "@gmail.com";
-    String password = "123456";
+    String password = "Aa123456";
     info("Add new user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);

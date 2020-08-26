@@ -51,8 +51,8 @@ public class SpaceSettingManagement {
     homePagePlatform.refreshUntil($(ELEMENT_SPACE_WIKI_TAB),Condition.visible,1000);
     if($(ELEMENT_SPACE_MENU_MORE).is(Condition.visible))
       $(ELEMENT_SPACE_MENU_MORE).click();
-    $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB).waitUntil(Condition.visible,Configuration.timeout).click();
-    $(byClassName("uiGrayLightBox")).waitUntil(Condition.visible, Configuration.timeout);
+    $(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byClassName("uiGrayLightBox")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
   }
 
   public void goToMemberTabInSpaceSettingTab() {
@@ -74,7 +74,7 @@ public class SpaceSettingManagement {
     ELEMENT_INPUT_INVITE_USER.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_INPUT_INVITE_USER.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(userName);
     info("click on Invite button");
-    $(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[1]/button")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//*[@id=\"UIUserInvitation\"]/div[2]/div[2]/button")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     if (verify) {
       info("Verify that user is shown in invitation table");
       if (fullName != "" && fullName != null)

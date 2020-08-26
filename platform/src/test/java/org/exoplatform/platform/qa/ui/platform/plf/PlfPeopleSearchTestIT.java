@@ -71,12 +71,12 @@ public class PlfPeopleSearchTestIT extends Base {
         String dStart = getDate(-7, "MM/dd/yyyy");
         String dEnd = getDate(-1, "MM/dd/yyyy");
         String username = "username" + getRandomNumber();
-        String password = "password" + getRandomNumber();
+        String password = "Password" + getRandomNumber();
         String firstName = "user-name" + getRandomString();
         String lastName = getRandomString();
         String email = firstName + getRandomNumber() + "@test.com";
         String username2 = "username" + getRandomNumber();
-        String password2 = "password" + getRandomNumber();
+        String password2 = "Password" + getRandomNumber();
         String firstName2 = "éric" + getRandomString();
         String lastName2 = getRandomString();
         String email2 = firstName + getRandomNumber() + "@test.com";

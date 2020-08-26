@@ -82,7 +82,7 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     String email1 = username1 + "@gmail.com";
     String username2 = "usernameab" + getRandomString();
     String email2 = username2 + "@gmail.com";
-    String password = "123456";
+    String password = "Aa123456";
     String comment2 = "comment" + getRandomNumber();
     String link = "http://www.google.fr";
     info("Add link without text");
@@ -203,7 +203,7 @@ public class SocialBasicTestsWithUserTestIT extends Base {
     String email1 = username1 + "@gmail.com";
     String username2 = "usernameb" + getRandomString();
     String email2 = username2 + "@gmail.com";
-    String password = "123456";
+    String password = "Aa123456";
     String comment = "comment" + getRandomNumber();
     String activity1 = "activity1" + getRandomNumber();
     info("Create a space");

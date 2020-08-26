@@ -273,7 +273,7 @@ public class ManageSpacesTestIT extends Base {
     String spaceDesb = "descriptionb" + getRandomNumber();
     String username1 = "usernamea" + getRandomString();
     String email1 = username1 + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
 
     info("Add new user");
     navigationToolbar.goToAddUser();

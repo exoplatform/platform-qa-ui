@@ -87,7 +87,7 @@ public class SOCSpaceMemberManagementTestIT extends Base {
     String email4 = username4 + "@test.com";
     String username5 = "usernamee" + getRandomString();
     String email5 = username5 + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
 
     info("Add user");
     navigationToolbar.goToAddUser();

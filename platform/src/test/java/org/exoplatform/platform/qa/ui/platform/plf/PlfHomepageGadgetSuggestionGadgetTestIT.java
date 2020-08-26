@@ -177,7 +177,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     String email = username1 + "@test.com";
     String email3 = username3 + "@test.com";
     String email4 = username4 + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
     info("Check display of Suggestions Gadget");
 
     navigationToolbar.goToAddUser();
@@ -266,7 +266,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     String username2 = "usernameb" + getRandomString();
     String email2 = username2 + "@test.com";
     String email = username1 + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
     space1 = "spaceA" + getRandomNumber();
     space2 = "spaceB" + getRandomNumber();
     space3 = "spaceC" + getRandomNumber();
@@ -281,6 +281,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     spaceManagement.addNewSpaceSimple(space1, space1);
     spaceManagement.goToMemberTab();
     spaceSettingManagement.inviteUser(username1, false, "");
+    executeJavaScript("window.scrollBy(0,-500)");
     spaceSettingManagement.inviteUser(username2, false, "");
     homePagePlatform.goToMySpaces();
     spaceManagement.addNewSpaceSimple(space2, space2);
@@ -375,7 +376,7 @@ public class PlfHomepageGadgetSuggestionGadgetTestIT extends Base {
     String email2 = username2 + "@test.com";
     String username3 = "usernamea" + getRandomString();
     String email3 = username3 + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
 
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email, username1, username1);

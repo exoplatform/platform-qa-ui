@@ -79,7 +79,7 @@ public class MiniChatTestIT extends Base {
   @Tag("cab")
   public void test01_OpenMiniChatFromUserPopUpThenFromUserProfileInConnectionThenFromHomeActivityStreamThenChatTabUpdateThenFromSpace() {
     String username = "username" + getRandomNumber();
-    String password = "123456";
+    String password = "Aa123456";
     String email = "emaila" + getRandomNumber() + "@test.com";
     String Firstname = "FirstName" + getRandomString();
     String LastName = "LastName" + getRandomString();
@@ -221,7 +221,7 @@ public class MiniChatTestIT extends Base {
   public void test02_ChatWithMemberOfRoomUsingUserPopOver() {
     String room = "room" + getRandomNumber();
     String usernamea = "username" + getRandomNumber();
-    String password = "123456";
+    String password = "Aa123456";
     String emaila = "emaila" + getRandomNumber() + "@test.com";
     String FirstnameA = "FirstName" + getRandomString();
     String LastNameA = "LastName" + getRandomString();

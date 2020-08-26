@@ -103,7 +103,7 @@ public class SOCNotificationIntranetSpaceJoinRequestTestIT extends Base {
     String email3 = username3 + "@gmail.com";
     String username4 = "usernamed" + getRandomString();
     String email4 = username4 + "@gmail.com";
-    String password = "123456";
+    String password = "Aa123456";
     info("Add new user");
     navigationToolbar.goToAddUser();
     addUsers.addUser(username1, password, email1, username1, username1);

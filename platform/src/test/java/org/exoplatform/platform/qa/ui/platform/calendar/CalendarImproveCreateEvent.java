@@ -213,7 +213,7 @@ public class CalendarImproveCreateEvent extends Base {
     String Firstname = "Firstname" + getRandomString();
     String Lastname = "Lastname" + getRandomString();
     String email1 = username + "@test.com";
-    String password = "123456";
+    String password = "Aa123456";
     navigationToolbar.goToAddUser();
     addUsers.addUser(username, password, email1, Firstname, Lastname);
     homePagePlatform.goToCalendarPage();

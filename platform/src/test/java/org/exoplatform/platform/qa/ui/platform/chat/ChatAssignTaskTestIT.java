@@ -70,7 +70,7 @@ public class ChatAssignTaskTestIT extends Base {
     String task = "task" + getRandomNumber();
     String room1 = "room" + getRandomNumber();
     String usernamea = "usernamea" + getRandomString();
-    String password = "123456";
+    String password = "Aa123456";
     String email = "email" + getRandomNumber() + "@test.com";
     String FirstName = "FirstName" + getRandomString();
     String LastName = "LastName" + getRandomString();
@@ -150,7 +150,7 @@ public class ChatAssignTaskTestIT extends Base {
     String room = "room" + getRandomNumber();
     String task = "task" + getRandomNumber();
     String usernamea = "usernamea" + getRandomString();
-    String password = "123456";
+    String password = "Aa123456";
     String email = "email" + getRandomNumber() + "@test.com";
     String FirstName = "FirstName" + getRandomString();
     String LastName = "LastName" + getRandomString();
