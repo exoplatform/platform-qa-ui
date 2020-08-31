@@ -97,6 +97,9 @@ public class WikiLocators {
     public static final By ELEMENT_WARNING_OK_BTN =
             By.xpath(".//*[@class='btn'][text()='OK']");
 
+    public static final By ELEMENT_WARNING_OK_BTN_TRIBE =
+          By.xpath(".//*[@class='btn'][text()='Valider']");
+
     public static final By ELEMENT_CONFIRM_POPUP_CONFIRM_BTN =
             By.xpath("//button[text()='Confirm']");
 
@@ -265,6 +268,12 @@ public class WikiLocators {
 
     public static final By ELEMENT_SEARCH_BROWSERS_WIKI_SETTINGS_DW =
           By.xpath(".//*[@class='dropdown-menu']//*[text()='Notebook Settings']");
+
+    public static final By ELEMENT_SEARCH_BROWSERS_DROPDOWN_TRIBE =
+          By.xpath("//*[@class='uiActionWithLabel']/..//*[text()='Options']");
+
+    public static final By ELEMENT_SEARCH_BROWSERS_WIKI_SETTINGS_TRIBE =
+          By.xpath(".//*[@class='dropdown-menu']//*[text()='Paramètres du bloc-notes']");
 
     public static final By ELEMENT_SEARCH_BROWSERS_MY_DRAFT =
             By.xpath(".//*[@class='dropdown-menu']//*[text()='My Drafts']");

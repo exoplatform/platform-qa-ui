@@ -17,6 +17,7 @@ import org.openqa.selenium.By;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_CONNECTION_DISONNECT_REFUSE_BTN_DW;
@@ -64,6 +65,7 @@ public class SOCPeopleConnectionsManagementTestDWIT extends BaseDW {
     navigationToolbar.goToAddUsersPageDW();
     addUsers.addUserTribe(username1, password, email1, username1, username1, "");
     addUsers.addUserTribe(username2, password, email2, username2, username2, "");
+    sleep(1000);
     addUsers.addUserTribe(username3, password, email3, username3, username3, "");
 
     manageLogInOut.signOutTribe();
@@ -234,6 +236,7 @@ public class SOCPeopleConnectionsManagementTestDWIT extends BaseDW {
     navigationToolbar.goToAddUsersPageDW();
     addUsers.addUserTribe(username1, password, email1, username1, username1, "");
     addUsers.addUserTribe(username2, password, email2, username2, username2, "");
+    sleep(2000);
     addUsers.addUserTribe(username3, password, email3, username3, username3, "");
     addUsers.addUserTribe(username4, password, email4, username4, username4, "");
     addUsers.addUserTribe(username5, password, email5, username5, username5, "");

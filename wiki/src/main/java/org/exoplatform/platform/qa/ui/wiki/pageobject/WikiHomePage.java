@@ -180,6 +180,16 @@ public class WikiHomePage {
         } while (!$(ELEMENT_WIKI_SETTING_ADD_MORE_TEMPALTE).exists());
     }
 
+    public void goToWikiSettingTribe() {
+        do{
+            info("Click on Browser drop down");
+            $(ELEMENT_SEARCH_BROWSERS_DROPDOWN_TRIBE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+            info("Select wiki settings label");
+            $(ELEMENT_SEARCH_BROWSERS_WIKI_SETTINGS_TRIBE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
+            testBase.getExoWebDriver().getWebDriver().navigate().refresh();
+        } while (!$(ELEMENT_WIKI_SETTING_ADD_MORE_TEMPALTE).exists());
+    }
+
     /**
      * Open permissions for the wiki
      */
@@ -218,6 +228,43 @@ public class WikiHomePage {
             if ($(ELEMENT_WARNING_OK_BTN).is(Condition.visible)) {
                 info("Click OK button");
                 $(ELEMENT_WARNING_OK_BTN).click();
+            }
+        } else {
+            if ($(ELEMENT_CONFIRM_POPUP_CANCEL_BTN).is(Condition.visible)) {
+                info("Click on Cancel button");
+                $(ELEMENT_CONFIRM_POPUP_CANCEL_BTN).click();
+            }
+
+            if ($(ELEMENT_CONFIRM_POPUP_NO_BTN).is(Condition.visible)) {
+                info("Click on No button");
+                $(ELEMENT_CONFIRM_POPUP_NO_BTN).click();
+            }
+
+        }
+    }
+
+    public void confirmWaringMessageTribe(Boolean isConfirm) {
+        if (isConfirm) {
+            if ($(ELEMENT_CONFIRM_POPUP_OK_BTN).is(Condition.visible)) {
+                info("Click on OK button");
+                $(ELEMENT_CONFIRM_POPUP_OK_BTN).waitUntil(Condition.visible,Configuration.timeout).click();
+            }
+            if ($(ELEMENT_CONFIRM_POPUP_CONFIRM_BTN).is(Condition.visible)) {
+
+                info("Click on Confirm button");
+                $(ELEMENT_CONFIRM_POPUP_CONFIRM_BTN).click();
+            }
+            if ($(ELEMENT_CONFIRM_POPUP_YES_BTN).is(Condition.visible)) {
+                info("Click on Yes button");
+                $(ELEMENT_CONFIRM_POPUP_YES_BTN).click();
+            }
+            if ($(ELEMENT_CONFIRM_POPUP_YES_BTN).is(Condition.visible)) {
+                info("Click on Yes button");
+                $(ELEMENT_CONFIRM_POPUP_YES_BTN).click();
+            }
+            if ($(ELEMENT_WARNING_OK_BTN_TRIBE).is(Condition.visible)) {
+                info("Click OK button");
+                $(ELEMENT_WARNING_OK_BTN_TRIBE).click();
             }
         } else {
             if ($(ELEMENT_CONFIRM_POPUP_CANCEL_BTN).is(Condition.visible)) {
