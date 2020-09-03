@@ -586,12 +586,12 @@ public class ChatManagementDWTestIt extends BaseDW {
     inviteUsers.add(username1);
     inviteUsers.add(username2);
     inviteUsers.add(username3);
-    navigationToolbar.openChatDrawerDW();
+    ELEMENT_TRIBE_MINICHAT_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     info("Check that Open Chat Page Button is displayed");
     ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
     info("Check that Discussions Filter Button is displayed");
     ELEMENT_CHAT_DISCUSSIONS_FILTER_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
-    navigationToolbar.goToChatPageDW();
+    ELEMENT_OPEN_CHAT_BUTTON_DW.waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     switchTo().window(1);
     roomManagement.addRoomTribe(room, username1, username2, username3);
     switchTo().window(1).close();
@@ -633,7 +633,6 @@ public class ChatManagementDWTestIt extends BaseDW {
     navigationToolbar.openChatDrawerDW();
     navigationToolbar.goToChatPageDW();
     switchTo().window(1);
-    roomManagement.deleteRomm(room);
     switchTo().window(1).close();
     switchToParentWindow();
     homePagePlatform.goToSnapshotPageTribeViaUrl();

@@ -737,6 +737,39 @@ public class WikiLocators {
     public static final String ELEMENT_EFFECT_UNDERLINE =
             "//ins[contains(text(),'$content')]";
 
+    public static final String ELEMENT_EFFECT_ITALIC_DW =
+          "//*[@id='UIViewContentDisplay' and contains(text(),'$content')]";
+
+    public static final String ELEMENT_EFFECT_BOLD_DW =
+            "//*[@id='UIViewContentDisplay' and contains(text(),'$content')]";
+
+    public static final String ELEMENT_EFFECT_BULLET_LIST_DW =
+            "//*[@id='UIViewContentDisplay' and contains(text(),'$content')]";
+
+    public static final String ELEMENT_EFFECT_NUMBER_LIST_DW =
+            "//*[@id='UIViewContentDisplay' and contains(text(),'$content')]";
+
+    public static final String ELEMENT_EFFECT_HEADING_1_DW =
+            "//*[@id='UIViewContentDisplay' and contains(text(),'$content')]";
+
+    public static final String ELEMENT_EFFECT_HEADING_3_DW =
+            "//*[@id='UIViewContentDisplay' and contains(text(),'$content')]";
+
+    public static final String ELEMENT_EFFECT_HEADING_2_DW =
+            "//*[@id='UIViewContentDisplay' and contains(text(),'$content')]";
+
+    public static final String ELEMENT_EFFECT_HEADING_5_DW =
+            "//*[@id='UIViewContentDisplay' and contains(text(),'$content')]";
+
+    public static final String ELEMENT_EFFECT_LINK_DW =
+            "//*[@id='UIViewContentDisplay' and contains(text(),'$content')]";
+
+    public static final String ELEMENT_EFFECT_STRIKE_DW =
+            "//*[@id='UIViewContentDisplay' and contains(text(),'$content')]";
+
+    public static final String ELEMENT_EFFECT_UNDERLINE_DW =
+            "//*[@id='UIViewContentDisplay' and contains(text(),'$content')]";
+
     // *============================================================= WIKI
     // PERMISSION =======================================================*\\
     public static final String ELEMENT_DELETE_PERMISSION =

@@ -161,6 +161,55 @@ public class WikiValidattions {
         }
     }
 
+    public void verifyEffectsPageContentDW(effectTypes type, String content) {
+        switch (type) {
+            case Bold:
+                info("Verify Bold effect");
+                $(byXpath(ELEMENT_EFFECT_BOLD_DW.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
+                break;
+            case Bullest_List:
+                info("Verify Bullest list");
+                $(byXpath(ELEMENT_EFFECT_BULLET_LIST_DW.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
+                break;
+            case Number_List:
+                info("Verify Number list");
+                $(byXpath(ELEMENT_EFFECT_NUMBER_LIST_DW.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
+                break;
+            case Heading1:
+                info("Verify Heading1 effect");
+                $(byXpath(ELEMENT_EFFECT_HEADING_1_DW.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
+                break;
+            case Heading3:
+                info("Verify Heading3 effect");
+                $(byXpath(ELEMENT_EFFECT_HEADING_3_DW.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
+                break;
+            case Heading2:
+                info("Verify Heading3 effect");
+                $(byXpath(ELEMENT_EFFECT_HEADING_2_DW.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
+                break;
+            case Heading5:
+                info("Verify Heading4 effect");
+                $(byXpath(ELEMENT_EFFECT_HEADING_5_DW.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
+                break;
+            case Italic:
+                info("Verify Italic effect");
+                $(byXpath(ELEMENT_EFFECT_ITALIC_DW.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
+                break;
+            case Link:
+                info("Verify Link effect");
+                $(byXpath(ELEMENT_EFFECT_LINK_DW.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
+                break;
+            case Strike:
+                info("Verify Strike effect");
+                $(byXpath(ELEMENT_EFFECT_STRIKE_DW.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
+                break;
+            case Underline:
+                info("Verify Underline effect");
+                $(byXpath(ELEMENT_EFFECT_UNDERLINE_DW.replace("$content", content))).waitUntil(Condition.visible, Configuration.timeout);
+                break;
+        }
+    }
+
     /**
      * Verify that Add page button isnot shown
      */

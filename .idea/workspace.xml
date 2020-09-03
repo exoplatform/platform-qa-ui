@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="fc4a0367-df54-4081-9eb5-c93d6d50856e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/SOCPeopleConnectionsManagementTestDWIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/SOCPeopleConnectionsManagementTestDWIT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ActivityStreamManagementDWTestIt.java" beforeDir="false" afterPath="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ActivityStreamManagementDWTestIt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ChatManagementDWTestIt.java" beforeDir="false" afterPath="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ChatManagementDWTestIt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/WikiTemplateDWIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/WikiTemplateDWIT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/wiki/WikiLocators.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/wiki/WikiLocators.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiHomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiHomePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiValidattions.java" beforeDir="false" afterPath="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiValidattions.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/forum/target/" />
     <ignored path="$PROJECT_DIR$/task/target/" />
@@ -89,12 +91,15 @@
     <favorites_list name="platform-qa-ui" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/WikiTemplateDWIT.java">
+        <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ChatManagementDWTestIt.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1290">
-              <caret line="113" column="28" selection-start-line="113" selection-start-column="28" selection-end-line="113" selection-end-column="28" />
+            <state relative-caret-position="401">
+              <caret line="129" column="83" lean-forward="true" selection-start-line="129" selection-start-column="83" selection-end-line="129" selection-end-column="83" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -173,7 +178,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/SOCHomePageDWTestIT.java" />
         <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/SOCSettingsEditTestDWIT.java" />
         <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/TaskManagementTestDWIT.java" />
         <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/WikiActivitiesInSpaceTestDWIT.java" />
@@ -202,10 +206,8 @@
         <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/chat/ChatLocator.java" />
         <option value="$PROJECT_DIR$/chat/src/main/java/org/exoplatform/platform/qa/ui/chat/pageobject/ChatManagement.java" />
         <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/exoTribe/exoTribeLocator.java" />
-        <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ChatManagementDWTestIt.java" />
         <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/ChatManagementTestIt.java" />
         <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/HomePagePlatform.java" />
-        <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ActivityStreamManagementDWTestIt.java" />
         <option value="$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/pageobject/TribeActivityStream.java" />
         <option value="$PROJECT_DIR$/exoTribe/pom.xml" />
         <option value="$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/pageobject/test.java" />
@@ -219,11 +221,14 @@
         <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/ActivityStream.java" />
         <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/SOCPeopleConnectionsManagementTestDWIT.java" />
         <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ggg.java" />
-        <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/WikiTemplateDWIT.java" />
         <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/hhh.java" />
         <option value="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiHomePage.java" />
-        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/wiki/WikiLocators.java" />
         <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/WikiTemplateDWIT.java" />
+        <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ChatManagementDWTestIt.java" />
+        <option value="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/wiki/WikiLocators.java" />
+        <option value="$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiValidattions.java" />
+        <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ActivityStreamManagementDWTestIt.java" />
+        <option value="$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/WikiTemplateDWIT.java" />
       </list>
     </option>
   </component>
@@ -245,7 +250,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="33" />
     <option name="y" value="57" />
     <option name="width" value="1136" />
@@ -317,12 +322,58 @@
             <path>
               <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
               <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="exoTribe" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="exoTribe" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+              <item name="wiki" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="platform-qa-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="platform" type="462c0819:PsiDirectoryNode" />
+              <item name="wiki" type="462c0819:PsiDirectoryNode" />
+              <item name="functional" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="platform-qa-ui" type="b2602c69:ProjectViewProjectNode" />
@@ -336,7 +387,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1598881384169" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1599137323242" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/opencsv-5.2.jar!/" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -376,7 +427,63 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.WikiTemplateDWIT">
+  <component name="RunManager" selected="JUnit.ChatManagementDWTestIt.test02_GoToAChatContact">
+    <configuration name="ActivityStreamManagementDWTestIt" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-exoTribe" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.digitalWorkplace.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+        </ENTRIES>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.digitalWorkplace" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.digitalWorkplace.ActivityStreamManagementDWTestIt" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-01.exoplatform.org/" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ActivityStreamManagementDWTestIt.test08_CommentAndReplyToAComment_ActivityByOtherUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-exoTribe" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.digitalWorkplace.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+        </ENTRIES>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.digitalWorkplace" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.digitalWorkplace.ActivityStreamManagementDWTestIt" />
+      <option name="METHOD_NAME" value="test08_CommentAndReplyToAComment_ActivityByOtherUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-01.exoplatform.org/" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CalendarBasicTestsInSpaceTestIT.test01_AddEventInSpace" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="platform-qa-ui-platform" />
       <extension name="coverage">
@@ -390,6 +497,62 @@
       <option name="METHOD_NAME" value="test01_AddEventInSpace" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://fqa01.exoplatform.org/" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ChatManagementDWTestIt" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-exoTribe" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.digitalWorkplace.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+        </ENTRIES>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.digitalWorkplace" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.digitalWorkplace.ChatManagementDWTestIt" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-01.exoplatform.org/" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ChatManagementDWTestIt.test02_GoToAChatContact" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="platform-qa-ui-exoTribe" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.digitalWorkplace.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+        </ENTRIES>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.digitalWorkplace" />
+      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.digitalWorkplace.ChatManagementDWTestIt" />
+      <option name="METHOD_NAME" value="test02_GoToAChatContact" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-01.exoplatform.org/" />
       <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -471,147 +634,7 @@
       <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.digitalWorkplace.WikiTemplateDWIT" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-02.exoplatform.org/" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="WikiTemplateDWIT.test01_CreateNewTemplate (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-exoTribe" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.exoTribe.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
-        </ENTRIES>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.exoTribe" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.exoTribe.WikiTemplateDWIT" />
-      <option name="METHOD_NAME" value="test01_CreateNewTemplate" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=https://community-preprod.exoplatform.com/" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="WikiTemplateDWIT.test01_CreateNewTemplate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-exoTribe" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.exoTribe.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
-        </ENTRIES>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.exoTribe" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.exoTribe.WikiTemplateDWIT" />
-      <option name="METHOD_NAME" value="test01_CreateNewTemplate" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=https://community-preprod.exoplatform.com/" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="WikiTemplateDWIT.test01_CreateNewTemplate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-exoTribe" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.digitalWorkplace.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
-        </ENTRIES>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.digitalWorkplace" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.digitalWorkplace.WikiTemplateDWIT" />
-      <option name="METHOD_NAME" value="test01_CreateNewTemplate" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-02.exoplatform.org/" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="WikiTemplateDWIT.test02_EditCreatedTemplate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-exoTribe" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.exoTribe.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
-        </ENTRIES>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.exoTribe" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.exoTribe.WikiTemplateDWIT" />
-      <option name="METHOD_NAME" value="test02_EditCreatedTemplate" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=https://community-preprod.exoplatform.com/" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="WikiTemplateDWIT.test03_SearchACreatedTemplate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="platform-qa-ui-exoTribe" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.exoplatform.platform.qa.ui.exoTribe.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
-        </ENTRIES>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.exoplatform.platform.qa.ui.exoTribe" />
-      <option name="MAIN_CLASS_NAME" value="org.exoplatform.platform.qa.ui.exoTribe.WikiTemplateDWIT" />
-      <option name="METHOD_NAME" value="test03_SearchACreatedTemplate" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=https://community-preprod.exoplatform.com/" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-01.exoplatform.org/" />
       <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -631,7 +654,7 @@
       <option name="MAIN_CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-02.exoplatform.org/" />
+      <option name="VM_PARAMETERS" value="-ea -Dwebdriver.chrome.driver=/usr/bin/chromedriver -Dselenide.baseUrl=http://qa-auto-60-01.exoplatform.org/" />
       <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -661,19 +684,19 @@
       <item itemvalue="JUnit.PlfUnifiedSearchTestIT.test13_checkUnifiedSearchNotWorkingWithFilesContainingDashInTheirTitles" />
       <item itemvalue="JUnit.PortletInSpaceHomePageTestIT.test04_CheckTheSpaceWhoIsOnlinePortlet" />
       <item itemvalue="JUnit.org.exoplatform.platform.qa.ui.chat.smoke in platform-qa-ui-chat" />
-      <item itemvalue="JUnit.WikiTemplateDWIT.test01_CreateNewTemplate" />
-      <item itemvalue="JUnit.WikiTemplateDWIT.test01_CreateNewTemplate (1)" />
-      <item itemvalue="JUnit.WikiTemplateDWIT.test02_EditCreatedTemplate" />
-      <item itemvalue="JUnit.WikiTemplateDWIT.test03_SearchACreatedTemplate" />
       <item itemvalue="JUnit.WikiTemplateDWIT" />
+      <item itemvalue="JUnit.ActivityStreamManagementDWTestIt" />
+      <item itemvalue="JUnit.ActivityStreamManagementDWTestIt.test08_CommentAndReplyToAComment_ActivityByOtherUser" />
+      <item itemvalue="JUnit.ChatManagementDWTestIt" />
+      <item itemvalue="JUnit.ChatManagementDWTestIt.test02_GoToAChatContact" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ChatManagementDWTestIt.test02_GoToAChatContact" />
+        <item itemvalue="JUnit.ChatManagementDWTestIt" />
+        <item itemvalue="JUnit.ActivityStreamManagementDWTestIt.test08_CommentAndReplyToAComment_ActivityByOtherUser" />
+        <item itemvalue="JUnit.ActivityStreamManagementDWTestIt" />
         <item itemvalue="JUnit.WikiTemplateDWIT" />
-        <item itemvalue="JUnit.WikiTemplateDWIT.test03_SearchACreatedTemplate" />
-        <item itemvalue="JUnit.WikiTemplateDWIT.test02_EditCreatedTemplate" />
-        <item itemvalue="JUnit.WikiTemplateDWIT.test01_CreateNewTemplate (1)" />
-        <item itemvalue="JUnit.WikiTemplateDWIT.test01_CreateNewTemplate" />
       </list>
     </recent_temporary>
   </component>
@@ -691,35 +714,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="WikiTemplateDWIT_test01_CreateNewTemplate - 2020.08.31 at 01h 18m 54s.xml">
-      <configuration name="WikiTemplateDWIT.test01_CreateNewTemplate" configurationId="JUnit" />
+    <history-entry file="WikiTemplateDWIT_test08_CreateNewTemplateWhenUsingStrikeEffectContent - 2020.09.03 at 12h 19m 56s.xml">
+      <configuration name="WikiTemplateDWIT.test08_CreateNewTemplateWhenUsingStrikeEffectContent" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="WikiTemplateDWIT_test01_CreateNewTemplate - 2020.08.31 at 01h 21m 27s.xml">
-      <configuration name="WikiTemplateDWIT.test01_CreateNewTemplate" configurationId="JUnit" />
+    <history-entry file="WikiTemplateDWIT_test09_CreateNewTemplateWhenUsingUnderlineEffectContent - 2020.09.03 at 12h 22m 00s.xml">
+      <configuration name="WikiTemplateDWIT.test09_CreateNewTemplateWhenUsingUnderlineEffectContent" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="WikiTemplateDWIT_test01_CreateNewTemplate_(1) - 2020.08.31 at 01h 23m 48s.xml">
-      <configuration name="WikiTemplateDWIT.test01_CreateNewTemplate (1)" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="WikiTemplateDWIT_test01_CreateNewTemplate_(1) - 2020.08.31 at 01h 25m 30s.xml">
-      <configuration name="WikiTemplateDWIT.test01_CreateNewTemplate (1)" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="WikiTemplateDWIT_test01_CreateNewTemplate_(1) - 2020.08.31 at 01h 27m 10s.xml">
-      <configuration name="WikiTemplateDWIT.test01_CreateNewTemplate (1)" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="WikiTemplateDWIT_test01_CreateNewTemplate_(1) - 2020.08.31 at 01h 28m 32s.xml">
-      <configuration name="WikiTemplateDWIT.test01_CreateNewTemplate (1)" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="WikiTemplateDWIT_test02_EditCreatedTemplate - 2020.08.31 at 01h 30m 57s.xml">
-      <configuration name="WikiTemplateDWIT.test02_EditCreatedTemplate" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="WikiTemplateDWIT_test03_SearchACreatedTemplate - 2020.08.31 at 01h 33m 06s.xml">
-      <configuration name="WikiTemplateDWIT.test03_SearchACreatedTemplate" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="WikiTemplateDWIT - 2020.08.31 at 01h 38m 27s.xml">
+    <history-entry file="WikiTemplateDWIT - 2020.09.03 at 12h 29m 58s.xml">
       <configuration name="WikiTemplateDWIT" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="WikiTemplateDWIT - 2020.08.31 at 01h 41m 01s.xml">
-      <configuration name="WikiTemplateDWIT" configurationId="JUnit" />
+    <history-entry file="ActivityStreamManagementDWTestIt - 2020.09.03 at 13h 23m 10s.xml">
+      <configuration name="ActivityStreamManagementDWTestIt" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ActivityStreamManagementDWTestIt_test08_CommentAndReplyToAComment_ActivityByOtherUser - 2020.09.03 at 13h 31m 49s.xml">
+      <configuration name="ActivityStreamManagementDWTestIt.test08_CommentAndReplyToAComment_ActivityByOtherUser" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ActivityStreamManagementDWTestIt_test08_CommentAndReplyToAComment_ActivityByOtherUser - 2020.09.03 at 13h 48m 56s.xml">
+      <configuration name="ActivityStreamManagementDWTestIt.test08_CommentAndReplyToAComment_ActivityByOtherUser" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ActivityStreamManagementDWTestIt_test08_CommentAndReplyToAComment_ActivityByOtherUser - 2020.09.03 at 13h 57m 50s.xml">
+      <configuration name="ActivityStreamManagementDWTestIt.test08_CommentAndReplyToAComment_ActivityByOtherUser" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ChatManagementDWTestIt - 2020.09.03 at 14h 17m 20s.xml">
+      <configuration name="ChatManagementDWTestIt" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ChatManagementDWTestIt_test02_GoToAChatContact - 2020.09.03 at 14h 31m 54s.xml">
+      <configuration name="ChatManagementDWTestIt.test02_GoToAChatContact" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ChatManagementDWTestIt_test02_GoToAChatContact - 2020.09.03 at 14h 34m 58s.xml">
+      <configuration name="ChatManagementDWTestIt.test02_GoToAChatContact" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -732,10 +755,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1533" height="875" extended-state="7" />
+    <frame x="67" y="25" width="1533" height="875" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" visible="true" weight="0.20780094" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" weight="0.25689307" />
       <window_info id="Structure" order="1" sideWeight="0.22285715" side_tool="true" weight="0.24815063" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -746,10 +769,10 @@
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49966374" weight="0.31903484" />
       <window_info anchor="bottom" id="Cvs" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="3" weight="0.4" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" sideWeight="0.732347" visible="true" weight="0.347185" />
-      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.7067922" weight="0.41152814" />
+      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.732347" weight="0.45710456" />
+      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.7067922" weight="0.45174262" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.58042896" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7868191" weight="0.37935656" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7868191" weight="0.4155496" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.267653" side_tool="true" weight="0.5241287" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49966374" weight="0.4530831" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49024883" weight="0.4075067" />
@@ -769,7 +792,7 @@
       <window_info anchor="right" id="Maven" order="8" sideWeight="0.7607527" weight="0.17148621" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77629066" visible="true" weight="0.123066574" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.77629066" visible="true" weight="0.25689307" />
       <window_info id="Structure" order="1" sideWeight="0.22285715" side_tool="true" weight="0.24815063" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -777,13 +800,13 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" sideWeight="0.24913494" side_tool="true" weight="0.16812374" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49966374" weight="0.6246649" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49966374" weight="0.31903484" />
       <window_info anchor="bottom" id="Cvs" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.732347" weight="0.347185" />
-      <window_info active="true" anchor="bottom" id="Debug" order="5" sideWeight="0.7067922" visible="true" weight="0.41152814" />
+      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.732347" weight="0.45710456" />
+      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.7067922" visible="true" weight="0.45174262" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.58042896" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7868191" weight="0.37935656" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7868191" weight="0.4155496" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.267653" side_tool="true" weight="0.5241287" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49966374" weight="0.4530831" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49024883" weight="0.4075067" />
@@ -1026,7 +1049,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiValidattions.java</url>
-          <line>346</line>
+          <line>395</line>
           <properties />
           <option name="timeStamp" value="3780" />
         </line-breakpoint>
@@ -1800,19 +1823,19 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ChatManagementDWTestIt.java</url>
-          <line>770</line>
+          <line>769</line>
           <properties />
           <option name="timeStamp" value="5119" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ChatManagementDWTestIt.java</url>
-          <line>879</line>
+          <line>878</line>
           <properties />
           <option name="timeStamp" value="5122" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ChatManagementDWTestIt.java</url>
-          <line>894</line>
+          <line>893</line>
           <properties />
           <option name="timeStamp" value="5123" />
         </line-breakpoint>
@@ -1896,7 +1919,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ChatManagementDWTestIt.java</url>
-          <line>1181</line>
+          <line>1180</line>
           <properties />
           <option name="timeStamp" value="5152" />
         </line-breakpoint>
@@ -1908,13 +1931,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ActivityStreamManagementDWTestIt.java</url>
-          <line>115</line>
+          <line>116</line>
           <properties />
           <option name="timeStamp" value="5158" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ActivityStreamManagementDWTestIt.java</url>
-          <line>88</line>
+          <line>89</line>
           <properties />
           <option name="timeStamp" value="5159" />
         </line-breakpoint>
@@ -1962,31 +1985,31 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ActivityStreamManagementDWTestIt.java</url>
-          <line>146</line>
+          <line>147</line>
           <properties />
           <option name="timeStamp" value="5175" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ActivityStreamManagementDWTestIt.java</url>
-          <line>188</line>
+          <line>189</line>
           <properties />
           <option name="timeStamp" value="5177" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ActivityStreamManagementDWTestIt.java</url>
-          <line>226</line>
+          <line>227</line>
           <properties />
           <option name="timeStamp" value="5178" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ActivityStreamManagementDWTestIt.java</url>
-          <line>300</line>
+          <line>301</line>
           <properties />
           <option name="timeStamp" value="5180" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ActivityStreamManagementDWTestIt.java</url>
-          <line>432</line>
+          <line>433</line>
           <properties />
           <option name="timeStamp" value="5182" />
         </line-breakpoint>
@@ -2076,27 +2099,21 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ActivityStreamManagementDWTestIt.java</url>
-          <line>265</line>
+          <line>266</line>
           <properties />
           <option name="timeStamp" value="5233" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ActivityStreamManagementDWTestIt.java</url>
-          <line>173</line>
+          <line>174</line>
           <properties />
           <option name="timeStamp" value="5234" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ActivityStreamManagementDWTestIt.java</url>
-          <line>419</line>
+          <line>420</line>
           <properties />
           <option name="timeStamp" value="5235" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ActivityStreamManagementDWTestIt.java</url>
-          <line>397</line>
-          <properties />
-          <option name="timeStamp" value="5236" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ChatManagementDWTestIt.java</url>
@@ -2112,25 +2129,25 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ChatManagementDWTestIt.java</url>
-          <line>1070</line>
+          <line>1069</line>
           <properties />
           <option name="timeStamp" value="5239" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ChatManagementDWTestIt.java</url>
-          <line>943</line>
+          <line>942</line>
           <properties />
           <option name="timeStamp" value="5240" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ChatManagementDWTestIt.java</url>
-          <line>1170</line>
+          <line>1169</line>
           <properties />
           <option name="timeStamp" value="5241" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ChatManagementDWTestIt.java</url>
-          <line>1036</line>
+          <line>1035</line>
           <properties />
           <option name="timeStamp" value="5242" />
         </line-breakpoint>
@@ -2139,12 +2156,6 @@
           <line>197</line>
           <properties />
           <option name="timeStamp" value="5244" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ActivityStreamManagementDWTestIt.java</url>
-          <line>386</line>
-          <properties />
-          <option name="timeStamp" value="5245" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/WikiBasicActionOtherActionsTestDWIT.java</url>
@@ -2184,9 +2195,15 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/WikiTemplateDWIT.java</url>
-          <line>112</line>
+          <line>109</line>
           <properties />
           <option name="timeStamp" value="5344" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ActivityStreamManagementDWTestIt.java</url>
+          <line>139</line>
+          <properties />
+          <option name="timeStamp" value="5345" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -2297,6 +2314,31 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
+        <expression-string>assertEquals($(byId(&quot;UIViewContentDisplay&quot;)).getCssValue(&quot;font-size&quot;), &quot;36px&quot;);</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>assertEquals($(byId(&quot;H&quot; + value6)).getCssValue(&quot;font-size&quot;), &quot;36px&quot;);</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>$(byId(&quot;UIViewContentDisplay&quot;)).shouldHave(Condition.text(value6));</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>$(byId(&quot;H&quot; + value6)).shouldHave(Condition.text(value6));</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>$(byXpath(ELEMENT_EFFECT_ITALIC.replace(&quot;$content&quot;, content))).waitUntil(Condition.visible, Configuration.timeout);</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>$(byXpath(ELEMENT_ACTIVITY_WIKI_VIEW_CHANGE_LINK.replace(&quot;$title&quot;, title))).waitUntil(Condition.visible,
               Configuration.timeout);</expression-string>
         <language-id>JAVA</language-id>
@@ -2317,46 +2359,9 @@
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>ELEMENT_PEOPLE_TRIBE_SEARCH_TEXT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).sendKeys(Keys.BACK_SPACE);</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>($(By.id(&quot;peopleListBody&quot;))).find(byText(username4 + &quot; &quot; + username4))
-            .parent()
-            .parent()
-            .parent()
-            .find(byText(connect))
-            .should(Condition.exist);</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>Assert.assertEquals(ELEMENT_TRIBE_LAST_VISITED_SPACES_CHECK_ORDER.getText(), &quot;Recent spaces&quot;);</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>Assert.assertEquals(ELEMENT_TRIBE_LAST_VISITED_SPACES_CHECK_ORDER.getText(), &quot;Recent Spaces&quot;);</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>Assert.assertEquals(ELEMENT_TRIBE_STREAM_CHECK_ORDER.getText(), &quot;Streams&quot;);</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiActivitiesTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4589">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/WikiBasicActionOtherActionsTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-7379">
@@ -2374,23 +2379,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiTemplateTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="35" lean-forward="true" selection-start-line="4" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/codeborne/selenide/4.3/selenide-4.3-sources.jar!/com/codeborne/selenide/Selectors.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="83" selection-start-line="83" selection-end-line="83" />
-          <folding>
-            <element signature="e#3015#3016#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/pageobject/TribeWikiManagement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="261">
@@ -2398,7 +2386,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/WikiTemplateDWIT.java" />
     <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCPeopleConnectionsManagementTestDWIT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-345">
@@ -2507,13 +2494,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="626" column="29" selection-start-line="626" selection-start-column="29" selection-end-line="626" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/exoTribe/exoTribeLocator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -2549,48 +2529,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/SOCManageSpacesDWTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="178" selection-start-line="178" selection-end-line="178" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/SOCPeopleActivityAddTestDWIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/SOCSettingsEditTestDWIT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ActivityStreamManagementDWTestIt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-105">
-          <caret line="31" column="62" lean-forward="true" selection-start-line="31" selection-start-column="62" selection-end-line="31" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/NotificationsManagementDWTestIt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="37" column="32" lean-forward="true" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ChatManagementDWTestIt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="956" column="20" selection-start-line="956" selection-start-column="18" selection-end-line="956" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2629,24 +2571,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiValidattions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1">
-          <caret line="460" column="16" selection-start-line="460" selection-start-column="16" selection-end-line="460" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/WikiPublishActivityTestIT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="109" column="37" selection-start-line="109" selection-start-column="25" selection-end-line="109" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.0.0/junit-platform-commons-1.0.0.jar!/org/junit/platform/commons/util/ReflectionUtils.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="175" selection-start-line="175" selection-end-line="175" />
         </state>
       </provider>
     </entry>
@@ -2692,13 +2620,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/wiki/WikiLocators.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="100" column="54" selection-start-line="100" selection-start-column="54" selection-end-line="100" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/WikiTemplateDWIT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
@@ -2706,10 +2627,103 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/chat/src/main/java/org/exoplatform/platform/qa/ui/chat/pageobject/RoomManagement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="35" column="14" selection-start-line="35" selection-start-column="14" selection-end-line="35" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/SOCManageSpacesDWTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="194" selection-start-line="194" selection-end-line="194" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/NotificationsManagementDWTestIt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2580">
+          <caret line="196" selection-start-line="196" selection-end-line="196" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/src/test/java/org/exoplatform/platform/qa/ui/platform/wiki/functional/WikiTemplateTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-472">
+          <caret line="103" column="7" lean-forward="true" selection-start-line="103" selection-start-column="7" selection-end-line="103" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/codeborne/selenide/4.3/selenide-4.3-sources.jar!/com/codeborne/selenide/Selectors.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="83" selection-start-line="83" selection-end-line="83" />
+          <folding>
+            <element signature="e#3015#3016#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/wiki/WikiLocators.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="584">
+          <caret line="769" column="58" selection-start-line="769" selection-start-column="58" selection-end-line="769" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wiki/src/main/java/org/exoplatform/platform/qa/ui/wiki/pageobject/WikiValidattions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="201" column="24" lean-forward="true" selection-start-line="201" selection-start-column="24" selection-end-line="201" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/SOCPeopleActivityAddTestDWIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-595">
+          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.0.0/junit-platform-commons-1.0.0.jar!/org/junit/platform/commons/util/ReflectionUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="175" selection-start-line="175" selection-end-line="175" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ActivityStreamManagementDWTestIt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="420" selection-start-line="420" selection-end-line="420" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/platform/NavigationToolbar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="663" column="60" lean-forward="true" selection-start-line="663" selection-start-column="60" selection-end-line="663" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/WikiTemplateDWIT.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1290">
-          <caret line="113" column="28" selection-start-line="113" selection-start-column="28" selection-end-line="113" selection-end-column="28" />
+        <state relative-caret-position="61">
+          <caret line="406" column="69" selection-start-line="406" selection-start-column="69" selection-end-line="406" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/digitalWorkplace/ChatManagementDWTestIt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="129" column="83" lean-forward="true" selection-start-line="129" selection-start-column="83" selection-end-line="129" selection-end-column="83" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
