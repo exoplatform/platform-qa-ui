@@ -1,5 +1,7 @@
 package org.exoplatform.platform.qa.ui.digitalWorkplace;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseDW;
 import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.pageobject.*;
@@ -18,9 +20,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selectors.byValue;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TEMPLATE_SEARCH_TEXTBOX;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("dw")
@@ -440,6 +443,132 @@ public class WikiTemplateDWIT extends BaseDW {
     tribeSpaceManagement.goToWikiTabDW(space);
     wikiHomePage.goToWikiSettingPageDW();
     wikiSettingPage.deleteTemplate(title9);
+
+  }
+
+  @Test
+  public void test10_CheckTheSearchOfADeletedTemplate() {
+
+    info("Add a new template");
+    String title = "title" + getRandomNumber();
+    String des = "des" + getRandomNumber();
+    String content = "content" + getRandomNumber();
+    info("Create new template");
+    info("Create a space");
+    String space = "space" + getRandomNumber();
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
+
+    info("Go to Wiki Settings");
+    tribeSpaceManagement.goToWikiTabDW(space);
+    wikiHomePage.goToWikiSettingPageDW();
+
+    wikiSettingPage.addTemplate(title, des, content);
+    wikiSettingPage.saveTemplate();
+    wikiHomePage.confirmWaringMessage(true);
+
+    info("Verify that new tempate is created. It'll be shown in template form");
+    wikiValidattions.verifyTemplateInList(title);
+
+    wikiSettingPage.searchTemplate(title);
+    wikiSettingPage.deleteTemplate(title);
+
+    info("Search A Deleted Template");
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    $(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).val(title);
+    $(ELEMENT_TEMPLATE_SEARCH_TEXTBOX).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).pressEnter();
+
+    info("Verify that the searching is empty");
+    $(byId("UIWikiTemplateGrid")).find(byText(title)).waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
+    wikiValidattions.verifyTemplateSearchEmpty();
+
+    info("Delete the space");
+    homePagePlatform.goToStreamPageTribeViaUrl();
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(space);
+
+  }
+
+  @Test
+  public void test11_UseACreatedTemplateToAddNewPage() {
+    info("Add a new template");
+    String title = "title" + getRandomNumber();
+    String des = "des" + getRandomNumber();
+    String content = "content" + getRandomNumber();
+    info("Create new template");
+    info("Create a space");
+    String space = "space" + getRandomNumber();
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
+
+    info("Using template to create new page");
+    info("Go to Wiki Settings");
+    tribeSpaceManagement.goToWikiTabDW(space);
+    wikiHomePage.goToWikiSettingPageDW();
+
+    wikiSettingPage.addTemplate(title, des, content);
+    wikiSettingPage.saveTemplate();
+    wikiHomePage.confirmWaringMessage(true);
+    info("Verify that new tempate is created. It'll be shown in template form");
+    wikiValidattions.verifyTemplateInList(title);
+    String title1 = "title1" + getRandomNumber();
+
+    tribeSpaceManagement.goToWikiTabDW(space);
+    tribeWikiHomePage.goToAddTemplateWikiPageDW();
+    tribeWikiManagement.addSimplePageByTemplateWithAutoSave($(byValue(title)), title1);
+
+    info("New page is created successfully. It is displayed in the destination path");
+    wikiValidattions.verifyTitleWikiPage(title1);
+    tribeWikiHomePage.deleteWikiDW(title1);
+    info("Delete the space");
+    homePagePlatform.goToStreamPageTribeViaUrl();
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(space);
+
+  }
+
+  @Test
+  public void test12_CreateNewTemplateWhenUsingBulletedListEffectWritingContent() {
+    info("Add a new template");
+    String title3 = "title3" + getRandomNumber();
+    String des3 = "des3" + getRandomNumber();
+    String value1 = "value" + getRandomNumber();
+    String value2 = "value" + getRandomNumber();
+    String value3 = "value" + getRandomNumber();
+    String value4 = "value" + getRandomNumber();
+    String content3 = "* " + value1 + " \n" + "** " + value2 + "\n" + "*** " + value3 + "\n" + "* " + value4;
+
+    String space = "space" + getRandomNumber();
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
+
+    info("Search template when the key is matched");
+    info("Go to Wiki Settings");
+    tribeSpaceManagement.goToWikiTabDW(space);
+    wikiHomePage.goToWikiSettingPageDW();
+
+    wikiSettingPage.addTemplate(title3, des3, content3);
+    wikiSettingPage.saveTemplate();
+    wikiHomePage.confirmWaringMessage(true);
+
+    info("Verify that new tempate is created. It'll be shown in template form");
+    wikiValidattions.verifyTemplateInList(title3);
+    info("The page is shown with Bullest list effect");
+    tribeSpaceManagement.goToWikiTabDW(space);
+    wikiHomePage.goToAddTemplateWikiPage();
+    wikiSettingPage.searchTemplate(title3);
+    wikiManagement.addSimpleWikiPageByTemplate($(byValue(title3)), "");
+    info("New page is created successfully. It is displayed in the destination path");
+    wikiValidattions.verifyTitleWikiPage(title3);
+    info("The page is shown with Bullest list effect");
+    wikiValidattions.verifyEffectsPageContentDW(WikiValidattions.effectTypes.Bullest_List, value3);
+    wikiHomePage.deleteWiki(title3);
+    tribeSpaceManagement.goToWikiTabDW(space);
+    wikiHomePage.goToWikiSettingPageDW();
+    wikiSettingPage.deleteTemplate(title3);
 
   }
 

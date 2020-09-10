@@ -219,6 +219,9 @@ public final class HomePageLocator {
   public static final SelenideElement ELEMENT_SEARCH_INPUT                                                 =
                                                            $(byClassName("showInputSearch"));
 
+  public static final SelenideElement ELEMENT_SEARCH_INPUT_DW                                                 =
+                                                           $(byId("searchInput"));
+
   public static final SelenideElement ELEMENT_SEARCH_RESULT                                                =
                                                             $(byId("quickSearchResult1"));
 

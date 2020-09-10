@@ -136,7 +136,7 @@ public class WikiBasicActionOtherActionsTestDWIT extends BaseDW {
     tribeWikiManagement.saveAddPage();
     $(byText(title2)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
 
-    info("Move page to Intranet");
+    info("Move page to My Notes");
     tribeWikiManagement.selectSpaceDestination("My Notes");
     $(byClassName("uiTreeExplorer")).find(byText(title2)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
     tribeWikiHomePage.deleteWikiDW(title2);

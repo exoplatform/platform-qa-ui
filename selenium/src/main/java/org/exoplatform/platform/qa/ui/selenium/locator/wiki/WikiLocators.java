@@ -309,6 +309,9 @@ public class WikiLocators {
     public static final SelenideElement ELEMENT_SAVE_BUTTON_ADD_PAGE =
             $(byId("UISubmitToolBarUpper_SavePage_"));
 
+    public static final SelenideElement ELEMENT_WIKI_PAGE_INSERT_PHOTO =
+          $(byXpath("//*[@class=\"ck-file-dialog-button\"]//button"));
+
     public static final By ELEMENT_CANCEL_BUTTON_ADD_PAGE =
             By.id("UISubmitToolBarBottom_Cancel_");
 
