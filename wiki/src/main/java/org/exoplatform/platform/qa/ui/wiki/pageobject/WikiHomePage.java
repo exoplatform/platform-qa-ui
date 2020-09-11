@@ -397,6 +397,19 @@ public class WikiHomePage {
         evt.waitForElementNotPresent(ELEMENT_SPACE_SWITCHER_INPUT);
     }
 
+    public void inputSpaceSwitcherTribe(String text) {
+        SelenideElement spaceSwitcherInput = $(ELEMENT_SPACE_SWITCHER_INPUT_TRIBE);
+        spaceSwitcherInput.clear();
+        spaceSwitcherInput.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        spaceSwitcherInput.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).sendKeys(text);
+    }
+
+    public void closeSpaceWitcherTribe() {
+        info("Click on Close button");
+        $(ELEMENT_SPACE_SWITCHER_CLOSE_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        evt.waitForElementNotPresent(ELEMENT_SPACE_SWITCHER_INPUT_TRIBE);
+    }
+
     /**
      * Close space switcher of the breadcrumb on wiki home page by clicking on
      * outside

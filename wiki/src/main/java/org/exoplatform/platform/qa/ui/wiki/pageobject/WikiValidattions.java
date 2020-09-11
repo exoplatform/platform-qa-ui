@@ -555,6 +555,7 @@ public class WikiValidattions {
 
     }
 
+
     /**
      * Verify that a space isnot shown in space switcher
      *

@@ -46,6 +46,9 @@ public class WikiLocators {
     public static final By ELEMENT_SPACE_SWITCHER_INPUT =
             By.xpath("//*[@id='uiSpaceSwitcher_BreadCrumb']//li[contains(@class, 'spaceSearch')]//input[contains(@placeholder, 'Filter Spaces')]");
 
+    public static final By ELEMENT_SPACE_SWITCHER_INPUT_TRIBE =
+          By.xpath("//*[@id='uiSpaceSwitcher_BreadCrumb']//li[contains(@class, 'spaceSearch')]//input[contains(@placeholder, 'Filtrer les Espaces')]");
+
     public static final By ELEMENT_SPACE_SWITCHER_CLOSE_BTN =
             By.xpath(".//*[@id='uiSpaceSwitcher_BreadCrumb']//*[contains(@class,'uiIconClose')]");
 
