@@ -272,7 +272,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     homePagePlatform.goToMySpacesTribeViaUrl();
     connectionsManagement.tribeSearchSpace(spaceNamea);
     tribeSpaceManagement.accessToSearchedSpace();
-    tribeActivityStream.checkThatUserWholikesActivityIsDisplayedDW(tribe_user3, activity1);
+    tribeActivityStream.checkThatUserWholikesActivityIsDisplayedTribe(tribe_user3, activity1);
 
     manageLogInOut.signInTribe(tribe_username3, tribe_password3);
     homePagePlatform.goToMySpacesTribeViaUrl();
@@ -286,7 +286,7 @@ public class ActivityStreamManagementTestIt extends BaseTribe {
     homePagePlatform.goToMySpacesTribeViaUrl();
     connectionsManagement.tribeSearchSpace(spaceNamea);
     tribeSpaceManagement.accessToSearchedSpace();
-    tribeActivityStream.checkThatUserWhoDislikesActivityIsNotDisplayedDW(tribe_user3, activity1);
+    tribeActivityStream.checkThatUserWhoDislikesActivityIsNotDisplayedTribe(tribe_user3, activity1);
 
     tribeActivityStream.deleteactivityDW(activity1);
     homePagePlatform.goToMySpacesTribeViaUrl();

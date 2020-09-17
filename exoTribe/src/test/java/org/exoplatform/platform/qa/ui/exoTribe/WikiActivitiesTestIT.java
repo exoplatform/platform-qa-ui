@@ -177,7 +177,7 @@ public class WikiActivitiesTestIT extends BaseTribe {
     info("In the create page's activity a Wiki page's version 'View change' is displayed");
     homePagePlatform.goToStreamPageTribe();
     tribeActivityStream.checkActivity(editTitle);
-    activityStream.checkActivityWikiPage(editTitle, editContent, "2", true);
+    activityStream.checkActivityWikiPageDW(editTitle, editContent, "2", true);
     activityStream.clickOnViewChange(editTitle);
     tribeWikiValidattions.verifyCompareVersions("1");
     tribeWikiHomePage.goToHomeWikiPage();
@@ -215,7 +215,7 @@ public class WikiActivitiesTestIT extends BaseTribe {
     spaceSettingManagement.goToApplicationTabDW();
     spaceSettingManagement.removeApplicationDW("Wiki");
     $(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_DW).waitUntil(Condition.appears, Configuration.timeout);
-    spaceSettingManagement.addApplicationDW("Wiki");
+    spaceSettingManagement.addApplicationTribe("Wiki");
     info("Check on AS");
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(space);

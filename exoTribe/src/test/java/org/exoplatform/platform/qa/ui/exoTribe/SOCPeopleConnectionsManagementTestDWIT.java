@@ -55,8 +55,8 @@ public class SOCPeopleConnectionsManagementTestDWIT extends BaseTribe {
     homePagePlatform.goToPeoplePageTribeViaUrl();
 
     info("Click on Connect button to invite about 2 users");
-    connectionsManagement.tribeConnectToAUser(tribe_user2);
-    connectionsManagement.tribeConnectToAUser(tribe_user3);
+    connectionsManagement.tribeConnectToAUser(tribe_username2);
+    connectionsManagement.tribeConnectToAUser(tribe_username3);
 
     info("User can accept or deny invitaions");
     info("Login by invited users, go to My Connections/Requests Received and accept invitation");
@@ -90,7 +90,7 @@ public class SOCPeopleConnectionsManagementTestDWIT extends BaseTribe {
     homePagePlatform.goToPeoplePageTribeViaUrl();
 
     info("Access people list, invite an user");
-    connectionsManagement.tribeConnectToAUser(tribe_user2);
+    connectionsManagement.tribeConnectToAUser(tribe_username2);
 
     info("Invited user accept invitation");
     manageLogInOut.signOutTribe();
@@ -110,7 +110,7 @@ public class SOCPeopleConnectionsManagementTestDWIT extends BaseTribe {
     manageLogInOut.signOutTribe();
     manageLogInOut.signInTribe(tribe_username1, tribe_password1);
     homePagePlatform.goToPeoplePageTribeViaUrl();
-    connectionsManagement.tribeConnectToAUser(tribe_user2);
+    connectionsManagement.tribeConnectToAUser(tribe_username2);
     manageLogInOut.signOutTribe();
     manageLogInOut.signInTribe(tribe_username2, tribe_password2);
     homePagePlatform.goToPeoplePageTribeViaUrl();
@@ -126,8 +126,8 @@ public class SOCPeopleConnectionsManagementTestDWIT extends BaseTribe {
     homePagePlatform.goToPeoplePageTribeViaUrl();
 
     info("Click on Connect button to invite about 2 users");
-    connectionsManagement.tribeConnectToAUser(tribe_user2);
-    connectionsManagement.tribeConnectToAUser(tribe_user3);
+    connectionsManagement.tribeConnectToAUser(tribe_username2);
+    connectionsManagement.tribeConnectToAUser(tribe_username3);
 
     info("Login by invited users, go to My Connections from avatar and accept invitation");
     info("Verify before accept User1's invitaion");
@@ -157,9 +157,9 @@ public class SOCPeopleConnectionsManagementTestDWIT extends BaseTribe {
     homePagePlatform.goToMyConnectionsFromHomePageDW();
     connectionsManagement.verifyConnectionDW(tribe_user2, true, "My Connections");
     connectionsManagement.verifyConnectionDW(tribe_user3, true, "My Connections");
-    connectionsManagement.removeConnectionDW(tribe_user2);
+    connectionsManagement.removeConnectionDW(tribe_username2);
     homePagePlatform.goToPeoplePageTribeViaUrl();
-    connectionsManagement.removeConnectionDW(tribe_user3);
+    connectionsManagement.removeConnectionDW(tribe_username3);
 
   }
 
@@ -204,7 +204,7 @@ public class SOCPeopleConnectionsManagementTestDWIT extends BaseTribe {
     info("Click on Connections on the left panel");
     homePagePlatform.goToPeoplePageTribeViaUrl();
     info("Click on Connect button to invite about 2 users");
-    connectionsManagement.tribeConnectToAUser(tribe_user3);
+    connectionsManagement.tribeConnectToAUser(tribe_username3);
     info("Login by invited users, go to My Connections/Requests Received and accept invitation");
     manageLogInOut.signOutTribe();
     manageLogInOut.signInTribe(tribe_username3, tribe_password3);
@@ -222,7 +222,7 @@ public class SOCPeopleConnectionsManagementTestDWIT extends BaseTribe {
     homePagePlatform.goToPeoplePageTribeViaUrl();
     homePagePlatform.goToMyConnectionsFromHomePageDW();
     connectionsManagement.verifyConnectionDW(tribe_user3, true, "My Connections");
-    connectionsManagement.removeConnectionDW(tribe_user3);
+    connectionsManagement.removeConnectionDW(tribe_username3);
 
   }
 

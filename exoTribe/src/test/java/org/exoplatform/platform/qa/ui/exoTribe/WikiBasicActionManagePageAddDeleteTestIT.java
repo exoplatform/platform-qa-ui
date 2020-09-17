@@ -119,7 +119,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
     tribeWikiManagement.addSimpleWikiPageByTemplate(template, title);
     $(byText(title)).should(Condition.exist);
     tribeWikiHomePage.deleteWikiDW(title);
-    info("Test 10: Delete data");
+    info("Delete data");
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.deleteTribeSpace(space);
 

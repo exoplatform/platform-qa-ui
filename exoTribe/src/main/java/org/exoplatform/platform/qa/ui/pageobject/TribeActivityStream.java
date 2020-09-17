@@ -305,7 +305,7 @@ public class TribeActivityStream {
 
   public void checkThatUserWholikesActivityIsDisplayedTribe(String user, String activity) {
 
-    $(byXpath("(//*[@class='description']//*[contains(text(),'${activity}')]/following::*[@class='activityReactionsContainer']//*[contains(text(),'${user}')])[1]"
+    $(byXpath("(//*[@class='description']//*[contains(text(),'${activity}')]/following::*[@class='activityReactionsContainer']//*[@title='${user}'])[1]"
             .replace("${user}", user)
             .replace("${activity}",activity)))
             .waitUntil(exist, openBrowserTimeoutMs);
@@ -367,6 +367,15 @@ public class TribeActivityStream {
   public void checkThatUserWhoDislikesActivityIsNotDisplayedDW(String user, String activity) {
 
     $(byXpath("(//*[@class='description']//*[contains(text(),'${activity}')]/following::*[@class='listPeopleContent']//*[contains(text(),'${user}')])[1]"
+            .replace("${user}", user)
+            .replace("${activity}",activity)))
+            .waitUntil(Condition.not(Condition.visible), openBrowserTimeoutMs);
+
+  }
+
+  public void checkThatUserWhoDislikesActivityIsNotDisplayedTribe(String user, String activity) {
+
+    $(byXpath("(//*[@class='description']//*[contains(text(),'${activity}')]/following::*[@class='activityReactionsContainer']//*[@title='${user}'])[1]"
             .replace("${user}", user)
             .replace("${activity}",activity)))
             .waitUntil(Condition.not(Condition.visible), openBrowserTimeoutMs);

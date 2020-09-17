@@ -271,6 +271,20 @@ public class SpaceSettingManagement {
 
   }
 
+  public void addApplicationTribe(String application) {
+    info("Click on Add application button");
+    sleep(2000);
+    $(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_TRIBE).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//*[@title='${application}']/following::*[@class='v-btn__content']".replace("${application}",application)))
+            .waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs)
+            .click();
+    info("Check Application added");
+    sleep(1000);
+    $(byXpath("//*[@id='Application']//*[@title='${app}']/following::*[@class='v-btn__content'][1]//i".replace("${app}",application)))
+            .waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+
+  }
+
   /**
    * Edit a node with new label
    *

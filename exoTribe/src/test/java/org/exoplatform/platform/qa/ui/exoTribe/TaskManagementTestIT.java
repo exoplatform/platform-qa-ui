@@ -69,9 +69,10 @@ public class TaskManagementTestIT extends BaseTribe {
     homePagePlatform.goToTasksPageDW();
     tasksManagement.addTask(taskName);
     info("verify task added");
-    $(byText(taskName)).should(Condition.exist);
+    $(byText(taskName)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
 
     info("Edit Task");
+    sleep(3000);
     tasksManagement.editTask(taskName, newTaskName, "Haute");
     info("verify task edited");
     $(byText(newTaskName)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);

@@ -146,14 +146,12 @@ public class SOCSettingsEditTestIT extends BaseTribe {
     info("Disable Notification Via Mail");
     sleep(3000);
     tribeChangeSettings.tribeEnableDisableNotificationViaMail();
-    getExoWebDriver().getWebDriver().navigate().refresh();
 
     info("Notification Via Mail is disabled");
     Assert.assertEquals(ELEMENT_TRIBE_NOTIFICATION_VIA_MAIL_STATUS.getAttribute("aria-checked"), "false");
 
     info("Enable Notification Via Mail");
     tribeChangeSettings.tribeEnableDisableNotificationViaMail();
-    getExoWebDriver().getWebDriver().navigate().refresh();
 
     info("Notification Via Mail is enabled");
     Assert.assertEquals(ELEMENT_TRIBE_NOTIFICATION_VIA_MAIL_STATUS.getAttribute("aria-checked"), "true");
@@ -168,14 +166,12 @@ public class SOCSettingsEditTestIT extends BaseTribe {
     info("Disable Notification On Mobile");
     sleep(2000);
     tribeChangeSettings.tribeEnableDisableNotificationOnMobile();
-    getExoWebDriver().getWebDriver().navigate().refresh();
 
     info("Notification On Mobile is disabled");
     Assert.assertEquals(ELEMENT_TRIBE_NOTIFICATION_ON_MOBILE_STATUS.getAttribute("aria-checked"), "false");
 
     info("Enable Notification On Mobile");
     tribeChangeSettings.tribeEnableDisableNotificationOnMobile();
-    getExoWebDriver().getWebDriver().navigate().refresh();
 
     info("Notification On Mobile is enabled");
     Assert.assertEquals(ELEMENT_TRIBE_NOTIFICATION_ON_MOBILE_STATUS.getAttribute("aria-checked"), "true");
@@ -190,14 +186,12 @@ public class SOCSettingsEditTestIT extends BaseTribe {
     info("Disable Notification On Site");
     sleep(2000);
     tribeChangeSettings.tribeEnableDisableNotificationOnSite();
-    getExoWebDriver().getWebDriver().navigate().refresh();
 
     info("Notification On Site is disabled");
     Assert.assertEquals(ELEMENT_TRIBE_NOTIFICATION_ON_SITE_STATUS.getAttribute("aria-checked"), "false");
 
     info("Enable Notification On Site");
     tribeChangeSettings.tribeEnableDisableNotificationOnSite();
-    getExoWebDriver().getWebDriver().navigate().refresh();
 
     info("Notification On Site is enabled");
     Assert.assertEquals(ELEMENT_TRIBE_NOTIFICATION_ON_SITE_STATUS.getAttribute("aria-checked"), "true");

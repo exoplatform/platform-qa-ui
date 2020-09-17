@@ -79,6 +79,24 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_CHECK_ORDER = $(byXpath("(//*[@id='SiteHamburgerNavigation']//i)[1]/following::div[1]//div"));
 
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_SPACES_NUMBER = $(byXpath("(//*[@id='profile-stats-portlet']//*[@class='flex xs6 d-flex justify-center align-center']//span)[2]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_WEEKLY_POINTS = $(byXpath("(//*[@id='profile-stats-portlet']//*[@class='flex xs6 d-flex justify-center align-center']//span)[7]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_WEEKLY_POINTS_TITLE = $(byXpath("(//*[@id='profile-stats-portlet']//*[@class='flex xs6 d-flex justify-center align-center']//span)[8]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_SPACES_NUMBER_TITLE = $(byXpath("(//*[@id='profile-stats-portlet']//*[@class='flex xs6 d-flex justify-center align-center']//span)[6]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_CONTACTS_NUMBER= $(byXpath("(//*[@id='profile-stats-portlet']//*[@class='flex d-flex xs6 justify-center align-center']//span)[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_CONTACTS_NUMBER_TITLE = $(byXpath("(//*[@id='profile-stats-portlet']//*[@class='flex d-flex xs6 justify-center align-center']//span)[6]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_WEEKLY_RANK= $(byXpath("(//*[@id='profile-stats-portlet']//*[@class='flex d-flex xs6 justify-center align-center']//span)[7]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_WEEKLY_RANK_TITLE= $(byXpath("(//*[@id='profile-stats-portlet']//*[@class='flex d-flex xs6 justify-center align-center']//span)[8]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_TASK_TITLE= $(byXpath("(//*[@id='tasks']//*[@class='taskTitle'])[last()]"));
+
     public static final SelenideElement ELEMENT_TRIBE_STREAM_CHECK_ORDER = $(byXpath("(//*[@id='SiteHamburgerNavigation']//i)[2]/following::div[1]//div"));
 
     public static final SelenideElement ELEMENT_TRIBE_SPACES_CHECK_ORDER = $(byXpath("(//*[@id='SiteHamburgerNavigation']//i)[3]/following::div[1]//div"));
@@ -385,6 +403,8 @@ public class exoTribeLocator {
     public static final SelenideElement  ELEMENT_SETTINGS_APP_TAB_DW  = $(byXpath("(//*[contains(text(),'Applications')]/following::*[@class='v-btn__content'])[last()]"));
 
     public static final SelenideElement  ELEMENT_APPLICATION_TAB_ADD_APPLICATION_DW  = $(byXpath("(//*[@id='SpaceSettings']//*[@class='v-btn__content'])[last()-2]"));
+
+    public static final SelenideElement  ELEMENT_APPLICATION_TAB_ADD_APPLICATION_TRIBE = $(byXpath("(//*[@id='SpaceSettings']//*[@class='v-btn__content'])[last()-1]"));
 
     public static final SelenideElement  ELEMENT_REMOVE_APPLICATION_DW  = $(byXpath("(//*[@class='v-list-item__title'])[1]"));
 
