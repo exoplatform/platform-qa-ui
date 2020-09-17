@@ -23,7 +23,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("social")
 @Tag("sniff")
-@Tag("dw")
+@Tag("tribe")
 public class SOCPeopleConnectionsManagementTestDWIT extends BaseTribe {
   NavigationToolbar navigationToolbar;
 
