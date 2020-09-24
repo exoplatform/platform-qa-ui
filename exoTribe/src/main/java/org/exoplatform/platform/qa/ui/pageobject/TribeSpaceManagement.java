@@ -75,6 +75,7 @@ public class TribeSpaceManagement {
 
   public void searchSpaceViaRecentSpaces(String spaceName) {
 
+    sleep(1000);
     ELEMENT_TRIBE_LAST_VISITED_SPACES_CHECK_ORDER.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).hover();
     ELEMENT_TRIBE_RECENT_SPACES.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     sleep(2000);

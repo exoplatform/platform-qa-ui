@@ -15,8 +15,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.sleep;
-import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
-import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
+import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -143,6 +142,47 @@ public class SideAndTopBarItemsManagementTestIt extends BaseTribe {
     homePagePlatform.goToStreamPageTribeViaUrl();
 
     homePagePlatform.goToSettingsPageTribe();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test04_CheckThatSideBarMenuProfileSectionIsDisplayed() {
+
+    info("Click on Hamburger Navigation Menu Button");
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    info("Check that SideBar Menu Profile Section is displayed");
+    ELEMENT_TRIBE_SIDEBAR_MENU_PROFILE_SECTION.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    info("Check that Profile Avatar is displayed in SideBar Menu");
+    ELEMENT_TRIBE_SIDEBAR_MENU_PROFILE_AVATAR.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    info("Check that Profile First name and Last name are displayed in SideBar Menu");
+    Assert.assertEquals(ELEMENT_TRIBE_SIDEBAR_MENU_PROFILE_FIRST_LAST_NAME.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).getText(),tribe_user);
+
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test05_CheckThatEditAdministrationButtonIsNotExistingForASimpleUser() {
+
+    info("Check that Top Bar Items are displayed");
+
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+    ELEMENT_TRIBE_BRANDING_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+    ELEMENT_TRIBE_SEARCH_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+    ELEMENT_TRIBE_MINICHAT_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+    ELEMENT_TRIBE_APPLICATIONS_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+    ELEMENT_TRIBE_NOTIFICATIONS_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    info("Check That Edit Administration Button Is Not Existing For A Simple User");
+
+    ELEMENT_TRIBE_EDIT_ADMINISTRATION_TOPBAR.waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
+
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
 

@@ -104,7 +104,7 @@ public class WikiBasicActionManagePageAddDeleteTestDWIT extends BaseDW {
   @Test
   public void test02_CreateDeletePageFromStatusMeetingTemplateOnSpace() {
     info("Create page from template");
-    SelenideElement template = ELEMENT_SELECT_TEMPLATE_StatusMeeting;
+    SelenideElement template = ELEMENT_SELECT_TEMPLATE_StatusMeetingDW;
     String title = "title1" + getRandomNumber();
     String space = "space" + getRandomNumber();
     homePagePlatform.goToMySpacesTribeViaUrl();

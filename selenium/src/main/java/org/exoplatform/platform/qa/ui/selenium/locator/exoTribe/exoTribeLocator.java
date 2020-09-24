@@ -71,6 +71,12 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU = $(byId("app"));
 
+    public static final SelenideElement ELEMENT_TRIBE_SIDEBAR_MENU_PROFILE_SECTION = $(byXpath("//*[@id='ProfileHamburgerNavigation']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SIDEBAR_MENU_PROFILE_AVATAR = $(byXpath("//*[@id='ProfileHamburgerNavigation']//*[@class='v-responsive__content']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SIDEBAR_MENU_PROFILE_FIRST_LAST_NAME = $(byXpath("(//*[@id='ProfileHamburgerNavigation']//*[@class='v-responsive__content']/following::div/div)[1]"));
+
     public static final SelenideElement ELEMENT_DW_ADMINISTRATION_PAGE = $(byXpath("//*[@class='uiIcon uiIconToolbarNavItem uiAdministrationIcon']"));
 
     public static final SelenideElement ELEMENT_TRIBE_STREAM_PAGE = $(byXpath("//*[@class='uiIcon uiIconFile uiIconToolbarNavItem uiIconStream iconStream null']"));
@@ -82,6 +88,8 @@ public class exoTribeLocator {
     public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_SPACES_NUMBER = $(byXpath("(//*[@id='profile-stats-portlet']//*[@class='flex xs6 d-flex justify-center align-center']//span)[2]"));
 
     public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_WEEKLY_POINTS = $(byXpath("(//*[@id='profile-stats-portlet']//*[@class='flex xs6 d-flex justify-center align-center']//span)[7]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_CHART_USER_POINTS = $(byXpath("//*[@id='echartUserPoints']"));
 
     public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_WEEKLY_POINTS_TITLE = $(byXpath("(//*[@id='profile-stats-portlet']//*[@class='flex xs6 d-flex justify-center align-center']//span)[8]"));
 
@@ -95,7 +103,71 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_WEEKLY_RANK_TITLE= $(byXpath("(//*[@id='profile-stats-portlet']//*[@class='flex d-flex xs6 justify-center align-center']//span)[8]"));
 
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_RANK_SECTION_TITLE= $(byXpath("(//*[@class='flex d-flex xs12 mt-n2 justify-center']//span)[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_PODIUM_SECTION_TITLE= $(byXpath("//*[@class='layout podium-layout row wrap mx-0']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_FIRST_PODIUM_NAME= $(byXpath("(//*[@class='transparent mx-1 align-center'])[2]/a"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_SECOND_PODIUM_NAME= $(byXpath("(//*[@class='transparent mx-1 align-center'])[1]/a"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_THIRD_PODIUM_NAME= $(byXpath("(//*[@class='transparent mx-1 align-center'])[3]/a"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_FIRST_PODIUM_POINTS= $(byXpath("(//*[@class='transparent mx-1 align-center'])[2]/a/following::div[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_SECOND_PODIUM_POINTS= $(byXpath("(//*[@class='transparent mx-1 align-center'])[1]/a/following::div[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_THIRD_PODIUM_POINTS= $(byXpath("(//*[@class='transparent mx-1 align-center'])[3]/a/following::div[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_FOURTH_PODIUM_NAME= $(byXpath("(//*[@class='flex xs12']//*[@class='v-list-item__title body-2'])[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_FIFTH_PODIUM_NAME= $(byXpath("(//*[@class='flex xs12']//*[@class='v-list-item__title body-2'])[2]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_SIXTH_PODIUM_NAME= $(byXpath("(//*[@class='flex xs12']//*[@class='v-list-item__title body-2'])[3]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_FOURTH_PODIUM_POINTS= $(byXpath("(//*[@class='flex xs12']//*[@class='v-list-item__title body-2']/following::div/span)[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_FIFTH_PODIUM_POINTS= $(byXpath("(//*[@class='flex xs12']//*[@class='v-list-item__title body-2']/following::div/span)[3]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_SIXTH_PODIUM_POINTS= $(byXpath("(//*[@class='flex xs12']//*[@class='v-list-item__title body-2']/following::div/span)[5]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_WALLET_TITLE= $(byXpath("(//*[@class='flex d-flex xs12']/div/div/span)[2]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_WALLET_SECTION= $(byXpath("//*[@id='walletBalancePortlet']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_PERKSTORE_SECTION= $(byXpath("//*[@id='perkstoreOrderPortlet']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_MY_ORDERS_TITLE= $(byXpath("(//*[@class='flex d-flex xs12']/div/div/span)[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_WALLET_VALUE= $(byXpath("//*[@class='flex d-flex xs12 justify-center']//a"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_MY_ORDERS_VALUE= $(byXpath("//*[@class='flex d-flex xs12 justify-center pa-2']//a"));
+
     public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_TASK_TITLE= $(byXpath("(//*[@id='tasks']//*[@class='taskTitle'])[last()]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_LAST_NEWS= $(byXpath("//*[@id='latestNewsDetails']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_USER_STATS= $(byXpath("//*[@id='profile-stats-portlet']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_SPACES= $(byXpath("//*[@id='rightbottom-spaces-container']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_TASKS= $(byXpath("//*[@id='tasks']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_SCROLL_TO_RIGHT_IN_DOCUMENTS_WIDGET= $(byXpath("//*[@class='v-slide-group__next']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_SCROLL_TO_LEFT_IN_DOCUMENTS_WIDGET= $(byXpath("//*[@class='v-slide-group__prev']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_DOCUMENTS_MYWORK= $(byXpath("(//*[@id='DocumentsContainer']//*[@class='tabsTitle'])[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_DOCUMENTS_FAVORITE= $(byXpath("(//*[@id='DocumentsContainer']//*[@class='tabsTitle'])[2]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_DOCUMENTS_SHARED_WITH_ME= $(byXpath("(//*[@id='DocumentsContainer']//*[@class='tabsTitle'])[3]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_DOCUMENTS_EXPLORE= $(byXpath("(//*[@id='DocumentsContainer']//*[@class='tabsTitle'])[4]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_DOCUMENTS= $(byXpath("//*[@id='DocumentsContainer']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_SLIDER= $(byXpath("//*[@id='SliderContainer']"));
 
     public static final SelenideElement ELEMENT_TRIBE_STREAM_CHECK_ORDER = $(byXpath("(//*[@id='SiteHamburgerNavigation']//i)[2]/following::div[1]//div"));
 
@@ -124,6 +196,8 @@ public class exoTribeLocator {
     public static final SelenideElement ELEMENT_TRIBE_SEARCH_TOPBAR = $(byXpath("//*[@class='uiIconPLF24x24Search']"));
 
     public static final SelenideElement ELEMENT_TRIBE_MINICHAT_TOPBAR = $(byXpath("//*[@id='miniChatDrawer']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_EDIT_ADMINISTRATION_TOPBAR = $(byXpath("//*[@id='DrawerEditAdministration']"));
 
     public static final SelenideElement ELEMENT_TRIBE_APPLICATIONS_TOPBAR = $(byXpath("//*[@id='appLauncher']"));
 
