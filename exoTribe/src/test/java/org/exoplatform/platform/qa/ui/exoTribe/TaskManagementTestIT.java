@@ -29,8 +29,6 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.Tas
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("tribe")
-@Tag("smoke")
-@Tag("task")
 public class TaskManagementTestIT extends BaseTribe {
   HomePagePlatform homePagePlatform;
   SpaceManagement spaceManagement;

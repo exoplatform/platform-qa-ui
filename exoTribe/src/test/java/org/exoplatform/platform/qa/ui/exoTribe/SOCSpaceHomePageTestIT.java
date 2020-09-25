@@ -23,10 +23,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeL
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_TRIBE_POST_ACTIVITY_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-
 @Tag("tribe")
-@Tag("social")
-@Tag("sniff")
 public class SOCSpaceHomePageTestIT extends BaseTribe {
   NavigationToolbar navigationToolbar;
 

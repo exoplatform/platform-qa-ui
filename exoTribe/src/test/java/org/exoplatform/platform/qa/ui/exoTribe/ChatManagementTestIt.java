@@ -38,8 +38,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @Tag("tribe")
-@Tag("social")
-@Tag("sniff")
 public class ChatManagementTestIt extends BaseTribe {
   NavigationToolbar navigationToolbar;
 

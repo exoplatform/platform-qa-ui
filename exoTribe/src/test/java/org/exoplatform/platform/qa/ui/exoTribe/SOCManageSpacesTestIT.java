@@ -23,8 +23,6 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("tribe")
-@Tag("social")
-@Tag("sniff")
 public class SOCManageSpacesTestIT extends BaseTribe {
   NavigationToolbar navigationToolbar;
 
@@ -64,6 +62,7 @@ public class SOCManageSpacesTestIT extends BaseTribe {
   }
 
   @Test
+  @Tag("spacetest")
   public void test01_CheckTheExistanceOfTheSpacesInTheManageSpacesTab() {
 
     String spaceNamea = "spaceNamea" + getRandomNumber();

@@ -26,8 +26,6 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("tribe")
-@Tag("wiki")
-@Tag("sniff")
 public class WikiPublishActivityTestIT extends BaseTribe {
   HomePagePlatform homePagePlatform;
 
