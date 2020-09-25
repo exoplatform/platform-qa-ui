@@ -26,7 +26,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
 @Tag("tribe")
-public class NotificationsManagementTestIt extends BaseTribe {
+public class NotificationsManagementTestIT extends BaseTribe {
   NavigationToolbar navigationToolbar;
 
   AddUsers addUsers;

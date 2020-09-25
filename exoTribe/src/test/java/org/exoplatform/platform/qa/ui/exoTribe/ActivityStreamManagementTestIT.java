@@ -27,7 +27,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
 @Tag("tribe")
-public class ActivityStreamManagementTestIt extends BaseTribe {
+public class ActivityStreamManagementTestIT extends BaseTribe {
   NavigationToolbar navigationToolbar;
 
   AddUsers addUsers;

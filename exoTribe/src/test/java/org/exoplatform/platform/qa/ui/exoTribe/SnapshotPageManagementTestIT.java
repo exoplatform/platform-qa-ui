@@ -29,7 +29,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
 @Tag("tribe")
-public class SnapshotPageManagementTestIt extends BaseTribe {
+public class SnapshotPageManagementTestIT extends BaseTribe {
   NavigationToolbar navigationToolbar;
 
   AddUsers addUsers;
