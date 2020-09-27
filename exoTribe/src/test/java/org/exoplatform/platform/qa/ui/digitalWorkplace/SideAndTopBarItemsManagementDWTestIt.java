@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseDW;
 import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
+import org.exoplatform.platform.qa.ui.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
@@ -14,9 +15,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static com.codeborne.selenide.Selenide.sleep;
-import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_PASS2;
-import static org.exoplatform.platform.qa.ui.core.PLFData.DATA_USER1;
+import static org.exoplatform.platform.qa.ui.core.PLFData.*;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
+import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
@@ -43,6 +47,8 @@ public class SideAndTopBarItemsManagementDWTestIt extends BaseDW {
 
   SpaceManagement spaceManagement;
 
+  TribeSpaceManagement tribeSpaceManagement;
+
   SpaceSettingManagement spaceSettingManagement;
 
   @BeforeEach
@@ -56,6 +62,7 @@ public class SideAndTopBarItemsManagementDWTestIt extends BaseDW {
     activityStream = new ActivityStream(this);
     tribeActivityStream = new TribeActivityStream(this);
     spaceHomePage = new SpaceHomePage(this);
+    tribeSpaceManagement = new TribeSpaceManagement(this);
     spaceManagement = new SpaceManagement(this);
     spaceSettingManagement = new SpaceSettingManagement(this);
     manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
@@ -63,7 +70,27 @@ public class SideAndTopBarItemsManagementDWTestIt extends BaseDW {
   }
 
   @Test
-  public void test01_CheckTopBarItemsOrder() {
+  public void test01_CheckTopBarItemsOrderByASimpleUser() {
+
+
+    String spaceNamea = "spacenamea" + getRandomNumber();
+    String spaceDesa = "descriptiona" + getRandomNumber();
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@test.com";
+    String password = "12345678";
+
+    info("Add user");
+    navigationToolbar.goToAddUsersPageViaUrlDW();
+    addUsers.addUserTribe(username1, password, email1, username1, username1, "");
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(username1);
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", inviteUsers);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(username1, password);
 
     info("Check that Top Bar Items are displayed");
 
@@ -82,8 +109,17 @@ public class SideAndTopBarItemsManagementDWTestIt extends BaseDW {
     Assert.assertTrue(ELEMENT_TRIBE_NOTIFICATIONS_CHECK_ORDER.getAttribute("id").contains("NotificationPopoverPortlet"));
     Assert.assertTrue(ELEMENT_TRIBE_SEARCH_CHECK_ORDER.getAttribute("id").contains("SearchApplication"));
 
+    info("Check That Edit Administration Button Is Not Existing For A Simple User");
+    ELEMENT_TRIBE_EDIT_ADMINISTRATION_TOPBAR.waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
+
     homePagePlatform.goToSnapshotPageTribeViaUrl();
-    homePagePlatform.goToStreamPageTribeViaUrl();
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    navigationToolbar.goToAddUsersPageViaUrlDW();
+    addUsers.deleteUserDW(username1);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamea);
 
   }
 
@@ -143,6 +179,47 @@ public class SideAndTopBarItemsManagementDWTestIt extends BaseDW {
     homePagePlatform.goToStreamPageTribeViaUrl();
 
     homePagePlatform.goToSettingsPageTribe();
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test04_CheckThatSideBarMenuProfileSectionIsDisplayed() {
+
+    info("Click on Hamburger Navigation Menu Button");
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    info("Check that SideBar Menu Profile Section is displayed");
+    ELEMENT_TRIBE_SIDEBAR_MENU_PROFILE_SECTION.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    info("Check that Profile Avatar is displayed in SideBar Menu");
+    ELEMENT_TRIBE_SIDEBAR_MENU_PROFILE_AVATAR.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    info("Check that Profile First name and Last name are displayed in SideBar Menu");
+    Assert.assertEquals(ELEMENT_TRIBE_SIDEBAR_MENU_PROFILE_FIRST_LAST_NAME.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).getText(),DATA_NAME_USER1);
+
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test05_CheckThatEditAdministrationButtonIsExistingForAnAdministratorAccount() {
+
+    info("Check that Top Bar Items are displayed");
+
+    ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+    ELEMENT_TRIBE_BRANDING_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+    ELEMENT_TRIBE_SEARCH_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+    ELEMENT_TRIBE_MINICHAT_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+    ELEMENT_TRIBE_APPLICATIONS_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+    ELEMENT_TRIBE_NOTIFICATIONS_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    info("Check That Edit Administration Button Is Not Existing For A Simple User");
+
+    ELEMENT_TRIBE_EDIT_ADMINISTRATION_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
 
