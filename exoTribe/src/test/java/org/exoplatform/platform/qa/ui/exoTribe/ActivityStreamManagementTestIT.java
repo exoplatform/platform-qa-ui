@@ -25,8 +25,8 @@ import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_DW_POST_ACTIVITY_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-
-@Tag("tribe12")
+@Tag("tribe")
+@Tag("tribeActivity")
 public class ActivityStreamManagementTestIT extends BaseTribe {
   NavigationToolbar navigationToolbar;
 
@@ -299,7 +299,7 @@ public class ActivityStreamManagementTestIT extends BaseTribe {
     String spaceDesa = "descriptiona" + getRandomNumber();
     String activity1 = "activity1" + getRandomNumber();
     String kudosMessage = "Thanks for your help";
-    String user1 = tribe_user3;
+    String user1 = tribe_user2;
 
     ArrayList<String> inviteUsers = new ArrayList<>();
     inviteUsers.add(user1);
@@ -310,7 +310,7 @@ public class ActivityStreamManagementTestIT extends BaseTribe {
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");
 
-    manageLogInOut.signInTribe(tribe_username3, tribe_password3);
+    manageLogInOut.signInTribe(tribe_username2, tribe_password2);
 
     navigationToolbar.goToIntranetNotificationDW();
     navigationToolbar.acceptJoinSpaceViaNotificationnDW(spaceNamea);
@@ -332,7 +332,7 @@ public class ActivityStreamManagementTestIT extends BaseTribe {
     tribeSpaceManagement.accessToSearchedSpace();
 
     info("Check That User Who Sends A Kudos Is Displayed");
-    tribeActivityStream.checkThatUserWhoSendsAKudosIsDisplayedTribe(tribe_user3, activity1, kudosMessage, tribe_user);
+    tribeActivityStream.checkThatUserWhoSendsAKudosIsDisplayedTribe(tribe_user2, activity1, kudosMessage, tribe_user);
 
     tribeActivityStream.deleteactivityDW(activity1);
     homePagePlatform.goToMySpacesTribeViaUrl();

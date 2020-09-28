@@ -31,6 +31,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("tribe")
+@Tag("tribeWikiActions")
 public class WikiBasicActionOtherActionsTestIT extends BaseTribe {
 
   HomePagePlatform homePagePlatform;

@@ -22,6 +22,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("tribe")
+@Tag("tribePeopleConnection")
 public class SOCPeopleConnectionsManagementTestDWIT extends BaseTribe {
   NavigationToolbar navigationToolbar;
 

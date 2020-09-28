@@ -639,6 +639,7 @@ public class NavigationToolbar {
 
   public void closeChatDrawerDW() {
     info("Close Chat Drawer");
+    sleep(2000);
     ELEMENT_CLOSE_CHAT_DRAWER_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_CHAT_CONTACT_LINK_DW.waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
     ELEMENT_CHAT_CONTACT_LIST_DW.waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);

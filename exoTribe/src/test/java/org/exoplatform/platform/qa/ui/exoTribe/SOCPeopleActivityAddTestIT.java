@@ -27,6 +27,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("tribe")
+@Tag("tribePeopleActivity")
 public class SOCPeopleActivityAddTestIT extends BaseTribe {
   NavigationToolbar navigationToolbar;
 

@@ -190,6 +190,7 @@ public class TribeSpaceManagement {
         }
     }
     info("Save all changes");
+    sleep(2000);
     ELEMENT_CREATE_SPACE_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     $(byXpath("//*[@class='pl-2 align-self-center brandingContainer space']//*[contains(text(),'${spaceName}')]"
             .replace("${spaceName}",name))).waitUntil(Condition.visible,60000);
@@ -246,7 +247,6 @@ public class TribeSpaceManagement {
       }
     }
     info("Save all changes");
-    sleep(2000);
     ELEMENT_CREATE_SPACE_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     $(byXpath("//*[@class='pl-2 align-self-center brandingContainer space']//*[contains(text(),'${spaceName}')]"
             .replace("${spaceName}",name))).waitUntil(Condition.visible,60000);

@@ -34,11 +34,12 @@ public class RoomManagement {
   }
 
   public void addRoomTribe(String name, String... users) {
+    sleep(2000);
     ELEMENT_CREATE_ROOM.waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs);
     ELEMENT_CREATE_ROOM.click();
     ELEMENT_POPUP_ROOM.waitUntil(Condition.appear, Configuration.openBrowserTimeoutMs);
     ELEMENT_ROOM_NAME.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
-    sleep(1000);
+    sleep(3000);
     for (int i = 0; i <= users.length - 1; i++) {
       ELEMENT_CHAT_INPUT_ROOMUSERSS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(users[i]);
       ELEMENT_CHAT_RESULT_SEARCH_USER.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
@@ -51,9 +52,9 @@ public class RoomManagement {
 
     public void deleteRomm(String room) {
       ELEMENT_CHAT_CONTACT.parent().parent().parent().parent().find(byText(room)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-      ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.click();
-      ELEMENT_DELETE_ROOM.click();
-      ELEMENT_CONFIRM_BUTTON_DELETE_ROOM.click();
+      ELEMENT_CHAT_ROOM_BUTTON_DROP_DOWN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+      ELEMENT_DELETE_ROOM.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+      ELEMENT_CONFIRM_BUTTON_DELETE_ROOM.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       ELEMENT_CONTACT_LIST.find(byText(room)).waitUntil(Condition.not(Condition.appear),Configuration.openBrowserTimeoutMs);
   }
 

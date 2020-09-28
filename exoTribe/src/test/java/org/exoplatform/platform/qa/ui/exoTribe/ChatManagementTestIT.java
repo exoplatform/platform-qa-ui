@@ -5,7 +5,6 @@ import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.chat.pageobject.ChatManagement;
 import org.exoplatform.platform.qa.ui.chat.pageobject.RoomManagement;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
-import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
 import org.exoplatform.platform.qa.ui.pageobject.TribeSpaceManagement;
@@ -26,18 +25,16 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
-import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password3;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.*;
-import static org.exoplatform.platform.qa.ui.selenium.locator.chat.ChatLocator.ELEMENT_ASSIGNEE_TASK;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.TaskManagementLocator.ELEMENT_TABLE_PROJECT;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 @Tag("tribe")
+@Tag("chatTribe")
 public class ChatManagementTestIT extends BaseTribe {
   NavigationToolbar navigationToolbar;
 
@@ -231,8 +228,8 @@ public class ChatManagementTestIT extends BaseTribe {
     chatManagement.CreateTask(task);
     switchToParentWindow();
     homePagePlatform.goToTasksPageDW();
-    $(byXpath("//*[@class='project-name' and contains(text(),'${title}')]".replace("${title}",room))).waitUntil(Condition.visible, openBrowserTimeoutMs);
-    $(byXpath("//*[@class='project-name' and contains(text(),'${title}')]".replace("${title}",room))).click();
+    $(byXpath("//*[@class='project-name' and contains(text(),'${title}')]".replace("${title}", room))).waitUntil(Condition.visible, openBrowserTimeoutMs);
+    $(byXpath("//*[@class='project-name' and contains(text(),'${title}')]".replace("${title}", room))).click();
     ELEMENT_TABLE_PROJECT.parent().parent().parent().find(byText(task)).waitUntil(Condition.exist, openBrowserTimeoutMs);
     projectsManagement.deleteProjectTribe(room);
     switchTo().window(1);
@@ -289,8 +286,8 @@ public class ChatManagementTestIT extends BaseTribe {
     manageLogInOut.signInTribe(tribe_username3, tribe_password3);
     $(byClassName("uiIconStatus")).waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     homePagePlatform.goToTasksPageDW();
-    $(byXpath("//*[@class='project-name' and contains(text(),'${title}')]".replace("${title}",room))).waitUntil(Condition.visible, openBrowserTimeoutMs);
-    $(byXpath("//*[@class='project-name' and contains(text(),'${title}')]".replace("${title}",room))).click();
+    $(byXpath("//*[@class='project-name' and contains(text(),'${title}')]".replace("${title}", room))).waitUntil(Condition.visible, openBrowserTimeoutMs);
+    $(byXpath("//*[@class='project-name' and contains(text(),'${title}')]".replace("${title}", room))).click();
     ELEMENT_TABLE_PROJECT.parent().parent().parent().find(byText(task)).waitUntil(Condition.exist, openBrowserTimeoutMs).click();
     ELEMENT_ASSIGNEE_TASK.shouldHave(Condition.text(tribe_user3));
     homePagePlatform.goToSnapshotPageTribeViaUrl();
@@ -365,6 +362,7 @@ public class ChatManagementTestIT extends BaseTribe {
   }
 
   @Test
+  @BugInPLF("Bug")
   public void test09_addEventInChatRoom() {
 
     String room = "room" + getRandomNumber();

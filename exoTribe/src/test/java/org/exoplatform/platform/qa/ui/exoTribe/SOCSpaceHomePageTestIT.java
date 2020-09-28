@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.exoTribe;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
 import org.exoplatform.platform.qa.ui.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
@@ -24,6 +25,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("tribe")
+@Tag("tribeSpaceHome")
 public class SOCSpaceHomePageTestIT extends BaseTribe {
   NavigationToolbar navigationToolbar;
 
@@ -142,7 +144,7 @@ public class SOCSpaceHomePageTestIT extends BaseTribe {
     info("-- Verify that an activity has been added --");
     sleep(2000);
     getExoWebDriver().getWebDriver().navigate().refresh();
-    sleep(2000);
+    sleep(3000);
     $(byText(attachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
     $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
     info("The activity is shared success");
@@ -167,6 +169,7 @@ public class SOCSpaceHomePageTestIT extends BaseTribe {
   }
 
   @Test
+  @BugInPLF("Bug")
   public void test04_UploadDocxOpenItInDocumentAndEditItInOnlyOffice() {
 
     String spaceNamea = "spaceNamea" + getRandomNumber();

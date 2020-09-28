@@ -31,6 +31,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("tribe")
+@Tag("tribeWikiActivities")
 public class WikiActivitiesTestIT extends BaseTribe {
 
   HomePagePlatform homePagePlatform;
@@ -212,7 +213,7 @@ public class WikiActivitiesTestIT extends BaseTribe {
     spaceSettingManagement.goToApplicationTabDW();
     spaceSettingManagement.removeApplicationDW("Wiki");
     $(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_DW).waitUntil(Condition.appears, Configuration.timeout);
-    spaceSettingManagement.addApplicationTribe("Wiki");
+    spaceSettingManagement.addApplicationDW("Wiki");
     info("Check on AS");
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(space);

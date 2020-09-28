@@ -297,7 +297,7 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_SPACE_INPUT_USER_TRIBE = $(byXpath("//input[@content-class='identitySuggesterContent']"));
 
-    public static final SelenideElement ELEMENT_CREATE_SPACE_TRIBE = $(byXpath("(//*[@class='d-flex']/button)[2]"));
+    public static final SelenideElement ELEMENT_CREATE_SPACE_TRIBE = $(byXpath("//*[@class='d-flex']//button[2]"));
 
     public static final SelenideElement ELEMENT_CANCEL_SPACE_TRIBE = $(byXpath("(//*[@class='d-flex']/button)[1]"));
 

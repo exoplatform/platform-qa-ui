@@ -19,8 +19,8 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
@@ -29,6 +29,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
 @Tag("tribe")
+@Tag("tribeSnapshot")
 public class SnapshotPageManagementTestIT extends BaseTribe {
   NavigationToolbar navigationToolbar;
 
@@ -184,6 +185,7 @@ public class SnapshotPageManagementTestIT extends BaseTribe {
     $(byText(taskName)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
 
     homePagePlatform.goToSnapshotPageTribe();
+    sleep(3000);
     info("Get Profile Weekly Points after creating a new task");
     int lastSnapshotWeeklyPoints = Integer.parseInt(ELEMENT_TRIBE_SNAPSHOT_WEEKLY_POINTS.waitUntil(Condition.visible, openBrowserTimeoutMs).getText());
 
@@ -191,7 +193,7 @@ public class SnapshotPageManagementTestIT extends BaseTribe {
     Assert.assertEquals(intialSnapshotWeeklyPoints + 3, lastSnapshotWeeklyPoints);
 
     info("Check That The Created Task Is Displayed In Snapshot Page");
-    Assert.assertEquals(ELEMENT_TRIBE_SNAPSHOT_TASK_TITLE.getAttribute("title"), taskName);
+    $(byXpath("//*[@id='tasks']//*[@class='taskTitle' and @title='${taskName}']".replace("${taskName}",taskName))).waitUntil(Condition.visible, openBrowserTimeoutMs);
 
     info("Delete Task");
     homePagePlatform.goToTasksPageDW();
@@ -230,7 +232,7 @@ public class SnapshotPageManagementTestIT extends BaseTribe {
     Assert.assertEquals(intialSnapshotWeeklyPoints + 3, lastSnapshotWeeklyPoints);
 
     info("Check that the new task added in a project is not displayed in Snapshot Page");
-    Assert.assertNotEquals(ELEMENT_TRIBE_SNAPSHOT_TASK_TITLE.getAttribute("title"), task);
+    $(byXpath("//*[@id='tasks']//*[@class='taskTitle' and @title='${taskName}']".replace("${taskName}",task))).waitUntil(Condition.not(Condition.visible), openBrowserTimeoutMs);
 
     info("Delete the task");
     homePagePlatform.goToTasksPageDW();

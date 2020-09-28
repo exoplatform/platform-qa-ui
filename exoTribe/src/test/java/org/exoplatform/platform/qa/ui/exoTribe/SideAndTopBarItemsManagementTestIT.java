@@ -21,6 +21,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
 @Tag("tribe")
+@Tag("tribeItem")
 public class SideAndTopBarItemsManagementTestIT extends BaseTribe {
   NavigationToolbar navigationToolbar;
 

@@ -25,6 +25,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("tribe")
+@Tag("tribeWikiTemplate")
 public class WikiTemplateDWIT extends BaseTribe {
   HomePagePlatform homePagePlatform;
 
