@@ -4,9 +4,7 @@
     <option name="SPLITTER_PROPORTION" value="0.8413697" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc4a0367-df54-4081-9eb5-c93d6d50856e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/pageobject/TribeSpaceManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/pageobject/TribeSpaceManagement.java" afterDir="false" />
-    </list>
+    <list default="true" id="fc4a0367-df54-4081-9eb5-c93d6d50856e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/forum/target/" />
     <ignored path="$PROJECT_DIR$/task/target/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -103,7 +101,7 @@
         <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/pageobject/TribeSpaceManagement.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="174">
-              <caret line="249" column="95" selection-start-line="249" selection-start-column="95" selection-end-line="249" selection-end-column="95" />
+              <caret line="249" column="36" lean-forward="true" selection-start-line="249" selection-start-column="36" selection-end-line="249" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -363,7 +361,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1601303776237" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1601304627248" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/opencsv-5.2.jar!/" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -797,7 +795,7 @@
     <frame x="67" y="25" width="1533" height="875" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.7799043" visible="true" weight="0.2555481" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7799043" visible="true" weight="0.2555481" />
       <window_info id="Structure" order="1" sideWeight="0.2200957" side_tool="true" weight="0.034969736" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -811,7 +809,7 @@
       <window_info anchor="bottom" id="Run" order="4" sideWeight="0.7316745" weight="0.43967828" />
       <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.7067922" weight="0.39812332" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.58042896" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7868191" visible="true" weight="0.37935656" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.7868191" visible="true" weight="0.48123324" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.26832548" side_tool="true" weight="0.2841823" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49966374" weight="0.71313673" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49024883" weight="0.4075067" />
@@ -2975,7 +2973,7 @@
     <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/pageobject/TribeSpaceManagement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
-          <caret line="249" column="95" selection-start-line="249" selection-start-column="95" selection-end-line="249" selection-end-column="95" />
+          <caret line="249" column="36" lean-forward="true" selection-start-line="249" selection-start-column="36" selection-end-line="249" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
