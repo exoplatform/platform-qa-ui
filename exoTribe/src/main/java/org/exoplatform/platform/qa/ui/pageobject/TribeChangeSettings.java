@@ -72,31 +72,31 @@ public class TribeChangeSettings {
 
   public void tribeEnableDisableNotificationOnMobile() {
 
-    evt.check(ELEMENT_TRIBE_NOTIFICATION_ON_MOBILE, 2);
+    $(ELEMENT_TRIBE_NOTIFICATION_ON_MOBILE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();;
 
   }
 
   public void tribeEnableDisableNotificationOnSite() {
 
-    evt.check(ELEMENT_TRIBE_NOTIFICATION_ON_SITE, 2);
+    $(ELEMENT_TRIBE_NOTIFICATION_ON_SITE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 
   public void tribeEnableDisableGeneralNotificationsViaMail() {
 
-    evt.check(ELEMENT_TRIBE_GENERAL_NOTIFICATION_VIA_MAIL, 2);
+    $(ELEMENT_TRIBE_GENERAL_NOTIFICATION_VIA_MAIL).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 
   public void tribeEnableDisableGeneralNotificationsOnSite() {
 
-    evt.check(ELEMENT_TRIBE_GENERAL_NOTIFICATION_ON_SITE, 2);
+    $(ELEMENT_TRIBE_GENERAL_NOTIFICATION_ON_SITE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 
   public void tribeEnableDisableGeneralNotificationsOnMobile() {
 
-    evt.check(ELEMENT_TRIBE_GENERAL_NOTIFICATION_ON_MOBILE, 2);
+    $(ELEMENT_TRIBE_GENERAL_NOTIFICATION_ON_MOBILE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 

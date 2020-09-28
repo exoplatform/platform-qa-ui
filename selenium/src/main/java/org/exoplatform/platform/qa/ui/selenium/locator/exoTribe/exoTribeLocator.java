@@ -510,17 +510,17 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_CONFIRM_EDIT_PASSWORD = $(byXpath("(//input[@type='password'])[3]/following::*[@class='v-btn__content'][2]"));
 
-    public static final SelenideElement ELEMENT_TRIBE_NOTIFICATION_VIA_MAIL_STATUS = $(byXpath("((//*[@class='v-list-item__title title text-color'])[3]/following::*[@class='v-input--selection-controls__input']//input)[1]"));
+    public static final SelenideElement ELEMENT_TRIBE_NOTIFICATION_VIA_MAIL_STATUS = $(byXpath("(//*[@class='v-list-item__title title text-color'])[3]/following::*[@class='v-input--selection-controls__input'][1]//input[1]"));
 
-    public static final SelenideElement ELEMENT_TRIBE_NOTIFICATION_ON_SITE_STATUS = $(byXpath("((//*[@class='v-list-item__title title text-color'])[3]/following::*[@class='v-input--selection-controls__input']//input)[2]"));
+    public static final SelenideElement ELEMENT_TRIBE_NOTIFICATION_ON_SITE_STATUS = $(byXpath("(//*[@class='v-list-item__title title text-color'])[3]/following::*[@class='v-input--selection-controls__input'][3]//input[1]"));
 
-    public static final SelenideElement ELEMENT_TRIBE_NOTIFICATION_ON_MOBILE_STATUS = $(byXpath("((//*[@class='v-list-item__title title text-color'])[3]/following::*[@class='v-input--selection-controls__input']//input)[3]"));
+    public static final SelenideElement ELEMENT_TRIBE_NOTIFICATION_ON_MOBILE_STATUS = $(byXpath("(//*[@class='v-list-item__title title text-color'])[3]/following::*[@class='v-input--selection-controls__input'][2]//input[1]"));
 
     public static final By ELEMENT_TRIBE_NOTIFICATION_VIA_MAIL = By.xpath("((//*[@class='v-list-item__title title text-color'])[3]/following::*[@class='v-input--selection-controls__input'])[1]");
 
-    public static final By ELEMENT_TRIBE_NOTIFICATION_ON_SITE = By.xpath("((//*[@class='v-list-item__title title text-color'])[3]/following::*[@class='v-input--selection-controls__input'])[2]");
+    public static final By ELEMENT_TRIBE_NOTIFICATION_ON_SITE = By.xpath("((//*[@class='v-list-item__title title text-color'])[3]/following::*[@class='v-input--selection-controls__input'])[3]");
 
-    public static final By ELEMENT_TRIBE_NOTIFICATION_ON_MOBILE = By.xpath("((//*[@class='v-list-item__title title text-color'])[3]/following::*[@class='v-input--selection-controls__input'])[3]");
+    public static final By ELEMENT_TRIBE_NOTIFICATION_ON_MOBILE = By.xpath("((//*[@class='v-list-item__title title text-color'])[3]/following::*[@class='v-input--selection-controls__input'])[2]");
 
     public static final By ELEMENT_TRIBE_GENERAL_NOTIFICATION_ON_MOBILE = By.xpath("(//*[@class='v-input--selection-controls__input'])[2]");
 
@@ -534,7 +534,7 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_GENERAL_NOTIFICATIONS_SELECT_MAIL_SENDING_TYPE = $(By.xpath("//select[@name='EMAIL_DIGEST']"));
 
-    public static final SelenideElement ELEMENT_TRIBE_MANAGE_NOTIFICATIONS = $(By.xpath("(//*[@class='v-list-item__action'])[6]//button"));
+    public static final SelenideElement ELEMENT_TRIBE_MANAGE_NOTIFICATIONS = $(By.xpath("(//*[@class='v-list-item__action'])[6]//button//span//i"));
 
     public static final SelenideElement ELEMENT_DIGITALWORKPLACE_MANAGE_NOTIFICATIONS = $(By.xpath("(//*[@class='v-list-item__action'])[7]//button"));
 
