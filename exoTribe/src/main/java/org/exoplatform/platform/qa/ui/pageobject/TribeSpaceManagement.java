@@ -247,6 +247,7 @@ public class TribeSpaceManagement {
       }
     }
     info("Save all changes");
+    ELEMENT_CREATE_SPACE_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     ELEMENT_CREATE_SPACE_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     $(byXpath("//*[@class='pl-2 align-self-center brandingContainer space']//*[contains(text(),'${spaceName}')]"
             .replace("${spaceName}",name))).waitUntil(Condition.visible,60000);
