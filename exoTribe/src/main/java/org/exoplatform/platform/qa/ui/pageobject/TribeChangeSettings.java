@@ -126,7 +126,7 @@ public class TribeChangeSettings {
   }
 
   public void goToTribeEditGeneralNotifications() {
-
+    sleep(3000);
     $(ELEMENT_TRIBE_EDIT_NOTIFICATIONS_GENERAL).waitUntil(Condition.visible, Configuration.timeout).click();
 
   }
