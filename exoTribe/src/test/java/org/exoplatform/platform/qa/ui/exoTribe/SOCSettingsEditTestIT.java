@@ -236,7 +236,7 @@ public class SOCSettingsEditTestIT extends BaseTribe {
   }
 
   @Test
-  @Tag("test1212")
+  @Tag("test12")
   public void test08_EnableDisableGeneralNotificationsOnMobile() {
 
     homePagePlatform.goToSettingsPageTribeViaUrl();

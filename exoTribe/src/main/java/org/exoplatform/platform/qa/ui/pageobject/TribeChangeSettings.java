@@ -120,7 +120,7 @@ public class TribeChangeSettings {
 
   public void goToManageNotificationsTribe() {
 
-    sleep(3000);
+    sleep(7000);
     ELEMENT_TRIBE_MANAGE_NOTIFICATIONS.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
