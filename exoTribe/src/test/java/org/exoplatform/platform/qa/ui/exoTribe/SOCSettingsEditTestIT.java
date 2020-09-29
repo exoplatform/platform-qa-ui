@@ -241,7 +241,6 @@ public class SOCSettingsEditTestIT extends BaseTribe {
 
     homePagePlatform.goToSettingsPageTribeViaUrl();
 
-    sleep(2000);
     tribeChangeSettings.goToManageNotificationsTribe();
     tribeChangeSettings.goToTribeEditGeneralNotifications();
 
