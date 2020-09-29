@@ -492,7 +492,7 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_NEW_PASSWORD_CONFIRM = $(byXpath("(//input[@type='password'])[3]"));
 
-    public static final SelenideElement ELEMENT_TRIBE_EDIT_NOTIFICATIONS_GENERAL = $(byXpath("(//*[@class='uiIconEdit uiIconLightBlue pb-2'])[1]"));
+    public static final SelenideElement ELEMENT_TRIBE_EDIT_NOTIFICATIONS_GENERAL = $(byXpath("//*[contains(text(),'Someone joins the social intranet')]/following::*[@class='uiIconEdit uiIconLightBlue pb-2'][1]"));
 
     public static final String          ELEMENT_TRIBE_CHANGE_LANGUAGE     = "//*[contains(text(),'${language}')]";
 
