@@ -4,10 +4,7 @@
     <option name="SPLITTER_PROPORTION" value="0.8413697" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc4a0367-df54-4081-9eb5-c93d6d50856e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/exoTribe/exoTribeLocator.java" beforeDir="false" afterPath="$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/exoTribe/exoTribeLocator.java" afterDir="false" />
-    </list>
+    <list default="true" id="fc4a0367-df54-4081-9eb5-c93d6d50856e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/forum/target/" />
     <ignored path="$PROJECT_DIR$/task/target/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -88,11 +85,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCSettingsEditTestIT.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="245" column="39" lean-forward="true" selection-start-line="245" selection-start-column="39" selection-end-line="245" selection-end-column="39" />
+            <state relative-caret-position="105">
+              <caret line="244" column="42" lean-forward="true" selection-start-line="244" selection-start-column="42" selection-end-line="244" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -100,17 +97,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/pageobject/TribeChangeSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="129" column="33" selection-start-line="129" selection-start-column="33" selection-end-line="129" selection-end-column="33" />
+            <state relative-caret-position="178">
+              <caret line="123" column="30" selection-start-line="123" selection-start-column="30" selection-end-line="123" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/exoTribe/exoTribeLocator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="494" column="209" selection-start-line="494" selection-start-column="209" selection-end-line="494" selection-end-column="209" />
+            <state relative-caret-position="133">
+              <caret line="536" column="40" selection-start-line="536" selection-start-column="40" selection-end-line="536" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -358,7 +355,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1601369576336" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1601369763602" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/opencsv-5.2.jar!/" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -748,12 +745,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="SOCSettingsEditTestIT_test08_EnableDisableGeneralNotificationsOnMobile - 2020.09.29 at 00h 53m 33s.xml">
-      <configuration name="SOCSettingsEditTestIT.test08_EnableDisableGeneralNotificationsOnMobile" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SOCSettingsEditTestIT_test09_EnableDisableGeneralNotificationsViaMail - 2020.09.29 at 00h 54m 20s.xml">
-      <configuration name="SOCSettingsEditTestIT.test09_EnableDisableGeneralNotificationsViaMail" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="SOCSettingsEditTestIT_test10_SelectSendMeASummaryEmailAtGeneralNotifications - 2020.09.29 at 00h 55m 12s.xml">
       <configuration name="SOCSettingsEditTestIT.test10_SelectSendMeASummaryEmailAtGeneralNotifications" configurationId="JUnit" />
     </history-entry>
@@ -776,6 +767,12 @@
       <configuration name="SOCSettingsEditTestIT.test08_EnableDisableGeneralNotificationsOnMobile" configurationId="JUnit" />
     </history-entry>
     <history-entry file="SOCSettingsEditTestIT_test08_EnableDisableGeneralNotificationsOnMobile - 2020.09.29 at 03h 13m 48s.xml">
+      <configuration name="SOCSettingsEditTestIT.test08_EnableDisableGeneralNotificationsOnMobile" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SOCSettingsEditTestIT_test08_EnableDisableGeneralNotificationsOnMobile - 2020.09.29 at 10h 52m 51s.xml">
+      <configuration name="SOCSettingsEditTestIT.test08_EnableDisableGeneralNotificationsOnMobile" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SOCSettingsEditTestIT_test08_EnableDisableGeneralNotificationsOnMobile - 2020.09.29 at 10h 53m 45s.xml">
       <configuration name="SOCSettingsEditTestIT.test08_EnableDisableGeneralNotificationsOnMobile" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -803,10 +800,10 @@
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49966374" weight="0.07372654" />
       <window_info anchor="bottom" id="Cvs" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.7316745" weight="0.45174262" />
-      <window_info active="true" anchor="bottom" id="Debug" order="5" sideWeight="0.7067922" visible="true" weight="0.39812332" />
+      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.7316745" weight="0.46380696" />
+      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.7067922" weight="0.39812332" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.58042896" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.7868191" weight="0.3069705" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.7868191" visible="true" weight="0.38873994" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.26832548" side_tool="true" weight="0.2841823" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49966374" weight="0.71313673" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49024883" weight="0.4075067" />
@@ -2953,24 +2950,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCSettingsEditTestIT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="244" column="42" lean-forward="true" selection-start-line="244" selection-start-column="42" selection-end-line="244" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/exoTribe/src/main/java/org/exoplatform/platform/qa/ui/pageobject/TribeChangeSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="129" column="33" selection-start-line="129" selection-start-column="33" selection-end-line="129" selection-end-column="33" />
+        <state relative-caret-position="178">
+          <caret line="123" column="30" selection-start-line="123" selection-start-column="30" selection-end-line="123" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/selenium/src/main/java/org/exoplatform/platform/qa/ui/selenium/locator/exoTribe/exoTribeLocator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="494" column="209" selection-start-line="494" selection-start-column="209" selection-end-line="494" selection-end-column="209" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/exoTribe/src/test/java/org/exoplatform/platform/qa/ui/exoTribe/SOCSettingsEditTestIT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="245" column="39" lean-forward="true" selection-start-line="245" selection-start-column="39" selection-end-line="245" selection-end-column="39" />
+        <state relative-caret-position="133">
+          <caret line="536" column="40" selection-start-line="536" selection-start-column="40" selection-end-line="536" selection-end-column="40" />
         </state>
       </provider>
     </entry>
