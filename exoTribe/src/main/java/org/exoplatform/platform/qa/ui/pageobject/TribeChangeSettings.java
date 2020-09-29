@@ -4,6 +4,9 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
@@ -127,7 +130,13 @@ public class TribeChangeSettings {
 
   public void goToTribeEditGeneralNotifications() {
     sleep(3000);
-    $(ELEMENT_TRIBE_EDIT_NOTIFICATIONS_GENERAL).waitUntil(Condition.visible, Configuration.timeout).click();
+    JavascriptExecutor js = (JavascriptExecutor) testBase.getExoWebDriver().getWebDriver();
+
+    try {
+      $(ELEMENT_TRIBE_EDIT_NOTIFICATIONS_GENERAL).waitUntil(Condition.visible, Configuration.timeout).click();
+    }catch(Exception ex){
+      js.executeScript("arguments[0].click();",ELEMENT_TRIBE_EDIT_NOTIFICATIONS_GENERAL);
+    }
 
   }
 
