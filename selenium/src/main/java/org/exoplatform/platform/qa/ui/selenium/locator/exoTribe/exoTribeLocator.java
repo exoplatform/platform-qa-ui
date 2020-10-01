@@ -393,6 +393,68 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_CONNECTION_REFUSE_SHOW_BTN_DW       = $(byXpath("(//*[@class='acceptToConnectButtonParent']//button)[2]"));
 
+    public static final SelenideElement ELEMENT_FIRST_USER_SUGGESTION_DW       = $(byXpath("(//*[@class='v-list-item__content pb-3']//a)[1]"));
+
+    public static final SelenideElement ELEMENT_SENT_REQUESTS_BTN_DW       = $(byXpath("//*[@id='PeopleOverview']/div/div/div/div[2]"));
+
+    public static final SelenideElement ELEMENT_CLOSE_SENT_REQUESTS_BTN_DW       = $(byXpath("//*[@class='v-list-item__action drawerIcons align-end d-flex flex-row']/button"));
+
+    public static final String ELEMENT_SENT_REQUESTS_USERS_DW       = "//*[@class='layout column']//*[@class='v-list-item__title']//a[contains(text(),'${user}')]";
+
+    public static final String ELEMENT_DELETE_SENT_REQUESTS_USERS_DW       = "//*[@class='layout column']//*[@class='v-list-item__title']//a[contains(text(),'${user}')]/following::button[1]";
+
+    public static final SelenideElement ELEMENT_SECOND_USER_SUGGESTION_DW       = $(byXpath("(//*[@class='v-list-item__content pb-3']//a)[2]"));
+
+    public static final SelenideElement ELEMENT_ADD_FIRST_USER_SUGGESTION_DW       = $(byXpath("(//*[@class='uiIconInviteUser'])[1]"));
+
+    public static final SelenideElement ELEMENT_ADD_SECOND_USER_SUGGESTION_DW       = $(byXpath("(//*[@class='uiIconInviteUser'])[2]"));
+
+    public static final SelenideElement ELEMENT_DELETE_FIRST_USER_SUGGESTION_DW       = $(byXpath("(//*[@class='uiIconCloseCircled'])[1]"));
+
+    public static final SelenideElement ELEMENT_DELETE_SECOND_USER_SUGGESTION_DW       = $(byXpath("(//*[@class='uiIconCloseCircled'])[2]"));
+
+    public static final SelenideElement ELEMENT_LEADER_BOARD_TITLE_DW       = $(byXpath("//*[@id='usersLeaderboard']//*[@class='d-inline-block']"));
+
+    public static final SelenideElement ELEMENT_CURRENT_USER_LEADER_BOARD_POSITION_DW       = $(byXpath("//*[@class='v-avatar tertiary']/span"));
+
+    public static final String ELEMENT_CURRENT_USER_LEADER_BOARD_POINTS_DW       = "(//*[@class='v-list-item__title']//a/following::*[@class='v-list-item__action mr-4'])[{id}]";
+
+    public static final SelenideElement ELEMENT_FIRST_USER_LEADER_BOARD_POSITION_DW       = $(byXpath("(//*[@class='v-list-item__title']//a)[1]"));
+
+    public static final SelenideElement ELEMENT_SECOND_USER_LEADER_BOARD_POSITION_DW       = $(byXpath("(//*[@class='v-list-item__title']//a)[2]"));
+
+    public static final SelenideElement ELEMENT_THIRD_USER_LEADER_BOARD_POSITION_DW       = $(byXpath("(//*[@class='v-list-item__title']//a)[3]"));
+
+    public static final SelenideElement ELEMENT_FOURTH_USER_LEADER_BOARD_POSITION_DW       = $(byXpath("(//*[@class='v-list-item__title']//a)[4]"));
+
+    public static final SelenideElement ELEMENT_FIFTH_USER_LEADER_BOARD_POSITION_DW       = $(byXpath("(//*[@class='v-list-item__title']//a)[5]"));
+
+    public static final SelenideElement ELEMENT_SIXTH_USER_LEADER_BOARD_POSITION_DW       = $(byXpath("(//*[@class='v-list-item__title']//a)[6]"));
+
+    public static final SelenideElement ELEMENT_SEVENTH_USER_LEADER_BOARD_POSITION_DW       = $(byXpath("(//*[@class='v-list-item__title']//a)[7]"));
+
+    public static final SelenideElement ELEMENT_EIGHTH_USER_LEADER_BOARD_POSITION_DW       = $(byXpath("(//*[@class='v-list-item__title']//a)[8]"));
+
+    public static final SelenideElement ELEMENT_NINTH_USER_LEADER_BOARD_POSITION_DW       = $(byXpath("(//*[@class='v-list-item__title']//a)[9]"));
+
+    public static final SelenideElement ELEMENT_FIRST_USER_LEADER_BOARD_POINTS_DW       = $(byXpath("(//*[@class='v-list-item__title']//a/following::*[@class='v-list-item__action mr-4'])[1]"));
+
+    public static final SelenideElement ELEMENT_SECOND_USER_LEADER_BOARD_POINTS_DW       = $(byXpath("(//*[@class='v-list-item__title']//a/following::*[@class='v-list-item__action mr-4'])[2]"));
+
+    public static final SelenideElement ELEMENT_THIRD_USER_LEADER_BOARD_POINTS_DW       = $(byXpath("(//*[@class='v-list-item__title']//a/following::*[@class='v-list-item__action mr-4'])[3]"));
+
+    public static final SelenideElement ELEMENT_FOURTH_USER_LEADER_BOARD_POINTS_DW       = $(byXpath("(//*[@class='v-list-item__title']//a/following::*[@class='v-list-item__action mr-4'])[4]"));
+
+    public static final SelenideElement ELEMENT_FIFTH_USER_LEADER_BOARD_POINTS_DW       = $(byXpath("(//*[@class='v-list-item__title']//a/following::*[@class='v-list-item__action mr-4'])[5]"));
+
+    public static final SelenideElement ELEMENT_SIXTH_USER_LEADER_BOARD_POINTS_DW       = $(byXpath("(//*[@class='v-list-item__title']//a/following::*[@class='v-list-item__action mr-4'])[6]"));
+
+    public static final SelenideElement ELEMENT_SEVENTH_USER_LEADER_BOARD_POINTS_DW       = $(byXpath("(//*[@class='v-list-item__title']//a/following::*[@class='v-list-item__action mr-4'])[7]"));
+
+    public static final SelenideElement ELEMENT_EIGHTH_USER_LEADER_BOARD_POINTS_DW       = $(byXpath("(//*[@class='v-list-item__title']//a/following::*[@class='v-list-item__action mr-4'])[8]"));
+
+    public static final SelenideElement ELEMENT_NINTH_USER_LEADER_BOARD_POINTS_DW       = $(byXpath("(//*[@class='v-list-item__title']//a/following::*[@class='v-list-item__action mr-4'])[9]"));
+
     public static final SelenideElement ELEMENT_CONNECTION_DISONNECT_REFUSE_BTN_DW       = $(byXpath("//*[@class='uiIconSocCancelConnectUser peopleRelationshipIcon d-inline']"));
 
     public static final SelenideElement ELEMENT_MY_CONNECTIONS_BTN_DW       = $(byXpath("//*[@id='peopleListToolbar']//select"));

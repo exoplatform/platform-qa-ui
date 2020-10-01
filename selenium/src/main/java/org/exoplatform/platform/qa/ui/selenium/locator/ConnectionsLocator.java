@@ -39,6 +39,102 @@ public class ConnectionsLocator {
 
   public static final SelenideElement ELEMENT_CONNECTION_REVOVE_BTN           = $(byText("Remove Connection"));
 
+  public static final SelenideElement ELEMENT_PROFILE_AVATAR_DW           = $(byXpath("(//*[@id='ProfileHeader']//*[@class='v-image__image v-image__image--cover'])[2]"));
+
+  public static final SelenideElement ELEMENT_PROFILE_COVER_DW           = $(byXpath("(//*[@id='ProfileHeader']//*[@class='v-image__image v-image__image--cover'])[1]"));
+
+  public static final SelenideElement ELEMENT_PROFILE_FULLNAME_DW           = $(byXpath("(//*[@class='profileHeader']/div/div/div)[1]"));
+
+  public static final SelenideElement ELEMENT_PROFILE_JOB_DW           = $(byXpath("(//*[@class='profileHeader']/div/div/div)[2]"));
+
+  public static final SelenideElement ELEMENT_CONTACT_INFORMATIONS_EDIT_BTN_DW           = $(byXpath("//*[@id='ProfileContactInformation']//*[@class='uiIconEdit uiIconLightBlue pb-2']"));
+
+  public static final SelenideElement ELEMENT_CONTACT_FIRST_NAME_EDIT_BTN_DW           = $(byXpath("(//*[@class='v-card__text d-flex fullnameFields py-0']//input)[1]"));
+
+  public static final SelenideElement ELEMENT_CONTACT_LAST_NAME_EDIT_BTN_DW           = $(byXpath("(//*[@class='v-card__text d-flex fullnameFields py-0']//input)[2]"));
+
+  public static final SelenideElement ELEMENT_CONTACT_EMAIL_EDIT_BTN_DW           = $(byXpath("(//*[@class='v-card__text d-flex emailField py-0']//input)[1]"));
+
+  public static final SelenideElement ELEMENT_CONTACT_JOB_TITLE_EDIT_BTN_DW           = $(byXpath("(//*[@class='v-card__text d-flex positionField py-0']//input)[1]"));
+
+  public static final SelenideElement ELEMENT_CONTACT_COMPANY_TITLE_EDIT_BTN_DW           = $(byXpath("(//*[@class='v-card__text d-flex positionField py-0']//input)[2]"));
+
+  public static final SelenideElement ELEMENT_CONTACT_PHONE_TITLE_EDIT_BTN_DW           = $(byXpath("//*[@class='v-card__text d-flex positionField py-0'][8]/following::input[1]"));
+
+  public static final SelenideElement ELEMENT_CONTACT_PHONE_TYPE_SELECT_EDIT_BTN_DW           = $(byXpath("//*[@class='v-card__text d-flex positionField py-0'][8]/following::select[1]"));
+
+  public static final SelenideElement ELEMENT_CONTACT_NEW_PHONE_TYPE_SELECT_EDIT_BTN_DW           = $(byXpath("//*[@class='v-card__text d-flex positionField py-0'][8]/following::select[2]"));
+
+  public static final SelenideElement ELEMENT_CONTACT_INSTANT_MESSAGING_TITLE_EDIT_BTN_DW           = $(byXpath("//*[@class='v-card__text d-flex positionField py-0'][8]/following::input[2]"));
+
+  public static final SelenideElement ELEMENT_CONTACT_INSTANT_MESSAGING_TYPE_SELECT_EDIT_BTN_DW     = $(byXpath("//*[@class='v-card__text d-flex positionField py-0'][8]/following::select[2]"));
+
+  public static final SelenideElement ELEMENT_CONTACT_NEW_INSTANT_MESSAGING_TYPE_SELECT_EDIT_BTN_DW     = $(byXpath("//*[@class='v-card__text d-flex positionField py-0'][8]/following::select[4]"));
+
+  public static final SelenideElement ELEMENT_CONTACT_URL_TITLE_EDIT_BTN_DW           = $(byXpath("//*[@class='v-card__text d-flex positionField py-0'][8]/following::input[3]"));
+
+  public static final SelenideElement ELEMENT_CONTACT_EDIT_SAVE_BTN_DW           = $(byXpath("(//*[@class='layout column']//*[@class='d-flex']//button)[7]"));
+
+  public static final SelenideElement ELEMENT_PROFILE_CONTACT_INFORMATION_TITLE_DW           = $(byXpath("//*[@id='ProfileContactInformation']//*[@class='text-header-title text-sub-title']"));
+
+  public static final SelenideElement ELEMENT_PROFILE_CONTACT_INFORMATION_FULLNAME_DW           = $(byXpath("(//*[@id='ProfileContactInformation']//*[@class='flex d-flex']//div[2])[1]"));
+
+  public static final SelenideElement ELEMENT_PROFILE_CONTACT_INFORMATION_EMAIL_DW           = $(byXpath("(//*[@id='ProfileContactInformation']//*[@class='flex d-flex']//div[2])[2]"));
+
+  public static final SelenideElement ELEMENT_PROFILE_CONTACT_INFORMATION_JOBTITLE_DW           = $(byXpath("(//*[@id='ProfileContactInformation']//*[@class='flex d-flex']//div[2])[3]"));
+
+  public static final SelenideElement ELEMENT_PROFILE_CONTACT_INFORMATION_COMPANY_DW           = $(byXpath("(//*[@id='ProfileContactInformation']//*[@class='flex d-flex']//div[2])[4]"));
+
+  public static final SelenideElement ELEMENT_PROFILE_CONTACT_INFORMATION_PHONE_DW           = $(byXpath("(//*[@id='ProfileContactInformation']//*[@class='flex d-flex']//div[2])[5]"));
+
+  public static final SelenideElement ELEMENT_PROFILE_CONTACT_INFORMATION__FIRST_PHONE_DW     = $(byXpath("(//*[@id='ProfileContactInformation']//*[@class='flex d-flex']//div[2])[5]//div[1]"));
+
+  public static final SelenideElement ELEMENT_PROFILE_CONTACT_INFORMATION_SECOND_PHONE_DW      = $(byXpath("(//*[@id='ProfileContactInformation']//*[@class='flex d-flex']//div[2])[5]//div[2]"));
+
+  public static final SelenideElement ELEMENT_PROFILE_CONTACT_INFORMATION_FIRST_INSTANT_MESSAGING_DW    = $(byXpath("(//*[@id='ProfileContactInformation']//*[@class='flex d-flex']//div[2])[7]//div[1]"));
+
+  public static final SelenideElement ELEMENT_PROFILE_CONTACT_INFORMATION_SECOND_INSTANT_MESSAGING_DW    = $(byXpath("(//*[@id='ProfileContactInformation']//*[@class='flex d-flex']//div[2])[7]//div[2]"));
+
+  public static final SelenideElement ELEMENT_PROFILE_CONTACT_INFORMATION__FIRST_URL_DW     = $(byXpath("(//*[@id='ProfileContactInformation']//*[@class='flex d-flex']//div[2])[9]//div[1]"));
+
+  public static final SelenideElement ELEMENT_PROFILE_CONTACT_INFORMATION_SECOND_URL_DW      = $(byXpath("(//*[@id='ProfileContactInformation']//*[@class='flex d-flex']//div[2])[9]//div[2]"));
+
+  public static final SelenideElement ELEMENT_PROFILE_CONTACT_INFORMATION_INSTANT_MESSAGING_DW           = $(byXpath("(//*[@id='ProfileContactInformation']//*[@class='flex d-flex']//div[2])[6]"));
+
+  public static final SelenideElement ELEMENT_PROFILE_CONTACT_INFORMATION_URL_DW           = $(byXpath("(//*[@id='ProfileContactInformation']//*[@class='flex d-flex']//div[2])[7]"));
+
+  public static final SelenideElement ELEMENT_ADD_CONTACT_NEW_PHONE_DW  = $(byXpath("(//*[@class='v-card__text d-flex positionField py-0'][8]/following::*[@class='d-flex']/div[2])[1]/button"));
+
+  public static final SelenideElement ELEMENT_ADD_CONTACT_NEW_INSTANT_MESSAGING_DW  = $(byXpath("(//*[@class='v-card__text d-flex positionField py-0'][8]/following::*[@class='d-flex']/div[2])[2]/button"));
+
+  public static final SelenideElement ELEMENT_ADD_CONTACT_NEW_URL_DW  = $(byXpath("(//*[@class='v-card__text d-flex positionField py-0'][8]/following::*[@class='d-flex']/div[2])[3]/button"));
+
+  public static final SelenideElement ELEMENT_CONTACT_NEW_PHONE_TITLE_EDIT_BTN_DW           = $(byXpath("//*[@class='v-card__text d-flex positionField py-0'][8]/following::input[2]"));
+
+  public static final SelenideElement ELEMENT_CONTACT_NEW_INSTANT_MESSAGING_TITLE_EDIT_BTN_DW           = $(byXpath("//*[@class='v-card__text d-flex positionField py-0'][8]/following::input[4]"));
+
+  public static final SelenideElement ELEMENT_CONTACT_NEW_URL_TITLE_EDIT_BTN_DW           = $(byXpath("//*[@class='v-card__text d-flex positionField py-0'][8]/following::input[6]"));
+
+  public static final SelenideElement ELEMENT_TRIBE_ADD_CONTACT_BTN_DW           = $(byXpath("//*[@class='uiIconSocConnectUser peopleRelationshipIcon d-inline']"));
+
+  public static final SelenideElement ELEMENT_CONTACT_AVATAR_DW           = $(byXpath("//*[@class='peopleAvatar']//*[@class='v-image__image v-image__image--cover']"));
+
+  public static final SelenideElement ELEMENT_ADD_CONTACT_TITLE_DW           = $(byXpath("//*[@class='d-inline peopleRelationshipButtonText']"));
+
+  public static final SelenideElement ELEMENT_ADD_CONTACT_JOB_DW           = $(byXpath("//*[@class='v-card__subtitle userPositionLabel text-truncate py-0']"));
+
+  public static final SelenideElement ELEMENT_ADD_CONTACT_FULLNAME_DW           = $(byXpath("//*[@class='v-card__text peopleCardBody align-center pt-2 pb-1']//a"));
+
+  public static final SelenideElement ELEMENT_PEOPLE_SHOWING_RESULTS_DW          = $(byXpath("//*[@class='showingPeopleText text-sub-title ml-3 d-none d-sm-flex']"));
+
+  public static final SelenideElement ELEMENT_PEOPLE_PULLDOWN_FILTER_DW          = $(byXpath("//*[@class='v-text-field__slot']/following::select[1]"));
+
+  public static final String ELEMENT_ADD_CONTACT_FULLNAM_WITH_PARAM_DW          = "//*[@class='v-card__text peopleCardBody align-center pt-2 pb-1']//a[contains(text(),'${user}')]";
+
+  public static final SelenideElement ELEMENT_ADD_CONTACT_COVER_DW           = $(byXpath("//*[@class='peopleCardFront']/div/div/div[@class='v-image__image v-image__image--cover']"));
+
+  public static final SelenideElement ELEMENT_ADD_CONTACT_COVER_WIDTH_DW           = $(byXpath("//*[@class='peopleCardFront']/div/div/div[@class='v-image__image v-image__image--cover']/following::div[@class='v-responsive__content'][1]"));
+
   public static final String          ELEMENT_CONNECTION_IGNORE_BTN           =
                                                                     " //a[contains(@href,'${user}')]/../..//*[text()='Ignore']";
 

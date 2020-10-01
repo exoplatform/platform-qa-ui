@@ -164,6 +164,14 @@ public class HomePagePlatform {
 
   }
 
+  public void goToProfilesPageTribeViaUrl() {
+
+    open(Configuration.baseUrl + "portal/dw/profile");
+    sleep(2000);
+    $(byXpath("//*[@id='ProfileHeader']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+  }
+
   public void goToSnapshotPageTribe() {
 
     info("Click on Home page");

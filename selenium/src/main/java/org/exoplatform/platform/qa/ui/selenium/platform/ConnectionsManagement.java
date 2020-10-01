@@ -97,13 +97,13 @@ public class ConnectionsManagement {
     else
       tribeSearchPeople(username, null, null, null);
     if ($(ELEMENT_CONNECTION_REMOVE_DW_BTN).is(Condition.exist)) {
-      $(ELEMENT_CONNECTION_REMOVE_DW_BTN).click();
+      $(ELEMENT_CONNECTION_REMOVE_DW_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
     if ($(ELEMENT_CONNECTION_CANCEL_DW_BTN).is(Condition.exist)) {
-      $(ELEMENT_CONNECTION_CANCEL_DW_BTN).click();
+      $(ELEMENT_CONNECTION_CANCEL_DW_BTN).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     }
     sleep(2000);
-    $(byXpath("//*[@class='uiIconSocConnectUser peopleRelationshipIcon d-inline']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_ADD_CONTACT_BTN_DW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     info("Connected to the user");
   }
 

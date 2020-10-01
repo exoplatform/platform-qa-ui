@@ -126,6 +126,7 @@ public class SOCSpaceHomePageTestIT extends BaseTribe {
   }
 
   @Test
+  @BugInPLF("Bug")
   public void test03_UploadPictureAndOpenItInDocument() {
 
     String spaceNamea = "spaceNamea" + getRandomNumber();

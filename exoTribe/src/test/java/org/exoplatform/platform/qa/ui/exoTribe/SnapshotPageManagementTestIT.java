@@ -193,7 +193,7 @@ public class SnapshotPageManagementTestIT extends BaseTribe {
     Assert.assertEquals(intialSnapshotWeeklyPoints + 3, lastSnapshotWeeklyPoints);
 
     info("Check That The Created Task Is Displayed In Snapshot Page");
-    $(byXpath("//*[@id='tasks']//*[@class='taskTitle' and @title='${taskName}']".replace("${taskName}",taskName))).waitUntil(Condition.visible, openBrowserTimeoutMs);
+    $(byXpath("//*[@id='tasks']//*[@class='taskTitle' and @title='${taskName}']".replace("${taskName}",taskName))).isDisplayed();
 
     info("Delete Task");
     homePagePlatform.goToTasksPageDW();

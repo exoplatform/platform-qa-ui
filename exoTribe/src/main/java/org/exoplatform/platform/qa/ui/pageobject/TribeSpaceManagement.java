@@ -141,6 +141,8 @@ public class TribeSpaceManagement {
    * @param params
    */
   public void addNewSpaceTribe(String name, String desc, String access, String hidden, ArrayList<String> groups, int... params) {
+
+    sleep(1000);
     if ($(ELEMENT_ADDNEWSPACE_SECOND_TRIBE_BUTTON).waitUntil(Condition.visible, Configuration.timeout) != null) {
       $(ELEMENT_ADDNEWSPACE_SECOND_TRIBE_BUTTON).click();
     }
@@ -247,7 +249,7 @@ public class TribeSpaceManagement {
       }
     }
     info("Save all changes");
-    sleep(2000);
+    sleep(3000);
     ELEMENT_CREATE_SPACE_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     $(byXpath("//*[@class='pl-2 align-self-center brandingContainer space']//*[contains(text(),'${spaceName}')]"
             .replace("${spaceName}",name))).waitUntil(Condition.visible,60000);
