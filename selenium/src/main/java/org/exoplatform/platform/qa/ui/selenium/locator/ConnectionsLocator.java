@@ -174,8 +174,12 @@ public class ConnectionsLocator {
   public static final SelenideElement ELEMENT_SEARCHED_NAME_OF_PEOPLE         =   $(byXpath("//*[@id='uiTableProfileUserSearchInput']/div[1]/div/div/div[1]/div"));
 
   public static final SelenideElement ELEMENT_CONTENT_PEOPLE                  = $(byXpath("//*[@id='UIAllPeople']/div[2]/div"));
+
   public static final SelenideElement ELEMENT_USER_RESULT_SEARCH                = $(byClassName(" spaceBox"));
+
   public static final SelenideElement ELEMENT_USER_PROFILE                = $(byClassName("uiIconAppprofile"));
+
+  public static final String ELEMENT_USER_SEARCH_TITLE                = "//*[@id='searchDialog']//a[@title='${user}']";
 
 
 

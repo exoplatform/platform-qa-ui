@@ -125,7 +125,7 @@ public class TribeWikiManagement {
    */
   public void publishPageWhenEditPage() {
     info("check on publish checkbox");
-    evt.check(ELEMENT_PUBLISH_ACTIVITY_CHECKBOX, 2);
+    $(ELEMENT_PUBLISH_ACTIVITY_CHECKBOX).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
   }
 
   /**

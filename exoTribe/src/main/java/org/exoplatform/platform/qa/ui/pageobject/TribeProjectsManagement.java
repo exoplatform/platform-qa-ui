@@ -35,12 +35,12 @@ public class TribeProjectsManagement {
    *          project in Calendar application = false if don't want.
    */
   public void addProject(String title, String des, boolean enableCalendar) {
-    ELEMENT_PROJECT_ICON_ADD_PROJECT.waitUntil(Condition.visible, Configuration.timeout).click();
-    ELEMENT_ADD_PROJECT.waitUntil(Condition.visible, Configuration.timeout).click();
+    ELEMENT_PROJECT_ICON_ADD_PROJECT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_ADD_PROJECT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     info("Create a new project");
     if (title != null || title != "") {
       info("Input title");
-      $(ELEMENT_ADD_PROJECT_TITLE).waitUntil(Condition.visible, Configuration.timeout).setValue(title);
+      $(ELEMENT_ADD_PROJECT_TITLE).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(title);
     }
     if (des != null || des != "") {
       info("Input description");
@@ -52,8 +52,8 @@ public class TribeProjectsManagement {
       info("Disable Calendar intergration");
       evt.uncheck(ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX, 2);
     }
-    ELEMENT_SAVE_PROJECT.waitUntil(Condition.visible, Configuration.timeout).click();
-    $(byText(title)).should(Condition.visible);
+    ELEMENT_SAVE_PROJECT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byText(title)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
   }
 
   /**
@@ -95,11 +95,12 @@ public class TribeProjectsManagement {
 
   public void deleteProject(String title) {
     $(byText(title)).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
-    sleep(1000);
+    sleep(2000);
     $(byText(title)).parent().parent().find(ELEMENT_ICON_PROJECT).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     $(byText(title)).parent().parent().find(ELEMENT_DELETE_PROJECT_OPTION).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     executeJavaScript("window.scrollBy(0,500)");
     ELEMENT_CONFIRM_DELETE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
     $(byText(title)).waitUntil(Condition.not(Condition.visible),Configuration.openBrowserTimeoutMs);
   }
 

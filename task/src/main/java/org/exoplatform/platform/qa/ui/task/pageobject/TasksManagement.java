@@ -60,7 +60,7 @@ public class TasksManagement {
     ELEMENT_TASK_FORM_ICOND_DROP_DOWN_MENU.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TASK_BUTTON_DELETE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TASK_BUTTON_DELETE_OK.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-    $(byText(taskContent)).should(Condition.exist);
+    $(byText(taskContent)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
   }
 
   public void deleteTaskDW(String taskContent) {

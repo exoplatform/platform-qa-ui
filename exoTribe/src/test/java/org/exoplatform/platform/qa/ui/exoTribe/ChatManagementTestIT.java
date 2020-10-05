@@ -17,8 +17,11 @@ import org.exoplatform.platform.qa.ui.task.pageobject.ProjectsManagement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
 import static com.codeborne.selenide.Selectors.*;
@@ -81,6 +84,13 @@ public class ChatManagementTestIT extends BaseTribe {
     spaceManagement = new SpaceManagement(this);
     spaceSettingManagement = new SpaceSettingManagement(this);
     projectsManagement = new ProjectsManagement(this);
+
+    getExoWebDriver().getWebDriver().close();
+
+    System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+    WebDriver driver = new ChromeDriver();
+    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
     manageLogInOut.signInTribe(tribe_username, tribe_password);
 
   }

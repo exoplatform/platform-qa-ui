@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.exoTribe;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
@@ -208,6 +209,7 @@ public class WikiTemplateDWIT extends BaseTribe {
   }
 
   @Test
+  @BugInPLF("Bug")
   public void test04_CreateNewTemplateWhenUsingItalicWritingContent() {
 
     info("Create a space");
@@ -247,6 +249,7 @@ public class WikiTemplateDWIT extends BaseTribe {
   }
 
   @Test
+  @BugInPLF("Bug")
   public void test05_CreateNewTemplateWhenUsingHeadingEffectWritingContent() {
 
     String space = "space" + getRandomNumber();
@@ -292,6 +295,7 @@ public class WikiTemplateDWIT extends BaseTribe {
   }
 
   @Test
+  @BugInPLF("Bug")
   public void test06_CreateNewTemplateWhenUsingLinkEffectWritingContent() {
 
     String space = "space" + getRandomNumber();
@@ -332,6 +336,7 @@ public class WikiTemplateDWIT extends BaseTribe {
   }
 
   @Test
+  @BugInPLF("Bug")
   public void test07_CreateNewTemplateWhenUsingNumberedEffectWritingContent() {
 
     String space = "space" + getRandomNumber();
@@ -372,6 +377,7 @@ public class WikiTemplateDWIT extends BaseTribe {
   }
 
   @Test
+  @BugInPLF("Bug")
   public void test08_CreateNewTemplateWhenUsingStrikeEffectWritingContent() {
 
     String space = "space" + getRandomNumber();
@@ -412,6 +418,7 @@ public class WikiTemplateDWIT extends BaseTribe {
   }
 
   @Test
+  @BugInPLF("Bug")
   public void test09_CreateNewTemplateWhenUsingUnderlineEffectWritingContent() {
 
     String space = "space" + getRandomNumber();
@@ -495,6 +502,7 @@ public class WikiTemplateDWIT extends BaseTribe {
   }
 
   @Test
+  @BugInPLF("Bug")
   public void test11_UseACreatedTemplateToAddNewPage() {
     info("Add a new template");
     String title = "title" + getRandomNumber();
@@ -534,6 +542,7 @@ public class WikiTemplateDWIT extends BaseTribe {
   }
 
   @Test
+  @BugInPLF("Bug")
   public void test12_CreateNewTemplateWhenUsingBulletedListEffectWritingContent() {
     info("Add a new template");
     String title3 = "title3" + getRandomNumber();

@@ -237,20 +237,21 @@ public class TribeSpaceManagement {
         ;
       }
     }
-
+     sleep(1000);
     $(byXpath("(//*[@class='layout column']//*[@class='v-btn__content' and contains(text(),'Continue')])[2]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_INVITE_USERS_DW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     if (groups!= null) {
       for (int i = 0; i < groups.size(); i++) {
-        sleep(2000);
+        sleep(3000);
         ELEMENT_SPACE_INPUT_USER_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
         ELEMENT_SPACE_INPUT_USER_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(groups.get(i));
+        sleep(1000);
         $(byXpath("//*[@class='v-list-item__title text-truncate identitySuggestionMenuItemText' and contains(text(),'${group}')]".replace("${group}", groups.get(i)))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
       }
     }
     info("Save all changes");
     sleep(3000);
-    ELEMENT_CREATE_SPACE_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CREATE_SPACE_TRIBE.click();
     $(byXpath("//*[@class='pl-2 align-self-center brandingContainer space']//*[contains(text(),'${spaceName}')]"
             .replace("${spaceName}",name))).waitUntil(Condition.visible,60000);
 

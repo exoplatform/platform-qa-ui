@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.exoTribe;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.pageobject.*;
 import org.exoplatform.platform.qa.ui.selenium.platform.ActivityStream;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
@@ -78,6 +79,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
   }
 
   @Test
+  @BugInPLF("Bug")
   public void test01_AutoSaveWhenAddingPageFromHowToGuideThreeColumnLayoutStatusMeetingLeavePlanningTwoColumnLayoutTemplatesOnSpace() {
     info("Auto Save when adding page from template");
     String title = "title1" + getRandomNumber();
@@ -106,6 +108,7 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
   }
 
   @Test
+  @BugInPLF("Bug")
   public void test02_CreateDeletePageFromStatusMeetingTemplateOnSpace() {
     info("Create page from template");
     SelenideElement template = ELEMENT_SELECT_TEMPLATE_StatusMeeting;

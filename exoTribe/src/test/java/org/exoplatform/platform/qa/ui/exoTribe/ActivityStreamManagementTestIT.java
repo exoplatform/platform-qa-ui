@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.exoTribe;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
 import org.exoplatform.platform.qa.ui.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
@@ -92,6 +93,7 @@ public class ActivityStreamManagementTestIT extends BaseTribe {
   }
 
   @Test
+  @Tag("www")
   public void test02_LikeDislike_Activity() {
 
     String spaceNamea = "spaceNamea" + getRandomNumber();
@@ -293,6 +295,7 @@ public class ActivityStreamManagementTestIT extends BaseTribe {
   }
 
   @Test
+  @BugInPLF("Restore_Data")
   public void test07_SendActivityKudosByOtherUser() {
 
     String spaceNamea = "spacenamea" + getRandomNumber();

@@ -587,9 +587,12 @@ public class NavigationToolbar {
 
   public void checkThatAllNotificationAreMarkedAsReadDW() {
 
+    sleep(1000);
+    $(byXpath("//*[@class='notificationsActions']//*[@class='actionMark enabled']")).isDisplayed();
     ELEMENT_SEE_ALL_NOTIFICATIONS.waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     info("Check That Mark As Read Button Is Disabled");
-    $(byXpath("//*[@class='notificationsActions']//*[@class='actionMark enabled']")).waitUntil(Condition.not(Condition.visible), openBrowserTimeoutMs).isDisplayed();
+    sleep(1000);
+    $(byXpath("//*[@class='notificationsActions']//*[@class='actionMark ']")).isDisplayed();
 
   }
 

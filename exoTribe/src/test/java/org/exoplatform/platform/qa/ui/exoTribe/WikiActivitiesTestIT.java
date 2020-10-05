@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_password;
 import static org.exoplatform.platform.qa.ui.core.PLFData.tribe_username;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
@@ -250,11 +251,11 @@ public class WikiActivitiesTestIT extends BaseTribe {
     tribeWikiManagement.goToSourceEditor();
     tribeSourceTextEditor.addSimplePage(title2, content2);
     tribeWikiManagement.saveAddPage();
-
     homePagePlatform.goToSnapshotPageTribe();
     ELEMENT_ICON_SEARCH.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SEARCH_INPUT_DW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(title);
-    $(By.xpath("//div[@title='${title}']".replace("${title}",title))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+    sleep(3000);
+    $(By.xpath("//*[@class='v-list-item__title' and @title='${title}']".replace("${title}",title))).isDisplayed();
     homePagePlatform.goToMySpacesTribe();
     tribeSpaceManagement.searchSpace(space);
     tribeSpaceManagement.accessToSearchedSpace();

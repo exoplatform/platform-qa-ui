@@ -138,6 +138,7 @@ public class SOCSettingsEditTestIT extends BaseTribe {
   }
 
   @Test
+  @Tag("tty")
   public void test04_EnableDisableNotificationViaMail() {
 
     homePagePlatform.goToSettingsPageTribeViaUrl();

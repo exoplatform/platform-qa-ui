@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
 import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
 import org.exoplatform.platform.qa.ui.pageobject.TribeLabelsManagement;
 import org.exoplatform.platform.qa.ui.pageobject.TribeProjectsManagement;
@@ -84,6 +85,7 @@ public class TaskManagementTestIT extends BaseTribe {
   }
 
   @Test
+  @BugInPLF("Bug")
   public void test02_Add_Edit_Delete_Label() {
 
     String label = "label" + getRandomNumber();
@@ -146,7 +148,7 @@ public class TaskManagementTestIT extends BaseTribe {
 
     executeJavaScript("window.scrollBy(0,-20000)");
     tasksManagement.addTask(task);
-    $(byText(task)).should(Condition.exist);
+    $(byText(task)).waitUntil(Condition.exist,Configuration.openBrowserTimeoutMs);
 
     info("delete task");
     tasksManagement.deleteTask(task);
@@ -185,6 +187,7 @@ public class TaskManagementTestIT extends BaseTribe {
   }
 
   @Test
+  @BugInPLF("Bug")
   public void test06_addTaskInLabel() {
 
     String task = "task" + getRandomNumber();
@@ -219,11 +222,12 @@ public class TaskManagementTestIT extends BaseTribe {
 
     info("mark task as completed");
     ELEMENT_TASKS_LIST.find(byText(task)).parent().find(ELEMENT_ICON_MARK_AS_COMPLETED).click();
-    $(byText(task)).shouldNot(Condition.exist);
+    $(byText(task)).waitUntil(Condition.not(Condition.exist), Configuration.openBrowserTimeoutMs);
 
   }
 
   @Test
+  @BugInPLF("Bug")
   public void test08_commentTask_WithImage() {
 
     String taskName = "task" + getRandomNumber();

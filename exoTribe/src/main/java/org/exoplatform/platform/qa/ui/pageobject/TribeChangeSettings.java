@@ -68,8 +68,10 @@ public class TribeChangeSettings {
   }
 
   public void tribeEnableDisableNotificationViaMail() {
-
-    $(ELEMENT_TRIBE_NOTIFICATION_VIA_MAIL).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    /*JavascriptExecutor executor = (JavascriptExecutor)driver;
+    executor.executeScript("arguments[0].click();", element);*/
+    $(ELEMENT_TRIBE_NOTIFICATION_VIA_MAIL).isDisplayed();
+    $(ELEMENT_TRIBE_NOTIFICATION_VIA_MAIL).click();
 
   }
 

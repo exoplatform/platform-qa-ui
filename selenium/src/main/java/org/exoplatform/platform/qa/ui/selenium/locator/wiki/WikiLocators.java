@@ -298,7 +298,7 @@ public class WikiLocators {
 
     public static final By ELEMENT_CONTENT_WIKI_INPUT = By.id("Markup");
 
-    public static final By ELEMENT_PUBLISH_ACTIVITY_CHECKBOX = By.id("PublishActivityUpper");
+    public static final By ELEMENT_PUBLISH_ACTIVITY_CHECKBOX = By.xpath("//*[@class='uiCheckbox']");
 
     public static final By ELEMENT_PREVIEW_BUTTON =
             By.xpath("//*[@class='uiIconWatchPage']");
