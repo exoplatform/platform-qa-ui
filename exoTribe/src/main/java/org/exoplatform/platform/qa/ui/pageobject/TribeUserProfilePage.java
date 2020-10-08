@@ -4,7 +4,10 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 
 import static com.codeborne.selenide.Selenide.$;
 import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator.*;
@@ -50,7 +53,8 @@ public class TribeUserProfilePage {
       $(ELEMENT_CONTACT_JOB_TITLE_EDIT_BTN_DW).setValue(job);
     }
 
-    ELEMENT_CONTACT_EDIT_SAVE_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    JavascriptExecutor executor = (JavascriptExecutor)testBase.getExoWebDriver().getWebDriver();
+    executor.executeScript("arguments[0].click();", ELEMENT_CONTACT_EDIT_SAVE_BTN_DW);
 
   }
 

@@ -3,7 +3,6 @@ package org.exoplatform.platform.qa.ui.exoTribe;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseTribe;
-import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
 import org.exoplatform.platform.qa.ui.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
@@ -93,7 +92,6 @@ public class ActivityStreamManagementTestIT extends BaseTribe {
   }
 
   @Test
-  @Tag("www")
   public void test02_LikeDislike_Activity() {
 
     String spaceNamea = "spaceNamea" + getRandomNumber();
@@ -295,14 +293,13 @@ public class ActivityStreamManagementTestIT extends BaseTribe {
   }
 
   @Test
-  @BugInPLF("Restore_Data")
   public void test07_SendActivityKudosByOtherUser() {
 
     String spaceNamea = "spacenamea" + getRandomNumber();
     String spaceDesa = "descriptiona" + getRandomNumber();
     String activity1 = "activity1" + getRandomNumber();
     String kudosMessage = "Thanks for your help";
-    String user1 = tribe_user2;
+    String user1 = tribe_user4;
 
     ArrayList<String> inviteUsers = new ArrayList<>();
     inviteUsers.add(user1);
@@ -313,7 +310,7 @@ public class ActivityStreamManagementTestIT extends BaseTribe {
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     tribeActivityStream.addTribeActivity(activity1, "");
 
-    manageLogInOut.signInTribe(tribe_username2, tribe_password2);
+    manageLogInOut.signInTribe(tribe_username4, tribe_password4);
 
     navigationToolbar.goToIntranetNotificationDW();
     navigationToolbar.acceptJoinSpaceViaNotificationnDW(spaceNamea);
@@ -335,7 +332,7 @@ public class ActivityStreamManagementTestIT extends BaseTribe {
     tribeSpaceManagement.accessToSearchedSpace();
 
     info("Check That User Who Sends A Kudos Is Displayed");
-    tribeActivityStream.checkThatUserWhoSendsAKudosIsDisplayedTribe(tribe_user2, activity1, kudosMessage, tribe_user);
+    tribeActivityStream.checkThatUserWhoSendsAKudosIsDisplayedTribe(tribe_user4, activity1, kudosMessage, tribe_user);
 
     tribeActivityStream.deleteactivityDW(activity1);
     homePagePlatform.goToMySpacesTribeViaUrl();

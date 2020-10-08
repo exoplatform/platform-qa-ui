@@ -75,6 +75,18 @@ public class ConnectionsLocator {
 
   public static final SelenideElement ELEMENT_CONTACT_EDIT_SAVE_BTN_DW           = $(byXpath("(//*[@class='layout column']//*[@class='d-flex']//button)[7]"));
 
+  public static final SelenideElement ELEMENT_CONTACT_RECEIVED_KUDOS_DW           = $(byXpath("//*[@id='kudosOverviewCardsParent']//*[@class='kudosOverviewCard col'][1]/div/div[2]"));
+
+  public static final SelenideElement ELEMENT_CONTACT_SENT_KUDOS_DW           = $(byXpath("//*[@id='kudosOverviewCardsParent']//*[@class='kudosOverviewCard col'][2]/div/div[2]"));
+
+  public static final SelenideElement ELEMENT_CONTACT_GAINED_CAURIS_DW           = $(byXpath("(//*[@id='WalletOverview']//div)[8]"));
+
+  public static final SelenideElement ELEMENT_CONTACT_GAINED_CAURIS_INFORMATION_DW           = $(byXpath("(//*[@id='WalletOverview']//button)[1]"));
+
+  public static final SelenideElement ELEMENT_CONTACT_CAURIS_GAMIFICATION_DRAWER_DW           = $(byXpath("//*[@class='layout column']//*[@id='plugin-gamification']"));
+
+  public static final SelenideElement ELEMENT_CONTACT_CAURIS_GAMIFICATION_CLOSE_DRAWER_BTN_DW           = $(byXpath("//*[@id='WalletOverview']//*[@class='layout column']//button"));
+
   public static final SelenideElement ELEMENT_PROFILE_CONTACT_INFORMATION_TITLE_DW           = $(byXpath("//*[@id='ProfileContactInformation']//*[@class='text-header-title text-sub-title']"));
 
   public static final SelenideElement ELEMENT_PROFILE_CONTACT_INFORMATION_FULLNAME_DW           = $(byXpath("(//*[@id='ProfileContactInformation']//*[@class='flex d-flex']//div[2])[1]"));
@@ -170,7 +182,6 @@ public class ConnectionsLocator {
   public static final SelenideElement ELEMENT_NAME_OF_PEOPLE                  =
                                                              $(byXpath("//*[@id='uiTableProfileUserSearchInput']/div[1]/div/div/div[1]/input"));
 
-
   public static final SelenideElement ELEMENT_SEARCHED_NAME_OF_PEOPLE         =   $(byXpath("//*[@id='uiTableProfileUserSearchInput']/div[1]/div/div/div[1]/div"));
 
   public static final SelenideElement ELEMENT_CONTENT_PEOPLE                  = $(byXpath("//*[@id='UIAllPeople']/div[2]/div"));
@@ -181,6 +192,29 @@ public class ConnectionsLocator {
 
   public static final String ELEMENT_USER_SEARCH_TITLE                = "//*[@id='searchDialog']//a[@title='${user}']";
 
+  public static final String ELEMENT_SPACE_SEARCH_TITLE                = "//*[@class='spaceCardFront']//*[contains(text(),'${space}')]";
+
+  public static final String ELEMENT_ACTIVITY_SEARCH_TITLE        = "//*[@class='searchMatchExcerpt' and text()='${activity}']";
+
+  public static final String ELEMENT_TASK_SEARCH_TITLE        = "//*[@class='searchMatchExcerpt' and text()='${task}']";
+
+  public static final String ELEMENT_APPLICATION_SEARCH_TITLE        = "//*[@title='${application}']";
+
+  public static final String ELEMENT_APPLICATION_SEARCH_DESCRIPTION        = "//*[@title='${applicationDescription}']";
+
+  public static final SelenideElement ELEMENT_APPLICATION_SEARCH_PICTURE       = $(byXpath("//*[@class='v-image v-responsive appImage theme--light']"));
+
+  public static final SelenideElement ELEMENT_WALLET_APPLICATION_PAGE       = $(byXpath("//*[@id='WalletApp']"));
+
+  public static final SelenideElement ELEMENT_DRAWER_TASK_NAME      =   $(byXpath("//*[@id='task-Drawer']//*[@id='task-name']"));
+
+  public static final String ELEMENT_FILE_SEARCH_TITLE        = "//*[@class='searchMatchExcerpt' and text()='${file}']";
+
+  public static final SelenideElement ELEMENT_ACCESS_TO_SEARCHED_ACTIVITY       =   $(byXpath("(//*[@class='v-list-item__content']//*[@class='v-list-item__title'])[1]"));
+
+  public static final SelenideElement ELEMENT_ACTIVITY_TITLE       =   $(byXpath("//*[@id='boxContainer']//*[@class='description']//p"));
+
+  public static final SelenideElement ELEMENT_COMMENT_TITLE       =   $(byXpath("//*[@id='boxContainer']//*[@class='contentComment']//p"));
 
 
 }

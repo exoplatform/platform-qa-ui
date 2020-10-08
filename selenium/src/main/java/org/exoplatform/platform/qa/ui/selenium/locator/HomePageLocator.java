@@ -222,6 +222,9 @@ public final class HomePageLocator {
   public static final SelenideElement ELEMENT_SEARCH_INPUT_DW                                                 =
                                                            $(byId("searchInput"));
 
+  public static final SelenideElement ELEMENT_CLOSE_SEARCH_INPUT_DW                                                 =
+                                                                  $(byXpath("//*[@class='searchCloseIcon transparent v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--default']"));
+
   public static final SelenideElement ELEMENT_SEARCH_RESULT                                                =
                                                             $(byId("quickSearchResult1"));
 

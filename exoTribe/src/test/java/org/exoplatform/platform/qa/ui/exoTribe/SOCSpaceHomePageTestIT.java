@@ -137,15 +137,11 @@ public class SOCSpaceHomePageTestIT extends BaseTribe {
     tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", null);
     ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     sleep(1000);
-
     info("-- Upload the picture --");
     tribeActivityStream.uploadFileActivityStreamDW(attachedFile);
-
     tribeActivityStream.postActivity();
-    info("-- Verify that an activity has been added --");
-    sleep(2000);
-    getExoWebDriver().getWebDriver().navigate().refresh();
     sleep(3000);
+    info("-- Verify that an activity has been added --");
     $(byText(attachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
     $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
     info("The activity is shared success");

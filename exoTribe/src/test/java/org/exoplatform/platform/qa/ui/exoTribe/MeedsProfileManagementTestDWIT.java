@@ -50,7 +50,7 @@ public class MeedsProfileManagementTestDWIT extends BaseTribe {
   @Test
   public void test01_CheckTheUserAvatarAndCoverInProfilePage() {
 
-    manageLogInOut.signInTribe(tribe_username3, tribe_password3);
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
 
     info("Go to Profile Page");
     homePagePlatform.goToProfilesPageTribeViaUrl();
@@ -62,7 +62,7 @@ public class MeedsProfileManagementTestDWIT extends BaseTribe {
     ELEMENT_PROFILE_AVATAR_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
 
     info("Check That User Fullname is displayed in Profile Page");
-    Assert.assertEquals(ELEMENT_PROFILE_FULLNAME_DW.getText(), tribe_user3);
+    Assert.assertEquals(ELEMENT_PROFILE_FULLNAME_DW.getText(), tribe_user);
 
     info("Check That User Job is displayed in Profile Page");
     Assert.assertEquals(ELEMENT_PROFILE_JOB_DW.getText(), "IT Engineer");
@@ -72,15 +72,15 @@ public class MeedsProfileManagementTestDWIT extends BaseTribe {
   @Test
   public void test02_CheckContactInformationsInProfilePage() {
 
-    manageLogInOut.signInTribe(tribe_username3, tribe_password3);
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
 
     info("Go to Profile Page");
     homePagePlatform.goToProfilesPageTribeViaUrl();
 
     info("Check That Profile Contact Fullname is displayed");
     sleep(2000);
-    Assert.assertEquals(ELEMENT_PROFILE_CONTACT_INFORMATION_TITLE_DW.getText(), "Contact information");
-    Assert.assertEquals(ELEMENT_PROFILE_CONTACT_INFORMATION_FULLNAME_DW.getText(), tribe_user3);
+    Assert.assertEquals(ELEMENT_PROFILE_CONTACT_INFORMATION_TITLE_DW.getText(), "Coordonnées");
+    Assert.assertEquals(ELEMENT_PROFILE_CONTACT_INFORMATION_FULLNAME_DW.getText(), tribe_user);
 
     ELEMENT_PROFILE_CONTACT_INFORMATION_EMAIL_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     String contactEmail = ELEMENT_PROFILE_CONTACT_INFORMATION_EMAIL_DW.getText();
@@ -237,6 +237,34 @@ public class MeedsProfileManagementTestDWIT extends BaseTribe {
 
     info("Check That Profile Contact Instant Messaging is displayed");
     Assert.assertEquals(ELEMENT_PROFILE_CONTACT_INFORMATION_COMPANY_DW.getText(), "Github: " + github);
+
+  }
+
+  @Test
+  public void test05_CheckThatRewardsMeedsBlockIsDisplayed() {
+
+
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
+
+    info("Go to Profile Page");
+    homePagePlatform.goToProfilesPageTribeViaUrl();
+
+    String receivedKudos = ELEMENT_CONTACT_RECEIVED_KUDOS_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).getText();
+    info("Received Kudos Number is " + receivedKudos);
+
+    String sentKudos = ELEMENT_CONTACT_SENT_KUDOS_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).getText();
+    info("Sent Kudos Number is " + sentKudos);
+
+    String gainedCauris = ELEMENT_CONTACT_GAINED_CAURIS_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).getText();
+    info("Gained Cauris Number is " + gainedCauris);
+
+    info("Click on Gained Cauris Informations Button");
+    ELEMENT_CONTACT_GAINED_CAURIS_INFORMATION_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    info("A drawer apprears displaying the history of Cauris gained");
+    ELEMENT_CONTACT_CAURIS_GAMIFICATION_DRAWER_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    ELEMENT_CONTACT_CAURIS_GAMIFICATION_CLOSE_DRAWER_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
   }
 
