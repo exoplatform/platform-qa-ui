@@ -23,8 +23,6 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("dw")
-@Tag("sniff")
-@Tag("social")
 public class SOCSettingsEditTestDWIT extends BaseDW {
   NavigationToolbar navigationToolbar;
 

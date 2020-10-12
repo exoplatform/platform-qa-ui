@@ -28,8 +28,6 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
 @Tag("dw")
-@Tag("social")
-@Tag("sniff")
 public class ActivityStreamManagementDWTestIt extends BaseDW {
   NavigationToolbar navigationToolbar;
 

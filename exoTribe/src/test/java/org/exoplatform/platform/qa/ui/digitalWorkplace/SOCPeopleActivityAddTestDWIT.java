@@ -26,8 +26,6 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("dw")
-@Tag("smoke")
-@Tag("social")
 public class SOCPeopleActivityAddTestDWIT extends BaseDW {
   NavigationToolbar navigationToolbar;
 

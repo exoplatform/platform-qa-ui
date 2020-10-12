@@ -27,8 +27,6 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("dw")
-@Tag("wiki")
-@Tag("sniff")
 public class WikiTemplateDWIT extends BaseDW {
 
   HomePagePlatform homePagePlatform;

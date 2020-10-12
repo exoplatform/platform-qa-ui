@@ -24,8 +24,6 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeL
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_NOTIFICATION_DROPDOWN_DW;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
-@Tag("social")
-@Tag("sniff")
 @Tag("dw")
 public class SOCPeopleConnectionsManagementTestDWIT extends BaseDW {
   NavigationToolbar navigationToolbar;

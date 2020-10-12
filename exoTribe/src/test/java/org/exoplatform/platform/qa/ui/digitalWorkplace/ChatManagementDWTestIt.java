@@ -36,8 +36,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @Tag("dw")
-@Tag("social")
-@Tag("sniff")
 public class ChatManagementDWTestIt extends BaseDW {
   NavigationToolbar navigationToolbar;
 
