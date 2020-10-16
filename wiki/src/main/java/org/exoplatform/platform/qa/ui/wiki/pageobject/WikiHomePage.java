@@ -8,6 +8,7 @@ import org.exoplatform.platform.qa.ui.selenium.ManageAlert;
 import org.exoplatform.platform.qa.ui.selenium.TestBase;
 import org.exoplatform.platform.qa.ui.selenium.platform.HomePagePlatform;
 import org.exoplatform.platform.qa.ui.selenium.testbase.ElementEventTestBase;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -188,6 +189,39 @@ public class WikiHomePage {
             $(ELEMENT_SEARCH_BROWSERS_WIKI_SETTINGS_TRIBE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs + Configuration.timeout).click();
             testBase.getExoWebDriver().getWebDriver().navigate().refresh();
         } while (!$(ELEMENT_WIKI_SETTING_ADD_MORE_TEMPALTE).exists());
+    }
+
+
+    public void goToWikiPermissionsTribe() {
+        info("Permissions page");
+        $(ELEMENT_WIKI_PERMISSIONS_TRIBE).waitUntil(Condition.visible,Configuration.timeout).click();
+        $(By.xpath("//*[@id='UIPermissionGrid']")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+        info("The permission popup is shown");
+    }
+
+
+    public void enableAdminPagesWikiPermissionsTribe(String username) {
+        goToWikiSettingTribe();
+        goToWikiPermissionsTribe();
+        addUserToWikiPermissionsTribe(username);
+        info("enable edit pages permission");
+        $(byXpath(ELEMENT_WIKI_EDIT_PAGES_TRIBE.replace("${user}",username))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        info("enable admin pages permission");
+        $(byXpath(ELEMENT_WIKI_ADMIN_PAGES_TRIBE.replace("${user}",username))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        info("enable admin bloc notes permission");
+        $(byXpath(ELEMENT_WIKI_ADMIN_NOTES_TRIBE.replace("${user}",username))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(ELEMENT_WIKI_PERMISSION_SAVE_BTN_TRIBE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        sleep(2000);
+        info("Confirm the save");
+        $(ELEMENT_WIKI_CONFIRM_SAVE_BTN_TRIBE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        sleep(3000);
+    }
+
+    public void addUserToWikiPermissionsTribe(String username) {
+
+        $(ELEMENT_USER_PERMISSION_INPUT_TRIBE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).setValue(username);
+        $(ELEMENT_ADD_USER_PERMISSION_BTN_TRIBE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
     }
 
     /**

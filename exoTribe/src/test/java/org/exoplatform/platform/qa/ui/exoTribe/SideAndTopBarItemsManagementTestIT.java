@@ -14,6 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
@@ -153,13 +155,13 @@ public class SideAndTopBarItemsManagementTestIT extends BaseTribe {
     ELEMENT_TRIBE_VERTICAL_SIDEBAR_MENU.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("Check that SideBar Menu Profile Section is displayed");
-    ELEMENT_TRIBE_SIDEBAR_MENU_PROFILE_SECTION.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
+    ELEMENT_TRIBE_SIDEBAR_MENU_PROFILE_SECTION.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
 
     info("Check that Profile Avatar is displayed in SideBar Menu");
-    ELEMENT_TRIBE_SIDEBAR_MENU_PROFILE_AVATAR.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
+    ELEMENT_TRIBE_SIDEBAR_MENU_PROFILE_AVATAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
 
     info("Check that Profile First name and Last name are displayed in SideBar Menu");
-    Assert.assertEquals(ELEMENT_TRIBE_SIDEBAR_MENU_PROFILE_FIRST_LAST_NAME.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).getText(),tribe_user);
+    Assert.assertEquals(ELEMENT_TRIBE_SIDEBAR_MENU_PROFILE_FIRST_LAST_NAME.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).getText(), tribe_user);
 
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
@@ -184,6 +186,83 @@ public class SideAndTopBarItemsManagementTestIT extends BaseTribe {
 
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test06_CheckTheChangeOfTheDefaultPageWhenClickingOnHomeIcon() {
+
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+    homePagePlatform.goToSideBarMenuTribe();
+    sleep(2000);
+
+    info("Check that home icon is displayed for every page in sidebar menu");
+
+    ELEMENT_TRIBE_SNAPSHOT_CHECK_ORDER.hover();
+    ELEMENT_TRIBE_SNAPSHOT_HOME_ICON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    ELEMENT_TRIBE_STREAM_CHECK_ORDER.hover();
+    ELEMENT_TRIBE_STREAM_HOME_ICON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    ELEMENT_TRIBE_SPACES_CHECK_ORDER.hover();
+    ELEMENT_TRIBE_SPACES_HOME_ICON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    ELEMENT_TRIBE_PEOPLE_CHECK_ORDER.hover();
+    ELEMENT_TRIBE_PEOPLE_HOME_ICON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    homePagePlatform.goToSideBarMenuTribe();
+    info("Change the default page to Stream Page");
+    ELEMENT_TRIBE_STREAM_CHECK_ORDER.waitUntil(Condition.visible, Configuration.timeout).hover();
+    ELEMENT_TRIBE_STREAM_HOME_ICON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_CONFIRM_DEFAULT_PAGE_CHANGE_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
+
+    info("Check that Stream Page is displayed");
+    $(byXpath("//*[@id='StreamPage']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    info("Change the default page to Spaces Page");
+    homePagePlatform.goToSideBarMenuTribe();
+    ELEMENT_TRIBE_SPACES_CHECK_ORDER.waitUntil(Condition.visible, Configuration.timeout).hover();
+    ELEMENT_TRIBE_SPACES_HOME_ICON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_CONFIRM_DEFAULT_PAGE_CHANGE_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
+
+    info("Check that Spaces Page is displayed");
+    $(byXpath("//*[@id='spacesListApplication']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    info("Change the default page to People Page");
+    homePagePlatform.goToSideBarMenuTribe();
+    ELEMENT_TRIBE_PEOPLE_CHECK_ORDER.waitUntil(Condition.visible, Configuration.timeout).hover();
+    ELEMENT_TRIBE_PEOPLE_HOME_ICON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_CONFIRM_DEFAULT_PAGE_CHANGE_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
+
+    info("Check that People Page is displayed");
+    $(byXpath("//*[@id='peopleListApplication']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    info("Change the default page to Snapshot Page");
+    homePagePlatform.goToSideBarMenuTribe();
+    ELEMENT_TRIBE_SNAPSHOT_CHECK_ORDER.waitUntil(Condition.visible, Configuration.timeout).hover();
+    ELEMENT_TRIBE_SNAPSHOT_HOME_ICON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_CONFIRM_DEFAULT_PAGE_CHANGE_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
+
+    info("Check that Snapshot Page is displayed");
+    $(byXpath("//*[@id='digitalWorkplaceHomePage']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
 
   }
 

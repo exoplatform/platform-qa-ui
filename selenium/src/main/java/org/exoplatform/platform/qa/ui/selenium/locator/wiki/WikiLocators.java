@@ -278,6 +278,33 @@ public class WikiLocators {
     public static final By ELEMENT_SEARCH_BROWSERS_WIKI_SETTINGS_TRIBE =
           By.xpath(".//*[@class='dropdown-menu']//*[text()='Paramètres du bloc-notes']");
 
+    public static final By ELEMENT_WIKI_PERMISSIONS_TRIBE =
+          By.xpath("(//*[@id='myTab']//a)[2]");
+
+    public static final By ELEMENT_WIKI_MODELS_TRIBE =
+          By.xpath("(//*[@id='myTab']//a)[1]");
+
+    public static final String ELEMENT_WIKI_ADMIN_PAGES_TRIBE =
+          "(//*[@id='UIPermissionGrid']//*[contains(text(),'${user}')]/following::span[@class='uiCheckbox'])[3]";
+
+    public static final String ELEMENT_WIKI_ADMIN_NOTES_TRIBE =
+          "(//*[@id='UIPermissionGrid']//*[contains(text(),'${user}')]/following::span[@class='uiCheckbox'])[4]";
+
+    public static final String ELEMENT_WIKI_EDIT_PAGES_TRIBE =
+          "(//*[@id='UIPermissionGrid']//*[contains(text(),'${user}')]/following::span[@class='uiCheckbox'])[2]";
+
+    public static final By ELEMENT_WIKI_PERMISSION_SAVE_BTN_TRIBE =
+          By.xpath("//*[@class='uiWikiPagePermission']//*[@class='uiAction uiActionBorder']//button");
+
+    public static final By ELEMENT_WIKI_CONFIRM_SAVE_BTN_TRIBE =
+          By.xpath("//*[@id='UIMaskWorkspace']/following::*[@class='uiAction uiActionBorder']//*[@class='btn']");
+
+    public static final By ELEMENT_USER_PERMISSION_INPUT_TRIBE =
+          By.xpath("//*[@id='PermissionOwner']");
+
+    public static final By ELEMENT_ADD_USER_PERMISSION_BTN_TRIBE =
+          By.xpath("//*[@class='groupPermissionBox']//button");
+
     public static final By ELEMENT_SEARCH_BROWSERS_MY_DRAFT =
             By.xpath(".//*[@class='dropdown-menu']//*[text()='My Drafts']");
 
