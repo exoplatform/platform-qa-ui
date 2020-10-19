@@ -389,8 +389,10 @@ public class SOCManageSpacesTestIT extends BaseTribe {
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(spaceNamea);
     tribeSpaceManagement.deleteTribeSpace(spaceNameb);
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(spaceNamec);
     tribeSpaceManagement.deleteTribeSpace(spaceNamed);
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(spaceNamee);
 
   }

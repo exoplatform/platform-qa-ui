@@ -90,6 +90,8 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpaceTribe(space, space, "Open", "No", null);
     tribeSpaceManagement.goToWikiTabDW(space);
+    wikiHomePage.enableAdminPagesWikiPermissionsTribe(tribe_username);
+    tribeSpaceManagement.goToWikiTabDW(space);
     tribeWikiHomePage.goToAddTemplateWikiPageDW();
     tribeWikiManagement.addSimplePageByTemplateWithAutoSave(ELEMENT_SELECT_TEMPLATE_HowToGuide, title);
     tribeWikiHomePage.goToHomeWikiPage();
@@ -116,6 +118,8 @@ public class WikiBasicActionManagePageAddDeleteTestIT extends BaseTribe {
     String space = "space" + getRandomNumber();
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpaceTribe(space, space, "Open", "No", null);
+    tribeSpaceManagement.goToWikiTabDW(space);
+    wikiHomePage.enableAdminPagesWikiPermissionsTribe(tribe_username);
     tribeSpaceManagement.goToWikiTabDW(space);
     tribeWikiHomePage.goToAddTemplateWikiPageDW();
     tribeWikiManagement.addSimpleWikiPageByTemplate(template, title);

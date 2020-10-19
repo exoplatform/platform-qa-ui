@@ -194,7 +194,7 @@ public class MeedsSearchManagementTestDWIT extends BaseTribe {
     tribeActivityStream.postActivity();
     info("-- Verify that an activity has been added --");
     sleep(3000);
-    $(byText(attachedFile.split(".p")[0] + "-" + "p" + attachedFile.split(".p")[1])).waitUntil(Condition.exist, openBrowserTimeoutMs);
+    $(byText(attachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
     $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
     info("The activity is shared success");
 
@@ -206,12 +206,12 @@ public class MeedsSearchManagementTestDWIT extends BaseTribe {
     $(byXpath(ELEMENT_FILE_SEARCH_TITLE.replace("${file}", attachedFile.split(".p")[0]))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
     info("Preview The Attached File");
     $(byXpath(ELEMENT_FILE_SEARCH_TITLE.replace("${file}", attachedFile.split(".p")[0]))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-    $(byText(attachedFile.split(".p")[0] + "-" + "p" + attachedFile.split(".p")[1])).waitUntil(Condition.exist, openBrowserTimeoutMs);
+    $(byText(attachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
 
     homePagePlatform.goToStreamPageTribeViaUrl();
 
     info("Delete The Attached File");
-    tribeActivityStream.deleteAttachedFileDW(attachedFile.split(".p")[0] + "-" + "p" + attachedFile.split(".p")[1]);
+    tribeActivityStream.deleteAttachedFileDW(attachedFile);
 
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(spaceNamea);

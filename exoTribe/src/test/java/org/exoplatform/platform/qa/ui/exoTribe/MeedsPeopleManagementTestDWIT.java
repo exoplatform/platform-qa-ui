@@ -128,30 +128,30 @@ public class MeedsPeopleManagementTestDWIT extends BaseTribe {
     homePagePlatform.goToPeoplePageTribeViaUrl();
 
     info("The suggestion widget is existing and displayed only 2 users with Add button and Delete buttons");
-    ELEMENT_FIRST_USER_SUGGESTION_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
-    ELEMENT_SECOND_USER_SUGGESTION_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    ELEMENT_FIRST_SUGGESTION_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    ELEMENT_SECOND_SUGGESTION_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     ELEMENT_ADD_FIRST_USER_SUGGESTION_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
     ELEMENT_ADD_SECOND_USER_SUGGESTION_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
-    ELEMENT_DELETE_FIRST_USER_SUGGESTION_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
-    ELEMENT_DELETE_SECOND_USER_SUGGESTION_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    ELEMENT_DELETE_FIRST_SUGGESTION_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    ELEMENT_DELETE_SECOND_SUGGESTION_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
 
-    String firstUserSuggestion = ELEMENT_FIRST_USER_SUGGESTION_DW.getText();
-    String secondtUserSuggestion = ELEMENT_SECOND_USER_SUGGESTION_DW.getText();
+    String firstUserSuggestion = ELEMENT_FIRST_SUGGESTION_DW.getText();
+    String secondtUserSuggestion = ELEMENT_SECOND_SUGGESTION_DW.getText();
 
     info("Add the first user suggestion");
     ELEMENT_ADD_FIRST_USER_SUGGESTION_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("The first user suggestion is not displayed");
     sleep(2000);
-    Assert.assertNotEquals(ELEMENT_FIRST_USER_SUGGESTION_DW.getText(), firstUserSuggestion);
-    Assert.assertEquals(ELEMENT_FIRST_USER_SUGGESTION_DW.getText(), secondtUserSuggestion);
+    Assert.assertNotEquals(ELEMENT_FIRST_SUGGESTION_DW.getText(), firstUserSuggestion);
+    Assert.assertEquals(ELEMENT_FIRST_SUGGESTION_DW.getText(), secondtUserSuggestion);
 
     info("Delete the user suggestion");
-    ELEMENT_DELETE_FIRST_USER_SUGGESTION_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_DELETE_FIRST_SUGGESTION_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("The user suggestion is not displayed");
     sleep(2000);
-    Assert.assertNotEquals(ELEMENT_FIRST_USER_SUGGESTION_DW.getText(), secondtUserSuggestion);
+    Assert.assertNotEquals(ELEMENT_FIRST_SUGGESTION_DW.getText(), secondtUserSuggestion);
 
     info("Go to Sent Requests");
     homePagePlatform.goToPeoplePageTribeViaUrl();
@@ -174,11 +174,13 @@ public class MeedsPeopleManagementTestDWIT extends BaseTribe {
   @Test
   public void test04_CheckThatTheLeaderboardWidgetIsExisting() {
 
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
+
     info("Go to People Page");
     homePagePlatform.goToPeoplePageTribeViaUrl();
 
     info("Check that the Leaderboard Widget is displayed");
-    Assert.assertEquals(ELEMENT_LEADER_BOARD_TITLE_DW.getText(), "Leaderboard");
+    Assert.assertEquals(ELEMENT_LEADER_BOARD_TITLE_DW.getText(), "Classement");
 
     info("Display the 9 first places on Leaderboard");
     String firstUserLeaderboard = ELEMENT_FIRST_USER_LEADER_BOARD_POSITION_DW.getText();
