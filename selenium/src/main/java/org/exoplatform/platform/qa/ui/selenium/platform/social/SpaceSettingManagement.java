@@ -197,6 +197,21 @@ public class SpaceSettingManagement {
     $(ELEMENT_SETTINGS_APP_TAB_DW).click();
   }
 
+  public void goToSpaceMembersTabDW(String space) {
+    info("Select Members tab");
+    if(!$(byXpath("//*[@id='MiddleToolBar']//*[@href='/portal/g/:spaces:{space}/{space}/members']".replace("{space}",space)))
+            .isDisplayed())
+    {
+      $(byXpath("//*[@class='v-slide-group__next']//i")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    }
+    $(byXpath("//*[@id='MiddleToolBar']//*[@href='/portal/g/:spaces:{space}/{space}/members']".replace("{space}",space)))
+            .waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs)
+            .click();
+    $(byXpath("//*[@id='peopleListApplication']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+    info("Space Members Page is shown");
+  }
+
   /**
    * Open Access and Edit tab
    */

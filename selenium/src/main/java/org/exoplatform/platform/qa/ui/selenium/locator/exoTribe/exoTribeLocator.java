@@ -287,6 +287,10 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_ADDNEWSPACE_SECOND_TRIBE_BUTTON  = $(byXpath("//*[@id='spacesListToolbar']//*[@class='d-none d-sm-inline']"));
 
+    public static final SelenideElement ELEMENT_EDIT_SPACE_BANNER_TRIBE_BUTTON  = $(byXpath("//*[@class='v-input__prepend-outer']//button"));
+
+    public static final SelenideElement ELEMENT_SPACE_BANNER_TRIBE = $(byXpath("//*[@id='SpaceHeader']//*[@class='v-responsive__content']"));
+
     public static final By ELEMENT_ADDNEWSPACE_SECOND_TRIBE_FORM  = By.xpath("(//*[@id='spacesListToolbar']//button)[1]");
 
     public static final SelenideElement ELEMENT_SPACE_NAME_SECOND_TRIBE_INPUT      = $(byXpath("//form/input[@placeholder]"));
@@ -296,6 +300,8 @@ public class exoTribeLocator {
     public static final SelenideElement ELEMENT_SPACE_DETAILS_TRIBE = $(byXpath("//*[@class='v-stepper__label' and contains(text(),\"Détails de l'espace\")]"));
 
     public static final SelenideElement ELEMENT_INVITE_USERS_TRIBE = $(byXpath("//*[@class='v-stepper__label' and contains(text(),'Inviter des utilisateurs')]"));
+
+    public static final SelenideElement ELEMENT_INVITE_USERS_SPACE_MEMBERS_TRIBE = $(byXpath("//*[@class='v-list-item__content drawerTitle align-start text-header-title text-truncate' and contains(text(),'Inviter des utilisateurs')]"));
 
     public static final SelenideElement ELEMENT_SPACE_ACCESS_TRIBE = $(byXpath("//*[@class='v-stepper__label' and contains(text(),\"Accès à l'espace\")]"));
 
@@ -308,6 +314,8 @@ public class exoTribeLocator {
     public static final SelenideElement ELEMENT_SPACE_INPUT_USER_TRIBE = $(byXpath("//input[@content-class='identitySuggesterContent']"));
 
     public static final SelenideElement ELEMENT_CREATE_SPACE_TRIBE = $(byXpath("//*[@class='d-flex']//button[2]/span"));
+
+    public static final SelenideElement ELEMENT_INVITE_USER_SPACE_MEMBERS_TRIBE_BTN = $(byXpath("//*[@class='d-flex']//button[2]/span"));
 
     public static final SelenideElement ELEMENT_SPACES_PULLDOWN_FILTER_DW     = $(byXpath("//*[@class='v-text-field__slot']/following::select[1]"));
 
@@ -413,15 +421,29 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_SPACE_INVITATION_NUMBER_BTN_DW       = $(byXpath("(//*[@id='SpacesOverview']/div/div/div/div)[1]//div[@class='spacesOverviewCount text-center pb-1']"));
 
+    public static final SelenideElement ELEMENT_SPACE_SENT_REQUESTS_NUMBER_BTN_DW       = $(byXpath("(//*[@id='SpacesOverview']/div/div/div/div)[2]//div[@class='spacesOverviewCount text-center pb-1']"));
+
+    public static final SelenideElement ELEMENT_SPACE_MEMBERS_SEARCH_TEXT = $(byXpath("(//*[@class='v-text-field__slot']/input)[2]"));
+
+    public static final SelenideElement ELEMENT_SPACE_MEMBERS_SHOWING_RESULTS_DW          = $(byXpath("(//*[@id='peopleListToolbar']//div)[3]"));
+
+    public static final SelenideElement ELEMENT_SPACE_MEMBERS_PULLDOWN_FILTER_DW          = $(byXpath("//*[@class='v-text-field__slot']/following::select[1]"));
+
+    public static final SelenideElement ELEMENT_INVITE_USER_SPACE_MEMBERS_DW          = $(byXpath("//*[@id='peopleListToolbar']//*[@class='d-none d-sm-inline']"));
+
     public static final String ELEMENT_ACCEPT_JOIN_SPACE_DW       = "//*[@class='drawerParent v-navigation-drawer v-navigation-drawer--absolute v-navigation-drawer--open v-navigation-drawer--right v-navigation-drawer--temporary theme--light']//*[@class='v-list-item__title']//a[contains(text(),'${space}')]/following::button[1]";
 
     public static final String ELEMENT_REFUSE_JOIN_SPACE_DW       = "//*[@class='drawerParent v-navigation-drawer v-navigation-drawer--absolute v-navigation-drawer--open v-navigation-drawer--right v-navigation-drawer--temporary theme--light']//*[@class='v-list-item__title']//a[contains(text(),'${space}')]/following::button[2]";
+
+    public static final String ELEMENT_REMOVE_SPACE_SENT_REQUEST_DW       = "//*[@class='drawerParent v-navigation-drawer v-navigation-drawer--absolute v-navigation-drawer--open v-navigation-drawer--right v-navigation-drawer--temporary theme--light']//*[@class='v-list-item__title']//a[contains(text(),'${space}')]/following::button[1]";
 
     public static final SelenideElement ELEMENT_CLOSE_SPACES_INVITATIONS_DRAWER_DW       = $(byXpath("(//*[@class='drawerParent v-navigation-drawer v-navigation-drawer--absolute v-navigation-drawer--open v-navigation-drawer--right v-navigation-drawer--temporary theme--light']//button)[1]"));
 
     public static final SelenideElement ELEMENT_FIRST_SUGGESTION_DW       = $(byXpath("(//*[@class='v-list-item__content pb-3']//a)[1]"));
 
     public static final SelenideElement ELEMENT_SENT_REQUESTS_BTN_DW       = $(byXpath("//*[@id='PeopleOverview']/div/div/div/div[2]"));
+
+    public static final String ELEMENT_POPULAR_SPACE_JOIN_SUGGESTION_DW       = "(//*[@class='v-list-item__title']//*[contains(text(),'${space}')]/following::div/button//span//span)[1]";
 
     public static final SelenideElement ELEMENT_CLOSE_SENT_REQUESTS_BTN_DW       = $(byXpath("//*[@class='v-list-item__action drawerIcons align-end d-flex flex-row']/button"));
 

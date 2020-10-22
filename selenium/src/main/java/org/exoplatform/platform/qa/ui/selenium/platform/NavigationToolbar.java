@@ -563,6 +563,12 @@ public class NavigationToolbar {
     ELEMENT_ACCEPT_JOIN_SPACE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
   }
 
+  public void joinSpaceViaSpacesPageDW() {
+    info("Accept to join a space");
+    sleep(3000);
+    ELEMENT_ACCEPT_JOIN_SPACE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+  }
+
   public void verifyAcceptJoinSpaceViaNotificationDW(String space) {
 
     sleep(2000);

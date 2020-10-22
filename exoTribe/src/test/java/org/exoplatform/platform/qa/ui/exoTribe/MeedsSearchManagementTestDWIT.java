@@ -200,7 +200,6 @@ public class MeedsSearchManagementTestDWIT extends BaseTribe {
 
     ELEMENT_ICON_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(attachedFile.split(".p")[0]);
-    ELEMENT_CANCEL_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("The Searched file " + attachedFile + " is displayed");
     $(byXpath(ELEMENT_FILE_SEARCH_TITLE.replace("${file}", attachedFile.split(".p")[0]))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();

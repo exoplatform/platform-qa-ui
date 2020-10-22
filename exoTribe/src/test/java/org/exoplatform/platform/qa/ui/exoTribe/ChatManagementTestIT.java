@@ -85,11 +85,11 @@ public class ChatManagementTestIT extends BaseTribe {
     spaceSettingManagement = new SpaceSettingManagement(this);
     projectsManagement = new ProjectsManagement(this);
 
-    getExoWebDriver().getWebDriver().close();
+    /*getExoWebDriver().getWebDriver().close();
 
     System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
     WebDriver driver = new ChromeDriver();
-    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);*/
 
     manageLogInOut.signInTribe(tribe_username, tribe_password);
 

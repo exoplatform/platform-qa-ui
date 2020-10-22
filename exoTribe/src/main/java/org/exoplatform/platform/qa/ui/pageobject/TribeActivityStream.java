@@ -305,7 +305,7 @@ public class TribeActivityStream {
 
   public void checkThatUserWholikesActivityIsDisplayedTribe(String user, String activity) {
 
-    $(byXpath("(//*[@class='description']//*[contains(text(),'${activity}')]/following::*[@class='activityReactionsContainer']//*[@title='${user}'])[1]"
+    $(byXpath("(//*[@class='description']//*[contains(text(),'${activity}')]/following::*[@class='activityReactionsContainer']//*[@alt='${user}'])[1]"
             .replace("${user}", user)
             .replace("${activity}",activity)))
             .waitUntil(exist, openBrowserTimeoutMs);

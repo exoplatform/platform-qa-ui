@@ -18,8 +18,7 @@ import org.openqa.selenium.By;
 import java.util.ArrayList;
 
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
@@ -516,6 +515,170 @@ public class SOCManageSpacesTestIT extends BaseTribe {
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.searchSpace(secondSpaceSuggestion);
     Assert.assertEquals($(By.xpath(ELEMENT_SPACE_STATUS_DW.replace("${space}", secondSpaceSuggestion))).getText(), "Join");
+
+    info("Delete space");
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username,tribe_password);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(space1);
+    tribeSpaceManagement.deleteTribeSpace(space2);
+    tribeSpaceManagement.deleteTribeSpace(space3);
+
+  }
+
+  @Test
+  public void test12_CheckPopularSpacesWidgetBehavior() {
+
+    String space1 = "space" + getRandomNumber();
+    String space2 = "space" + getRandomNumber();
+
+    String activity1 = "activity1" + getRandomNumber();
+    String activity2 = "activity2" + getRandomNumber();
+    String activity3 = "activity3" + getRandomNumber();
+    String activity4 = "activity4" + getRandomNumber();
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+      tribeSpaceManagement.addNewSpaceTribe(space1,space1,"Validation","No",null);
+    info("Post Activities");
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    tribeActivityStream.addTribeActivity(activity1, "");
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    tribeActivityStream.addTribeActivity(activity2, "");
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    tribeActivityStream.addTribeActivity(activity3, "");
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    tribeActivityStream.addTribeActivity(activity4, "");
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpaceTribe(space2,space2,"Open","No",null);
+    info("Post Activities");
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    tribeActivityStream.addTribeActivity(activity1, "");
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    tribeActivityStream.addTribeActivity(activity2, "");
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    tribeActivityStream.addTribeActivity(activity3, "");
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    tribeActivityStream.addTribeActivity(activity4, "");
+
+    info("Go to Space Page");
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username4,tribe_password4);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+
+    info( "Join button is displayed in popular Spaces Widget for " + space2);
+    sleep(3000);
+    Assert.assertEquals($(byXpath(ELEMENT_POPULAR_SPACE_JOIN_SUGGESTION_DW.replace("${space}",space2))).getText(),"Join");
+
+    info("Check that user " + tribe_user4 + " hadn't joined " + space2);
+    tribeSpaceManagement.searchSpace(space2);
+    Assert.assertEquals($(By.xpath(ELEMENT_SPACE_STATUS_DW.replace("${space}", space2))).getText(), "Join");
+
+    info("Request to join button for " + space1 + " is displayed");
+    Assert.assertEquals($(byXpath(ELEMENT_POPULAR_SPACE_JOIN_SUGGESTION_DW.replace("${space}",space1))).getText(),"Request to join");
+    $(byXpath(ELEMENT_POPULAR_SPACE_JOIN_SUGGESTION_DW.replace("${space}",space1))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
+    info("Cancel request for " + space1 + " is displayed");
+    sleep(2000);
+    Assert.assertEquals($(byXpath(ELEMENT_POPULAR_SPACE_JOIN_SUGGESTION_DW.replace("${space}",space1))).getText(),"Cancel request");
+
+    info("Cancel request for " +space1);
+    $(byXpath(ELEMENT_POPULAR_SPACE_JOIN_SUGGESTION_DW.replace("${space}",space1))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
+    Assert.assertEquals($(byXpath(ELEMENT_POPULAR_SPACE_JOIN_SUGGESTION_DW.replace("${space}",space1))).getText(),"Request to join");
+
+    info("Request to join " + space1 );
+    $(byXpath(ELEMENT_POPULAR_SPACE_JOIN_SUGGESTION_DW.replace("${space}",space1))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
+    Assert.assertEquals($(byXpath(ELEMENT_POPULAR_SPACE_JOIN_SUGGESTION_DW.replace("${space}",space1))).getText(),"Cancel request");
+
+    info("Request to join " + space2 );
+    $(byXpath(ELEMENT_POPULAR_SPACE_JOIN_SUGGESTION_DW.replace("${space}",space2))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
+    info("Check that user " + tribe_user4 + " had joined " + space2);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.searchSpace(space2);
+    Assert.assertEquals($(By.xpath(ELEMENT_SPACE_STATUS_DW.replace("${space}", space2))).getText(), "Leave");
+
+    info("Check that an invitation is sent to join "+ space1);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.searchSpace(space1);
+    Assert.assertEquals($(By.xpath(ELEMENT_SPACE_STATUS_DW.replace("${space}", space1))).getText(), "Cancel request");
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username, tribe_password);
+    navigationToolbar.goToIntranetNotificationDW();
+    navigationToolbar.acceptJoinSpaceViaNotificationnDW(space1);
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username4, tribe_password4);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    connectionsManagement.tribeSearchSpace(space1);
+    Assert.assertEquals($(By.xpath(ELEMENT_SPACE_STATUS_DW.replace("${space}", space1))).getText(), "Leave");
+
+    info("Delete space");
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username,tribe_password);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(space1);
+    tribeSpaceManagement.deleteTribeSpace(space2);
+
+  }
+
+  @Test
+  public void test13_CheckUserSpacesRequests() {
+
+    String space1 = "space" + getRandomNumber();
+    String space2 = "space" + getRandomNumber();
+    String space3 = "space" + getRandomNumber();
+
+    String user1 = tribe_user4;
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(user1);
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpaceTribe(space1,space1,"Validation","No",null);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpaceTribe(space2,space2,"Validation","No",null);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpaceTribe(space3,space3,"Validation","No",null);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username4,tribe_password4);
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.searchSpace(space2);
+    Assert.assertEquals($(By.xpath(ELEMENT_SPACE_STATUS_DW.replace("${space}", space2))).getText(), "Request access");
+    $(By.xpath(ELEMENT_SPACE_STATUS_DW.replace("${space}", space2))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.searchSpace(space3);
+    Assert.assertEquals($(By.xpath(ELEMENT_SPACE_STATUS_DW.replace("${space}", space3))).getText(), "Request access");
+    $(By.xpath(ELEMENT_SPACE_STATUS_DW.replace("${space}", space3))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    info("Check that Spaces Sent Requests Number is " + ELEMENT_SPACE_SENT_REQUESTS_NUMBER_BTN_DW.getText());
+    Assert.assertEquals(ELEMENT_SPACE_SENT_REQUESTS_NUMBER_BTN_DW.getText(),"2");
+
+    info("Check that " + space2 + " and " + space3 + " are displayed in Sent Requests Drawer");
+    ELEMENT_SPACE_SENT_REQUESTS_NUMBER_BTN_DW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(By.xpath(ELEMENT_REMOVE_SPACE_SENT_REQUEST_DW.replace("${space}",space2))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+    $(By.xpath(ELEMENT_REMOVE_SPACE_SENT_REQUEST_DW.replace("${space}",space3))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+
+    info("Remove Sent Request to " + space2);
+    $(By.xpath(ELEMENT_REMOVE_SPACE_SENT_REQUEST_DW.replace("${space}",space2))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
+    info("Check that " + space2 + " is not displayed in Sent Requests Drawer");
+    $(By.xpath(ELEMENT_REMOVE_SPACE_SENT_REQUEST_DW.replace("${space}",space2))).waitUntil(Condition.not(Condition.visible),Configuration.openBrowserTimeoutMs);
+
+    info("Close Spaces Sent Requests");
+    ELEMENT_CLOSE_SPACES_INVITATIONS_DRAWER_DW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
+    sleep(2000);
+    info("Check that the new Spaces Sent Requests Number is " + ELEMENT_SPACE_SENT_REQUESTS_NUMBER_BTN_DW.getText());
+    Assert.assertEquals(ELEMENT_SPACE_SENT_REQUESTS_NUMBER_BTN_DW.getText(),"1");
 
     info("Delete space");
     manageLogInOut.signOutTribe();

@@ -147,6 +147,48 @@ public class ConnectionsLocator {
 
   public static final SelenideElement ELEMENT_ADD_CONTACT_COVER_WIDTH_DW           = $(byXpath("//*[@class='peopleCardFront']/div/div/div[@class='v-image__image v-image__image--cover']/following::div[@class='v-responsive__content'][1]"));
 
+  public static final SelenideElement ELEMENT_FILTER_USER_INFORMATIONS_DW           = $(byXpath("//*[@class='peopleToolbarIcons px-2']//*[@class='v-icon notranslate fa fa-info theme--light']"));
+
+  public static final SelenideElement ELEMENT_FILTER_CLOSE_USER_INFORMATIONS_DW           = $(byXpath("//*[@class='peopleInfoIcon ma-2 v-btn v-btn--absolute v-btn--flat v-btn--icon v-btn--round theme--light v-size--small']"));
+
+  public static final SelenideElement ELEMENT_FILTER_USER_MENU_ICON_DW           = $(byXpath("//*[@class='peopleToolbarIcons px-2']//*[@class='v-icon notranslate mdi mdi-dots-vertical theme--light']"));
+
+  public static final SelenideElement ELEMENT_FILTER_USER_MENU_ICON_SEND_KUDOS_DW           = $(byXpath("//*[@class='uiIcon fa fa-award uiIconKudos uiIconLightBlue']"));
+
+  public static final SelenideElement ELEMENT_FILTER_USER_MENU_ICON_SEND_CAURIS_DW           = $(byXpath("//*[@class='uiIcon uiIconLightBlue mdi mdi-send material-icons']"));
+
+  public static final SelenideElement ELEMENT_FILTER_USER_MENU_ICON_REMOVE_MEMBER_DW           = $(byXpath("//*[@class='uiIcon uiIconTrash']"));
+
+  public static final SelenideElement ELEMENT_FILTER_USER_MENU_ICON_REMOVE_SET_AS_MANAGER_DW           = $(byXpath("//*[@class='uiIcon uiIconMemberAdmin']"));
+
+  public static final SelenideElement ELEMENT_FILTER_USER_MENU_ICON_REMOVE_SET_AS_REDACTOR_DW           = $(byXpath("//*[@class='uiIcon uiIconEditMembership']"));
+
+  public static final SelenideElement ELEMENT_FILTER_USER_MENU_ICON_OPEN_CHAT_DW           = $(byXpath("//*[@class='uiIcon uiIconBannerChat']"));
+
+  public static final SelenideElement ELEMENT_FILTER_USER_MENU_ICON_SEND_KUDOS_TEXT_DW           = $(byXpath("//*[@class='uiIcon fa fa-award uiIconKudos uiIconLightBlue']//ancestor::div[1]"));
+
+  public static final SelenideElement ELEMENT_FILTER_USER_MENU_ICON_REMOVE_MEMBER_TEXT_DW           = $(byXpath("//*[@class='uiIcon uiIconTrash']//ancestor::div[1]"));
+
+  public static final SelenideElement ELEMENT_FILTER_USER_MENU_ICON_REMOVE_SET_AS_MANAGER_TEXT_DW           = $(byXpath("//*[@class='uiIcon uiIconMemberAdmin']//ancestor::div[1]"));
+
+  public static final SelenideElement ELEMENT_FILTER_USER_MENU_ICON_REMOVE_SET_AS_REDACTOR_TEXT_DW           = $(byXpath("//*[@class='uiIcon uiIconEditMembership']//ancestor::div[1]"));
+
+  public static final SelenideElement ELEMENT_FILTER_USER_MENU_ICON_OPEN_CHAT_TEXT_DW           = $(byXpath("//*[@class='uiIcon uiIconBannerChat']//ancestor::div[1]"));
+
+  public static final SelenideElement ELEMENT_FILTER_USER_MENU_ICON_SEND_CAURIS_TEXT_DW           = $(byXpath("//*[@class='uiIcon uiIconLightBlue mdi mdi-send material-icons']//ancestor::div[1]"));
+
+  public static final SelenideElement ELEMENT_FILTER_SPACE_MANAGER_ICON_DW           = $(byXpath("//*[@class='peopleToolbarIcons px-2']//*[@class='d-flex uiIconMemberAdmin primary--text']"));
+
+  public static final SelenideElement ELEMENT_FILTER_USER_ABOUT_ME_TEXT_DW           = $(byXpath("//*[@class='d-flex pt-3 pb-2']//p"));
+
+  public static final SelenideElement ELEMENT_FILTER_USER_CONTACTS_NUMBER_DW           = $(byXpath("(//*[@class='font-weight-bold ma-auto mb-1'])[1]"));
+
+  public static final SelenideElement ELEMENT_FILTER_USER_SPACES_NUMBER_DW           = $(byXpath("(//*[@class='font-weight-bold ma-auto mb-1'])[2]"));
+
+  public static final SelenideElement ELEMENT_FILTER_USER_CONTACTS_TEXT_DW           = $(byXpath("(//*[@class='ma-auto text-sub-title'])[1]"));
+
+  public static final SelenideElement ELEMENT_FILTER_USER_SPACES_TEXT_DW           = $(byXpath("(//*[@class='ma-auto text-sub-title'])[2]"));
+
   public static final String          ELEMENT_CONNECTION_IGNORE_BTN           =
                                                                     " //a[contains(@href,'${user}')]/../..//*[text()='Ignore']";
 
