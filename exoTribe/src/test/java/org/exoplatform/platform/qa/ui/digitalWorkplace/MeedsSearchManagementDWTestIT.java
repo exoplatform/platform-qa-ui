@@ -30,7 +30,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("dw")
-public class MeedsSearchManagementTestDWIT extends BaseTribe {
+public class MeedsSearchManagementDWTestIT extends BaseTribe {
   NavigationToolbar navigationToolbar;
 
   AddUsers addUsers;
@@ -79,10 +79,11 @@ public class MeedsSearchManagementTestDWIT extends BaseTribe {
     navigationToolbar.goToAddUsersPageViaUrlDW();
     addUsers.addUserTribe(username1, password, email1, "test", DATA_NAME_USER1.split(" ")[1], "");
 
-
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    sleep(1000);
     ELEMENT_ICON_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(1000);
     ELEMENT_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(DATA_NAME_USER1.split(" ")[1] + " ");
-    ELEMENT_CANCEL_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("The Searched user " + DATA_NAME_USER1 + " is displayed");
     sleep(2000);
@@ -120,7 +121,6 @@ public class MeedsSearchManagementTestDWIT extends BaseTribe {
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     ELEMENT_ICON_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(activity1);
-    ELEMENT_CANCEL_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("The Searched activity " + activity1 + " is displayed");
     $(byXpath(ELEMENT_ACTIVITY_SEARCH_TITLE.replace("${activity}", activity1))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
@@ -130,7 +130,6 @@ public class MeedsSearchManagementTestDWIT extends BaseTribe {
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     ELEMENT_ICON_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(activity2);
-    ELEMENT_CANCEL_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("The Searched activity " + activity2 + " is displayed");
     $(byXpath(ELEMENT_ACTIVITY_SEARCH_TITLE.replace("${activity}", activity2))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
@@ -140,7 +139,6 @@ public class MeedsSearchManagementTestDWIT extends BaseTribe {
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     ELEMENT_ICON_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(comment);
-    ELEMENT_CANCEL_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("The comment " + comment + " is displayed");
     $(byXpath(ELEMENT_ACTIVITY_SEARCH_TITLE.replace("${activity}", comment))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
@@ -155,7 +153,6 @@ public class MeedsSearchManagementTestDWIT extends BaseTribe {
     homePagePlatform.goToStreamPageTribeViaUrl();
     ELEMENT_ICON_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue("testactivity3");
-    ELEMENT_CANCEL_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     $(byXpath(ELEMENT_ACTIVITY_SEARCH_TITLE.replace("${activity}", activity1))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
     $(byXpath(ELEMENT_ACTIVITY_SEARCH_TITLE.replace("${activity}", activity2))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
     ELEMENT_CLOSE_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
@@ -178,7 +175,6 @@ public class MeedsSearchManagementTestDWIT extends BaseTribe {
 
     ELEMENT_ICON_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(spaceNamea);
-    ELEMENT_CANCEL_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("The Searched space " + spaceNamea + " is displayed");
     $(byXpath(ELEMENT_SPACE_SEARCH_TITLE.replace("${space}", spaceNamea))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
@@ -213,7 +209,6 @@ public class MeedsSearchManagementTestDWIT extends BaseTribe {
 
     ELEMENT_ICON_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(attachedFile.split(".p")[0]);
-    ELEMENT_CANCEL_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("The Searched file " + attachedFile + " is displayed");
     $(byXpath(ELEMENT_FILE_SEARCH_TITLE.replace("${file}", attachedFile.split(".p")[0]))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
@@ -245,7 +240,6 @@ public class MeedsSearchManagementTestDWIT extends BaseTribe {
 
     ELEMENT_ICON_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(taskName);
-    ELEMENT_CANCEL_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("The Searched task " + taskName + " is displayed");
     $(byXpath(ELEMENT_TASK_SEARCH_TITLE.replace("${task}", taskName))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
@@ -272,7 +266,6 @@ public class MeedsSearchManagementTestDWIT extends BaseTribe {
     info("Search the application " + appName);
     ELEMENT_ICON_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(appName);
-    ELEMENT_CANCEL_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("The Searched application " + appName + " is displayed");
     $(byXpath(ELEMENT_APPLICATION_SEARCH_TITLE.replace("${application}", appName))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
@@ -281,7 +274,7 @@ public class MeedsSearchManagementTestDWIT extends BaseTribe {
     $(byXpath(ELEMENT_APPLICATION_SEARCH_DESCRIPTION.replace("${applicationDescription}", appDesc))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
 
     info("The Searched application picture is displayed");
-    ELEMENT_APPLICATION_SEARCH_PICTURE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+    ELEMENT_APPLICATION_SEARCH_PICTURE_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
 
     info("Click on the searched application");
     $(byXpath(ELEMENT_APPLICATION_SEARCH_TITLE.replace("${application}", appName))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();

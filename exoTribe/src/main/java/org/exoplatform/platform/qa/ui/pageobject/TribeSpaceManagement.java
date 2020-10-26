@@ -290,6 +290,26 @@ public class TribeSpaceManagement {
     refresh();
   }
 
+  public void inviteUsersToJoinSpaceViaSpaceMembersDW(ArrayList<String> groups, int... params) {
+
+    sleep(1000);
+
+    ELEMENT_INVITE_USER_SPACE_MEMBERS_DW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_INVITE_USERS_SPACE_MEMBERS_DW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
+    if (groups!= null) {
+      for (int i = 0; i < groups.size(); i++) {
+        sleep(Configuration.timeout);
+        ELEMENT_SPACE_INPUT_USER_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+        ELEMENT_SPACE_INPUT_USER_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(groups.get(i));
+        $(byXpath("//*[@class='v-list-item__title text-truncate identitySuggestionMenuItemText' and contains(text(),'${group}')]".replace("${group}", groups.get(i)))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+      }
+    }
+    info("Save all changes");
+    sleep(2000);
+    ELEMENT_INVITE_USER_SPACE_MEMBERS_TRIBE_BTN.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
+  }
+
   /**
    * Open Invite users from group tab
    */

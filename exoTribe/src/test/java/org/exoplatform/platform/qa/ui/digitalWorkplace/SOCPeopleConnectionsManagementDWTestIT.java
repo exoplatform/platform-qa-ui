@@ -25,7 +25,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("dw")
-public class SOCPeopleConnectionsManagementTestDWIT extends BaseDW {
+public class SOCPeopleConnectionsManagementDWTestIT extends BaseDW {
   NavigationToolbar navigationToolbar;
 
   AddUsers addUsers;

@@ -27,7 +27,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.taskmanagement.Tas
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("dw")
-public class TaskManagementTestDWIT extends BaseDW {
+public class TaskManagementDWTestIT extends BaseDW {
   HomePagePlatform homePagePlatform;
   SpaceManagement spaceManagement;
   SpaceHomePage spaceHomePage;

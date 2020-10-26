@@ -17,16 +17,19 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.*;
+import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_TRIBE_APPLICATIONS_CHECK_ORDER_DW;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
 @Tag("dw")
-public class SideAndTopBarItemsManagementDWTestIt extends BaseDW {
+public class SideAndTopBarItemsManagementDWTestIT extends BaseDW {
   NavigationToolbar navigationToolbar;
 
   AddUsers addUsers;
@@ -100,12 +103,12 @@ public class SideAndTopBarItemsManagementDWTestIt extends BaseDW {
     ELEMENT_TRIBE_NOTIFICATIONS_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
 
     info("Check Top Bar Items Order");
-    Assert.assertTrue(ELEMENT_TRIBE_SIDEBAR_MENU_CHECK_ORDER.getAttribute("id").contains("app"));
-    Assert.assertTrue(ELEMENT_TRIBE_BRANDING_CHECK_ORDER.getAttribute("id").contains("brandingTopBar"));
-    Assert.assertTrue(ELEMENT_TRIBE_MINICHAT_CHECK_ORDER.getAttribute("id").contains("miniChatDrawer"));
-    Assert.assertTrue(ELEMENT_TRIBE_APPLICATIONS_CHECK_ORDER.getAttribute("id").contains("appLauncher"));
-    Assert.assertTrue(ELEMENT_TRIBE_NOTIFICATIONS_CHECK_ORDER.getAttribute("id").contains("NotificationPopoverPortlet"));
-    Assert.assertTrue(ELEMENT_TRIBE_SEARCH_CHECK_ORDER.getAttribute("id").contains("SearchApplication"));
+    Assert.assertTrue(ELEMENT_TRIBE_SIDEBAR_MENU_CHECK_ORDER_DW.getAttribute("id").contains("app"));
+    Assert.assertTrue(ELEMENT_TRIBE_BRANDING_CHECK_ORDER_DW.getAttribute("id").contains("brandingTopBar"));
+    Assert.assertTrue(ELEMENT_TRIBE_MINICHAT_CHECK_ORDER_DW.getAttribute("id").contains("miniChatDrawer"));
+    Assert.assertTrue(ELEMENT_TRIBE_APPLICATIONS_CHECK_ORDER_DW.getAttribute("id").contains("appLauncher"));
+    Assert.assertTrue(ELEMENT_TRIBE_NOTIFICATIONS_CHECK_ORDER_DW.getAttribute("id").contains("NotificationPopoverPortlet"));
+    Assert.assertTrue(ELEMENT_TRIBE_SEARCH_CHECK_ORDER_DW.getAttribute("id").contains("SearchApplication"));
 
     info("Check That Edit Administration Button Is Not Existing For A Simple User");
     ELEMENT_TRIBE_EDIT_ADMINISTRATION_TOPBAR.waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
@@ -220,6 +223,88 @@ public class SideAndTopBarItemsManagementDWTestIt extends BaseDW {
 
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test06_CheckTheChangeOfTheDefaultPageWhenClickingOnHomeIcon() {
+
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+    homePagePlatform.goToSideBarMenuTribe();
+    sleep(2000);
+
+    info("Check that home icon is displayed for every page in sidebar menu");
+
+    ELEMENT_TRIBE_SNAPSHOT_CHECK_ORDER.hover();
+    ELEMENT_TRIBE_SNAPSHOT_HOME_ICON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    ELEMENT_TRIBE_STREAM_CHECK_ORDER.hover();
+    ELEMENT_TRIBE_STREAM_HOME_ICON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    ELEMENT_TRIBE_SPACES_CHECK_ORDER.hover();
+    ELEMENT_TRIBE_SPACES_HOME_ICON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    ELEMENT_TRIBE_PEOPLE_CHECK_ORDER.hover();
+    ELEMENT_TRIBE_PEOPLE_HOME_ICON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    homePagePlatform.goToSideBarMenuTribe();
+    sleep(2000);
+    info("Change the default page to Stream Page");
+    ELEMENT_TRIBE_STREAM_CHECK_ORDER.waitUntil(Condition.visible, Configuration.timeout).hover();
+    ELEMENT_TRIBE_STREAM_HOME_ICON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
+    ELEMENT_TRIBE_CONFIRM_DEFAULT_PAGE_CHANGE_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+
+    info("Check that Stream Page is displayed");
+    $(byXpath("//*[@id='StreamPage']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    info("Change the default page to Spaces Page");
+    homePagePlatform.goToSideBarMenuTribe();
+    sleep(2000);
+    ELEMENT_TRIBE_SPACES_CHECK_ORDER.waitUntil(Condition.visible, Configuration.timeout).hover();
+    ELEMENT_TRIBE_SPACES_HOME_ICON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_CONFIRM_DEFAULT_PAGE_CHANGE_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+
+    info("Check that Spaces Page is displayed");
+    $(byXpath("//*[@id='spacesListApplication']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    info("Change the default page to People Page");
+    homePagePlatform.goToSideBarMenuTribe();
+    ELEMENT_TRIBE_PEOPLE_CHECK_ORDER.waitUntil(Condition.visible, Configuration.timeout).hover();
+    ELEMENT_TRIBE_PEOPLE_HOME_ICON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
+    ELEMENT_TRIBE_CONFIRM_DEFAULT_PAGE_CHANGE_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+
+    info("Check that People Page is displayed");
+    $(byXpath("//*[@id='peopleListApplication']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    info("Change the default page to Snapshot Page");
+    homePagePlatform.goToSideBarMenuTribe();
+    sleep(2000);
+    ELEMENT_TRIBE_SNAPSHOT_CHECK_ORDER.waitUntil(Condition.visible, Configuration.timeout).hover();
+    ELEMENT_TRIBE_SNAPSHOT_HOME_ICON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_TRIBE_CONFIRM_DEFAULT_PAGE_CHANGE_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+
+    info("Check that Snapshot Page is displayed");
+    $(byXpath("//*[@id='digitalWorkplaceHomePage']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
 
   }
 

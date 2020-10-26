@@ -3,6 +3,7 @@ package org.exoplatform.platform.qa.ui.digitalWorkplace;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.exoplatform.platform.qa.ui.commons.BaseDW;
+import org.exoplatform.platform.qa.ui.core.PLFData;
 import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
 import org.exoplatform.platform.qa.ui.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
@@ -28,7 +29,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
 @Tag("dw")
-public class NotificationsManagementDWTestIt extends BaseDW {
+public class NotificationsManagementDWTestIT extends BaseDW {
   NavigationToolbar navigationToolbar;
 
   AddUsers addUsers;
@@ -164,6 +165,21 @@ public class NotificationsManagementDWTestIt extends BaseDW {
   @Test
   public void test04_MarkAllNotificationsAsRead() {
 
+
+    String spaceNamea = "spacenamea" + getRandomNumber();
+    String spaceDesa = "descriptiona" + getRandomNumber();
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(PLFData.DATA_NAME_USER1);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(PLFData.username, "password");
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", inviteUsers);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+
     info("Open Notifications");
     navigationToolbar.goToIntranetNotificationDigitalWorkplace();
 
@@ -176,6 +192,12 @@ public class NotificationsManagementDWTestIt extends BaseDW {
 
     info("Close Notifications");
     navigationToolbar.closeNotificationsDW();
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(PLFData.username, "password");
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamea);
+
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
 
@@ -184,7 +206,21 @@ public class NotificationsManagementDWTestIt extends BaseDW {
   @Test
   public void test05_SeeAllNotifications() {
 
+
+    String spaceNamea = "spacenamea" + getRandomNumber();
+    String spaceDesa = "descriptiona" + getRandomNumber();
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(PLFData.DATA_NAME_USER1);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(PLFData.username, "password");
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", inviteUsers);
+
     info("Open Notifications");
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
     navigationToolbar.goToIntranetNotificationDigitalWorkplace();
 
     info("Check that Notification Settings Button is displayed");
@@ -197,12 +233,33 @@ public class NotificationsManagementDWTestIt extends BaseDW {
     ELEMENT_NOTIFICATION_ACTIONS_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
     ELEMENT_ALL_NOTIFICATIONS_DISPLAYED_DW.waitUntil(Condition.visible, openBrowserTimeoutMs);
 
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(PLFData.username, "password");
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamea);
+
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    homePagePlatform.goToStreamPageTribeViaUrl();
+
   }
 
   @Test
   public void test06_Remove_Notification() {
 
+    String spaceNamea = "spacenamea" + getRandomNumber();
+    String spaceDesa = "descriptiona" + getRandomNumber();
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(PLFData.DATA_NAME_USER1);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(PLFData.username, "password");
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", inviteUsers);
+
     info("Open Notifications");
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
     navigationToolbar.goToIntranetNotificationDigitalWorkplace();
 
     info("Check that Notification Settings Button is displayed");
@@ -214,8 +271,16 @@ public class NotificationsManagementDWTestIt extends BaseDW {
 
     info("Close Notifications");
     navigationToolbar.closeNotificationsDW();
+
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(PLFData.username, "password");
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamea);
+
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
+
 
   }
 

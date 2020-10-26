@@ -225,6 +225,18 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_NOTIFICATIONS_CHECK_ORDER = $(byXpath("((//*[@id='UITopBarContainer']//*[@class='VuetifyApp'])[5]//div)[1]"));
 
+  public static final SelenideElement ELEMENT_TRIBE_SIDEBAR_MENU_CHECK_ORDER_DW = $(byXpath("((//*[@id='UITopBarContainer']//*[@class='VuetifyApp'])[1]//div)[1]"));
+
+  public static final SelenideElement ELEMENT_TRIBE_BRANDING_CHECK_ORDER_DW = $(byXpath("((//*[@id='UITopBarContainer']//*[@class='VuetifyApp'])[2]//div)[1]"));
+
+  public static final SelenideElement ELEMENT_TRIBE_SEARCH_CHECK_ORDER_DW = $(byXpath("((//*[@id='UITopBarContainer']//*[@class='VuetifyApp'])[3]//div)[1]"));
+
+  public static final SelenideElement ELEMENT_TRIBE_MINICHAT_CHECK_ORDER_DW = $(byXpath("((//*[@id='UITopBarContainer']//*[@class='VuetifyApp'])[4]//div)[1]"));
+
+  public static final SelenideElement ELEMENT_TRIBE_APPLICATIONS_CHECK_ORDER_DW = $(byXpath("((//*[@id='UITopBarContainer']//*[@class='VuetifyApp'])[5]//div)[1]"));
+
+  public static final SelenideElement ELEMENT_TRIBE_NOTIFICATIONS_CHECK_ORDER_DW = $(byXpath("((//*[@id='UITopBarContainer']//*[@class='VuetifyApp'])[6]//div)[1]"));
+
     public static final SelenideElement ELEMENT_TRIBE_PEOPLE_PAGE = $(byXpath("//*[@class='uiIcon uiIconFile uiIconToolbarNavItem uiIconPeople iconPeople null']"));
 
     public static final SelenideElement ELEMENT_CONNECTIONS_PAGE_FROM_HOME = $(byXpath("(//*[@class='v-card__text pa-1 subtitle-1 text-color'])[2]"));
@@ -303,6 +315,8 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_INVITE_USERS_SPACE_MEMBERS_TRIBE = $(byXpath("//*[@class='v-list-item__content drawerTitle align-start text-header-title text-truncate' and contains(text(),'Inviter des utilisateurs')]"));
 
+    public static final SelenideElement ELEMENT_INVITE_USERS_SPACE_MEMBERS_DW = $(byXpath("//*[@class='v-list-item__content drawerTitle align-start text-header-title text-truncate' and contains(text(),'Invite users')]"));
+
     public static final SelenideElement ELEMENT_SPACE_ACCESS_TRIBE = $(byXpath("//*[@class='v-stepper__label' and contains(text(),\"Accès à l'espace\")]"));
 
     public static final SelenideElement ELEMENT_SPACE_DETAILS_DW = $(byXpath("//*[@class='v-stepper__label' and contains(text(),'Space details')]"));
@@ -324,6 +338,8 @@ public class exoTribeLocator {
     public static final SelenideElement ELEMENT_LOAD_MORE_SPACES_BTN_DW     = $(byXpath("//*[@id='spacesListFooter']//button"));
 
     public static final String ELEMENT_SPACE_STATUS_DW     = "(//*[@class='spaceAvatar']/following::a[contains(text(),'${space}')]/following::span[@class='spaceMembershipButtonText d-inline'])[1]";
+
+    public static final String ELEMENT_SPACE_STATUS_BEFORE_ACCEPTING_INVITATION_DW     = "//*[@class='spaceDisplayName text-truncate d-block' and contains(text(),'${space}')]/following::*[@class='v-card__actions spaceCardActions']//*[@class='d-flex']";
 
     public static final SelenideElement ELEMENT_CANCEL_SPACE_TRIBE = $(byXpath("(//*[@class='d-flex']/button)[1]"));
 

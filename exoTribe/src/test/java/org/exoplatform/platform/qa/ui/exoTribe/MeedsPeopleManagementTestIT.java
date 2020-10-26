@@ -25,7 +25,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("tribe")
 @Tag("tribeMeedsPeople")
-public class MeedsPeopleManagementTestDWIT extends BaseTribe {
+public class MeedsPeopleManagementTestIT extends BaseTribe {
   NavigationToolbar navigationToolbar;
 
   AddUsers addUsers;

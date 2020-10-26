@@ -32,7 +32,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("dw")
-public class WikiActivitiesTestDWIT extends BaseDW {
+public class WikiActivitiesDWTestIT extends BaseDW {
 
   HomePagePlatform homePagePlatform;
 

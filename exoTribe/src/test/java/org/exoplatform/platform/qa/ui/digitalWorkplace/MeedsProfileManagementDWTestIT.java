@@ -20,7 +20,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.ConnectionsLocator
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("dw")
-public class MeedsProfileManagementTestDWIT extends BaseTribe {
+public class MeedsProfileManagementDWTestIT extends BaseTribe {
   NavigationToolbar navigationToolbar;
 
   AddUsers addUsers;

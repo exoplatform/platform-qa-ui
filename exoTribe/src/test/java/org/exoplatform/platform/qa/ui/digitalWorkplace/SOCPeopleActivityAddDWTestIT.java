@@ -26,7 +26,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("dw")
-public class SOCPeopleActivityAddTestDWIT extends BaseDW {
+public class SOCPeopleActivityAddDWTestIT extends BaseDW {
   NavigationToolbar navigationToolbar;
 
   AddUsers addUsers;

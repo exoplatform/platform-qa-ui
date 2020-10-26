@@ -22,12 +22,13 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_TEMPLATE_SEARCH_TEXTBOX;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("dw")
-public class WikiTemplateDWIT extends BaseDW {
+public class WikiTemplateDWTestIT extends BaseDW {
 
   HomePagePlatform homePagePlatform;
 
@@ -85,7 +86,7 @@ public class WikiTemplateDWIT extends BaseDW {
     tribeActivityStream = new TribeActivityStream(this);
     tribeSpaceManagement = new TribeSpaceManagement(this);
     manageLogInOut = new ManageLogInOut(this);
-    manageLogInOut.signIn(PLFData.DATA_USER1, PLFData.DATA_PASS2);
+    manageLogInOut.signIn(DATA_USER1, PLFData.DATA_PASS2);
 
   }
 
@@ -268,6 +269,8 @@ public class WikiTemplateDWIT extends BaseDW {
     info("Verify that new tempate is created. It'll be shown in template form");
     wikiValidattions.verifyTemplateInList(title5);
     info("The page is shown with heading effects");
+    wikiHomePage.goToWikiSettingPageDW();
+    wikiHomePage.enableEditPagesWikiPermissionsDW(DATA_USER1);
     tribeSpaceManagement.goToWikiTabDW(space);
     wikiHomePage.goToAddTemplateWikiPage();
     wikiSettingPage.searchTemplate(title5);

@@ -246,6 +246,8 @@ public class ConnectionsLocator {
 
   public static final SelenideElement ELEMENT_APPLICATION_SEARCH_PICTURE       = $(byXpath("//*[@class='v-image v-responsive appImage theme--light']"));
 
+  public static final SelenideElement ELEMENT_APPLICATION_SEARCH_PICTURE_DW      = $(byXpath("//*[@class='v-responsive v-image appImage']"));
+
   public static final SelenideElement ELEMENT_WALLET_APPLICATION_PAGE       = $(byXpath("//*[@id='WalletApp']"));
 
   public static final SelenideElement ELEMENT_DRAWER_TASK_NAME      =   $(byXpath("//*[@id='task-Drawer']//*[@id='task-name']"));

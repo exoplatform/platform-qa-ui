@@ -10,6 +10,7 @@ import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.social.SpaceSettingManagement;
 import org.exoplatform.platform.qa.ui.social.pageobject.AddUsers;
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -18,17 +19,20 @@ import java.util.ArrayList;
 
 import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_COMMENT_LINK;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_LIKE_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeLocator.ELEMENT_DW_POST_ACTIVITY_BUTTON;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 
 @Tag("dw")
-public class ActivityStreamManagementDWTestIt extends BaseDW {
+public class ActivityStreamManagementDWTestIT extends BaseDW {
   NavigationToolbar navigationToolbar;
 
   AddUsers addUsers;
@@ -429,6 +433,42 @@ public class ActivityStreamManagementDWTestIt extends BaseDW {
     tribeSpaceManagement.accessToSearchedSpace();
     tribeActivityStream.checkThatUserWhoReplyToActivityCommentIsDisplayedDW(activity1, username2, comment, reply);
 
+    tribeActivityStream.deleteactivityDW(activity1);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamea);
+
+  }
+
+  @Test
+  public void test09_CheckThatLikeReplyAndKudosLabelsInCommentBlockAreColoredInBlue() {
+
+    String spaceNamea = "spaceNamea" + getRandomNumber();
+    String spaceDesa = "descriptiona" + getRandomNumber();
+    String activity1 = "activity1" + getRandomNumber();
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    tribeActivityStream.addTribeActivity(activity1, "");
+
+    String activityId = tribeActivityStream.getActivityIdDW(activity1);
+
+    info("Check that Like Button Color is Blue when moving the cursor over it");
+    $(byXpath(ELEMENT_LIKE_BUTTON.replace("{id}", activityId))).hover();
+    Assert.assertEquals($(byXpath(ELEMENT_LIKE_BUTTON.replace("{id}", activityId))).getCssValue("color"),"rgba(87, 141, 201, 1)");
+
+    info("Check that Comment Button Color is Blue when moving the cursor over it");
+    $(byXpath(ELEMENT_COMMENT_LINK.replace("{id}",  activityId))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).hover();
+    Assert.assertEquals($(byXpath(ELEMENT_COMMENT_LINK.replace("{id}", activityId))).getCssValue("color"),"rgba(87, 141, 201, 1)");
+
+    info("Check that Kudos Button Color is Blue when moving the cursor over it");
+    $(byXpath("(//*[@class='description']//*[text()='${activity}']/following::*[@class='SendKudosButtonTemplate VuetifyApp']//a)[1]"
+            .replace("${activity}", activity1))).hover();
+    Assert.assertEquals($(byXpath("(//*[@class='description']//*[text()='${activity}']/following::*[@class='SendKudosButtonTemplate VuetifyApp']//a)[1]"
+            .replace("${activity}", activity1))).getCssValue("color"),"rgba(87, 141, 201, 1)");
+
+    // click on the activity to appear the delete button
     tribeActivityStream.deleteactivityDW(activity1);
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(spaceNamea);

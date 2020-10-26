@@ -6,6 +6,7 @@ import org.exoplatform.platform.qa.ui.chat.pageobject.ChatManagement;
 import org.exoplatform.platform.qa.ui.chat.pageobject.RoomManagement;
 import org.exoplatform.platform.qa.ui.commons.BaseDW;
 import org.exoplatform.platform.qa.ui.core.PLFData;
+import org.exoplatform.platform.qa.ui.core.context.BugInPLF;
 import org.exoplatform.platform.qa.ui.pageobject.TribeActivityStream;
 import org.exoplatform.platform.qa.ui.pageobject.TribeSpaceManagement;
 import org.exoplatform.platform.qa.ui.selenium.platform.*;
@@ -36,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @Tag("dw")
-public class ChatManagementDWTestIt extends BaseDW {
+public class ChatManagementDWTestIT extends BaseDW {
   NavigationToolbar navigationToolbar;
 
   AddUsers addUsers;
@@ -381,6 +382,7 @@ public class ChatManagementDWTestIt extends BaseDW {
   }
 
   @Test
+  @BugInPLF("Bug")
   public void test09_addEventInChatRoom() {
 
     String room = "room" + getRandomNumber();

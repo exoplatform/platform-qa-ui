@@ -23,7 +23,7 @@ import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("tribe")
 @Tag("tribePeopleConnection")
-public class SOCPeopleConnectionsManagementTestDWIT extends BaseTribe {
+public class SOCPeopleConnectionsManagementTestIT extends BaseTribe {
   NavigationToolbar navigationToolbar;
 
   AddUsers addUsers;

@@ -24,7 +24,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("dw")
-public class WikiBasicActionManagePageAddDeleteTestDWIT extends BaseDW {
+public class WikiBasicActionManagePageAddDeleteDWTestIT extends BaseDW {
 
 
   HomePagePlatform homePagePlatform;

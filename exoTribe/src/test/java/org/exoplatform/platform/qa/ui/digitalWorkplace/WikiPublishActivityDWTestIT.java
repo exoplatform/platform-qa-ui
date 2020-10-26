@@ -19,14 +19,13 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
-import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_BUTTON_SELECT_RELATION;
+import static org.exoplatform.platform.qa.ui.selenium.locator.ActivityStreamLocator.ELEMENT_ACTIVITY_STREAM_CONTAINER;
+import static org.exoplatform.platform.qa.ui.selenium.locator.wiki.WikiLocators.ELEMENT_WIKI_PAGE_CONTAINER;
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("dw")
-public class WikiInformationTestDWIT extends BaseDW {
-
+public class WikiPublishActivityDWTestIT extends BaseDW {
   HomePagePlatform homePagePlatform;
 
   WikiHomePage wikiHomePage;
@@ -94,58 +93,59 @@ public class WikiInformationTestDWIT extends BaseDW {
   }
 
   @Test
-  public void test01_AddRelationWithIntranetPortal() {
+  public void test01_OpenWikiPageFromWikiActivity() {
+    info("Update activity - edit wiki page title");
 
-    info("Add relations with Intranet portal");
-    String space1 = "space1" + getRandomNumber();
-    String space2 = "space2" + getRandomNumber();
-    String title1 = "title1" + getRandomNumber();
-    String title2 = "title2" + getRandomNumber();
+    String space = "space" + getRandomNumber();
+    String title = "title" + getRandomNumber();
+    String content = "content" + getRandomNumber();
+    String text = "text" + getRandomNumber();
+    String newTitle = "newTitle" + getRandomNumber();
 
-    info("Create space 1 and wiki page 1");
+    info("Create a new wiki page");
     homePagePlatform.goToMySpacesTribeViaUrl();
-    tribeSpaceManagement.addNewSpace(space1, space1, "Open", "No", null);
-    info("Add new wiki page for space 1");
-    tribeSpaceManagement.goToWikiTabDW(space1);
+    tribeSpaceManagement.addNewSpace(space, space, "Open", "No", null);
+    info("Add new wiki page for space");
+    tribeSpaceManagement.goToWikiTabDW(space);
     tribeWikiHomePage.goToAddBlankPageDW();
     tribeWikiManagement.goToSourceEditor();
-    tribeSourceTextEditor.addSimplePage(title1, title1);
+    tribeSourceTextEditor.addSimplePage(title, content);
     tribeWikiManagement.saveAddPage();
+    info("Verify that an activity is added to the activity stream");
     getExoWebDriver().getWebDriver().navigate().refresh();
-    $(byText(title1)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
+    homePagePlatform.goToSpaceHomeDW();
+    activityStream.checkActivity(title);
+    activityStream.commentWikiActivity(title, text);
+    info("check that the comment is added successfully");
+    activityStream.checkCommentOfActivity(title, text);
+    ELEMENT_ACTIVITY_STREAM_CONTAINER.find(byText(title)).click();
+    info("Verify that The wiki application is opened in the correspond page ");
+    ELEMENT_WIKI_PAGE_CONTAINER.find(byText(title)).should(Condition.exist);
 
-    info("Create space 2 and wiki page 2");
-    homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.addNewSpace(space2, space2, "Open", "No", null);
-    info("Add new wiki page for space 1");
-    tribeSpaceManagement.goToWikiTabDW(space2);
-    tribeWikiHomePage.goToAddBlankPageDW();
-    tribeWikiManagement.goToSourceEditor();
-    tribeSourceTextEditor.addSimplePage(title2, title2);
-    tribeWikiManagement.saveAddPage();
-    $(byText(title2)).waitUntil(Condition.exist, Configuration.openBrowserTimeoutMs);
-
+    String comment = "Page's title has been updated to: " + newTitle;
+    info("Go to Wiki porlet and select the wiki page created");
     info("Open wiki page 1");
-    homePagePlatform.goToSpaceHomeDW();
+    getExoWebDriver().getWebDriver().navigate().refresh();
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.searchSpace(space1);
+    tribeSpaceManagement.searchSpace(space);
     tribeSpaceManagement.accessToSearchedSpace();
-    tribeSpaceManagement.goToWikiTabDW(space1);
-    info("Open page 1 and Go to Page Info");
-    tribeWikiHomePage.goToAPage(title1);
-    tribeWikiHomePage.goToPageInformation(title1);
+    tribeSpaceManagement.goToWikiTabDW(space);
+    $(byText(title)).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    info("Edit the title of the wiki page and check on published checkbox");
+    tribeWikiHomePage.goToEditPage();
+    tribeSourceTextEditor.editSimplePage(newTitle, "");
+    tribeWikiManagement.publishPageWhenEditPage();
+    tribeWikiManagement.saveAddPage();
+    info("The title of wiki page's activity is updated");
+    homePagePlatform.goToSpaceHomeDW();
+    activityStream.checkActivity(newTitle);
 
-    executeJavaScript("window.scrollBy(0,500)");
-    info("Go to Related page form");
-    info("Check when add relations from 2 different spaces");
-    tribeWikiPageInformation.addRelations("Dw", "Wiki Home");
-    info("intranet's portal is added as a related pages on page info layout");
-    ELEMENT_BUTTON_SELECT_RELATION.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
-
+    info("Delete the page");
+    tribeSpaceManagement.goToWikiTabDW(space);
+    tribeWikiHomePage.deleteWikiDW(newTitle);
     homePagePlatform.goToSpaceHomeDW();
     homePagePlatform.goToMySpacesTribe();
-    tribeSpaceManagement.deleteTribeSpace(space1);
-    tribeSpaceManagement.deleteTribeSpace(space2);
+    tribeSpaceManagement.deleteTribeSpace(space);
 
   }
 

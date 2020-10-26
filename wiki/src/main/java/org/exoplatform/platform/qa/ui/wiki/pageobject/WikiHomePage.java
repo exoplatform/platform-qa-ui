@@ -201,7 +201,7 @@ public class WikiHomePage {
 
 
     public void enableAdminPagesWikiPermissionsTribe(String username) {
-        goToWikiSettingTribe();
+        goToWikiSettingPageDW();
         goToWikiPermissionsTribe();
         addUserToWikiPermissionsTribe(username);
         info("enable edit pages permission");
@@ -210,6 +210,19 @@ public class WikiHomePage {
         $(byXpath(ELEMENT_WIKI_ADMIN_PAGES_TRIBE.replace("${user}",username))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         info("enable admin bloc notes permission");
         $(byXpath(ELEMENT_WIKI_ADMIN_NOTES_TRIBE.replace("${user}",username))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        $(ELEMENT_WIKI_PERMISSION_SAVE_BTN_TRIBE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        sleep(2000);
+        info("Confirm the save");
+        $(ELEMENT_WIKI_CONFIRM_SAVE_BTN_TRIBE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+        sleep(3000);
+    }
+
+    public void enableEditPagesWikiPermissionsDW(String username) {
+        goToWikiSettingPageDW();
+        goToWikiPermissionsTribe();
+        addUserToWikiPermissionsTribe(username);
+        info("enable edit pages permission");
+        $(byXpath(ELEMENT_WIKI_EDIT_PAGES_TRIBE.replace("${user}",username))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         $(ELEMENT_WIKI_PERMISSION_SAVE_BTN_TRIBE).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
         sleep(2000);
         info("Confirm the save");

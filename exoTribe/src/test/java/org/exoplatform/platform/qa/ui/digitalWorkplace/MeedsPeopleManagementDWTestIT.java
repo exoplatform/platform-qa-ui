@@ -29,7 +29,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("dw")
-public class MeedsPeopleManagementTestDWIT extends BaseTribe {
+public class MeedsPeopleManagementDWTestIT extends BaseTribe {
   NavigationToolbar navigationToolbar;
 
   AddUsers addUsers;
@@ -159,6 +159,7 @@ public class MeedsPeopleManagementTestDWIT extends BaseTribe {
     addUsers.addUserTribe(username1, password, email1, username1, username1, "");
     addUsers.addUserTribe(username2, password, email2, username2, username2, "");
     addUsers.addUserTribe(username3, password, email3, username3, username3, "");
+    sleep(2000);
     addUsers.addUserTribe(username4, password, email4, username4, username4, "");
 
     ArrayList<String> inviteUsers = new ArrayList<>();
