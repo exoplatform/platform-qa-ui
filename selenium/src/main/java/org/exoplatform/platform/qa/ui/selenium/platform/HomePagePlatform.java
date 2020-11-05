@@ -94,7 +94,7 @@ public class HomePagePlatform {
   public void goToHomeSpaceTribe() {
     $(ELEMENT_SPACE_HOME_TAB_DW).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
     info("Space setting page is shown");
-    $(ELEMENT_HOME_SPACE_DW).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout).click();
+    $(ELEMENT_HOME_SPACE_DW).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs + Configuration.collectionsTimeout);
   }
 
   /**
@@ -126,6 +126,112 @@ public class HomePagePlatform {
     open(Configuration.baseUrl + "portal/dw/people");
     sleep(2000);
     $(byXpath("//*[@id='peopleListApplication']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+  }
+
+  public void goToAgendaAppCenterApplication() {
+
+    info("Click on App Center Agenda Application Button");
+    ELEMENT_TRIBE_APPLICATIONS_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
+    ELEMENT_TRIBE_APPCENTER_AGENDA.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    info("Agenda Application Page is displayed");
+    ELEMENT_TRIBE_AGENDA_APPLICATION_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+  }
+
+  public void goToTasksAppCenterApplication() {
+
+    info("Click on App Center Tasks Application Button");
+    ELEMENT_TRIBE_APPLICATIONS_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
+    ELEMENT_TRIBE_APPCENTER_TASKS.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    info("Tasks Application Page is displayed");
+    ELEMENT_TRIBE_TASKS_APPLICATION_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+  }
+
+  public void goToNewsAppCenterApplication() {
+
+    info("Click on App Center News Application Button");
+    ELEMENT_TRIBE_APPLICATIONS_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
+    ELEMENT_TRIBE_APPCENTER_NEWS.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    info("News Application Page is displayed");
+    ELEMENT_TRIBE_NEWS_APPLICATION_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+  }
+
+  public void seeAllApplications() {
+
+    info("Click on App Center News Application Button");
+    ELEMENT_TRIBE_APPLICATIONS_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
+    ELEMENT_TRIBE_APPCENTER_SEE_ALL_APPLICATIONS.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    info("All Applications Page is displayed");
+    ELEMENT_TRIBE_APPCENTER_ALL_APPLICATIONS_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+  }
+
+  public void addRemoveApplicationToFavorites(String app) {
+
+    info("Add/ Remove the application " + app + " To Favorites");
+    $(byXpath(ELEMENT_TRIBE_APPCENTER_ADD_APP_TO_FAVORITES_BTN.replace("${app}", app))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+  }
+
+  public void checkThatAppcenterApplicationIsDisplayed(String app) {
+
+    info("Check that AppCenter Application " + app + " is displayed");
+    ELEMENT_TRIBE_APPLICATIONS_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byXpath(ELEMENT_TRIBE_APPCENTER_APPLICATION_TITLE.replace("${app}", app))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+  }
+
+  public void checkThatAppcenterApplicationIsNotDisplayed(String app) {
+
+    info("Check that AppCenter Application " + app + " is not displayed");
+    ELEMENT_TRIBE_APPLICATIONS_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byXpath(ELEMENT_TRIBE_APPCENTER_APPLICATION_TITLE.replace("${app}", app))).waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
+
+  }
+
+  public void goToTheAppcenterApplicationPage(String app) {
+
+    $(byXpath(ELEMENT_TRIBE_APPCENTER_APPLICATION_TITLE.replace("${app}", app))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+  }
+
+  public void goToWalletAppCenterApplication() {
+
+    info("Click on App Center Wallet Application Button");
+    ELEMENT_TRIBE_APPLICATIONS_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
+    ELEMENT_TRIBE_APPCENTER_WALLET.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    info("Wallet Application Page is displayed");
+    ELEMENT_TRIBE_WALLET_APPLICATION_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+  }
+
+  public void goToPerkStoreAppCenterApplication() {
+
+    info("Click on App Center Perk Store Application Button");
+    ELEMENT_TRIBE_APPLICATIONS_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
+    ELEMENT_TRIBE_APPCENTER_PERK_STORE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    info("Perk Store Application Page is displayed");
+    ELEMENT_TRIBE_PERK_STORE_APPLICATION_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+  }
+
+  public void goToSendFeedbackAppCenterApplication() {
+
+    info("Click on Send Feedback Perk Store Application Button");
+    ELEMENT_TRIBE_APPLICATIONS_TOPBAR.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(2000);
+    ELEMENT_TRIBE_APPCENTER_SEND_FEEDBACK.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    info("Send Feedback Application Page is displayed");
+    ELEMENT_TRIBE_SEND_FEEDBACK_APPLICATION_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
 
   }
 

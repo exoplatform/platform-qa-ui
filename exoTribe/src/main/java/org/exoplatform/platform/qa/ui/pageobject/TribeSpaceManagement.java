@@ -850,6 +850,18 @@ public class TribeSpaceManagement {
     info("Wiki portlet is shown");
   }
 
+  public void goToDocumentsSpaceTribe(String space) {
+
+    info("Open Documents Tab");
+
+    $(byXpath("//*[@id='MiddleToolBar']//*[@href='/portal/g/:spaces:{space}/{space}/documents']".replace("{space}",space)))
+            .waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs)
+            .click();
+    $(ELEMENT_DW_DOCUMENTS_ACTIVITY_STREAM_BTN).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+    info("Documents Tab is shown");
+
+  }
+
   public void checkThatSpaceTabsAreDisplayedInOrderDW(String space) {
 
     info("Top Bar Tabs after Space Creation are displayed in order");

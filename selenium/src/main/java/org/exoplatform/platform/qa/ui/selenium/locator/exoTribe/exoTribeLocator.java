@@ -169,6 +169,54 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_DOCUMENTS_MYWORK= $(byXpath("(//*[@id='DocumentsContainer']//*[@class='tabsTitle'])[1]"));
 
+    public static final SelenideElement ELEMENT_TRIBE_FIRST_EXPLORE_DOCUMENT_NAME= $(byXpath("(//*[@id='recentSpacesDocuments']//*[@class='v-list-item__content']//div)[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SECOND_EXPLORE_DOCUMENT_NAME= $(byXpath("(//*[@id='recentSpacesDocuments']//*[@class='v-list-item__content']//div)[4]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_FIRST_SHARED_WITH_ME_DOCUMENT_NAME= $(byXpath("(//*[@id='sharedDocuments']//*[@class='v-list-item__content']//div)[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SECOND_SHARED_WITH_ME_DOCUMENT_NAME= $(byXpath("(//*[@id='sharedDocuments']//*[@class='v-list-item__content']//div)[4]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_THIRD_SHARED_WITH_ME_DOCUMENT_NAME= $(byXpath("(//*[@id='sharedDocuments']//*[@class='v-list-item__content']//div)[7]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_FIRST_FAVORITES_DOCUMENT_NAME= $(byXpath("(//*[@id='favoriteDocuments']//*[@class='v-list-item__content']//div)[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SECOND_FAVORITES_DOCUMENT_NAME= $(byXpath("(//*[@id='favoriteDocuments']//*[@class='v-list-item__content']//div)[4]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_THIRD_FAVORITES_DOCUMENT_NAME= $(byXpath("(//*[@id='favoriteDocuments']//*[@class='v-list-item__content']//div)[7]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_THIRD_EXPLORE_DOCUMENT_NAME= $(byXpath("(//*[@id='recentSpacesDocuments']//*[@class='v-list-item__content']//div)[7]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_FIRST_MYWORK_DOCUMENT_NAME= $(byXpath("(//*[@id='recentDocuments']//*[@class='v-list-item__content']//div)[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SECOND_MYWORK_DOCUMENT_NAME= $(byXpath("(//*[@id='recentDocuments']//*[@class='v-list-item__content']//div)[4]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_THIRD_MYWORK_DOCUMENT_NAME= $(byXpath("(//*[@id='recentDocuments']//*[@class='v-list-item__content']//div)[7]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_FIRST_EXPLORE_DOCUMENT_SPACE_NAME= $(byXpath("(//*[@id='recentSpacesDocuments']//*[@class='v-list-item__content']//div[@class='color-title']//span[2])[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SECOND_EXPLORE_DOCUMENT_SPACE_NAME= $(byXpath("(//*[@id='recentSpacesDocuments']//*[@class='v-list-item__content']//div[@class='color-title']//span[2])[2]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_THIRD_EXPLORE_DOCUMENT_SPACE_NAME= $(byXpath("(//*[@id='recentSpacesDocuments']//*[@class='v-list-item__content']//div[@class='color-title']//span[2])[3]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_FIRST_MYWORK_DOCUMENT_SPACE_NAME= $(byXpath("(//*[@id='recentDocuments']//*[@class='v-list-item__content']//div[@class='color-title']//span[2])[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SECOND_MYWORK_DOCUMENT_SPACE_NAME= $(byXpath("(//*[@id='recentDocuments']//*[@class='v-list-item__content']//div[@class='color-title']//span[2])[2]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_THIRD_MYWORK_DOCUMENT_SPACE_NAME= $(byXpath("(//*[@id='recentDocuments']//*[@class='v-list-item__content']//div[@class='color-title']//span[2])[3]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_FIRST_SHARED_WITH_ME_DOCUMENT_SPACE_NAME= $(byXpath("(//*[@id='sharedDocuments']//*[@class='v-list-item__content']//div[@class='color-title']//span[2])[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SECOND_SHARED_WITH_ME_DOCUMENT_SPACE_NAME= $(byXpath("(//*[@id='sharedDocuments']//*[@class='v-list-item__content']//div[@class='color-title']//span[2])[2]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_FIRST_FAVORITES__DOCUMENT_SPACE_NAME= $(byXpath("(//*[@id='favoriteDocuments']//*[@class='v-list-item__content']//div[@class='color-title']//span[2])[1]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SECOND_FAVORITES__DOCUMENT_SPACE_NAME= $(byXpath("(//*[@id='favoriteDocuments']//*[@class='v-list-item__content']//div[@class='color-title']//span[2])[2]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_THIRD_FAVORITES__DOCUMENT_SPACE_NAME= $(byXpath("(//*[@id='favoriteDocuments']//*[@class='v-list-item__content']//div[@class='color-title']//span[2])[3]"));
+
+    public static final SelenideElement ELEMENT_TRIBE_THIRD_SHARED_WITH_ME_DOCUMENT_SPACE_NAME= $(byXpath("(//*[@id='sharedDocuments']//*[@class='v-list-item__content']//div[@class='color-title']//span[2])[3]"));
+
     public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_DOCUMENTS_FAVORITE= $(byXpath("(//*[@id='DocumentsContainer']//*[@class='tabsTitle'])[2]"));
 
     public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_DOCUMENTS_SHARED_WITH_ME= $(byXpath("(//*[@id='DocumentsContainer']//*[@class='tabsTitle'])[3]"));
@@ -208,6 +256,42 @@ public class exoTribeLocator {
     public static final SelenideElement ELEMENT_TRIBE_MINICHAT_TOPBAR = $(byXpath("//*[@id='miniChatDrawer']"));
 
     public static final SelenideElement ELEMENT_TRIBE_EDIT_ADMINISTRATION_TOPBAR = $(byXpath("//*[@id='DrawerEditAdministration']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_AGENDA_APPLICATION_PAGE = $(byXpath("//*[@id='AgendaApplication']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_TASKS_APPLICATION_PAGE = $(byXpath("//*[@id='TasksManagementPortlet']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_NEWS_APPLICATION_PAGE = $(byXpath("//*[@class='newsApp']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_PERK_STORE_APPLICATION_PAGE = $(byXpath("//*[@id='PerkStoreApp']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_WALLET_APPLICATION_PAGE = $(byXpath("//*[@id='WalletApp']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_FORUMS_APPLICATION_PAGE = $(byXpath("//*[@id='UIForumPortlet']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_SEND_FEEDBACK_APPLICATION_PAGE = $(byXpath("//*[@id='ticketAddon']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_APPCENTER_SEE_ALL_APPLICATIONS= $(byXpath("//*[@class='row drawerActions mx-0']//*[@class='v-btn__content']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_APPCENTER_ALL_APPLICATIONS_PAGE= $(byXpath("//*[@class='userAuthorizedApplications']"));
+
+    public static final String ELEMENT_TRIBE_APPCENTER_ADD_APP_TO_FAVORITES_BTN= "(//*[@class='authorisedAppContent']//*[@class='tooltipContent']//div[contains(text(),'${app}')]/following::*[@class='v-card__actions applicationActions']//button)[1]";
+
+    public static final String ELEMENT_TRIBE_APPCENTER_ALL_APPLICATIONS_OPEN_APP_BTN= "(//*[@class='authorisedAppContent']//*[@class='tooltipContent']//div[contains(text(),'${app}')]/following::*[@class='v-card__actions applicationActions']//a)[1]";
+
+    public static final String ELEMENT_TRIBE_APPCENTER_APPLICATION_TITLE= "//*[@class='appLauncherTitle' and contains(text(),'${app}')]";
+
+    public static final SelenideElement ELEMENT_TRIBE_APPCENTER_AGENDA = $(byXpath("//*[@href='/portal/dw/agenda']//*[@class='appLauncherImage']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_APPCENTER_TASKS = $(byXpath("//*[@href='/portal/dw/taskstest']//*[@class='appLauncherImage']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_APPCENTER_NEWS= $(byXpath("//*[@href='/portal/dw/news']//*[@class='appLauncherImage']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_APPCENTER_PERK_STORE= $(byXpath("//*[@href='/portal/dw/perkstore']//*[@class='appLauncherImage']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_APPCENTER_WALLET= $(byXpath("//*[@href='/portal/dw/wallet']//*[@class='appLauncherImage']"));
+
+    public static final SelenideElement ELEMENT_TRIBE_APPCENTER_SEND_FEEDBACK= $(byXpath("//*[@href='/portal/dw/tribe-feedback']//*[@class='appLauncherImage']"));
 
     public static final SelenideElement ELEMENT_TRIBE_APPLICATIONS_TOPBAR = $(byXpath("//*[@id='appLauncher']"));
 
@@ -272,6 +356,19 @@ public class exoTribeLocator {
     public static final SelenideElement ELEMENT_DW_ATTACHED_FILE_PREVIEW_DOWNLOAD  = $(byXpath("//*[@class='downloadBtn']"));
 
     public static final SelenideElement ELEMENT_DW_DOCUMENT_EDIT_IN_ONLYOFFICE  = $(byXpath("//*[@class='hidden-tabletL editorButton']"));
+
+    public static final SelenideElement ELEMENT_DW_SHARE_DOCUMENT  = $(byXpath("//*[@class='uiIconEcmsShareDocuments uiIconEcmsLightGray']"));
+
+    public static final SelenideElement ELEMENT_DW_INVITE_USER_SHARE_DOCUMENT  = $(byXpath("(//*[@class='addInvite']//input)[2]"));
+
+    public static final SelenideElement ELEMENT_DW_SAVE_BTN_SHARE_DOCUMENT  = $(byXpath("//*[@id='UIShareDocument']/following::*[@class='uiActionBorder']//button[1]"));
+
+    public static final SelenideElement ELEMENT_DW_DOCUMENTS_ACTIVITY_STREAM_BTN  = $(byXpath("//*[@class='actionIconLabel' and @data-original-title='Activity Stream Documents ']"));
+
+    public static final String ELEMENT_ACTIVITY_STREAM_DOCUMENT_NAME  = "//*[@class='actionIconLabel']//*[@class='nodeName' and contains(text(),'${documentName}')]";
+
+    public static final SelenideElement ELEMENT_ADD_DOCUMENT_TO_FAVORITS_BTN  = $(byXpath("(//*[@class='uiIconEcmsAddToFavourite'])[1]"));
+
 
   //SPACE
 

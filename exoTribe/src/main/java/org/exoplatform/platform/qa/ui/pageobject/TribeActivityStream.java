@@ -11,6 +11,8 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
@@ -209,6 +211,40 @@ public class TribeActivityStream {
 
     ELEMENT_DW_ATTACHED_FILE_PREVIEW_DROPDOWN.waitUntil(Condition.visible, openBrowserTimeoutMs).click();
     ELEMENT_DW_ATTACHED_FILE_PREVIEW_OPEN_IN_DOCUMENTS.waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+
+  }
+
+  public void goToDocumentsActivityStream() {
+
+    ELEMENT_DW_DOCUMENTS_ACTIVITY_STREAM_BTN.waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+
+  }
+
+  public void addDocumentsToFavorites(String documentName) {
+
+    $(byXpath(ELEMENT_ACTIVITY_STREAM_DOCUMENT_NAME.replace("${documentName}", documentName))).waitUntil(visible, openBrowserTimeoutMs).contextClick();
+    ELEMENT_ADD_DOCUMENT_TO_FAVORITS_BTN.waitUntil(Condition.visible, openBrowserTimeoutMs).click();
+
+  }
+
+  public void shareDocumentWithUser(ArrayList<String> users) {
+
+    ELEMENT_DW_SHARE_DOCUMENT.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
+    if (users!= null) {
+      for (int i = 0; i < users.size(); i++) {
+        sleep(Configuration.timeout);
+        ELEMENT_DW_INVITE_USER_SHARE_DOCUMENT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+        ELEMENT_DW_INVITE_USER_SHARE_DOCUMENT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(users.get(i));
+        sleep(2000);
+        ELEMENT_DW_INVITE_USER_SHARE_DOCUMENT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).pressEnter();
+        $(byXpath("//*[@class='uiUserInvitation']//*[@class and contains(text(),'${users}')]".replace("${users}", users.get(i)))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+      }
+    }
+
+    sleep(2000);
+    ELEMENT_DW_SAVE_BTN_SHARE_DOCUMENT.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("//*[@class and contains(text(),'Valider')]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
 
   }
 
