@@ -48,6 +48,10 @@ public class PLFData {
 
   public static String tribe_user2             = "Firas Mejri";
 
+  public static String tribe_dw_user2             = "firas mejri";
+
+  public static String tribe_dw_user1             = "firas bouseha";
+
   public static String tribe_password3             = "aymen2020";
 
   public static String tribe_username3             = "aymen.khalfi";

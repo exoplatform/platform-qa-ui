@@ -107,7 +107,6 @@ public class MeedsSearchManagementTestIT extends BaseTribe {
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     ELEMENT_ICON_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(activity1);
-    ELEMENT_CANCEL_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("The Searched activity " + activity1 + " is displayed");
     $(byXpath(ELEMENT_ACTIVITY_SEARCH_TITLE.replace("${activity}", activity1))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
@@ -117,7 +116,6 @@ public class MeedsSearchManagementTestIT extends BaseTribe {
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     ELEMENT_ICON_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(activity2);
-    ELEMENT_CANCEL_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("The Searched activity " + activity2 + " is displayed");
     $(byXpath(ELEMENT_ACTIVITY_SEARCH_TITLE.replace("${activity}", activity2))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
@@ -127,7 +125,6 @@ public class MeedsSearchManagementTestIT extends BaseTribe {
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     ELEMENT_ICON_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(comment);
-    ELEMENT_CANCEL_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("The comment " + comment + " is displayed");
     $(byXpath(ELEMENT_ACTIVITY_SEARCH_TITLE.replace("${activity}", comment))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
@@ -142,7 +139,6 @@ public class MeedsSearchManagementTestIT extends BaseTribe {
     homePagePlatform.goToStreamPageTribeViaUrl();
     ELEMENT_ICON_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue("testactivity3");
-    ELEMENT_CANCEL_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     $(byXpath(ELEMENT_ACTIVITY_SEARCH_TITLE.replace("${activity}", activity1))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
     $(byXpath(ELEMENT_ACTIVITY_SEARCH_TITLE.replace("${activity}", activity2))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
     ELEMENT_CLOSE_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
@@ -165,7 +161,6 @@ public class MeedsSearchManagementTestIT extends BaseTribe {
 
     ELEMENT_ICON_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(spaceNamea);
-    ELEMENT_CANCEL_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("The Searched space " + spaceNamea + " is displayed");
     $(byXpath(ELEMENT_SPACE_SEARCH_TITLE.replace("${space}", spaceNamea))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
@@ -231,7 +226,6 @@ public class MeedsSearchManagementTestIT extends BaseTribe {
 
     ELEMENT_ICON_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(taskName);
-    ELEMENT_CANCEL_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("The Searched task " + taskName + " is displayed");
     $(byXpath(ELEMENT_TASK_SEARCH_TITLE.replace("${task}", taskName))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
@@ -258,7 +252,6 @@ public class MeedsSearchManagementTestIT extends BaseTribe {
     info("Search the application " + appName);
     ELEMENT_ICON_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(appName);
-    ELEMENT_CANCEL_SPACE_TRIBE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("The Searched application " + appName + " is displayed");
     $(byXpath(ELEMENT_APPLICATION_SEARCH_TITLE.replace("${application}", appName))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
@@ -274,6 +267,34 @@ public class MeedsSearchManagementTestIT extends BaseTribe {
 
     info("The "+ appName + " application is displayed");
     ELEMENT_WALLET_APPLICATION_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+  }
+
+  @Test
+  public void test07_CheckThatProductsCardsAreDisplayed() {
+
+    String productName = "Tuc";
+
+    info("Search the application " + productName);
+    ELEMENT_ICON_SEARCH.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_SEARCH_INPUT_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(productName);
+
+    info("The Searched product " + productName + " is displayed");
+    $(byXpath(ELEMENT_PRODUCT_SEARCH_TITLE.replace("${product}", productName))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    info("The Searched product price is displayed ");
+    $(byXpath(ELEMENT_PRODUCT_SEARCH_PRICE.replace("${product}", productName))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    info("The Searched product price is " + $(byXpath(ELEMENT_PRODUCT_SEARCH_PRICE.replace("${product}", productName))).getText());
+
+    info("Click on the searched product");
+    $(byXpath(ELEMENT_PRODUCT_SEARCH_TITLE.replace("${product}", productName))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    info("Perk Store application is displayed");
+    ELEMENT_PERK_STORE_APPLICATION_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    info("Perk Store Page is opened by "+ productName);
+    Assert.assertEquals(ELEMENT_PERK_STORE_PAGE_PRODUCT_NAME.getText(),productName + "\nProposé par eXo Employees");
 
   }
 

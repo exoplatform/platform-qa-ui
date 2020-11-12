@@ -121,10 +121,8 @@ public class SOCManageSpacesTestIT extends BaseTribe {
     tribeSpaceManagement.addNewSpaceTribe(spaceNamef, spaceDesf, "Open", "No", null);
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpaceTribe(spaceNameg, spaceDesg, "Open", "No", null);
-
-    homePagePlatform.goToSnapshotPageTribeViaUrl();
-    homePagePlatform.goToStreamPageTribeViaUrl();
     homePagePlatform.goToSideBarMenuTribe();
+    sleep(3000);
     info("Check That the created spaces are displayed in order on SideBar menu");
     info("Last space created is the first displayed on SideBar menu");
     Assert.assertEquals($(By.xpath(ELEMENT_SPACE_SIDEBAR_ORDER.replace("{id}", "1"))).getText(), spaceNameg);
@@ -166,8 +164,6 @@ public class SOCManageSpacesTestIT extends BaseTribe {
 
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", null);
-    homePagePlatform.goToSnapshotPageTribeViaUrl();
-    homePagePlatform.goToStreamPageTribeViaUrl();
 
     homePagePlatform.goToSideBarMenuTribe();
     info("Select Space From Last Visited Spaces List");
@@ -187,8 +183,6 @@ public class SOCManageSpacesTestIT extends BaseTribe {
 
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpaceTribe(spaceNamea, spaceDesa, "Open", "No", null);
-    homePagePlatform.goToSnapshotPageTribeViaUrl();
-    homePagePlatform.goToStreamPageTribeViaUrl();
 
     homePagePlatform.goToSideBarMenuTribe();
     info("Search A Space Via Recent Spaces");
@@ -211,9 +205,6 @@ public class SOCManageSpacesTestIT extends BaseTribe {
 
     info("Top Bar Tabs after Space Creation are displayed in order");
     tribeSpaceManagement.checkThatSpaceTabsAreDisplayedInOrderDW(spaceNamea);
-
-    homePagePlatform.goToSnapshotPageTribeViaUrl();
-    homePagePlatform.goToStreamPageTribeViaUrl();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(spaceNamea);
@@ -251,7 +242,6 @@ public class SOCManageSpacesTestIT extends BaseTribe {
     }
 
     homePagePlatform.goToSnapshotPageTribeViaUrl();
-    homePagePlatform.goToStreamPageTribeViaUrl();
 
   }
 
@@ -280,7 +270,6 @@ public class SOCManageSpacesTestIT extends BaseTribe {
     $(By.xpath(ELEMENT_SPACE_STATUS_DW.replace("${space}", space4))).waitUntil(Condition.not(Condition.visible), Configuration.openBrowserTimeoutMs);
 
     homePagePlatform.goToSnapshotPageTribeViaUrl();
-    homePagePlatform.goToStreamPageTribeViaUrl();
 
   }
 
@@ -328,8 +317,10 @@ public class SOCManageSpacesTestIT extends BaseTribe {
 
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(spaceNamea);
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(spaceNameb);
     tribeSpaceManagement.deleteTribeSpace(spaceNamec);
+    homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(spaceNamed);
     tribeSpaceManagement.deleteTribeSpace(spaceNamee);
 
@@ -642,6 +633,7 @@ public class SOCManageSpacesTestIT extends BaseTribe {
     tribeSpaceManagement.addNewSpaceTribe(space1,space1,"Validation","No",null);
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpaceTribe(space2,space2,"Validation","No",null);
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpaceTribe(space3,space3,"Validation","No",null);
 
@@ -687,6 +679,41 @@ public class SOCManageSpacesTestIT extends BaseTribe {
     tribeSpaceManagement.deleteTribeSpace(space1);
     tribeSpaceManagement.deleteTribeSpace(space2);
     tribeSpaceManagement.deleteTribeSpace(space3);
+
+  }
+
+  @Test
+  public void test14_CheckSpaceManagingRequests() {
+
+    String space1 = "space" + getRandomNumber();
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpaceTribe(space1,space1,"Validation","No",null);
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+
+    info("Check that Managing is displayed in Space Widget");
+    Assert.assertEquals(ELEMENT_MANAGING_SPACE_TITLE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).getText(),"En gestion");
+
+    info("Check that Managed Spaces Number is displayed");
+    ELEMENT_MANAGING_SPACE_NUMBER.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
+    info("Check that Spaces Number is " + ELEMENT_MANAGING_SPACE_NUMBER.getText());
+
+    info("Click on Managing Number");
+    ELEMENT_MANAGING_SPACE_NUMBER.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
+    info("Check that displayed space with Edit Icon is displayed");
+    $(byXpath(ELEMENT_EDIT_MANAGING_SPACE.replace("${space}",space1))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    info("Check on Edit Icon");
+    $(byXpath(ELEMENT_EDIT_MANAGING_SPACE.replace("${space}",space1))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
+    info("Check that Edit Space Drawer is opened");
+    ELEMENT_DRAWER_EDIT_SPACE_TITLE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(space1);
+
 
   }
 

@@ -139,7 +139,7 @@ public class ConnectionsLocator {
 
   public static final SelenideElement ELEMENT_PEOPLE_SHOWING_RESULTS_DW          = $(byXpath("//*[@class='showingPeopleText text-sub-title ml-3 d-none d-sm-flex']"));
 
-  public static final SelenideElement ELEMENT_PEOPLE_PULLDOWN_FILTER_DW          = $(byXpath("//*[@class='v-text-field__slot']/following::select[1]"));
+  public static final SelenideElement ELEMENT_PEOPLE_PULLDOWN_FILTER_DW          = $(byXpath("(//*[@class='v-input__prepend-inner']/following::*[@class='v-text-field__slot']/input/following::select)[1]"));
 
   public static final String ELEMENT_ADD_CONTACT_FULLNAM_WITH_PARAM_DW          = "//*[@class='v-card__text peopleCardBody align-center pt-2 pb-1']//a[contains(text(),'${user}')]";
 
@@ -238,9 +238,13 @@ public class ConnectionsLocator {
 
   public static final String ELEMENT_ACTIVITY_SEARCH_TITLE        = "//*[@class='searchMatchExcerpt' and text()='${activity}']";
 
-  public static final String ELEMENT_TASK_SEARCH_TITLE        = "//*[@class='searchMatchExcerpt' and text()='${task}']";
+  public static final String ELEMENT_TASK_SEARCH_TITLE      = "//*[@class='searchMatchExcerpt' and text()='${task}']";
 
-  public static final String ELEMENT_APPLICATION_SEARCH_TITLE        = "//*[@title='${application}']";
+  public static final String ELEMENT_APPLICATION_SEARCH_TITLE     = "//*[@title='${application}']";
+
+  public static final String ELEMENT_PRODUCT_SEARCH_TITLE     = "//*[@class='uiIconHandbag tertiary--text pl-1 pr-2 display-1']/following::*[@title='${product}' and contains(text(),'${product}')]";
+
+  public static final String ELEMENT_PRODUCT_SEARCH_PRICE      = "//*[@class='uiIconHandbag tertiary--text pl-1 pr-2 display-1']/following::*[@title='${product}' and contains(text(),'${product}')]/following::*[@class='v-list-item__subtitle'][1]";
 
   public static final String ELEMENT_APPLICATION_SEARCH_DESCRIPTION        = "//*[@title='${applicationDescription}']";
 
@@ -249,6 +253,10 @@ public class ConnectionsLocator {
   public static final SelenideElement ELEMENT_APPLICATION_SEARCH_PICTURE_DW      = $(byXpath("//*[@class='v-responsive v-image appImage']"));
 
   public static final SelenideElement ELEMENT_WALLET_APPLICATION_PAGE       = $(byXpath("//*[@id='WalletApp']"));
+
+  public static final SelenideElement ELEMENT_PERK_STORE_APPLICATION_PAGE       = $(byXpath("//*[@id='PerkStoreApp']"));
+
+  public static final SelenideElement ELEMENT_PERK_STORE_PAGE_PRODUCT_NAME       = $(byXpath("//*[@class='headline mb-4']"));
 
   public static final SelenideElement ELEMENT_DRAWER_TASK_NAME      =   $(byXpath("//*[@id='task-Drawer']//*[@id='task-name']"));
 

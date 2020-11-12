@@ -252,9 +252,6 @@ public class SnapshotPageManagementTestIT extends BaseTribe {
     info("Check That User Statistics Section is displayed");
     ELEMENT_TRIBE_SNAPSHOT_USER_STATS.waitUntil(Condition.visible, openBrowserTimeoutMs).isDisplayed();
 
-    info("Check That Popular Spaces Section is displayed");
-    ELEMENT_TRIBE_SNAPSHOT_SPACES.waitUntil(Condition.visible, openBrowserTimeoutMs).isDisplayed();
-
     info("Check That Tasks Section is displayed");
     ELEMENT_TRIBE_SNAPSHOT_TASKS.waitUntil(Condition.visible, openBrowserTimeoutMs).isDisplayed();
 

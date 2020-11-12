@@ -150,7 +150,7 @@ public class TribeSpaceManagement {
     ELEMENT_SPACE_DETAILS_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     $(ELEMENT_SPACE_NAME_SECOND_TRIBE_INPUT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
     $(ELEMENT_SPACE_DESCRIPTION_SECOND_TRIBE_INPUT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(desc);
-    $(byXpath("(//*[@class='layout column']//*[@class='v-btn__content'])[1]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("(//*[@class='btn btn-primary v-btn v-btn--depressed v-btn--flat v-btn--outlined theme--light v-size--default'])[1]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SPACE_ACCESS_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
 
     if (hidden == "Yes") {
@@ -181,7 +181,7 @@ public class TribeSpaceManagement {
       }
     }
 
-    $(byXpath("(//*[@class='layout column']//*[@class='v-btn__content'])[3]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("(//*[@class='btn btn-primary v-btn v-btn--depressed v-btn--flat v-btn--outlined theme--light v-size--default'])[2]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_INVITE_USERS_TRIBE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     if (groups!= null) {
       for (int i = 0; i < groups.size(); i++) {
@@ -207,7 +207,7 @@ public class TribeSpaceManagement {
     ELEMENT_SPACE_DETAILS_DW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     $(ELEMENT_SPACE_NAME_SECOND_TRIBE_INPUT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(name);
     $(ELEMENT_SPACE_DESCRIPTION_SECOND_TRIBE_INPUT).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(desc);
-    $(byXpath("(//*[@class='layout column']//*[@class='v-btn__content' and contains(text(),'Continue')])[1]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("(//*[@class='btn btn-primary v-btn v-btn--depressed v-btn--flat v-btn--outlined theme--light v-size--default'])[1]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_SPACE_ACCESS_DW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
 
     if (hidden == "Yes") {
@@ -238,7 +238,7 @@ public class TribeSpaceManagement {
       }
     }
      sleep(1000);
-    $(byXpath("(//*[@class='layout column']//*[@class='v-btn__content' and contains(text(),'Continue')])[2]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("(//*[@class='btn btn-primary v-btn v-btn--depressed v-btn--flat v-btn--outlined theme--light v-size--default'])[2]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
     ELEMENT_INVITE_USERS_DW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs);
     if (groups!= null) {
       for (int i = 0; i < groups.size(); i++) {
@@ -873,18 +873,21 @@ public class TribeSpaceManagement {
             .contains($(byXpath(ELEMENT_SPACE_DOCUMENTS_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
 
     Assert.assertTrue($(byXpath(ELEMENT_SPACE_TABS_TOP_BAR_ORDER.replace("{i}","3"))).getAttribute("href")
-            .contains($(byXpath(ELEMENT_SPACE_TASKS_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
+            .contains($(byXpath(ELEMENT_SPACE_WIKI_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
 
     Assert.assertTrue($(byXpath(ELEMENT_SPACE_TABS_TOP_BAR_ORDER.replace("{i}","4"))).getAttribute("href")
             .contains($(byXpath(ELEMENT_SPACE_FORUM_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
 
     Assert.assertTrue($(byXpath(ELEMENT_SPACE_TABS_TOP_BAR_ORDER.replace("{i}","5"))).getAttribute("href")
-            .contains($(byXpath(ELEMENT_SPACE_WIKI_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
+            .contains($(byXpath(ELEMENT_SPACE_TASKS_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
 
     Assert.assertTrue($(byXpath(ELEMENT_SPACE_TABS_TOP_BAR_ORDER.replace("{i}","6"))).getAttribute("href")
-            .contains($(byXpath(ELEMENT_SPACE_MEMBERS_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
+            .contains($(byXpath(ELEMENT_SPACE_AGENDA_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
 
     Assert.assertTrue($(byXpath(ELEMENT_SPACE_TABS_TOP_BAR_ORDER.replace("{i}","7"))).getAttribute("href")
+            .contains($(byXpath(ELEMENT_SPACE_MEMBERS_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
+
+    Assert.assertTrue($(byXpath(ELEMENT_SPACE_TABS_TOP_BAR_ORDER.replace("{i}","8"))).getAttribute("href")
             .contains($(byXpath(ELEMENT_SPACE_SETTINGS_TAB_TOP_BAR.replace("{space}",space))).getAttribute("href")));
 
 

@@ -220,6 +220,7 @@ public class SideAndTopBarItemsManagementTestIT extends BaseTribe {
 
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     manageLogInOut.signOutTribe();
+    sleep(2000);
     manageLogInOut.signInTribe(tribe_username, tribe_password);
 
     info("Check that Stream Page is displayed");
@@ -227,6 +228,7 @@ public class SideAndTopBarItemsManagementTestIT extends BaseTribe {
 
     info("Change the default page to Spaces Page");
     homePagePlatform.goToSideBarMenuTribe();
+    sleep(3000);
     ELEMENT_TRIBE_SPACES_CHECK_ORDER.waitUntil(Condition.visible, Configuration.timeout).hover();
     ELEMENT_TRIBE_SPACES_HOME_ICON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TRIBE_CONFIRM_DEFAULT_PAGE_CHANGE_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
@@ -238,8 +240,10 @@ public class SideAndTopBarItemsManagementTestIT extends BaseTribe {
     info("Check that Spaces Page is displayed");
     $(byXpath("//*[@id='spacesListApplication']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
 
+    sleep(2000);
     info("Change the default page to People Page");
     homePagePlatform.goToSideBarMenuTribe();
+    sleep(3000);
     ELEMENT_TRIBE_PEOPLE_CHECK_ORDER.waitUntil(Condition.visible, Configuration.timeout).hover();
     ELEMENT_TRIBE_PEOPLE_HOME_ICON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TRIBE_CONFIRM_DEFAULT_PAGE_CHANGE_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
@@ -251,8 +255,10 @@ public class SideAndTopBarItemsManagementTestIT extends BaseTribe {
     info("Check that People Page is displayed");
     $(byXpath("//*[@id='peopleListApplication']")).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
 
+    sleep(2000);
     info("Change the default page to Snapshot Page");
     homePagePlatform.goToSideBarMenuTribe();
+    sleep(3000);
     ELEMENT_TRIBE_SNAPSHOT_CHECK_ORDER.waitUntil(Condition.visible, Configuration.timeout).hover();
     ELEMENT_TRIBE_SNAPSHOT_HOME_ICON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
     ELEMENT_TRIBE_CONFIRM_DEFAULT_PAGE_CHANGE_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();

@@ -185,28 +185,74 @@ public class MeedsPeopleManagementTestIT extends BaseTribe {
     info("Display the 9 first places on Leaderboard");
     String firstUserLeaderboard = ELEMENT_FIRST_USER_LEADER_BOARD_POSITION_DW.getText();
     String secondUserLeaderboard = ELEMENT_SECOND_USER_LEADER_BOARD_POSITION_DW.getText();
-    String thirdUserLeaderboard = ELEMENT_THIRD_USER_LEADER_BOARD_POSITION_DW.getText();
-
 
     info("First User On Leaderboard is" + firstUserLeaderboard);
     info("Second User On Leaderboard is" + secondUserLeaderboard);
-    info("Third User On Leaderboard is" + thirdUserLeaderboard);
-
 
     info("Display the 9 first users points on Leaderboard");
     String firstUsePointsLeaderboard = ELEMENT_FIRST_USER_LEADER_BOARD_POINTS_DW.getText();
     String secondUserPointsLeaderboard = ELEMENT_SECOND_USER_LEADER_BOARD_POINTS_DW.getText();
-    String thirdUserPointsLeaderboard = ELEMENT_THIRD_USER_LEADER_BOARD_POINTS_DW.getText();
 
     info("First User Points On Leaderboard is" + firstUsePointsLeaderboard);
     info("Second User Points On Leaderboard is" + secondUserPointsLeaderboard);
-    info("Third User Points On Leaderboard is" + thirdUserPointsLeaderboard);
 
     String currentUserPositionLeaderboard = ELEMENT_CURRENT_USER_LEADER_BOARD_POSITION_DW.getText();
     String currentUserPointsLeaderboard = $(By.xpath(ELEMENT_CURRENT_USER_LEADER_BOARD_POINTS_DW.replace("{id}", currentUserPositionLeaderboard))).getText();
 
     info("Current user position on Leaderboard" + currentUserPositionLeaderboard);
     info("Current user points on Leaderboard" + currentUserPointsLeaderboard);
+
+  }
+
+  @Test
+  public void test05_CheckReceivedInvitationsBehavior() {
+
+    info("Click on Connections on the left panel");
+    homePagePlatform.goToPeoplePageTribeViaUrl();
+    info("Click on Connect button to invite users");
+    connectionsManagement.tribeConnectToAUser(tribe_username3);
+    info("Login by invited users, go to My Connections/Requests Received and accept invitation");
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username2, tribe_password2);
+    homePagePlatform.goToPeoplePageTribeViaUrl();
+    info("Click on Connect button to invite users");
+    connectionsManagement.tribeConnectToAUser(tribe_username3);
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signInTribe(tribe_username3, tribe_password3);
+    homePagePlatform.goToPeoplePageTribeViaUrl();
+    info("Click on Connect button to invite users");
+    connectionsManagement.tribeConnectToAUser(tribe_username4);
+
+    homePagePlatform.goToPeoplePageTribeViaUrl();
+
+    ELEMENT_SENT_REQUESTS_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    info("Check that " + tribe_user4 + " is displayed");
+    $(byXpath(ELEMENT_SENT_REQUESTS_USERS_DW.replace("${user}", tribe_user4))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+
+    info("Delete the Sent Request");
+    $(byXpath(ELEMENT_DELETE_SENT_REQUESTS_USERS_DW.replace("${user}", tribe_user4))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    info("Close Sent Requests Button");
+    ELEMENT_CLOSE_SENT_REQUESTS_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    homePagePlatform.goToPeoplePageTribeViaUrl();
+
+    ELEMENT_SENT_INVITATIONS_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    info("Check that " + tribe_dw_user2 + " is displayed");
+    $(byXpath(ELEMENT_SENT_INVITATIONS_USERS_DW.replace("${user}", tribe_dw_user2))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+
+    info("Check that " + tribe_dw_user1 + " is displayed");
+    $(byXpath(ELEMENT_SENT_INVITATIONS_USERS_DW.replace("${user}", tribe_dw_user1))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+
+    info("Delete the Invitations");
+    $(byXpath(ELEMENT_DELETE_SENT_INVITATIONS_USERS_DW.replace("${user}", tribe_dw_user1))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byXpath(ELEMENT_DELETE_SENT_INVITATIONS_USERS_DW.replace("${user}", tribe_dw_user2))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    info("Close Invitations Button");
+    ELEMENT_CLOSE_SENT_INVITATIONS_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
 
   }
 
