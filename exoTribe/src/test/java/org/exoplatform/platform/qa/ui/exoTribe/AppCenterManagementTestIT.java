@@ -21,7 +21,7 @@ import static org.exoplatform.platform.qa.ui.selenium.locator.exoTribe.exoTribeL
 import static org.exoplatform.platform.qa.ui.selenium.logger.Logger.info;
 
 @Tag("tribe")
-@Tag("tribeMeedsSearch")
+@Tag("tribeAppCenterManagement")
 public class AppCenterManagementTestIT extends BaseTribe {
   NavigationToolbar navigationToolbar;
 

@@ -294,6 +294,7 @@ public class MeedsSearchManagementTestIT extends BaseTribe {
     ELEMENT_PERK_STORE_APPLICATION_PAGE.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
 
     info("Perk Store Page is opened by "+ productName);
+    sleep(2000);
     Assert.assertEquals(ELEMENT_PERK_STORE_PAGE_PRODUCT_NAME.getText(),productName + "\nProposé par eXo Employees");
 
   }
