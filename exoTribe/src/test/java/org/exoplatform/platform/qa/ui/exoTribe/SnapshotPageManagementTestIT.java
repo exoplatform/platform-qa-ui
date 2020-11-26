@@ -457,7 +457,7 @@ public class SnapshotPageManagementTestIT extends BaseTribe {
     tribeActivityStream.postActivity();
     sleep(2000);
     getExoWebDriver().getWebDriver().navigate().refresh();
-    sleep(2000);
+    sleep(Configuration.timeout);
     info("-- Verify that an activity has been added --");
     $(byText(secondAttachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
     $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
@@ -788,7 +788,7 @@ public class SnapshotPageManagementTestIT extends BaseTribe {
     tribeActivityStream.postActivity();
     sleep(2000);
     getExoWebDriver().getWebDriver().navigate().refresh();
-    sleep(2000);
+    sleep(Configuration.timeout);
     info("-- Verify that an activity has been added --");
     $(byText(secondAttachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
     $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);

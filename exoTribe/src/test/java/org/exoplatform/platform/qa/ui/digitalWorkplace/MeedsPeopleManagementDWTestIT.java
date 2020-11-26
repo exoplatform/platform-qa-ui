@@ -211,7 +211,7 @@ public class MeedsPeopleManagementDWTestIT extends BaseTribe {
     $(byXpath(ELEMENT_DELETE_SENT_REQUESTS_USERS_DW.replace("${user}", firstUserSuggestion))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     info("Close Sent Requests Button");
-    ELEMENT_CLOSE_SENT_REQUESTS_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    ELEMENT_CLOSE_SENT_REQUESTS_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
     navigationToolbar.goToAddUsersPageViaUrlDW();
     addUsers.deleteUserDW(username1);
@@ -309,6 +309,90 @@ public class MeedsPeopleManagementDWTestIT extends BaseTribe {
 
     info("Current user position on Leaderboard" + currentUserPositionLeaderboard);
     info("Current user points on Leaderboard" + currentUserPointsLeaderboard);
+
+  }
+
+  @Test
+  public void test05_CheckReceivedInvitationsBehavior() {
+
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@test.com";
+    String password = "12345678";
+    String username2 = "usernameb" + getRandomString();
+    String email2 = username2 + "@test.com";
+    String username3 = "usernamec" + getRandomString();
+    String email3 = username3 + "@test.com";
+    String username4 = "usernamed" + getRandomString();
+    String email4 = username4 + "@test.com";
+
+    info("Add user");
+    navigationToolbar.goToAddUsersPageViaUrlDW();
+    addUsers.addUserTribe(username1, password, email1, username1, username1, "");
+    addUsers.addUserTribe(username2, password, email2, username2, username2, "");
+    addUsers.addUserTribe(username3, password, email3, username3, username3, "");
+    addUsers.addUserTribe(username4, password, email4, username4, username4, "");
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(username1);
+    inviteUsers.add(username2);
+    inviteUsers.add(username3);
+    inviteUsers.add(username4);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(username1, password);
+    info("Click on Connections on the left panel");
+    homePagePlatform.goToPeoplePageTribeViaUrl();
+    info("Click on Connect button to invite users");
+    connectionsManagement.tribeConnectToAUser(username3);
+    info("Login by invited users, go to My Connections/Requests Received and accept invitation");
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(username2, password);
+    homePagePlatform.goToPeoplePageTribeViaUrl();
+    info("Click on Connect button to invite users");
+    connectionsManagement.tribeConnectToAUser(username3);
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(username3, password);
+    homePagePlatform.goToPeoplePageTribeViaUrl();
+    info("Click on Connect button to invite users");
+    connectionsManagement.tribeConnectToAUser(username4);
+
+    homePagePlatform.goToPeoplePageTribeViaUrl();
+
+    ELEMENT_SENT_REQUESTS_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    info("Check that " + username4 + " is displayed");
+    $(byXpath(ELEMENT_SENT_REQUESTS_USERS_DW.replace("${user}", username4))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+
+    info("Delete the Sent Request");
+    $(byXpath(ELEMENT_DELETE_SENT_REQUESTS_USERS_DW.replace("${user}", username4))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    info("Close Sent Requests Button");
+    ELEMENT_CLOSE_SENT_REQUESTS_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    homePagePlatform.goToPeoplePageTribeViaUrl();
+
+    ELEMENT_SENT_INVITATIONS_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    info("Check that " + username2 + " is displayed");
+    $(byXpath(ELEMENT_SENT_INVITATIONS_USERS_DW.replace("${user}", username2))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+
+    info("Check that " + username1 + " is displayed");
+    $(byXpath(ELEMENT_SENT_INVITATIONS_USERS_DW.replace("${user}", username1))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs);
+
+    info("Delete the Invitations");
+    $(byXpath(ELEMENT_DELETE_SENT_INVITATIONS_USERS_DW.replace("${user}", username1))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    $(byXpath(ELEMENT_DELETE_SENT_INVITATIONS_USERS_DW.replace("${user}", username2))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    info("Close Invitations Button");
+    ELEMENT_CLOSE_SENT_INVITATIONS_BTN.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    navigationToolbar.goToAddUsersPageViaUrlDW();
+    addUsers.deleteUserDW(username1);
+    addUsers.deleteUserDW(username2);
+    addUsers.deleteUserDW(username3);
+    addUsers.deleteUserDW(username4);
 
   }
 

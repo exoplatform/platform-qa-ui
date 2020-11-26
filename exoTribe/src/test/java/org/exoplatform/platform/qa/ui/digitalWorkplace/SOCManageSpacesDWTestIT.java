@@ -237,20 +237,6 @@ public class SOCManageSpacesDWTestIT extends BaseDW {
     info("Check that Filter pulldown (All spaces/My spaces) is displayed");
     ELEMENT_SPACES_PULLDOWN_FILTER_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
 
-    info("Check the Full Number of All Spaces displayed");
-
-    for (int i = 1; i <= 20; i++) {
-      $(By.xpath(ELEMENT_FULL_SPACES_NUMBER_DW.replace("{i}", String.valueOf(i)))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
-
-    }
-
-    info("Check the Full Number of My Spaces displayed");
-    ELEMENT_SPACES_PULLDOWN_FILTER_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).sendKeys("Mes espaces");
-
-    for (int i = 1; i <= 20; i++) {
-      $(By.xpath(ELEMENT_FULL_SPACES_NUMBER_DW.replace("{i}", String.valueOf(i)))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
-
-    }
 
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
@@ -382,6 +368,22 @@ public class SOCManageSpacesDWTestIT extends BaseDW {
     String spaceNamec = "spacec" + getRandomNumber();
     String spaceNamed = "spaced" + getRandomNumber();
     String spaceNamee = "spacee" + getRandomNumber();
+    String spaceNamef = "spacef" + getRandomNumber();
+    String spaceNameg = "spaceg" + getRandomNumber();
+    String spaceNameh = "spaceh" + getRandomNumber();
+    String spaceNamei = "spacei" + getRandomNumber();
+    String spaceNamek = "spacek" + getRandomNumber();
+    String spaceNamel = "spacel" + getRandomNumber();
+    String spaceNamem = "spacem" + getRandomNumber();
+    String spaceNamen = "spacen" + getRandomNumber();
+    String spaceNameo = "spaceo" + getRandomNumber();
+    String spaceNamep = "spacep" + getRandomNumber();
+    String spaceNames = "spaces" + getRandomNumber();
+    String spaceNamer = "spacer" + getRandomNumber();
+    String spaceNamet = "spacet" + getRandomNumber();
+    String spaceNameu = "spaceu" + getRandomNumber();
+    String spaceNamev = "spacev" + getRandomNumber();
+    String spaceNamew = "spacew" + getRandomNumber();
 
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(spaceNamea, spaceNamea, "Open", "No", null);
@@ -393,6 +395,38 @@ public class SOCManageSpacesDWTestIT extends BaseDW {
     tribeSpaceManagement.addNewSpace(spaceNamed, spaceNamed, "Open", "No", null);
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.addNewSpace(spaceNamee, spaceNamee, "Open", "No", null);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamef, spaceNamef, "Open", "No", null);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNameg, spaceNameg, "Open", "No", null);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNameh, spaceNameh, "Open", "No", null);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamek, spaceNamek, "Open", "No", null);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamel, spaceNamel, "Open", "No", null);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamem, spaceNamem, "Open", "No", null);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamen, spaceNamen, "Open", "No", null);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNameo, spaceNameo, "Open", "No", null);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamep, spaceNamep, "Open", "No", null);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamei, spaceNamei, "Open", "No", null);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNames, spaceNames, "Open", "No", null);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamer, spaceNamer, "Open", "No", null);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamet, spaceNamet, "Open", "No", null);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNameu, spaceNameu, "Open", "No", null);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamev, spaceNamev, "Open", "No", null);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamew, spaceNamew, "Open", "No", null);
 
     homePagePlatform.goToMySpacesTribeViaUrl();
 
@@ -405,12 +439,26 @@ public class SOCManageSpacesDWTestIT extends BaseDW {
     info("Check that Filter pulldown (All spaces/My spaces) is displayed");
     ELEMENT_SPACES_PULLDOWN_FILTER_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
 
+    info("Check the Full Number of All Spaces displayed");
+
+    for (int i = 1; i <= 20; i++) {
+      $(By.xpath(ELEMENT_FULL_SPACES_NUMBER_DW.replace("{i}", String.valueOf(i)))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    }
+
+    info("Check the Full Number of My Spaces displayed");
+    ELEMENT_SPACES_PULLDOWN_FILTER_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).sendKeys("Mes espaces");
+
+    for (int i = 1; i <= 20; i++) {
+      $(By.xpath(ELEMENT_FULL_SPACES_NUMBER_DW.replace("{i}", String.valueOf(i)))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    }
 
     info("Check the Full Number of All Spaces After loading more spaces");
 
     ELEMENT_LOAD_MORE_SPACES_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
-    for (int i = 1; i <= 40; i++) {
+    for (int i = 1; i <= 21; i++) {
       $(By.xpath(ELEMENT_FULL_SPACES_NUMBER_DW.replace("{i}", String.valueOf(i)))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
 
     }
@@ -418,7 +466,7 @@ public class SOCManageSpacesDWTestIT extends BaseDW {
     info("Check the Full Number of My Spaces displayed After loading more spaces");
     ELEMENT_SPACES_PULLDOWN_FILTER_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).sendKeys("Mes espaces");
 
-    for (int i = 1; i <= 40; i++) {
+    for (int i = 1; i <= 21; i++) {
       $(By.xpath(ELEMENT_FULL_SPACES_NUMBER_DW.replace("{i}", String.valueOf(i)))).waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).isDisplayed();
 
     }
@@ -431,6 +479,30 @@ public class SOCManageSpacesDWTestIT extends BaseDW {
     tribeSpaceManagement.deleteTribeSpace(spaceNamed);
     homePagePlatform.goToMySpacesTribeViaUrl();
     tribeSpaceManagement.deleteTribeSpace(spaceNamee);
+    tribeSpaceManagement.deleteTribeSpace(spaceNamef);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNameg);
+    tribeSpaceManagement.deleteTribeSpace(spaceNameh);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamei);
+    tribeSpaceManagement.deleteTribeSpace(spaceNamek);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamel);
+    tribeSpaceManagement.deleteTribeSpace(spaceNamem);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamen);
+    tribeSpaceManagement.deleteTribeSpace(spaceNameo);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamep);
+    tribeSpaceManagement.deleteTribeSpace(spaceNames);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamer);
+    tribeSpaceManagement.deleteTribeSpace(spaceNamet);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNameu);
+    tribeSpaceManagement.deleteTribeSpace(spaceNamev);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamew);
 
   }
 
@@ -766,6 +838,42 @@ public class SOCManageSpacesDWTestIT extends BaseDW {
     tribeSpaceManagement.deleteTribeSpace(space1);
     tribeSpaceManagement.deleteTribeSpace(space2);
     tribeSpaceManagement.deleteTribeSpace(space3);
+
+  }
+
+  @Test
+  public void test14_CheckSpaceManagingRequests() {
+
+    String space1 = "space" + getRandomNumber();
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(space1,space1,"Validation","No",null);
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+
+    info("Check that Managing is displayed in Space Widget");
+    Assert.assertEquals(ELEMENT_MANAGING_SPACE_TITLE.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).getText(),"Managing");
+
+    info("Check that Managed Spaces Number is displayed");
+    ELEMENT_MANAGING_SPACE_NUMBER.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
+    info("Check that Spaces Number is " + ELEMENT_MANAGING_SPACE_NUMBER.getText());
+
+    info("Click on Managing Number");
+    ELEMENT_MANAGING_SPACE_NUMBER.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
+    info("Check that displayed space with Edit Icon is displayed");
+    $(byXpath(ELEMENT_EDIT_MANAGING_SPACE.replace("${space}",space1))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
+
+    info("Check on Edit Icon");
+    $(byXpath(ELEMENT_EDIT_MANAGING_SPACE.replace("${space}",space1))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
+    info("Check that Edit Space Drawer is opened");
+    ELEMENT_DRAWER_EDIT_SPACE_TITLE_DW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).isDisplayed();
+    Assert.assertEquals(ELEMENT_DRAWER_EDIT_SPACE_TITLE_DW.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).getText(), "Edit Space " + space1);
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(space1);
+
 
   }
 

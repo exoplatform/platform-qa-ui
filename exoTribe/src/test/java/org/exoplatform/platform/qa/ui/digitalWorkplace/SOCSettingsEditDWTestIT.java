@@ -101,15 +101,15 @@ public class SOCSettingsEditDWTestIT extends BaseDW {
 
     info("Cancel Edit Time Zone");
     tribeChangeSettings.tribeEditTimeZone(timeZone);
-    tribeChangeSettings.tribeCancelEditTimeZone();
+    tribeChangeSettings.dwCancelEditTimeZone();
 
     info("Confirm Edit Time Zone");
     tribeChangeSettings.tribeEditTimeZone(timeZone);
-    tribeChangeSettings.tribeAcceptEditTimeZone();
+    tribeChangeSettings.dwAcceptEditTimeZone();
 
     info("Reset Data : Set the first Time Zone");
     tribeChangeSettings.tribeEditTimeZone(firstTimeZone);
-    tribeChangeSettings.tribeAcceptEditTimeZone();
+    tribeChangeSettings.dwAcceptEditTimeZone();
 
   }
 

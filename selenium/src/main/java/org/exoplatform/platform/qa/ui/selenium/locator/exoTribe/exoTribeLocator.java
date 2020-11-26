@@ -141,13 +141,13 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_SIXTH_PODIUM_POINTS= $(byXpath("(//*[@class='flex xs12']//*[@class='v-list-item__title body-2']/following::div/span)[5]"));
 
-    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_MY_ORDERS_TITLE= $(byXpath("//*[@class='v-card__text subtitle-2 text-color text-sub-title pa-2']"));
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_MY_ORDERS_TITLE= $(byXpath("(//*[@class='v-card__text subtitle-2 text-sub-title pa-2'])[1]"));
 
-    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_WALLET_SECTION= $(byXpath("//*[@id='walletBalance']"));
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_WALLET_SECTION= $(byXpath("//*[@id='walletBalancePortlet']"));
 
     public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_PERKSTORE_SECTION= $(byXpath("//*[@id='perkstoreOrderPortlet']"));
 
-    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_WALLET_TITLE= $(byXpath("//*[@class='v-card__text subtitle-2 text-sub-title pa-2']"));
+    public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_WALLET_TITLE= $(byXpath("(//*[@class='v-card__text subtitle-2 text-sub-title pa-2'])[2]"));
 
     public static final SelenideElement ELEMENT_TRIBE_SNAPSHOT_WALLET_VALUE= $(byXpath("//*[@class='flex d-flex xs12 justify-center']//a"));
 
@@ -259,7 +259,7 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_AGENDA_APPLICATION_PAGE = $(byXpath("//*[@id='AgendaApplication']"));
 
-    public static final SelenideElement ELEMENT_TRIBE_TASKS_APPLICATION_PAGE = $(byXpath("//*[@id='TasksManagementPortlet']"));
+    public static final SelenideElement ELEMENT_TRIBE_TASKS_APPLICATION_PAGE = $(byXpath("//*[@id='taskManagement']"));
 
     public static final SelenideElement ELEMENT_TRIBE_NEWS_APPLICATION_PAGE = $(byXpath("//*[@class='newsApp']"));
 
@@ -283,7 +283,7 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_APPCENTER_AGENDA = $(byXpath("//*[@href='/portal/dw/agenda']//*[@class='appLauncherImage']"));
 
-    public static final SelenideElement ELEMENT_TRIBE_APPCENTER_TASKS = $(byXpath("//*[@href='/portal/dw/taskstest']//*[@class='appLauncherImage']"));
+    public static final SelenideElement ELEMENT_TRIBE_APPCENTER_TASKS = $(byXpath("//*[@href='/portal/dw/tasks']//*[@class='appLauncherImage']"));
 
     public static final SelenideElement ELEMENT_TRIBE_APPCENTER_NEWS= $(byXpath("//*[@href='/portal/dw/news']//*[@class='appLauncherImage']"));
 
@@ -293,7 +293,7 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_APPCENTER_SEND_FEEDBACK= $(byXpath("//*[@href='/portal/dw/tribe-feedback']//*[@class='appLauncherImage']"));
 
-    public static final SelenideElement ELEMENT_TRIBE_APPLICATIONS_TOPBAR = $(byXpath("//*[@id='appLauncher']"));
+    public static final SelenideElement ELEMENT_TRIBE_APPLICATIONS_TOPBAR = $(byXpath("//*[@id='appcenterLauncherButton']"));
 
     public static final SelenideElement ELEMENT_TRIBE_NOTIFICATIONS_TOPBAR = $(byXpath("//*[@id='NotificationPopoverPortlet']"));
 
@@ -540,6 +540,8 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_DRAWER_EDIT_SPACE_TITLE = $(byXpath("(//*[@class='v-list-item__content drawerTitle align-start text-header-title text-truncate'])[1]"));
 
+    public static final SelenideElement ELEMENT_DRAWER_EDIT_SPACE_TITLE_DW = $(byXpath("(//*[@class='v-list-item__content drawerTitle align-start text-header-title text-truncate'])[3]"));
+
     public static final SelenideElement ELEMENT_MANAGING_SPACE_TITLE = $(byXpath("(//*[@class='spacesOverviewTitle text-center text-truncate pt-1'])[4]"));
 
     public static final SelenideElement ELEMENT_SPACE_INVITATION_NUMBER_BTN_DW       = $(byXpath("(//*[@id='SpacesOverview']/div/div/div/div)[1]//div[@class='spacesOverviewCount text-center pb-1']"));
@@ -572,11 +574,15 @@ public class exoTribeLocator {
 
     public static final String ELEMENT_SENT_REQUESTS_USERS_DW       = "//*[@class='layout column']//*[@class='v-list-item__title']//a[contains(text(),'${user}')]";
 
+    public static final SelenideElement ELEMENT_CLOSE_SENT_REQUESTS_BTN      = $(byXpath("//*[contains(text(),'Sent Requests')]/following::*[@class='v-icon notranslate my-auto v-icon--link mdi mdi-close theme--light']"));
+
     public static final String ELEMENT_DELETE_SENT_REQUESTS_USERS_DW       = "//*[@class='layout column']//*[@class='v-list-item__title']//a[contains(text(),'${user}')]/following::button[1]";
 
     public static final SelenideElement ELEMENT_SENT_INVITATIONS_BTN_DW       = $(byXpath("//*[@id='PeopleOverview']/div/div/div/div[1]//*[@class='peopleOverviewCount text-center pb-1']"));
 
     public static final SelenideElement ELEMENT_CLOSE_SENT_INVITATIONS_BTN_DW       = $(byXpath("//*[contains(text(),'Invitations')]/following::*[@class='v-icon notranslate v-icon--link mdi mdi-close theme--light']"));
+
+    public static final SelenideElement ELEMENT_CLOSE_SENT_INVITATIONS_BTN      = $(byXpath("(//*[contains(text(),'Invitations')]/following::*[@class='v-icon notranslate my-auto v-icon--link mdi mdi-close theme--light'])[2]"));
 
     public static final String ELEMENT_SENT_INVITATIONS_USERS_DW       = "//*[@class='layout column']//*[@class='v-list-item__title']//a[contains(text(),'${user}')]";
 
@@ -751,7 +757,11 @@ public class exoTribeLocator {
 
     public static final SelenideElement ELEMENT_TRIBE_CANCEL_CHANGE_TIMEZONE_BUTTON = $(byXpath("//button[@class='btn mr-2 v-btn v-btn--contained theme--light v-size--default']"));
 
+    public static final SelenideElement ELEMENT_DW_CANCEL_CHANGE_TIMEZONE_BUTTON = $(byXpath("(//button[@class='btn mr-2 v-btn v-btn--contained theme--light v-size--default'])[2]"));
+
     public static final SelenideElement ELEMENT_TRIBE_APPLY_CHANGE_TIMEZONE_BUTTON = $(byXpath("//*[@class='btn btn-primary v-btn v-btn--contained theme--light v-size--default']"));
+
+    public static final SelenideElement ELEMENT_DW_APPLY_CHANGE_TIMEZONE_BUTTON = $(byXpath("(//*[@class='btn btn-primary v-btn v-btn--contained theme--light v-size--default'])[2]"));
 
     public static final SelenideElement ELEMENT_TRIBE_CANCEL_EDIT_PASSWORD = $(byXpath("(//input[@type='password'])[3]/following::*[@class='v-btn__content'][1]"));
 

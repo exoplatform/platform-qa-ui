@@ -253,7 +253,6 @@ public class MeedsPeopleManagementTestIT extends BaseTribe {
     info("Close Invitations Button");
     ELEMENT_CLOSE_SENT_INVITATIONS_BTN_DW.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
 
-
   }
 
 }

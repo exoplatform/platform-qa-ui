@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import static com.codeborne.selenide.Configuration.openBrowserTimeoutMs;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.exoplatform.platform.qa.ui.core.PLFData.*;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomNumber;
 import static org.exoplatform.platform.qa.ui.selenium.Utils.getRandomString;
@@ -462,6 +462,446 @@ public class SnapshotPageManagementDWTestIT extends BaseTribe {
 
     homePagePlatform.goToSnapshotPageTribeViaUrl();
     homePagePlatform.goToStreamPageTribeViaUrl();
+
+  }
+
+  @Test
+  public void test11_CheckThatUploadedDocumentsAreDisplayedInOrderInSnapshotDocumentsWidget() {
+
+    String spaceNamea = "spaceNamea" + getRandomNumber();
+    String spaceDesa = "descriptiona" + getRandomNumber();
+    String spaceNameb = "spaceNameb" + getRandomNumber();
+    String spaceDesb = "descriptionb" + getRandomNumber();
+
+    String attachedFile = "docx_test.docx";
+    String secondAttachedFile = "OO_test.docx";
+    String thirdAttachedFile = "dependencies.docx";
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNameb, spaceDesb, "Open", "No", null);
+
+
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(1000);
+
+    info("-- Upload first Word Document --");
+    tribeActivityStream.uploadFileActivityStreamDW(attachedFile);
+
+    tribeActivityStream.postActivity();
+    sleep(2000);
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    sleep(2000);
+    info("-- Verify that an activity has been added --");
+    $(byText(attachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
+    $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
+    info("The activity is shared success");
+
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(1000);
+
+    info("-- Upload second Word Document --");
+    tribeActivityStream.uploadFileActivityStreamDW(secondAttachedFile);
+    tribeActivityStream.postActivity();
+    sleep(2000);
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    sleep(Configuration.timeout);
+    info("-- Verify that an activity has been added --");
+    $(byText(secondAttachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
+    $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
+    info("The activity is shared success");
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.searchSpace(spaceNamea);
+    tribeSpaceManagement.accessToSearchedSpace();
+
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(1000);
+
+    info("-- Upload third Word Document --");
+    tribeActivityStream.uploadFileActivityStreamDW(thirdAttachedFile);
+    tribeActivityStream.postActivity();
+    sleep(2000);
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    sleep(2000);
+    info("-- Verify that an activity has been added --");
+    $(byText(thirdAttachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
+    $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
+    info("The activity is shared success");
+
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    ELEMENT_TRIBE_SNAPSHOT_DOCUMENTS_MYWORK.waitUntil(Condition.visible, openBrowserTimeoutMs).isDisplayed();
+
+    info("Check that uploaded documents are displayed in order");
+    info("Check that " + thirdAttachedFile + " is displayed in first rank");
+    Assert.assertEquals(ELEMENT_TRIBE_FIRST_MYWORK_DOCUMENT_NAME.getText(), thirdAttachedFile);
+    Assert.assertEquals(ELEMENT_TRIBE_FIRST_MYWORK_DOCUMENT_SPACE_NAME.getText(), spaceNamea);
+
+    info("Check that " + secondAttachedFile + " is displayed in second rank");
+    Assert.assertEquals(ELEMENT_TRIBE_SECOND_MYWORK_DOCUMENT_NAME.getText(), secondAttachedFile);
+    Assert.assertEquals(ELEMENT_TRIBE_SECOND_MYWORK_DOCUMENT_SPACE_NAME.getText(), spaceNameb);
+
+    info("Check that " + attachedFile + " is displayed in third rank");
+    Assert.assertEquals(ELEMENT_TRIBE_THIRD_MYWORK_DOCUMENT_NAME.getText(), attachedFile);
+    Assert.assertEquals(ELEMENT_TRIBE_THIRD_MYWORK_DOCUMENT_SPACE_NAME.getText(), spaceNameb);
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamea);
+    tribeSpaceManagement.deleteTribeSpace(spaceNameb);
+
+  }
+
+  @Test
+  public void test12_CheckTheUploadedDocumentsBehaviorInSpacesDocumentsWidgetByAnOtherUser() {
+
+    String spaceNamea = "spaceNamea" + getRandomNumber();
+    String spaceDesa = "descriptiona" + getRandomNumber();
+    String spaceNameb = "spaceNameb" + getRandomNumber();
+    String spaceDesb = "descriptionb" + getRandomNumber();
+
+    String attachedFile = "docx_test.docx";
+    String secondAttachedFile = "OO_test.docx";
+    String thirdAttachedFile = "dependencies.docx";
+
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@test.com";
+    String password = "12345678";
+
+    info("Add user");
+    navigationToolbar.goToAddUsersPageViaUrlDW();
+    addUsers.addUserTribe(username1, password, email1, username1, username1, "");
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(username1);
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNameb, spaceDesb, "Open", "No", inviteUsers);
+
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(1000);
+
+    info("-- Upload first Word Document --");
+    tribeActivityStream.uploadFileActivityStreamDW(attachedFile);
+
+    tribeActivityStream.postActivity();
+    sleep(2000);
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    sleep(2000);
+    info("-- Verify that an activity has been added --");
+    $(byText(attachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
+    $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
+    info("The activity is shared success");
+
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(1000);
+
+    info("-- Upload second Word Document --");
+    tribeActivityStream.uploadFileActivityStreamDW(secondAttachedFile);
+    tribeActivityStream.postActivity();
+    sleep(2000);
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    sleep(2000);
+    info("-- Verify that an activity has been added --");
+    $(byText(secondAttachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
+    $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
+    info("The activity is shared success");
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.searchSpace(spaceNamea);
+    tribeSpaceManagement.accessToSearchedSpace();
+
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(1000);
+
+    info("-- Upload third Word Document --");
+    tribeActivityStream.uploadFileActivityStreamDW(thirdAttachedFile);
+    tribeActivityStream.postActivity();
+    sleep(2000);
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    sleep(2000);
+    info("-- Verify that an activity has been added --");
+    $(byText(thirdAttachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
+    $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
+    info("The activity is shared success");
+
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    ELEMENT_TRIBE_SNAPSHOT_DOCUMENTS_MYWORK.waitUntil(Condition.visible, openBrowserTimeoutMs).isDisplayed();
+
+    info("Check that uploaded documents are displayed in order");
+    info("Check that " + thirdAttachedFile + " is displayed in first rank");
+    Assert.assertEquals(ELEMENT_TRIBE_FIRST_MYWORK_DOCUMENT_NAME.getText(), thirdAttachedFile);
+    Assert.assertEquals(ELEMENT_TRIBE_FIRST_MYWORK_DOCUMENT_SPACE_NAME.getText(), spaceNamea);
+
+    info("Check that " + secondAttachedFile + " is displayed in second rank");
+    Assert.assertEquals(ELEMENT_TRIBE_SECOND_MYWORK_DOCUMENT_NAME.getText(), secondAttachedFile);
+    Assert.assertEquals(ELEMENT_TRIBE_SECOND_MYWORK_DOCUMENT_SPACE_NAME.getText(), spaceNameb);
+
+    info("Check that " + attachedFile + " is displayed in third rank");
+    Assert.assertEquals(ELEMENT_TRIBE_THIRD_MYWORK_DOCUMENT_NAME.getText(), attachedFile);
+    Assert.assertEquals(ELEMENT_TRIBE_THIRD_MYWORK_DOCUMENT_SPACE_NAME.getText(), spaceNameb);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(username1, password);
+    navigationToolbar.goToIntranetNotificationDW();
+    navigationToolbar.acceptJoinSpaceViaNotificationnDW(spaceNameb);
+
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+    ELEMENT_TRIBE_SNAPSHOT_DOCUMENTS_MYWORK.waitUntil(Condition.visible, openBrowserTimeoutMs).isDisplayed();
+
+    info("Go to Documents Explore Tab");
+    ELEMENT_TRIBE_SNAPSHOT_DOCUMENTS_EXPLORE.waitUntil(Condition.visible, openBrowserTimeoutMs).isDisplayed();
+    ELEMENT_TRIBE_SNAPSHOT_DOCUMENTS_EXPLORE.click();
+
+    info("Check that uploaded documents in " + spaceNameb + " are displayed");
+    info("Check that " + secondAttachedFile + " is displayed in first rank");
+    Assert.assertEquals(ELEMENT_TRIBE_FIRST_EXPLORE_DOCUMENT_NAME.getText(), secondAttachedFile);
+    Assert.assertEquals(ELEMENT_TRIBE_FIRST_EXPLORE_DOCUMENT_SPACE_NAME.getText(), spaceNameb);
+
+    info("Check that " + attachedFile + " is displayed in second rank");
+    Assert.assertEquals(ELEMENT_TRIBE_SECOND_EXPLORE_DOCUMENT_NAME.getText(), attachedFile);
+    Assert.assertEquals(ELEMENT_TRIBE_SECOND_EXPLORE_DOCUMENT_SPACE_NAME.getText(), spaceNameb);
+
+    info("Check that uploaded documents in " + spaceNamea + " are not displayed");
+    info("Check that " + thirdAttachedFile + " is not displayed");
+    Assert.assertNotEquals(ELEMENT_TRIBE_FIRST_EXPLORE_DOCUMENT_NAME.getText(), thirdAttachedFile);
+    Assert.assertNotEquals(ELEMENT_TRIBE_SECOND_EXPLORE_DOCUMENT_NAME.getText(), thirdAttachedFile);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamea);
+    tribeSpaceManagement.deleteTribeSpace(spaceNameb);
+
+  }
+
+  @Test
+  public void test13_CheckTheUploadedDocumentsBehaviorInSharedWithMeDocumentsWidgetByAnOtherUser() {
+
+    String spaceNamea = "spaceNamea" + getRandomNumber();
+    String spaceDesa = "descriptiona" + getRandomNumber();
+    String spaceNameb = "spaceNameb" + getRandomNumber();
+
+    String attachedFile = "docx_test.docx";
+    String secondAttachedFile = "OO_test.docx";
+    String thirdAttachedFile = "dependencies.docx";
+
+    String username1 = "usernamea" + getRandomString();
+    String email1 = username1 + "@test.com";
+    String password = "12345678";
+
+    info("Add user");
+    navigationToolbar.goToAddUsersPageViaUrlDW();
+    addUsers.addUserTribe(username1, password, email1, username1, username1, "");
+
+    ArrayList<String> inviteUsers = new ArrayList<>();
+    inviteUsers.add(username1);
+
+    info("Click on Connections on the left panel");
+    homePagePlatform.goToPeoplePageTribeViaUrl();
+
+    info("Click on Connect button to invite " + username1);
+    connectionsManagement.tribeConnectToAUser(username1);
+
+    info("Login by invited users, go to My Connections/Requests Received and accept invitation");
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(username1, password);
+
+    homePagePlatform.goToPeoplePageTribeViaUrl();
+    connectionsManagement.acceptAConnectionDW(DATA_NAME_USER1);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(1000);
+
+    info("-- Upload first Word Document --");
+    tribeActivityStream.uploadFileActivityStreamDW(attachedFile);
+
+    tribeActivityStream.postActivity();
+    sleep(2000);
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    sleep(2000);
+    info("-- Verify that an activity has been added --");
+    $(byText(attachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
+    $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
+    info("The activity is shared success");
+    tribeActivityStream.previewAttachedFile(attachedFile);
+
+    info("Open The Attached File In Documents");
+    tribeActivityStream.openAttachedFileInDocuments(attachedFile);
+    info("Share the document with " + username1);
+    tribeActivityStream.shareDocumentWithUserDW(inviteUsers);
+
+    homePagePlatform.goToHomeSpaceTribe();
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(1000);
+
+    info("-- Upload second Word Document --");
+    tribeActivityStream.uploadFileActivityStreamDW(secondAttachedFile);
+    tribeActivityStream.postActivity();
+    sleep(2000);
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    sleep(2000);
+    info("-- Verify that an activity has been added --");
+    $(byText(secondAttachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
+    $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
+    info("The activity is shared success");
+
+    tribeActivityStream.previewAttachedFile(secondAttachedFile);
+
+    info("Open The Attached File In Documents");
+    tribeActivityStream.openAttachedFileInDocuments(secondAttachedFile);
+    info("Share the document with " + username1);
+    tribeActivityStream.shareDocumentWithUserDW(inviteUsers);
+
+    sleep(3000);
+    homePagePlatform.goToHomeSpaceTribe();
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(1000);
+
+    info("-- Upload third Word Document --");
+    tribeActivityStream.uploadFileActivityStreamDW(thirdAttachedFile);
+    tribeActivityStream.postActivity();
+    sleep(2000);
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    sleep(2000);
+    info("-- Verify that an activity has been added --");
+    $(byText(thirdAttachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
+    $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
+    info("The activity is shared success");
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(username1, password);
+    ELEMENT_TRIBE_SNAPSHOT_DOCUMENTS_MYWORK.waitUntil(Condition.visible, openBrowserTimeoutMs).isDisplayed();
+
+    info("Go to Documents Shared with me Tab");
+    ELEMENT_TRIBE_SNAPSHOT_DOCUMENTS_SHARED_WITH_ME.waitUntil(Condition.visible, openBrowserTimeoutMs).isDisplayed();
+    ELEMENT_TRIBE_SNAPSHOT_DOCUMENTS_SHARED_WITH_ME.click();
+
+    info("Check that uploaded documents in " + spaceNameb + " are displayed");
+    sleep(2000);
+    info("Check that " + secondAttachedFile + " is displayed in first rank");
+    Assert.assertEquals(ELEMENT_TRIBE_FIRST_SHARED_WITH_ME_DOCUMENT_NAME.getText(), secondAttachedFile);
+    Assert.assertEquals(ELEMENT_TRIBE_FIRST_SHARED_WITH_ME_DOCUMENT_SPACE_NAME.getText(), "Shared");
+
+    info("Check that " + attachedFile + " is displayed in second rank");
+    Assert.assertEquals(ELEMENT_TRIBE_SECOND_SHARED_WITH_ME_DOCUMENT_NAME.getText(), attachedFile);
+    Assert.assertEquals(ELEMENT_TRIBE_SECOND_SHARED_WITH_ME_DOCUMENT_SPACE_NAME.getText(), "Shared");
+
+    info("Check that Uploaded document not shared is not displayed");
+    info("Check that " + thirdAttachedFile + " is not displayed");
+    ELEMENT_TRIBE_THIRD_SHARED_WITH_ME_DOCUMENT_NAME.waitUntil(Condition.not(Condition.exist), openBrowserTimeoutMs);
+
+    manageLogInOut.signOutTribe();
+    manageLogInOut.signIn(DATA_USER1, DATA_PASS2);
+    homePagePlatform.goToPeoplePageTribeViaUrl();
+    connectionsManagement.removeConnectionDW(username1);
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamea);
+
+  }
+
+  @Test
+  public void test14_CheckTheUploadedDocumentsBehaviorInFavoritesDocumentsWidget() {
+
+    String spaceNamea = "spacenamea" + getRandomNumber();
+    String spaceDesa = "descriptiona" + getRandomNumber();
+    String spaceNameb = "spaceNameb" + getRandomNumber();
+
+    String attachedFile = "docx_test.docx";
+    String secondAttachedFile = "OO_test.docx";
+    String thirdAttachedFile = "dependencies.docx";
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.addNewSpace(spaceNamea, spaceDesa, "Open", "No", null);
+
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(1000);
+
+    info("-- Upload first Word Document --");
+    tribeActivityStream.uploadFileActivityStreamDW(attachedFile);
+
+    tribeActivityStream.postActivity();
+    sleep(2000);
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    sleep(2000);
+    info("-- Verify that an activity has been added --");
+    $(byText(attachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
+    $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
+    info("The activity is shared success");
+
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(1000);
+
+    info("-- Upload second Word Document --");
+    tribeActivityStream.uploadFileActivityStreamDW(secondAttachedFile);
+    tribeActivityStream.postActivity();
+    sleep(2000);
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    sleep(Configuration.timeout);
+    info("-- Verify that an activity has been added --");
+    $(byText(secondAttachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
+    $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
+    info("The activity is shared success");
+
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    ELEMENT_DW_POST_ACTIVITY_BUTTON.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+    sleep(1000);
+
+    info("-- Upload third Word Document --");
+    tribeActivityStream.uploadFileActivityStreamDW(thirdAttachedFile);
+    tribeActivityStream.postActivity();
+    sleep(2000);
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    sleep(2000);
+    info("-- Verify that an activity has been added --");
+    $(byText(thirdAttachedFile)).waitUntil(Condition.exist, openBrowserTimeoutMs);
+    $(ELEMENT_TRIBE_POST_ACTIVITY_BUTTON).waitUntil(Condition.disabled, openBrowserTimeoutMs);
+    info("The activity is shared success");
+
+    tribeSpaceManagement.goToDocumentsSpaceTribe(spaceNamea);
+    info("Add Documents to Favorites");
+    tribeActivityStream.goToDocumentsActivityStream();
+    tribeActivityStream.addDocumentsToFavorites(attachedFile);
+    getExoWebDriver().getWebDriver().navigate().refresh();
+    tribeActivityStream.addDocumentsToFavorites(secondAttachedFile);
+
+    homePagePlatform.goToSnapshotPageTribeViaUrl();
+
+    ELEMENT_TRIBE_SNAPSHOT_DOCUMENTS_MYWORK.waitUntil(Condition.visible, openBrowserTimeoutMs).isDisplayed();
+
+    info("Go to Favorite Documents Tab");
+    ELEMENT_TRIBE_SNAPSHOT_DOCUMENTS_FAVORITE.waitUntil(Condition.visible, openBrowserTimeoutMs).isDisplayed();
+    ELEMENT_TRIBE_SNAPSHOT_DOCUMENTS_FAVORITE.click();
+
+    info("Check that uploaded documents in " + spaceNameb + " are displayed");
+    info("Check that " + secondAttachedFile + " is displayed in first rank");
+    Assert.assertEquals(ELEMENT_TRIBE_FIRST_FAVORITES_DOCUMENT_NAME.getText(), secondAttachedFile);
+    Assert.assertEquals(ELEMENT_TRIBE_FIRST_FAVORITES__DOCUMENT_SPACE_NAME.getText(), "Favorites");
+
+    info("Check that " + attachedFile + " is displayed in second rank");
+    Assert.assertEquals(ELEMENT_TRIBE_SECOND_FAVORITES_DOCUMENT_NAME.getText(), attachedFile);
+    Assert.assertEquals(ELEMENT_TRIBE_SECOND_FAVORITES__DOCUMENT_SPACE_NAME.getText(), "Favorites");
+
+    info("Check that Uploaded document is not displayed in Favorites Documents Widget");
+    info("Check that " + thirdAttachedFile + " is not displayed");
+    ELEMENT_TRIBE_THIRD_FAVORITES__DOCUMENT_SPACE_NAME.waitUntil(Condition.not(Condition.exist), openBrowserTimeoutMs);
+
+    homePagePlatform.goToMySpacesTribeViaUrl();
+    tribeSpaceManagement.deleteTribeSpace(spaceNamea);
 
   }
 

@@ -157,9 +157,19 @@ public class TribeChangeSettings {
     ELEMENT_TRIBE_APPLY_CHANGE_TIMEZONE_BUTTON.waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
+  public void dwAcceptEditTimeZone() {
+    info("Select Time Zone and change it");
+    ELEMENT_DW_APPLY_CHANGE_TIMEZONE_BUTTON.waitUntil(Condition.visible,Configuration.timeout).click();
+  }
+
   public void tribeCancelEditTimeZone() {
     info("Select Time Zone and change it");
     ELEMENT_TRIBE_CANCEL_CHANGE_TIMEZONE_BUTTON.waitUntil(Condition.visible,Configuration.timeout).click();
+  }
+
+  public void dwCancelEditTimeZone() {
+    info("Select Time Zone and change it");
+    ELEMENT_DW_CANCEL_CHANGE_TIMEZONE_BUTTON.waitUntil(Condition.visible,Configuration.timeout).click();
   }
 
   public void tribeAcceptEditPassword() {

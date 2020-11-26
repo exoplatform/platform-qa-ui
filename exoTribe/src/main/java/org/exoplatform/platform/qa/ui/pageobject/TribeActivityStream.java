@@ -257,6 +257,27 @@ public class TribeActivityStream {
 
   }
 
+  public void shareDocumentWithUserDW(ArrayList<String> users) {
+
+    ELEMENT_DW_SHARE_DOCUMENT.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
+    if (users!= null) {
+      for (int i = 0; i < users.size(); i++) {
+        sleep(Configuration.timeout);
+        ELEMENT_DW_INVITE_USER_SHARE_DOCUMENT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).click();
+        ELEMENT_DW_INVITE_USER_SHARE_DOCUMENT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).setValue(users.get(i));
+        sleep(2000);
+        ELEMENT_DW_INVITE_USER_SHARE_DOCUMENT.waitUntil(Condition.visible, Configuration.openBrowserTimeoutMs).pressEnter();
+        $(byXpath("//*[@class='uiUserInvitation']//*[@class and contains(text(),'${users}')]".replace("${users}", users.get(i)))).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+      }
+    }
+
+    sleep(2000);
+    ELEMENT_DW_SAVE_BTN_SHARE_DOCUMENT.waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+    $(byXpath("(//*[@class and contains(text(),'OK')])[2]")).waitUntil(Condition.visible,Configuration.openBrowserTimeoutMs).click();
+
+  }
+
   public static void checkOpeningDocumentWithEditOnlineDW(String documentName,String extension, String userName) {
     $(byText(documentName + extension)).waitUntil(exist, openBrowserTimeoutMs);
     $(".editor").waitUntil(visible, 60000).exists();
@@ -432,6 +453,7 @@ public class TribeActivityStream {
     // insert comment
     $(byId(ELEMENT_COMMENT_INPUT.replace("{id}", activityId))).waitUntil(Condition.appears, Configuration.openBrowserTimeoutMs).click();
     sleep(3000);
+
     executeJavaScript("CKEDITOR.instances.CommentTextarea" + activityId + ".insertText(\"" + comment + "\")", "");
     sleep(3000);
     // click on the button comment
